@@ -245,6 +245,56 @@ html,body{height:100%;background:var(--white);color:var(--black);font-family:'Su
 @keyframes scan-line{0%{top:-32px}100%{top:100%}}
 @keyframes icon-pulse{0%,100%{background:rgba(255,255,255,.07);box-shadow:0 0 0 0 rgba(255,255,255,.08)}60%{background:rgba(255,255,255,.13);box-shadow:0 0 0 5px rgba(255,255,255,0)}}
 
+/* ── Expand / fullscreen modal ── */
+.tmock{position:relative;cursor:pointer}
+.tmock::after{content:'';position:absolute;inset:0;border-radius:10px;box-shadow:0 0 0 0 rgba(17,17,17,.12);transition:box-shadow .15s}
+.tmock:hover::after{box-shadow:0 0 0 2px var(--black)}
+.tmock-expand-btn{position:absolute;top:7px;right:7px;width:20px;height:20px;border:1px solid var(--border);border-radius:5px;background:var(--white);display:none;align-items:center;justify-content:center;cursor:pointer;z-index:10;opacity:.8}
+.tmock-expand-btn:hover{opacity:1;background:var(--gray-100)}
+.tmock:hover .tmock-expand-btn{display:flex}
+/* Modal */
+.dir-modal-bg{position:fixed;inset:0;background:rgba(17,17,17,.6);backdrop-filter:blur(8px);z-index:10000;display:flex;align-items:center;justify-content:center;padding:28px;opacity:0;pointer-events:none;transition:opacity .18s}
+.dir-modal-bg.open{opacity:1;pointer-events:all}
+.dir-modal{background:var(--white);border-radius:16px;width:100%;max-width:580px;max-height:90vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 32px 80px rgba(0,0,0,.3);transform:translateY(10px);transition:transform .2s}
+.dir-modal-bg.open .dir-modal{transform:translateY(0)}
+.dir-modal-topbar{display:flex;align-items:center;justify-content:space-between;padding:13px 18px;border-bottom:1px solid var(--border);flex-shrink:0;background:var(--gray-50)}
+.dir-modal-label{font-size:12px;font-weight:700;font-family:var(--font-heading);text-transform:uppercase;letter-spacing:.06em;color:var(--text)}
+.dir-modal-path{font-size:11px;color:var(--muted);font-family:var(--mono);margin-left:8px}
+.dir-modal-close{width:26px;height:26px;border:1px solid var(--border);border-radius:6px;background:none;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.dir-modal-close:hover{background:var(--gray-100)}
+.dir-modal-body{overflow-y:auto;flex:1}
+/* Mild modal */
+.dm-mild{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:64px 48px;text-align:center;min-height:360px}
+.dm-mild-illus{width:128px;height:128px;border-radius:24px;background:var(--gray-100);display:flex;align-items:center;justify-content:center;margin-bottom:28px;animation:illus-float 3s ease-in-out infinite}
+.dm-mild-title{font-size:26px;font-weight:400;font-family:var(--font-heading);letter-spacing:-.5px;color:var(--text);margin-bottom:10px;line-height:115%}
+.dm-mild-sub{font-size:14px;color:var(--muted);font-family:var(--font-body);margin-bottom:30px;line-height:160%;max-width:340px}
+.dm-mild-cta{padding:11px 26px;background:var(--black);color:var(--white);border-radius:8px;font-size:13px;font-weight:500;font-family:var(--font-body)}
+/* Medium modal */
+.dm-med{padding:24px 26px 32px}
+.dm-hero{display:flex;align-items:flex-start;gap:16px;padding:20px;border:1px solid var(--border);border-radius:12px;margin-bottom:14px}
+.dm-hero-icon{width:48px;height:48px;background:var(--gray-100);border-radius:10px;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.dm-hero-content{flex:1}
+.dm-hero-title{font-size:20px;font-weight:400;font-family:var(--font-heading);letter-spacing:-.4px;color:var(--text);margin-bottom:7px;line-height:115%}
+.dm-hero-sub{font-size:13px;color:var(--muted);font-family:var(--font-body);line-height:160%;margin-bottom:14px}
+.dm-btns{display:flex;gap:8px;flex-wrap:wrap}
+.dm-btn-p{padding:8px 20px;background:var(--black);color:var(--white);border-radius:7px;font-size:12px;font-weight:500;font-family:var(--font-body)}
+.dm-btn-o{padding:7px 16px;border:1px solid var(--border);border-radius:7px;font-size:12px;font-weight:500;font-family:var(--font-body);color:var(--text)}
+.dm-tip{display:flex;align-items:flex-start;gap:10px;padding:11px 14px;background:var(--gray-50);border-radius:8px;margin-bottom:16px;border:1px solid var(--gray-200)}
+.dm-tip-text{font-size:12px;color:var(--muted);font-family:var(--font-body);line-height:160%}
+.dm-cards{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.dm-card{padding:15px;border:1px solid var(--border);border-radius:10px}
+.dm-card-title{font-size:12px;font-weight:600;font-family:var(--font-body);color:var(--text);margin-bottom:4px}
+.dm-card-sub{font-size:11px;color:var(--muted);font-family:var(--font-body);line-height:150%;margin-bottom:8px}
+.dm-card-cli{background:var(--black);border-radius:6px;padding:9px 11px;font-size:10px;color:var(--gray-300);font-family:var(--mono);line-height:160%;white-space:pre}
+.dm-card-link{font-size:11px;color:var(--text);font-family:var(--font-body);font-weight:500;text-decoration:none}
+/* Spicy modal */
+.dm-spicy{background:var(--black);min-height:400px;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:72px 48px;text-align:center}
+.dm-spicy-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);background-size:28px 28px;animation:grid-breathe 5s ease-in-out infinite}
+.dm-spicy-scan{position:absolute;left:0;right:0;height:50px;background:linear-gradient(transparent,rgba(255,255,255,.06),transparent);animation:scan-line 3.5s linear infinite;pointer-events:none;z-index:0;top:-50px}
+.dm-spicy-icon{width:56px;height:56px;border-radius:14px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);display:flex;align-items:center;justify-content:center;margin-bottom:22px;position:relative;z-index:1;animation:icon-pulse 2.8s ease-in-out infinite}
+.dm-spicy-title{font-size:30px;font-weight:400;font-family:var(--font-heading);color:var(--white);line-height:115%;margin-bottom:12px;position:relative;z-index:1;letter-spacing:-.6px}
+.dm-spicy-sub{font-size:14px;color:rgba(255,255,255,.45);font-family:var(--font-body);margin-bottom:28px;position:relative;z-index:1;line-height:160%}
+.dm-spicy-cta{padding:11px 26px;background:var(--white);color:var(--black);border-radius:8px;font-size:13px;font-weight:600;font-family:var(--font-body);position:relative;z-index:1}
 /* ── Content area ── */
 .ca{padding:20px 24px 40px;flex:1}
 
@@ -1446,11 +1496,12 @@ img.ico{display:block;flex:0 0 auto}
       </div>
       <div class="dir-state-cols">
         <!-- MILD -->
-        <div class="tmock">
+        <div class="tmock" data-state="instances" data-theme="mild" onclick="openDirModal(this)">
           <div class="tmock-chrome">
             <div class="tmock-dot"></div><div class="tmock-dot"></div><div class="tmock-dot"></div>
             <div class="tmock-chrome-label">Instances</div>
             <div class="tmock-chip">Mild</div>
+            <button class="tmock-expand-btn" onclick="event.stopPropagation();openDirModal(this.closest('.tmock'))"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 4V1h3M6 1h3v3M9 6v3H6M4 9H1V6"/></svg></button>
           </div>
           <div class="tmock-body" style="justify-content:center;gap:0;padding:32px 20px">
             <div class="tmock-illus-lg">
@@ -1474,42 +1525,48 @@ img.ico{display:block;flex:0 0 auto}
           </div>
         </div>
         <!-- MEDIUM -->
-        <div class="tmock">
+        <div class="tmock" data-state="instances" data-theme="medium" onclick="openDirModal(this)">
           <div class="tmock-chrome">
             <div class="tmock-dot"></div><div class="tmock-dot"></div><div class="tmock-dot"></div>
             <div class="tmock-chrome-label">Instances</div>
             <div class="tmock-chip">Medium</div>
+            <button class="tmock-expand-btn" onclick="event.stopPropagation();openDirModal(this.closest('.tmock'))"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 4V1h3M6 1h3v3M9 6v3H6M4 9H1V6"/></svg></button>
           </div>
-          <div class="tmock-body" style="align-items:flex-start;text-align:left;gap:0;padding:14px">
-            <div class="tmock-hero-row">
-              <div class="tmock-hero-sq">
-                <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="var(--gray-700)" stroke-width="1.4"><rect x="2.5" y="5" width="15" height="12" rx="2"/><path d="M6 5V3.5A1.5 1.5 0 017.5 2h5A1.5 1.5 0 0114 3.5V5"/></svg>
+          <div class="tmock-body" style="align-items:flex-start;text-align:left;gap:0;padding:11px;min-height:0">
+            <div style="display:flex;gap:7px;padding:8px;border:1px solid var(--border);border-radius:7px;margin-bottom:6px;align-items:flex-start">
+              <div style="width:26px;height:26px;background:var(--gray-100);border-radius:5px;flex-shrink:0;display:flex;align-items:center;justify-content:center"><svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="var(--gray-600)" stroke-width="1.4"><rect x="2.5" y="5" width="15" height="12" rx="2"/><path d="M6 5V3.5A1.5 1.5 0 017.5 2h5A1.5 1.5 0 0114 3.5V5"/></svg></div>
+              <div style="flex:1;min-width:0">
+                <div style="font-size:9.5px;font-weight:700;font-family:var(--font-heading);color:var(--text);margin-bottom:2px;line-height:130%">No instances yet</div>
+                <div style="font-size:7.5px;color:var(--muted);font-family:var(--font-body);line-height:140%;margin-bottom:5px">VMs with dedicated GPU — H100, A100, L40S.</div>
+                <div style="display:flex;gap:4px">
+                  <div style="padding:2px 7px;background:var(--black);color:var(--white);border-radius:3px;font-size:7.5px;font-family:var(--font-body);white-space:nowrap">+ Create instance</div>
+                  <div style="padding:2px 7px;border:1px solid var(--border);border-radius:3px;font-size:7.5px;font-family:var(--font-body);color:var(--text);white-space:nowrap">View docs</div>
+                </div>
               </div>
-              <div class="tmock-hero-lines">
-                <div class="tmock-line-dark" style="width:70%"></div>
-                <div class="tmock-line" style="width:90%;margin-top:3px"></div>
+            </div>
+            <div style="padding:5px 7px;background:var(--gray-50);border-radius:5px;margin-bottom:6px;display:flex;gap:5px;align-items:flex-start;border:1px solid var(--gray-200)">
+              <div style="width:8px;height:8px;border-radius:50%;background:var(--gray-300);flex-shrink:0;margin-top:1px"></div>
+              <div style="font-size:7px;color:var(--muted);font-family:var(--font-body);line-height:140%">Start with a single A100 before scaling to multi-GPU.</div>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px">
+              <div style="padding:6px;border:1px solid var(--border);border-radius:5px">
+                <div style="font-size:8px;font-weight:600;font-family:var(--font-body);color:var(--text);margin-bottom:2px">Quickstart</div>
+                <div style="font-size:7px;color:var(--muted);font-family:var(--font-body);line-height:140%">Deploy your first VM in minutes.</div>
               </div>
-            </div>
-            <div class="tmock-cards-row" style="grid-template-columns:1fr 1fr">
-              <div class="tmock-card-sm"><div class="tmock-line-dark" style="width:55%;height:7px"></div><div class="tmock-line" style="width:80%"></div></div>
-              <div class="tmock-card-sm"><div class="tmock-line-dark" style="width:55%;height:7px"></div><div class="tmock-line" style="width:80%"></div></div>
-            </div>
-            <div style="padding:7px 9px;background:var(--gray-50);border-radius:6px;display:flex;gap:6px;align-items:flex-start;width:100%;margin-bottom:8px">
-              <div style="width:9px;height:9px;border-radius:50%;background:var(--gray-300);flex-shrink:0;margin-top:1px"></div>
-              <div class="tmock-line" style="width:90%;height:7px"></div>
-            </div>
-            <div class="tmock-action-row">
-              <div class="tmock-action-card"><div class="tmock-line" style="width:60%;height:7px"></div><div class="tmock-line" style="width:80%"></div></div>
-              <div class="tmock-action-card"><div class="tmock-line" style="width:60%;height:7px"></div><div class="tmock-line" style="width:80%"></div></div>
+              <div style="padding:6px;border:1px solid var(--border);border-radius:5px">
+                <div style="font-size:8px;font-weight:600;font-family:var(--font-body);color:var(--text);margin-bottom:2px">CLI</div>
+                <div style="font-size:7px;color:var(--mono);font-family:var(--mono);line-height:140%;background:var(--black);color:var(--gray-300);padding:3px 5px;border-radius:3px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">crusoe compute vms create</div>
+              </div>
             </div>
           </div>
         </div>
         <!-- SPICY -->
-        <div class="tmock">
+        <div class="tmock" data-state="instances" data-theme="spicy" onclick="openDirModal(this)">
           <div class="tmock-chrome">
             <div class="tmock-dot"></div><div class="tmock-dot"></div><div class="tmock-dot"></div>
             <div class="tmock-chrome-label">Instances</div>
             <div class="tmock-chip">Spicy</div>
+            <button class="tmock-expand-btn" onclick="event.stopPropagation();openDirModal(this.closest('.tmock'))"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 4V1h3M6 1h3v3M9 6v3H6M4 9H1V6"/></svg></button>
           </div>
           <div class="tmock-body" style="justify-content:center;gap:0;padding:12px">
             <div class="tmock-spicy-bg">
@@ -1539,11 +1596,12 @@ img.ico{display:block;flex:0 0 auto}
       </div>
       <div class="dir-state-cols">
         <!-- MILD -->
-        <div class="tmock">
+        <div class="tmock" data-state="k8s" data-theme="mild" onclick="openDirModal(this)">
           <div class="tmock-chrome">
             <div class="tmock-dot"></div><div class="tmock-dot"></div><div class="tmock-dot"></div>
             <div class="tmock-chrome-label">Kubernetes</div>
             <div class="tmock-chip">Mild</div>
+            <button class="tmock-expand-btn" onclick="event.stopPropagation();openDirModal(this.closest('.tmock'))"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 4V1h3M6 1h3v3M9 6v3H6M4 9H1V6"/></svg></button>
           </div>
           <div class="tmock-body" style="justify-content:center;gap:0;padding:32px 20px">
             <div class="tmock-illus-lg">
@@ -1573,42 +1631,48 @@ img.ico{display:block;flex:0 0 auto}
           </div>
         </div>
         <!-- MEDIUM -->
-        <div class="tmock">
+        <div class="tmock" data-state="k8s" data-theme="medium" onclick="openDirModal(this)">
           <div class="tmock-chrome">
             <div class="tmock-dot"></div><div class="tmock-dot"></div><div class="tmock-dot"></div>
             <div class="tmock-chrome-label">Kubernetes</div>
             <div class="tmock-chip">Medium</div>
+            <button class="tmock-expand-btn" onclick="event.stopPropagation();openDirModal(this.closest('.tmock'))"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 4V1h3M6 1h3v3M9 6v3H6M4 9H1V6"/></svg></button>
           </div>
-          <div class="tmock-body" style="align-items:flex-start;text-align:left;gap:0;padding:14px">
-            <div class="tmock-hero-row">
-              <div class="tmock-hero-sq">
-                <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="var(--gray-700)" stroke-width="1.4"><circle cx="10" cy="10" r="8"/><line x1="10" y1="2" x2="10" y2="5"/><line x1="10" y1="15" x2="10" y2="18"/><line x1="2" y1="10" x2="5" y2="10"/><line x1="15" y1="10" x2="18" y2="10"/><circle cx="10" cy="10" r="2.5" fill="var(--gray-700)" stroke="none"/></svg>
+          <div class="tmock-body" style="align-items:flex-start;text-align:left;gap:0;padding:11px;min-height:0">
+            <div style="display:flex;gap:7px;padding:8px;border:1px solid var(--border);border-radius:7px;margin-bottom:6px;align-items:flex-start">
+              <div style="width:26px;height:26px;background:var(--gray-100);border-radius:5px;flex-shrink:0;display:flex;align-items:center;justify-content:center"><svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="var(--gray-600)" stroke-width="1.4"><circle cx="10" cy="10" r="8"/><line x1="10" y1="2" x2="10" y2="5"/><line x1="10" y1="15" x2="10" y2="18"/><line x1="2" y1="10" x2="5" y2="10"/><line x1="15" y1="10" x2="18" y2="10"/><circle cx="10" cy="10" r="2.5" fill="var(--gray-600)" stroke="none"/></svg></div>
+              <div style="flex:1;min-width:0">
+                <div style="font-size:9.5px;font-weight:700;font-family:var(--font-heading);color:var(--text);margin-bottom:2px;line-height:130%">No clusters yet</div>
+                <div style="font-size:7.5px;color:var(--muted);font-family:var(--font-body);line-height:140%;margin-bottom:5px">Managed K8s on GPU nodes. No control plane to manage.</div>
+                <div style="display:flex;gap:4px">
+                  <div style="padding:2px 7px;background:var(--black);color:var(--white);border-radius:3px;font-size:7.5px;font-family:var(--font-body);white-space:nowrap">+ Create cluster</div>
+                  <div style="padding:2px 7px;border:1px solid var(--border);border-radius:3px;font-size:7.5px;font-family:var(--font-body);color:var(--text);white-space:nowrap">View docs</div>
+                </div>
               </div>
-              <div class="tmock-hero-lines">
-                <div class="tmock-line-dark" style="width:80%"></div>
-                <div class="tmock-line" style="width:95%;margin-top:3px"></div>
+            </div>
+            <div style="padding:5px 7px;background:var(--gray-50);border-radius:5px;margin-bottom:6px;display:flex;gap:5px;align-items:flex-start;border:1px solid var(--gray-200)">
+              <div style="width:8px;height:8px;border-radius:50%;background:var(--gray-300);flex-shrink:0;margin-top:1px"></div>
+              <div style="font-size:7px;color:var(--muted);font-family:var(--font-body);line-height:140%">Start with one H100 node pool before scaling out.</div>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px">
+              <div style="padding:6px;border:1px solid var(--border);border-radius:5px">
+                <div style="font-size:8px;font-weight:600;font-family:var(--font-body);color:var(--text);margin-bottom:2px">Quickstart</div>
+                <div style="font-size:7px;color:var(--muted);font-family:var(--font-body);line-height:140%">Create your first cluster.</div>
               </div>
-            </div>
-            <div class="tmock-cards-row" style="grid-template-columns:1fr 1fr">
-              <div class="tmock-card-sm"><div class="tmock-line-dark" style="width:55%;height:7px"></div><div class="tmock-line" style="width:85%"></div></div>
-              <div class="tmock-card-sm"><div class="tmock-line-dark" style="width:55%;height:7px"></div><div class="tmock-line" style="width:85%"></div></div>
-            </div>
-            <div style="padding:7px 9px;background:var(--gray-50);border-radius:6px;display:flex;gap:6px;align-items:flex-start;width:100%;margin-bottom:8px">
-              <div style="width:9px;height:9px;border-radius:50%;background:var(--gray-300);flex-shrink:0;margin-top:1px"></div>
-              <div class="tmock-line" style="width:90%;height:7px"></div>
-            </div>
-            <div class="tmock-action-row">
-              <div class="tmock-action-card"><div class="tmock-line" style="width:60%;height:7px"></div><div class="tmock-line" style="width:80%"></div></div>
-              <div class="tmock-action-card"><div class="tmock-line" style="width:60%;height:7px"></div><div class="tmock-line" style="width:80%"></div></div>
+              <div style="padding:6px;border:1px solid var(--border);border-radius:5px">
+                <div style="font-size:8px;font-weight:600;font-family:var(--font-body);color:var(--text);margin-bottom:2px">CLI</div>
+                <div style="font-size:7px;color:var(--mono);font-family:var(--mono);line-height:140%;background:var(--black);color:var(--gray-300);padding:3px 5px;border-radius:3px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">crusoe kubernetes clusters create</div>
+              </div>
             </div>
           </div>
         </div>
         <!-- SPICY -->
-        <div class="tmock">
+        <div class="tmock" data-state="k8s" data-theme="spicy" onclick="openDirModal(this)">
           <div class="tmock-chrome">
             <div class="tmock-dot"></div><div class="tmock-dot"></div><div class="tmock-dot"></div>
             <div class="tmock-chrome-label">Kubernetes</div>
             <div class="tmock-chip">Spicy</div>
+            <button class="tmock-expand-btn" onclick="event.stopPropagation();openDirModal(this.closest('.tmock'))"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 4V1h3M6 1h3v3M9 6v3H6M4 9H1V6"/></svg></button>
           </div>
           <div class="tmock-body" style="justify-content:center;gap:0;padding:12px">
             <div class="tmock-spicy-bg">
@@ -1638,11 +1702,12 @@ img.ico{display:block;flex:0 0 auto}
       </div>
       <div class="dir-state-cols">
         <!-- MILD -->
-        <div class="tmock">
+        <div class="tmock" data-state="slurm" data-theme="mild" onclick="openDirModal(this)">
           <div class="tmock-chrome">
             <div class="tmock-dot"></div><div class="tmock-dot"></div><div class="tmock-dot"></div>
             <div class="tmock-chrome-label">Slurm</div>
             <div class="tmock-chip">Mild</div>
+            <button class="tmock-expand-btn" onclick="event.stopPropagation();openDirModal(this.closest('.tmock'))"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 4V1h3M6 1h3v3M9 6v3H6M4 9H1V6"/></svg></button>
           </div>
           <div class="tmock-body" style="justify-content:center;gap:0;padding:32px 20px">
             <div class="tmock-illus-lg">
@@ -1667,42 +1732,48 @@ img.ico{display:block;flex:0 0 auto}
           </div>
         </div>
         <!-- MEDIUM -->
-        <div class="tmock">
+        <div class="tmock" data-state="slurm" data-theme="medium" onclick="openDirModal(this)">
           <div class="tmock-chrome">
             <div class="tmock-dot"></div><div class="tmock-dot"></div><div class="tmock-dot"></div>
             <div class="tmock-chrome-label">Slurm</div>
             <div class="tmock-chip">Medium</div>
+            <button class="tmock-expand-btn" onclick="event.stopPropagation();openDirModal(this.closest('.tmock'))"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 4V1h3M6 1h3v3M9 6v3H6M4 9H1V6"/></svg></button>
           </div>
-          <div class="tmock-body" style="align-items:flex-start;text-align:left;gap:0;padding:14px">
-            <div class="tmock-hero-row">
-              <div class="tmock-hero-sq">
-                <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="var(--gray-700)" stroke-width="1.4"><rect x="2" y="2" width="7" height="5" rx="1"/><rect x="11" y="2" width="7" height="5" rx="1"/><rect x="6.5" y="13" width="7" height="5" rx="1"/><line x1="5.5" y1="7" x2="10" y2="13" stroke-dasharray="2 2"/><line x1="14.5" y1="7" x2="10" y2="13" stroke-dasharray="2 2"/></svg>
+          <div class="tmock-body" style="align-items:flex-start;text-align:left;gap:0;padding:11px;min-height:0">
+            <div style="display:flex;gap:7px;padding:8px;border:1px solid var(--border);border-radius:7px;margin-bottom:6px;align-items:flex-start">
+              <div style="width:26px;height:26px;background:var(--gray-100);border-radius:5px;flex-shrink:0;display:flex;align-items:center;justify-content:center"><svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="var(--gray-600)" stroke-width="1.4"><rect x="2" y="2" width="7" height="5" rx="1"/><rect x="11" y="2" width="7" height="5" rx="1"/><rect x="6.5" y="13" width="7" height="5" rx="1"/><line x1="5.5" y1="7" x2="10" y2="13" stroke-dasharray="2 2"/><line x1="14.5" y1="7" x2="10" y2="13" stroke-dasharray="2 2"/></svg></div>
+              <div style="flex:1;min-width:0">
+                <div style="font-size:9.5px;font-weight:700;font-family:var(--font-heading);color:var(--text);margin-bottom:2px;line-height:130%">No clusters yet</div>
+                <div style="font-size:7.5px;color:var(--muted);font-family:var(--font-body);line-height:140%;margin-bottom:5px">Managed Slurm for HPC and AI training at scale.</div>
+                <div style="display:flex;gap:4px">
+                  <div style="padding:2px 7px;background:var(--black);color:var(--white);border-radius:3px;font-size:7.5px;font-family:var(--font-body);white-space:nowrap">+ Create cluster</div>
+                  <div style="padding:2px 7px;border:1px solid var(--border);border-radius:3px;font-size:7.5px;font-family:var(--font-body);color:var(--text);white-space:nowrap">View docs</div>
+                </div>
               </div>
-              <div class="tmock-hero-lines">
-                <div class="tmock-line-dark" style="width:75%"></div>
-                <div class="tmock-line" style="width:90%;margin-top:3px"></div>
+            </div>
+            <div style="padding:5px 7px;background:var(--gray-50);border-radius:5px;margin-bottom:6px;display:flex;gap:5px;align-items:flex-start;border:1px solid var(--gray-200)">
+              <div style="width:8px;height:8px;border-radius:50%;background:var(--gray-300);flex-shrink:0;margin-top:1px"></div>
+              <div style="font-size:7px;color:var(--muted);font-family:var(--font-body);line-height:140%">Start with a CPU login node before adding GPU compute.</div>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px">
+              <div style="padding:6px;border:1px solid var(--border);border-radius:5px">
+                <div style="font-size:8px;font-weight:600;font-family:var(--font-body);color:var(--text);margin-bottom:2px">Quickstart</div>
+                <div style="font-size:7px;color:var(--muted);font-family:var(--font-body);line-height:140%">Set up your first cluster.</div>
               </div>
-            </div>
-            <div class="tmock-cards-row" style="grid-template-columns:1fr 1fr">
-              <div class="tmock-card-sm"><div class="tmock-line-dark" style="width:55%;height:7px"></div><div class="tmock-line" style="width:80%"></div></div>
-              <div class="tmock-card-sm"><div class="tmock-line-dark" style="width:55%;height:7px"></div><div class="tmock-line" style="width:80%"></div></div>
-            </div>
-            <div style="padding:7px 9px;background:var(--gray-50);border-radius:6px;display:flex;gap:6px;align-items:flex-start;width:100%;margin-bottom:8px">
-              <div style="width:9px;height:9px;border-radius:50%;background:var(--gray-300);flex-shrink:0;margin-top:1px"></div>
-              <div class="tmock-line" style="width:90%;height:7px"></div>
-            </div>
-            <div class="tmock-action-row">
-              <div class="tmock-action-card"><div class="tmock-line" style="width:60%;height:7px"></div><div class="tmock-line" style="width:80%"></div></div>
-              <div class="tmock-action-card"><div class="tmock-line" style="width:60%;height:7px"></div><div class="tmock-line" style="width:80%"></div></div>
+              <div style="padding:6px;border:1px solid var(--border);border-radius:5px">
+                <div style="font-size:8px;font-weight:600;font-family:var(--font-body);color:var(--text);margin-bottom:2px">CLI</div>
+                <div style="font-size:7px;color:var(--mono);font-family:var(--mono);line-height:140%;background:var(--black);color:var(--gray-300);padding:3px 5px;border-radius:3px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">crusoe slurm clusters create</div>
+              </div>
             </div>
           </div>
         </div>
         <!-- SPICY -->
-        <div class="tmock">
+        <div class="tmock" data-state="slurm" data-theme="spicy" onclick="openDirModal(this)">
           <div class="tmock-chrome">
             <div class="tmock-dot"></div><div class="tmock-dot"></div><div class="tmock-dot"></div>
             <div class="tmock-chrome-label">Slurm</div>
             <div class="tmock-chip">Spicy</div>
+            <button class="tmock-expand-btn" onclick="event.stopPropagation();openDirModal(this.closest('.tmock'))"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 4V1h3M6 1h3v3M9 6v3H6M4 9H1V6"/></svg></button>
           </div>
           <div class="tmock-body" style="justify-content:center;gap:0;padding:12px">
             <div class="tmock-spicy-bg">
@@ -1732,11 +1803,12 @@ img.ico{display:block;flex:0 0 auto}
       </div>
       <div class="dir-state-cols">
         <!-- MILD -->
-        <div class="tmock">
+        <div class="tmock" data-state="disks" data-theme="mild" onclick="openDirModal(this)">
           <div class="tmock-chrome">
             <div class="tmock-dot"></div><div class="tmock-dot"></div><div class="tmock-dot"></div>
             <div class="tmock-chrome-label">Disks</div>
             <div class="tmock-chip">Mild</div>
+            <button class="tmock-expand-btn" onclick="event.stopPropagation();openDirModal(this.closest('.tmock'))"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 4V1h3M6 1h3v3M9 6v3H6M4 9H1V6"/></svg></button>
           </div>
           <div class="tmock-body" style="justify-content:center;gap:0;padding:32px 20px">
             <div class="tmock-illus-lg">
@@ -1762,38 +1834,48 @@ img.ico{display:block;flex:0 0 auto}
           </div>
         </div>
         <!-- MEDIUM -->
-        <div class="tmock">
+        <div class="tmock" data-state="disks" data-theme="medium" onclick="openDirModal(this)">
           <div class="tmock-chrome">
             <div class="tmock-dot"></div><div class="tmock-dot"></div><div class="tmock-dot"></div>
             <div class="tmock-chrome-label">Disks</div>
             <div class="tmock-chip">Medium</div>
+            <button class="tmock-expand-btn" onclick="event.stopPropagation();openDirModal(this.closest('.tmock'))"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 4V1h3M6 1h3v3M9 6v3H6M4 9H1V6"/></svg></button>
           </div>
-          <div class="tmock-body" style="align-items:flex-start;text-align:left;gap:0;padding:14px">
-            <div class="tmock-hero-row">
-              <div class="tmock-hero-sq">
-                <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="var(--gray-700)" stroke-width="1.4"><ellipse cx="10" cy="7" rx="7" ry="3"/><path d="M3 7v6c0 1.7 3.1 3 7 3s7-1.3 7-3V7"/></svg>
-              </div>
-              <div class="tmock-hero-lines">
-                <div class="tmock-line-dark" style="width:65%"></div>
-                <div class="tmock-line" style="width:90%;margin-top:3px"></div>
+          <div class="tmock-body" style="align-items:flex-start;text-align:left;gap:0;padding:11px;min-height:0">
+            <div style="display:flex;gap:7px;padding:8px;border:1px solid var(--border);border-radius:7px;margin-bottom:6px;align-items:flex-start">
+              <div style="width:26px;height:26px;background:var(--gray-100);border-radius:5px;flex-shrink:0;display:flex;align-items:center;justify-content:center"><svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="var(--gray-600)" stroke-width="1.4"><ellipse cx="10" cy="7" rx="7" ry="3"/><path d="M3 7v6c0 1.7 3.1 3 7 3s7-1.3 7-3V7"/></svg></div>
+              <div style="flex:1;min-width:0">
+                <div style="font-size:9.5px;font-weight:700;font-family:var(--font-heading);color:var(--text);margin-bottom:2px;line-height:130%">No disks yet</div>
+                <div style="font-size:7.5px;color:var(--muted);font-family:var(--font-body);line-height:140%;margin-bottom:5px">Persistent block storage — survives VM lifecycle.</div>
+                <div style="display:flex;gap:4px">
+                  <div style="padding:2px 7px;background:var(--black);color:var(--white);border-radius:3px;font-size:7.5px;font-family:var(--font-body);white-space:nowrap">+ Create disk</div>
+                  <div style="padding:2px 7px;border:1px solid var(--border);border-radius:3px;font-size:7.5px;font-family:var(--font-body);color:var(--text);white-space:nowrap">View docs</div>
+                </div>
               </div>
             </div>
-            <div style="padding:7px 9px;background:var(--black);border-radius:6px;width:100%;margin-bottom:8px">
-              <div style="height:7px;border-radius:2px;background:var(--gray-700);width:85%;margin-bottom:4px"></div>
-              <div style="height:7px;border-radius:2px;background:var(--gray-700);width:60%"></div>
+            <div style="padding:5px 7px;background:var(--gray-50);border-radius:5px;margin-bottom:6px;display:flex;gap:5px;align-items:flex-start;border:1px solid var(--gray-200)">
+              <div style="width:8px;height:8px;border-radius:50%;background:var(--gray-300);flex-shrink:0;margin-top:1px"></div>
+              <div style="font-size:7px;color:var(--muted);font-family:var(--font-body);line-height:140%">Create the disk in the same location as your instance.</div>
             </div>
-            <div class="tmock-action-row">
-              <div class="tmock-action-card"><div class="tmock-line" style="width:60%;height:7px"></div><div class="tmock-line" style="width:80%"></div></div>
-              <div class="tmock-action-card"><div class="tmock-line" style="width:60%;height:7px"></div><div class="tmock-line" style="width:80%"></div></div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px">
+              <div style="padding:6px;border:1px solid var(--border);border-radius:5px">
+                <div style="font-size:8px;font-weight:600;font-family:var(--font-body);color:var(--text);margin-bottom:2px">Docs</div>
+                <div style="font-size:7px;color:var(--muted);font-family:var(--font-body);line-height:140%">Block storage overview.</div>
+              </div>
+              <div style="padding:6px;border:1px solid var(--border);border-radius:5px">
+                <div style="font-size:8px;font-weight:600;font-family:var(--font-body);color:var(--text);margin-bottom:2px">CLI</div>
+                <div style="font-size:7px;color:var(--mono);font-family:var(--mono);line-height:140%;background:var(--black);color:var(--gray-300);padding:3px 5px;border-radius:3px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">crusoe storage disks create</div>
+              </div>
             </div>
           </div>
         </div>
         <!-- SPICY -->
-        <div class="tmock">
+        <div class="tmock" data-state="disks" data-theme="spicy" onclick="openDirModal(this)">
           <div class="tmock-chrome">
             <div class="tmock-dot"></div><div class="tmock-dot"></div><div class="tmock-dot"></div>
             <div class="tmock-chrome-label">Disks</div>
             <div class="tmock-chip">Spicy</div>
+            <button class="tmock-expand-btn" onclick="event.stopPropagation();openDirModal(this.closest('.tmock'))"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 4V1h3M6 1h3v3M9 6v3H6M4 9H1V6"/></svg></button>
           </div>
           <div class="tmock-body" style="justify-content:center;gap:0;padding:12px">
             <div class="tmock-spicy-bg">
@@ -1823,11 +1905,12 @@ img.ico{display:block;flex:0 0 auto}
       </div>
       <div class="dir-state-cols">
         <!-- MILD -->
-        <div class="tmock">
+        <div class="tmock" data-state="buckets" data-theme="mild" onclick="openDirModal(this)">
           <div class="tmock-chrome">
             <div class="tmock-dot"></div><div class="tmock-dot"></div><div class="tmock-dot"></div>
             <div class="tmock-chrome-label">Buckets</div>
             <div class="tmock-chip">Mild</div>
+            <button class="tmock-expand-btn" onclick="event.stopPropagation();openDirModal(this.closest('.tmock'))"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 4V1h3M6 1h3v3M9 6v3H6M4 9H1V6"/></svg></button>
           </div>
           <div class="tmock-body" style="justify-content:center;gap:0;padding:32px 20px">
             <div class="tmock-illus-lg">
@@ -1851,38 +1934,48 @@ img.ico{display:block;flex:0 0 auto}
           </div>
         </div>
         <!-- MEDIUM -->
-        <div class="tmock">
+        <div class="tmock" data-state="buckets" data-theme="medium" onclick="openDirModal(this)">
           <div class="tmock-chrome">
             <div class="tmock-dot"></div><div class="tmock-dot"></div><div class="tmock-dot"></div>
             <div class="tmock-chrome-label">Buckets</div>
             <div class="tmock-chip">Medium</div>
+            <button class="tmock-expand-btn" onclick="event.stopPropagation();openDirModal(this.closest('.tmock'))"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 4V1h3M6 1h3v3M9 6v3H6M4 9H1V6"/></svg></button>
           </div>
-          <div class="tmock-body" style="align-items:flex-start;text-align:left;gap:0;padding:14px">
-            <div class="tmock-hero-row">
-              <div class="tmock-hero-sq">
-                <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="var(--gray-700)" stroke-width="1.4"><path d="M5 6h10l-1.5 9h-7L5 6z"/><path d="M4 6h12" stroke-linecap="round"/><path d="M8 6s.5-2 2-2 2 2 2 2"/></svg>
-              </div>
-              <div class="tmock-hero-lines">
-                <div class="tmock-line-dark" style="width:60%"></div>
-                <div class="tmock-line" style="width:92%;margin-top:3px"></div>
+          <div class="tmock-body" style="align-items:flex-start;text-align:left;gap:0;padding:11px;min-height:0">
+            <div style="display:flex;gap:7px;padding:8px;border:1px solid var(--border);border-radius:7px;margin-bottom:6px;align-items:flex-start">
+              <div style="width:26px;height:26px;background:var(--gray-100);border-radius:5px;flex-shrink:0;display:flex;align-items:center;justify-content:center"><svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="var(--gray-600)" stroke-width="1.4"><path d="M5 6h10l-1.5 9h-7L5 6z"/><path d="M4 6h12" stroke-linecap="round"/><path d="M8 6s.5-2 2-2 2 2 2 2"/></svg></div>
+              <div style="flex:1;min-width:0">
+                <div style="font-size:9.5px;font-weight:700;font-family:var(--font-heading);color:var(--text);margin-bottom:2px;line-height:130%">No buckets yet</div>
+                <div style="font-size:7.5px;color:var(--muted);font-family:var(--font-body);line-height:140%;margin-bottom:5px">S3-compatible object storage for datasets and models.</div>
+                <div style="display:flex;gap:4px">
+                  <div style="padding:2px 7px;background:var(--black);color:var(--white);border-radius:3px;font-size:7.5px;font-family:var(--font-body);white-space:nowrap">+ Create bucket</div>
+                  <div style="padding:2px 7px;border:1px solid var(--border);border-radius:3px;font-size:7.5px;font-family:var(--font-body);color:var(--text);white-space:nowrap">View docs</div>
+                </div>
               </div>
             </div>
-            <div style="padding:7px 9px;background:var(--black);border-radius:6px;width:100%;margin-bottom:8px">
-              <div style="height:7px;border-radius:2px;background:var(--gray-700);width:90%;margin-bottom:4px"></div>
-              <div style="height:7px;border-radius:2px;background:var(--gray-700);width:55%"></div>
+            <div style="padding:5px 7px;background:var(--gray-50);border-radius:5px;margin-bottom:6px;display:flex;gap:5px;align-items:flex-start;border:1px solid var(--gray-200)">
+              <div style="width:8px;height:8px;border-radius:50%;background:var(--gray-300);flex-shrink:0;margin-top:1px"></div>
+              <div style="font-size:7px;color:var(--muted);font-family:var(--font-body);line-height:140%">Use presigned URLs for temporary access to objects.</div>
             </div>
-            <div class="tmock-action-row">
-              <div class="tmock-action-card"><div class="tmock-line" style="width:60%;height:7px"></div><div class="tmock-line" style="width:80%"></div></div>
-              <div class="tmock-action-card"><div class="tmock-line" style="width:60%;height:7px"></div><div class="tmock-line" style="width:80%"></div></div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px">
+              <div style="padding:6px;border:1px solid var(--border);border-radius:5px">
+                <div style="font-size:8px;font-weight:600;font-family:var(--font-body);color:var(--text);margin-bottom:2px">Docs</div>
+                <div style="font-size:7px;color:var(--muted);font-family:var(--font-body);line-height:140%">Object storage + S3 API.</div>
+              </div>
+              <div style="padding:6px;border:1px solid var(--border);border-radius:5px">
+                <div style="font-size:8px;font-weight:600;font-family:var(--font-body);color:var(--text);margin-bottom:2px">CLI</div>
+                <div style="font-size:7px;color:var(--mono);font-family:var(--mono);line-height:140%;background:var(--black);color:var(--gray-300);padding:3px 5px;border-radius:3px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">crusoe storage objects buckets create</div>
+              </div>
             </div>
           </div>
         </div>
         <!-- SPICY -->
-        <div class="tmock">
+        <div class="tmock" data-state="buckets" data-theme="spicy" onclick="openDirModal(this)">
           <div class="tmock-chrome">
             <div class="tmock-dot"></div><div class="tmock-dot"></div><div class="tmock-dot"></div>
             <div class="tmock-chrome-label">Buckets</div>
             <div class="tmock-chip">Spicy</div>
+            <button class="tmock-expand-btn" onclick="event.stopPropagation();openDirModal(this.closest('.tmock'))"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 4V1h3M6 1h3v3M9 6v3H6M4 9H1V6"/></svg></button>
           </div>
           <div class="tmock-body" style="justify-content:center;gap:0;padding:12px">
             <div class="tmock-spicy-bg">
@@ -1909,6 +2002,22 @@ img.ico{display:block;flex:0 0 auto}
 
 </div><!-- /main -->
 </div><!-- /body -->
+
+<!-- ─── Design Directions Modal ─── -->
+<div class="dir-modal-bg" id="dir-modal-bg" onclick="closeDirModal(event)">
+  <div class="dir-modal" id="dir-modal">
+    <div class="dir-modal-topbar">
+      <div style="display:flex;align-items:center">
+        <div class="dir-modal-label" id="dir-modal-label"></div>
+        <div class="dir-modal-path" id="dir-modal-path"></div>
+      </div>
+      <button class="dir-modal-close" onclick="closeDirModal()">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="1" y1="1" x2="11" y2="11"/><line x1="11" y1="1" x2="1" y2="11"/></svg>
+      </button>
+    </div>
+    <div class="dir-modal-body" id="dir-modal-body"></div>
+  </div>
+</div>
 
 <!-- ─── Avatar Dropdown ─── -->
 <div class="avatar-dd" id="avatar-dd">
@@ -2269,6 +2378,91 @@ function closeAvatarDd() {
 document.addEventListener('click', e => {
   if (!e.target.closest('#tb-avatar') && !e.target.closest('#avatar-dd')) closeAvatarDd();
 });
+
+// ── Design Directions Modal ──
+const DIR_ICONS = {
+  instances:`<svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="var(--gray-700)" stroke-width="1.4"><rect x="3" y="6" width="22" height="16" rx="2.5"/><rect x="6" y="10" width="7" height="4" rx="1" fill="var(--gray-200)" stroke="none"/><circle cx="20" cy="12" r="1.5" fill="var(--black)"/><circle cx="20" cy="17" r="1.5" fill="var(--gray-400)"/></svg>`,
+  k8s:`<svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="var(--gray-700)" stroke-width="1.4"><circle cx="14" cy="14" r="10"/><line x1="14" y1="4" x2="14" y2="8"/><line x1="14" y1="20" x2="14" y2="24"/><line x1="4" y1="14" x2="8" y2="14"/><line x1="20" y1="14" x2="24" y2="14"/><circle cx="14" cy="14" r="3" fill="var(--gray-700)" stroke="none"/></svg>`,
+  slurm:`<svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="var(--gray-700)" stroke-width="1.4"><rect x="3" y="3" width="9" height="7" rx="1.5"/><rect x="16" y="3" width="9" height="7" rx="1.5"/><rect x="9" y="18" width="10" height="7" rx="1.5"/><line x1="7.5" y1="10" x2="14" y2="18" stroke-dasharray="2.5 1.5"/><line x1="20.5" y1="10" x2="14" y2="18" stroke-dasharray="2.5 1.5"/></svg>`,
+  disks:`<svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="var(--gray-700)" stroke-width="1.4"><ellipse cx="14" cy="10" rx="9" ry="4"/><path d="M5 10v8c0 2.2 4 4 9 4s9-1.8 9-4V10"/></svg>`,
+  buckets:`<svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="var(--gray-700)" stroke-width="1.4"><path d="M7 9h14l-2 13H9L7 9z"/><path d="M6 9h16" stroke-linecap="round"/><path d="M11 9s.5-3 3-3 3 3 3 3"/></svg>`
+};
+const DIR_ILLUS_LG = {
+  instances:`<svg width="72" height="72" viewBox="0 0 44 44" fill="none"><rect x="6" y="7" width="32" height="30" rx="3" fill="var(--gray-100)" stroke="var(--gray-800)" stroke-width="1.5"/><rect x="10" y="12" width="24" height="5.5" rx="1" fill="var(--white)" stroke="var(--gray-300)" stroke-width="1"/><rect x="10" y="20" width="24" height="5.5" rx="1" fill="var(--white)" stroke="var(--gray-300)" stroke-width="1"/><rect x="10" y="28" width="24" height="5.5" rx="1" fill="var(--white)" stroke="var(--gray-300)" stroke-width="1"/><circle cx="30" cy="14.75" r="1.8" fill="var(--black)" class="illus-blink-1"/><circle cx="30" cy="22.75" r="1.8" fill="var(--gray-400)" class="illus-blink-2"/><circle cx="30" cy="30.75" r="1.8" fill="var(--gray-400)" class="illus-blink-3"/><rect x="12" y="13.5" width="12" height="2.5" rx=".8" fill="var(--gray-300)"/><rect x="12" y="21.5" width="9" height="2.5" rx=".8" fill="var(--gray-200)"/><rect x="12" y="29.5" width="10" height="2.5" rx=".8" fill="var(--gray-200)"/></svg>`,
+  k8s:`<svg width="72" height="72" viewBox="0 0 44 44" fill="none"><g class="illus-spin"><line x1="22" y1="6" x2="22" y2="14" stroke="var(--gray-400)" stroke-width="1.2"/><line x1="33.8" y1="9.2" x2="28.6" y2="16" stroke="var(--gray-400)" stroke-width="1.2"/><line x1="37.8" y1="22" x2="30" y2="22" stroke="var(--gray-400)" stroke-width="1.2"/><line x1="33.8" y1="34.8" x2="28.6" y2="28" stroke="var(--gray-400)" stroke-width="1.2"/><line x1="22" y1="38" x2="22" y2="30" stroke="var(--gray-400)" stroke-width="1.2"/><line x1="10.2" y1="34.8" x2="15.4" y2="28" stroke="var(--gray-400)" stroke-width="1.2"/><line x1="6.2" y1="22" x2="14" y2="22" stroke="var(--gray-400)" stroke-width="1.2"/><line x1="10.2" y1="9.2" x2="15.4" y2="16" stroke="var(--gray-400)" stroke-width="1.2"/><circle cx="22" cy="22" r="17" stroke="var(--gray-300)" stroke-width="1.3" fill="none" stroke-dasharray="4 2"/></g><circle cx="22" cy="22" r="7" fill="var(--gray-100)" stroke="var(--gray-700)" stroke-width="1.5"/><circle cx="22" cy="22" r="2.5" fill="var(--black)"/></svg>`,
+  slurm:`<svg width="72" height="72" viewBox="0 0 44 44" fill="none"><rect x="13" y="18" width="22" height="14" rx="2.5" fill="var(--gray-200)" stroke="var(--gray-300)" stroke-width="1"/><rect x="11" y="15" width="22" height="14" rx="2.5" fill="var(--gray-100)" stroke="var(--gray-400)" stroke-width="1"/><g class="illus-bob"><rect x="9" y="12" width="22" height="14" rx="2.5" fill="var(--white)" stroke="var(--gray-700)" stroke-width="1.4"/><rect x="13" y="16" width="10" height="2" rx=".8" fill="var(--gray-700)"/><rect x="13" y="20" width="7" height="1.5" rx=".6" fill="var(--gray-300)"/><rect x="13" y="23" width="9" height="1.5" rx=".6" fill="var(--gray-300)"/></g></svg>`,
+  disks:`<svg width="72" height="72" viewBox="0 0 44 44" fill="none"><g class="illus-spin-reverse"><circle cx="22" cy="22" r="17" fill="var(--gray-100)" stroke="var(--gray-300)" stroke-width="1"/><circle cx="22" cy="22" r="12" fill="none" stroke="var(--gray-200)" stroke-width="2"/><circle cx="22" cy="22" r="8" fill="none" stroke="var(--gray-300)" stroke-width="1.5"/><path d="M22 5 A17 17 0 0 1 36.7 13.5" stroke="var(--gray-400)" stroke-width=".8" fill="none"/><path d="M5 22 A17 17 0 0 1 12 8.3" stroke="var(--gray-400)" stroke-width=".8" fill="none"/><path d="M22 39 A17 17 0 0 1 7.3 30.5" stroke="var(--gray-400)" stroke-width=".8" fill="none"/></g><circle cx="22" cy="22" r="3.5" fill="var(--white)" stroke="var(--gray-700)" stroke-width="1.5"/><circle cx="22" cy="22" r="1.2" fill="var(--black)"/></svg>`,
+  buckets:`<svg width="72" height="72" viewBox="0 0 44 44" fill="none"><path d="M11 17h22l-3.5 17H14.5L11 17z" fill="var(--gray-100)" stroke="var(--gray-700)" stroke-width="1.5" stroke-linejoin="round"/><path d="M9 17h26" stroke="var(--gray-700)" stroke-width="1.5" stroke-linecap="round"/><path d="M16 17c0-4 3-6 6-6s6 2 6 6" stroke="var(--gray-600)" stroke-width="1.3" fill="none"/><ellipse cx="18" cy="12" rx="1.2" ry="1.6" fill="var(--gray-500)" class="illus-rise-1"/><ellipse cx="22" cy="9" rx="1.2" ry="1.6" fill="var(--gray-400)" class="illus-rise-2"/><ellipse cx="26" cy="12" rx="1.2" ry="1.6" fill="var(--gray-500)" class="illus-rise-3"/></svg>`
+};
+const DIR_SPICY_ICONS = {
+  instances:`<svg width="24" height="24" viewBox="0 0 20 20" fill="none" stroke="rgba(255,255,255,.8)" stroke-width="1.4"><rect x="2.5" y="5" width="15" height="12" rx="2"/><path d="M6 5V3.5A1.5 1.5 0 017.5 2h5A1.5 1.5 0 0114 3.5V5"/></svg>`,
+  k8s:`<svg width="24" height="24" viewBox="0 0 20 20" fill="none" stroke="rgba(255,255,255,.8)" stroke-width="1.4"><circle cx="10" cy="10" r="8"/><line x1="10" y1="2" x2="10" y2="5"/><line x1="10" y1="15" x2="10" y2="18"/><line x1="2" y1="10" x2="5" y2="10"/><line x1="15" y1="10" x2="18" y2="10"/><circle cx="10" cy="10" r="2.5" fill="rgba(255,255,255,.8)" stroke="none"/></svg>`,
+  slurm:`<svg width="24" height="24" viewBox="0 0 20 20" fill="none" stroke="rgba(255,255,255,.8)" stroke-width="1.4"><rect x="2" y="2" width="7" height="5" rx="1"/><rect x="11" y="2" width="7" height="5" rx="1"/><rect x="6.5" y="13" width="7" height="5" rx="1"/><line x1="5.5" y1="7" x2="10" y2="13" stroke-dasharray="2 2"/><line x1="14.5" y1="7" x2="10" y2="13" stroke-dasharray="2 2"/></svg>`,
+  disks:`<svg width="24" height="24" viewBox="0 0 20 20" fill="none" stroke="rgba(255,255,255,.8)" stroke-width="1.4"><ellipse cx="10" cy="7" rx="7" ry="3"/><path d="M3 7v6c0 1.7 3.1 3 7 3s7-1.3 7-3V7"/></svg>`,
+  buckets:`<svg width="24" height="24" viewBox="0 0 20 20" fill="none" stroke="rgba(255,255,255,.8)" stroke-width="1.4"><path d="M5 6h10l-1.5 9h-7L5 6z"/><path d="M4 6h12" stroke-linecap="round"/><path d="M8 6s.5-2 2-2 2 2 2 2"/></svg>`
+};
+const DIR_DATA = {
+  instances:{
+    label:'Instances', path:'Compute → Instances',
+    mild:{title:'No instances yet',sub:'Spin up a cloud virtual machine in seconds. Choose from H100, A100, and L40S GPUs across multiple regions.',cta:'+ Create instance'},
+    medium:{title:'No instances yet',sub:'Virtual machines with dedicated GPU. Choose from H100 80GB SXM, A100 80GB SXM, and L40S across multiple regions and availability zones.',cta:'+ Create instance',ctaSecondary:'View documentation →',tip:'Start with a single A100 to validate your workload before scaling to multi-GPU or multi-node configurations.',cards:[{title:'Quickstart',sub:'Deploy your first instance in minutes.',link:'https://docs.crusoecloud.com/compute/vms/getting-started',linkText:'Getting started →'},{title:'CLI',sub:'Create an instance from the terminal:',cli:'crusoe compute vms create \\\n  --name my-vm \\\n  --type a100-80gb-sxm-ib.1x \\\n  --location us-east1-a \\\n  --ssh-key ~/.ssh/id_rsa.pub'}]},
+    spicy:{title:'Launch your\nfirst instance',sub:'H100s. A100s. Available now.',cta:'Get started →'}
+  },
+  k8s:{
+    label:'Kubernetes', path:'Orchestration → Kubernetes',
+    mild:{title:'No clusters yet',sub:'Deploy managed Kubernetes on dedicated GPU nodes. No control plane to manage.',cta:'+ Create cluster'},
+    medium:{title:'No clusters yet',sub:'Managed Kubernetes on GPU nodes. Deploy and scale ML workloads without managing the control plane. Supports GPU Operator, InfiniBand, and RDMA.',cta:'+ Create cluster',ctaSecondary:'View documentation →',tip:'Start with a single H100 or A100 node pool to validate GPU Operator and networking before scaling.',cards:[{title:'Quickstart',sub:'Create your first cluster in minutes.',link:'https://docs.crusoecloud.com/orchestration/cmk/getting-started',linkText:'Getting started →'},{title:'CLI',sub:'Create a cluster from the terminal:',cli:'crusoe kubernetes clusters create \\\n  --name my-cluster \\\n  --version 1.28 \\\n  --location us-east1-a'}]},
+    spicy:{title:'Orchestrate at\nGPU scale',sub:'Managed K8s. Zero ops overhead.',cta:'Create cluster →'}
+  },
+  slurm:{
+    label:'Slurm', path:'Orchestration → Slurm',
+    mild:{title:'No clusters yet',sub:'Managed Slurm for HPC and AI training at scale. Dedicated GPU nodes with InfiniBand.',cta:'+ Create cluster'},
+    medium:{title:'No clusters yet',sub:'Managed Slurm clusters for HPC and large-scale AI training. Runs on dedicated GPU nodes with high-speed InfiniBand networking and RDMA.',cta:'+ Create cluster',ctaSecondary:'View documentation →',tip:'Start with a CPU-only login node. Add GPU compute nodes after validating your Slurm config and job scripts.',cards:[{title:'Quickstart',sub:'Set up your first Slurm cluster.',link:'https://docs.crusoecloud.com/orchestration/slurm/getting-started',linkText:'Getting started →'},{title:'CLI',sub:'Create a Slurm cluster:',cli:'crusoe slurm clusters create \\\n  --name my-cluster \\\n  --cluster-template standard-v1 \\\n  --location us-east1-a'}]},
+    spicy:{title:'Run workloads\nat any scale',sub:'Slurm on H100 + InfiniBand.',cta:'Create cluster →'}
+  },
+  disks:{
+    label:'Disks', path:'Storage → Disks',
+    mild:{title:'No disks yet',sub:'Persistent block storage for your VMs. Attach and detach freely — data survives independently.',cta:'+ Create disk'},
+    medium:{title:'No disks yet',sub:'Persistent block storage for virtual machines. Attach and detach across instances — data persists independently of VM lifecycle. Supports snapshots and resizing.',cta:'+ Create disk',ctaSecondary:'View documentation →',tip:'Create your disk in the same location as your instance to avoid cross-region latency and transfer costs.',cards:[{title:'Documentation',sub:'Block storage overview and best practices.',link:'https://docs.crusoecloud.com/storage/disks/overview',linkText:'Storage docs →'},{title:'CLI',sub:'Create a persistent disk:',cli:'crusoe storage disks create \\\n  --name my-disk \\\n  --size 500GiB \\\n  --location us-east1-a'}]},
+    spicy:{title:'Fast, persistent\nblock storage',sub:'Attach to any instance. Survives reboots.',cta:'Create disk →'}
+  },
+  buckets:{
+    label:'Buckets', path:'Storage → Buckets',
+    mild:{title:'No buckets yet',sub:'S3-compatible object storage. Store datasets, model weights, and artifacts — access from any instance.',cta:'+ Create bucket'},
+    medium:{title:'No buckets yet',sub:'S3-compatible object storage. Store training datasets, model checkpoints, and build artifacts. Access from any Crusoe instance or the public internet.',cta:'+ Create bucket',ctaSecondary:'View documentation →',tip:'Use presigned URLs to give temporary access to bucket objects without making buckets public.',cards:[{title:'Documentation',sub:'Object storage overview and S3 API reference.',link:'https://docs.crusoecloud.com/storage/buckets/overview',linkText:'Storage docs →'},{title:'CLI',sub:'Create an object storage bucket:',cli:'crusoe storage objects \\\n  buckets create my-bucket \\\n  --location us-east1'}]},
+    spicy:{title:'Object storage,\nglobal scale',sub:'S3-compatible. Low latency. Always on.',cta:'Create bucket →'}
+  }
+};
+
+function openDirModal(el) {
+  const tmock = el.closest ? el.closest('.tmock') : el;
+  const state = tmock.dataset.state;
+  const theme = tmock.dataset.theme;
+  if (!state || !theme) return;
+  const d = DIR_DATA[state];
+  if (!d) return;
+  document.getElementById('dir-modal-label').textContent = d.label + ' — ' + theme.charAt(0).toUpperCase() + theme.slice(1);
+  document.getElementById('dir-modal-path').textContent = d.path;
+  const body = document.getElementById('dir-modal-body');
+  const infoIcon = `<svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="var(--gray-500)" stroke-width="1.4"><circle cx="8" cy="8" r="6.5"/><line x1="8" y1="7" x2="8" y2="11.5" stroke-linecap="round"/><circle cx="8" cy="5" r=".7" fill="var(--gray-500)" stroke="none"/></svg>`;
+  if (theme === 'mild') {
+    body.innerHTML = `<div class="dm-mild"><div class="dm-mild-illus">${DIR_ILLUS_LG[state]||''}</div><div class="dm-mild-title">${d.mild.title}</div><div class="dm-mild-sub">${d.mild.sub}</div><div class="dm-mild-cta">${d.mild.cta}</div></div>`;
+  } else if (theme === 'medium') {
+    const m = d.medium;
+    const cardsHtml = m.cards.map(c => `<div class="dm-card"><div class="dm-card-title">${c.title}</div><div class="dm-card-sub">${c.sub}</div>${c.cli?`<div class="dm-card-cli">${c.cli}</div>`:`<a class="dm-card-link" href="${c.link}" target="_blank">${c.linkText}</a>`}</div>`).join('');
+    body.innerHTML = `<div class="dm-med"><div class="dm-hero"><div class="dm-hero-icon">${DIR_ICONS[state]||''}</div><div class="dm-hero-content"><div class="dm-hero-title">${m.title}</div><div class="dm-hero-sub">${m.sub}</div><div class="dm-btns"><div class="dm-btn-p">${m.cta}</div><div class="dm-btn-o">${m.ctaSecondary}</div></div></div></div><div class="dm-tip">${infoIcon}<div class="dm-tip-text">${m.tip}</div></div><div class="dm-cards">${cardsHtml}</div></div>`;
+  } else if (theme === 'spicy') {
+    const s = d.spicy;
+    body.innerHTML = `<div class="dm-spicy"><div class="dm-spicy-grid"></div><div class="dm-spicy-scan"></div><div class="dm-spicy-icon">${DIR_SPICY_ICONS[state]||''}</div><div class="dm-spicy-title">${s.title.replace('\n','<br>')}</div><div class="dm-spicy-sub">${s.sub}</div><div class="dm-spicy-cta">${s.cta}</div></div>`;
+  }
+  document.getElementById('dir-modal-bg').classList.add('open');
+}
+
+function closeDirModal(e) {
+  if (e && e.target !== document.getElementById('dir-modal-bg')) return;
+  document.getElementById('dir-modal-bg').classList.remove('open');
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') document.getElementById('dir-modal-bg')?.classList.remove('open'); });
 
 // ── Init ──
 navigate('instances');
