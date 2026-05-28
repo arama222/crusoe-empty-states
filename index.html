@@ -1,0 +1,1674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
+<meta http-equiv="Pragma" content="no-cache"/>
+<meta http-equiv="Expires" content="0"/>
+<title>Crusoe Cloud Console</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+  /* CDS font-face: ABC Diatype Mono (commercial) — Space Mono is the visual fallback */
+  /* CDS font-face: Suisse Int'l (commercial) — Inter is the visual fallback */
+</style>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:var(--white);color:var(--black);font-family:'Suisse Int\'l','Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:14px;line-height:130%;-webkit-font-smoothing:antialiased}
+:root{
+  /* ── CDS Color Palette ── */
+  --black:    #111;      /* neutrals/black  */
+  --white:    #ffffff;   /* neutrals/white  */
+  --gray-50:  #f8f9fa;
+  --gray-100: #f1f3f5;
+  --gray-200: #e9ecef;
+  --gray-300: #dee2e6;
+  --gray-400: #ced4da;
+  --gray-500: #adb5bd;
+  --gray-600: #868e96;
+  --gray-700: #495057;
+  --gray-800: #343a40;
+  --gray-900: #212529;
+  --gray-1000:#1a1b1e;
+
+  /* ── CDS Greens ── */
+  --green-50:  #ecfdf5;
+  --green-100: #d1fae5;
+  --green-600: #059669;
+  --green-700: #047857;
+  --green-800: #065f46;
+
+  /* ── CLI text on dark bg ── */
+  --cli-text: var(--gray-200); /* #e9ecef */
+
+  /* ── Semantic aliases ── */
+  --border: var(--gray-300);   /* #dee2e6 */
+  --text:   var(--black);      /* #111    */
+  --text2:  var(--gray-800);   /* #343a40 */
+  --muted:  var(--gray-600);   /* #868e96 */
+  --sel:    var(--gray-50);    /* #f8f9fa */
+
+  /* ── CDS Typography ──
+     Headings : ABC Diatype Mono (commercial) → Space Mono fallback
+     Body     : Suisse Int'l (commercial)    → Inter fallback        */
+  --font-heading: 'ABC Diatype Mono','Space Mono','Courier New',monospace;
+  --font-body:    'Suisse Int\'l','Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --mono: var(--font-heading);
+
+  /* ── CDS Type Scale (headings, ABC Diatype Mono, weight 400) ──
+     h1: 48px / 115% / ls -0.96px
+     h2: 40px / 115% / ls -0.80px
+     h3: 32px / 115% / ls -0.64px
+     h4: 24px / 115% / ls -0.48px
+     h5: 16px / 115% / ls -0.32px
+     h6: 14px / 125% / ls -0.28px
+  ── Body (Suisse Int'l):
+     xs:  10px / 130%    sm:  12px / 130%
+     md:  14px / 130%    lg:  16px / 130%
+     xl:  18px / 130%                       */
+
+  --sw:208px;
+  --th:40px;
+}
+
+/* ── App ── */
+.app{display:flex;flex-direction:column;height:100vh;overflow:hidden}
+
+/* ── Topbar ── */
+.topbar{display:grid;grid-template-columns:auto minmax(0,1fr);gap:16px;align-items:center;border-bottom:1px solid var(--gray-400);background:var(--gray-50);padding:4px 12px;flex-shrink:0;z-index:10}
+.tb-left{display:flex;align-items:center;gap:8px;font-size:14px;font-family:var(--font-body)}
+.tb-org,.tb-proj{display:inline-flex;align-items:center;gap:6px;font-weight:400;cursor:pointer;padding:4px 8px;border-radius:8px;color:var(--muted)}
+.tb-org:hover,.tb-proj:hover{background:var(--sel)}
+.tb-slash{color:var(--gray-500);font-size:12px;margin:0 2px}
+.tb-right{display:flex;align-items:center;gap:8px;justify-self:end}
+.tb-icon{width:40px;height:40px;display:grid;place-content:center;border-radius:8px;cursor:pointer;color:var(--gray-700);position:relative}
+.tb-icon:hover{background:var(--sel)}
+.tb-notif-dot{position:absolute;top:6px;right:6px;width:6px;height:6px;background:#ef4444;border-radius:50%;border:1.5px solid var(--white)}
+.tb-divider{width:1px;height:24px;background:var(--gray-400)}
+/* Avatar: CDS square gray per Figma */
+.tb-avatar{width:40px;aspect-ratio:1;background:var(--gray-200);color:var(--text);border-radius:12px;display:inline-flex;align-items:center;justify-content:center;line-height:40px;font-size:14px;font-weight:400;cursor:pointer;flex-shrink:0;font-family:var(--font-body)}
+
+/* ── Body ── */
+.body{display:flex;flex:1;overflow:hidden}
+
+/* ── Sidebar ── */
+.sidebar{width:var(--sw);border-right:1px solid var(--gray-400);display:flex;flex-direction:column;justify-content:space-between;flex-shrink:0;background:var(--gray-50);overflow-y:auto;padding:12px}
+.snav{flex:1;display:flex;flex-direction:column;gap:4px}
+/* Sidebar labels: body xs, muted */
+.snav-label{font-size:12px;color:var(--muted);padding:0 8px;height:40px;display:flex;align-items:center;font-family:var(--font-body);border-radius:8px;line-height:130%}
+.sgrp{cursor:pointer}
+/* Sidebar group headers: body sm, medium weight */
+.sgrp-hd{display:flex;align-items:center;gap:8px;padding:0 8px;height:40px;font-size:14px;font-weight:500;color:var(--text);user-select:none;font-family:var(--font-body);border-radius:8px;line-height:130%}
+.sgrp-hd:hover{background:var(--sel);border-radius:8px}
+.sgrp-chev{margin-left:auto;transition:transform .15s;color:var(--gray-700)}
+.sgrp-chev.open{transform:rotate(180deg)}
+/* Sidebar child items: body sm */
+.sgrp-items{padding-left:28px}
+.sitem{display:flex;align-items:center;padding:0 8px;height:40px;font-size:14px;color:var(--gray-700);cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;user-select:none;font-family:var(--font-body);border-radius:8px;line-height:130%}
+.sitem:hover{background:var(--sel)}
+.sitem.active{background:#dee2e6;color:var(--text);font-weight:500;border-radius:8px}
+.sitem-solo{display:flex;align-items:center;gap:8px;padding:0 8px;height:40px;font-size:14px;color:var(--text);cursor:pointer;user-select:none;font-family:var(--font-body);border-radius:8px;line-height:130%}
+.sitem-solo:hover{background:var(--sel)}
+.sitem-solo.active{background:var(--sel);font-weight:500;border-radius:8px}
+.sback{display:flex;align-items:center;gap:8px;padding:0 8px;height:40px;font-size:14px;font-weight:400;color:var(--text);cursor:pointer;font-family:var(--font-body);border-radius:8px}
+.sback:hover{color:var(--gray-800)}
+.sfoot{padding:0 0 0 8px;display:flex;align-items:center;justify-content:space-between;width:100%}
+.sfoot-logo{position:relative;width:80px;height:20px;flex-shrink:0}
+.sfoot-logo .lp{position:absolute}
+.sfoot-logo .lp img{position:absolute;inset:0;width:100%;height:100%;display:block;max-width:none}
+.sfoot-panel{cursor:pointer;width:40px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:8px}
+.sfoot-panel:hover{background:var(--sel)}
+/* ── Sidebar collapsed ── */
+.sidebar{transition:width .2s ease,padding .2s ease}
+.sidebar.collapsed{width:56px;padding:12px 8px}
+.sidebar.collapsed .snav-label,.sidebar.collapsed .sgrp-items,.sidebar.collapsed .sgrp-chev,.sidebar.collapsed .sgrp-hd span,.sidebar.collapsed .sitem-solo span,.sidebar.collapsed .sback span,.sidebar.collapsed .sfoot-logo{display:none}
+.sidebar.collapsed .sgrp-hd{justify-content:center;padding:0;width:40px;height:40px;margin:0 auto}
+.sidebar.collapsed .sitem-solo{justify-content:center;padding:0;width:40px;height:40px;margin:0 auto}
+.sidebar.collapsed .sback{justify-content:center;padding:0;width:40px;height:40px;margin:0 auto}
+.sidebar.collapsed .sfoot{justify-content:center;padding:0}
+.sidebar.collapsed .sfoot-panel{margin:0}
+
+/* ── Main ── */
+.main{flex:1;overflow-y:auto;background:var(--white);display:flex;flex-direction:column}
+
+/* ── Page header ── */
+.ph{padding:20px 12px 12px;display:flex;align-items:flex-start;justify-content:space-between;gap:16px}
+.ph-l{display:flex;flex-direction:column;gap:2px}
+/* Page titles: CDS h4 — ABC Diatype Mono, 24px, 400, 115%, ls -0.48px */
+.ph-title{font-family:var(--font-heading);font-size:24px;font-weight:400;line-height:125%;letter-spacing:-0.96px;color:var(--text);text-transform:capitalize}
+.ph-title-sans{font-family:var(--font-heading);font-size:24px;font-weight:400;line-height:125%;letter-spacing:-0.96px;color:var(--text);text-transform:capitalize}
+/* Subtitle: body xs / muted */
+.ph-sub{font-size:12px;color:var(--muted);margin-top:4px;font-family:var(--font-body);line-height:130%}
+.ph-r{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.divider{height:1px;background:var(--border)}
+
+/* ── Buttons — CDS black (#111) ── */
+.btn{display:inline-flex;align-items:center;gap:8px;padding:0 16px;border-radius:12px;font-size:14px;font-weight:500;cursor:pointer;border:none;font-family:var(--font-body);white-space:nowrap;line-height:130%;height:40px}
+/* Primary: CDS neutrals/black */
+.btn-p{background:var(--black);color:var(--white)}.btn-p:hover{background:var(--gray-900)}
+/* Outline */
+.btn-o{background:var(--white);color:var(--text);border:1px solid var(--gray-400)}.btn-o:hover{background:var(--sel)}
+.btn-sm{padding:0 12px;font-size:12px;height:32px}
+
+/* ── Status badges ── */
+.badge-green{display:inline-flex;align-items:center;padding:2px 8px;background:var(--green-50);color:var(--green-600);border:1px solid var(--green-100);border-radius:4px;font-size:12px;font-weight:500;font-family:var(--font-body)}
+
+/* ── Toggle ── */
+.tog-wrap{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:500;font-family:var(--font-body);line-height:130%}
+.tog{width:36px;height:20px;background:var(--green-600);border-radius:10px;position:relative;cursor:pointer;flex-shrink:0}
+.tog::after{content:'';position:absolute;width:16px;height:16px;background:var(--white);border-radius:50%;top:2px;right:2px}
+
+/* ── Tabs ── */
+.tabs-bar{display:flex;align-items:center;border-bottom:1px solid var(--gray-400);padding:0 12px}
+.tabs{display:flex}
+/* Tab labels: body sm */
+.tab{padding:10px 14px;font-size:14px;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;white-space:nowrap;font-family:var(--font-body);line-height:130%}
+.tab:hover{color:var(--text)}
+/* Active tab: CDS green underline */
+.tab.active{color:var(--text);font-weight:500;border-bottom-color:#2e7663}
+.tabs-right{margin-left:auto;padding:8px 0}
+
+/* ── State toggle (prototype only) ── */
+.state-toggle{display:inline-flex;background:var(--gray-100);border-radius:6px;padding:2px;gap:1px;margin-left:16px;vertical-align:middle}
+.state-toggle-btn{padding:3px 10px;font-size:11px;font-weight:500;font-family:var(--font-body);color:var(--muted);border-radius:4px;cursor:pointer;border:none;background:none;line-height:130%}
+.state-toggle-btn.active{background:var(--white);color:var(--text);box-shadow:0 1px 3px rgba(0,0,0,.1)}
+
+/* ── Content area ── */
+.ca{padding:20px 24px 40px;flex:1}
+
+/* ── Banner ── */
+.banner{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border:1px solid var(--border);border-radius:8px;margin-bottom:16px;font-size:14px;font-family:var(--font-body);color:var(--text);line-height:130%}
+
+/* ── Stats ── */
+.stats{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-bottom:16px}
+.stat{padding:20px 20px 16px}
+.stat+.stat{border-left:1px solid var(--border)}
+/* Stat value: CDS h2, ABC Diatype Mono */
+.stat-val{font-size:40px;font-weight:400;font-family:var(--font-heading);letter-spacing:-0.8px;line-height:1.15;color:var(--text)}
+/* Stat label: body sm, muted */
+.stat-lbl{font-size:12px;color:var(--muted);margin-top:4px;font-family:var(--font-body);line-height:130%}
+
+/* ══ TEMPLATE 1 — Guided (3-card) ══ */
+.t1-header{font-family:var(--font-heading);font-size:32px;font-weight:400;letter-spacing:-0.64px;line-height:1.15;color:var(--text);margin-bottom:24px}
+.t1-cards{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:24px}
+.t1-card{border:1px solid var(--border);border-radius:12px;padding:24px;display:flex;flex-direction:column;gap:12px;background:var(--white)}
+.t1-card.primary{border-color:var(--black);border-width:2px}
+.t1-card-title{font-size:16px;font-weight:700;font-family:var(--font-body);color:var(--text);line-height:130%}
+.t1-card-desc{font-size:14px;color:var(--text2);font-family:var(--font-body);line-height:150%;flex:1}
+.t1-card-cta{align-self:flex-start}
+.t1-cli{background:var(--gray-900);border-radius:8px;padding:14px 18px;font-family:var(--mono);font-size:13px;color:var(--cli-text);display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;overflow-x:auto}
+.t1-cli code{white-space:pre;color:var(--cli-text)}
+.t1-cli-copy{background:none;border:1px solid rgba(255,255,255,.2);border-radius:6px;color:#a1a1aa;padding:4px 10px;font-size:12px;font-family:var(--font-body);cursor:pointer;flex-shrink:0;margin-left:16px}
+.t1-cli-copy:hover{color:var(--white);border-color:rgba(255,255,255,.4)}
+.t1-resources{margin-top:0}
+.t1-resources-title{font-size:12px;font-weight:500;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;font-family:var(--font-body);margin-bottom:10px}
+.t1-resources-list{display:flex;gap:12px;flex-wrap:wrap}
+.t1-resources-link{font-size:13px;font-weight:500;color:var(--text);text-decoration:none;font-family:var(--font-body);padding:6px 14px;border:1px solid var(--border);border-radius:8px;cursor:pointer}
+.t1-resources-link:hover{background:var(--sel);border-color:var(--gray-400)}
+
+/* ══ TEMPLATE 2 — Minimal (button + docs) ══ */
+.t2{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:64px 20px;text-align:center;gap:16px;min-height:260px}
+.t2-msg{font-size:14px;color:var(--muted);font-family:var(--font-body);line-height:150%;max-width:380px}
+.t2-docs{font-size:13px;font-weight:500;color:var(--text);text-decoration:underline;cursor:pointer;font-family:var(--font-body)}
+
+/* ══ TEMPLATE 3 — Reassurance (no action) ══ */
+.t3{padding:0}
+.t3-msg{display:flex;align-items:center;gap:8px;padding:12px 16px;background:var(--gray-50);border:1px solid var(--border);border-radius:8px;margin-bottom:16px;font-size:14px;font-family:var(--font-body);color:var(--muted);line-height:150%}
+.t3-msg svg{flex-shrink:0}
+.t3-docs{font-size:13px;font-weight:500;color:var(--text);text-decoration:underline;cursor:pointer;font-family:var(--font-body);margin-bottom:24px;display:inline-block}
+
+/* ── Detail page header ── */
+.dph{padding:12px 24px;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border)}
+.dph-back{width:28px;height:28px;display:flex;align-items:center;justify-content:center;cursor:pointer;border-radius:5px;flex-shrink:0;color:var(--gray-700)}
+.dph-back:hover{background:var(--sel)}
+/* Detail title: CDS h4, ABC Diatype Mono */
+.dph-title{font-family:var(--font-heading);font-size:24px;font-weight:400;letter-spacing:-0.96px;line-height:125%;color:var(--text);text-transform:capitalize}
+.dph-r{margin-left:auto;display:flex;align-items:center;gap:8px}
+.menu-btn{width:32px;height:32px;display:flex;align-items:center;justify-content:center;border:1px solid var(--border);border-radius:6px;cursor:pointer;background:var(--white);color:var(--text)}
+.menu-btn:hover{background:var(--sel)}
+
+/* ── Section header ── */
+.sec-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+/* Section title: body lg, bold */
+.sec-title{font-size:16px;font-weight:700;font-family:var(--font-body);color:var(--text)}
+
+/* ── Views ── */
+.view{display:none}
+.view.active{display:block}
+
+/* ── SVG icons ── */
+svg.ico{display:block;flex:0 0 auto}
+img.ico{display:block;flex:0 0 auto}
+
+/* ── CDS Table ── */
+.tbl-wrap{border:1px solid var(--gray-400);border-radius:12px;overflow:hidden}
+.tbl-filter{display:flex;align-items:center;padding:8px 12px;border-bottom:1px solid var(--border);gap:8px;background:var(--white)}
+.tbl-search-wrap{display:flex;align-items:center;gap:8px;font-size:14px;font-family:var(--font-body);color:var(--muted);flex:1}
+.tbl-search-wrap input{border:none;outline:none;font-size:14px;font-family:var(--font-body);color:var(--text);background:transparent;flex:1}
+.tbl-search-wrap input::placeholder{color:var(--muted)}
+.tbl-add-filter{font-size:14px;color:var(--muted);cursor:pointer;font-family:var(--font-body);padding:4px 8px;border-radius:4px;white-space:nowrap;line-height:130%}
+.tbl-add-filter:hover{background:var(--sel)}
+.tbl{width:100%;border-collapse:collapse;background:var(--white)}
+.tbl th{height:40px;padding:0 16px;text-align:left;font-size:12px;font-weight:500;color:var(--muted);font-family:var(--font-body);border-bottom:1px solid var(--border);white-space:nowrap;line-height:130%}
+.tbl td{height:56px;padding:0 16px;font-size:14px;color:var(--text);font-family:var(--font-body);border-bottom:1px solid var(--border);vertical-align:middle;line-height:130%}
+.tbl tr:last-child td{border-bottom:none}
+.tbl tbody tr:hover td{background:var(--gray-50)}
+.tbl tbody tr{cursor:pointer}
+.tbl-null-row{cursor:default!important}
+.tbl-link{color:var(--text);font-weight:500;cursor:pointer}.tbl-link:hover{text-decoration:underline}
+.tbl-mono{font-family:var(--font-heading);font-size:12px;color:var(--text2)}
+.tbl-actions{display:flex;align-items:center;gap:4px}
+.tbl-icon-btn{width:28px;height:28px;display:flex;align-items:center;justify-content:center;cursor:pointer;border-radius:4px;color:var(--gray-500);border:none;background:transparent;flex-shrink:0}
+.tbl-icon-btn:hover{background:var(--sel);color:var(--text)}
+.tbl-null{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:48px 20px;gap:12px}
+.tbl-null-msg{font-size:14px;color:var(--muted);font-family:var(--font-body);line-height:130%}
+/* Status / label badges */
+.pill-green{display:inline-flex;align-items:center;padding:2px 10px;background:var(--green-50);color:var(--green-700);border-radius:4px;font-size:12px;font-weight:500;font-family:var(--font-body)}
+.badge-label{display:inline-flex;align-items:center;padding:1px 8px;background:var(--green-50);color:var(--green-700);border:1px solid var(--green-100);border-radius:4px;font-size:11px;font-weight:500;font-family:var(--font-body)}
+.badge-outline{display:inline-flex;align-items:center;padding:2px 8px;background:var(--white);color:var(--text2);border:1px solid var(--border);border-radius:4px;font-size:12px;font-family:var(--font-body)}
+/* Tab panels (cluster detail) */
+.tab-panel{display:none}
+.tab-panel.active{display:block}
+/* Avatar dropdown */
+.avatar-dd{position:fixed;top:46px;right:8px;background:var(--white);border:1px solid var(--border);border-radius:8px;box-shadow:0 4px 20px rgba(0,0,0,.1);min-width:200px;z-index:200;padding:4px 0;display:none}
+.avatar-dd.open{display:block}
+.avatar-dd-header{padding:10px 14px;border-bottom:1px solid var(--border);margin-bottom:2px}
+.avatar-dd-name{font-size:14px;font-weight:500;font-family:var(--font-body);color:var(--text);line-height:130%}
+.avatar-dd-meta{font-size:12px;color:var(--muted);font-family:var(--font-body);margin-top:2px;line-height:130%}
+.avatar-dd-item{display:flex;align-items:center;gap:8px;padding:8px 14px;font-size:14px;font-family:var(--font-body);cursor:pointer;color:var(--text);line-height:130%}
+.avatar-dd-item:hover{background:var(--sel)}
+.avatar-dd-sep{height:1px;background:var(--border);margin:4px 0}
+/* ── Metrics toolbar ── */
+.metrics-toolbar{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.seg-ctrl{display:inline-flex;background:var(--gray-100);border-radius:6px;padding:2px;gap:1px}
+.seg-ctrl-item{padding:4px 12px;font-size:12px;font-weight:500;font-family:var(--font-body);color:var(--muted);border-radius:4px;cursor:pointer;white-space:nowrap;line-height:130%}
+.seg-ctrl-item.active{background:var(--white);color:var(--text);box-shadow:0 1px 3px rgba(0,0,0,.1)}
+.seg-ctrl-item:hover:not(.active){color:var(--text)}
+/* ── Info/notice banner ── */
+.info-banner{display:flex;align-items:center;gap:8px;padding:10px 14px;background:var(--green-50);border:1px solid var(--green-100);border-radius:8px;margin-bottom:16px;font-size:14px;font-family:var(--font-body);color:var(--green-800);line-height:130%}
+/* ── Chart grid ── */
+.chart-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.chart-card{border:1px solid var(--border);border-radius:8px;overflow:hidden}
+.chart-card-hd{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:1px solid var(--border)}
+.chart-card-title{font-size:14px;font-weight:500;font-family:var(--font-body);color:var(--text);line-height:130%}
+.chart-empty{display:flex;align-items:center;justify-content:center;height:160px;background:var(--gray-50)}
+.chart-empty-msg{font-size:12px;color:var(--muted);font-family:var(--font-body)}
+/* ── Empty state card ── */
+.ecard{display:flex;align-items:center;gap:24px;padding:32px;border:1px solid var(--border);border-radius:12px;margin-bottom:32px;background:var(--white)}
+.illus{width:96px;height:96px;background:var(--gray-100);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--muted);font-family:var(--font-body);flex-shrink:0}
+.etxt{display:flex;flex-direction:column;gap:6px}
+.ecat{font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:0.06em;color:var(--muted);font-family:var(--font-body)}
+.etitle{font-family:var(--font-heading);font-size:24px;font-weight:400;letter-spacing:-0.48px;line-height:115%;color:var(--text)}
+.edesc{font-size:14px;color:var(--text2);font-family:var(--font-body);line-height:150%;max-width:780px}
+.eactions{display:flex;align-items:center;gap:12px;margin-top:4px}
+.edocs{font-size:13px;font-weight:500;color:var(--text);text-decoration:underline;cursor:pointer;font-family:var(--font-body)}
+/* CLI snippet */
+.cli-snippet{background:var(--gray-900);border-radius:8px;padding:14px 18px;font-family:var(--mono);font-size:13px;color:var(--cli-text);display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;overflow-x:auto}
+.cli-snippet code{white-space:pre;color:var(--cli-text)}
+.cli-snippet-copy{background:none;border:1px solid rgba(255,255,255,.2);border-radius:6px;color:#a1a1aa;padding:4px 10px;font-size:12px;font-family:var(--font-body);cursor:pointer;flex-shrink:0;margin-left:16px}
+.cli-snippet-copy:hover{color:var(--white);border-color:rgba(255,255,255,.4)}
+/* Step cards — hover-reveal pattern */
+.steps{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.step{border:1px solid var(--border);border-radius:12px;overflow:hidden;display:flex;flex-direction:column;background:var(--white);transition:box-shadow .2s ease,border-color .2s ease;cursor:default;position:relative}
+.step:hover{box-shadow:0 4px 16px rgba(0,0,0,.06);border-color:var(--gray-400)}
+.step.full-width{grid-column:1 / -1}
+/* Top accent bar */
+.step::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--gray-200);z-index:1;transition:background .2s ease}
+.step:hover::before{background:var(--black)}
+/* Illustration area */
+.step-illus{background:#f9fafb;height:130px;display:flex;align-items:center;justify-content:center;position:relative}
+.step-illus svg{opacity:.22;transition:opacity .25s ease}
+.step:hover .step-illus svg{opacity:.45}
+/* Body — description & link hidden until hover */
+.step-body{padding:16px 20px 20px;display:flex;flex-direction:column;gap:4px;flex:1}
+.step-n{font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:0.06em;color:var(--muted);font-family:var(--font-body)}
+.step-h{font-size:14px;font-weight:600;font-family:var(--font-body);color:var(--text);line-height:130%}
+.step-reveal{max-height:0;overflow:hidden;opacity:0;transition:max-height .3s ease,opacity .25s ease,padding .3s ease}
+.step:hover .step-reveal{max-height:200px;opacity:1;padding-top:6px}
+.step.full-width .step-reveal{max-height:none;opacity:1;padding-top:6px}
+.step-d{font-size:13px;color:var(--text2);font-family:var(--font-body);line-height:150%;flex:1}
+.step-a{display:inline-block;font-size:13px;font-weight:500;color:var(--text);text-decoration:none;cursor:pointer;font-family:var(--font-body);margin-top:8px}.step-a:hover{text-decoration:underline}
+/* Embedded empty state (Pattern 2) */
+.embedded-empty{border:1px solid var(--border);border-radius:12px;padding:24px 28px;display:flex;flex-direction:column;gap:12px;margin-bottom:16px}
+.embedded-empty-desc{font-size:14px;color:var(--text2);font-family:var(--font-body);line-height:150%}
+.embedded-empty-actions{display:flex;align-items:center;gap:12px}
+/* ── Infra stat h3 size ── */
+.stat-val-h3{font-size:32px;font-weight:400;font-family:var(--font-heading);letter-spacing:-0.64px;line-height:1.15;color:var(--text)}
+/* ── VM Detail meta bar ── */
+.vm-meta-bar{display:flex;align-items:center;gap:16px;padding:8px 24px;font-size:13px;font-family:var(--font-body);color:var(--muted);border-bottom:1px solid var(--border);flex-wrap:wrap}
+.vm-meta-item{display:inline-flex;align-items:center;gap:4px}
+.vm-meta-chip{display:inline-flex;align-items:center;padding:2px 10px;border:1px solid var(--border);border-radius:4px;font-size:12px;font-weight:500;font-family:var(--font-body);color:var(--text);background:var(--white)}
+/* ── VM Network grid ── */
+.vm-net-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr) minmax(0,1fr);gap:0;border:1px solid var(--border);border-radius:8px;overflow:hidden}
+.vm-net-card{padding:20px 24px}
+.vm-net-card+.vm-net-card{border-left:1px solid var(--border)}
+.vm-net-card-title{font-size:16px;font-weight:700;font-family:var(--font-body);color:var(--text);margin-bottom:16px}
+.vm-net-row{display:grid;grid-template-columns:auto 1fr;align-items:baseline;gap:12px;font-size:14px;font-family:var(--font-body);margin-bottom:10px}
+.vm-net-row:last-child{margin-bottom:0}
+.vm-net-label{color:var(--muted);white-space:nowrap;font-size:13px}
+.vm-net-link{color:var(--text);text-decoration:underline;cursor:pointer;font-weight:500;font-size:14px;word-break:break-word}
+.vm-net-val{display:inline-flex;align-items:center;gap:4px}
+.vm-section-title{font-size:24px;font-weight:400;font-family:var(--font-heading);letter-spacing:-0.48px;color:var(--text);margin-bottom:12px}
+/* ── Section-level empty state ── */
+.sec-empty{border:1px solid var(--border);border-radius:12px;padding:40px 32px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:12px}
+.sec-empty-illust{color:var(--gray-400);margin-bottom:4px}
+.sec-empty-title{font-size:14px;font-weight:600;font-family:var(--font-body);color:var(--text)}
+.sec-empty-copy{font-size:13px;color:var(--muted);font-family:var(--font-body);line-height:155%;max-width:420px}
+.sec-empty-actions{display:flex;align-items:center;gap:10px;margin-top:4px}
+.sec-empty-cli-card{display:flex;align-items:center;gap:12px;border:1px solid var(--border);border-radius:8px;padding:10px 14px;margin-top:4px;cursor:pointer;transition:border-color .15s ease,box-shadow .15s ease}
+.sec-empty-cli-card:hover{border-color:var(--gray-400);box-shadow:0 2px 8px rgba(0,0,0,.05)}
+.sec-empty-cli-icon{width:32px;height:32px;background:var(--gray-900);border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.sec-empty-cli-text{text-align:left}
+.sec-empty-cli-label{font-size:12px;font-weight:600;font-family:var(--font-body);color:var(--text)}
+.sec-empty-cli-cmd{font-size:11px;font-family:var(--mono);color:var(--muted);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:320px}
+.sec-empty-cli-copy{font-size:11px;font-weight:500;color:var(--muted);font-family:var(--font-body);margin-left:auto;flex-shrink:0;padding:4px 10px;border:1px solid var(--border);border-radius:4px;background:var(--white);transition:color .15s,border-color .15s}
+.sec-empty-cli-card:hover .sec-empty-cli-copy{color:var(--text);border-color:var(--gray-400)}
+/* ── Infra action cards ── */
+.action-cards{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-top:32px}
+.action-card{border:1px solid var(--border);border-radius:12px;padding:24px;background:var(--white);display:flex;flex-direction:column;gap:10px}
+.action-card-title{font-size:14px;font-weight:600;font-family:var(--font-body);color:var(--text)}
+.action-card-desc{font-size:13px;color:var(--muted);font-family:var(--font-body);line-height:150%;flex:1}
+.action-card-cli{background:var(--gray-900);color:var(--cli-text);border-radius:8px;padding:14px 16px;font-family:var(--mono);font-size:12px;line-height:160%;overflow-x:auto;white-space:pre;max-height:180px;overflow-y:auto}
+.action-card-cli code{font-family:var(--mono);font-size:12px;color:var(--cli-text)}
+/* ── Infra recommended start ── */
+.rec-start{border:1px solid var(--border);border-radius:12px;padding:24px 28px;margin-top:32px;background:var(--white)}
+.rec-start-label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;color:var(--muted);font-family:var(--font-body);margin-bottom:8px}
+.rec-start-title{font-size:16px;font-weight:600;font-family:var(--font-body);color:var(--text);margin-bottom:8px}
+.rec-start-desc{font-size:13px;color:var(--text2);font-family:var(--font-body);line-height:160%}
+/* ── Popular platform cards ── */
+.pop-section{margin-top:12px;margin-bottom:12px}
+.pop-section-centered{max-width:920px;margin-left:auto;margin-right:auto}
+.pop-title{font-size:14px;font-weight:500;font-family:var(--font-body);color:var(--muted);text-align:center;margin-bottom:16px}
+.pop-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+.pop-card{border:1px solid var(--border);border-radius:10px;padding:18px 20px;background:var(--white);cursor:pointer;transition:border-color .2s ease,box-shadow .2s ease}
+.pop-card:hover{border-color:var(--gray-400);box-shadow:0 4px 16px rgba(0,0,0,.07)}
+.pop-card-top{display:flex;align-items:center;gap:12px}
+.pop-icon{width:40px;height:40px;background:var(--gray-50);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.pop-card-info{flex:1;min-width:0}
+.pop-card-name{font-size:13px;font-weight:600;font-family:var(--font-body);color:var(--text)}
+.pop-card-price{font-size:11px;font-weight:500;color:var(--muted);font-family:var(--font-body);margin-top:1px}
+.pop-chev{color:var(--gray-400);flex-shrink:0;transition:color .2s ease,transform .2s ease}
+.pop-card:hover .pop-chev{color:var(--text);transform:translateX(2px)}
+/* Hover-reveal: description + tags hidden by default */
+.pop-card-reveal{max-height:0;overflow:hidden;opacity:0;transition:max-height .3s ease,opacity .25s ease,margin .25s ease;margin-top:0}
+.pop-card:hover .pop-card-reveal{max-height:120px;opacity:1;margin-top:12px}
+.pop-card-desc{font-size:13px;color:var(--muted);font-family:var(--font-body);line-height:150%;margin-bottom:10px}
+.pop-card-tags{display:flex;gap:6px}
+.pop-tag{font-size:11px;font-weight:500;font-family:var(--font-body);padding:2px 8px;border-radius:4px;background:var(--gray-50);color:var(--gray-700);border:1px solid var(--gray-200)}
+.pop-alt{display:flex;align-items:center;gap:16px;margin-top:20px;margin-bottom:8px}
+.pop-alt::before,.pop-alt::after{content:'';flex:1;height:1px;background:var(--gray-200)}
+.pop-alt-inner{display:flex;align-items:center;gap:8px;white-space:nowrap;font-size:13px;color:var(--muted);font-family:var(--font-body)}
+.pop-alt-btn{display:inline-flex;align-items:center;gap:4px;font-size:13px;font-weight:500;font-family:var(--font-body);color:var(--text);padding:6px 14px;border:1px solid var(--border);border-radius:8px;background:var(--white);cursor:pointer;text-decoration:none;transition:border-color .15s ease,box-shadow .15s ease}
+.pop-alt-btn:hover{border-color:var(--gray-400);box-shadow:0 1px 4px rgba(0,0,0,.06)}
+/* ── 2-column action cards variant ── */
+.action-cards-2col{grid-template-columns:1fr 1fr}
+/* ── Metrics empty state ── */
+.metrics-empty{display:flex;flex-direction:column;align-items:center;text-align:center;padding:48px 24px 32px}
+.metrics-empty-icon{margin-bottom:24px;opacity:.85}
+.metrics-empty-title{font-size:20px;font-weight:400;font-family:var(--font-heading);letter-spacing:-0.4px;color:var(--text);margin-bottom:10px}
+.metrics-empty-desc{font-size:14px;color:var(--muted);font-family:var(--font-body);line-height:155%;max-width:520px;margin-bottom:32px}
+.metrics-empty-cards{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;width:100%;max-width:720px}
+.metrics-hint-card{display:flex;align-items:flex-start;gap:12px;padding:16px;border:1px solid var(--border);border-radius:10px;text-align:left;background:var(--white);transition:border-color .15s ease,box-shadow .15s ease}
+.metrics-hint-card:hover{border-color:var(--gray-400);box-shadow:0 2px 8px rgba(0,0,0,.05)}
+.metrics-hint-icon{flex-shrink:0;margin-top:1px}
+.metrics-hint-text{display:flex;flex-direction:column;gap:3px}
+.metrics-hint-title{font-size:13px;font-weight:600;font-family:var(--font-body);color:var(--text)}
+.metrics-hint-desc{font-size:12px;color:var(--muted);font-family:var(--font-body);line-height:145%}
+.metrics-hint-card-action{cursor:pointer}
+.metrics-hint-card-action .metrics-hint-title{color:var(--text)}
+.metrics-hint-chev{color:var(--gray-400);flex-shrink:0;align-self:center;transition:color .15s ease,transform .15s ease}
+.metrics-hint-card-action:hover .metrics-hint-chev{color:var(--text);transform:translateX(2px)}
+</style>
+</head>
+<body>
+<div class="app">
+
+<!-- ═══ TOPBAR ═══ -->
+<header class="topbar" id="topbar">
+  <div class="tb-left" id="tb-left">
+    <span class="tb-org">ManagedOrchestration
+      <svg class="ico" width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 11L3 6 3.7 5.3 8 9.6 12.3 5.3 13 6z"></path></svg>
+    </span>
+    <span class="tb-slash">/</span>
+    <span class="tb-proj">abhatti
+      <svg class="ico" width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 11L3 6 3.7 5.3 8 9.6 12.3 5.3 13 6z"></path></svg>
+    </span>
+  </div>
+  <div class="tb-right">
+    <!-- Notifications (Carbon: Notification) -->
+    <div class="tb-icon" id="tb-notif">
+      <svg class="ico" width="20" height="20" viewBox="0 0 32 32" fill="currentColor"><path d="M28.7071,19.293,26,16.5859V13a10.0136,10.0136,0,0,0-9-9.9492V1H15V3.0508A10.0136,10.0136,0,0,0,6,13v3.5859L3.2929,19.293A1,1,0,0,0,3,20v3a1,1,0,0,0,1,1h7v.7768a5.152,5.152,0,0,0,4.5,5.1987A5.0057,5.0057,0,0,0,21,25V24h7a1,1,0,0,0,1-1V20A1,1,0,0,0,28.7071,19.293ZM19,25a3,3,0,0,1-6,0V24h6Zm8-3H5V20.4141L7.707,17.707A1,1,0,0,0,8,17V13a8,8,0,0,1,16,0v4a1,1,0,0,0,.293.707L27,20.4141Z"></path></svg>
+    </div>
+    <!-- Help (Carbon: Help) -->
+    <div class="tb-icon">
+      <svg class="ico" width="20" height="20" viewBox="0 0 16 16" fill="currentColor"><path d="M8,1C4.1,1,1,4.1,1,8s3.1,7,7,7s7-3.1,7-7S11.9,1,8,1z M8,14c-3.3,0-6-2.7-6-6s2.7-6,6-6s6,2.7,6,6S11.3,14,8,14z"></path><circle cx="8" cy="11.8" r=".8"></circle><path d="M8.5,4H7.8C6.5,4,5.5,5,5.5,6.2c0,0,0,0,0,0v0.2h1V6.2C6.5,5.6,7.1,5,7.8,5h0.8c0.7,0,1.2,0.6,1.2,1.2S9.2,7.5,8.5,7.5h-1 v2.2h1V8.5c1.2,0,2.2-1,2.2-2.2S9.7,4,8.5,4z"></path></svg>
+    </div>
+    <!-- Docs (Carbon: Table split) -->
+    <div class="tb-icon">
+      <svg class="ico" width="20" height="20" viewBox="0 0 32 32" fill="currentColor"><path d="M19 10H26V12H19zM19 15H26V17H19zM19 20H26V22H19zM6 10H13V12H6zM6 15H13V17H6zM6 20H13V22H6z"></path><path d="M28,5H4A2.002,2.002,0,0,0,2,7V25a2.002,2.002,0,0,0,2,2H28a2.002,2.002,0,0,0,2-2V7A2.002,2.002,0,0,0,28,5ZM4,7H15V25H4ZM17,25V7H28V25Z"></path></svg>
+    </div>
+    <div class="tb-divider"></div>
+    <!-- App menu (Carbon: Grid) -->
+    <div class="tb-icon">
+      <svg class="ico" width="20" height="20" viewBox="0 0 32 32" fill="currentColor"><path d="M12 4H6A2 2 0 004 6v6a2 2 0 002 2h6a2 2 0 002-2V6A2 2 0 0012 4zm0 8H6V6h6zM26 4H20a2 2 0 00-2 2v6a2 2 0 002 2h6a2 2 0 002-2V6A2 2 0 0026 4zm0 8H20V6h6zM12 18H6a2 2 0 00-2 2v6a2 2 0 002 2h6a2 2 0 002-2V20A2 2 0 0012 18zm0 8H6V20h6zM26 18H20a2 2 0 00-2 2v6a2 2 0 002 2h6a2 2 0 002-2V20A2 2 0 0026 18zm0 8H20V20h6z"></path></svg>
+    </div>
+    <div class="tb-avatar" id="tb-avatar" onclick="toggleAvatarDd()">Y</div>
+  </div>
+</header>
+
+<div class="body">
+
+<!-- ═══ SIDEBAR (injected by JS) ═══ -->
+<aside class="sidebar" id="sidebar"></aside>
+
+<!-- ═══ MAIN ═══ -->
+<div class="main">
+
+<!-- ─── VIEW: Instances ─── -->
+<div class="view active" id="view-instances">
+  <div class="ph">
+    <div class="ph-l">
+      <div class="ph-title-sans">Instances</div>
+      <div class="state-toggle">
+        <button class="state-toggle-btn active" onclick="toggleInstanceState('empty')">Empty</button>
+        <button class="state-toggle-btn" onclick="toggleInstanceState('filled')">Filled</button>
+      </div>
+    </div>
+    <div class="ph-r"><button class="btn btn-p"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.99967 3.33337V12.6667M3.33301 8.00004H12.6663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Create Instance</button></div>
+  </div>
+  <div class="divider"></div>
+  <div class="ca">
+    <!-- ── EMPTY STATE ── -->
+    <div id="instances-empty">
+    <!-- Empty state hero -->
+    <div class="ecard">
+      <div class="illus">
+        <svg width="64" height="64" viewBox="0 0 64 64" fill="none" stroke="#ced4da" stroke-width="1.2">
+          <polygon points="32,8 56,24 56,48 32,56 8,48 8,24"/>
+          <polygon points="32,16 48,26 48,42 32,48 16,42 16,26"/>
+          <line x1="32" y1="8" x2="32" y2="56" opacity=".3"/>
+          <line x1="8" y1="24" x2="56" y2="48" opacity=".3"/>
+          <line x1="56" y1="24" x2="8" y2="48" opacity=".3"/>
+        </svg>
+      </div>
+      <div class="etxt">
+        <div class="ecat">Compute</div>
+        <div class="etitle">Create your first instance</div>
+        <div class="edesc">Crusoe Cloud provides a high-performance, sustainable cloud platform with the latest hardware. Once you create an instance it will appear here with status, region, uptime, and cost-to-date.</div>
+      </div>
+    </div>
+    <!-- Your reservations -->
+    <div class="pop-section">
+      <div class="pop-title">Create from your reservations</div>
+      <div class="pop-grid">
+        <div class="pop-card">
+          <div class="pop-card-top">
+            <div class="pop-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="2" y="6" width="24" height="16" rx="3" stroke="#111" stroke-width="1.4"/><rect x="6" y="10" width="6" height="6" rx="1" fill="#111" opacity=".12"/><rect x="16" y="10" width="6" height="6" rx="1" fill="#111" opacity=".12"/><line x1="8" y1="22" x2="20" y2="22" stroke="#111" stroke-width="1.4"/></svg></div>
+            <div class="pop-card-info">
+              <div class="pop-card-name">H100 80GB SXM</div>
+              <div class="pop-card-price">6 of 32 GPUs available</div>
+            </div>
+            <svg class="pop-chev" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="pop-card-reveal">
+            <div class="pop-card-desc">Reservation res-a1b2c3 · us-east1-a · 6 GPUs remaining of 32 total</div>
+            <div class="pop-card-tags"><span class="pop-tag">Reserved</span><span class="pop-tag">H100</span></div>
+          </div>
+        </div>
+        <div class="pop-card">
+          <div class="pop-card-top">
+            <div class="pop-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="2" y="6" width="24" height="16" rx="3" stroke="#111" stroke-width="1.4"/><rect x="6" y="10" width="6" height="6" rx="1" fill="#111" opacity=".12"/><rect x="16" y="10" width="6" height="6" rx="1" fill="#111" opacity=".12"/><line x1="8" y1="22" x2="20" y2="22" stroke="#111" stroke-width="1.4"/></svg></div>
+            <div class="pop-card-info">
+              <div class="pop-card-name">H200 141GB</div>
+              <div class="pop-card-price">16 of 16 GPUs available</div>
+            </div>
+            <svg class="pop-chev" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="pop-card-reveal">
+            <div class="pop-card-desc">Reservation res-d4e5f6 · us-northcentral1-a · All 16 GPUs available</div>
+            <div class="pop-card-tags"><span class="pop-tag">Reserved</span><span class="pop-tag">H200</span></div>
+          </div>
+        </div>
+        <div class="pop-card">
+          <div class="pop-card-top">
+            <div class="pop-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="2" y="6" width="24" height="16" rx="3" stroke="#111" stroke-width="1.4"/><rect x="8" y="10" width="12" height="8" rx="1.5" fill="#111" opacity=".08" stroke="#111" stroke-width="1"/></svg></div>
+            <div class="pop-card-info">
+              <div class="pop-card-name">L40S 48GB</div>
+              <div class="pop-card-price">4 of 8 GPUs available</div>
+            </div>
+            <svg class="pop-chev" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="pop-card-reveal">
+            <div class="pop-card-desc">Reservation res-g7h8i9 · us-east1-a · 4 GPUs remaining of 8 total</div>
+            <div class="pop-card-tags"><span class="pop-tag">Reserved</span><span class="pop-tag">L40S</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="pop-alt"><span class="pop-alt-inner">or start from scratch</span></div>
+    </div>
+    <!-- Secondary resources: Docs + CLI (2-column) -->
+    <div class="action-cards action-cards-2col">
+      <div class="action-card">
+        <div class="action-card-title">Getting started</div>
+        <div class="action-card-desc">A dedicated Linux host with one or more GPUs you can SSH into directly. Stopped VMs are not charged for on-demand usage.</div>
+        <a class="btn btn-o" href="https://docs.crusoecloud.com/compute/virtual-machines" style="margin-top:auto">Getting started →</a>
+      </div>
+      <div class="action-card">
+        <div class="action-card-title">CLI command</div>
+        <div class="action-card-desc" style="font-size:12px;color:var(--muted);margin-bottom:4px">Create an A100 VM via the Crusoe CLI:</div>
+        <div class="action-card-cli"><code>crusoe compute vms create \
+  --name my-vm \
+  --type a100.80gb.1x \
+  --location us-east1-a \
+  --image ubuntu22.04:latest \
+  --keyfile ~/.ssh/id_ed25519.pub</code><button class="cli-snippet-copy">Copy</button></div>
+      </div>
+    </div>
+    </div><!-- /instances-empty -->
+
+    <!-- ── FILLED STATE ── -->
+    <div id="instances-filled" style="display:none">
+      <div class="tbl-wrap">
+        <div class="tbl-filter">
+          <div class="tbl-search-wrap">
+            <svg class="ico" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="text" placeholder="Search instances by name"/>
+          </div>
+          <div class="tbl-add-filter">+ Add filter option</div>
+        </div>
+        <table class="tbl">
+          <thead>
+            <tr><th>Name</th><th>State</th><th>Type</th><th>Location</th><th>Cluster</th><th>Created</th><th>Actions</th></tr>
+          </thead>
+          <tbody>
+            <tr onclick="navigate('vm-detail')" style="cursor:pointer">
+              <td><span class="tbl-link">np-9cef4f52-2</span></td>
+              <td><span class="pill-green">Running</span></td>
+              <td><span class="tbl-mono">h100-80gb-sxm-ib.8x</span></td>
+              <td>us-southcentral1-a</td>
+              <td><span style="text-decoration:underline;cursor:pointer">omni-man</span></td>
+              <td>05/26, 4:23 pm</td>
+              <td><div class="tbl-actions">
+                <button class="tbl-icon-btn" onclick="event.stopPropagation()"><svg class="ico" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg></button>
+              </div></td>
+            </tr>
+            <tr onclick="navigate('vm-detail')" style="cursor:pointer">
+              <td><span class="tbl-link">np-9cef4f52-1</span></td>
+              <td><span class="pill-green">Running</span></td>
+              <td><span class="tbl-mono">h100-80gb-sxm-ib.8x</span></td>
+              <td>us-southcentral1-a</td>
+              <td><span style="text-decoration:underline;cursor:pointer">omni-man</span></td>
+              <td>05/26, 4:22 pm</td>
+              <td><div class="tbl-actions">
+                <button class="tbl-icon-btn" onclick="event.stopPropagation()"><svg class="ico" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg></button>
+              </div></td>
+            </tr>
+            <tr onclick="navigate('vm-detail')" style="cursor:pointer">
+              <td><span class="tbl-link">inference-node-01</span></td>
+              <td><span class="pill-green">Running</span></td>
+              <td><span class="tbl-mono">l40s-48gb.4x</span></td>
+              <td>us-east1-a</td>
+              <td>—</td>
+              <td>05/25, 11:08 am</td>
+              <td><div class="tbl-actions">
+                <button class="tbl-icon-btn" onclick="event.stopPropagation()"><svg class="ico" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg></button>
+              </div></td>
+            </tr>
+            <tr onclick="navigate('vm-detail')" style="cursor:pointer">
+              <td><span class="tbl-link">dev-sandbox</span></td>
+              <td><span class="badge-outline" style="background:var(--gray-50);color:var(--gray-600);border-color:var(--gray-300)">Stopped</span></td>
+              <td><span class="tbl-mono">a100-80gb.1x</span></td>
+              <td>us-northcentral1-a</td>
+              <td>—</td>
+              <td>05/22, 9:30 am</td>
+              <td><div class="tbl-actions">
+                <button class="tbl-icon-btn" onclick="event.stopPropagation()"><svg class="ico" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg></button>
+              </div></td>
+            </tr>
+            <tr onclick="navigate('vm-detail')" style="cursor:pointer">
+              <td><span class="tbl-link">training-run-47</span></td>
+              <td><span class="pill-green">Running</span></td>
+              <td><span class="tbl-mono">h200-141gb.8x</span></td>
+              <td>us-northcentral1-a</td>
+              <td><span style="text-decoration:underline;cursor:pointer">mega-train</span></td>
+              <td>05/24, 2:15 pm</td>
+              <td><div class="tbl-actions">
+                <button class="tbl-icon-btn" onclick="event.stopPropagation()"><svg class="ico" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg></button>
+              </div></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div><!-- /instances-filled -->
+
+  </div>
+</div>
+
+<!-- ─── VIEW: Kubernetes Clusters ─── -->
+<div class="view" id="view-kubernetes">
+  <div class="ph">
+    <div class="ph-l"><div class="ph-title">Kubernetes Clusters</div></div>
+    <div class="ph-r"><button class="btn btn-p"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.99967 3.33337V12.6667M3.33301 8.00004H12.6663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Create Cluster</button></div>
+  </div>
+  <div class="divider"></div>
+  <div class="ca">
+    <div class="ecard">
+      <div class="illus">Illustration</div>
+      <div class="etxt">
+        <div class="ecat">Orchestration</div>
+        <div class="etitle">No Kubernetes clusters yet</div>
+        <div class="edesc">Crusoe Managed Kubernetes (CMK) allows you to spin up Kubernetes clusters with fully-managed control planes. CMK manages the availability, scaling, and lifecycle of control plane nodes with pre-installed GPU and network drivers.</div>
+      </div>
+    </div>
+    <!-- Popular cluster templates -->
+    <div class="pop-section pop-section-centered">
+      <div class="pop-title">Start with a popular cluster template</div>
+      <div class="pop-grid">
+        <div class="pop-card">
+          <div class="pop-card-top">
+            <div class="pop-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="3" y="3" width="22" height="22" rx="4" stroke="#111" stroke-width="1.4"/><circle cx="14" cy="14" r="5" stroke="#111" stroke-width="1.2"/><circle cx="14" cy="14" r="1.5" fill="#111" opacity=".3"/><line x1="14" y1="3" x2="14" y2="9" stroke="#111" stroke-width="1" opacity=".3"/><line x1="14" y1="19" x2="14" y2="25" stroke="#111" stroke-width="1" opacity=".3"/></svg></div>
+            <div class="pop-card-info">
+              <div class="pop-card-name">GPU Training Cluster</div>
+              <div class="pop-card-price">H100 8x node pool</div>
+            </div>
+            <svg class="pop-chev" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="pop-card-reveal">
+            <div class="pop-card-desc">Pre-configured with GPU operator, network operator, and CSI. Optimized for distributed training workloads.</div>
+            <div class="pop-card-tags"><span class="pop-tag">GPU</span><span class="pop-tag">Training</span><span class="pop-tag">Multi-node</span></div>
+          </div>
+        </div>
+        <div class="pop-card">
+          <div class="pop-card-top">
+            <div class="pop-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="3" y="3" width="22" height="22" rx="4" stroke="#111" stroke-width="1.4"/><path d="M9 10h10M9 14h10M9 18h6" stroke="#111" stroke-width="1.2" stroke-linecap="round" opacity=".4"/></svg></div>
+            <div class="pop-card-info">
+              <div class="pop-card-name">Inference Cluster</div>
+              <div class="pop-card-price">L40S autoscaling pool</div>
+            </div>
+            <svg class="pop-chev" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="pop-card-reveal">
+            <div class="pop-card-desc">Cost-efficient serving with autoscaling node pools. Ideal for vLLM, TGI, or Triton inference endpoints.</div>
+            <div class="pop-card-tags"><span class="pop-tag">GPU</span><span class="pop-tag">Inference</span><span class="pop-tag">Autoscale</span></div>
+          </div>
+        </div>
+        <div class="pop-card">
+          <div class="pop-card-top">
+            <div class="pop-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="3" y="3" width="22" height="22" rx="4" stroke="#111" stroke-width="1.4"/><rect x="8" y="8" width="12" height="12" rx="2" stroke="#111" stroke-width="1" opacity=".25"/></svg></div>
+            <div class="pop-card-info">
+              <div class="pop-card-name">CPU-only Cluster</div>
+              <div class="pop-card-price">General-purpose nodes</div>
+            </div>
+            <svg class="pop-chev" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="pop-card-reveal">
+            <div class="pop-card-desc">Standard Kubernetes cluster for APIs, data pipelines, and services that don't require GPU acceleration.</div>
+            <div class="pop-card-tags"><span class="pop-tag">CPU</span><span class="pop-tag">General</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="pop-alt"><span class="pop-alt-inner">or</span></div>
+    </div>
+    <!-- Secondary resources: Docs + CLI (2-column) -->
+    <div class="action-cards action-cards-2col">
+      <div class="action-card">
+        <div class="action-card-title">Documentation</div>
+        <div class="action-card-desc">Build and scale your AI workloads with minimal overhead. Learn about GPU operators, AutoClusters, and cluster versions.</div>
+        <a class="btn btn-o" href="https://docs.crusoecloud.com/orchestration/cmk" style="margin-top:auto">View CMK docs →</a>
+      </div>
+      <div class="action-card">
+        <div class="action-card-title">CLI command</div>
+        <div class="action-card-desc" style="font-size:12px;color:var(--muted);margin-bottom:4px">Create a cluster via the Crusoe CLI:</div>
+        <div class="action-card-cli"><code>crusoe kubernetes clusters create \
+  --name my-first-cluster \
+  --cluster-version 1.31 \
+  --location us-east1-a \
+  --subnet-id &lt;subnet-id&gt; \
+  --add-ons "nvidia_gpu_operator,\
+    nvidia_network_operator,\
+    crusoe_csi"</code><button class="cli-snippet-copy">Copy</button></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── VIEW: Slurm ─── -->
+<div class="view" id="view-slurm">
+  <div class="ph">
+    <div class="ph-l"><div class="ph-title">Slurm Clusters</div></div>
+    <div class="ph-r"><button class="btn btn-p"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.99967 3.33337V12.6667M3.33301 8.00004H12.6663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Create Cluster</button></div>
+  </div>
+  <div class="divider"></div>
+  <div class="ca">
+    <div class="ecard">
+      <div class="illus">Illustration</div>
+      <div class="etxt">
+        <div class="ecat">Orchestration</div>
+        <div class="etitle">No Slurm clusters yet</div>
+        <div class="edesc">Crusoe Managed Slurm provides managed HPC cluster orchestration on Crusoe Cloud. Provision a complete Slurm cluster backed by GPU-optimized infrastructure with a single command.</div>
+      </div>
+    </div>
+    <!-- Docs + CLI (2-column) -->
+    <div class="action-cards action-cards-2col">
+      <div class="action-card">
+        <div class="action-card-title">Documentation</div>
+        <div class="action-card-desc">Production-ready HPC with topology-aware scheduling, shared storage, and multi-user access. Start with a CPU-only login node to validate your workflow.</div>
+        <a class="btn btn-o" href="https://docs.crusoecloud.com/orchestration/slurm" style="margin-top:auto">View Slurm docs →</a>
+      </div>
+      <div class="action-card">
+        <div class="action-card-title">CLI command</div>
+        <div class="action-card-desc" style="font-size:12px;color:var(--muted);margin-bottom:4px">Create a Slurm cluster via the Crusoe CLI:</div>
+        <div class="action-card-cli"><code>crusoe kubernetes clusters create \
+  --name my-slurm \
+  --type slurm \
+  --location us-east1-a</code><button class="cli-snippet-copy">Copy</button></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── VIEW: Disks ─── -->
+<div class="view" id="view-disks">
+  <div class="ph">
+    <div class="ph-l"><div class="ph-title">Disks</div></div>
+    <div class="ph-r"><button class="btn btn-p"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.99967 3.33337V12.6667M3.33301 8.00004H12.6663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Create Disk</button></div>
+  </div>
+  <div class="divider"></div>
+  <div class="ca">
+    <div class="ecard">
+      <div class="illus">Illustration</div>
+      <div class="etxt">
+        <div class="ecat">Storage</div>
+        <div class="etitle">No disks yet</div>
+        <div class="edesc">Crusoe Cloud offers three types of disks: Ephemeral Disks, Persistent Disks, and Shared Disks. Ephemeral disks are local to the VM for highest performance, persistent disks provide high availability from 1 GiB to 10 TiB, and shared disks support concurrent multi-VM access via NFS.</div>
+      </div>
+    </div>
+    <div class="action-cards action-cards-2col">
+      <div class="action-card">
+        <div class="action-card-title">Documentation</div>
+        <div class="action-card-desc">Remote block storage volumes with high availability and durability. Attach up to 16 persistent disks per instance.</div>
+        <a class="btn btn-o" href="https://docs.crusoecloud.com/storage/disks/overview" style="margin-top:auto">View disk docs →</a>
+      </div>
+      <div class="action-card">
+        <div class="action-card-title">CLI command</div>
+        <div class="action-card-desc" style="font-size:12px;color:var(--muted);margin-bottom:4px">Create a persistent disk via the Crusoe CLI:</div>
+        <div class="action-card-cli"><code>crusoe storage disks create \
+  --name data-1 \
+  --size 100GiB \
+  --location us-southcentral1-a \
+  --block-size 4096</code><button class="cli-snippet-copy">Copy</button></div>
+      </div>
+    </div>
+    <div class="rec-start">
+      <div class="rec-start-label">Recommended start</div>
+      <div class="rec-start-title">Start with a persistent disk</div>
+      <div class="rec-start-desc">Name, size, and location are required. Use <code style="font-size:12px;background:var(--gray-100);padding:1px 4px;border-radius:3px">block-size 4096</code> (default). When attaching to a VM, the disk must be in the same location. Use Instance Templates to provision VMs with pre-attached disks.</div>
+      <a class="step-a" href="https://docs.crusoecloud.com/storage/disks/managing-persistent-disks">Read quickstart guide →</a>
+    </div>
+  </div>
+</div>
+
+<!-- ─── VIEW: Buckets ─── -->
+<div class="view" id="view-buckets">
+  <div class="ph">
+    <div class="ph-l"><div class="ph-title">Buckets</div></div>
+    <div class="ph-r">
+      <button class="btn btn-o"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.99967 3.33337V12.6667M3.33301 8.00004H12.6663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Create Key</button>
+      <button class="btn btn-p"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.99967 3.33337V12.6667M3.33301 8.00004H12.6663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Create Bucket</button>
+    </div>
+  </div>
+  <div class="divider"></div>
+  <div class="ca">
+    <div class="ecard">
+      <div class="illus">Illustration</div>
+      <div class="etxt">
+        <div class="ecat">Storage</div>
+        <div class="etitle">No buckets yet</div>
+        <div class="edesc">Crusoe Cloud Object Storage provides high-performance, S3-compatible object storage designed for AI/ML workloads. Store and retrieve datasets, model checkpoints, training artifacts, and other unstructured data with the standard S3 format.</div>
+      </div>
+    </div>
+    <div class="action-cards action-cards-2col">
+      <div class="action-card">
+        <div class="action-card-title">Documentation</div>
+        <div class="action-card-desc">S3-compatible object storage backed by Crusoe's low-carbon infrastructure. Create access keys to use standard S3 clients.</div>
+        <a class="btn btn-o" href="https://docs.crusoecloud.com/storage" style="margin-top:auto">View storage docs →</a>
+      </div>
+      <div class="action-card">
+        <div class="action-card-title">CLI command</div>
+        <div class="action-card-desc" style="font-size:12px;color:var(--muted);margin-bottom:4px">Create a bucket via the Crusoe CLI:</div>
+        <div class="action-card-cli"><code>crusoe storage buckets create \
+  --name my-bucket \
+  --location us-east1-a</code><button class="cli-snippet-copy">Copy</button></div>
+      </div>
+    </div>
+    <div class="rec-start">
+      <div class="rec-start-label">Recommended start</div>
+      <div class="rec-start-title">Co-locate storage with compute</div>
+      <div class="rec-start-desc">Co-locate your bucket in the same region as your compute for lowest latency. Start by creating an Object Storage access key, then create your first bucket and upload via CLI or any S3-compatible tool.</div>
+      <a class="step-a" href="https://docs.crusoecloud.com/storage">Read quickstart guide →</a>
+    </div>
+  </div>
+</div>
+
+<!-- ─── VIEW: VM Detail ─── -->
+<div class="view" id="view-vm-detail">
+  <div class="dph">
+    <div class="dph-back" onclick="navigate('instances')">
+      <svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15,18 9,12 15,6"/></svg>
+    </div>
+    <div class="dph-title">np-9cef4f52-2</div>
+    <span class="badge-green" style="margin-left:4px">Running</span>
+    <div class="tog-wrap" style="margin-left:8px"><div class="tog"></div><span>Stop VM</span></div>
+    <div class="dph-r">
+      <div class="menu-btn">
+        <svg class="ico" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg>
+      </div>
+    </div>
+  </div>
+  <!-- VM meta bar -->
+  <div class="vm-meta-bar">
+    <span class="vm-meta-item">ID: <span class="tbl-mono">d82ca21b-9d21-4a22-995f-8968cc2edc2c</span> <button class="tbl-icon-btn" style="display:inline-flex;vertical-align:middle"><svg class="ico" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></span>
+    <span class="vm-meta-chip">h100-80gb-sxm-ib.8x</span>
+    <span class="vm-meta-item">Created: <span style="font-weight:500">05/26, 4:23 pm</span></span>
+    <span class="vm-meta-item">Updated: <span style="font-weight:500">05/26, 4:24 pm</span></span>
+    <span class="vm-meta-item">Location: <span style="font-weight:500">us-southcentral1-a</span></span>
+    <span class="vm-meta-item">Cluster: <span style="font-weight:500;text-decoration:underline;cursor:pointer">omni-man</span></span>
+  </div>
+  <div class="tabs-bar">
+    <div class="tabs" id="vm-detail-tabs">
+      <div class="tab active" onclick="switchDetailTab(this,'vm-det-details')">Details</div>
+      <div class="tab" onclick="switchDetailTab(this,'vm-det-metrics')">Metrics</div>
+    </div>
+  </div>
+
+  <!-- Details tab -->
+  <div id="vm-det-details" class="tab-panel active ca">
+    <div class="vm-net-grid">
+      <div class="vm-net-card">
+        <div class="vm-net-card-title">VPC Network</div>
+        <div class="vm-net-row"><span class="vm-net-label">Network</span><a class="vm-net-link">default-vpc-network (172.27.0.0/16)</a></div>
+        <div class="vm-net-row"><span class="vm-net-label">Subnet</span><a class="vm-net-link">default-subnet-us-southcentral1-a (172.27.32.0/20)</a></div>
+      </div>
+      <div class="vm-net-card">
+        <div class="vm-net-card-title">Public IP</div>
+        <div class="vm-net-row"><span class="vm-net-label">External DNS Name</span><span class="vm-net-val"><span class="tbl-mono" style="font-size:13px">216-86-160-220.us...</span> <button class="tbl-icon-btn" style="display:inline-flex;vertical-align:middle"><svg class="ico" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></span></div>
+        <div class="vm-net-row"><span class="vm-net-label">Address</span><span class="vm-net-val"><span style="font-weight:500">216.86.160.220</span> <button class="tbl-icon-btn" style="display:inline-flex;vertical-align:middle"><svg class="ico" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></span></div>
+        <div class="vm-net-row"><span class="vm-net-label">SSH</span><span class="vm-net-val"><span class="tbl-mono" style="font-size:13px">ubuntu@216.86.160...</span> <button class="tbl-icon-btn" style="display:inline-flex;vertical-align:middle"><svg class="ico" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></span></div>
+        <div class="vm-net-row"><span class="vm-net-label">Type</span><span class="vm-net-val"><button class="btn btn-o btn-sm" style="height:28px;padding:0 10px;font-size:13px">Dynamic <svg class="ico" width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4,6 8,10 12,6"/></svg></button></span></div>
+      </div>
+      <div class="vm-net-card">
+        <div class="vm-net-card-title">Private IP</div>
+        <div class="vm-net-row"><span class="vm-net-label">Internal DNS Name</span><span class="vm-net-val"><span class="tbl-mono" style="font-size:13px">np-9cef4f52-2.us-...</span> <button class="tbl-icon-btn" style="display:inline-flex;vertical-align:middle"><svg class="ico" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></span></div>
+        <div class="vm-net-row"><span class="vm-net-label">Address</span><span class="vm-net-val"><span style="font-weight:500">172.27.39.252</span> <button class="tbl-icon-btn" style="display:inline-flex;vertical-align:middle"><svg class="ico" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></span></div>
+        <div class="vm-net-row"><span class="vm-net-label">Type</span><span class="vm-net-val" style="font-weight:500">Static</span></div>
+      </div>
+    </div>
+
+    <!-- Infiniband -->
+    <div style="margin-top:24px">
+      <h3 class="vm-section-title">Infiniband</h3>
+      <div class="divider" style="margin-bottom:16px"></div>
+      <div style="display:flex;align-items:center;gap:32px;font-size:14px;font-family:var(--font-body)">
+        <span>Network <span class="tbl-mono" style="font-size:13px">us-southcentral1-a H100-80GB SXM IB Network 0</span> <button class="tbl-icon-btn" style="display:inline-flex;vertical-align:middle"><svg class="ico" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></span>
+        <span>Partition <span class="tbl-mono" style="font-size:13px">omni-man-h100-txdr</span> <button class="tbl-icon-btn" style="display:inline-flex;vertical-align:middle"><svg class="ico" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></span>
+      </div>
+    </div>
+
+    <!-- Disks -->
+    <div style="margin-top:24px">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px">
+        <div>
+          <h3 class="vm-section-title">Disks</h3>
+          <div style="font-size:12px;color:var(--muted);margin-top:2px">No Disks Available</div>
+        </div>
+        <button class="btn btn-p"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.99967 3.33337V12.6667M3.33301 8.00004H12.6663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Create Disk</button>
+      </div>
+      <div class="divider" style="margin-bottom:0"></div>
+      <div class="tbl-wrap" style="border-top:none;border-radius:0 0 12px 12px">
+        <table class="tbl">
+          <thead>
+            <tr><th>Name</th><th>Size</th><th>Serial Number</th><th>Type</th><th>Mode</th><th>Actions</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="font-weight:500">BootDisk</td>
+              <td>128GiB</td>
+              <td><span class="tbl-mono">B86ED27E0D40816655D</span> <button class="tbl-icon-btn" style="display:inline-flex;vertical-align:middle"><svg class="ico" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></td>
+              <td><span class="badge-outline" style="background:var(--green-50);color:var(--green-700);border-color:var(--green-100)">Persistent</span></td>
+              <td><span class="badge-outline" style="background:var(--green-50);color:var(--green-700);border-color:var(--green-100)">read-write</span></td>
+              <td><button class="tbl-icon-btn"><svg class="ico" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Metrics tab -->
+  <div id="vm-det-metrics" class="tab-panel ca" style="display:none">
+    <!-- Toolbar -->
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
+      <div style="font-size:16px;font-weight:600;font-family:var(--font-body);color:var(--text)">Metrics</div>
+      <div style="display:flex;align-items:center;gap:8px">
+        <div class="seg-ctrl">
+          <div class="seg-ctrl-item active">Detailed view</div>
+          <div class="seg-ctrl-item">Aggregated VM/Node view</div>
+        </div>
+        <button class="btn btn-o btn-sm">1 hour
+          <svg class="ico" width="11" height="11" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4,6 8,10 12,6"/></svg>
+        </button>
+        <button class="btn btn-o btn-sm">Refresh</button>
+      </div>
+    </div>
+    <!-- Agent banner -->
+    <div style="display:flex;align-items:center;gap:12px;padding:14px 18px;border:1px solid var(--border);border-radius:10px;margin-bottom:20px;background:var(--white)">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" style="flex-shrink:0"><circle cx="10" cy="10" r="9" stroke="var(--gray-400)" stroke-width="1.3"/><path d="M10 9v5" stroke="var(--gray-400)" stroke-width="1.4" stroke-linecap="round"/><circle cx="10" cy="6.5" r="1" fill="var(--gray-400)"/></svg>
+      <div style="flex:1">
+        <div style="font-size:14px;font-weight:600;font-family:var(--font-body);color:var(--text)">No agent collected metrics</div>
+        <div style="font-size:13px;font-family:var(--font-body);color:var(--muted);margin-top:1px">Install the Crusoe Telemetry Agent to enable monitoring on Crusoe cloud resources</div>
+      </div>
+      <a class="btn btn-p btn-sm" href="https://github.com/crusoecloud/crusoe-watch-agent" target="_blank" style="text-decoration:none;white-space:nowrap;flex-shrink:0">Crusoe Watch Agent page</a>
+    </div>
+    <!-- Empty chart grid -->
+    <div class="chart-grid">
+      <div class="chart-card">
+        <div class="chart-card-hd"><div class="chart-card-title">TFLOPS (FP16)</div></div>
+        <div class="chart-empty"><span class="chart-empty-msg">No data available</span></div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-card-hd"><div class="chart-card-title">CPU Utilization (%)</div></div>
+        <div class="chart-empty"><span class="chart-empty-msg">No data available</span></div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-card-hd"><div class="chart-card-title">GPU Utilization (%)</div></div>
+        <div class="chart-empty"><span class="chart-empty-msg">No data available</span></div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-card-hd"><div class="chart-card-title">VRAM Usage (GB)</div></div>
+        <div class="chart-empty"><span class="chart-empty-msg">No data available</span></div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-card-hd"><div class="chart-card-title">Network RX (MB/s)</div></div>
+        <div class="chart-empty"><span class="chart-empty-msg">No data available</span></div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-card-hd"><div class="chart-card-title">Network TX (MB/s)</div></div>
+        <div class="chart-empty"><span class="chart-empty-msg">No data available</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── VIEW: Cloud API Keys ─── -->
+<div class="view" id="view-apikeys">
+  <div class="ph">
+    <div class="ph-l">
+      <div class="ph-title">Cloud API Keys</div>
+      <div class="ph-sub">Keys for programmatic access to the Crusoe Cloud API.</div>
+    </div>
+    <div class="ph-r"><button class="btn btn-p"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.99967 3.33337V12.6667M3.33301 8.00004H12.6663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Create Cloud API Key</button></div>
+  </div>
+  <div class="divider"></div>
+  <div class="ca">
+    <div class="ecard">
+      <div class="illus">
+        <svg width="56" height="56" viewBox="0 0 56 56" fill="none">
+          <rect x="8" y="16" width="40" height="24" rx="4" stroke="var(--gray-400)" stroke-width="1.4"/>
+          <circle cx="20" cy="28" r="6" stroke="var(--gray-400)" stroke-width="1.3"/>
+          <circle cx="20" cy="28" r="2" fill="var(--gray-400)" opacity=".3"/>
+          <line x1="26" y1="28" x2="42" y2="28" stroke="var(--gray-400)" stroke-width="1.3" stroke-linecap="round"/>
+          <line x1="34" y1="24" x2="34" y2="32" stroke="var(--gray-400)" stroke-width="1.3" stroke-linecap="round" opacity=".4"/>
+          <line x1="38" y1="24" x2="38" y2="32" stroke="var(--gray-400)" stroke-width="1.3" stroke-linecap="round" opacity=".4"/>
+        </svg>
+      </div>
+      <div class="etxt">
+        <div class="ecat">Access</div>
+        <div class="etitle">No API keys yet</div>
+        <div class="edesc">Generate an API key for programmatic access to the Crusoe CLI, Terraform provider, and SDKs. The secret is shown once — store it securely.</div>
+      </div>
+    </div>
+    <div class="action-cards action-cards-2col">
+      <div class="action-card">
+        <div class="action-card-title">Documentation</div>
+        <div class="action-card-desc">Create your first API key — the secret is shown once, so store it in your password manager. Scope keys to a single project and rotate every 90 days.</div>
+        <a class="btn btn-o" href="https://docs.crusoecloud.com/development-tools/api/generating-api-keys" style="margin-top:auto">API key docs →</a>
+      </div>
+      <div class="action-card">
+        <div class="action-card-title">CLI setup</div>
+        <div class="action-card-desc" style="font-size:12px;color:var(--muted);margin-bottom:4px">Configure the Crusoe CLI with your API key:</div>
+        <div class="action-card-cli"><code>crusoe init</code><button class="cli-snippet-copy">Copy</button></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── VIEW: Infrastructure Overview ─── -->
+<div class="view" id="view-infra">
+  <div class="ph">
+    <div class="ph-l"><div class="ph-title">Infrastructure Overview</div></div>
+  </div>
+  <div class="divider"></div>
+  <div class="ca">
+    <div class="banner">
+      <span>Install Crusoe MCP</span>
+      <button class="btn btn-p btn-sm">Install</button>
+    </div>
+    <div class="stats">
+      <div class="stat">
+        <div class="stat-val">0</div>
+        <div class="stat-lbl">Total Active Instances (VMs + CMK Nodes)</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">0</div>
+        <div class="stat-lbl">Total CPUs</div>
+      </div>
+    </div>
+    <div class="ecard">
+      <div class="illus">Illustration</div>
+      <div class="etxt">
+        <div class="ecat">Compute</div>
+        <div class="etitle">No compute yet</div>
+        <div class="edesc">Crusoe Cloud provides a high-performance, sustainable cloud platform with the latest hardware. Monitor, diagnose, and optimize your AI infrastructure from the Command Center once you create your first instance.</div>
+      </div>
+    </div>
+    <!-- Action cards: CTA / Docs / CLI -->
+    <div class="action-cards">
+      <div class="action-card">
+        <div class="action-card-title">Get started</div>
+        <div class="action-card-desc">Create your first VM with a GPU type and region. Launch usually takes under 60 seconds.</div>
+        <button class="btn btn-p" onclick="navigate('instances')" style="margin-top:auto"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.99967 3.33337V12.6667M3.33301 8.00004H12.6663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Create Instance</button>
+      </div>
+      <div class="action-card">
+        <div class="action-card-title">Documentation</div>
+        <div class="action-card-desc">Learn about instance types, GPU availability, networking, and billing before you spin up.</div>
+        <a class="btn btn-o" href="https://docs.crusoecloud.com/quickstart/creating-a-vm" style="margin-top:auto">View quickstart docs →</a>
+      </div>
+      <div class="action-card">
+        <div class="action-card-title">CLI command</div>
+        <div class="action-card-desc" style="font-size:12px;color:var(--muted);margin-bottom:4px">Create an H100 VM via the Crusoe CLI:</div>
+        <div class="action-card-cli"><code>crusoe compute vms create \
+  --name my-vm \
+  --type h100-80gb-sxm-ib.8x \
+  --location us-southcentral1-a \
+  --image ubuntu22.04:latest \
+  --keyfile ~/.ssh/id_ed25519.pub</code><button class="cli-snippet-copy">Copy</button></div>
+      </div>
+    </div>
+    <!-- Recommended start — full width -->
+    <div class="rec-start">
+      <div class="rec-start-label">Recommended start</div>
+      <div class="rec-start-title">Start with a single GPU instance</div>
+      <div class="rec-start-desc">Pick an L40S or A100 GPU in us-southcentral1-a to validate your stack. Use <code style="font-size:12px;background:var(--gray-100);padding:1px 4px;border-radius:3px">crusoe compute vms types</code> to list all available GPU types, and <code style="font-size:12px;background:var(--gray-100);padding:1px 4px;border-radius:3px">crusoe locations list</code> to see regions. Stopped VMs are not charged for on-demand usage. If no image is specified, the system defaults to Ubuntu 22.04.</div>
+      <a class="step-a" href="https://docs.crusoecloud.com/quickstart/creating-a-vm">Read quickstart guide →</a>
+    </div>
+  </div>
+</div>
+
+<!-- ─── VIEW: Kubernetes Cluster Detail ─── -->
+<div class="view" id="view-k8s-detail">
+  <div class="dph">
+    <div class="dph-back" onclick="navigate('k8s-list')">
+      <svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15,18 9,12 15,6"/></svg>
+    </div>
+    <div class="dph-title">slurm-pyxis-problem</div>
+    <span class="badge-green" style="margin-left:4px">Running</span>
+    <span class="badge-outline" style="margin-left:4px">Managed Kubernetes</span>
+    <div class="dph-r">
+      <button class="btn btn-p" style="font-size:14px">
+        <svg class="ico" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7,10 12,15 17,10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Download Kubeconfig
+      </button>
+    </div>
+  </div>
+  <div class="tabs-bar">
+    <div class="tabs" id="k8s-detail-tabs">
+      <div class="tab active" onclick="switchDetailTab(this,'k8s-det-details')">Details</div>
+      <div class="tab" onclick="switchDetailTab(this,'k8s-det-metrics')">Metrics</div>
+    </div>
+  </div>
+
+  <!-- Details tab -->
+  <div id="k8s-det-details" class="tab-panel active ca">
+    <div style="display:grid;grid-template-columns:repeat(6,1fr);border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-bottom:24px">
+      <div style="padding:11px 16px;border-right:1px solid var(--border)">
+        <div style="font-size:11px;color:var(--muted);margin-bottom:4px">Version</div>
+        <span style="border:1px solid var(--border);border-radius:4px;padding:2px 7px;font-size:12px;font-weight:500">1.33.4</span>
+      </div>
+      <div style="padding:11px 16px;border-right:1px solid var(--border)">
+        <div style="font-size:11px;color:var(--muted);margin-bottom:4px">Location</div>
+        <div style="font-size:14px;font-weight:500">us-east1-a</div>
+      </div>
+      <div style="padding:11px 16px;border-right:1px solid var(--border)">
+        <div style="font-size:11px;color:var(--muted);margin-bottom:4px">GPU Drivers</div>
+        <div style="font-size:14px;font-weight:500">nvidia, v455.28</div>
+      </div>
+      <div style="padding:11px 16px;border-right:1px solid var(--border)">
+        <div style="font-size:11px;color:var(--muted);margin-bottom:4px">Network Operators</div>
+        <div style="font-size:14px;font-weight:500">Helm Chart, v23.4.0</div>
+      </div>
+      <div style="padding:11px 16px;border-right:1px solid var(--border)">
+        <div style="font-size:11px;color:var(--muted);margin-bottom:4px">SSH Key</div>
+        <div style="font-size:14px;font-weight:500;display:flex;align-items:center;gap:4px">Copy <svg class="ico" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></div>
+      </div>
+      <div style="padding:11px 16px">
+        <div style="font-size:11px;color:var(--muted);margin-bottom:4px">API Token</div>
+        <div style="font-size:14px;font-weight:500;display:flex;align-items:center;gap:4px">Copy <svg class="ico" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></div>
+      </div>
+    </div>
+    <div class="sec-hd">
+      <div class="sec-title">Node Pools</div>
+      <div style="display:flex;gap:8px">
+        <button class="btn btn-p"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.99967 3.33337V12.6667M3.33301 8.00004H12.6663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Create Node Pool</button>
+      </div>
+    </div>
+    <div class="sec-empty">
+      <div class="sec-empty-illust">
+        <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+          <rect x="6" y="8" width="36" height="12" rx="3.5" stroke="currentColor" stroke-width="1.4"/>
+          <circle cx="13" cy="14" r="2" fill="currentColor" opacity=".45"/>
+          <line x1="18" y1="14" x2="32" y2="14" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" opacity=".4"/>
+          <rect x="6" y="26" width="36" height="12" rx="3.5" stroke="currentColor" stroke-width="1.4" stroke-dasharray="3.5 2.5" opacity=".35"/>
+          <circle cx="13" cy="32" r="2" fill="currentColor" opacity=".18"/>
+          <line x1="18" y1="32" x2="28" y2="32" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" opacity=".18"/>
+        </svg>
+      </div>
+      <div class="sec-empty-title">No node pools yet</div>
+      <div class="sec-empty-copy">Add a pool to assign GPU or CPU nodes to this cluster. Nodes join the control plane automatically within minutes.</div>
+      <div class="sec-empty-actions">
+        <button class="btn btn-p"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.99967 3.33337V12.6667M3.33301 8.00004H12.6663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Create Node Pool</button>
+      </div>
+      <div class="sec-empty-cli-card" onclick="navigator.clipboard.writeText('crusoe kubernetes nodepools create --name my-pool --cluster-id <cluster-id> --type h100-80gb-sxm-ib.8x --count 4')">
+        <div class="sec-empty-cli-icon">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M5.3 2h7.4c.7 0 1.3.6 1.3 1.3v9.4c0 .7-.6 1.3-1.3 1.3H5.3C4.6 14 4 13.4 4 12.7V3.3C4 2.6 4.6 2 5.3 2z" stroke="var(--cli-text)" stroke-width="1.2"/><path d="M7 5.5l2 2-2 2" stroke="var(--cli-text)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="sec-empty-cli-text">
+          <div class="sec-empty-cli-label">Create via CLI</div>
+          <div class="sec-empty-cli-cmd">crusoe kubernetes nodepools create --name my-pool --type h100-80gb-sxm-ib.8x</div>
+        </div>
+        <div class="sec-empty-cli-copy">Copy</div>
+      </div>
+      <div style="display:flex;align-items:flex-start;gap:10px;margin-top:8px;padding:12px 16px;background:var(--gray-50);border-radius:8px;max-width:480px">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style="flex-shrink:0;margin-top:1px"><circle cx="8" cy="8" r="7" stroke="var(--gray-400)" stroke-width="1.2"/><path d="M8 7v4" stroke="var(--gray-400)" stroke-width="1.3" stroke-linecap="round"/><circle cx="8" cy="5" r=".8" fill="var(--gray-400)"/></svg>
+        <div style="font-size:12px;color:var(--muted);font-family:var(--font-body);line-height:155%">Start with a single H100 or A100 node pool to validate GPU operator and networking before scaling. <a href="https://docs.crusoecloud.com/orchestration/cmk/managing-nodepools" style="color:var(--text);text-decoration:underline">Node pool docs →</a></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Metrics tab -->
+  <div id="k8s-det-metrics" class="tab-panel ca" style="display:none">
+    <div class="metrics-toolbar">
+      <div class="seg-ctrl">
+        <div class="seg-ctrl-item active">GPU Utilization</div>
+        <div class="seg-ctrl-item">VRAM Usage</div>
+        <div class="seg-ctrl-item">Network</div>
+        <div class="seg-ctrl-item">Disk I/O</div>
+      </div>
+      <div style="margin-left:auto;display:flex;gap:8px">
+        <button class="btn btn-o btn-sm">Last 1 hour
+          <svg class="ico" width="11" height="11" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4,6 8,10 12,6"/></svg>
+        </button>
+      </div>
+    </div>
+    <!-- Metrics empty state -->
+    <div class="sec-empty">
+      <div class="sec-empty-illust">
+        <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+          <rect x="7" y="30" width="7" height="10" rx="2" fill="currentColor" opacity=".18"/>
+          <rect x="17" y="22" width="7" height="18" rx="2" fill="currentColor" opacity=".25"/>
+          <rect x="27" y="16" width="7" height="24" rx="2" fill="currentColor" opacity=".35"/>
+          <rect x="37" y="26" width="7" height="14" rx="2" fill="currentColor" opacity=".25"/>
+          <line x1="5" y1="40" x2="46" y2="40" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+          <path d="M10.5 27 L20.5 19 L30.5 13 L40.5 22" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="3 3" opacity=".45"/>
+        </svg>
+      </div>
+      <div class="sec-empty-title">No node pools to monitor</div>
+      <div class="sec-empty-copy">Add a node pool with GPU or CPU nodes to start collecting metrics. Utilization, VRAM, network, and disk I/O are reported automatically once nodes are running.</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ─── VIEW: Kubernetes Cluster List ─── -->
+<div class="view" id="view-k8s-list">
+  <div class="ph">
+    <div class="ph-l"><div class="ph-title">Kubernetes Clusters</div></div>
+    <div class="ph-r"><button class="btn btn-p"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.99967 3.33337V12.6667M3.33301 8.00004H12.6663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Create Cluster</button></div>
+  </div>
+  <div class="divider"></div>
+  <div class="ca">
+    <div class="tbl-wrap">
+      <div class="tbl-filter">
+        <div class="tbl-search-wrap">
+          <svg class="ico" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="text" placeholder="Search clusters by name"/>
+        </div>
+        <div class="tbl-add-filter">+ Add filter option</div>
+      </div>
+      <table class="tbl">
+        <thead>
+          <tr><th>Name</th><th>State</th><th>Version</th><th>DNS</th><th># of Node Pools</th><th>Actions</th></tr>
+        </thead>
+        <tbody>
+          <tr onclick="navigate('k8s-detail')">
+            <td><span class="tbl-link">slurm-pyxis-problem</span></td>
+            <td><span class="pill-green">Running</span></td>
+            <td><span class="tbl-mono">1.33.4-cmk.84</span></td>
+            <td><button class="tbl-icon-btn" onclick="event.stopPropagation()"><svg class="ico" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></td>
+            <td>2</td>
+            <td><div class="tbl-actions"><button class="tbl-icon-btn" onclick="event.stopPropagation()"><svg class="ico" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3,6 5,6 21,6"/><path d="M19,6l-1,14a2,2 0 01-2,2H8a2,2 0 01-2-2L5,6"/><path d="M10,11v6"/><path d="M14,11v6"/></svg></button></div></td>
+          </tr>
+          <tr onclick="navigate('k8s-detail')">
+            <td><span class="tbl-link">shashank-a100-east</span></td>
+            <td><span class="pill-green">Running</span></td>
+            <td><span class="tbl-mono">1.33.4-cmk.43</span></td>
+            <td><button class="tbl-icon-btn" onclick="event.stopPropagation()"><svg class="ico" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></td>
+            <td>0</td>
+            <td><div class="tbl-actions"><button class="tbl-icon-btn" onclick="event.stopPropagation()"><svg class="ico" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3,6 5,6 21,6"/><path d="M19,6l-1,14a2,2 0 01-2,2H8a2,2 0 01-2-2L5,6"/><path d="M10,11v6"/><path d="M14,11v6"/></svg></button></div></td>
+          </tr>
+          <tr onclick="navigate('k8s-detail')">
+            <td><span class="tbl-link">shashank-ha-test</span></td>
+            <td><span class="pill-green">Running</span></td>
+            <td><span class="tbl-mono">1.33.4-cmk.43</span></td>
+            <td><button class="tbl-icon-btn" onclick="event.stopPropagation()"><svg class="ico" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></td>
+            <td>0</td>
+            <td><div class="tbl-actions"><button class="tbl-icon-btn" onclick="event.stopPropagation()"><svg class="ico" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3,6 5,6 21,6"/><path d="M19,6l-1,14a2,2 0 01-2,2H8a2,2 0 01-2-2L5,6"/><path d="M10,11v6"/><path d="M14,11v6"/></svg></button></div></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ─── VIEW: SSH Keys ─── -->
+<div class="view" id="view-sshkeys">
+  <div class="ph">
+    <div class="ph-l">
+      <div class="ph-title">SSH Keys</div>
+      <div class="ph-sub">Keys for programmatic access to the VMs. <span style="color:var(--black);text-decoration:underline;cursor:pointer">Refer docs on managing SSH keys</span></div>
+    </div>
+    <div class="ph-r"><button class="btn btn-p">+ Add SSH Keys</button></div>
+  </div>
+  <div class="divider"></div>
+  <div class="ca">
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <thead>
+          <tr><th>Name</th><th>Key Fingerprint (MD5)</th><th>Added</th><th>Actions</th></tr>
+        </thead>
+        <tbody>
+          <tr class="tbl-null-row">
+            <td colspan="4">
+              <div class="tbl-null">
+                <div class="tbl-null-msg">No SSH keys added</div>
+                <button class="btn btn-o btn-sm">+ Add SSH Keys</button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+</div><!-- /main -->
+</div><!-- /body -->
+
+<!-- ─── Avatar Dropdown ─── -->
+<div class="avatar-dd" id="avatar-dd">
+  <div class="avatar-dd-header">
+    <div class="avatar-dd-name">ybosenko</div>
+    <div class="avatar-dd-meta">ManagedOrchestration · Org editor</div>
+  </div>
+  <div class="avatar-dd-item" onclick="closeAvatarDd()">
+    <svg class="ico" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    Profile
+  </div>
+  <div class="avatar-dd-item" onclick="closeAvatarDd();navigate('cloud-api-keys')">
+    <svg class="ico" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+    Security
+  </div>
+  <div class="avatar-dd-sep"></div>
+  <div class="avatar-dd-item" onclick="closeAvatarDd()" style="color:var(--gray-600)">
+    <svg class="ico" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16,17 21,12 16,7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+    Log out
+  </div>
+</div>
+
+</div><!-- /app -->
+
+<script>
+// ── Icons — pulled from Figma sidebar (node 13607-77536) ──
+const ICONS = {
+  compute:`<img class="ico" width="16" height="16" src="https://www.figma.com/api/mcp/asset/f9c48047-cabf-4020-a514-8ab1b6562547"/>`,
+  orchestration:`<img class="ico" width="16" height="16" src="https://www.figma.com/api/mcp/asset/d03a154d-cee2-4c0e-bcac-950f61b1ba8a"/>`,
+  storage:`<img class="ico" width="16" height="16" src="https://www.figma.com/api/mcp/asset/2721d522-f4e6-4a78-84ed-86f5681789c6"/>`,
+  networking:`<img class="ico" width="16" height="16" src="https://www.figma.com/api/mcp/asset/0f798c06-b785-43c5-a47b-03c4868229af"/>`,
+  registry:`<img class="ico" width="16" height="16" src="https://www.figma.com/api/mcp/asset/2a267f4d-4347-4870-88b1-cbd39f825fc8"/>`,
+  cc:`<svg class="ico" width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="2.5" y="2.5" width="6" height="6" rx="1"/><rect x="11.5" y="2.5" width="6" height="6" rx="1"/><rect x="2.5" y="11.5" width="6" height="6" rx="1"/><rect x="11.5" y="11.5" width="6" height="6" rx="1"/></svg>`,
+  logs:`<svg class="ico" width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M13 2H5a1.5 1.5 0 00-1.5 1.5v13A1.5 1.5 0 005 18h10a1.5 1.5 0 001.5-1.5V6.5L13 2z"/><polyline points="13,2 13,7 16.5,7"/><line x1="6.5" y1="11" x2="13.5" y2="11"/><line x1="6.5" y1="14" x2="13.5" y2="14"/></svg>`,
+  usage:`<img class="ico" width="16" height="16" src="https://www.figma.com/api/mcp/asset/02cde2ff-fbbd-4fca-bdac-7ff0ea45fa49"/>`,
+  billing:`<img class="ico" width="16" height="16" src="https://www.figma.com/api/mcp/asset/bfb276f0-59f4-4722-aac2-2766ad797b50"/>`,
+  users:`<img class="ico" width="16" height="16" src="https://www.figma.com/api/mcp/asset/8df4fec9-8993-4114-8467-7b3c763d7987"/>`,
+  projects:`<img class="ico" width="16" height="16" src="https://www.figma.com/api/mcp/asset/a4ab3242-314a-48bd-8b1f-8609b07bf6b4"/>`,
+  security:`<img class="ico" width="16" height="16" src="https://www.figma.com/api/mcp/asset/842d7429-0534-449a-8454-c45408eba7d6"/>`,
+  profile:`<img class="ico" width="16" height="16" src="https://www.figma.com/api/mcp/asset/cb031410-a6d1-4589-8012-8711483b433c"/>`,
+  chevDown:`<svg class="ico" width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 11L3 6 3.7 5.3 8 9.6 12.3 5.3 13 6z"></path></svg>`,
+  gear:`<svg class="ico" width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="10" cy="10" r="2.5"/><path d="M10 2v2M10 16v2M2 10h2M16 10h2M4.1 4.1l1.4 1.4M14.5 14.5l1.4 1.4M4.1 15.9l1.4-1.4M14.5 5.5l1.4-1.4"/></svg>`,
+  panel:`<img class="ico" width="20" height="20" src="https://www.figma.com/api/mcp/asset/a785d781-576a-4c02-a1e3-a3b30823f14f"/>`,
+  arrowLeft:`<svg class="ico" width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><line x1="17" y1="10" x2="3" y2="10"/><polyline points="8,5 3,10 8,15"/></svg>`
+};
+
+// ── Shared nav group items ──
+const G = {
+  compute: [
+    {id:'instances',label:'Instances'},
+    {id:'instance-templates',label:'Instance Templates'},
+    {id:'instance-groups',label:'Instance Groups'},
+    {id:'custom-images',label:'Custom Images'}
+  ],
+  orchestration: [
+    {id:'kubernetes',label:'Kubernetes'},
+    {id:'slurm',label:'Slurm'}
+  ],
+  storage: [
+    {id:'disks',label:'Disks'},
+    {id:'buckets',label:'Buckets'}
+  ],
+  networking: [
+    {id:'vpc',label:'VPC Networks'},
+    {id:'subnets',label:'VPC Subnets'},
+    {id:'firewall',label:'Firewall Rules'},
+    {id:'infiniband',label:'Infiniband'},
+    {id:'load-balancers',label:'Load Balancers'}
+  ]
+};
+
+// helper: build a nav group with shared items, marking active item
+function grp(id, icon, label, activeId, open) {
+  const items = G[id] ? G[id].map(i => ({...i, active: i.id === activeId})) : [];
+  return {id, icon, label, open: !!open, items};
+}
+
+// ── Sidebar definitions ──
+// Shared main nav helper
+function mainNav(activeGrp, activeItem) {
+  return [
+    grp('compute','compute','Compute', activeGrp==='compute'?activeItem:null, activeGrp==='compute'),
+    grp('orchestration','orchestration','Orchestration', activeGrp==='orchestration'?activeItem:null, activeGrp==='orchestration'),
+    grp('storage','storage','Storage', activeGrp==='storage'?activeItem:null, activeGrp==='storage'),
+    grp('networking','networking','Networking', activeGrp==='networking'?activeItem:null, activeGrp==='networking'),
+    {id:'managed-logs',icon:'logs',label:'Managed Logs',solo:true},
+    {id:'registry',icon:'registry',label:'Container Registry',solo:true}
+  ];
+}
+function settingsNav(activeKey) {
+  return {
+    type:'settings', topbar:null, back:'Back to Project',
+    sections:[
+      {label:'Org Management', items:[
+        {id:'usage',icon:'usage',label:'Usage',hasChev:true},
+        {id:'billing',icon:'billing',label:'Billing',hasChev:true},
+        {id:'projects',icon:'projects',label:'Projects'},
+        {id:'notifications',icon:'logs',label:'All Notifications'}
+      ]},
+      {label:'Personal Settings', items:[
+        {id:'security',icon:'security',label:'Security',hasChev:true,open:true,subItems:[
+          {id:'cloud-api-keys',label:'Cloud API Keys',active:activeKey==='cloud-api-keys'},
+          {id:'ssh-keys',label:'SSH Keys',active:activeKey==='ssh-keys'},
+          {id:'obj-storage-keys',label:'Object Storage Keys'},
+          {id:'container-reg-keys',label:'Container Registry ...'},
+          {id:'mon-keys',label:'Monitoring Keys'},
+          {id:'inf-api-keys',label:'Inference API Keys'},
+          {id:'mfa',label:'MFA'}
+        ]},
+        {id:'settings-personal',icon:'gear',label:'Settings',hasChev:true}
+      ]}
+    ]
+  };
+}
+const SIDEBARS = {
+  instances:   {type:'main', topbar:{org:'ManagedOrchestration',proj:'abhatti'}, nav:mainNav('compute','instances')},
+  kubernetes:  {type:'main', topbar:{org:'ManagedOrchestration',proj:'abhatti'}, nav:mainNav('orchestration','kubernetes')},
+  'k8s-list':  {type:'main', topbar:{org:'ManagedOrchestration',proj:'abhatti'}, nav:mainNav('orchestration','kubernetes')},
+  'k8s-detail':{type:'main', topbar:{org:'ManagedOrchestration',proj:'abhatti'}, nav:mainNav('orchestration','kubernetes')},
+  'vm-detail': {type:'main', topbar:{org:'ManagedOrchestration',proj:'abhatti'}, nav:mainNav('compute','instances')},
+  slurm:       {type:'main', topbar:{org:'ManagedOrchestration',proj:'abhatti'}, nav:mainNav('orchestration','slurm')},
+  disks:       {type:'main', topbar:{org:'ManagedOrchestration',proj:'abhatti'}, nav:mainNav('storage','disks')},
+  buckets:     {type:'main', topbar:{org:'ManagedOrchestration',proj:'abhatti'}, nav:mainNav('storage','buckets')},
+  apikeys:     settingsNav('cloud-api-keys'),
+  sshkeys:     settingsNav('ssh-keys'),
+  infra: {
+    type:'cc', topbar:{org:'ManagedOrchestration',proj:'abhatti'}, notif:true,
+    nav:[
+      grp('compute','compute','Compute',null,false),
+      grp('orchestration','orchestration','Orchestration',null,false),
+      grp('storage','storage','Storage',null,false),
+      grp('networking','networking','Networking',null,false),
+      {id:'managed-logs',icon:'logs',label:'Managed Logs',solo:true},
+      {id:'registry',icon:'registry',label:'Container Registry',solo:true}
+    ]
+  }
+};
+
+// ── Route map: nav id → view id ──
+const ROUTES = {
+  instances:'instances', 'instance-templates':'instances', 'instance-groups':'instances', 'custom-images':'instances',
+  kubernetes:'k8s-list', slurm:'slurm',
+  'k8s-list':'k8s-list', 'k8s-detail':'k8s-detail', 'vm-detail':'vm-detail',
+  disks:'disks', buckets:'buckets',
+  vpc:'instances', subnets:'instances', firewall:'instances', infiniband:'instances', 'load-balancers':'instances',
+  'cloud-api-keys':'apikeys', 'ssh-keys':'sshkeys',
+  'infra-overview':'infra', 'managed-logs':'infra'
+};
+
+let currentView = 'instances';
+
+function buildSidebar(key) {
+  const cfg = SIDEBARS[key];
+  if (!cfg) return;
+
+  // Update topbar
+  const tbLeft = document.getElementById('tb-left');
+  const notifBtn = document.getElementById('tb-notif');
+  if (cfg.topbar) {
+    tbLeft.style.display='flex';
+    tbLeft.querySelector('.tb-org').childNodes[0].textContent = cfg.topbar.org + ' ';
+    tbLeft.querySelector('.tb-proj').childNodes[0].textContent = cfg.topbar.proj + ' ';
+  }
+  // notif dot
+  const dot = notifBtn.querySelector('.tb-notif-dot');
+  if (cfg.notif) {
+    if (!dot) { const d=document.createElement('div'); d.className='tb-notif-dot'; notifBtn.appendChild(d); }
+  } else {
+    if (dot) dot.remove();
+  }
+
+  const sb = document.getElementById('sidebar');
+  let html = '<nav class="snav">';
+
+  if (cfg.type === 'settings') {
+    html += `<div class="sback">${ICONS.arrowLeft} ${cfg.back}</div>`;
+    cfg.sections.forEach(sec => {
+      html += `<div class="snav-label">${sec.label}</div>`;
+      sec.items.forEach(item => {
+        if (item.subItems && item.subItems.length) {
+          html += `<div class="sgrp">
+            <div class="sgrp-hd">${ICONS[item.icon]||''}<span>${item.label}</span>${item.hasChev?`<span class="sgrp-chev${item.open?' open':''}">${ICONS.chevDown}</span>`:''}</div>
+            <div class="sgrp-items"${!item.open?' style="display:none"':''}>`;
+          item.subItems.forEach(sub => {
+            html += `<div class="sitem${sub.active?' active':''}" onclick="navigate('${sub.id}')">${sub.label}</div>`;
+          });
+          html += `</div></div>`;
+        } else {
+          html += `<div class="sitem-solo${item.active?' active':''}" onclick="navigate('${item.id}')">${ICONS[item.icon]||''}<span>${item.label}</span>${item.hasChev?`<span style="margin-left:auto">${ICONS.chevDown}</span>`:''}</div>`;
+        }
+      });
+    });
+  } else if (cfg.type === 'cc') {
+    cfg.nav.forEach(item => {
+      if (!item.icon && item.label) {
+        html += `<div class="snav-label">${item.label}</div>`;
+        return;
+      }
+      if (item.solo || (!item.items && !item.open)) {
+        html += `<div class="sitem-solo${item.active?' active':''}" onclick="navigate('${item.id}')">${ICONS[item.icon]||''}<span>${item.label}</span></div>`;
+        return;
+      }
+      html += `<div class="sgrp">
+        <div class="sgrp-hd${item.highlighted?' active':''}">${ICONS[item.icon]||''}<span>${item.label}</span><span class="sgrp-chev${item.open?' open':''}">${ICONS.chevDown}</span></div>`;
+      if (item.items && item.items.length) {
+        html += `<div class="sgrp-items"${!item.open?' style="display:none"':''}>`;
+        item.items.forEach(sub => {
+          html += `<div class="sitem${sub.active?' active':''}" onclick="navigate('${sub.id}')">${sub.label}</div>`;
+        });
+        html += `</div>`;
+      }
+      html += `</div>`;
+    });
+  } else {
+    // main
+    cfg.nav.forEach(item => {
+      if (item.solo) {
+        html += `<div class="sitem-solo" onclick="navigate('${item.id}')">${ICONS[item.icon]||''}<span>${item.label}</span></div>`;
+        return;
+      }
+      html += `<div class="sgrp">
+        <div class="sgrp-hd${item.highlighted?' active':''}">${ICONS[item.icon]||''}<span>${item.label}</span><span class="sgrp-chev${item.open?' open':''}">${ICONS.chevDown}</span></div>`;
+      if (item.items && item.items.length) {
+        html += `<div class="sgrp-items"${!item.open?' style="display:none"':''}>`;
+        item.items.forEach(sub => {
+          html += `<div class="sitem${sub.active?' active':''}" onclick="navigate('${sub.id}')">${sub.label}</div>`;
+        });
+        html += `</div>`;
+      }
+      html += `</div>`;
+    });
+  }
+
+  html += '</nav>';
+  html += `<div class="sfoot"><div class="sfoot-logo">`
+    + `<div class="lp" style="inset:0.67% 0.03% 1.01% 76.17%"><img src="https://www.figma.com/api/mcp/asset/b8963513-8f34-49bf-8984-eae44c97f8c1"/></div>`
+    + `<div class="lp" style="inset:9.98% 84.84% 22.27% 0.24%"><img src="https://www.figma.com/api/mcp/asset/1a956290-61d8-47b7-ae76-1ee730f7b793"/></div>`
+    + `<div class="lp" style="inset:26.89% 54.18% 22.28% 35.74%"><img src="https://www.figma.com/api/mcp/asset/28b38690-9d72-486f-b946-cd0015061905"/></div>`
+    + `<div class="lp" style="inset:26.9% 41.94% 22.28% 46.47%"><img src="https://www.figma.com/api/mcp/asset/86aab3ac-54d1-4a50-93f2-77bd22693b66"/></div>`
+    + `<div class="lp" style="inset:26.9% 29.77% 22.28% 58.8%"><img src="https://www.figma.com/api/mcp/asset/6d1dfc56-fbc2-4626-9cbc-07e881cf6e5e"/></div>`
+    + `<div class="lp" style="inset:27.98% 76.64% 23.46% 16.65%"><img src="https://www.figma.com/api/mcp/asset/8e6ccbe7-e506-48c4-8687-f2c1c30bbf40"/></div>`
+    + `<div class="lp" style="inset:27.99% 65.4% 22.28% 24.53%"><img src="https://www.figma.com/api/mcp/asset/23e4f874-918a-4f13-a4ab-9e1ccd8cd99e"/></div>`
+    + `</div><div class="sfoot-panel" onclick="toggleSidebar()">${ICONS.panel}</div></div>`;
+  sb.innerHTML = html;
+}
+
+function navigate(id) {
+  const viewId = ROUTES[id] || id;
+
+  // 1. Direct match: sidebar key == view id (most common case)
+  let sbKey = SIDEBARS[viewId] ? viewId : null;
+
+  // 2. Fallback: search sidebar sections for this nav id
+  if (!sbKey) {
+    outer: for (const [k, cfg] of Object.entries(SIDEBARS)) {
+      if (cfg.nav) {
+        for (const item of cfg.nav) {
+          if (item.id === id) { sbKey = k; break outer; }
+          if (item.items) {
+            for (const sub of item.items) {
+              if (sub.id === id) { sbKey = k; break outer; }
+            }
+          }
+        }
+      }
+      if (cfg.sections) {
+        for (const sec of cfg.sections) {
+          for (const item of sec.items) {
+            if (item.id === id) { sbKey = k; break outer; }
+            if (item.subItems) {
+              for (const sub of item.subItems) {
+                if (sub.id === id) { sbKey = k; break outer; }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  if (!sbKey) sbKey = viewId;
+  showView(viewId, sbKey);
+}
+
+function showView(viewId, sbKey) {
+  // hide all views
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  const v = document.getElementById('view-' + viewId);
+  if (v) v.classList.add('active');
+  // rebuild sidebar
+  buildSidebar(sbKey || viewId);
+  currentView = viewId;
+}
+
+function switchTab(el, viewId) {
+  el.closest('.tabs').querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+}
+
+// Sidebar nav item nav click (for main nav groups)
+document.addEventListener('click', e => {
+  const hd = e.target.closest('.sgrp-hd');
+  if (hd) {
+    const grp = hd.closest('.sgrp');
+    const items = grp.querySelector('.sgrp-items');
+    const chev = hd.querySelector('.sgrp-chev');
+    if (items) {
+      items.style.display = items.style.display === 'none' ? '' : 'none';
+      if (chev) chev.classList.toggle('open');
+    }
+  }
+});
+
+// ── Cluster detail tab switching ──
+function switchDetailTab(el, panelId) {
+  el.closest('.tabs').querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  const view = el.closest('.view');
+  view.querySelectorAll('.tab-panel').forEach(p => { p.classList.remove('active'); p.style.display='none'; });
+  const panel = document.getElementById(panelId);
+  if (panel) { panel.classList.add('active'); panel.style.display='block'; }
+}
+
+// ── Avatar dropdown ──
+function toggleSidebar() {
+  document.querySelector('.sidebar').classList.toggle('collapsed');
+}
+function toggleInstanceState(state) {
+  const empty = document.getElementById('instances-empty');
+  const filled = document.getElementById('instances-filled');
+  const btns = document.querySelectorAll('.state-toggle-btn');
+  if (state === 'filled') {
+    empty.style.display = 'none';
+    filled.style.display = '';
+    btns[0].classList.remove('active');
+    btns[1].classList.add('active');
+  } else {
+    empty.style.display = '';
+    filled.style.display = 'none';
+    btns[0].classList.add('active');
+    btns[1].classList.remove('active');
+  }
+}
+function toggleAvatarDd() {
+  document.getElementById('avatar-dd').classList.toggle('open');
+}
+function closeAvatarDd() {
+  document.getElementById('avatar-dd').classList.remove('open');
+}
+document.addEventListener('click', e => {
+  if (!e.target.closest('#tb-avatar') && !e.target.closest('#avatar-dd')) closeAvatarDd();
+});
+
+// ── Init ──
+navigate('instances');
+</script>
+</body>
+</html>
