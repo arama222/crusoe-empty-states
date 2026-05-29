@@ -858,48 +858,33 @@ img.ico{display:block;flex:0 0 auto}
 
   <!-- ── No SSH key ── -->
   <div id="edge-5" style="display:none">
-    <!-- Prereq banner -->
-    <div style="border:1px solid var(--gray-200);border-radius:10px;padding:12px 16px;display:flex;align-items:flex-start;gap:12px;background:var(--gray-50);margin-bottom:16px">
-      <svg width="16" height="16" viewBox="0 0 20 20" fill="none" style="flex-shrink:0;margin-top:1px" stroke="var(--gray-600)" stroke-width="1.5"><circle cx="10" cy="10" r="8"/><line x1="10" y1="9" x2="10" y2="13"/><circle cx="10" cy="7" r=".5" fill="var(--gray-600)" stroke="none"/></svg>
-      <div style="flex:1">
-        <div style="font-size:13px;font-weight:600;font-family:var(--font-body);color:var(--text);margin-bottom:2px">Add an SSH key before creating an instance</div>
-        <div style="font-size:12px;color:var(--muted);font-family:var(--font-body);line-height:150%">You'll need a public SSH key to connect to your VM after it boots. Without one, you won't be able to log in.</div>
-      </div>
-      <button class="btn btn-p btn-sm" onclick="navigate('ssh-keys')" style="flex-shrink:0;white-space:nowrap">+ Add SSH key</button>
-    </div>
-    <div class="ecard" style="margin-bottom:0">
-      <div class="illus">
-        <svg width="96" height="94" viewBox="0 0 154.556 151" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M133.337 112.904C138.807 112.904 144.269 112.904 149.739 112.904C150.483 112.904 151.253 113.046 151.963 112.636C152.524 112.318 153.101 112.477 153.469 112.92C153.854 113.389 153.469 113.84 153.226 114.3C152.323 116.023 151.37 117.73 150.425 119.428C147.915 123.919 145.414 128.411 142.905 132.894C140.12 137.895 137.393 142.93 134.533 147.882C133.646 149.413 132.291 150.491 130.008 150.483C87.9873 150.391 45.975 150.416 3.95432 150.408C3.13465 150.408 2.05569 150.709 1.64585 149.831C1.30293 149.078 0.792728 148.283 0.893096 147.355C0.909824 147.171 0.893096 146.987 0.893096 146.803C0.893096 111.557 0.893096 76.3112 0.893096 41.0654C0.893096 39.2336 1.32802 37.5943 2.21461 35.888C4.53143 31.4384 6.92353 27.0306 9.22363 22.5809C12.8871 15.5301 16.7345 8.56289 20.3645 1.48695C20.5652 1.10221 20.8329 0.66728 21.3431 0.5C21.6274 0.633824 21.9118 0.784376 21.8784 1.19421C21.5605 5.21729 21.7696 9.2571 21.7529 13.2802C21.7111 21.6609 21.7445 30.0416 21.7445 38.4307" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M21.8196 0.600466C28.8621 9.90959 67.9805 63.6817 75.1066 72.9406C75.8008 73.8439 76.7962 75.1153 77.8166 75.9015" stroke="black" stroke-miterlimit="10" stroke-dasharray="3 3"/>
-        <path d="M21.845 113.129C22.2882 113.648 40.9734 112.912 41.6091 112.912C62.0841 112.912 82.5592 112.912 103.043 112.912H133.061" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M132.433 38.481C131.99 37.9625 113.405 38.4309 112.77 38.4309C92.4786 38.4309 1.45323 38.7069 1.45323 38.7069" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M78.7201 76.7799C79.2303 76.6377 79.6987 76.8552 80.1002 77.0726C83.4541 78.8876 86.9754 80.3764 90.3962 82.0576C101.169 87.3353 112 92.4875 122.782 97.7484C131.572 102.031 140.43 106.171 149.17 110.57C150.207 111.089 151.562 111.189 152.097 112.494" stroke="black" stroke-miterlimit="10" stroke-dasharray="3 3"/>
-        <path d="M1.44507 38.7151C1.62907 38.7151 1.87999 38.6398 1.98873 38.7235C5.55179 41.517 9.93452 42.7633 13.8238 44.9379C16.1322 46.2343 18.6749 47.1209 21.0084 48.3504C27.3734 51.7127 33.9141 54.6903 40.3627 57.877C51.3614 63.3136 62.4186 68.608 73.4507 73.9777C74.1114 74.3039 76.2024 75.9181 77.089 75.5334" stroke="black" stroke-miterlimit="10" stroke-dasharray="3 3"/>
-        <path d="M21.8781 49.2705C21.6857 49.764 21.7443 50.2825 21.7443 50.8011C21.7443 65.2541 21.7443 98.3588 21.7443 112.803" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M133.203 38.3389C133.203 52.4155 133.203 132.869 133.203 146.945C133.203 147.564 133.186 148.183 133.487 148.752" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M76.7712 75.9432C77.7833 75.868 78.5527 76.1356 78.5695 77.3317C78.5695 77.867 79.0044 78.0928 79.2721 78.4441C85.2105 86.5655 91.3497 94.5364 97.3383 102.624C99.5045 105.552 101.662 108.479 103.879 111.373C104.163 111.741 132.174 149.931 132.183 150.433" stroke="black" stroke-miterlimit="10" stroke-dasharray="3 3"/>
-        <path d="M21.6024 38.715C21.7613 41.9603 21.9872 45.2055 21.4602 48.4424" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M0.500033 150.5L22.3635 112.243L77.0891 76.7965L77.8753 76.2863L153.787 1.10239L133.395 39.1836L77.2982 77.8253L0.500033 150.5Z" stroke="black" stroke-miterlimit="10" stroke-linejoin="round" stroke-dasharray="3 3"/>
-        <path d="M8.21345 98.8278L145.5 54.9419" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
-        <circle cx="9.02466" cy="98.579" r="2.375" fill="black"/>
-        <circle cx="147.689" cy="54.4467" r="2.375" fill="black"/>
-        <path d="M21.343 0.5C21.343 0.5 154.08 1.06039 153.494 1.06039C154.18 1.62078 154.046 2.39863 154.046 3.14302C154.046 36.3983 154.046 69.6535 154.046 102.9C154.046 105.635 154.046 108.362 154.046 111.097C154.046 111.716 154.063 112.335 153.486 112.762" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-      </div>
-      <div class="etxt">
-        <div class="ecat">Compute</div>
-        <div class="etitle">Create your first instance</div>
-        <div class="edesc">A dedicated Linux VM with one or more GPUs. Add an SSH key first so you can connect once it's running.</div>
-        <div style="margin-top:12px;display:flex;gap:8px;align-items:center">
-          <div style="position:relative;display:inline-flex">
+    <div class="ecard" style="margin-bottom:0;flex-direction:column;gap:0;padding:0;overflow:hidden">
+      <!-- Top: illus + text -->
+      <div style="display:flex;align-items:center;gap:24px;padding:32px">
+        <div class="illus">
+          <svg width="96" height="94" viewBox="0 0 154.556 151" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M133.337 112.904C138.807 112.904 144.269 112.904 149.739 112.904C150.483 112.904 151.253 113.046 151.963 112.636C152.524 112.318 153.101 112.477 153.469 112.92C153.854 113.389 153.469 113.84 153.226 114.3C152.323 116.023 151.37 117.73 150.425 119.428C147.915 123.919 145.414 128.411 142.905 132.894C140.12 137.895 137.393 142.93 134.533 147.882C133.646 149.413 132.291 150.491 130.008 150.483C87.9873 150.391 45.975 150.416 3.95432 150.408C3.13465 150.408 2.05569 150.709 1.64585 149.831C1.30293 149.078 0.792728 148.283 0.893096 147.355C0.909824 147.171 0.893096 146.987 0.893096 146.803C0.893096 111.557 0.893096 76.3112 0.893096 41.0654C0.893096 39.2336 1.32802 37.5943 2.21461 35.888C4.53143 31.4384 6.92353 27.0306 9.22363 22.5809C12.8871 15.5301 16.7345 8.56289 20.3645 1.48695C20.5652 1.10221 20.8329 0.66728 21.3431 0.5C21.6274 0.633824 21.9118 0.784376 21.8784 1.19421C21.5605 5.21729 21.7696 9.2571 21.7529 13.2802C21.7111 21.6609 21.7445 30.0416 21.7445 38.4307" stroke="black" stroke-linecap="round" stroke-linejoin="round"/><path d="M21.8196 0.600466C28.8621 9.90959 67.9805 63.6817 75.1066 72.9406C75.8008 73.8439 76.7962 75.1153 77.8166 75.9015" stroke="black" stroke-miterlimit="10" stroke-dasharray="3 3"/><path d="M21.845 113.129C22.2882 113.648 40.9734 112.912 41.6091 112.912C62.0841 112.912 82.5592 112.912 103.043 112.912H133.061" stroke="black" stroke-linecap="round" stroke-linejoin="round"/><path d="M132.433 38.481C131.99 37.9625 113.405 38.4309 112.77 38.4309C92.4786 38.4309 1.45323 38.7069 1.45323 38.7069" stroke="black" stroke-linecap="round" stroke-linejoin="round"/><path d="M78.7201 76.7799C79.2303 76.6377 79.6987 76.8552 80.1002 77.0726C83.4541 78.8876 86.9754 80.3764 90.3962 82.0576C101.169 87.3353 112 92.4875 122.782 97.7484C131.572 102.031 140.43 106.171 149.17 110.57C150.207 111.089 151.562 111.189 152.097 112.494" stroke="black" stroke-miterlimit="10" stroke-dasharray="3 3"/><path d="M1.44507 38.7151C1.62907 38.7151 1.87999 38.6398 1.98873 38.7235C5.55179 41.517 9.93452 42.7633 13.8238 44.9379C16.1322 46.2343 18.6749 47.1209 21.0084 48.3504C27.3734 51.7127 33.9141 54.6903 40.3627 57.877C51.3614 63.3136 62.4186 68.608 73.4507 73.9777C74.1114 74.3039 76.2024 75.9181 77.089 75.5334" stroke="black" stroke-miterlimit="10" stroke-dasharray="3 3"/><path d="M21.8781 49.2705C21.6857 49.764 21.7443 50.2825 21.7443 50.8011C21.7443 65.2541 21.7443 98.3588 21.7443 112.803" stroke="black" stroke-linecap="round" stroke-linejoin="round"/><path d="M133.203 38.3389C133.203 52.4155 133.203 132.869 133.203 146.945C133.203 147.564 133.186 148.183 133.487 148.752" stroke="black" stroke-linecap="round" stroke-linejoin="round"/><path d="M76.7712 75.9432C77.7833 75.868 78.5527 76.1356 78.5695 77.3317C78.5695 77.867 79.0044 78.0928 79.2721 78.4441C85.2105 86.5655 91.3497 94.5364 97.3383 102.624C99.5045 105.552 101.662 108.479 103.879 111.373C104.163 111.741 132.174 149.931 132.183 150.433" stroke="black" stroke-miterlimit="10" stroke-dasharray="3 3"/><path d="M21.6024 38.715C21.7613 41.9603 21.9872 45.2055 21.4602 48.4424" stroke="black" stroke-linecap="round" stroke-linejoin="round"/><path d="M0.500033 150.5L22.3635 112.243L77.0891 76.7965L77.8753 76.2863L153.787 1.10239L133.395 39.1836L77.2982 77.8253L0.500033 150.5Z" stroke="black" stroke-miterlimit="10" stroke-linejoin="round" stroke-dasharray="3 3"/><path d="M8.21345 98.8278L145.5 54.9419" stroke="black" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9.02466" cy="98.579" r="2.375" fill="black"/><circle cx="147.689" cy="54.4467" r="2.375" fill="black"/><path d="M21.343 0.5C21.343 0.5 154.08 1.06039 153.494 1.06039C154.18 1.62078 154.046 2.39863 154.046 3.14302C154.046 36.3983 154.046 69.6535 154.046 102.9C154.046 105.635 154.046 108.362 154.046 111.097C154.046 111.716 154.063 112.335 153.486 112.762" stroke="black" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="etxt">
+          <div class="ecat">Compute</div>
+          <div class="etitle">Create your first instance</div>
+          <div class="edesc">A dedicated Linux VM with one or more GPUs you can SSH into directly. Stopped VMs are not charged for on-demand usage.</div>
+          <div style="margin-top:12px;display:flex;gap:8px;align-items:center;flex-wrap:wrap">
             <button class="btn btn-p btn-sm" style="opacity:.4;cursor:not-allowed" disabled>
               <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
               Create instance
             </button>
+            <a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/compute/virtual-machines" target="_blank" style="text-decoration:none">View docs →</a>
           </div>
-          <span style="font-size:11px;color:var(--muted);font-family:var(--font-body)">← Add SSH key first</span>
         </div>
+      </div>
+      <!-- Bottom: SSH key banner -->
+      <div style="border-top:1px solid var(--border);background:var(--gray-50);padding:14px 32px;display:flex;align-items:center;gap:12px">
+        <svg width="16" height="16" viewBox="0 0 20 20" fill="none" style="flex-shrink:0" stroke="var(--gray-600)" stroke-width="1.5"><circle cx="10" cy="10" r="8"/><line x1="10" y1="9" x2="10" y2="13"/><circle cx="10" cy="7" r=".5" fill="var(--gray-600)" stroke="none"/></svg>
+        <div style="flex:1">
+          <div style="font-size:13px;font-weight:600;font-family:var(--font-body);color:var(--text);margin-bottom:1px">Add an SSH key before creating an instance</div>
+          <div style="font-size:12px;color:var(--muted);font-family:var(--font-body);line-height:150%">You'll need a public SSH key to connect to your VM after it boots. Without one, you won't be able to log in.</div>
+        </div>
+        <button class="btn btn-p btn-sm" onclick="navigate('ssh-keys')" style="flex-shrink:0;white-space:nowrap">+ Add SSH key</button>
       </div>
     </div>
     <div class="pop-section">
