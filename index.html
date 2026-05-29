@@ -204,6 +204,10 @@ html,body{height:100%;background:var(--white);color:var(--black);font-family:'Su
 .res-card-body{pointer-events:auto}
 .res-card-body-inner{padding-top:10px;padding-bottom:2px}
 @keyframes spicy-ring{0%,100%{opacity:.6;transform:scale(1)}50%{opacity:1;transform:scale(1.03)}}
+@keyframes cube-float{0%,100%{transform:translateY(0) rotate(0deg)}30%{transform:translateY(-10px) rotate(.6deg)}70%{transform:translateY(-7px) rotate(-.4deg)}}
+@keyframes cursor-blink{0%,49%{opacity:1}50%,100%{opacity:0}}
+@keyframes cube-glitch-run{0%,8%{transform:none;filter:none}10%{transform:translate(3px,-2px) skewX(-2deg);filter:contrast(1.4)}16%{transform:translate(-2px,1px)}20%{transform:translate(1px,-1px) skewX(1deg);filter:none}25%,100%{transform:none}}
+@keyframes node-ripple{0%{r:3;opacity:.7}100%{r:18;opacity:0}}
 /* ── Spicy scroll-reveal ── */
 .spicy-reveal{opacity:0;transform:translateY(14px);transition:opacity .5s ease,transform .5s ease}
 .spicy-reveal.is-visible{opacity:1;transform:none}
@@ -1020,14 +1024,18 @@ img.ico{display:block;flex:0 0 auto}
 <!-- ── SPICY (Motion-forward) ── -->
 <div id="instances-spicy" style="display:none">
   <!-- Motion hero — light bg -->
-  <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:56px 40px 48px;text-align:center;position:relative;overflow:hidden;background:var(--white)">
+  <div id="spicy-hero" style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:56px 40px 48px;text-align:center;position:relative;overflow:hidden;background:var(--white)">
     <!-- Subtle dot grid -->
     <div style="position:absolute;inset:0;background-image:radial-gradient(circle,rgba(0,0,0,.055) 1px,transparent 1px);background-size:28px 28px;pointer-events:none"></div>
     <!-- Scan line (dark) -->
     <div style="position:absolute;left:0;right:0;height:56px;background:linear-gradient(transparent,rgba(0,0,0,.04),transparent);animation:scan-line 4.5s linear infinite;pointer-events:none;z-index:0;top:-56px"></div>
-    <!-- Illustration -->
-    <div style="display:flex;align-items:center;justify-content:center;margin-bottom:32px;z-index:1">
-        <svg width="160" height="156" viewBox="0 0 154.556 151" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Illustration + particle canvas -->
+    <div id="spicy-cube-wrap" style="display:flex;align-items:center;justify-content:center;margin-bottom:32px;z-index:1;position:relative">
+      <!-- Particle canvas behind cube -->
+      <canvas id="spicy-particles" width="300" height="260" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);pointer-events:none;z-index:0"></canvas>
+      <!-- SVG node ripple overlay -->
+      <svg id="spicy-node-ripples" width="300" height="260" viewBox="0 0 300 260" fill="none" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);pointer-events:none;z-index:2;overflow:visible"></svg>
+        <svg id="spicy-cube" width="160" height="156" viewBox="0 0 154.556 151" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:relative;z-index:1">
           <path d="M133.337 112.904C138.807 112.904 144.269 112.904 149.739 112.904C150.483 112.904 151.253 113.046 151.963 112.636C152.524 112.318 153.101 112.477 153.469 112.92C153.854 113.389 153.469 113.84 153.226 114.3C152.323 116.023 151.37 117.73 150.425 119.428C147.915 123.919 145.414 128.411 142.905 132.894C140.12 137.895 137.393 142.93 134.533 147.882C133.646 149.413 132.291 150.491 130.008 150.483C87.9873 150.391 45.975 150.416 3.95432 150.408C3.13465 150.408 2.05569 150.709 1.64585 149.831C1.30293 149.078 0.792728 148.283 0.893096 147.355C0.909824 147.171 0.893096 146.987 0.893096 146.803C0.893096 111.557 0.893096 76.3112 0.893096 41.0654C0.893096 39.2336 1.32802 37.5943 2.21461 35.888C4.53143 31.4384 6.92353 27.0306 9.22363 22.5809C12.8871 15.5301 16.7345 8.56289 20.3645 1.48695C20.5652 1.10221 20.8329 0.66728 21.3431 0.5C21.6274 0.633824 21.9118 0.784376 21.8784 1.19421C21.5605 5.21729 21.7696 9.2571 21.7529 13.2802C21.7111 21.6609 21.7445 30.0416 21.7445 38.4307" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
           <path d="M21.8196 0.600466C28.8621 9.90959 67.9805 63.6817 75.1066 72.9406C75.8008 73.8439 76.7962 75.1153 77.8166 75.9015" stroke="black" stroke-miterlimit="10" stroke-dasharray="3 3"/>
           <path d="M21.845 113.129C22.2882 113.648 40.9734 112.912 41.6091 112.912C62.0841 112.912 82.5592 112.912 103.043 112.912H133.061" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
@@ -1044,9 +1052,9 @@ img.ico{display:block;flex:0 0 auto}
           <circle cx="147.689" cy="54.4467" r="2.375" fill="black"/>
           <path d="M21.343 0.5C21.343 0.5 154.08 1.06039 153.494 1.06039C154.18 1.62078 154.046 2.39863 154.046 3.14302C154.046 36.3983 154.046 69.6535 154.046 102.9C154.046 105.635 154.046 108.362 154.046 111.097C154.046 111.716 154.063 112.335 153.486 112.762" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
-    </div>
-    <!-- Headline -->
-    <h1 style="font-size:52px;font-weight:400;font-family:var(--font-heading);color:var(--text);letter-spacing:-1.6px;line-height:100%;margin:0 0 14px;position:relative;z-index:1">No instances yet.</h1>
+    </div><!-- /spicy-cube-wrap -->
+    <!-- Headline with typewriter -->
+    <h1 style="font-size:52px;font-weight:400;font-family:var(--font-heading);color:var(--text);letter-spacing:-1.6px;line-height:100%;margin:0 0 14px;position:relative;z-index:1"><span id="spicy-typed">No instances yet.</span><span id="spicy-cursor" style="display:none;font-style:normal">|</span></h1>
     <!-- Sub -->
     <p style="font-size:14px;color:var(--muted);font-family:var(--font-body);line-height:165%;max-width:320px;margin:0 0 32px;position:relative;z-index:1">Spin up a dedicated GPU VM in under a minute. SSH in directly and start building.</p>
     <!-- CTA + docs -->
@@ -1326,20 +1334,12 @@ img.ico{display:block;flex:0 0 auto}
         <div class="edesc">Crusoe Managed Slurm provides managed HPC cluster orchestration on Crusoe Cloud. Provision a complete Slurm cluster backed by GPU-optimized infrastructure with a single command.</div>
       </div>
     </div>
-    <!-- Docs + CLI + Template (3-column) -->
-    <div class="action-cards">
+    <!-- Docs + Template (2-column) -->
+    <div class="action-cards action-cards-2col">
       <div class="action-card">
         <div class="action-card-title">Documentation</div>
         <div class="action-card-desc">Production-ready HPC with topology-aware scheduling, shared storage, and multi-user access. Start with a CPU-only login node to validate your workflow.</div>
         <a class="btn btn-o" href="https://docs.crusoecloud.com/orchestration/slurm" style="margin-top:auto">View Slurm docs →</a>
-      </div>
-      <div class="action-card">
-        <div class="action-card-title">CLI command</div>
-        <div class="action-card-desc" style="font-size:12px;color:var(--muted);margin-bottom:4px">Create a Slurm cluster via the Crusoe CLI:</div>
-        <div class="action-card-cli"><code>crusoe kubernetes clusters create \
-  --name my-slurm \
-  --type slurm \
-  --location us-east1-a</code><button class="cli-snippet-copy">Copy</button></div>
       </div>
       <div class="action-card">
         <div class="action-card-title">Create from template</div>
@@ -1382,7 +1382,7 @@ img.ico{display:block;flex:0 0 auto}
         </div>
       </div>
       <!-- 2-step guided flow -->
-      <div class="setup-flow">
+      <div class="setup-flow" style="margin: 0 auto">
         <!-- Step 1: Create disk -->
         <div class="setup-step active">
           <div class="setup-step-num">1</div>
@@ -2490,11 +2490,172 @@ function toggleEdgeState(n) {
   const origToggle = window.toggleInstanceState;
   window.toggleInstanceState = function(state) {
     origToggle(state);
-    if(state === 'spicy') { requestAnimationFrame(initSpicyReveal); requestAnimationFrame(initScrollHint); }
+    if(state === 'spicy') {
+      requestAnimationFrame(initSpicyReveal);
+      requestAnimationFrame(initScrollHint);
+      setTimeout(initSpicyMagic, 60);
+    }
   };
   // Init if spicy is already active on load
-  if(document.getElementById('instances-spicy') && document.getElementById('instances-spicy').style.display !== 'none') { initSpicyReveal(); initScrollHint(); }
+  if(document.getElementById('instances-spicy') && document.getElementById('instances-spicy').style.display !== 'none') {
+    initSpicyReveal(); initScrollHint(); setTimeout(initSpicyMagic, 60);
+  }
 })();
+
+// ── Spicy magic: draw-in + typewriter + particles + parallax + glitch ──
+function initSpicyMagic() {
+  const svg = document.getElementById('spicy-cube');
+  if (!svg) return;
+
+  // ── 1. SVG draw-in ──
+  const paths = [...svg.querySelectorAll('path')];
+  const circles = [...svg.querySelectorAll('circle')];
+  // Reset first (re-entry safe)
+  paths.forEach(p => { p.style.transition='none'; const l=p.getTotalLength(); p.style.strokeDasharray=l; p.style.strokeDashoffset=l; });
+  circles.forEach(c => { c.style.transition='none'; c.style.opacity='0'; c.style.transform='scale(0)'; c.style.transformOrigin='center'; });
+  svg.style.animation='none'; svg.style.filter='none';
+  // Trigger on next frame
+  requestAnimationFrame(() => {
+    paths.forEach((p,i) => {
+      p.style.transition=`stroke-dashoffset 0.95s cubic-bezier(.4,0,0,1) ${i*0.065}s`;
+      p.style.strokeDashoffset='0';
+    });
+    const circleDelay = paths.length*65 + 550;
+    circles.forEach((c,i) => setTimeout(() => {
+      c.style.transition='opacity .3s ease, transform .45s cubic-bezier(.34,1.56,.64,1)';
+      c.style.opacity='1'; c.style.transform='scale(1)';
+    }, circleDelay + i*120));
+    // Float + glitch loop start after draw-in
+    const doneAt = paths.length*65 + 1050;
+    setTimeout(() => {
+      svg.style.animation='cube-float 4.8s ease-in-out infinite';
+      scheduleGlitch();
+    }, doneAt);
+    // Node ripple pulses after circles appear
+    setTimeout(startNodeRipples, circleDelay + 400);
+  });
+
+  // ── 2. Typewriter ──
+  const text = 'No instances yet.';
+  const typed = document.getElementById('spicy-typed');
+  const cursor = document.getElementById('spicy-cursor');
+  if (typed && cursor) {
+    typed.textContent = '';
+    cursor.style.display = '';
+    cursor.style.opacity = '1';
+    cursor.style.animation = 'cursor-blink .75s step-end infinite';
+    let ci = 0;
+    const typeNext = () => {
+      if (ci < text.length) {
+        typed.textContent += text[ci++];
+        setTimeout(typeNext, 48 + Math.random()*38);
+      } else {
+        setTimeout(() => {
+          cursor.style.animation = 'none';
+          cursor.style.transition = 'opacity .6s';
+          cursor.style.opacity = '0';
+        }, 1100);
+      }
+    };
+    setTimeout(typeNext, 320);
+  }
+
+  // ── 3. Particle canvas ──
+  const canvas = document.getElementById('spicy-particles');
+  if (canvas) {
+    if (window._spicyParticleRaf) cancelAnimationFrame(window._spicyParticleRaf);
+    const ctx = canvas.getContext('2d');
+    const W = canvas.width, H = canvas.height;
+    const parts = [];
+    const cx = W/2, cy = H/2 + 20;
+    function spawn() {
+      parts.push({ x: cx+(Math.random()-.5)*110, y: cy+(Math.random()-.5)*55,
+        vx:(Math.random()-.5)*.45, vy:-.35-Math.random()*.55,
+        life:0, maxLife:65+Math.random()*55, r:.5+Math.random()*1.1 });
+    }
+    function tick() {
+      ctx.clearRect(0,0,W,H);
+      if(Math.random()<.13) spawn();
+      for(let i=parts.length-1;i>=0;i--){
+        const p=parts[i]; p.x+=p.vx; p.y+=p.vy; p.life++;
+        if(p.life>p.maxLife){parts.splice(i,1);continue;}
+        const t=p.life/p.maxLife;
+        const a=(t<.2?t/.2:t>.7?(1-t)/.3:1)*.38;
+        ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+        ctx.fillStyle=`rgba(0,0,0,${a})`; ctx.fill();
+      }
+      window._spicyParticleRaf = requestAnimationFrame(tick);
+    }
+    tick();
+  }
+
+  // ── 4. Node ripples (SVG circles at known positions) ──
+  // Circle 1 at SVG coords (9.02,98.58) → scaled to 160px wide in 300×260 canvas
+  // SVG viewBox 0 0 154.556 151, rendered at 160×156 centered in 300×260 canvas
+  const scaleX = 160/154.556, scaleY = 156/151;
+  const offX = (300-160)/2, offY = (260-156)/2;
+  const nodeCoords = [
+    { x: offX + 9.025*scaleX,   y: offY + 98.579*scaleY },
+    { x: offX + 147.689*scaleX, y: offY + 54.447*scaleY }
+  ];
+  function startNodeRipples() {
+    if (!document.getElementById('spicy-node-ripples')) return;
+    nodeCoords.forEach((nc, ni) => {
+      function pulse() {
+        const rippleSvg = document.getElementById('spicy-node-ripples');
+        if (!rippleSvg || !document.getElementById('instances-spicy') ||
+            document.getElementById('instances-spicy').style.display === 'none') return;
+        const c = document.createElementNS('http://www.w3.org/2000/svg','circle');
+        c.setAttribute('cx', nc.x); c.setAttribute('cy', nc.y);
+        c.setAttribute('r', '3'); c.setAttribute('fill','none');
+        c.setAttribute('stroke','rgba(0,0,0,.5)'); c.setAttribute('stroke-width','1');
+        rippleSvg.appendChild(c);
+        let start=null;
+        function animRipple(ts) {
+          if(!start) start=ts;
+          const t=Math.min((ts-start)/800,1);
+          const r=3+t*15, a=(1-t)*.45;
+          c.setAttribute('r',r); c.setAttribute('stroke',`rgba(0,0,0,${a})`);
+          c.setAttribute('stroke-width', 1-t*.5);
+          if(t<1) requestAnimationFrame(animRipple);
+          else c.remove();
+        }
+        requestAnimationFrame(animRipple);
+        setTimeout(pulse, 2200 + ni*700);
+      }
+      setTimeout(pulse, ni*600);
+    });
+  }
+
+  // ── 5. Mouse parallax ──
+  const section = document.getElementById('instances-spicy');
+  const wrap = document.getElementById('spicy-cube-wrap');
+  if (window._spicyMM) { section.removeEventListener('mousemove', window._spicyMM); section.removeEventListener('mouseleave', window._spicyML); }
+  window._spicyMM = e => {
+    const hero = document.getElementById('spicy-hero');
+    if (!hero) return;
+    const r = hero.getBoundingClientRect();
+    const dx = (e.clientX - r.left - r.width/2) / (r.width/2);
+    const dy = (e.clientY - r.top - r.height/2) / (r.height/2);
+    if (wrap) { wrap.style.transform=`translate(${dx*14}px,${dy*9}px)`; wrap.style.transition='transform .07s ease-out'; }
+  };
+  window._spicyML = () => { if(wrap){wrap.style.transform='translate(0,0)';wrap.style.transition='transform .5s ease-out';} };
+  section.addEventListener('mousemove', window._spicyMM);
+  section.addEventListener('mouseleave', window._spicyML);
+
+  // ── 6. Periodic glitch ──
+  if (window._spicyGlitchTimer) clearTimeout(window._spicyGlitchTimer);
+  function scheduleGlitch() {
+    window._spicyGlitchTimer = setTimeout(() => {
+      const s = document.getElementById('spicy-cube');
+      if (!s || !document.getElementById('instances-spicy') ||
+          document.getElementById('instances-spicy').style.display === 'none') return;
+      s.style.animation = 'cube-glitch-run .28s steps(1) forwards, cube-float 4.8s ease-in-out infinite';
+      setTimeout(() => { if(s) s.style.animation='cube-float 4.8s ease-in-out infinite'; }, 280);
+      scheduleGlitch();
+    }, 7000 + Math.random()*8000);
+  }
+}
 
 function toggleAvatarDd() {
   document.getElementById('avatar-dd').classList.toggle('open');
