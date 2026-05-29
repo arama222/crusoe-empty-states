@@ -454,6 +454,22 @@ img.ico{display:block;flex:0 0 auto}
 .pop-alt-btn:hover{border-color:var(--gray-400);box-shadow:0 1px 4px rgba(0,0,0,.06)}
 /* ── 2-column action cards variant ── */
 .action-cards-2col{grid-template-columns:1fr 1fr}
+/* ── API key setup flow ── */
+.setup-flow{display:flex;flex-direction:column;max-width:560px}
+.setup-connector{width:1px;height:20px;background:var(--border);margin-left:33px}
+.setup-step{display:flex;gap:16px;padding:18px 20px;border:1px solid var(--border);border-radius:10px;background:var(--white);transition:opacity .3s,border-color .2s}
+.setup-step.locked{opacity:.38;pointer-events:none}
+.setup-step.done{border-color:var(--gray-200)}
+.setup-step-num{width:28px;height:28px;min-width:28px;border-radius:50%;border:1.5px solid var(--gray-300);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;font-family:var(--font-heading);color:var(--text2);background:var(--white);transition:all .3s;margin-top:1px}
+.setup-step.active .setup-step-num{background:var(--black);color:var(--white);border-color:var(--black)}
+.setup-step.done .setup-step-num{background:var(--black);color:var(--white);border-color:var(--black)}
+.setup-step-body{flex:1;display:flex;flex-direction:column;gap:8px;min-width:0}
+.setup-step-title{font-size:14px;font-weight:600;font-family:var(--font-body);color:var(--text)}
+.setup-step-desc{font-size:13px;color:var(--muted);font-family:var(--font-body);line-height:1.5}
+.pkg-toggle{display:flex;gap:3px;background:var(--gray-100);border-radius:6px;padding:3px;width:fit-content;margin-top:2px}
+.pkg-btn{padding:4px 14px;border-radius:4px;border:none;background:transparent;font-size:12px;font-family:var(--font-heading);font-weight:500;cursor:pointer;color:var(--muted);transition:all .15s}
+.pkg-btn.active{background:var(--white);color:var(--text);box-shadow:0 1px 3px rgba(0,0,0,.1)}
+.setup-key-box{background:var(--gray-50);border:1px solid var(--border);border-radius:8px;padding:12px 14px;font-family:var(--font-heading);font-size:12px}
 /* ── Metrics empty state ── */
 .metrics-empty{display:flex;flex-direction:column;align-items:center;text-align:center;padding:48px 24px 32px}
 .metrics-empty-icon{margin-bottom:24px;opacity:.85}
@@ -1748,34 +1764,75 @@ img.ico{display:block;flex:0 0 auto}
   </div>
   <div class="divider"></div>
   <div class="ca">
-    <div class="ecard">
-      <div class="illus">
-        <svg width="56" height="56" viewBox="0 0 56 56" fill="none">
-          <rect x="8" y="16" width="40" height="24" rx="4" stroke="var(--gray-400)" stroke-width="1.4"/>
-          <circle cx="20" cy="28" r="6" stroke="var(--gray-400)" stroke-width="1.3"/>
-          <circle cx="20" cy="28" r="2" fill="var(--gray-400)" opacity=".3"/>
-          <line x1="26" y1="28" x2="42" y2="28" stroke="var(--gray-400)" stroke-width="1.3" stroke-linecap="round"/>
-          <line x1="34" y1="24" x2="34" y2="32" stroke="var(--gray-400)" stroke-width="1.3" stroke-linecap="round" opacity=".4"/>
-          <line x1="38" y1="24" x2="38" y2="32" stroke="var(--gray-400)" stroke-width="1.3" stroke-linecap="round" opacity=".4"/>
-        </svg>
-      </div>
-      <div class="etxt">
-        <div class="ecat">Access</div>
-        <div class="etitle">No API keys yet</div>
-        <div class="edesc">Generate an API key for programmatic access to the Crusoe CLI, Terraform provider, and SDKs. The secret is shown once — store it securely.</div>
-      </div>
+    <div style="margin-bottom:24px">
+      <div style="font-size:15px;font-weight:600;font-family:var(--font-body);color:var(--text);margin-bottom:4px">Get started with the Crusoe CLI</div>
+      <div style="font-size:13px;color:var(--muted);font-family:var(--font-body)">Follow these steps to connect the CLI to your account. Takes about 2 minutes.</div>
     </div>
-    <div class="action-cards action-cards-2col">
-      <div class="action-card">
-        <div class="action-card-title">Documentation</div>
-        <div class="action-card-desc">Create your first API key — the secret is shown once, so store it in your password manager. Scope keys to a single project and rotate every 90 days.</div>
-        <a class="btn btn-o" href="https://docs.crusoecloud.com/development-tools/api/generating-api-keys" style="margin-top:auto">API key docs →</a>
+    <div class="setup-flow">
+
+      <!-- Step 1: Generate API key -->
+      <div class="setup-step active" id="api-step-1">
+        <div class="setup-step-num" id="api-num-1">1</div>
+        <div class="setup-step-body">
+          <div class="setup-step-title">Generate an API key</div>
+          <div class="setup-step-desc">Your API key gives the CLI and SDKs access to your Crusoe account. The secret is shown once — store it in a password manager.</div>
+          <div id="api-step-1-cta">
+            <button class="btn btn-p btn-sm" onclick="apiKeyCreated()" style="width:fit-content">Create Cloud API Key</button>
+          </div>
+          <div id="api-step-1-done" style="display:none">
+            <div class="setup-key-box">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+                <span style="font-weight:600;color:var(--text);font-size:13px">my-api-key</span>
+                <span style="font-size:11px;color:var(--muted)">Created just now</span>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:6px">
+                <div style="display:flex;gap:10px;align-items:center">
+                  <span style="color:var(--muted);font-size:11px;min-width:40px;font-family:var(--font-body)">Key ID</span>
+                  <code style="font-size:11px;color:var(--text);background:none">ak_7f3a2b19c4d8…</code>
+                  <button class="cli-snippet-copy" style="font-size:10px;padding:2px 8px" onclick="copySnippet(this,'ak_7f3a2b19c4d8')">Copy</button>
+                </div>
+                <div style="display:flex;gap:10px;align-items:center">
+                  <span style="color:var(--muted);font-size:11px;min-width:40px;font-family:var(--font-body)">Secret</span>
+                  <code style="font-size:11px;color:var(--text);background:none">cs_••••••••••••••••••••</code>
+                  <span style="font-size:10px;color:#16a34a;font-weight:500;font-family:var(--font-body)">Copy now — shown once</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="action-card">
-        <div class="action-card-title">CLI setup</div>
-        <div class="action-card-desc" style="font-size:12px;color:var(--muted);margin-bottom:4px">Configure the Crusoe CLI with your API key:</div>
-        <div class="action-card-cli"><code>crusoe init</code><button class="cli-snippet-copy">Copy</button></div>
+
+      <div class="setup-connector"></div>
+
+      <!-- Step 2: Install CLI -->
+      <div class="setup-step locked" id="api-step-2">
+        <div class="setup-step-num" id="api-num-2">2</div>
+        <div class="setup-step-body">
+          <div class="setup-step-title">Install the Crusoe CLI</div>
+          <div class="setup-step-desc">Install the CLI to manage VMs, storage, and reservations from your terminal.</div>
+          <div class="pkg-toggle">
+            <button class="pkg-btn active" onclick="setPkg('pip')">pip</button>
+            <button class="pkg-btn" onclick="setPkg('brew')">brew</button>
+          </div>
+          <div id="pkg-pip" class="action-card-cli" style="display:flex;align-items:center;justify-content:space-between"><code>pip install crusoe</code><button class="cli-snippet-copy" onclick="copySnippet(this,'pip install crusoe')">Copy</button></div>
+          <div id="pkg-brew" class="action-card-cli" style="display:none;align-items:center;justify-content:space-between"><code>brew install crusoe-cloud/tap/crusoe</code><button class="cli-snippet-copy" onclick="copySnippet(this,'brew install crusoe-cloud/tap/crusoe')">Copy</button></div>
+          <button class="btn btn-o btn-sm" style="margin-top:4px;width:fit-content" onclick="cliInstalled()">I've installed it →</button>
+        </div>
       </div>
+
+      <div class="setup-connector"></div>
+
+      <!-- Step 3: Configure -->
+      <div class="setup-step locked" id="api-step-3">
+        <div class="setup-step-num" id="api-num-3">3</div>
+        <div class="setup-step-body">
+          <div class="setup-step-title">Configure the CLI</div>
+          <div class="setup-step-desc">Run <code style="font-size:12px;background:var(--gray-100);padding:1px 5px;border-radius:3px;font-family:var(--mono)">crusoe init</code> and paste your API key ID and secret when prompted. You're ready to deploy.</div>
+          <div class="action-card-cli" style="display:flex;align-items:center;justify-content:space-between"><code>crusoe init</code><button class="cli-snippet-copy" onclick="copySnippet(this,'crusoe init')">Copy</button></div>
+          <a href="https://docs.crusoecloud.com/development-tools/api/generating-api-keys" style="font-size:12px;color:var(--muted);font-family:var(--font-body);margin-top:2px">API key docs →</a>
+        </div>
+      </div>
+
     </div>
   </div>
 </div>
@@ -2484,6 +2541,44 @@ function toggleDiskState(state) {
   document.querySelectorAll('#view-disks .state-toggle-btn').forEach((b,i) => {
     b.classList.toggle('active', (i===0 && state==='empty') || (i===1 && state==='filled'));
   });
+}
+
+// ── API key setup flow ──
+function apiKeyCreated() {
+  document.getElementById('api-step-1-cta').style.display = 'none';
+  document.getElementById('api-step-1-done').style.display = '';
+  const s1 = document.getElementById('api-step-1');
+  s1.classList.remove('active');
+  s1.classList.add('done');
+  const s2 = document.getElementById('api-step-2');
+  s2.classList.remove('locked');
+  s2.classList.add('active');
+}
+
+function cliInstalled() {
+  const s2 = document.getElementById('api-step-2');
+  s2.classList.remove('active');
+  s2.classList.add('done');
+  const s3 = document.getElementById('api-step-3');
+  s3.classList.remove('locked');
+  s3.classList.add('active');
+}
+
+function setPkg(pkg) {
+  document.getElementById('pkg-pip').style.display = pkg === 'pip' ? 'flex' : 'none';
+  document.getElementById('pkg-brew').style.display = pkg === 'brew' ? 'flex' : 'none';
+  document.querySelectorAll('.pkg-btn').forEach((b, i) => {
+    b.classList.toggle('active', (i === 0 && pkg === 'pip') || (i === 1 && pkg === 'brew'));
+  });
+}
+
+function copySnippet(btn, text) {
+  navigator.clipboard.writeText(text).then(() => {
+    const orig = btn.innerHTML;
+    btn.innerHTML = '✓ Copied';
+    btn.style.color = '#16a34a';
+    setTimeout(() => { btn.innerHTML = orig; btn.style.color = ''; }, 1500);
+  }).catch(() => {});
 }
 
 // ── Init ──
