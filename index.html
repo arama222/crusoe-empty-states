@@ -501,7 +501,7 @@ img.ico{display:block;flex:0 0 auto}
 /* ── Filled reservation cards — hover-expand, no layout shift ── */
 .filled-res-card{transition:border-color .18s,box-shadow .18s}
 .filled-res-card.open{border-color:var(--gray-300)!important;box-shadow:0 4px 16px rgba(0,0,0,.08)!important}
-.filled-res-expand{max-height:0;overflow:hidden;padding:0 20px;font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:155%;transition:max-height .28s ease,padding .28s ease,opacity .2s ease;opacity:0}
+.filled-res-expand{max-height:0;overflow:hidden;padding:0 20px;font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:155%;opacity:0}
 .filled-res-card.open .filled-res-expand{max-height:120px;padding:10px 20px 14px;opacity:1}
 </style>
 </head>
@@ -2670,13 +2670,31 @@ const RES_CLI = {
 // ── Filled reservation cards: one-open-at-a-time expand ──
 (function() {
   function initFilledCards() {
-    const cards = document.querySelectorAll('#instances-filled .filled-res-card');
+    const cards = [...document.querySelectorAll('#instances-filled .filled-res-card')];
     cards.forEach(card => {
+      const exp = card.querySelector('.filled-res-expand');
       card.addEventListener('mouseenter', () => {
-        cards.forEach(c => c.classList.remove('open'));
+        // Instantly snap closed every other card (no animation)
+        cards.forEach(c => {
+          if (c !== card) {
+            const e = c.querySelector('.filled-res-expand');
+            e.style.transition = 'none';
+            e.style.maxHeight = '0';
+            e.style.padding = '0 20px';
+            e.style.opacity = '0';
+            c.classList.remove('open');
+          }
+        });
+        // Smooth-open this card
+        exp.style.transition = 'max-height .28s ease, padding .28s ease, opacity .2s ease';
         card.classList.add('open');
       });
       card.addEventListener('mouseleave', () => {
+        // Instant close on leave
+        exp.style.transition = 'none';
+        exp.style.maxHeight = '0';
+        exp.style.padding = '0 20px';
+        exp.style.opacity = '0';
         card.classList.remove('open');
       });
     });
