@@ -157,8 +157,11 @@ html,body{height:100%;background:var(--white);color:var(--black);font-family:'Su
 
 /* ── Toggle ── */
 .tog-wrap{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:500;font-family:var(--font-body);line-height:130%}
-.tog{width:36px;height:20px;background:var(--green-600);border-radius:10px;position:relative;cursor:pointer;flex-shrink:0}
-.tog::after{content:'';position:absolute;width:16px;height:16px;background:var(--white);border-radius:50%;top:2px;right:2px}
+.tog{width:36px;height:20px;background:var(--green-600);border-radius:10px;position:relative;cursor:pointer;flex-shrink:0;transition:background .3s}
+.tog::after{content:'';position:absolute;width:16px;height:16px;background:var(--white);border-radius:50%;top:2px;right:2px;transition:left .25s,right .25s}
+.tog.off{background:var(--gray-300)}
+.tog.off::after{right:auto;left:2px}
+.tog.stopping{background:#f59e0b}
 
 /* ── Tabs ── */
 .tabs-bar{display:flex;align-items:center;border-bottom:1px solid var(--gray-400);padding:0 12px}
@@ -1518,8 +1521,8 @@ img.ico{display:block;flex:0 0 auto}
       <svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15,18 9,12 15,6"/></svg>
     </div>
     <div class="dph-title">np-9cef4f52-2</div>
-    <span class="badge-green" style="margin-left:4px">Running</span>
-    <div class="tog-wrap" style="margin-left:8px"><div class="tog"></div><span>Stop VM</span></div>
+    <span class="badge-green" id="vm-status-badge" style="margin-left:4px">Running</span>
+    <div class="tog-wrap" style="margin-left:8px;cursor:pointer" onclick="toggleVmStop()"><div class="tog" id="vm-stop-tog"></div><span id="vm-stop-label">Stop VM</span></div>
     <div class="dph-r">
       <div class="menu-btn">
         <svg class="ico" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg>
@@ -2541,6 +2544,38 @@ function toggleDiskState(state) {
   document.querySelectorAll('#view-disks .state-toggle-btn').forEach((b,i) => {
     b.classList.toggle('active', (i===0 && state==='empty') || (i===1 && state==='filled'));
   });
+}
+
+// ── Stop VM toggle ──
+function toggleVmStop() {
+  const tog = document.getElementById('vm-stop-tog');
+  const badge = document.getElementById('vm-status-badge');
+  const label = document.getElementById('vm-stop-label');
+  if (!tog || !badge || !label) return;
+
+  if (tog.classList.contains('off')) {
+    // Start VM
+    tog.classList.remove('off');
+    badge.className = 'badge-green';
+    badge.style.cssText = 'margin-left:4px';
+    badge.textContent = 'Running';
+    label.textContent = 'Stop VM';
+  } else {
+    // → Stopping
+    tog.classList.add('stopping');
+    badge.className = 'badge-outline';
+    badge.style.cssText = 'margin-left:4px;background:#fffbeb;color:#92400e;border-color:#fcd34d';
+    badge.textContent = 'Stopping…';
+    label.textContent = 'Starting…';
+    setTimeout(() => {
+      // → Stopped
+      tog.classList.remove('stopping');
+      tog.classList.add('off');
+      badge.style.cssText = 'margin-left:4px;background:var(--gray-50);color:var(--gray-600);border-color:var(--gray-300)';
+      badge.textContent = 'Stopped';
+      label.textContent = 'Start VM';
+    }, 1800);
+  }
 }
 
 // ── API key setup flow ──
