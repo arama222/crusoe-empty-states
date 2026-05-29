@@ -500,8 +500,8 @@ img.ico{display:block;flex:0 0 auto}
 .metrics-hint-card-action:hover .metrics-hint-chev{color:var(--text);transform:translateX(2px)}
 /* ── Filled reservation cards — hover-expand, no layout shift ── */
 .filled-res-card{position:relative}
-.filled-res-card:hover{border-color:var(--gray-300)!important;box-shadow:0 2px 12px rgba(0,0,0,.08)!important;border-radius:10px 10px 0 0!important;z-index:50}
-.filled-res-expand{position:absolute;top:calc(100% - 1px);left:-1px;right:-1px;background:var(--white);border:1px solid var(--gray-300);border-top:none;border-radius:0 0 10px 10px;padding:10px 20px 14px;opacity:0;pointer-events:none;transition:opacity .18s ease;z-index:60;font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:150%;box-shadow:0 8px 20px rgba(0,0,0,.07)}
+.filled-res-card:hover{border-color:var(--gray-300)!important;box-shadow:0 -2px 12px rgba(0,0,0,.08)!important;border-radius:0 0 10px 10px!important;z-index:50}
+.filled-res-expand{position:absolute;bottom:calc(100% - 1px);left:-1px;right:-1px;background:var(--white);border:1px solid var(--gray-300);border-bottom:none;border-radius:10px 10px 0 0;padding:10px 20px 14px;opacity:0;pointer-events:none;transition:opacity .18s ease;z-index:60;font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:150%;box-shadow:0 -8px 20px rgba(0,0,0,.07)}
 .filled-res-card:hover .filled-res-expand{opacity:1;pointer-events:auto}
 </style>
 </head>
@@ -1109,7 +1109,7 @@ img.ico{display:block;flex:0 0 auto}
 <!-- ── FILLED STATE ── -->
 <div id="instances-filled" style="display:none">
   <!-- Reservation cards persist at top -->
-  <div class="pop-section" style="margin-bottom:4px;position:relative;z-index:40;padding-bottom:80px">
+  <div class="pop-section" style="margin-bottom:4px;position:relative;z-index:40;padding-bottom:4px">
     <div class="pop-title">Create from your reservations</div>
     <div class="pop-grid">
       <div class="pop-card filled-res-card" style="cursor:default;display:flex;flex-direction:column;gap:0">
