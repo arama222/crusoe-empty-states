@@ -500,9 +500,9 @@ img.ico{display:block;flex:0 0 auto}
 .metrics-hint-card-action:hover .metrics-hint-chev{color:var(--text);transform:translateX(2px)}
 /* ── Filled reservation cards — hover-expand, no layout shift ── */
 .filled-res-card{transition:border-color .18s,box-shadow .18s}
-.filled-res-card:hover{border-color:var(--gray-300)!important;box-shadow:0 4px 16px rgba(0,0,0,.08)!important}
+.filled-res-card.open{border-color:var(--gray-300)!important;box-shadow:0 4px 16px rgba(0,0,0,.08)!important}
 .filled-res-expand{max-height:0;overflow:hidden;padding:0 20px;font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:155%;transition:max-height .28s ease,padding .28s ease,opacity .2s ease;opacity:0}
-.filled-res-card:hover .filled-res-expand{max-height:120px;padding:10px 20px 14px;opacity:1}
+.filled-res-card.open .filled-res-expand{max-height:120px;padding:10px 20px 14px;opacity:1}
 </style>
 </head>
 <body>
@@ -2667,6 +2667,32 @@ const RES_CLI = {
   h200: 'crusoe compute vms create \\\n  --name my-vm \\\n  --type h200-141gb.1x \\\n  --location us-northcentral1-a \\\n  --ssh-key ~/.ssh/id_rsa.pub',
   l40s: 'crusoe compute vms create \\\n  --name my-vm \\\n  --type l40s-48gb.1x \\\n  --location us-east1-a \\\n  --ssh-key ~/.ssh/id_rsa.pub'
 };
+// ── Filled reservation cards: one-open-at-a-time expand ──
+(function() {
+  function initFilledCards() {
+    const cards = document.querySelectorAll('#instances-filled .filled-res-card');
+    cards.forEach(card => {
+      card.addEventListener('mouseenter', () => {
+        cards.forEach(c => c.classList.remove('open'));
+        card.classList.add('open');
+      });
+      card.addEventListener('mouseleave', () => {
+        card.classList.remove('open');
+      });
+    });
+  }
+  // Init on load and whenever the filled tab is shown
+  const origToggle = window.toggleInstanceState;
+  window.toggleInstanceState = function(state) {
+    origToggle(state);
+    if (state === 'filled') requestAnimationFrame(initFilledCards);
+  };
+  if (document.getElementById('instances-filled') &&
+      document.getElementById('instances-filled').style.display !== 'none') {
+    initFilledCards();
+  }
+})();
+
 function copyResCli(gpu) {
   const cmd = RES_CLI[gpu] || '';
   navigator.clipboard.writeText(cmd).then(() => {
