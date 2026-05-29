@@ -1621,7 +1621,7 @@ img.ico{display:block;flex:0 0 auto}
       </div>
     </div>
     <!-- Agent banner -->
-    <div style="display:flex;align-items:center;gap:12px;padding:14px 18px;border:1px solid var(--border);border-radius:10px;margin-bottom:20px;background:var(--white)">
+    <div id="vm-agent-banner" style="display:flex;align-items:center;gap:12px;padding:14px 18px;border:1px solid var(--border);border-radius:10px;margin-bottom:20px;background:var(--white);transition:opacity .3s">
       <svg width="20" height="20" viewBox="0 0 20 20" fill="none" style="flex-shrink:0"><circle cx="10" cy="10" r="9" stroke="var(--gray-400)" stroke-width="1.3"/><path d="M10 9v5" stroke="var(--gray-400)" stroke-width="1.4" stroke-linecap="round"/><circle cx="10" cy="6.5" r="1" fill="var(--gray-400)"/></svg>
       <div style="flex:1">
         <div style="font-size:14px;font-weight:600;font-family:var(--font-body);color:var(--text)">No agent collected metrics</div>
@@ -1629,8 +1629,14 @@ img.ico{display:block;flex:0 0 auto}
       </div>
       <a class="btn btn-p btn-sm" href="https://github.com/crusoecloud/crusoe-watch-agent" target="_blank" style="text-decoration:none;white-space:nowrap;flex-shrink:0">Crusoe Watch Agent page</a>
     </div>
+    <!-- Stopped state -->
+    <div id="vm-metrics-stopped" style="display:none;border:1px solid var(--border);border-radius:10px;background:var(--white);padding:40px 24px;text-align:center;margin-bottom:16px">
+      <svg width="40" height="40" viewBox="0 0 40 40" fill="none" style="margin-bottom:12px;opacity:.35"><rect x="6" y="6" width="28" height="28" rx="5" stroke="var(--gray-600)" stroke-width="1.5"/><rect x="13" y="13" width="6" height="14" rx="2" fill="var(--gray-600)"/><rect x="21" y="13" width="6" height="14" rx="2" fill="var(--gray-600)"/></svg>
+      <div style="font-size:14px;font-weight:600;font-family:var(--font-body);color:var(--text);margin-bottom:4px">VM is stopped</div>
+      <div style="font-size:13px;color:var(--muted);font-family:var(--font-body)">No metrics are being collected. Start the VM to resume monitoring.</div>
+    </div>
     <!-- Chart grid — realistic placeholder data for H100 8x training workload -->
-    <div class="chart-grid">
+    <div class="chart-grid" id="vm-metrics-charts">
 
       <!-- TFLOPS: steady ramp-up then plateau ~1,830 -->
       <div class="chart-card">
@@ -2551,29 +2557,41 @@ function toggleVmStop() {
   const tog = document.getElementById('vm-stop-tog');
   const badge = document.getElementById('vm-status-badge');
   const label = document.getElementById('vm-stop-label');
+  const charts = document.getElementById('vm-metrics-charts');
+  const stopped = document.getElementById('vm-metrics-stopped');
+  const agentBanner = document.getElementById('vm-agent-banner');
   if (!tog || !badge || !label) return;
 
   if (tog.classList.contains('off')) {
-    // Start VM
+    // → Start VM
     tog.classList.remove('off');
     badge.className = 'badge-green';
     badge.style.cssText = 'margin-left:4px';
     badge.textContent = 'Running';
     label.textContent = 'Stop VM';
+    if (charts) charts.style.display = '';
+    if (stopped) stopped.style.display = 'none';
+    if (agentBanner) agentBanner.style.opacity = '';
   } else {
-    // → Stopping
+    // → Stopping: dim charts, amber badge
     tog.classList.add('stopping');
     badge.className = 'badge-outline';
     badge.style.cssText = 'margin-left:4px;background:#fffbeb;color:#92400e;border-color:#fcd34d';
     badge.textContent = 'Stopping…';
     label.textContent = 'Starting…';
+    if (charts) charts.style.opacity = '0.3';
+    if (agentBanner) agentBanner.style.opacity = '0.3';
+
     setTimeout(() => {
-      // → Stopped
+      // → Stopped: hide charts, show stopped card
       tog.classList.remove('stopping');
       tog.classList.add('off');
       badge.style.cssText = 'margin-left:4px;background:var(--gray-50);color:var(--gray-600);border-color:var(--gray-300)';
       badge.textContent = 'Stopped';
       label.textContent = 'Start VM';
+      if (charts) { charts.style.opacity = ''; charts.style.display = 'none'; }
+      if (stopped) stopped.style.display = '';
+      if (agentBanner) agentBanner.style.opacity = '0.4';
     }, 1800);
   }
 }
