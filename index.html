@@ -213,7 +213,7 @@ html,body{height:100%;background:var(--white);color:var(--black);font-family:'Su
 .spicy-reveal.is-visible{opacity:1;transform:none}
 /* ── Scroll hint ── */
 @keyframes scroll-bounce{0%,100%{transform:translateY(0);opacity:.5}50%{transform:translateY(6px);opacity:1}}
-.scroll-hint{display:flex;flex-direction:column;align-items:center;gap:5px;pointer-events:none;transition:opacity .4s ease;margin-top:-48px;margin-bottom:16px;position:relative;z-index:2}
+.scroll-hint{display:flex;flex-direction:column;align-items:center;gap:5px;pointer-events:none;transition:opacity .4s ease;z-index:3}
 .scroll-hint.hidden{opacity:0}
 .scroll-hint-chevron{animation:scroll-bounce 1.6s ease-in-out infinite}
 .scroll-hint-label{font-size:10px;font-weight:500;letter-spacing:.07em;text-transform:uppercase;font-family:var(--font-body);color:var(--muted);opacity:.7}
@@ -1024,15 +1024,13 @@ img.ico{display:block;flex:0 0 auto}
 <!-- ── SPICY (Motion-forward) ── -->
 <div id="instances-spicy" style="display:none">
   <!-- Motion hero — light bg -->
-  <div id="spicy-hero" style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:56px 40px 48px;text-align:center;position:relative;overflow:hidden;background:var(--white)">
+  <div id="spicy-hero" style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:56px 40px 64px;text-align:center;position:relative;overflow:hidden;background:var(--white)">
     <!-- Subtle dot grid -->
-    <div style="position:absolute;inset:0;background-image:radial-gradient(circle,rgba(0,0,0,.055) 1px,transparent 1px);background-size:28px 28px;pointer-events:none"></div>
-    <!-- Scan line (dark) -->
-    <div style="position:absolute;left:0;right:0;height:56px;background:linear-gradient(transparent,rgba(0,0,0,.04),transparent);animation:scan-line 4.5s linear infinite;pointer-events:none;z-index:0;top:-56px"></div>
-    <!-- Illustration + particle canvas -->
+    <div style="position:absolute;inset:0;background-image:radial-gradient(circle,rgba(0,0,0,.055) 1px,transparent 1px);background-size:28px 28px;pointer-events:none;z-index:0"></div>
+    <!-- Horizontal wave canvas (replaces scan line) -->
+    <canvas id="spicy-wave-canvas" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0"></canvas>
+    <!-- Illustration (no particle canvas) -->
     <div id="spicy-cube-wrap" style="display:flex;align-items:center;justify-content:center;margin-bottom:32px;z-index:1;position:relative">
-      <!-- Particle canvas behind cube -->
-      <canvas id="spicy-particles" width="300" height="260" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);pointer-events:none;z-index:0"></canvas>
       <!-- SVG node ripple overlay -->
       <svg id="spicy-node-ripples" width="300" height="260" viewBox="0 0 300 260" fill="none" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);pointer-events:none;z-index:2;overflow:visible"></svg>
         <svg id="spicy-cube" width="160" height="156" viewBox="0 0 154.556 151" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:relative;z-index:1">
@@ -1065,13 +1063,13 @@ img.ico{display:block;flex:0 0 auto}
       </button>
       <a class="btn btn-o" href="https://docs.crusoecloud.com/compute/virtual-machines" target="_blank" style="text-decoration:none;height:44px;padding:0 20px;font-size:14px;border-radius:12px">View docs →</a>
     </div>
-  </div>
-  <!-- Scroll hint (outside hero so overflow:hidden doesn't clip it) -->
-  <div class="scroll-hint" id="spicy-scroll-hint" aria-hidden="true">
-    <span class="scroll-hint-label">Scroll</span>
-    <span class="scroll-hint-chevron">
-      <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4 6.5l5 5 5-5" stroke="var(--gray-400)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </span>
+    <!-- Scroll hint — absolute bottom of hero -->
+    <div class="scroll-hint" id="spicy-scroll-hint" aria-hidden="true" style="position:absolute;bottom:14px;left:50%;transform:translateX(-50%)">
+      <span class="scroll-hint-label">Scroll</span>
+      <span class="scroll-hint-chevron">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4 6.5l5 5 5-5" stroke="var(--gray-400)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+    </div>
   </div>
   <!-- Info ecard -->
   <div class="ecard spicy-reveal" style="margin-top:24px">
@@ -2527,12 +2525,9 @@ function initSpicyMagic() {
       c.style.transition='opacity .3s ease, transform .45s cubic-bezier(.34,1.56,.64,1)';
       c.style.opacity='1'; c.style.transform='scale(1)';
     }, circleDelay + i*120));
-    // Float + glitch loop start after draw-in
+    // Glitch loop start after draw-in
     const doneAt = paths.length*65 + 1050;
-    setTimeout(() => {
-      svg.style.animation='cube-float 4.8s ease-in-out infinite';
-      scheduleGlitch();
-    }, doneAt);
+    setTimeout(scheduleGlitch, doneAt);
     // Node ripple pulses after circles appear
     setTimeout(startNodeRipples, circleDelay + 400);
   });
@@ -2562,34 +2557,8 @@ function initSpicyMagic() {
     setTimeout(typeNext, 320);
   }
 
-  // ── 3. Particle canvas ──
-  const canvas = document.getElementById('spicy-particles');
-  if (canvas) {
-    if (window._spicyParticleRaf) cancelAnimationFrame(window._spicyParticleRaf);
-    const ctx = canvas.getContext('2d');
-    const W = canvas.width, H = canvas.height;
-    const parts = [];
-    const cx = W/2, cy = H/2 + 20;
-    function spawn() {
-      parts.push({ x: cx+(Math.random()-.5)*110, y: cy+(Math.random()-.5)*55,
-        vx:(Math.random()-.5)*.45, vy:-.35-Math.random()*.55,
-        life:0, maxLife:65+Math.random()*55, r:.5+Math.random()*1.1 });
-    }
-    function tick() {
-      ctx.clearRect(0,0,W,H);
-      if(Math.random()<.13) spawn();
-      for(let i=parts.length-1;i>=0;i--){
-        const p=parts[i]; p.x+=p.vx; p.y+=p.vy; p.life++;
-        if(p.life>p.maxLife){parts.splice(i,1);continue;}
-        const t=p.life/p.maxLife;
-        const a=(t<.2?t/.2:t>.7?(1-t)/.3:1)*.38;
-        ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-        ctx.fillStyle=`rgba(0,0,0,${a})`; ctx.fill();
-      }
-      window._spicyParticleRaf = requestAnimationFrame(tick);
-    }
-    tick();
-  }
+  // ── 3. Horizontal wave background canvas ──
+  initSpicyWaves();
 
   // ── 4. Node ripples (SVG circles at known positions) ──
   // Circle 1 at SVG coords (9.02,98.58) → scaled to 160px wide in 300×260 canvas
@@ -2652,11 +2621,53 @@ function initSpicyMagic() {
       const s = document.getElementById('spicy-cube');
       if (!s || !document.getElementById('instances-spicy') ||
           document.getElementById('instances-spicy').style.display === 'none') return;
-      s.style.animation = 'cube-glitch-run .28s steps(1) forwards, cube-float 4.8s ease-in-out infinite';
-      setTimeout(() => { if(s) s.style.animation='cube-float 4.8s ease-in-out infinite'; }, 280);
+      s.style.animation = 'cube-glitch-run .28s steps(1) forwards';
+      setTimeout(() => { if(s) s.style.animation='none'; }, 300);
       scheduleGlitch();
     }, 7000 + Math.random()*8000);
   }
+}
+
+// ── Spicy: horizontal sine-wave background ──
+function initSpicyWaves() {
+  const canvas = document.getElementById('spicy-wave-canvas');
+  if (!canvas) return;
+  if (window._spicyWaveRaf) cancelAnimationFrame(window._spicyWaveRaf);
+  const hero = document.getElementById('spicy-hero');
+  const setSize = () => {
+    const r = hero.getBoundingClientRect();
+    canvas.width  = r.width  || 900;
+    canvas.height = r.height || 440;
+  };
+  setSize();
+  const ctx = canvas.getContext('2d');
+  const waves = [
+    { yFrac:.16, amp:8,  period:300, phase:0.0,  opacity:.038 },
+    { yFrac:.30, amp:5,  period:220, phase:1.2,  opacity:.028 },
+    { yFrac:.50, amp:11, period:360, phase:2.5,  opacity:.034 },
+    { yFrac:.66, amp:6,  period:250, phase:0.7,  opacity:.026 },
+    { yFrac:.82, amp:9,  period:320, phase:3.8,  opacity:.036 },
+  ];
+  let t = 0;
+  function draw() {
+    const W = canvas.width, H = canvas.height;
+    ctx.clearRect(0, 0, W, H);
+    waves.forEach(w => {
+      const y0 = w.yFrac * H;
+      ctx.beginPath();
+      ctx.strokeStyle = `rgba(0,0,0,${w.opacity})`;
+      ctx.lineWidth = 1;
+      let first = true;
+      for (let x = 0; x <= W; x += 3) {
+        const y = y0 + w.amp * Math.sin((x / w.period) * Math.PI * 2 + w.phase + t * 0.009);
+        if (first) { ctx.moveTo(x, y); first = false; } else ctx.lineTo(x, y);
+      }
+      ctx.stroke();
+    });
+    t++;
+    window._spicyWaveRaf = requestAnimationFrame(draw);
+  }
+  draw();
 }
 
 function toggleAvatarDd() {
