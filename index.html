@@ -555,8 +555,8 @@ img.ico{display:block;flex:0 0 auto}
     <div class="ph-l">
       <div class="ph-title-sans">Instances</div>
       <div class="state-toggle">
-        <button class="state-toggle-btn active" onclick="toggleInstanceState('mild')">Mild</button>
-        <button class="state-toggle-btn" onclick="toggleInstanceState('medium')">Medium</button>
+        <button class="state-toggle-btn active" onclick="toggleInstanceState('medium')">Mild</button>
+        <button class="state-toggle-btn" onclick="toggleInstanceState('mild')">Medium</button>
         <button class="state-toggle-btn" onclick="toggleInstanceState('spicy')">Spicy</button>
         <button class="state-toggle-btn" onclick="toggleInstanceState('filled')">Filled</button>
         <button class="state-toggle-btn" onclick="toggleInstanceState('edge')">Edge cases</button>
@@ -567,7 +567,7 @@ img.ico{display:block;flex:0 0 auto}
   <div class="divider"></div>
   <div class="ca">
     <!-- ── MEDIUM (Informational) ── -->
-<div id="instances-medium" style="display:none">
+<div id="instances-medium">
   <!-- Empty state hero -->
   <div class="ecard">
     <div class="illus">
@@ -953,7 +953,7 @@ img.ico{display:block;flex:0 0 auto}
 </div><!-- /instances-edge -->
 
 <!-- ── MILD (Delightful) ── -->
-<div id="instances-mild">
+<div id="instances-mild" style="display:none">
   <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 40px 32px;text-align:center;position:relative;overflow:hidden">
     <!-- Soft radial gradient bg -->
     <div style="position:absolute;inset:0;background:radial-gradient(ellipse 75% 65% at 50% 36%,var(--gray-50) 0%,transparent 70%);pointer-events:none"></div>
@@ -2441,7 +2441,7 @@ function toggleInstanceState(state) {
     if (el) el.style.display = s === state ? '' : 'none';
   });
   const btns = document.querySelectorAll('#view-instances .state-toggle-btn');
-  btns.forEach((b, i) => b.classList.toggle('active', ['mild','medium','spicy','filled','edge'][i] === state));
+  btns.forEach((b, i) => b.classList.toggle('active', ['medium','mild','spicy','filled','edge'][i] === state));
   document.querySelector('.main').scrollTop = 0;
 }
 function toggleEdgeState(n) {
