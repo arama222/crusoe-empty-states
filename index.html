@@ -254,6 +254,12 @@ html,body{height:100%;background:var(--white);color:var(--black);font-family:'Su
 /* ── Spicy scroll-reveal ── */
 .spicy-reveal{opacity:0;transform:translateY(14px);transition:opacity .5s ease,transform .5s ease}
 .spicy-reveal.is-visible{opacity:1;transform:none}
+/* ── Scroll hint ── */
+@keyframes scroll-bounce{0%,100%{transform:translateY(0);opacity:.5}50%{transform:translateY(6px);opacity:1}}
+.scroll-hint{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:5px;pointer-events:none;transition:opacity .4s ease}
+.scroll-hint.hidden{opacity:0}
+.scroll-hint-chevron{animation:scroll-bounce 1.6s ease-in-out infinite}
+.scroll-hint-label{font-size:10px;font-weight:500;letter-spacing:.07em;text-transform:uppercase;font-family:var(--font-body);color:var(--muted);opacity:.7}
 @keyframes divider-shimmer{0%{background-position:200% center}100%{background-position:-200% center}}
 @keyframes divider-text-pulse{0%,100%{opacity:.45}50%{opacity:.75}}
 .res-divider-line{flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--gray-300),var(--gray-400),var(--gray-300),transparent);background-size:200% 100%;animation:divider-shimmer 3.5s ease-in-out infinite}
@@ -821,6 +827,13 @@ img.ico{display:block;flex:0 0 auto}
         Create instance
       </button>
       <a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/compute/virtual-machines" target="_blank" style="text-decoration:none">View docs →</a>
+    </div>
+    <!-- Scroll hint -->
+    <div class="scroll-hint" id="spicy-scroll-hint" aria-hidden="true">
+      <span class="scroll-hint-label">Scroll</span>
+      <span class="scroll-hint-chevron">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4 6.5l5 5 5-5" stroke="var(--gray-400)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
     </div>
   </div>
   <!-- Info ecard -->
@@ -2678,14 +2691,28 @@ function toggleInstanceState(state) {
       io.observe(el);
     });
   }
+  // ── Scroll hint show/hide ──
+  function initScrollHint() {
+    const hint = document.getElementById('spicy-scroll-hint');
+    if (!hint) return;
+    hint.classList.remove('hidden');
+    const scroller = document.querySelector('.main') || document.documentElement;
+    function onScroll() {
+      if (scroller.scrollTop > 30) {
+        hint.classList.add('hidden');
+        scroller.removeEventListener('scroll', onScroll);
+      }
+    }
+    scroller.addEventListener('scroll', onScroll, { passive: true });
+  }
   // Re-run whenever spicy tab is shown
   const origToggle = window.toggleInstanceState;
   window.toggleInstanceState = function(state) {
     origToggle(state);
-    if(state === 'spicy') requestAnimationFrame(initSpicyReveal);
+    if(state === 'spicy') { requestAnimationFrame(initSpicyReveal); requestAnimationFrame(initScrollHint); }
   };
   // Init if spicy is already active on load
-  if(document.getElementById('instances-spicy') && document.getElementById('instances-spicy').style.display !== 'none') initSpicyReveal();
+  if(document.getElementById('instances-spicy') && document.getElementById('instances-spicy').style.display !== 'none') { initSpicyReveal(); initScrollHint(); }
 })();
 
 function toggleAvatarDd() {
