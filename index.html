@@ -529,7 +529,10 @@ img.ico{display:block;flex:0 0 auto}
 .pop-card-reveal{max-height:0;overflow:hidden;opacity:0;transition:max-height .3s ease,opacity .25s ease,margin .25s ease;margin-top:0}
 .pop-card:hover .pop-card-reveal{max-height:120px;opacity:1;margin-top:12px}
 .pop-card-desc{font-size:13px;color:var(--muted);font-family:var(--font-body);line-height:150%;margin-bottom:10px}
-.pop-card-tags{display:flex;gap:6px}
+.pop-card-tags{display:flex;flex-direction:column;gap:2px}
+.pop-tag-title{font-size:13px;font-weight:600;font-family:var(--font-body);color:var(--text)}
+.pop-tag-sub{font-size:12px;font-family:var(--font-body);color:var(--muted)}
+/* legacy pill style kept for non-reservation uses */
 .pop-tag{font-size:11px;font-weight:500;font-family:var(--font-body);padding:2px 8px;border-radius:4px;background:var(--gray-50);color:var(--gray-700);border:1px solid var(--gray-200)}
 .pop-alt{display:flex;align-items:center;gap:16px;margin-top:20px;margin-bottom:8px}
 .pop-alt::before,.pop-alt::after{content:'';flex:1;height:1px;background:var(--gray-200)}
@@ -641,7 +644,7 @@ img.ico{display:block;flex:0 0 auto}
           <div class="pop-card-info"><div class="pop-card-name">H100 80GB SXM</div><div class="pop-card-price">6 of 32 GPUs available</div></div>
         </div>
         <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:150%;margin-bottom:10px">State-of-the-art training &amp; inference. 80 GB HBM3 with NVLink + InfiniBand for multi-node runs. Best for LLM training, RLHF, and fine-tuning.</div>
-        <div class="pop-card-tags" style="margin-bottom:12px"><span class="pop-tag">H100</span><span class="pop-tag">Training</span><span class="pop-tag">Multi-node</span></div>
+        <div class="pop-card-tags" style="margin-bottom:12px"><span class="pop-tag-title">H100</span><span class="pop-tag-sub">Training · Multi-node</span></div>
         <div style="display:flex;gap:6px;margin-top:auto"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create instance</button><button class="btn btn-o btn-sm" onclick="copyResCli('h100')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
       </div>
       <!-- H200 card -->
@@ -651,7 +654,7 @@ img.ico{display:block;flex:0 0 auto}
           <div class="pop-card-info"><div class="pop-card-name">H200 141GB</div><div class="pop-card-price">16 of 16 GPUs available</div></div>
         </div>
         <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:150%;margin-bottom:10px">Largest memory for massive models. 141 GB HBM3e — ideal for 70B+ parameter inference, long-context workloads, and MoE architectures.</div>
-        <div class="pop-card-tags" style="margin-bottom:12px"><span class="pop-tag">H200</span><span class="pop-tag">Inference</span><span class="pop-tag">Large models</span></div>
+        <div class="pop-card-tags" style="margin-bottom:12px"><span class="pop-tag-title">H200</span><span class="pop-tag-sub">Inference · Large models</span></div>
         <div style="display:flex;gap:6px;margin-top:auto"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create instance</button><button class="btn btn-o btn-sm" onclick="copyResCli('h200')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
       </div>
       <!-- L40S card -->
@@ -661,7 +664,7 @@ img.ico{display:block;flex:0 0 auto}
           <div class="pop-card-info"><div class="pop-card-name">L40S 48GB</div><div class="pop-card-price">4 of 8 GPUs available</div></div>
         </div>
         <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:150%;margin-bottom:10px">Cost-efficient inference &amp; fine-tuning. 48 GB GDDR6, great for model serving, small-scale training, and multi-modal workloads.</div>
-        <div class="pop-card-tags" style="margin-bottom:12px"><span class="pop-tag">L40S</span><span class="pop-tag">Inference</span><span class="pop-tag">Fine-tuning</span></div>
+        <div class="pop-card-tags" style="margin-bottom:12px"><span class="pop-tag-title">L40S</span><span class="pop-tag-sub">Inference · Fine-tuning</span></div>
         <div style="display:flex;gap:6px;margin-top:auto"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create instance</button><button class="btn btn-o btn-sm" onclick="copyResCli('l40s')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
       </div>
     </div>
@@ -759,19 +762,19 @@ img.ico{display:block;flex:0 0 auto}
     <div class="pop-card" style="cursor:default;display:flex;flex-direction:column;gap:0">
       <div class="pop-card-top" style="margin-bottom:10px"><div class="pop-icon"><svg width="26" height="26" viewBox="0 0 28 28" fill="none"><rect x="2" y="6" width="24" height="16" rx="3" stroke="var(--gray-800)" stroke-width="1.4"/><rect x="6" y="10" width="6" height="6" rx="1" fill="var(--gray-800)" opacity=".12"/><rect x="16" y="10" width="6" height="6" rx="1" fill="var(--gray-800)" opacity=".12"/><line x1="8" y1="22" x2="20" y2="22" stroke="var(--gray-800)" stroke-width="1.4"/></svg></div><div class="pop-card-info"><div class="pop-card-name">H100 80GB SXM</div><div class="pop-card-price">6 of 32 GPUs available</div></div></div>
       <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:150%;margin-bottom:10px">State-of-the-art training &amp; inference. 80 GB HBM3 with NVLink + InfiniBand for multi-node runs.</div>
-      <div class="pop-card-tags" style="margin-bottom:12px"><span class="pop-tag">H100</span><span class="pop-tag">Training</span><span class="pop-tag">Multi-node</span></div>
+      <div class="pop-card-tags" style="margin-bottom:12px"><span class="pop-tag-title">H100</span><span class="pop-tag-sub">Training · Multi-node</span></div>
       <div style="display:flex;gap:6px;margin-top:auto"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create instance</button><button class="btn btn-o btn-sm" onclick="copyResCli('h100')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
     </div>
     <div class="pop-card" style="cursor:default;display:flex;flex-direction:column;gap:0">
       <div class="pop-card-top" style="margin-bottom:10px"><div class="pop-icon"><svg width="26" height="26" viewBox="0 0 28 28" fill="none"><rect x="2" y="6" width="24" height="16" rx="3" stroke="var(--gray-800)" stroke-width="1.4"/><rect x="6" y="10" width="6" height="6" rx="1" fill="var(--gray-800)" opacity=".12"/><rect x="16" y="10" width="6" height="6" rx="1" fill="var(--gray-800)" opacity=".12"/><line x1="8" y1="22" x2="20" y2="22" stroke="var(--gray-800)" stroke-width="1.4"/></svg></div><div class="pop-card-info"><div class="pop-card-name">H200 141GB</div><div class="pop-card-price">16 of 16 GPUs available</div></div></div>
       <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:150%;margin-bottom:10px">Largest memory for massive models. 141 GB HBM3e — ideal for 70B+ inference and long-context workloads.</div>
-      <div class="pop-card-tags" style="margin-bottom:12px"><span class="pop-tag">H200</span><span class="pop-tag">Inference</span><span class="pop-tag">Large models</span></div>
+      <div class="pop-card-tags" style="margin-bottom:12px"><span class="pop-tag-title">H200</span><span class="pop-tag-sub">Inference · Large models</span></div>
       <div style="display:flex;gap:6px;margin-top:auto"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create instance</button><button class="btn btn-o btn-sm" onclick="copyResCli('h200')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
     </div>
     <div class="pop-card" style="cursor:default;display:flex;flex-direction:column;gap:0">
       <div class="pop-card-top" style="margin-bottom:10px"><div class="pop-icon"><svg width="26" height="26" viewBox="0 0 28 28" fill="none"><rect x="2" y="6" width="24" height="16" rx="3" stroke="var(--gray-800)" stroke-width="1.4"/><rect x="8" y="10" width="12" height="8" rx="1.5" fill="var(--gray-800)" opacity=".08" stroke="var(--gray-700)" stroke-width="1"/></svg></div><div class="pop-card-info"><div class="pop-card-name">L40S 48GB</div><div class="pop-card-price">4 of 8 GPUs available</div></div></div>
       <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:150%;margin-bottom:10px">Cost-efficient inference &amp; fine-tuning. 48 GB GDDR6, great for serving and small-scale training.</div>
-      <div class="pop-card-tags" style="margin-bottom:12px"><span class="pop-tag">L40S</span><span class="pop-tag">Inference</span><span class="pop-tag">Fine-tuning</span></div>
+      <div class="pop-card-tags" style="margin-bottom:12px"><span class="pop-tag-title">L40S</span><span class="pop-tag-sub">Inference · Fine-tuning</span></div>
       <div style="display:flex;gap:6px;margin-top:auto"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create instance</button><button class="btn btn-o btn-sm" onclick="copyResCli('l40s')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
     </div>
   </div>
@@ -839,7 +842,7 @@ img.ico{display:block;flex:0 0 auto}
         <div class="pop-card-top" style="margin-bottom:10px"><div class="pop-icon"><svg width="26" height="26" viewBox="0 0 28 28" fill="none"><rect x="2" y="6" width="24" height="16" rx="3" stroke="var(--gray-800)" stroke-width="1.4"/><rect x="6" y="10" width="6" height="6" rx="1" fill="var(--gray-800)" opacity=".12"/><rect x="16" y="10" width="6" height="6" rx="1" fill="var(--gray-800)" opacity=".12"/><line x1="8" y1="22" x2="20" y2="22" stroke="var(--gray-800)" stroke-width="1.4"/></svg></div><div class="pop-card-info"><div class="pop-card-name">H100 80GB SXM</div><div class="pop-card-price">6 of 32 GPUs available</div></div></div>
         <div class="res-card-body"><div class="res-card-body-inner">
           <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:150%;margin-bottom:10px">State-of-the-art training &amp; inference. 80 GB HBM3 with NVLink + InfiniBand for multi-node runs. Best for LLM training, RLHF, and fine-tuning.</div>
-          <div class="pop-card-tags" style="margin-bottom:12px"><span class="pop-tag">H100</span><span class="pop-tag">Training</span><span class="pop-tag">Multi-node</span></div>
+          <div class="pop-card-tags" style="margin-bottom:12px"><span class="pop-tag-title">H100</span><span class="pop-tag-sub">Training · Multi-node</span></div>
           <div style="display:flex;gap:6px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create instance</button><button class="btn btn-o btn-sm" onclick="copyResCli('h100')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
         </div></div>
       </div>
@@ -847,7 +850,7 @@ img.ico{display:block;flex:0 0 auto}
         <div class="pop-card-top" style="margin-bottom:10px"><div class="pop-icon"><svg width="26" height="26" viewBox="0 0 28 28" fill="none"><rect x="2" y="6" width="24" height="16" rx="3" stroke="var(--gray-800)" stroke-width="1.4"/><rect x="6" y="10" width="6" height="6" rx="1" fill="var(--gray-800)" opacity=".12"/><rect x="16" y="10" width="6" height="6" rx="1" fill="var(--gray-800)" opacity=".12"/><line x1="8" y1="22" x2="20" y2="22" stroke="var(--gray-800)" stroke-width="1.4"/></svg></div><div class="pop-card-info"><div class="pop-card-name">H200 141GB</div><div class="pop-card-price">16 of 16 GPUs available</div></div></div>
         <div class="res-card-body"><div class="res-card-body-inner">
           <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:150%;margin-bottom:10px">Largest memory for massive models. 141 GB HBM3e — ideal for 70B+ parameter inference, long-context workloads, and MoE architectures.</div>
-          <div class="pop-card-tags" style="margin-bottom:12px"><span class="pop-tag">H200</span><span class="pop-tag">Inference</span><span class="pop-tag">Large models</span></div>
+          <div class="pop-card-tags" style="margin-bottom:12px"><span class="pop-tag-title">H200</span><span class="pop-tag-sub">Inference · Large models</span></div>
           <div style="display:flex;gap:6px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create instance</button><button class="btn btn-o btn-sm" onclick="copyResCli('h200')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
         </div></div>
       </div>
@@ -855,7 +858,7 @@ img.ico{display:block;flex:0 0 auto}
         <div class="pop-card-top" style="margin-bottom:10px"><div class="pop-icon"><svg width="26" height="26" viewBox="0 0 28 28" fill="none"><rect x="2" y="6" width="24" height="16" rx="3" stroke="var(--gray-800)" stroke-width="1.4"/><rect x="8" y="10" width="12" height="8" rx="1.5" fill="var(--gray-800)" opacity=".08" stroke="var(--gray-700)" stroke-width="1"/></svg></div><div class="pop-card-info"><div class="pop-card-name">L40S 48GB</div><div class="pop-card-price">4 of 8 GPUs available</div></div></div>
         <div class="res-card-body"><div class="res-card-body-inner">
           <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:150%;margin-bottom:10px">Cost-efficient inference &amp; fine-tuning. 48 GB GDDR6, great for model serving, small-scale training, and multi-modal workloads.</div>
-          <div class="pop-card-tags" style="margin-bottom:12px"><span class="pop-tag">L40S</span><span class="pop-tag">Inference</span><span class="pop-tag">Fine-tuning</span></div>
+          <div class="pop-card-tags" style="margin-bottom:12px"><span class="pop-tag-title">L40S</span><span class="pop-tag-sub">Inference · Fine-tuning</span></div>
           <div style="display:flex;gap:6px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create instance</button><button class="btn btn-o btn-sm" onclick="copyResCli('l40s')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
         </div></div>
       </div>
