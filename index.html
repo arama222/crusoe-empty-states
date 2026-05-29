@@ -1176,13 +1176,17 @@ img.ico{display:block;flex:0 0 auto}
           </div>
         </div>
       </div>
-      <!-- Docs card -->
-      <div class="action-cards" style="grid-template-columns:1fr;max-width:480px">
-        <div class="action-card">
-          <div class="action-card-title">Persistent Disk docs</div>
-          <div class="action-card-desc">Remote block storage with high availability. Attach up to 16 disks per instance. Create your disk in the same location as your instance to avoid latency and transfer costs.</div>
-          <a class="btn btn-o" href="https://docs.crusoecloud.com/storage/disks/overview" style="margin-top:auto;align-self:flex-start;text-decoration:none" target="_blank">Visit disk docs →</a>
+      <!-- CLI card -->
+      <div style="margin-top:20px;max-width:480px">
+        <div style="font-size:12px;color:var(--muted);font-family:var(--font-body);font-weight:500;margin-bottom:8px;letter-spacing:.01em">Or create via CLI:</div>
+        <div style="background:var(--gray-50);border:1px solid var(--border);border-radius:10px;padding:14px 16px;position:relative">
+          <pre style="margin:0;font-size:12px;font-family:var(--font-heading);color:var(--text);line-height:170%;overflow-x:auto;white-space:pre">crusoe storage disks create \
+  --name my-disk \
+  --size 500GiB \
+  --location us-east1-a</pre>
+          <button onclick="(()=>{navigator.clipboard.writeText('crusoe storage disks create \\\n  --name my-disk \\\n  --size 500GiB \\\n  --location us-east1-a');this.textContent='Copied!';setTimeout(()=>this.textContent='Copy',1600)})()" style="position:absolute;top:10px;right:10px;font-size:11px;font-weight:500;font-family:var(--font-body);padding:3px 10px;border-radius:6px;border:1px solid var(--border);background:var(--white);color:var(--muted);cursor:pointer">Copy</button>
         </div>
+        <div style="margin-top:10px;font-size:12px;color:var(--muted);font-family:var(--font-body);line-height:150%">💡 Create your disk in the same location as your instance to avoid cross-region latency.</div>
       </div>
     </div><!-- /disks-empty -->
 
