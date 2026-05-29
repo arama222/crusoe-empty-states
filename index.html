@@ -2593,21 +2593,7 @@ function initSpicyMagic() {
     });
   }
 
-  // ── 5. Mouse parallax ──
-  const section = document.getElementById('instances-spicy');
-  const wrap = document.getElementById('spicy-cube-wrap');
-  if (window._spicyMM) { section.removeEventListener('mousemove', window._spicyMM); section.removeEventListener('mouseleave', window._spicyML); }
-  window._spicyMM = e => {
-    const hero = document.getElementById('spicy-hero');
-    if (!hero) return;
-    const r = hero.getBoundingClientRect();
-    const dx = (e.clientX - r.left - r.width/2) / (r.width/2);
-    const dy = (e.clientY - r.top - r.height/2) / (r.height/2);
-    if (wrap) { wrap.style.transform=`translate(${dx*14}px,${dy*9}px)`; wrap.style.transition='transform .07s ease-out'; }
-  };
-  window._spicyML = () => { if(wrap){wrap.style.transform='translate(0,0)';wrap.style.transition='transform .5s ease-out';} };
-  section.addEventListener('mousemove', window._spicyMM);
-  section.addEventListener('mouseleave', window._spicyML);
+  // Mouse parallax removed — illustration stays fixed
 
   // ── 6. Periodic glitch ──
   if (window._spicyGlitchTimer) clearTimeout(window._spicyGlitchTimer);
