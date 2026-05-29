@@ -666,6 +666,26 @@ img.ico{display:block;flex:0 0 auto}
       </div>
     </div>
   </div>
+  <!-- CLI + Recommended start -->
+  <div class="rec-start" style="margin-top:24px;display:flex;flex-direction:column;gap:20px">
+    <div>
+      <div class="rec-start-label">Recommended start</div>
+      <div class="rec-start-title">Start with a single GPU to validate your workload</div>
+      <div class="rec-start-desc" style="margin-top:6px">Pick a 1x instance — H100, H200, or L40S — to test your code, install dependencies, and iterate quickly over SSH. Scale to multi-GPU or multi-node once your setup is confirmed. Stopped VMs are not charged for on-demand GPU usage.</div>
+    </div>
+    <div>
+      <div style="font-size:12px;color:var(--muted);font-family:var(--font-body);margin-bottom:8px">Launch via CLI:</div>
+      <div style="background:var(--gray-50);border:1px solid var(--border);border-radius:10px;padding:14px 16px;position:relative">
+        <pre style="margin:0;font-size:12px;font-family:'Space Mono',monospace;color:var(--text);line-height:1.7;white-space:pre">crusoe compute vms create \
+  --name my-vm \
+  --type h100-80gb-sxm-ib.1x \
+  --location us-east1-a \
+  --ssh-key ~/.ssh/id_rsa.pub</pre>
+        <button onclick="navigator.clipboard.writeText('crusoe compute vms create \\\n  --name my-vm \\\n  --type h100-80gb-sxm-ib.1x \\\n  --location us-east1-a \\\n  --ssh-key ~/.ssh/id_rsa.pub').then(()=>{this.textContent='✓ Copied';setTimeout(()=>this.textContent='Copy',1800)})" style="position:absolute;top:10px;right:10px;font-size:11px;font-family:var(--font-body);padding:4px 10px;border:1px solid var(--border);border-radius:6px;background:var(--white);color:var(--muted);cursor:pointer">Copy</button>
+      </div>
+    </div>
+    <a class="step-a" href="https://docs.crusoecloud.com/compute/virtual-machines" target="_blank">View instance docs →</a>
+  </div>
 </div><!-- /instances-v1 -->
 
 <!-- ── MILD (Delightful) ── -->
@@ -840,26 +860,6 @@ img.ico{display:block;flex:0 0 auto}
         </div></div>
       </div>
     </div>
-  </div>
-  <!-- Recommended start + CLI card -->
-  <div class="rec-start spicy-reveal" style="margin-top:24px;transition-delay:.36s;display:flex;flex-direction:column;gap:20px">
-    <div>
-      <div class="rec-start-label">Recommended start</div>
-      <div class="rec-start-title">Start with a single GPU to validate your workload</div>
-      <div class="rec-start-desc" style="margin-top:6px">Pick a 1x instance — H100, H200, or L40S — to test your code, install dependencies, and iterate quickly over SSH. Scale to multi-GPU or multi-node once your setup is confirmed. Stopped VMs are not charged for on-demand GPU usage.</div>
-    </div>
-    <div>
-      <div style="font-size:12px;color:var(--muted);font-family:var(--font-body);margin-bottom:8px">Launch via CLI:</div>
-      <div style="background:var(--gray-50);border:1px solid var(--border);border-radius:10px;padding:14px 16px;position:relative">
-        <pre style="margin:0;font-size:12px;font-family:'Space Mono',monospace;color:var(--text);line-height:1.7;white-space:pre">crusoe compute vms create \
-  --name my-vm \
-  --type h100-80gb-sxm-ib.1x \
-  --location us-east1-a \
-  --ssh-key ~/.ssh/id_rsa.pub</pre>
-        <button onclick="navigator.clipboard.writeText('crusoe compute vms create \\\n  --name my-vm \\\n  --type h100-80gb-sxm-ib.1x \\\n  --location us-east1-a \\\n  --ssh-key ~/.ssh/id_rsa.pub').then(()=>{this.textContent='✓ Copied';setTimeout(()=>this.textContent='Copy',1800)})" style="position:absolute;top:10px;right:10px;font-size:11px;font-family:var(--font-body);padding:4px 10px;border:1px solid var(--border);border-radius:6px;background:var(--white);color:var(--muted);cursor:pointer">Copy</button>
-      </div>
-    </div>
-    <a class="step-a" href="https://docs.crusoecloud.com/compute/virtual-machines" target="_blank">View instance docs →</a>
   </div>
 </div><!-- /instances-spicy -->
 
