@@ -2052,6 +2052,13 @@ document.addEventListener('click', e => {
   if (!e.target.closest('#tb-avatar') && !e.target.closest('#avatar-dd')) closeAvatarDd();
 });
 
+// ── Copy reservation CLI ──
+const RES_CLI = {
+  h100: 'crusoe compute vms create \\\n  --name my-vm \\\n  --type h100-80gb-sxm-ib.1x \\\n  --location us-east1-a \\\n  --ssh-key ~/.ssh/id_rsa.pub',
+  h200: 'crusoe compute vms create \\\n  --name my-vm \\\n  --type h200-141gb.1x \\\n  --location us-northcentral1-a \\\n  --ssh-key ~/.ssh/id_rsa.pub',
+  l40s: 'crusoe compute vms create \\\n  --name my-vm \\\n  --type l40s-48gb.1x \\\n  --location us-east1-a \\\n  --ssh-key ~/.ssh/id_rsa.pub'
+};
+function copyResCli(gpu) {
   const cmd = RES_CLI[gpu] || '';
   navigator.clipboard.writeText(cmd).then(() => {
     // brief visual feedback
