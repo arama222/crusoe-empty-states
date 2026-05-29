@@ -1024,7 +1024,7 @@ img.ico{display:block;flex:0 0 auto}
 <!-- ── SPICY (Motion-forward) ── -->
 <div id="instances-spicy" style="display:none">
   <!-- Motion hero — light bg -->
-  <div id="spicy-hero" style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:56px 40px 64px;text-align:center;position:relative;overflow:hidden;background:var(--white)">
+  <div id="spicy-hero" style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:56px 40px 52px;text-align:center;position:relative;overflow:hidden;background:var(--white)">
     <!-- Subtle dot grid -->
     <div style="position:absolute;inset:0;background-image:radial-gradient(circle,rgba(0,0,0,.055) 1px,transparent 1px);background-size:28px 28px;pointer-events:none;z-index:0"></div>
     <!-- Horizontal wave canvas (replaces scan line) -->
@@ -1055,14 +1055,6 @@ img.ico{display:block;flex:0 0 auto}
     <h1 style="font-size:52px;font-weight:400;font-family:var(--font-heading);color:var(--text);letter-spacing:-1.6px;line-height:100%;margin:0 0 14px;position:relative;z-index:1"><span id="spicy-typed">No instances yet.</span><span id="spicy-cursor" style="display:none;font-style:normal">|</span></h1>
     <!-- Sub -->
     <p style="font-size:14px;color:var(--muted);font-family:var(--font-body);line-height:165%;max-width:320px;margin:0 0 32px;position:relative;z-index:1">Spin up a dedicated GPU VM in under a minute. SSH in directly and start building.</p>
-    <!-- CTA + docs -->
-    <div style="display:flex;gap:10px;align-items:center;position:relative;z-index:1">
-      <button class="btn btn-p" style="padding:0 28px;height:44px;font-size:14px;border-radius:12px;letter-spacing:-.1px;box-shadow:0 6px 20px rgba(0,0,0,.16),0 2px 6px rgba(0,0,0,.07)">
-        <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-        Create instance
-      </button>
-      <a class="btn btn-o" href="https://docs.crusoecloud.com/compute/virtual-machines" target="_blank" style="text-decoration:none;height:44px;padding:0 20px;font-size:14px;border-radius:12px">View docs →</a>
-    </div>
     <!-- Scroll hint — absolute bottom of hero -->
     <div class="scroll-hint" id="spicy-scroll-hint" aria-hidden="true" style="position:absolute;bottom:14px;left:50%;transform:translateX(-50%)">
       <span class="scroll-hint-label">Scroll</span>
@@ -1077,6 +1069,10 @@ img.ico{display:block;flex:0 0 auto}
       <div class="ecat">Compute</div>
       <div class="etitle">Create your first instance</div>
       <div class="edesc">A dedicated Linux VM with one or more GPUs you can SSH into directly. Stopped VMs are not charged for on-demand usage. Once created, instances appear here with status, region, uptime, and cost.</div>
+      <div style="margin-top:12px;display:flex;gap:8px;align-items:center">
+        <button class="btn btn-p btn-sm">Create instance</button>
+        <a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/compute/virtual-machines" target="_blank" style="text-decoration:none">View docs →</a>
+      </div>
     </div>
   </div>
   <!-- Reservations -->
@@ -2284,7 +2280,7 @@ function buildSidebar(key) {
   let html = '<nav class="snav">';
 
   if (cfg.type === 'settings') {
-    html += `<div class="sback">${ICONS.arrowLeft} ${cfg.back}</div>`;
+    html += `<div class="sback" onclick="navigate('instances')">${ICONS.arrowLeft} ${cfg.back}</div>`;
     cfg.sections.forEach(sec => {
       html += `<div class="snav-label">${sec.label}</div>`;
       sec.items.forEach(item => {
