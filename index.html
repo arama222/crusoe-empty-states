@@ -335,6 +335,13 @@ img.ico{display:block;flex:0 0 auto}
 .chart-card-title{font-size:14px;font-weight:500;font-family:var(--font-body);color:var(--text);line-height:130%}
 .chart-empty{display:flex;align-items:center;justify-content:center;height:160px;background:var(--gray-50)}
 .chart-empty-msg{font-size:12px;color:var(--muted);font-family:var(--font-body)}
+.chart-body{background:var(--white);padding:10px 14px 4px}
+.chart-stat{font-size:22px;font-weight:600;font-family:var(--font-heading);letter-spacing:-.5px;color:var(--text);display:flex;align-items:baseline;gap:4px;margin-bottom:8px}
+.chart-stat-unit{font-size:11px;font-weight:400;font-family:var(--font-body);color:var(--muted)}
+.chart-stat-delta{font-size:11px;font-family:var(--font-body);margin-left:4px}
+.chart-stat-up{color:#16a34a}.chart-stat-flat{color:var(--muted)}
+.chart-t-row{display:flex;justify-content:space-between;padding:0 2px;margin-top:2px}
+.chart-t-lbl{font-size:9px;color:var(--muted);font-family:var(--font-body)}
 /* ── Empty state card ── */
 .ecard{display:flex;align-items:center;gap:24px;padding:32px;border:1px solid var(--border);border-radius:12px;margin-bottom:32px;background:var(--white)}
 .illus{width:96px;height:96px;background:var(--gray-100);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--muted);font-family:var(--font-body);flex-shrink:0}
@@ -1600,32 +1607,129 @@ img.ico{display:block;flex:0 0 auto}
       </div>
       <a class="btn btn-p btn-sm" href="https://github.com/crusoecloud/crusoe-watch-agent" target="_blank" style="text-decoration:none;white-space:nowrap;flex-shrink:0">Crusoe Watch Agent page</a>
     </div>
-    <!-- Empty chart grid -->
+    <!-- Chart grid — realistic placeholder data for H100 8x training workload -->
     <div class="chart-grid">
+
+      <!-- TFLOPS: steady ramp-up then plateau ~1,830 -->
       <div class="chart-card">
-        <div class="chart-card-hd"><div class="chart-card-title">TFLOPS (FP16)</div></div>
-        <div class="chart-empty"><span class="chart-empty-msg">No data available</span></div>
+        <div class="chart-card-hd">
+          <div class="chart-card-title">TFLOPS (FP16)</div>
+          <div style="font-size:10px;font-weight:600;color:var(--muted);font-family:var(--font-body);background:var(--gray-100);padding:2px 7px;border-radius:4px">1h</div>
+        </div>
+        <div class="chart-body">
+          <div class="chart-stat">1,830 <span class="chart-stat-unit">TFLOPS</span><span class="chart-stat-delta chart-stat-up">↑ 2%</span></div>
+          <svg viewBox="0 0 260 64" width="100%" height="64" preserveAspectRatio="none">
+            <line x1="0" y1="16" x2="260" y2="16" stroke="var(--gray-100)" stroke-width="1"/>
+            <line x1="0" y1="32" x2="260" y2="32" stroke="var(--gray-100)" stroke-width="1"/>
+            <line x1="0" y1="48" x2="260" y2="48" stroke="var(--gray-100)" stroke-width="1"/>
+            <polygon points="0,52 28.9,46 57.8,41 86.7,44 115.6,38 144.4,30 173.3,27 202.2,24 231.1,22 260,21 260,64 0,64" fill="rgba(0,0,0,.05)"/>
+            <polyline points="0,52 28.9,46 57.8,41 86.7,44 115.6,38 144.4,30 173.3,27 202.2,24 231.1,22 260,21" fill="none" stroke="var(--black)" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/>
+            <circle cx="260" cy="21" r="2.5" fill="var(--black)"/>
+          </svg>
+          <div class="chart-t-row"><span class="chart-t-lbl">60m ago</span><span class="chart-t-lbl">30m ago</span><span class="chart-t-lbl">Now</span></div>
+        </div>
       </div>
+
+      <!-- CPU: spiky 35–65%, data-loading pattern -->
       <div class="chart-card">
-        <div class="chart-card-hd"><div class="chart-card-title">CPU Utilization (%)</div></div>
-        <div class="chart-empty"><span class="chart-empty-msg">No data available</span></div>
+        <div class="chart-card-hd">
+          <div class="chart-card-title">CPU Utilization (%)</div>
+          <div style="font-size:10px;font-weight:600;color:var(--muted);font-family:var(--font-body);background:var(--gray-100);padding:2px 7px;border-radius:4px">1h</div>
+        </div>
+        <div class="chart-body">
+          <div class="chart-stat">51 <span class="chart-stat-unit">%</span><span class="chart-stat-delta chart-stat-flat">— stable</span></div>
+          <svg viewBox="0 0 260 64" width="100%" height="64" preserveAspectRatio="none">
+            <line x1="0" y1="16" x2="260" y2="16" stroke="var(--gray-100)" stroke-width="1"/>
+            <line x1="0" y1="32" x2="260" y2="32" stroke="var(--gray-100)" stroke-width="1"/>
+            <line x1="0" y1="48" x2="260" y2="48" stroke="var(--gray-100)" stroke-width="1"/>
+            <polygon points="0,37 28.9,26 57.8,44 86.7,30 115.6,35 144.4,42 173.3,28 202.2,38 231.1,24 260,38 260,64 0,64" fill="rgba(0,0,0,.05)"/>
+            <polyline points="0,37 28.9,26 57.8,44 86.7,30 115.6,35 144.4,42 173.3,28 202.2,38 231.1,24 260,38" fill="none" stroke="var(--black)" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/>
+            <circle cx="260" cy="38" r="2.5" fill="var(--black)"/>
+          </svg>
+          <div class="chart-t-row"><span class="chart-t-lbl">60m ago</span><span class="chart-t-lbl">30m ago</span><span class="chart-t-lbl">Now</span></div>
+        </div>
       </div>
+
+      <!-- GPU: very high, stable 88–96% -->
       <div class="chart-card">
-        <div class="chart-card-hd"><div class="chart-card-title">GPU Utilization (%)</div></div>
-        <div class="chart-empty"><span class="chart-empty-msg">No data available</span></div>
+        <div class="chart-card-hd">
+          <div class="chart-card-title">GPU Utilization (%)</div>
+          <div style="font-size:10px;font-weight:600;color:var(--muted);font-family:var(--font-body);background:var(--gray-100);padding:2px 7px;border-radius:4px">1h</div>
+        </div>
+        <div class="chart-body">
+          <div class="chart-stat">93 <span class="chart-stat-unit">%</span><span class="chart-stat-delta chart-stat-up">↑ 1%</span></div>
+          <svg viewBox="0 0 260 64" width="100%" height="64" preserveAspectRatio="none">
+            <line x1="0" y1="16" x2="260" y2="16" stroke="var(--gray-100)" stroke-width="1"/>
+            <line x1="0" y1="32" x2="260" y2="32" stroke="var(--gray-100)" stroke-width="1"/>
+            <line x1="0" y1="48" x2="260" y2="48" stroke="var(--gray-100)" stroke-width="1"/>
+            <polygon points="0,34 28.9,26 57.8,40 86.7,22 115.6,30 144.4,18 173.3,26 202.2,21 231.1,16 260,22 260,64 0,64" fill="rgba(0,0,0,.05)"/>
+            <polyline points="0,34 28.9,26 57.8,40 86.7,22 115.6,30 144.4,18 173.3,26 202.2,21 231.1,16 260,22" fill="none" stroke="var(--black)" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/>
+            <circle cx="260" cy="22" r="2.5" fill="var(--black)"/>
+          </svg>
+          <div class="chart-t-row"><span class="chart-t-lbl">60m ago</span><span class="chart-t-lbl">30m ago</span><span class="chart-t-lbl">Now</span></div>
+        </div>
       </div>
+
+      <!-- VRAM: climbing as model loads then plateau at ~572 GB (8× H100 80 GB) -->
       <div class="chart-card">
-        <div class="chart-card-hd"><div class="chart-card-title">VRAM Usage (GB)</div></div>
-        <div class="chart-empty"><span class="chart-empty-msg">No data available</span></div>
+        <div class="chart-card-hd">
+          <div class="chart-card-title">VRAM Usage (GB)</div>
+          <div style="font-size:10px;font-weight:600;color:var(--muted);font-family:var(--font-body);background:var(--gray-100);padding:2px 7px;border-radius:4px">1h</div>
+        </div>
+        <div class="chart-body">
+          <div class="chart-stat">572 <span class="chart-stat-unit">GB / 640 GB</span></div>
+          <svg viewBox="0 0 260 64" width="100%" height="64" preserveAspectRatio="none">
+            <line x1="0" y1="16" x2="260" y2="16" stroke="var(--gray-100)" stroke-width="1"/>
+            <line x1="0" y1="32" x2="260" y2="32" stroke="var(--gray-100)" stroke-width="1"/>
+            <line x1="0" y1="48" x2="260" y2="48" stroke="var(--gray-100)" stroke-width="1"/>
+            <polygon points="0,58 28.9,50 57.8,42 86.7,36 115.6,30 144.4,26 173.3,24 202.2,23 231.1,22 260,22 260,64 0,64" fill="rgba(0,0,0,.05)"/>
+            <polyline points="0,58 28.9,50 57.8,42 86.7,36 115.6,30 144.4,26 173.3,24 202.2,23 231.1,22 260,22" fill="none" stroke="var(--black)" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/>
+            <circle cx="260" cy="22" r="2.5" fill="var(--black)"/>
+          </svg>
+          <div class="chart-t-row"><span class="chart-t-lbl">60m ago</span><span class="chart-t-lbl">30m ago</span><span class="chart-t-lbl">Now</span></div>
+        </div>
       </div>
+
+      <!-- Network RX: spiky, data loading bursts -->
       <div class="chart-card">
-        <div class="chart-card-hd"><div class="chart-card-title">Network RX (MB/s)</div></div>
-        <div class="chart-empty"><span class="chart-empty-msg">No data available</span></div>
+        <div class="chart-card-hd">
+          <div class="chart-card-title">Network RX (MB/s)</div>
+          <div style="font-size:10px;font-weight:600;color:var(--muted);font-family:var(--font-body);background:var(--gray-100);padding:2px 7px;border-radius:4px">1h</div>
+        </div>
+        <div class="chart-body">
+          <div class="chart-stat">520 <span class="chart-stat-unit">MB/s</span><span class="chart-stat-delta chart-stat-flat">— stable</span></div>
+          <svg viewBox="0 0 260 64" width="100%" height="64" preserveAspectRatio="none">
+            <line x1="0" y1="16" x2="260" y2="16" stroke="var(--gray-100)" stroke-width="1"/>
+            <line x1="0" y1="32" x2="260" y2="32" stroke="var(--gray-100)" stroke-width="1"/>
+            <line x1="0" y1="48" x2="260" y2="48" stroke="var(--gray-100)" stroke-width="1"/>
+            <polygon points="0,40 28.9,18 57.8,52 86.7,22 115.6,46 144.4,12 173.3,34 202.2,50 231.1,20 260,36 260,64 0,64" fill="rgba(0,0,0,.05)"/>
+            <polyline points="0,40 28.9,18 57.8,52 86.7,22 115.6,46 144.4,12 173.3,34 202.2,50 231.1,20 260,36" fill="none" stroke="var(--black)" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/>
+            <circle cx="260" cy="36" r="2.5" fill="var(--black)"/>
+          </svg>
+          <div class="chart-t-row"><span class="chart-t-lbl">60m ago</span><span class="chart-t-lbl">30m ago</span><span class="chart-t-lbl">Now</span></div>
+        </div>
       </div>
+
+      <!-- Network TX: periodic spikes for checkpoint saves -->
       <div class="chart-card">
-        <div class="chart-card-hd"><div class="chart-card-title">Network TX (MB/s)</div></div>
-        <div class="chart-empty"><span class="chart-empty-msg">No data available</span></div>
+        <div class="chart-card-hd">
+          <div class="chart-card-title">Network TX (MB/s)</div>
+          <div style="font-size:10px;font-weight:600;color:var(--muted);font-family:var(--font-body);background:var(--gray-100);padding:2px 7px;border-radius:4px">1h</div>
+        </div>
+        <div class="chart-body">
+          <div class="chart-stat">290 <span class="chart-stat-unit">MB/s</span></div>
+          <svg viewBox="0 0 260 64" width="100%" height="64" preserveAspectRatio="none">
+            <line x1="0" y1="16" x2="260" y2="16" stroke="var(--gray-100)" stroke-width="1"/>
+            <line x1="0" y1="32" x2="260" y2="32" stroke="var(--gray-100)" stroke-width="1"/>
+            <line x1="0" y1="48" x2="260" y2="48" stroke="var(--gray-100)" stroke-width="1"/>
+            <polygon points="0,52 28.9,40 57.8,56 86.7,24 115.6,54 144.4,30 173.3,46 202.2,14 231.1,56 260,40 260,64 0,64" fill="rgba(0,0,0,.05)"/>
+            <polyline points="0,52 28.9,40 57.8,56 86.7,24 115.6,54 144.4,30 173.3,46 202.2,14 231.1,56 260,40" fill="none" stroke="var(--black)" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/>
+            <circle cx="260" cy="40" r="2.5" fill="var(--black)"/>
+          </svg>
+          <div class="chart-t-row"><span class="chart-t-lbl">60m ago</span><span class="chart-t-lbl">30m ago</span><span class="chart-t-lbl">Now</span></div>
+        </div>
       </div>
+
     </div>
   </div>
 </div>
