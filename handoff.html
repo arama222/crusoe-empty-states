@@ -451,7 +451,8 @@ img.ico{display:block;flex:0 0 auto}
 .pop-icon{width:40px;height:40px;background:var(--gray-50);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .pop-card-info{flex:1;min-width:0}
 .pop-card-name{font-size:13px;font-weight:600;font-family:var(--font-body);color:var(--text)}
-.pop-card-price{font-size:11px;font-weight:500;color:var(--green-600);font-family:var(--font-body);margin-top:1px}
+.pop-card-price{font-size:11px;font-weight:500;color:var(--gray-800);font-family:var(--font-body);margin-top:1px}
+.pop-card-price.avail-zero{color:#ef4444}
 .pop-chev{color:var(--gray-400);flex-shrink:0;transition:color .2s ease,transform .2s ease}
 .pop-card:hover .pop-chev{color:var(--text);transform:translateX(2px)}
 /* Hover-reveal: description + tags hidden by default */
@@ -817,7 +818,7 @@ img.ico{display:block;flex:0 0 auto}
             <div class="pop-icon"><svg width="26" height="26" viewBox="0 0 28 28" fill="none"><rect x="2" y="6" width="24" height="16" rx="3" stroke="var(--gray-800)" stroke-width="1.4"/><rect x="6" y="10" width="6" height="6" rx="1" fill="var(--gray-800)" opacity=".12"/><rect x="16" y="10" width="6" height="6" rx="1" fill="var(--gray-800)" opacity=".12"/><line x1="8" y1="22" x2="20" y2="22" stroke="var(--gray-800)" stroke-width="1.4"/></svg></div>
             <div class="pop-card-info">
               <div style="display:flex;align-items:center;gap:6px"><div class="pop-card-name">H200 141GB</div><span style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;padding:1px 6px;border-radius:3px;background:var(--gray-100);color:var(--gray-500);font-family:var(--font-body)">Sold out</span></div>
-              <div class="pop-card-price" style="color:var(--muted)">0 of 16 GPUs available</div>
+              <div class="pop-card-price avail-zero">0 of 16 GPUs available</div>
             </div>
           </div>
           <div class="pop-card-tags" style="margin-bottom:6px"><span class="pop-tag-sub">Inference · Large models</span></div>
