@@ -3267,14 +3267,16 @@ function initSpicyMagic() {
   const solidPaths  = paths.filter(p => !p.getAttribute('stroke-dasharray'));
   const dashedPaths = paths.filter(p =>  p.getAttribute('stroke-dasharray'));
 
-  const STAGGER  = 65;   // ms between each solid-path start
-  const DUR_FWD  = 920;  // ms for solid draw-in
-  const DUR_BWD  = 680;  // ms for solid erase
+  const STAGGER  = 80;   // ms between each solid-path start
+  const DUR_FWD  = 1150; // ms for solid draw-in
+  const DUR_BWD  = 900;  // ms for solid erase
   const TOTAL_FWD = solidPaths.length * STAGGER + DUR_FWD;
   const TOTAL_BWD = solidPaths.length * STAGGER + DUR_BWD;
+  const PAUSE    = 160;  // ms between forward→backward and backward→forward
 
   let _instancesFirstDraw = true;
   let _drawTimer = null; // guard against overlapping calls
+  let _drawFirstRun = true; // one-time initial priming flag
 
   function doDrawIn(dir) {
     if (!document.getElementById('spicy-cube')) return;
@@ -3282,33 +3284,35 @@ function initSpicyMagic() {
     dir = dir || 'fwd';
 
     if (dir === 'fwd') {
-      // Prime solid paths: fully hidden via CSS dashoffset
-      solidPaths.forEach(p => {
-        const l = p.getTotalLength();
-        p.style.transition = 'none';
-        p.style.strokeDasharray = l;
-        p.style.strokeDashoffset = l;
-      });
-      // Prime dashed paths: invisible via opacity (dash pattern untouched)
-      dashedPaths.forEach(p => {
-        p.style.transition = 'none';
-        p.style.strokeDasharray = '';
-        p.style.strokeDashoffset = '';
-        p.style.opacity = '0';
-      });
-      dots.forEach(c => {
-        c.style.transition = 'none';
-        c.style.opacity = '0';
-        c.style.transform = 'scale(0)';
-        c.style.transformOrigin = 'center';
-      });
-
-      // Force a synchronous reflow so the browser paints the hidden initial state
-      // before we apply transitions — guarantees smooth first-run
-      void svg.getBoundingClientRect();
+      // First run only: prime everything hidden so browser paints the start state
+      // before transitions begin. Subsequent runs: paths already at dashoffset=l
+      // (set by backward pass), so no re-priming needed.
+      if (_drawFirstRun) {
+        _drawFirstRun = false;
+        solidPaths.forEach(p => {
+          const l = p.getTotalLength();
+          p.style.transition = 'none';
+          p.style.strokeDasharray = l;
+          p.style.strokeDashoffset = l;
+        });
+        dashedPaths.forEach(p => {
+          p.style.transition = 'none';
+          p.style.strokeDasharray = '';
+          p.style.strokeDashoffset = '';
+          p.style.opacity = '0';
+        });
+        dots.forEach(c => {
+          c.style.transition = 'none';
+          c.style.opacity = '0';
+          c.style.transform = 'scale(0)';
+          c.style.transformOrigin = 'center';
+        });
+        // Force synchronous reflow to flush the transition:none before we animate
+        void svg.getBoundingClientRect();
+      }
 
       requestAnimationFrame(() => {
-        // Draw in solid paths staggered
+        // Draw in solid paths staggered (from dashoffset=l → 0)
         solidPaths.forEach((p, i) => {
           p.style.transition = `stroke-dashoffset ${DUR_FWD}ms cubic-bezier(.4,0,0,1) ${i*STAGGER}ms`;
           p.style.strokeDashoffset = '0';
@@ -3336,52 +3340,34 @@ function initSpicyMagic() {
           setTimeout(startNodeRipples, dotsStart + 400);
         }
 
-        // After fully drawn: pause, then reverse
-        _drawTimer = setTimeout(() => {
-          // Clear CSS overrides on solid paths so SVG attrs take over cleanly
-          solidPaths.forEach(p => {
-            p.style.transition = 'none';
-            p.style.strokeDasharray = '';
-            p.style.strokeDashoffset = '';
-          });
-          _drawTimer = setTimeout(() => doDrawIn('bwd'), 1400);
-        }, TOTAL_FWD);
+        // After forward completes: short pause then reverse
+        // No CSS clearing needed — solid paths keep dasharray=l throughout
+        _drawTimer = setTimeout(() => doDrawIn('bwd'), TOTAL_FWD + PAUSE);
       });
 
     } else { // 'bwd'
-      // Re-prime solid paths at dashoffset=0 (currently shown via SVG attrs)
-      solidPaths.forEach(p => {
+      // Paths arrive here at dasharray=l, dashoffset=0 (fully drawn by forward pass).
+      // Apply backward transitions directly — no re-priming or reflow needed.
+      solidPaths.forEach((p, i) => {
         const l = p.getTotalLength();
-        p.style.transition = 'none';
-        p.style.strokeDasharray = l;
-        p.style.strokeDashoffset = '0';
+        const revDelay = (solidPaths.length - 1 - i) * STAGGER;
+        p.style.transition = `stroke-dashoffset ${DUR_BWD}ms cubic-bezier(.55,0,1,.45) ${revDelay}ms`;
+        p.style.strokeDashoffset = l; // erase: animate dashoffset back to l
+      });
+      // Fade out dashed paths
+      dashedPaths.forEach((p, i) => {
+        p.style.transition = `opacity 280ms ease ${i*60}ms`;
+        p.style.opacity = '0';
+      });
+      // Fade out dots
+      dots.forEach(c => {
+        c.style.transition = 'opacity .2s ease, transform .28s ease';
+        c.style.opacity = '0'; c.style.transform = 'scale(0)';
       });
 
-      void svg.getBoundingClientRect(); // force reflow before backward transitions
-
-      requestAnimationFrame(() => {
-        // Erase solid paths in reverse stagger
-        solidPaths.forEach((p, i) => {
-          const l = p.getTotalLength();
-          const revDelay = (solidPaths.length - 1 - i) * STAGGER;
-          p.style.transition = `stroke-dashoffset ${DUR_BWD}ms cubic-bezier(.55,0,1,.45) ${revDelay}ms`;
-          p.style.strokeDashoffset = l;
-        });
-        // Fade out dashed paths
-        dashedPaths.forEach((p, i) => {
-          p.style.transition = `opacity 280ms ease ${i*60}ms`;
-          p.style.opacity = '0';
-        });
-        // Fade out dots
-        dots.forEach(c => {
-          c.style.transition = 'opacity .2s ease, transform .28s ease';
-          c.style.opacity = '0'; c.style.transform = 'scale(0)';
-        });
-
-        _drawTimer = setTimeout(() => {
-          _drawTimer = setTimeout(() => doDrawIn('fwd'), 550);
-        }, TOTAL_BWD);
-      });
+      // After backward completes: short pause then forward
+      // Paths now at dashoffset=l — ready for forward to animate without re-priming
+      _drawTimer = setTimeout(() => doDrawIn('fwd'), TOTAL_BWD + PAUSE);
     }
   }
 
