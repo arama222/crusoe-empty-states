@@ -3015,6 +3015,8 @@ function initClusterSpicyMagic() {
     {id:'co-diag-1', delay:760, dur:220},
     {id:'co-diag-2', delay:840, dur:220},
   ];
+  // Last draw-in finishes at delay:840 + dur:220 = 1060ms
+  const DRAW_DONE = 1100;
   drawOrder.forEach(({id, delay, dur}) => {
     const el = document.getElementById(id);
     if (!el) return;
@@ -3029,12 +3031,24 @@ function initClusterSpicyMagic() {
       }, delay);
     } catch(e) {}
   });
+  // Clear all transitions once draw-in is fully done so nothing can re-trigger
+  setTimeout(() => {
+    drawOrder.forEach(({id}) => {
+      const el = document.getElementById(id);
+      if (el) { el.style.transition = 'none'; el.style.strokeDasharray = ''; el.style.strokeDashoffset = ''; }
+    });
+  }, DRAW_DONE + 60);
   // Fade in corner dots after draw-in completes
   ['co-dot-bl','co-dot-tr'].forEach((id, i) => {
     const el = document.getElementById(id);
     if (!el) return;
     el.style.opacity = '0';
-    setTimeout(() => { el.style.transition = 'opacity 400ms ease'; el.style.opacity = '1'; }, 980 + i*120);
+    setTimeout(() => {
+      el.style.transition = 'opacity 400ms ease';
+      el.style.opacity = '1';
+      // clear opacity transition once done
+      setTimeout(() => { if(el) el.style.transition = 'none'; }, 450);
+    }, 980 + i*120);
   });
 
   // 2. Typewriter — starts after draw-in
@@ -3082,21 +3096,6 @@ function initClusterSpicyMagic() {
     setTimeout(rippleLoop, 1200);
   }
 
-  // 5. Periodic glitch — resets float animation after
-  const wrap = document.getElementById('cluster-illus-wrap');
-  if (wrap) {
-    function scheduleGlitch() {
-      setTimeout(() => {
-        if (!document.getElementById('cluster-illus-wrap')) return;
-        wrap.style.animation = 'cube-glitch-run .28s steps(1) forwards';
-        setTimeout(() => {
-          if (wrap) wrap.style.animation = '';
-          scheduleGlitch();
-        }, 300);
-      }, 3500 + Math.random()*3000);
-    }
-    scheduleGlitch();
-  }
 }
 function initClusterWaves() {
   const canvas = document.getElementById('cluster-wave-canvas');
