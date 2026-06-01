@@ -3270,35 +3270,105 @@ function initSpicyMagic() {
     }, 7000 + Math.random()*8000);
   }
 
-  // ── SVG draw-in — loops continuously ──
+  // ── SVG draw-in — ping-pong loop (forward → pause → backward → pause → …) ──
+  // Each path's original dash attribute (e.g. "3 3") is stored so we can
+  // restore it after the forward pass, making dashed lines visible again.
+  const pathOrigDash = paths.map(p => p.getAttribute('stroke-dasharray') || null);
+
   let _instancesFirstDraw = true;
-  function doDrawIn() {
+
+  function doDrawIn(dir) {
     if (!document.getElementById('spicy-cube')) return;
-    paths.forEach(p => { p.style.transition='none'; const l=p.getTotalLength(); p.style.strokeDasharray=l; p.style.strokeDashoffset=l; });
-    dots.forEach(c => { c.style.transition='none'; c.style.opacity='0'; c.style.transform='scale(0)'; c.style.transformOrigin='center'; });
-    svg.style.animation='none'; svg.style.filter='none';
-    requestAnimationFrame(() => {
-      paths.forEach((p,i) => {
-        p.style.transition=`stroke-dashoffset 0.95s cubic-bezier(.4,0,0,1) ${i*0.065}s`;
-        p.style.strokeDashoffset='0';
+    dir = dir || 'fwd';
+    const STAGGER = 62;   // ms between each path start
+    const DUR_FWD = 950;  // ms per-path draw-in duration
+    const DUR_BWD = 700;  // ms per-path erase duration
+    const totalFwd = paths.length * STAGGER + DUR_FWD;
+    const totalBwd = paths.length * STAGGER + DUR_BWD;
+
+    if (dir === 'fwd') {
+      // ── Prime each path: fully hidden, CSS dash overrides SVG attr ──
+      paths.forEach((p, i) => {
+        const l = p.getTotalLength();
+        p.style.transition = 'none';
+        p.style.strokeDasharray = l;
+        p.style.strokeDashoffset = l;
       });
-      const circleDelay = paths.length*65 + 550;
-      dots.forEach((c,i) => setTimeout(() => {
-        c.style.transition='opacity .3s ease, transform .45s cubic-bezier(.34,1.56,.64,1)';
-        c.style.opacity='1'; c.style.transform='scale(1)';
-      }, circleDelay + i*120));
-      const doneAt = paths.length*65 + 1050;
-      if (_instancesFirstDraw) {
-        _instancesFirstDraw = false;
-        setTimeout(scheduleGlitch, doneAt);
-        setTimeout(startNodeRipples, circleDelay + 400);
-      }
-      // Loop: pause then redraw
-      setTimeout(() => { if (document.getElementById('spicy-cube')) setTimeout(doDrawIn, 1200); }, doneAt);
-    });
+      dots.forEach(c => {
+        c.style.transition = 'none';
+        c.style.opacity = '0';
+        c.style.transform = 'scale(0)';
+        c.style.transformOrigin = 'center';
+      });
+      svg.style.animation = 'none'; svg.style.filter = 'none';
+
+      requestAnimationFrame(() => {
+        // Animate each path from hidden → visible
+        paths.forEach((p, i) => {
+          p.style.transition = `stroke-dashoffset ${DUR_FWD}ms cubic-bezier(.4,0,0,1) ${i*STAGGER}ms`;
+          p.style.strokeDashoffset = '0';
+        });
+        // Pop in dots near the end of draw-in
+        const circleDelay = paths.length * STAGGER + 520;
+        dots.forEach((c, i) => setTimeout(() => {
+          c.style.transition = 'opacity .3s ease, transform .45s cubic-bezier(.34,1.56,.64,1)';
+          c.style.opacity = '1'; c.style.transform = 'scale(1)';
+        }, circleDelay + i * 120));
+
+        // One-time: start glitch & ripples
+        if (_instancesFirstDraw) {
+          _instancesFirstDraw = false;
+          setTimeout(scheduleGlitch, totalFwd);
+          setTimeout(startNodeRipples, circleDelay + 400);
+        }
+
+        // After forward finishes: restore original SVG dash attrs, then reverse
+        setTimeout(() => {
+          // Clear CSS overrides so SVG stroke-dasharray="3 3" takes effect
+          paths.forEach((p, i) => {
+            if (pathOrigDash[i]) {
+              p.style.strokeDasharray = '';
+              p.style.strokeDashoffset = '';
+              p.style.transition = 'none';
+            }
+          });
+          // Pause at full visible state, then erase
+          setTimeout(() => { if (document.getElementById('spicy-cube')) doDrawIn('bwd'); }, 1400);
+        }, totalFwd);
+      });
+
+    } else {
+      // ── Backward pass: re-set CSS dash so we can animate erasure ──
+      paths.forEach((p, i) => {
+        const l = p.getTotalLength();
+        p.style.transition = 'none';
+        p.style.strokeDasharray = l;
+        p.style.strokeDashoffset = '0';  // currently fully drawn
+      });
+
+      requestAnimationFrame(() => {
+        // Erase in reverse stagger order (last drawn erases first)
+        paths.forEach((p, i) => {
+          const l = p.getTotalLength();
+          const revDelay = (paths.length - 1 - i) * STAGGER;
+          p.style.transition = `stroke-dashoffset ${DUR_BWD}ms cubic-bezier(.6,0,1,.4) ${revDelay}ms`;
+          p.style.strokeDashoffset = l;
+        });
+        // Fade dots out quickly
+        dots.forEach(c => {
+          c.style.transition = 'opacity .25s ease, transform .3s ease';
+          c.style.opacity = '0'; c.style.transform = 'scale(0)';
+        });
+
+        // After backward finishes: pause, then draw forward again
+        setTimeout(() => {
+          if (document.getElementById('spicy-cube')) setTimeout(() => doDrawIn('fwd'), 600);
+        }, totalBwd);
+      });
+    }
   }
 
-  doDrawIn();
+  doDrawIn('fwd');
   initSpicyWaves();
 
   // Reveal below-fold cards
