@@ -1245,7 +1245,18 @@ img.ico{display:block;flex:0 0 auto}
 <!-- ── MILD (ecard + hover-expand templates) ── -->
 <div id="clusters-medium">
   <div class="ecard">
-    <div class="illus">Illustration</div>
+    <div class="illus">
+      <svg width="96" height="95" viewBox="0 0 153.881 152.019" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M87.2031 65.5249H66.1768V86.4529H87.2031V65.5249Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M11.67 140.399H0.5V151.519H11.67V140.399Z" fill="black" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M153.381 0.5H142.211V11.62H153.381V0.5Z" fill="black" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M113.7 39.2188H5.81006V146.629H113.7V39.2188Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M130.63 22.2891H22.7402V129.699H130.63V22.2891Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M147.57 5.34863H39.6802V112.759H147.57V5.34863Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M66.5181 66.0903L87.167 86.019" stroke="black"/>
+        <path d="M86.8652 66.1665L66.2163 86.0952" stroke="black"/>
+      </svg>
+    </div>
     <div class="etxt">
       <div class="ecat">Orchestration</div>
       <div class="etitle">Create your first cluster</div>
@@ -1295,9 +1306,18 @@ img.ico{display:block;flex:0 0 auto}
     <!-- Decorative concentric rings -->
     <div style="position:absolute;width:360px;height:360px;border-radius:50%;border:1px solid var(--gray-100);left:50%;top:38%;transform:translate(-50%,-50%);pointer-events:none"></div>
     <div style="position:absolute;width:480px;height:480px;border-radius:50%;border:1px dashed var(--gray-100);left:50%;top:38%;transform:translate(-50%,-50%);pointer-events:none"></div>
-    <!-- Illustration placeholder -->
-    <div style="width:140px;height:130px;border:1.4px dashed var(--gray-300);border-radius:10px;display:flex;align-items:center;justify-content:center;background:var(--white);margin-bottom:22px;position:relative;z-index:1">
-      <span style="font-size:11px;font-family:var(--font-body);color:var(--muted)">Illustration</span>
+    <!-- Illustration -->
+    <div style="margin-bottom:22px;position:relative;z-index:1">
+      <svg width="140" height="138" viewBox="0 0 153.881 152.019" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M87.2031 65.5249H66.1768V86.4529H87.2031V65.5249Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M11.67 140.399H0.5V151.519H11.67V140.399Z" fill="black" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M153.381 0.5H142.211V11.62H153.381V0.5Z" fill="black" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M113.7 39.2188H5.81006V146.629H113.7V39.2188Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M130.63 22.2891H22.7402V129.699H130.63V22.2891Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M147.57 5.34863H39.6802V112.759H147.57V5.34863Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M66.5181 66.0903L87.167 86.019" stroke="black"/>
+        <path d="M86.8652 66.1665L66.2163 86.0952" stroke="black"/>
+      </svg>
     </div>
     <!-- Headline -->
     <h1 style="font-size:48px;font-weight:400;font-family:var(--font-heading);color:var(--text);letter-spacing:-1.4px;line-height:104%;margin:0 0 10px;position:relative;z-index:1">No clusters yet</h1>
@@ -1358,11 +1378,20 @@ img.ico{display:block;flex:0 0 auto}
     <div style="position:absolute;inset:0;background-image:radial-gradient(circle,rgba(0,0,0,.055) 1px,transparent 1px);background-size:28px 28px;pointer-events:none;z-index:0"></div>
     <!-- Horizontal wave canvas -->
     <canvas id="cluster-wave-canvas" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0"></canvas>
-    <!-- Illustration placeholder -->
-    <div id="cluster-illus-wrap" style="display:flex;align-items:center;justify-content:center;margin-bottom:32px;z-index:1;position:relative">
-      <div style="width:160px;height:140px;border:1.4px dashed var(--gray-300);border-radius:12px;display:flex;align-items:center;justify-content:center;background:var(--white);animation:cube-float 4.5s ease-in-out infinite">
-        <span style="font-size:11px;font-family:var(--font-body);color:var(--muted)">Illustration</span>
-      </div>
+    <!-- Illustration -->
+    <div id="cluster-illus-wrap" style="display:flex;align-items:center;justify-content:center;margin-bottom:32px;z-index:1;position:relative;animation:cube-float 4.5s ease-in-out infinite">
+      <!-- Ripple overlay (same viewBox as orch SVG) -->
+      <svg id="cluster-node-ripples" width="160" height="158" viewBox="0 0 153.881 152.019" fill="none" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);pointer-events:none;z-index:2;overflow:visible"></svg>
+      <svg id="cluster-orch-svg" width="160" height="158" viewBox="0 0 153.881 152.019" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:relative;z-index:1">
+        <path id="co-sq-tr" d="M147.57 5.34863H39.6802V112.759H147.57V5.34863Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+        <path id="co-sq-mid" d="M130.63 22.2891H22.7402V129.699H130.63V22.2891Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+        <path id="co-sq-bl" d="M113.7 39.2188H5.81006V146.629H113.7V39.2188Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+        <path id="co-center" d="M87.2031 65.5249H66.1768V86.4529H87.2031V65.5249Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+        <path id="co-diag-1" d="M66.5181 66.0903L87.167 86.019" stroke="black"/>
+        <path id="co-diag-2" d="M86.8652 66.1665L66.2163 86.0952" stroke="black"/>
+        <path id="co-dot-bl" d="M11.67 140.399H0.5V151.519H11.67V140.399Z" fill="black" stroke="black" stroke-linecap="round" stroke-linejoin="round" opacity="0"/>
+        <path id="co-dot-tr" d="M153.381 0.5H142.211V11.62H153.381V0.5Z" fill="black" stroke="black" stroke-linecap="round" stroke-linejoin="round" opacity="0"/>
+      </svg>
     </div>
     <!-- Headline with typewriter -->
     <h1 style="font-size:52px;font-weight:400;font-family:var(--font-heading);color:var(--text);letter-spacing:-1.6px;line-height:100%;margin:0 0 14px;position:relative;z-index:1"><span id="cluster-typed">No clusters yet.</span><span id="cluster-cursor" style="display:none;font-style:normal">|</span></h1>
@@ -2974,33 +3003,95 @@ function toggleClusterState(state) {
   };
 })();
 
-// ── Cluster spicy wave + typewriter ──
+// ── Cluster spicy wave + typewriter + draw-in ──
 function initClusterSpicyMagic() {
-  // Typewriter
+  // 1. SVG draw-in: outer→mid→inner squares, then center box, then X diagonals
+  const drawOrder = [
+    {id:'co-sq-tr',  delay:0,   dur:700},
+    {id:'co-sq-mid', delay:200, dur:650},
+    {id:'co-sq-bl',  delay:400, dur:600},
+    {id:'co-center', delay:600, dur:350},
+    {id:'co-diag-1', delay:760, dur:220},
+    {id:'co-diag-2', delay:840, dur:220},
+  ];
+  drawOrder.forEach(({id, delay, dur}) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    try {
+      const len = el.getTotalLength();
+      el.style.strokeDasharray = len;
+      el.style.strokeDashoffset = len;
+      el.style.transition = 'none';
+      setTimeout(() => {
+        el.style.transition = `stroke-dashoffset ${dur}ms ease`;
+        el.style.strokeDashoffset = '0';
+      }, delay);
+    } catch(e) {}
+  });
+  // Fade in corner dots after draw-in completes
+  ['co-dot-bl','co-dot-tr'].forEach((id, i) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.style.opacity = '0';
+    setTimeout(() => { el.style.transition = 'opacity 400ms ease'; el.style.opacity = '1'; }, 980 + i*120);
+  });
+
+  // 2. Typewriter — starts after draw-in
   const typed = document.getElementById('cluster-typed');
   const cursor = document.getElementById('cluster-cursor');
-  if (!typed || !cursor) return;
-  const fullText = 'No clusters yet.';
-  typed.textContent = '';
-  cursor.style.display = 'inline';
-  cursor.style.animation = 'cursor-blink .9s step-start infinite';
-  let i = 0;
-  function type() {
-    if (!document.getElementById('cluster-typed')) return;
-    if (i < fullText.length) { typed.textContent += fullText[i++]; setTimeout(type, 68 + Math.random()*40); }
-    else { setTimeout(() => { if(cursor) cursor.style.display = 'none'; }, 900); }
+  if (typed && cursor) {
+    const fullText = 'No clusters yet.';
+    typed.textContent = '';
+    cursor.style.display = 'inline';
+    cursor.style.animation = 'cursor-blink .9s step-start infinite';
+    let i = 0;
+    function type() {
+      if (!document.getElementById('cluster-typed')) return;
+      if (i < fullText.length) { typed.textContent += fullText[i++]; setTimeout(type, 68 + Math.random()*40); }
+      else { setTimeout(() => { if(cursor) cursor.style.display = 'none'; }, 900); }
+    }
+    setTimeout(type, 1100);
   }
-  setTimeout(type, 200);
-  // Wave canvas
+
+  // 3. Wave canvas
   initClusterWaves();
-  // Periodic glitch on illustration
+
+  // 4. Node ripples at corner dot positions (viewBox coords)
+  const rippleSvg = document.getElementById('cluster-node-ripples');
+  const dotPositions = [{cx:6.085,cy:145.96},{cx:147.80,cy:6.06}];
+  if (rippleSvg) {
+    function makeRipple(cx, cy, delay) {
+      setTimeout(() => {
+        if (!rippleSvg.isConnected) return;
+        const c = document.createElementNS('http://www.w3.org/2000/svg','circle');
+        c.setAttribute('cx', cx); c.setAttribute('cy', cy); c.setAttribute('r','3');
+        c.setAttribute('fill','none'); c.setAttribute('stroke','black'); c.setAttribute('stroke-width','1');
+        c.style.animation = 'node-ripple 1.1s ease-out forwards';
+        rippleSvg.appendChild(c);
+        setTimeout(() => c.remove(), 1200);
+      }, delay);
+    }
+    function rippleLoop() {
+      if (!document.getElementById('cluster-orch-svg') ||
+          !document.getElementById('clusters-spicy') ||
+          document.getElementById('clusters-spicy').style.display === 'none') return;
+      dotPositions.forEach((pos, i) => makeRipple(pos.cx, pos.cy, i * 420));
+      setTimeout(rippleLoop, 2400);
+    }
+    setTimeout(rippleLoop, 1200);
+  }
+
+  // 5. Periodic glitch — resets float animation after
   const wrap = document.getElementById('cluster-illus-wrap');
   if (wrap) {
     function scheduleGlitch() {
       setTimeout(() => {
         if (!document.getElementById('cluster-illus-wrap')) return;
         wrap.style.animation = 'cube-glitch-run .28s steps(1) forwards';
-        setTimeout(() => { if(wrap) wrap.style.animation = ''; scheduleGlitch(); }, 300);
+        setTimeout(() => {
+          if (wrap) wrap.style.animation = 'cube-float 4.5s ease-in-out infinite';
+          scheduleGlitch();
+        }, 300);
       }, 3500 + Math.random()*3000);
     }
     scheduleGlitch();
