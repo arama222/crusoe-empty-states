@@ -2113,36 +2113,53 @@ img.ico{display:block;flex:0 0 auto}
     </div>
   </div>
   <div class="divider"></div>
-  <div class="ca">
-    <div class="ecard">
-      <div class="illus">
-        <svg width="56" height="56" viewBox="0 0 44 44" fill="none"><path d="M11 17h22l-3.5 17H14.5L11 17z" fill="var(--gray-100)" stroke="var(--gray-700)" stroke-width="1.5" stroke-linejoin="round"/><path d="M9 17h26" stroke="var(--gray-700)" stroke-width="1.5" stroke-linecap="round"/><path d="M16 17c0-4 3-6 6-6s6 2 6 6" stroke="var(--gray-600)" stroke-width="1.3" fill="none"/><ellipse cx="18" cy="12" rx="1.2" ry="1.6" fill="var(--gray-500)" class="illus-rise-1"/><ellipse cx="22" cy="9" rx="1.2" ry="1.6" fill="var(--gray-400)" class="illus-rise-2"/><ellipse cx="26" cy="12" rx="1.2" ry="1.6" fill="var(--gray-500)" class="illus-rise-3"/></svg>
+  <div class="ca" style="padding:0">
+    <!-- Side-by-side hero: animation left, text right -->
+    <div id="bucket-spicy-hero" style="display:flex;flex-direction:row;align-items:center;justify-content:flex-start;gap:48px;padding:12px 40px 8px 72px;text-align:left;position:relative;overflow:visible;background:var(--white)">
+      <div style="position:absolute;inset:0;background-image:radial-gradient(circle,rgba(0,0,0,.045) 1px,transparent 1px);background-size:28px 28px;pointer-events:none;z-index:0"></div>
+      <canvas id="bucket-wave-canvas" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0"></canvas>
+      <!-- Illustration -->
+      <div id="bucket-illus-wrap" style="display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:1;position:relative;padding:20px 0">
+        <svg id="bucket-spicy-svg" width="185" height="185" viewBox="0 0 150.588 150.588" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:relative;z-index:1;overflow:visible">
+          <path id="bucket-e0" d="M75.2938 150.088C116.601 150.088 150.088 116.601 150.088 75.2938C150.088 33.9863 116.601 0.5 75.2938 0.5C33.9863 0.5 0.5 33.9863 0.5 75.2938C0.5 116.601 33.9863 150.088 75.2938 150.088Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+          <path id="bucket-e1" transform="translate(0,16.149)" d="M75.2938 117.79C116.601 117.79 150.088 91.5341 150.088 59.1452C150.088 26.7564 116.601 0.5 75.2938 0.5C33.9863 0.5 0.5 26.7564 0.5 59.1452C0.5 91.5341 33.9863 117.79 75.2938 117.79Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+          <path id="bucket-e2" transform="translate(0,32.307)" d="M75.2938 85.4742C116.601 85.4742 150.088 66.4521 150.088 42.9871C150.088 19.5221 116.601 0.5 75.2938 0.5C33.9863 0.5 0.5 19.5221 0.5 42.9871C0.5 66.4521 33.9863 85.4742 75.2938 85.4742Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+          <path id="bucket-e3" transform="translate(0,48.455)" d="M75.2938 53.1771C116.601 53.1771 150.088 41.3849 150.088 26.8385C150.088 12.2922 116.601 0.5 75.2938 0.5C33.9863 0.5 0.5 12.2922 0.5 26.8385C0.5 41.3849 33.9863 53.1771 75.2938 53.1771Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+          <path id="bucket-e4" transform="translate(0,64.604)" d="M75.2938 20.88C116.601 20.88 150.088 16.3178 150.088 10.69C150.088 5.06222 116.601 0.5 75.2938 0.5C33.9863 0.5 0.5 5.06222 0.5 10.69C0.5 16.3178 33.9863 20.88 75.2938 20.88Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
       </div>
-      <div class="etxt">
-        <div class="ecat">Storage</div>
-        <div class="etitle">No buckets yet</div>
-        <div class="edesc">S3-compatible object storage for datasets, model checkpoints, and artifacts. Access from any Crusoe instance or via standard S3 clients. You'll need an Object Storage Key before creating a bucket.</div>
+      <!-- Text block -->
+      <div style="position:relative;z-index:1;max-width:380px">
+        <h1 style="font-size:36px;font-weight:400;font-family:var(--font-heading);color:var(--text);letter-spacing:-1px;line-height:105%;margin:0 0 8px">No buckets yet.</h1>
+        <p style="font-size:13px;color:var(--muted);font-family:var(--font-body);line-height:160%;margin:0 0 14px">S3-compatible object storage for datasets, model checkpoints, and artifacts. You'll need a storage key before creating a bucket.</p>
+        <a href="https://docs.crusoecloud.com/storage" target="_blank" style="display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:500;font-family:var(--font-body);color:var(--white);background:var(--black);padding:6px 14px;border-radius:8px;text-decoration:none;letter-spacing:.01em;transition:opacity .15s ease" onmouseenter="this.style.opacity='.8'" onmouseleave="this.style.opacity='1'">View docs →</a>
       </div>
     </div>
-    <!-- 2-step guided flow (same style as Disks) -->
-    <div class="setup-flow" style="margin:0 auto">
-      <!-- Step 1: Create storage key -->
-      <div class="setup-step active">
-        <div class="setup-step-num">1</div>
-        <div class="setup-step-body">
-          <div class="setup-step-title">Create a storage key</div>
-          <div class="setup-step-desc">Object Storage Keys authenticate access to Crusoe buckets. You need one before creating or accessing any bucket.</div>
-          <button class="btn btn-p btn-sm" style="width:fit-content" onclick="navigate('obj-storage-keys')">+ Create key</button>
+    <!-- Step cards side by side -->
+    <div class="pop-section bucket-spicy-reveal" style="margin-top:60px;padding-bottom:20px">
+      <div class="pop-title">Get started in two steps</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;overflow:visible;align-items:start">
+        <div class="pop-card res-card bucket-spicy-reveal" style="transition-delay:.08s">
+          <div class="pop-card-top" style="margin-bottom:8px">
+            <div class="pop-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="13" fill="#111"/><text x="14" y="18.5" text-anchor="middle" fill="white" font-size="13" font-weight="700" font-family="sans-serif">1</text></svg></div>
+            <div class="pop-card-info"><div class="pop-card-name">Create a storage key</div><div class="pop-card-price">Authenticate bucket access</div></div>
+          </div>
+          <div class="pop-card-tags" style="margin-bottom:0;padding-top:2px"><span class="pop-tag-sub">Step 1 · Storage</span></div>
+          <div class="res-card-body"><div class="res-card-body-inner">
+            <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">Object Storage Keys authenticate access to Crusoe buckets. You need one before creating or accessing any bucket.</div>
+            <div class="res-card-actions"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create storage key</button></div>
+          </div></div>
         </div>
-      </div>
-      <div class="setup-connector"></div>
-      <!-- Step 2: Create a bucket -->
-      <div class="setup-step locked">
-        <div class="setup-step-num">2</div>
-        <div class="setup-step-body">
-          <div class="setup-step-title">Create a bucket</div>
-          <div class="setup-step-desc">Once you have a key, create a bucket and co-locate it in the same region as your compute for the lowest latency.</div>
-          <button class="btn btn-o btn-sm" disabled style="width:fit-content;opacity:.5;cursor:default">Create bucket</button>
+        <div class="pop-card res-card bucket-spicy-reveal" style="transition-delay:.14s">
+          <div class="pop-card-top" style="margin-bottom:8px">
+            <div class="pop-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="13" fill="#111"/><text x="14" y="18.5" text-anchor="middle" fill="white" font-size="13" font-weight="700" font-family="sans-serif">2</text></svg></div>
+            <div class="pop-card-info"><div class="pop-card-name">Create a bucket</div><div class="pop-card-price">S3-compatible object storage</div></div>
+          </div>
+          <div class="pop-card-tags" style="margin-bottom:0;padding-top:2px"><span class="pop-tag-sub">Step 2 · Storage</span></div>
+          <div class="res-card-body"><div class="res-card-body-inner">
+            <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">Once you have a key, create a bucket and co-locate it in the same region as your compute for the lowest latency.</div>
+            <div class="res-card-actions"><button class="btn btn-o btn-sm" style="flex:1;justify-content:center">Create bucket</button></div>
+          </div></div>
         </div>
       </div>
     </div>
@@ -3163,6 +3180,8 @@ function showView(viewId, sbKey) {
     setTimeout(initSlurmSpicyMagic, 60);
   } else if (viewId === 'disks') {
     setTimeout(initDiskSpicyMagic, 60);
+  } else if (viewId === 'buckets') {
+    setTimeout(initBucketSpicyMagic, 60);
   }
 }
 
@@ -3716,6 +3735,7 @@ function initClusterWaves() {
     '.cluster-spicy-reveal{opacity:0;transform:translateY(14px);transition:opacity .55s ease,transform .55s ease}.cluster-spicy-reveal.is-visible{opacity:1;transform:none}',
     '.slurm-spicy-reveal{opacity:0;transform:translateY(14px);transition:opacity .55s ease,transform .55s ease}.slurm-spicy-reveal.is-visible{opacity:1;transform:none}',
     '.disk-spicy-reveal{opacity:0;transform:translateY(14px);transition:opacity .55s ease,transform .55s ease}.disk-spicy-reveal.is-visible{opacity:1;transform:none}',
+    '.bucket-spicy-reveal{opacity:0;transform:translateY(14px);transition:opacity .55s ease,transform .55s ease}.bucket-spicy-reveal.is-visible{opacity:1;transform:none}',
     '.logs-spicy-reveal{opacity:0;transform:translateY(14px);transition:opacity .55s ease,transform .55s ease}.logs-spicy-reveal.is-visible{opacity:1;transform:none}',
   ].join('');
   document.head.appendChild(style);
@@ -3899,6 +3919,78 @@ function initDiskSpicyMagic() {
 }
 function initDiskWaves() {
   const canvas = document.getElementById('disk-wave-canvas');
+  if (!canvas) return;
+  const waves = [
+    { yFrac:.20, amp:7,  period:280, phase:0.5,  opacity:.035 },
+    { yFrac:.40, amp:10, period:340, phase:2.1,  opacity:.030 },
+    { yFrac:.60, amp:6,  period:240, phase:1.4,  opacity:.032 },
+    { yFrac:.80, amp:9,  period:310, phase:3.2,  opacity:.028 },
+  ];
+  let t = 0; let raf;
+  function draw() {
+    if (!canvas.isConnected) { cancelAnimationFrame(raf); return; }
+    const W = canvas.offsetWidth, H = canvas.offsetHeight;
+    if (canvas.width !== W || canvas.height !== H) { canvas.width = W; canvas.height = H; }
+    const ctx = canvas.getContext('2d'); ctx.clearRect(0,0,W,H);
+    waves.forEach(w => {
+      ctx.beginPath(); ctx.strokeStyle = `rgba(0,0,0,${w.opacity})`; ctx.lineWidth = 1.2;
+      for (let x = 0; x <= W; x += 2) {
+        const y = w.yFrac * H + Math.sin((x / w.period) * Math.PI * 2 + t + w.phase) * w.amp;
+        x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+      }
+      ctx.stroke();
+    });
+    t += 0.008;
+    raf = requestAnimationFrame(draw);
+  }
+  draw();
+}
+
+function initBucketSpicyMagic() {
+  const svg = document.getElementById('bucket-spicy-svg');
+  if (!svg) return;
+
+  const ellipseIds = ['bucket-e0','bucket-e1','bucket-e2','bucket-e3','bucket-e4'];
+  const baseY      = [0, 16.149, 32.307, 48.455, 64.604];
+  const amps       = [5, 10, 14, 10, 5];
+  const PERIOD     = 2400;
+
+  function springCurve(t) {
+    const x = t * Math.PI * 2;
+    return Math.sin(x) + 0.18 * Math.sin(x * 2);
+  }
+
+  let rafId;
+  let startTime = null;
+
+  function loop(ts) {
+    if (!svg.isConnected) { cancelAnimationFrame(rafId); return; }
+    if (startTime === null) startTime = ts;
+    const elapsed = ts - startTime;
+
+    ellipseIds.forEach((id, i) => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      const phase = (elapsed / PERIOD + i * 0.13) % 1;
+      const displacement = springCurve(phase) * amps[i];
+      el.setAttribute('transform', `translate(0,${(baseY[i] + displacement).toFixed(3)})`);
+    });
+
+    rafId = requestAnimationFrame(loop);
+  }
+
+  if (window._bucketAnimRaf) cancelAnimationFrame(window._bucketAnimRaf);
+  window._bucketAnimRaf = requestAnimationFrame(ts => { startTime = ts; loop(ts); });
+
+  initBucketWaves();
+  setTimeout(() => {
+    document.querySelectorAll('.bucket-spicy-reveal').forEach((el, i) => {
+      setTimeout(() => el.classList.add('is-visible'), i * 80);
+    });
+  }, 200);
+}
+function initBucketWaves() {
+  const canvas = document.getElementById('bucket-wave-canvas');
   if (!canvas) return;
   const waves = [
     { yFrac:.20, amp:7,  period:280, phase:0.5,  opacity:.035 },
