@@ -1226,6 +1226,10 @@ img.ico{display:block;flex:0 0 auto}
     <div class="ph-l">
       <div class="ph-title-sans">Kubernetes Clusters</div>
       <div class="state-toggle">
+        <button class="state-toggle-btn active" id="k8s-toggle-empty" onclick="toggleK8sMain('empty')">Empty</button>
+        <button class="state-toggle-btn" id="k8s-toggle-filled" onclick="toggleK8sMain('filled')">Filled</button>
+      </div>
+      <div class="state-toggle" id="k8s-empty-subtabs" style="margin-left:6px">
         <button class="state-toggle-btn active" onclick="toggleClusterState('medium')">Mild</button>
         <button class="state-toggle-btn" onclick="toggleClusterState('mild')">Medium</button>
         <button class="state-toggle-btn" onclick="toggleClusterState('spicy')">Spicy</button>
@@ -1419,6 +1423,58 @@ img.ico{display:block;flex:0 0 auto}
     </div>
   </div>
 </div><!-- /clusters-spicy -->
+
+<!-- ── FILLED state ── -->
+<div id="clusters-filled" style="display:none">
+  <div class="tbl-wrap">
+    <div class="tbl-filter">
+      <div class="tbl-search-wrap">
+        <svg class="ico" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="text" placeholder="Search clusters by name"/>
+      </div>
+      <div class="tbl-add-filter">+ Add filter option</div>
+    </div>
+    <table class="tbl">
+      <thead>
+        <tr><th>Name</th><th>State</th><th>Version</th><th>DNS</th><th># of Node Pools</th><th>Actions</th></tr>
+      </thead>
+      <tbody>
+        <tr onclick="navigate('k8s-detail')" style="cursor:pointer">
+          <td><span class="tbl-link">slurm-pyxis-problem</span></td>
+          <td><span class="pill-green">Running</span></td>
+          <td><span class="tbl-mono">1.33.4-cmk.84</span></td>
+          <td><button class="tbl-icon-btn" onclick="event.stopPropagation()"><svg class="ico" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></td>
+          <td>2</td>
+          <td><div class="tbl-actions"><button class="tbl-icon-btn" onclick="event.stopPropagation()"><svg class="ico" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3,6 5,6 21,6"/><path d="M19,6l-1,14a2,2 0 01-2,2H8a2,2 0 01-2-2L5,6"/><path d="M10,11v6"/><path d="M14,11v6"/></svg></button></div></td>
+        </tr>
+        <tr onclick="navigate('k8s-detail')" style="cursor:pointer">
+          <td><span class="tbl-link">shashank-a100-east</span></td>
+          <td><span class="pill-green">Running</span></td>
+          <td><span class="tbl-mono">1.33.4-cmk.43</span></td>
+          <td><button class="tbl-icon-btn" onclick="event.stopPropagation()"><svg class="ico" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></td>
+          <td>0</td>
+          <td><div class="tbl-actions"><button class="tbl-icon-btn" onclick="event.stopPropagation()"><svg class="ico" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3,6 5,6 21,6"/><path d="M19,6l-1,14a2,2 0 01-2,2H8a2,2 0 01-2-2L5,6"/><path d="M10,11v6"/><path d="M14,11v6"/></svg></button></div></td>
+        </tr>
+        <tr onclick="navigate('k8s-detail')" style="cursor:pointer">
+          <td><span class="tbl-link">shashank-ha-test</span></td>
+          <td><span class="pill-green">Running</span></td>
+          <td><span class="tbl-mono">1.33.4-cmk.43</span></td>
+          <td><button class="tbl-icon-btn" onclick="event.stopPropagation()"><svg class="ico" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></td>
+          <td>0</td>
+          <td><div class="tbl-actions"><button class="tbl-icon-btn" onclick="event.stopPropagation()"><svg class="ico" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3,6 5,6 21,6"/><path d="M19,6l-1,14a2,2 0 01-2,2H8a2,2 0 01-2-2L5,6"/><path d="M10,11v6"/><path d="M14,11v6"/></svg></button></div></td>
+        </tr>
+        <tr onclick="navigate('k8s-detail')" style="cursor:pointer">
+          <td><span class="tbl-link">mega-train-prod</span></td>
+          <td><span class="badge-outline" style="background:var(--gray-50);color:var(--gray-600);border-color:var(--gray-300)">Provisioning</span></td>
+          <td><span class="tbl-mono">1.33.4-cmk.84</span></td>
+          <td>—</td>
+          <td>1</td>
+          <td><div class="tbl-actions"><button class="tbl-icon-btn" onclick="event.stopPropagation()"><svg class="ico" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3,6 5,6 21,6"/><path d="M19,6l-1,14a2,2 0 01-2,2H8a2,2 0 01-2-2L5,6"/><path d="M10,11v6"/><path d="M14,11v6"/></svg></button></div></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div><!-- /clusters-filled -->
 
   </div>
 </div>
@@ -2119,7 +2175,8 @@ img.ico{display:block;flex:0 0 auto}
 
 </div>
 
-<!-- ─── VIEW: Kubernetes Cluster List ─── -->
+<!-- ─── VIEW: Kubernetes Cluster List (removed — merged into view-kubernetes filled state) ─── -->
+<!--
 <div class="view" id="view-k8s-list">
   <div class="ph">
     <div class="ph-l"><div class="ph-title">Kubernetes Clusters</div></div>
@@ -2169,6 +2226,7 @@ img.ico{display:block;flex:0 0 auto}
     </div>
   </div>
 </div>
+-->
 
 <!-- ─── VIEW: SSH Keys ─── -->
 <div class="view" id="view-sshkeys">
@@ -2836,6 +2894,38 @@ function copyResCli(gpu) {
       setTimeout(() => { btn.innerHTML = orig; btn.style.color = ''; }, 1500);
     });
   }).catch(() => {});
+}
+
+// ── Kubernetes Empty/Filled main toggle ──
+function toggleK8sMain(mode) {
+  const emptyWrap = document.getElementById('clusters-medium') || document.querySelector('#view-kubernetes #clusters-medium');
+  // Show/hide all cluster state panels + filled
+  ['clusters-medium','clusters-mild','clusters-spicy','clusters-filled'].forEach(id => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    if (mode === 'filled') {
+      el.style.display = id === 'clusters-filled' ? '' : 'none';
+    } else {
+      // empty: restore the last active cluster sub-state, default to medium
+      if (id === 'clusters-filled') { el.style.display = 'none'; return; }
+      // let toggleClusterState handle which empty sub-state is shown
+    }
+  });
+  // Toggle top-level buttons
+  document.getElementById('k8s-toggle-empty').classList.toggle('active', mode === 'empty');
+  document.getElementById('k8s-toggle-filled').classList.toggle('active', mode === 'filled');
+  // Show/hide the Mild/Medium/Spicy sub-tabs
+  const subtabs = document.getElementById('k8s-empty-subtabs');
+  if (subtabs) subtabs.style.display = mode === 'empty' ? '' : 'none';
+  // If switching to empty, re-apply the current active sub-state
+  if (mode === 'empty') {
+    const activeSub = document.querySelector('#k8s-empty-subtabs .state-toggle-btn.active');
+    const subState = activeSub ? (['medium','mild','spicy'][
+      [...document.querySelectorAll('#k8s-empty-subtabs .state-toggle-btn')].indexOf(activeSub)
+    ]) : 'medium';
+    toggleClusterState(subState || 'medium');
+  }
+  document.querySelector('.main').scrollTop = 0;
 }
 
 // ── Cluster state toggle ──
