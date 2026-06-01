@@ -3135,6 +3135,7 @@ function showView(viewId, sbKey) {
   if (viewId === 'instances') {
     setTimeout(initSpicyMagic, 60);
   } else if (viewId === 'kubernetes') {
+    window._clusterWavesStarted = false; window._clusterRipplesStarted = false;
     setTimeout(() => {
       document.querySelectorAll('#clusters-spicy .cluster-spicy-reveal').forEach(el => { el.classList.remove('is-visible'); });
       setTimeout(() => {
@@ -3143,6 +3144,7 @@ function showView(viewId, sbKey) {
       initClusterSpicyMagic();
     }, 60);
   } else if (viewId === 'slurm') {
+    window._slurmWavesStarted = false; window._slurmRipplesStarted = false;
     setTimeout(initSlurmSpicyMagic, 60);
   } else if (viewId === 'disks') {
     setTimeout(initDiskSpicyMagic, 60);
@@ -3242,69 +3244,17 @@ function toggleEdgeState(n) {
   };
 })();
 
-// ── Spicy magic: draw-in + typewriter + particles + parallax + glitch ──
+// ── Spicy magic: draw-in loop + ripples + glitch ──
 function initSpicyMagic() {
   const svg = document.getElementById('spicy-cube');
   if (!svg) return;
 
-  // ── 1. SVG draw-in ──
   const dotIds = ['inst-dot-1','inst-dot-2'];
   const allPaths = [...svg.querySelectorAll('path')];
   const paths = allPaths.filter(p => !dotIds.includes(p.id));
   const dots = dotIds.map(id => document.getElementById(id)).filter(Boolean);
-  // Reset first (re-entry safe)
-  paths.forEach(p => { p.style.transition='none'; const l=p.getTotalLength(); p.style.strokeDasharray=l; p.style.strokeDashoffset=l; });
-  dots.forEach(c => { c.style.transition='none'; c.style.opacity='0'; c.style.transform='scale(0)'; c.style.transformOrigin='center'; });
-  svg.style.animation='none'; svg.style.filter='none';
-  // Trigger on next frame
-  requestAnimationFrame(() => {
-    paths.forEach((p,i) => {
-      p.style.transition=`stroke-dashoffset 0.95s cubic-bezier(.4,0,0,1) ${i*0.065}s`;
-      p.style.strokeDashoffset='0';
-    });
-    const circleDelay = paths.length*65 + 550;
-    dots.forEach((c,i) => setTimeout(() => {
-      c.style.transition='opacity .3s ease, transform .45s cubic-bezier(.34,1.56,.64,1)';
-      c.style.opacity='1'; c.style.transform='scale(1)';
-    }, circleDelay + i*120));
-    // Glitch loop start after draw-in
-    const doneAt = paths.length*65 + 1050;
-    setTimeout(scheduleGlitch, doneAt);
-    // Node ripple pulses after dots appear
-    setTimeout(startNodeRipples, circleDelay + 400);
-  });
 
-  // ── 2. Typewriter ──
-  const text = 'No instances yet.';
-  const typed = document.getElementById('spicy-typed');
-  const cursor = document.getElementById('spicy-cursor');
-  if (typed && cursor) {
-    typed.textContent = '';
-    cursor.style.display = '';
-    cursor.style.opacity = '1';
-    cursor.style.animation = 'cursor-blink .75s step-end infinite';
-    let ci = 0;
-    const typeNext = () => {
-      if (ci < text.length) {
-        typed.textContent += text[ci++];
-        setTimeout(typeNext, 48 + Math.random()*38);
-      } else {
-        setTimeout(() => {
-          cursor.style.animation = 'none';
-          cursor.style.transition = 'opacity .6s';
-          cursor.style.opacity = '0';
-        }, 1100);
-      }
-    };
-    setTimeout(typeNext, 320);
-  }
-
-  // ── 3. Horizontal wave background canvas ──
-  initSpicyWaves();
-
-  // ── 4. Node ripples (SVG dot positions) ──
-  // Dot 1 center (13.4, 81.6), Dot 2 center (155.4, 49.6) in viewBox 166.55×128.97
-  // Rendered at 160×124 centered in 300×260 canvas
+  // ── Node ripples (start once, self-loop) ──
   const scaleX = 160/166.55, scaleY = 124/128.97;
   const offX = (300-160)/2, offY = (260-124)/2;
   const nodeCoords = [
@@ -3340,9 +3290,7 @@ function initSpicyMagic() {
     });
   }
 
-  // Mouse parallax removed — illustration stays fixed
-
-  // ── 6. Periodic glitch ──
+  // ── Periodic glitch (start once, self-loop) ──
   if (window._spicyGlitchTimer) clearTimeout(window._spicyGlitchTimer);
   function scheduleGlitch() {
     window._spicyGlitchTimer = setTimeout(() => {
@@ -3354,6 +3302,37 @@ function initSpicyMagic() {
       scheduleGlitch();
     }, 7000 + Math.random()*8000);
   }
+
+  // ── SVG draw-in — loops continuously ──
+  let _instancesFirstDraw = true;
+  function doDrawIn() {
+    if (!document.getElementById('spicy-cube')) return;
+    paths.forEach(p => { p.style.transition='none'; const l=p.getTotalLength(); p.style.strokeDasharray=l; p.style.strokeDashoffset=l; });
+    dots.forEach(c => { c.style.transition='none'; c.style.opacity='0'; c.style.transform='scale(0)'; c.style.transformOrigin='center'; });
+    svg.style.animation='none'; svg.style.filter='none';
+    requestAnimationFrame(() => {
+      paths.forEach((p,i) => {
+        p.style.transition=`stroke-dashoffset 0.95s cubic-bezier(.4,0,0,1) ${i*0.065}s`;
+        p.style.strokeDashoffset='0';
+      });
+      const circleDelay = paths.length*65 + 550;
+      dots.forEach((c,i) => setTimeout(() => {
+        c.style.transition='opacity .3s ease, transform .45s cubic-bezier(.34,1.56,.64,1)';
+        c.style.opacity='1'; c.style.transform='scale(1)';
+      }, circleDelay + i*120));
+      const doneAt = paths.length*65 + 1050;
+      if (_instancesFirstDraw) {
+        _instancesFirstDraw = false;
+        setTimeout(scheduleGlitch, doneAt);
+        setTimeout(startNodeRipples, circleDelay + 400);
+      }
+      // Loop: pause then redraw
+      setTimeout(() => { if (document.getElementById('spicy-cube')) setTimeout(doDrawIn, 1200); }, doneAt);
+    });
+  }
+
+  doDrawIn();
+  initSpicyWaves();
 }
 
 // ── Spicy: horizontal sine-wave background ──
@@ -3572,54 +3551,41 @@ function initClusterSpicyMagic() {
     setTimeout(() => {
       el.style.transition = 'opacity 400ms ease';
       el.style.opacity = '1';
-      // clear opacity transition once done
       setTimeout(() => { if(el) el.style.transition = 'none'; }, 450);
     }, 980 + i*120);
   });
+  // Loop: restart draw-in after a pause
+  setTimeout(() => { if (document.getElementById('cluster-orch-svg')) initClusterSpicyMagic(); }, DRAW_DONE + 1400);
 
-  // 2. Typewriter — starts after draw-in
-  const typed = document.getElementById('cluster-typed');
-  const cursor = document.getElementById('cluster-cursor');
-  if (typed && cursor) {
-    const fullText = 'No clusters yet.';
-    typed.textContent = '';
-    cursor.style.display = 'inline';
-    cursor.style.animation = 'cursor-blink .9s step-start infinite';
-    let i = 0;
-    function type() {
-      if (!document.getElementById('cluster-typed')) return;
-      if (i < fullText.length) { typed.textContent += fullText[i++]; setTimeout(type, 68 + Math.random()*40); }
-      else { setTimeout(() => { if(cursor) cursor.style.display = 'none'; }, 900); }
-    }
-    setTimeout(type, 1100);
-  }
+  // 3. Wave canvas — start once only
+  if (!window._clusterWavesStarted) { window._clusterWavesStarted = true; initClusterWaves(); }
 
-  // 3. Wave canvas
-  initClusterWaves();
-
-  // 4. Node ripples at corner dot positions (viewBox coords)
-  const rippleSvg = document.getElementById('cluster-node-ripples');
-  const dotPositions = [{cx:6.085,cy:145.96},{cx:147.80,cy:6.06}];
-  if (rippleSvg) {
-    function makeRipple(cx, cy, delay) {
-      setTimeout(() => {
-        if (!rippleSvg.isConnected) return;
-        const c = document.createElementNS('http://www.w3.org/2000/svg','circle');
-        c.setAttribute('cx', cx); c.setAttribute('cy', cy); c.setAttribute('r','3');
-        c.setAttribute('fill','none'); c.setAttribute('stroke','black'); c.setAttribute('stroke-width','1');
-        c.style.animation = 'node-ripple 1.1s ease-out forwards';
-        rippleSvg.appendChild(c);
-        setTimeout(() => c.remove(), 1200);
-      }, delay);
+  // 4. Node ripples — start once only
+  if (!window._clusterRipplesStarted) {
+    window._clusterRipplesStarted = true;
+    const rippleSvg = document.getElementById('cluster-node-ripples');
+    const dotPositions = [{cx:6.085,cy:145.96},{cx:147.80,cy:6.06}];
+    if (rippleSvg) {
+      function makeRipple(cx, cy, delay) {
+        setTimeout(() => {
+          if (!rippleSvg.isConnected) return;
+          const c = document.createElementNS('http://www.w3.org/2000/svg','circle');
+          c.setAttribute('cx', cx); c.setAttribute('cy', cy); c.setAttribute('r','3');
+          c.setAttribute('fill','none'); c.setAttribute('stroke','black'); c.setAttribute('stroke-width','1');
+          c.style.animation = 'node-ripple 1.1s ease-out forwards';
+          rippleSvg.appendChild(c);
+          setTimeout(() => c.remove(), 1200);
+        }, delay);
+      }
+      function rippleLoop() {
+        if (!document.getElementById('cluster-orch-svg') ||
+            !document.getElementById('clusters-spicy') ||
+            document.getElementById('clusters-spicy').style.display === 'none') return;
+        dotPositions.forEach((pos, i) => makeRipple(pos.cx, pos.cy, i * 420));
+        setTimeout(rippleLoop, 2400);
+      }
+      setTimeout(rippleLoop, 1200);
     }
-    function rippleLoop() {
-      if (!document.getElementById('cluster-orch-svg') ||
-          !document.getElementById('clusters-spicy') ||
-          document.getElementById('clusters-spicy').style.display === 'none') return;
-      dotPositions.forEach((pos, i) => makeRipple(pos.cx, pos.cy, i * 420));
-      setTimeout(rippleLoop, 2400);
-    }
-    setTimeout(rippleLoop, 1200);
   }
 
 }
@@ -3706,22 +3672,8 @@ function initSlurmSpicyMagic() {
       setTimeout(() => { if(el) el.style.transition = 'none'; }, 450);
     }, 980 + i*120);
   });
-  // Typewriter
-  const typed = document.getElementById('slurm-typed');
-  const cursor = document.getElementById('slurm-cursor');
-  if (typed && cursor) {
-    const fullText = 'No clusters yet.';
-    typed.textContent = '';
-    cursor.style.display = 'inline';
-    cursor.style.animation = 'cursor-blink .9s step-start infinite';
-    let i = 0;
-    function type() {
-      if (!document.getElementById('slurm-typed')) return;
-      if (i < fullText.length) { typed.textContent += fullText[i++]; setTimeout(type, 68 + Math.random()*40); }
-      else { setTimeout(() => { if(cursor) cursor.style.display = 'none'; }, 900); }
-    }
-    setTimeout(type, DRAW_DONE);
-  }
+  // Loop: restart draw-in after a pause
+  setTimeout(() => { if (document.getElementById('slurm-orch-svg')) initSlurmSpicyMagic(); }, DRAW_DONE + 1400);
   // Scroll hint
   const hint = document.getElementById('slurm-scroll-hint');
   if (hint) {
@@ -3738,30 +3690,34 @@ function initSlurmSpicyMagic() {
       setTimeout(() => el.classList.add('is-visible'), i * 80);
     });
   }, 200);
-  initSlurmWaves();
-  // Node ripples
-  const rippleSvg = document.getElementById('slurm-node-ripples');
-  const dotPositions = [{cx:6.085,cy:145.96},{cx:147.80,cy:6.06}];
-  if (rippleSvg) {
-    function makeRipple(cx, cy, delay) {
-      setTimeout(() => {
-        if (!rippleSvg.isConnected) return;
-        const c = document.createElementNS('http://www.w3.org/2000/svg','circle');
-        c.setAttribute('cx', cx); c.setAttribute('cy', cy); c.setAttribute('r','3');
-        c.setAttribute('fill','none'); c.setAttribute('stroke','black'); c.setAttribute('stroke-width','1');
-        c.style.animation = 'node-ripple 1.1s ease-out forwards';
-        rippleSvg.appendChild(c);
-        setTimeout(() => c.remove(), 1200);
-      }, delay);
+  // Wave canvas — start once only
+  if (!window._slurmWavesStarted) { window._slurmWavesStarted = true; initSlurmWaves(); }
+  // Node ripples — start once only
+  if (!window._slurmRipplesStarted) {
+    window._slurmRipplesStarted = true;
+    const rippleSvg = document.getElementById('slurm-node-ripples');
+    const dotPositions = [{cx:6.085,cy:145.96},{cx:147.80,cy:6.06}];
+    if (rippleSvg) {
+      function makeRipple(cx, cy, delay) {
+        setTimeout(() => {
+          if (!rippleSvg.isConnected) return;
+          const c = document.createElementNS('http://www.w3.org/2000/svg','circle');
+          c.setAttribute('cx', cx); c.setAttribute('cy', cy); c.setAttribute('r','3');
+          c.setAttribute('fill','none'); c.setAttribute('stroke','black'); c.setAttribute('stroke-width','1');
+          c.style.animation = 'node-ripple 1.1s ease-out forwards';
+          rippleSvg.appendChild(c);
+          setTimeout(() => c.remove(), 1200);
+        }, delay);
+      }
+      function rippleLoop() {
+        if (!document.getElementById('slurm-orch-svg') ||
+            !document.getElementById('slurm-spicy') ||
+            document.getElementById('slurm-spicy').style.display === 'none') return;
+        dotPositions.forEach((pos, i) => makeRipple(pos.cx, pos.cy, i * 420));
+        setTimeout(rippleLoop, 2400);
+      }
+      setTimeout(rippleLoop, DRAW_DONE + 100);
     }
-    function rippleLoop() {
-      if (!document.getElementById('slurm-orch-svg') ||
-          !document.getElementById('slurm-spicy') ||
-          document.getElementById('slurm-spicy').style.display === 'none') return;
-      dotPositions.forEach((pos, i) => makeRipple(pos.cx, pos.cy, i * 420));
-      setTimeout(rippleLoop, 2400);
-    }
-    setTimeout(rippleLoop, DRAW_DONE + 100);
   }
 }
 function initSlurmWaves() {
@@ -3794,44 +3750,50 @@ function initSlurmWaves() {
   draw();
 }
 
-// ── Disk spicy: concentric ellipses draw-in + typewriter + waves ──
+// ── Disk spicy: spring physics loop — ellipses fall in and bounce back ──
 function initDiskSpicyMagic() {
   const svg = document.getElementById('disk-spicy-svg');
   if (!svg) return;
+
+  // Base y-offsets matching the original SVG transform attributes
   const ellipseIds = ['disk-e0','disk-e1','disk-e2','disk-e3','disk-e4'];
-  // Draw outer→inner with stagger
-  ellipseIds.forEach((id, i) => {
-    const el = document.getElementById(id);
-    if (!el) return;
-    try {
-      const len = el.getTotalLength();
-      el.style.strokeDasharray = len;
-      el.style.strokeDashoffset = len;
-      el.style.transition = 'none';
-      setTimeout(() => {
-        el.style.transition = `stroke-dashoffset ${700 - i*80}ms cubic-bezier(.4,0,0,1)`;
-        el.style.strokeDashoffset = '0';
-      }, i * 110);
-    } catch(e) {}
-  });
-  const DRAW_DONE = ellipseIds.length * 110 + 750;
-  // Typewriter
-  const typed = document.getElementById('disk-typed');
-  const cursor = document.getElementById('disk-cursor');
-  if (typed && cursor) {
-    const fullText = 'No disks yet.';
-    typed.textContent = '';
-    cursor.style.display = 'inline';
-    cursor.style.animation = 'cursor-blink .9s step-start infinite';
-    let i = 0;
-    function type() {
-      if (!document.getElementById('disk-typed')) return;
-      if (i < fullText.length) { typed.textContent += fullText[i++]; setTimeout(type, 68 + Math.random()*40); }
-      else { setTimeout(() => { if(cursor) cursor.style.display = 'none'; }, 900); }
-    }
-    setTimeout(type, DRAW_DONE - 300);
+  const baseY      = [0, 16.149, 32.307, 48.455, 64.604];
+  // Outer + inner rings move less, middle rings move most
+  const amps       = [5, 10, 14, 10, 5];
+  const PERIOD     = 2400; // ms per full oscillation cycle
+
+  // Spring-like curve: asymmetric sine gives fast-fall / slow-rise character
+  // Returns value in [-1, 1] with a slight overshoot shape
+  function springCurve(t) {
+    const x = t * Math.PI * 2;
+    return Math.sin(x) + 0.18 * Math.sin(x * 2);
   }
-  // Scroll hint
+
+  let rafId;
+  let startTime = null;
+
+  function loop(ts) {
+    if (!svg.isConnected) { cancelAnimationFrame(rafId); return; }
+    if (startTime === null) startTime = ts;
+    const elapsed = ts - startTime;
+
+    ellipseIds.forEach((id, i) => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      // Stagger phase top-to-bottom — creates cascading fall effect
+      const phase = (elapsed / PERIOD + i * 0.13) % 1;
+      const displacement = springCurve(phase) * amps[i];
+      el.setAttribute('transform', `translate(0,${(baseY[i] + displacement).toFixed(3)})`);
+    });
+
+    rafId = requestAnimationFrame(loop);
+  }
+
+  if (window._diskAnimRaf) cancelAnimationFrame(window._diskAnimRaf);
+  window._diskAnimRaf = requestAnimationFrame(ts => { startTime = ts; loop(ts); });
+
+  // One-time setup: waves, scroll hint, reveal cards
+  initDiskWaves();
   const hint = document.getElementById('disk-scroll-hint');
   if (hint) {
     hint.classList.remove('hidden');
@@ -3841,13 +3803,11 @@ function initDiskSpicyMagic() {
     }
     scroller.addEventListener('scroll', onScroll, { passive: true });
   }
-  // Reveal cards
   setTimeout(() => {
-    document.querySelectorAll('.disk-spicy-reveal').forEach((el,i) => {
+    document.querySelectorAll('.disk-spicy-reveal').forEach((el, i) => {
       setTimeout(() => el.classList.add('is-visible'), i * 80);
     });
   }, 200);
-  initDiskWaves();
 }
 function initDiskWaves() {
   const canvas = document.getElementById('disk-wave-canvas');
