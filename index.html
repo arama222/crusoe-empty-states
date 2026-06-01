@@ -2054,7 +2054,7 @@ img.ico{display:block;flex:0 0 auto}
 <!-- ─── VIEW: Kubernetes Cluster Detail ─── -->
 <div class="view" id="view-k8s-detail">
   <div class="dph">
-    <div class="dph-back" onclick="navigate('k8s-list')">
+    <div class="dph-back" onclick="navigate('kubernetes')">
       <svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15,18 9,12 15,6"/></svg>
     </div>
     <div class="dph-title">slurm-pyxis-problem</div>
@@ -2415,8 +2415,8 @@ const SIDEBARS = {
 // ── Route map: nav id → view id ──
 const ROUTES = {
   instances:'instances', 'instance-templates':'instances', 'instance-groups':'instances', 'custom-images':'instances',
-  kubernetes:'k8s-list', slurm:'slurm',
-  'k8s-list':'k8s-list', 'k8s-detail':'k8s-detail', 'vm-detail':'vm-detail',
+  kubernetes:'kubernetes', slurm:'slurm',
+  'k8s-list':'kubernetes', 'k8s-detail':'k8s-detail', 'vm-detail':'vm-detail',
   disks:'disks', buckets:'buckets',
   vpc:'instances', subnets:'instances', firewall:'instances', infiniband:'instances', 'load-balancers':'instances',
   'cloud-api-keys':'apikeys', 'ssh-keys':'sshkeys',
