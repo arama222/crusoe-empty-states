@@ -1017,12 +1017,12 @@ img.ico{display:block;flex:0 0 auto}
 
 <!-- ── SPICY (Motion-forward) ── -->
 <div id="instances-spicy">
-  <!-- Compact centered hero: animation top, text below -->
-  <div id="spicy-hero" style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px 40px 20px;text-align:center;position:relative;overflow:hidden;background:var(--white)">
+  <!-- Side-by-side hero: illustration left, text right -->
+  <div id="spicy-hero" style="display:flex;flex-direction:row;align-items:center;justify-content:flex-start;gap:48px;padding:32px 40px 28px 72px;text-align:left;position:relative;overflow:hidden;background:var(--white)">
     <div style="position:absolute;inset:0;background-image:radial-gradient(circle,rgba(0,0,0,.045) 1px,transparent 1px);background-size:28px 28px;pointer-events:none;z-index:0"></div>
     <canvas id="spicy-wave-canvas" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0"></canvas>
     <!-- Illustration -->
-    <div id="spicy-cube-wrap" style="display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:1;position:relative;margin-bottom:18px">
+    <div id="spicy-cube-wrap" style="display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:1;position:relative">
       <svg id="spicy-node-ripples" width="260" height="220" viewBox="0 0 300 260" fill="none" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);pointer-events:none;z-index:2;overflow:visible"></svg>
       <svg id="spicy-cube" width="140" height="108" viewBox="0 0 166.55 128.97" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:relative;z-index:1">
         <path d="M143.43 96.41H161.12C161.92 96.41 162.75 96.53 163.52 96.18C164.12 95.91 164.75 96.04 165.14 96.42C165.56 96.82 165.14 97.2 164.88 97.6C163.91 99.07 162.88 100.53 161.86 101.98C159.15 105.81 156.46 109.64 153.75 113.47C150.75 117.74 147.81 122.03 144.72 126.26C143.76 127.57 142.3 128.49 139.84 128.48C94.52 128.4 49.22 128.42 3.9 128.42C3.02 128.42 1.85 128.68 1.41 127.93C1.04 127.29 0.49 126.61 0.6 125.82C0.62 125.66 0.6 125.51 0.6 125.35V35.11C0.6 33.55 1.07 32.15 2.03 30.69C4.53 26.89 7.11 23.13 9.59 19.34C13.54 13.32 17.69 7.38 21.6 1.34C21.82 1.01 22.11 0.64 22.66 0.5C22.97 0.61 23.27 0.74 23.24 1.09C22.9 4.52 23.12 7.97 23.1 11.4C23.05 18.55 23.1 89.24 23.1 96.4" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
@@ -1039,15 +1039,15 @@ img.ico{display:block;flex:0 0 auto}
         <path d="M22.35 0.58H165.77" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
     </div>
-    <!-- Text + button row -->
-    <div style="position:relative;z-index:1">
-      <h1 style="font-size:32px;font-weight:400;font-family:var(--font-heading);color:var(--text);letter-spacing:-0.8px;line-height:105%;margin:0 0 6px"><span id="spicy-typed">No instances yet.</span><span id="spicy-cursor" style="display:none;font-style:normal">|</span></h1>
-      <p style="font-size:13px;color:var(--muted);font-family:var(--font-body);line-height:155%;margin:0 0 14px;max-width:340px">Spin up a dedicated GPU VM in under a minute. SSH in directly and start building.</p>
+    <!-- Text block -->
+    <div style="position:relative;z-index:1;max-width:380px">
+      <h1 style="font-size:36px;font-weight:400;font-family:var(--font-heading);color:var(--text);letter-spacing:-1px;line-height:105%;margin:0 0 8px"><span id="spicy-typed">No instances yet.</span><span id="spicy-cursor" style="display:none;font-style:normal">|</span></h1>
+      <p style="font-size:13px;color:var(--muted);font-family:var(--font-body);line-height:160%;margin:0 0 14px">Spin up a dedicated GPU VM in under a minute. SSH in directly and start building.</p>
       <a href="https://docs.crusoecloud.com/compute/virtual-machines" target="_blank" style="display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:500;font-family:var(--font-body);color:var(--white);background:var(--black);padding:6px 14px;border-radius:8px;text-decoration:none;letter-spacing:.01em;transition:opacity .15s ease" onmouseenter="this.style.opacity='.8'" onmouseleave="this.style.opacity='1'">View docs →</a>
     </div>
   </div>
   <!-- Reservations -->
-  <div class="pop-section spicy-reveal" style="margin-top:20px;padding-bottom:20px">
+  <div class="pop-section spicy-reveal" style="margin-top:24px;padding-bottom:20px">
     <div class="pop-title">Create from your reservations</div>
     <div class="pop-grid">
       <div class="pop-card res-card spicy-reveal" style="transition-delay:.08s">
