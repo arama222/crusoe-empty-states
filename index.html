@@ -981,7 +981,6 @@ img.ico{display:block;flex:0 0 auto}
     <!-- Headline -->
     <h1 style="font-size:48px;font-weight:400;font-family:var(--font-heading);color:var(--text);letter-spacing:-1.4px;line-height:104%;margin:0 0 10px;position:relative;z-index:1">No instances yet</h1>
     <!-- Sub -->
-    <p style="font-size:14px;color:var(--muted);font-family:var(--font-body);line-height:160%;max-width:340px;margin:0 0 28px;position:relative;z-index:1">Spin up a dedicated GPU VM in under a minute. SSH in directly and start building.</p>
     <!-- CTA + docs -->
     <div style="display:flex;flex-direction:column;align-items:center;gap:14px;position:relative;z-index:1">
       <button class="btn btn-p" style="padding:0 44px;height:54px;font-size:15px;border-radius:16px;letter-spacing:-.1px;box-shadow:0 8px 28px rgba(0,0,0,.18),0 2px 6px rgba(0,0,0,.08)">
@@ -1224,88 +1223,203 @@ img.ico{display:block;flex:0 0 auto}
 <!-- ─── VIEW: Kubernetes Clusters ─── -->
 <div class="view" id="view-kubernetes">
   <div class="ph">
-    <div class="ph-l"><div class="ph-title">Kubernetes Clusters</div></div>
+    <div class="ph-l">
+      <div class="ph-title-sans">Kubernetes Clusters</div>
+      <div class="state-toggle">
+        <button class="state-toggle-btn active" onclick="toggleClusterState('medium')">Mild</button>
+        <button class="state-toggle-btn" onclick="toggleClusterState('mild')">Medium</button>
+        <button class="state-toggle-btn" onclick="toggleClusterState('spicy')">Spicy</button>
+      </div>
+    </div>
     <div class="ph-r"><button class="btn btn-p"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.99967 3.33337V12.6667M3.33301 8.00004H12.6663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Create Cluster</button></div>
   </div>
   <div class="divider"></div>
   <div class="ca">
-    <div class="ecard">
-      <div class="illus">Illustration</div>
-      <div class="etxt">
-        <div class="ecat">Orchestration</div>
-        <div class="etitle">No Kubernetes clusters yet</div>
-        <div class="edesc">Crusoe Managed Kubernetes (CMK) allows you to spin up Kubernetes clusters with fully-managed control planes. CMK manages the availability, scaling, and lifecycle of control plane nodes with pre-installed GPU and network drivers.</div>
+
+<!-- ── MILD (ecard + hover-expand templates) ── -->
+<div id="clusters-medium">
+  <div class="ecard">
+    <div class="illus">Illustration</div>
+    <div class="etxt">
+      <div class="ecat">Orchestration</div>
+      <div class="etitle">Create your first cluster</div>
+      <div class="edesc">Crusoe Managed Kubernetes (CMK) gives you fully-managed control planes with pre-installed GPU and network drivers. Spin up a training or inference cluster in minutes.</div>
+      <a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/orchestration/cmk" target="_blank" style="text-decoration:none;margin-top:12px;align-self:flex-start">View docs →</a>
+    </div>
+  </div>
+  <div class="pop-section">
+    <div class="pop-title">Start with a popular cluster template</div>
+    <div class="pop-grid">
+      <div class="pop-card med-res-card" style="display:flex;flex-direction:column;gap:0">
+        <div class="pop-card-top" style="margin-bottom:8px">
+          <div class="pop-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="3" y="3" width="22" height="22" rx="4" stroke="#111" stroke-width="1.4"/><circle cx="14" cy="14" r="5" stroke="#111" stroke-width="1.2"/><circle cx="14" cy="14" r="1.5" fill="#111" opacity=".3"/><line x1="14" y1="3" x2="14" y2="9" stroke="#111" stroke-width="1" opacity=".3"/><line x1="14" y1="19" x2="14" y2="25" stroke="#111" stroke-width="1" opacity=".3"/></svg></div>
+          <div class="pop-card-info"><div class="pop-card-name">GPU Training Cluster</div><div class="pop-card-price">H100 8x node pool</div></div>
+        </div>
+        <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Training · Multi-node</span></div>
+        <div style="display:flex;gap:6px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create cluster</button><a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/orchestration/cmk" target="_blank" style="text-decoration:none;gap:5px">View docs</a></div>
+        <div class="med-res-expand">Pre-configured with GPU operator, network operator, and CSI. Optimized for distributed training with NVLink + InfiniBand across H100 nodes.</div>
+      </div>
+      <div class="pop-card med-res-card" style="display:flex;flex-direction:column;gap:0">
+        <div class="pop-card-top" style="margin-bottom:8px">
+          <div class="pop-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="3" y="3" width="22" height="22" rx="4" stroke="#111" stroke-width="1.4"/><path d="M9 10h10M9 14h10M9 18h6" stroke="#111" stroke-width="1.2" stroke-linecap="round" opacity=".4"/></svg></div>
+          <div class="pop-card-info"><div class="pop-card-name">Inference Cluster</div><div class="pop-card-price">L40S autoscaling pool</div></div>
+        </div>
+        <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Inference · Autoscale</span></div>
+        <div style="display:flex;gap:6px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create cluster</button><a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/orchestration/cmk" target="_blank" style="text-decoration:none;gap:5px">View docs</a></div>
+        <div class="med-res-expand">Cost-efficient serving with autoscaling node pools. Ideal for vLLM, TGI, or Triton inference endpoints on L40S GPUs.</div>
+      </div>
+      <div class="pop-card med-res-card" style="display:flex;flex-direction:column;gap:0">
+        <div class="pop-card-top" style="margin-bottom:8px">
+          <div class="pop-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="3" y="3" width="22" height="22" rx="4" stroke="#111" stroke-width="1.4"/><rect x="8" y="8" width="12" height="12" rx="2" stroke="#111" stroke-width="1" opacity=".25"/></svg></div>
+          <div class="pop-card-info"><div class="pop-card-name">CPU-only Cluster</div><div class="pop-card-price">General-purpose nodes</div></div>
+        </div>
+        <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">CPU · APIs · Pipelines</span></div>
+        <div style="display:flex;gap:6px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create cluster</button><a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/orchestration/cmk" target="_blank" style="text-decoration:none;gap:5px">View docs</a></div>
+        <div class="med-res-expand">Standard Kubernetes cluster for APIs, data pipelines, and services that don't require GPU acceleration.</div>
       </div>
     </div>
-    <!-- Popular cluster templates -->
-    <div class="pop-section pop-section-centered">
-      <div class="pop-title">Start with a popular cluster template</div>
-      <div class="pop-grid">
-        <div class="pop-card">
-          <div class="pop-card-top">
-            <div class="pop-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="3" y="3" width="22" height="22" rx="4" stroke="#111" stroke-width="1.4"/><circle cx="14" cy="14" r="5" stroke="#111" stroke-width="1.2"/><circle cx="14" cy="14" r="1.5" fill="#111" opacity=".3"/><line x1="14" y1="3" x2="14" y2="9" stroke="#111" stroke-width="1" opacity=".3"/><line x1="14" y1="19" x2="14" y2="25" stroke="#111" stroke-width="1" opacity=".3"/></svg></div>
-            <div class="pop-card-info">
-              <div class="pop-card-name">GPU Training Cluster</div>
-              <div class="pop-card-price">H100 8x node pool</div>
-            </div>
-            <svg class="pop-chev" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
-          <div class="pop-card-reveal">
-            <div class="pop-card-desc">Pre-configured with GPU operator, network operator, and CSI. Optimized for distributed training workloads.</div>
-            <div class="pop-card-tags"><span class="pop-tag">GPU</span><span class="pop-tag">Training</span><span class="pop-tag">Multi-node</span></div>
-          </div>
-        </div>
-        <div class="pop-card">
-          <div class="pop-card-top">
-            <div class="pop-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="3" y="3" width="22" height="22" rx="4" stroke="#111" stroke-width="1.4"/><path d="M9 10h10M9 14h10M9 18h6" stroke="#111" stroke-width="1.2" stroke-linecap="round" opacity=".4"/></svg></div>
-            <div class="pop-card-info">
-              <div class="pop-card-name">Inference Cluster</div>
-              <div class="pop-card-price">L40S autoscaling pool</div>
-            </div>
-            <svg class="pop-chev" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
-          <div class="pop-card-reveal">
-            <div class="pop-card-desc">Cost-efficient serving with autoscaling node pools. Ideal for vLLM, TGI, or Triton inference endpoints.</div>
-            <div class="pop-card-tags"><span class="pop-tag">GPU</span><span class="pop-tag">Inference</span><span class="pop-tag">Autoscale</span></div>
-          </div>
-        </div>
-        <div class="pop-card">
-          <div class="pop-card-top">
-            <div class="pop-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="3" y="3" width="22" height="22" rx="4" stroke="#111" stroke-width="1.4"/><rect x="8" y="8" width="12" height="12" rx="2" stroke="#111" stroke-width="1" opacity=".25"/></svg></div>
-            <div class="pop-card-info">
-              <div class="pop-card-name">CPU-only Cluster</div>
-              <div class="pop-card-price">General-purpose nodes</div>
-            </div>
-            <svg class="pop-chev" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
-          <div class="pop-card-reveal">
-            <div class="pop-card-desc">Standard Kubernetes cluster for APIs, data pipelines, and services that don't require GPU acceleration.</div>
-            <div class="pop-card-tags"><span class="pop-tag">CPU</span><span class="pop-tag">General</span></div>
-          </div>
-        </div>
-      </div>
-      <div class="pop-alt"><span class="pop-alt-inner">or</span></div>
+  </div>
+</div><!-- /clusters-medium -->
+
+<!-- ── MEDIUM (big centered hero) ── -->
+<div id="clusters-mild" style="display:none">
+  <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 40px 32px;text-align:center;position:relative;overflow:hidden">
+    <!-- Soft radial gradient bg -->
+    <div style="position:absolute;inset:0;background:radial-gradient(ellipse 75% 65% at 50% 36%,var(--gray-50) 0%,transparent 70%);pointer-events:none"></div>
+    <!-- Decorative concentric rings -->
+    <div style="position:absolute;width:360px;height:360px;border-radius:50%;border:1px solid var(--gray-100);left:50%;top:38%;transform:translate(-50%,-50%);pointer-events:none"></div>
+    <div style="position:absolute;width:480px;height:480px;border-radius:50%;border:1px dashed var(--gray-100);left:50%;top:38%;transform:translate(-50%,-50%);pointer-events:none"></div>
+    <!-- Illustration placeholder -->
+    <div style="width:140px;height:130px;border:1.4px dashed var(--gray-300);border-radius:10px;display:flex;align-items:center;justify-content:center;background:var(--white);margin-bottom:22px;position:relative;z-index:1">
+      <span style="font-size:11px;font-family:var(--font-body);color:var(--muted)">Illustration</span>
     </div>
-    <!-- Secondary resources: Docs + CLI (2-column) -->
-    <div class="action-cards action-cards-2col">
-      <div class="action-card">
-        <div class="action-card-title">Documentation</div>
-        <div class="action-card-desc">Build and scale your AI workloads with minimal overhead. Learn about GPU operators, AutoClusters, and cluster versions.</div>
-        <a class="btn btn-o" href="https://docs.crusoecloud.com/orchestration/cmk" style="margin-top:auto">View CMK docs →</a>
+    <!-- Headline -->
+    <h1 style="font-size:48px;font-weight:400;font-family:var(--font-heading);color:var(--text);letter-spacing:-1.4px;line-height:104%;margin:0 0 10px;position:relative;z-index:1">No clusters yet</h1>
+    <!-- Sub -->
+    <p style="font-size:14px;color:var(--muted);font-family:var(--font-body);line-height:160%;max-width:360px;margin:0 0 28px;position:relative;z-index:1">Launch a fully-managed Kubernetes cluster with GPU operators pre-installed. Ready in minutes.</p>
+    <!-- CTAs -->
+    <div style="display:flex;flex-direction:column;align-items:center;gap:14px;position:relative;z-index:1">
+      <button class="btn btn-p" style="padding:0 44px;height:54px;font-size:15px;border-radius:16px;letter-spacing:-.1px;box-shadow:0 8px 28px rgba(0,0,0,.18),0 2px 6px rgba(0,0,0,.08)">
+        <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        Create cluster
+      </button>
+      <a href="https://docs.crusoecloud.com/orchestration/cmk" target="_blank" style="font-size:13px;color:var(--muted);font-family:var(--font-body);text-decoration:none">View cluster docs →</a>
+    </div>
+  </div>
+  <!-- Shimmer divider -->
+  <div style="display:flex;align-items:center;gap:14px;margin:0 0 20px;padding:0 2px">
+    <div class="res-divider-line"></div>
+    <span class="res-divider-text">Or start from a template</span>
+    <div class="res-divider-line" style="animation-delay:.4s"></div>
+  </div>
+  <!-- Template cards — descriptions always visible -->
+  <div class="pop-grid" style="margin-bottom:16px">
+    <div class="pop-card" style="cursor:default;display:flex;flex-direction:column;gap:0">
+      <div class="pop-card-top" style="margin-bottom:10px">
+        <div class="pop-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="3" y="3" width="22" height="22" rx="4" stroke="#111" stroke-width="1.4"/><circle cx="14" cy="14" r="5" stroke="#111" stroke-width="1.2"/><circle cx="14" cy="14" r="1.5" fill="#111" opacity=".3"/><line x1="14" y1="3" x2="14" y2="9" stroke="#111" stroke-width="1" opacity=".3"/><line x1="14" y1="19" x2="14" y2="25" stroke="#111" stroke-width="1" opacity=".3"/></svg></div>
+        <div class="pop-card-info"><div class="pop-card-name">GPU Training Cluster</div><div class="pop-card-price">H100 8x node pool</div></div>
       </div>
-      <div class="action-card">
-        <div class="action-card-title">CLI command</div>
-        <div class="action-card-desc" style="font-size:12px;color:var(--muted);margin-bottom:4px">Create a cluster via the Crusoe CLI:</div>
-        <div class="action-card-cli"><code>crusoe kubernetes clusters create \
-  --name my-first-cluster \
-  --cluster-version 1.31 \
-  --location us-east1-a \
-  --subnet-id &lt;subnet-id&gt; \
-  --add-ons "nvidia_gpu_operator,\
-    nvidia_network_operator,\
-    crusoe_csi"</code><button class="cli-snippet-copy">Copy</button></div>
+      <div class="pop-card-tags" style="margin-bottom:6px"><span class="pop-tag-sub">Training · Multi-node</span></div>
+      <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:150%;margin-bottom:12px">Pre-configured with GPU operator, network operator, and CSI. Optimized for distributed training workloads.</div>
+      <div style="display:flex;gap:6px;margin-top:auto"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create cluster</button><a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/orchestration/cmk" target="_blank" style="text-decoration:none">View docs</a></div>
+    </div>
+    <div class="pop-card" style="cursor:default;display:flex;flex-direction:column;gap:0">
+      <div class="pop-card-top" style="margin-bottom:10px">
+        <div class="pop-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="3" y="3" width="22" height="22" rx="4" stroke="#111" stroke-width="1.4"/><path d="M9 10h10M9 14h10M9 18h6" stroke="#111" stroke-width="1.2" stroke-linecap="round" opacity=".4"/></svg></div>
+        <div class="pop-card-info"><div class="pop-card-name">Inference Cluster</div><div class="pop-card-price">L40S autoscaling pool</div></div>
+      </div>
+      <div class="pop-card-tags" style="margin-bottom:6px"><span class="pop-tag-sub">Inference · Autoscale</span></div>
+      <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:150%;margin-bottom:12px">Cost-efficient serving with autoscaling node pools. Ideal for vLLM, TGI, or Triton inference endpoints.</div>
+      <div style="display:flex;gap:6px;margin-top:auto"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create cluster</button><a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/orchestration/cmk" target="_blank" style="text-decoration:none">View docs</a></div>
+    </div>
+    <div class="pop-card" style="cursor:default;display:flex;flex-direction:column;gap:0">
+      <div class="pop-card-top" style="margin-bottom:10px">
+        <div class="pop-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="3" y="3" width="22" height="22" rx="4" stroke="#111" stroke-width="1.4"/><rect x="8" y="8" width="12" height="12" rx="2" stroke="#111" stroke-width="1" opacity=".25"/></svg></div>
+        <div class="pop-card-info"><div class="pop-card-name">CPU-only Cluster</div><div class="pop-card-price">General-purpose nodes</div></div>
+      </div>
+      <div class="pop-card-tags" style="margin-bottom:6px"><span class="pop-tag-sub">CPU · APIs · Pipelines</span></div>
+      <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:150%;margin-bottom:12px">Standard Kubernetes cluster for APIs, data pipelines, and services that don't require GPU acceleration.</div>
+      <div style="display:flex;gap:6px;margin-top:auto"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create cluster</button><a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/orchestration/cmk" target="_blank" style="text-decoration:none">View docs</a></div>
+    </div>
+  </div>
+</div><!-- /clusters-mild -->
+
+<!-- ── SPICY (motion-forward) ── -->
+<div id="clusters-spicy" style="display:none">
+  <!-- Motion hero -->
+  <div id="cluster-spicy-hero" style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:56px 40px 52px;text-align:center;position:relative;overflow:hidden;background:var(--white)">
+    <!-- Subtle dot grid -->
+    <div style="position:absolute;inset:0;background-image:radial-gradient(circle,rgba(0,0,0,.055) 1px,transparent 1px);background-size:28px 28px;pointer-events:none;z-index:0"></div>
+    <!-- Horizontal wave canvas -->
+    <canvas id="cluster-wave-canvas" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0"></canvas>
+    <!-- Illustration placeholder -->
+    <div id="cluster-illus-wrap" style="display:flex;align-items:center;justify-content:center;margin-bottom:32px;z-index:1;position:relative">
+      <div style="width:160px;height:140px;border:1.4px dashed var(--gray-300);border-radius:12px;display:flex;align-items:center;justify-content:center;background:var(--white);animation:cube-float 4.5s ease-in-out infinite">
+        <span style="font-size:11px;font-family:var(--font-body);color:var(--muted)">Illustration</span>
       </div>
     </div>
+    <!-- Headline with typewriter -->
+    <h1 style="font-size:52px;font-weight:400;font-family:var(--font-heading);color:var(--text);letter-spacing:-1.6px;line-height:100%;margin:0 0 14px;position:relative;z-index:1"><span id="cluster-typed">No clusters yet.</span><span id="cluster-cursor" style="display:none;font-style:normal">|</span></h1>
+    <!-- Sub -->
+    <p style="font-size:14px;color:var(--muted);font-family:var(--font-body);line-height:165%;max-width:320px;margin:0 0 32px;position:relative;z-index:1">Launch a fully-managed Kubernetes cluster with GPU operators pre-installed. Ready in minutes.</p>
+    <!-- Scroll hint -->
+    <div class="scroll-hint" id="cluster-scroll-hint" aria-hidden="true" style="position:absolute;bottom:14px;left:50%;transform:translateX(-50%)">
+      <span class="scroll-hint-label">Scroll</span>
+      <span class="scroll-hint-chevron"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4 6.5l5 5 5-5" stroke="var(--gray-400)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+    </div>
+  </div>
+  <!-- Info ecard -->
+  <div class="ecard cluster-spicy-reveal" style="margin-top:24px">
+    <div class="etxt">
+      <div class="ecat">Orchestration</div>
+      <div class="etitle">Create your first cluster</div>
+      <div class="edesc">Crusoe Managed Kubernetes (CMK) gives you fully-managed control planes with GPU and network drivers pre-installed. Spin up a training or inference cluster in minutes.</div>
+      <div style="margin-top:12px">
+        <a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/orchestration/cmk" target="_blank" style="text-decoration:none">View docs →</a>
+      </div>
+    </div>
+  </div>
+  <!-- Template cards -->
+  <div class="pop-section cluster-spicy-reveal" style="transition-delay:.08s">
+    <div class="pop-title">Start with a popular cluster template</div>
+    <div class="pop-grid">
+      <div class="pop-card res-card cluster-spicy-reveal" style="transition-delay:.12s">
+        <div class="pop-card-top" style="margin-bottom:10px">
+          <div class="pop-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="3" y="3" width="22" height="22" rx="4" stroke="#111" stroke-width="1.4"/><circle cx="14" cy="14" r="5" stroke="#111" stroke-width="1.2"/><circle cx="14" cy="14" r="1.5" fill="#111" opacity=".3"/><line x1="14" y1="3" x2="14" y2="9" stroke="#111" stroke-width="1" opacity=".3"/><line x1="14" y1="19" x2="14" y2="25" stroke="#111" stroke-width="1" opacity=".3"/></svg></div>
+          <div class="pop-card-info"><div class="pop-card-name">GPU Training Cluster</div><div class="pop-card-price">H100 8x node pool</div></div>
+        </div>
+        <div class="res-card-body"><div class="res-card-body-inner">
+          <div class="pop-card-tags" style="margin-bottom:6px"><span class="pop-tag-sub">Training · Multi-node</span></div>
+          <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:150%;margin-bottom:12px">Pre-configured with GPU operator, network operator, and CSI. Optimized for distributed training with NVLink + InfiniBand.</div>
+          <div style="display:flex;gap:6px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create cluster</button><a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/orchestration/cmk" target="_blank" style="text-decoration:none">View docs</a></div>
+        </div></div>
+      </div>
+      <div class="pop-card res-card cluster-spicy-reveal" style="transition-delay:.2s">
+        <div class="pop-card-top" style="margin-bottom:10px">
+          <div class="pop-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="3" y="3" width="22" height="22" rx="4" stroke="#111" stroke-width="1.4"/><path d="M9 10h10M9 14h10M9 18h6" stroke="#111" stroke-width="1.2" stroke-linecap="round" opacity=".4"/></svg></div>
+          <div class="pop-card-info"><div class="pop-card-name">Inference Cluster</div><div class="pop-card-price">L40S autoscaling pool</div></div>
+        </div>
+        <div class="res-card-body"><div class="res-card-body-inner">
+          <div class="pop-card-tags" style="margin-bottom:6px"><span class="pop-tag-sub">Inference · Autoscale</span></div>
+          <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:150%;margin-bottom:12px">Cost-efficient serving with autoscaling node pools. Ideal for vLLM, TGI, or Triton inference endpoints on L40S GPUs.</div>
+          <div style="display:flex;gap:6px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create cluster</button><a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/orchestration/cmk" target="_blank" style="text-decoration:none">View docs</a></div>
+        </div></div>
+      </div>
+      <div class="pop-card res-card cluster-spicy-reveal" style="transition-delay:.28s">
+        <div class="pop-card-top" style="margin-bottom:10px">
+          <div class="pop-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="3" y="3" width="22" height="22" rx="4" stroke="#111" stroke-width="1.4"/><rect x="8" y="8" width="12" height="12" rx="2" stroke="#111" stroke-width="1" opacity=".25"/></svg></div>
+          <div class="pop-card-info"><div class="pop-card-name">CPU-only Cluster</div><div class="pop-card-price">General-purpose nodes</div></div>
+        </div>
+        <div class="res-card-body"><div class="res-card-body-inner">
+          <div class="pop-card-tags" style="margin-bottom:6px"><span class="pop-tag-sub">CPU · APIs · Pipelines</span></div>
+          <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:150%;margin-bottom:12px">Standard Kubernetes cluster for APIs, data pipelines, and services that don't require GPU acceleration.</div>
+          <div style="display:flex;gap:6px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create cluster</button><a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/orchestration/cmk" target="_blank" style="text-decoration:none">View docs</a></div>
+        </div></div>
+      </div>
+    </div>
+  </div>
+</div><!-- /clusters-spicy -->
+
   </div>
 </div>
 
@@ -2723,6 +2837,119 @@ function copyResCli(gpu) {
     });
   }).catch(() => {});
 }
+
+// ── Cluster state toggle ──
+function toggleClusterState(state) {
+  ['mild','medium','spicy'].forEach(s => {
+    const el = document.getElementById('clusters-' + s);
+    if (el) el.style.display = s === state ? '' : 'none';
+  });
+  const btns = document.querySelectorAll('#view-kubernetes .state-toggle-btn');
+  btns.forEach((b, i) => b.classList.toggle('active', ['medium','mild','spicy'][i] === state));
+  document.querySelector('.main').scrollTop = 0;
+}
+
+// ── Cluster spicy scroll-reveal ──
+(function(){
+  const root = document.querySelector('.main') || document.documentElement;
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add('is-visible'); io.unobserve(e.target); } });
+  }, { root, threshold: 0.08 });
+  function initClusterSpicyReveal() {
+    document.querySelectorAll('#clusters-spicy .cluster-spicy-reveal').forEach(el => {
+      el.classList.remove('is-visible');
+      io.observe(el);
+    });
+  }
+  function initClusterScrollHint() {
+    const hint = document.getElementById('cluster-scroll-hint');
+    if (!hint) return;
+    hint.classList.remove('hidden');
+    const scroller = document.querySelector('.main') || document.documentElement;
+    function onScroll() {
+      if (scroller.scrollTop > 30) { hint.classList.add('hidden'); scroller.removeEventListener('scroll', onScroll); }
+    }
+    scroller.addEventListener('scroll', onScroll, { passive: true });
+  }
+  const origToggle = window.toggleClusterState;
+  window.toggleClusterState = function(state) {
+    origToggle(state);
+    if (state === 'spicy') {
+      requestAnimationFrame(initClusterSpicyReveal);
+      requestAnimationFrame(initClusterScrollHint);
+      setTimeout(initClusterSpicyMagic, 60);
+    }
+  };
+})();
+
+// ── Cluster spicy wave + typewriter ──
+function initClusterSpicyMagic() {
+  // Typewriter
+  const typed = document.getElementById('cluster-typed');
+  const cursor = document.getElementById('cluster-cursor');
+  if (!typed || !cursor) return;
+  const fullText = 'No clusters yet.';
+  typed.textContent = '';
+  cursor.style.display = 'inline';
+  cursor.style.animation = 'cursor-blink .9s step-start infinite';
+  let i = 0;
+  function type() {
+    if (!document.getElementById('cluster-typed')) return;
+    if (i < fullText.length) { typed.textContent += fullText[i++]; setTimeout(type, 68 + Math.random()*40); }
+    else { setTimeout(() => { if(cursor) cursor.style.display = 'none'; }, 900); }
+  }
+  setTimeout(type, 200);
+  // Wave canvas
+  initClusterWaves();
+  // Periodic glitch on illustration
+  const wrap = document.getElementById('cluster-illus-wrap');
+  if (wrap) {
+    function scheduleGlitch() {
+      setTimeout(() => {
+        if (!document.getElementById('cluster-illus-wrap')) return;
+        wrap.style.animation = 'cube-glitch-run .28s steps(1) forwards';
+        setTimeout(() => { if(wrap) wrap.style.animation = ''; scheduleGlitch(); }, 300);
+      }, 3500 + Math.random()*3000);
+    }
+    scheduleGlitch();
+  }
+}
+function initClusterWaves() {
+  const canvas = document.getElementById('cluster-wave-canvas');
+  if (!canvas) return;
+  const waves = [
+    { yFrac:.16, amp:8,  period:300, phase:0.0,  opacity:.038 },
+    { yFrac:.30, amp:5,  period:220, phase:1.2,  opacity:.028 },
+    { yFrac:.50, amp:11, period:360, phase:2.5,  opacity:.034 },
+    { yFrac:.66, amp:6,  period:250, phase:0.7,  opacity:.026 },
+    { yFrac:.82, amp:9,  period:320, phase:3.8,  opacity:.036 },
+  ];
+  let t = 0; let raf;
+  function draw() {
+    if (!canvas.isConnected) { cancelAnimationFrame(raf); return; }
+    const W = canvas.offsetWidth, H = canvas.offsetHeight;
+    if (canvas.width !== W || canvas.height !== H) { canvas.width = W; canvas.height = H; }
+    const ctx = canvas.getContext('2d'); ctx.clearRect(0,0,W,H);
+    waves.forEach(w => {
+      ctx.beginPath(); ctx.strokeStyle = `rgba(0,0,0,${w.opacity})`; ctx.lineWidth = 1.2;
+      for (let x = 0; x <= W; x += 2) {
+        const y = w.yFrac * H + Math.sin((x / w.period) * Math.PI * 2 + t + w.phase) * w.amp;
+        x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+      }
+      ctx.stroke();
+    });
+    t += 0.008;
+    raf = requestAnimationFrame(draw);
+  }
+  draw();
+}
+
+// Add cluster-spicy-reveal class to spicy CSS (reuse spicy-reveal styles)
+(function(){
+  const style = document.createElement('style');
+  style.textContent = '.cluster-spicy-reveal{opacity:0;transform:translateY(14px);transition:opacity .55s ease,transform .55s ease}.cluster-spicy-reveal.is-visible{opacity:1;transform:none}';
+  document.head.appendChild(style);
+})();
 
 // ── Disk state toggle ──
 function toggleDiskState(state) {
