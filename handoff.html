@@ -212,6 +212,10 @@ html,body{height:100%;background:var(--white);color:var(--black);font-family:'Su
 .res-card-body-inner{padding-top:10px;padding-bottom:10px}
 /* Buttons always visible inside body */
 .res-card-actions{display:flex;gap:6px}
+.step-card{border:1px solid var(--border);border-radius:12px;padding:20px 24px;display:flex;flex-direction:column;gap:10px;background:var(--white)}
+.step-num{width:30px;height:30px;border-radius:50%;background:#111;color:#fff;font-size:13px;font-weight:700;font-family:var(--font-body);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.step-title{font-size:15px;font-weight:600;font-family:var(--font-body);color:var(--text);margin:0}
+.step-desc{font-size:12px;color:var(--muted);font-family:var(--font-body);line-height:155%;flex:1}
 @keyframes spicy-ring{0%,100%{opacity:.6;transform:scale(1)}50%{opacity:1;transform:scale(1.03)}}
 @keyframes cube-float{0%,100%{transform:translateY(0) rotate(0deg)}30%{transform:translateY(-10px) rotate(.6deg)}70%{transform:translateY(-7px) rotate(-.4deg)}}
 @keyframes cursor-blink{0%,49%{opacity:1}50%,100%{opacity:0}}
@@ -2010,11 +2014,13 @@ img.ico{display:block;flex:0 0 auto}
 
     <!-- Spicy state -->
     <div id="disks-spicy">
-      <div id="disk-spicy-hero" style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:56px 40px 52px;text-align:center;position:relative;overflow:hidden;background:var(--white)">
-        <div style="position:absolute;inset:0;background-image:radial-gradient(circle,rgba(0,0,0,.055) 1px,transparent 1px);background-size:28px 28px;pointer-events:none;z-index:0"></div>
+      <!-- Side-by-side hero: animation left, text right -->
+      <div id="disk-spicy-hero" style="display:flex;flex-direction:row;align-items:center;justify-content:flex-start;gap:48px;padding:32px 40px 28px 72px;text-align:left;position:relative;overflow:hidden;background:var(--white)">
+        <div style="position:absolute;inset:0;background-image:radial-gradient(circle,rgba(0,0,0,.045) 1px,transparent 1px);background-size:28px 28px;pointer-events:none;z-index:0"></div>
         <canvas id="disk-wave-canvas" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0"></canvas>
-        <div id="disk-illus-wrap" style="display:flex;align-items:center;justify-content:center;margin-bottom:32px;z-index:1;position:relative">
-          <svg id="disk-spicy-svg" width="160" height="160" viewBox="0 0 150.588 150.588" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:relative;z-index:1">
+        <!-- Illustration -->
+        <div id="disk-illus-wrap" style="display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:1;position:relative">
+          <svg id="disk-spicy-svg" width="185" height="185" viewBox="0 0 150.588 150.588" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:relative;z-index:1">
             <path id="disk-e0" d="M75.2938 150.088C116.601 150.088 150.088 116.601 150.088 75.2938C150.088 33.9863 116.601 0.5 75.2938 0.5C33.9863 0.5 0.5 33.9863 0.5 75.2938C0.5 116.601 33.9863 150.088 75.2938 150.088Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
             <path id="disk-e1" transform="translate(0,16.149)" d="M75.2938 117.79C116.601 117.79 150.088 91.5341 150.088 59.1452C150.088 26.7564 116.601 0.5 75.2938 0.5C33.9863 0.5 0.5 26.7564 0.5 59.1452C0.5 91.5341 33.9863 117.79 75.2938 117.79Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
             <path id="disk-e2" transform="translate(0,32.307)" d="M75.2938 85.4742C116.601 85.4742 150.088 66.4521 150.088 42.9871C150.088 19.5221 116.601 0.5 75.2938 0.5C33.9863 0.5 0.5 19.5221 0.5 42.9871C0.5 66.4521 33.9863 85.4742 75.2938 85.4742Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
@@ -2022,20 +2028,28 @@ img.ico{display:block;flex:0 0 auto}
             <path id="disk-e4" transform="translate(0,64.604)" d="M75.2938 20.88C116.601 20.88 150.088 16.3178 150.088 10.69C150.088 5.06222 116.601 0.5 75.2938 0.5C33.9863 0.5 0.5 5.06222 0.5 10.69C0.5 16.3178 33.9863 20.88 75.2938 20.88Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </div>
-        <h1 style="font-size:52px;font-weight:400;font-family:var(--font-heading);color:var(--text);letter-spacing:-1.6px;line-height:100%;margin:0 0 14px;position:relative;z-index:1"><span id="disk-typed">No disks yet.</span><span id="disk-cursor" style="display:none;font-style:normal">|</span></h1>
-        <p style="font-size:14px;color:var(--muted);font-family:var(--font-body);line-height:165%;max-width:320px;margin:0 0 32px;position:relative;z-index:1">Persistent block storage for your VMs. Attach, detach, snapshot — data lives on independently.</p>
-        <div class="scroll-hint" id="disk-scroll-hint" aria-hidden="true" style="position:absolute;bottom:14px;left:50%;transform:translateX(-50%)">
-          <span class="scroll-hint-label">Scroll</span>
-          <span class="scroll-hint-chevron"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4 6.5l5 5 5-5" stroke="var(--gray-400)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <!-- Text block -->
+        <div style="position:relative;z-index:1;max-width:380px">
+          <h1 style="font-size:36px;font-weight:400;font-family:var(--font-heading);color:var(--text);letter-spacing:-1px;line-height:105%;margin:0 0 8px"><span id="disk-typed">No disks yet.</span><span id="disk-cursor" style="display:none;font-style:normal">|</span></h1>
+          <p style="font-size:13px;color:var(--muted);font-family:var(--font-body);line-height:160%;margin:0 0 14px">Persistent block storage for your VMs. Attach, detach, snapshot — data lives on independently.</p>
+          <a href="https://docs.crusoecloud.com/storage/disks/overview" target="_blank" style="display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:500;font-family:var(--font-body);color:var(--white);background:var(--black);padding:6px 14px;border-radius:8px;text-decoration:none;letter-spacing:.01em;transition:opacity .15s ease" onmouseenter="this.style.opacity='.8'" onmouseleave="this.style.opacity='1'">View docs →</a>
         </div>
       </div>
-      <div class="ecard disk-spicy-reveal" style="margin-top:24px">
-        <div class="etxt">
-          <div class="ecat">Storage</div>
-          <div class="etitle">No disks yet</div>
-          <div class="edesc">Persistent block storage for your virtual machines. Attach and detach across instances — data persists independently of VM lifecycle. Supports snapshots and resizing up to 10 TiB.</div>
-          <div style="margin-top:12px;display:flex;gap:8px">
-            <a class="btn btn-p" href="https://docs.crusoecloud.com/storage/disks/overview" target="_blank" style="text-decoration:none">Visit disk docs</a>
+      <!-- Step cards side by side -->
+      <div class="pop-section disk-spicy-reveal" style="margin-top:60px;padding-bottom:20px">
+        <div class="pop-title">Get started in two steps</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+          <div class="step-card">
+            <div class="step-num">1</div>
+            <div class="step-title">Create a disk</div>
+            <div class="step-desc">Persistent block storage that survives VM restarts. Choose size and type when creating.</div>
+            <div><button class="btn btn-p btn-sm">Create disk</button></div>
+          </div>
+          <div class="step-card">
+            <div class="step-num">2</div>
+            <div class="step-title">Attach to instance</div>
+            <div class="step-desc">Mount your disk to any running or stopped instance. Detach and reattach without losing data.</div>
+            <div><button class="btn btn-o btn-sm">Attach to instance</button></div>
           </div>
         </div>
       </div>
@@ -3576,56 +3590,57 @@ function toggleClusterEdgeState(n) {
 
 // ── Cluster spicy wave + typewriter + draw-in ──
 function initClusterSpicyMagic() {
-  // 1. SVG draw-in: outer→mid→inner squares, then center box, then X diagonals
-  const drawOrder = [
-    {id:'co-sq-tr',  delay:0,   dur:700},
-    {id:'co-sq-mid', delay:200, dur:650},
-    {id:'co-sq-bl',  delay:400, dur:600},
-    {id:'co-center', delay:600, dur:350},
-    {id:'co-diag-1', delay:760, dur:220},
-    {id:'co-diag-2', delay:840, dur:220},
-  ];
-  // Last draw-in finishes at delay:840 + dur:220 = 1060ms
-  const DRAW_DONE = 1100;
-  drawOrder.forEach(({id, delay, dur}) => {
-    const el = document.getElementById(id);
-    if (!el) return;
-    try {
-      const len = el.getTotalLength();
-      el.style.strokeDasharray = len;
-      el.style.strokeDashoffset = len;
-      el.style.transition = 'none';
-      setTimeout(() => {
-        el.style.transition = `stroke-dashoffset ${dur}ms ease`;
-        el.style.strokeDashoffset = '0';
-      }, delay);
-    } catch(e) {}
-  });
-  // Clear all transitions once draw-in is fully done so nothing can re-trigger
-  setTimeout(() => {
-    drawOrder.forEach(({id}) => {
-      const el = document.getElementById(id);
-      if (el) { el.style.transition = 'none'; el.style.strokeDasharray = ''; el.style.strokeDashoffset = ''; }
-    });
-  }, DRAW_DONE + 60);
-  // Fade in corner dots after draw-in completes
-  ['co-dot-bl','co-dot-tr'].forEach((id, i) => {
-    const el = document.getElementById(id);
-    if (!el) return;
-    el.style.opacity = '0';
-    setTimeout(() => {
-      el.style.transition = 'opacity 400ms ease';
-      el.style.opacity = '1';
-      setTimeout(() => { if(el) el.style.transition = 'none'; }, 450);
-    }, 980 + i*120);
-  });
-  // Loop: restart draw-in after a pause
-  setTimeout(() => { if (document.getElementById('cluster-orch-svg')) initClusterSpicyMagic(); }, DRAW_DONE + 1400);
+  const svg = document.getElementById('cluster-orch-svg');
+  if (!svg) return;
 
-  // 3. Wave canvas — start once only
+  const pathIds = ['co-sq-tr','co-sq-mid','co-sq-bl','co-center','co-diag-1','co-diag-2'];
+  const dotIds  = ['co-dot-bl','co-dot-tr'];
+  const STAGGER  = 130;
+  const DUR_FWD  = 1400;
+  const DUR_BWD  = 1100;
+  const TOTAL_FWD = (pathIds.length - 1) * STAGGER + DUR_FWD;
+  const TOTAL_BWD = (pathIds.length - 1) * STAGGER + DUR_BWD;
+  const PAUSE    = 160;
+
+  clearTimeout(window._clusterDrawTimer);
+  window._clusterDrawFirstRun = true;
+
+  function doClusterDraw(dir) {
+    if (!document.getElementById('cluster-orch-svg')) return;
+    clearTimeout(window._clusterDrawTimer);
+    const paths = pathIds.map(id => document.getElementById(id)).filter(Boolean);
+    const dots  = dotIds.map(id  => document.getElementById(id)).filter(Boolean);
+
+    if (dir === 'fwd') {
+      if (window._clusterDrawFirstRun) {
+        window._clusterDrawFirstRun = false;
+        paths.forEach(p => {
+          try { const l = p.getTotalLength(); p.style.transition = 'none'; p.style.strokeDasharray = l; p.style.strokeDashoffset = l; } catch(e) {}
+        });
+        dots.forEach(d => { d.style.transition = 'none'; d.style.opacity = '0'; });
+        void svg.getBoundingClientRect();
+      }
+      requestAnimationFrame(() => {
+        paths.forEach((p, i) => {
+          try { p.style.transition = `stroke-dashoffset ${DUR_FWD}ms cubic-bezier(.4,0,0,1) ${i*STAGGER}ms`; p.style.strokeDashoffset = '0'; } catch(e) {}
+        });
+        const dotsStart = (pathIds.length - 1) * STAGGER + 500;
+        dots.forEach((d, i) => setTimeout(() => { d.style.transition = 'opacity 400ms ease'; d.style.opacity = '1'; }, dotsStart + i * 120));
+        window._clusterDrawTimer = setTimeout(() => doClusterDraw('bwd'), TOTAL_FWD + PAUSE);
+      });
+    } else {
+      paths.forEach((p, i) => {
+        try { const l = p.getTotalLength(); const rd = (paths.length-1-i)*STAGGER; p.style.transition = `stroke-dashoffset ${DUR_BWD}ms cubic-bezier(.55,0,1,.45) ${rd}ms`; p.style.strokeDashoffset = l; } catch(e) {}
+      });
+      dots.forEach((d, i) => { d.style.transition = `opacity 280ms ease ${i*60}ms`; d.style.opacity = '0'; });
+      window._clusterDrawTimer = setTimeout(() => doClusterDraw('fwd'), TOTAL_BWD + PAUSE);
+    }
+  }
+
+  doClusterDraw('fwd');
+
   if (!window._clusterWavesStarted) { window._clusterWavesStarted = true; initClusterWaves(); }
 
-  // 4. Node ripples — start once only
   if (!window._clusterRipplesStarted) {
     window._clusterRipplesStarted = true;
     const rippleSvg = document.getElementById('cluster-node-ripples');
@@ -3652,7 +3667,6 @@ function initClusterSpicyMagic() {
       setTimeout(rippleLoop, 1200);
     }
   }
-
 }
 function initClusterWaves() {
   const canvas = document.getElementById('cluster-wave-canvas');
@@ -3698,58 +3712,56 @@ function initClusterWaves() {
 
 // ── Slurm spicy: draw-in + typewriter + waves + ripples ──
 function initSlurmSpicyMagic() {
-  const drawOrder = [
-    {id:'sl-sq-tr',  delay:0,   dur:700},
-    {id:'sl-sq-mid', delay:200, dur:650},
-    {id:'sl-sq-bl',  delay:400, dur:600},
-    {id:'sl-center', delay:600, dur:350},
-    {id:'sl-diag-1', delay:760, dur:220},
-    {id:'sl-diag-2', delay:840, dur:220},
-  ];
-  const DRAW_DONE = 1100;
-  drawOrder.forEach(({id, delay, dur}) => {
-    const el = document.getElementById(id);
-    if (!el) return;
-    try {
-      const len = el.getTotalLength();
-      el.style.strokeDasharray = len;
-      el.style.strokeDashoffset = len;
-      el.style.transition = 'none';
-      setTimeout(() => {
-        el.style.transition = `stroke-dashoffset ${dur}ms ease`;
-        el.style.strokeDashoffset = '0';
-      }, delay);
-    } catch(e) {}
-  });
-  setTimeout(() => {
-    drawOrder.forEach(({id}) => {
-      const el = document.getElementById(id);
-      if (el) { el.style.transition = 'none'; el.style.strokeDasharray = ''; el.style.strokeDashoffset = ''; }
-    });
-  }, DRAW_DONE + 60);
-  ['sl-dot-bl','sl-dot-tr'].forEach((id, i) => {
-    const el = document.getElementById(id);
-    if (!el) return;
-    el.style.opacity = '0';
-    setTimeout(() => {
-      el.style.transition = 'opacity 400ms ease';
-      el.style.opacity = '1';
-      setTimeout(() => { if(el) el.style.transition = 'none'; }, 450);
-    }, 980 + i*120);
-  });
-  // Loop: restart draw-in after a pause
-  setTimeout(() => { if (document.getElementById('slurm-orch-svg')) initSlurmSpicyMagic(); }, DRAW_DONE + 1400);
-  // Scroll hint
-  const hint = document.getElementById('slurm-scroll-hint');
-  if (hint) {
-    hint.classList.remove('hidden');
-    const scroller = document.querySelector('.main') || document.documentElement;
-    function onScroll() {
-      if (scroller.scrollTop > 30) { hint.classList.add('hidden'); scroller.removeEventListener('scroll', onScroll); }
+  const svg = document.getElementById('slurm-orch-svg');
+  if (!svg) return;
+
+  const pathIds = ['sl-sq-tr','sl-sq-mid','sl-sq-bl','sl-center','sl-diag-1','sl-diag-2'];
+  const dotIds  = ['sl-dot-bl','sl-dot-tr'];
+  const STAGGER  = 130;
+  const DUR_FWD  = 1400;
+  const DUR_BWD  = 1100;
+  const TOTAL_FWD = (pathIds.length - 1) * STAGGER + DUR_FWD;
+  const TOTAL_BWD = (pathIds.length - 1) * STAGGER + DUR_BWD;
+  const PAUSE    = 160;
+
+  clearTimeout(window._slurmDrawTimer);
+  window._slurmDrawFirstRun = true;
+
+  function doSlurmDraw(dir) {
+    if (!document.getElementById('slurm-orch-svg')) return;
+    clearTimeout(window._slurmDrawTimer);
+    const paths = pathIds.map(id => document.getElementById(id)).filter(Boolean);
+    const dots  = dotIds.map(id  => document.getElementById(id)).filter(Boolean);
+
+    if (dir === 'fwd') {
+      if (window._slurmDrawFirstRun) {
+        window._slurmDrawFirstRun = false;
+        paths.forEach(p => {
+          try { const l = p.getTotalLength(); p.style.transition = 'none'; p.style.strokeDasharray = l; p.style.strokeDashoffset = l; } catch(e) {}
+        });
+        dots.forEach(d => { d.style.transition = 'none'; d.style.opacity = '0'; });
+        void svg.getBoundingClientRect();
+      }
+      requestAnimationFrame(() => {
+        paths.forEach((p, i) => {
+          try { p.style.transition = `stroke-dashoffset ${DUR_FWD}ms cubic-bezier(.4,0,0,1) ${i*STAGGER}ms`; p.style.strokeDashoffset = '0'; } catch(e) {}
+        });
+        const dotsStart = (pathIds.length - 1) * STAGGER + 500;
+        dots.forEach((d, i) => setTimeout(() => { d.style.transition = 'opacity 400ms ease'; d.style.opacity = '1'; }, dotsStart + i * 120));
+        window._slurmDrawTimer = setTimeout(() => doSlurmDraw('bwd'), TOTAL_FWD + PAUSE);
+      });
+    } else {
+      paths.forEach((p, i) => {
+        try { const l = p.getTotalLength(); const rd = (paths.length-1-i)*STAGGER; p.style.transition = `stroke-dashoffset ${DUR_BWD}ms cubic-bezier(.55,0,1,.45) ${rd}ms`; p.style.strokeDashoffset = l; } catch(e) {}
+      });
+      dots.forEach((d, i) => { d.style.transition = `opacity 280ms ease ${i*60}ms`; d.style.opacity = '0'; });
+      window._slurmDrawTimer = setTimeout(() => doSlurmDraw('fwd'), TOTAL_BWD + PAUSE);
     }
-    scroller.addEventListener('scroll', onScroll, { passive: true });
   }
-  // Reveal below-fold items
+
+  doSlurmDraw('fwd');
+
+  // Reveal cards
   setTimeout(() => {
     document.querySelectorAll('.slurm-spicy-reveal').forEach((el,i) => {
       setTimeout(() => el.classList.add('is-visible'), i * 80);
