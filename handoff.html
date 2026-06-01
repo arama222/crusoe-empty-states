@@ -444,7 +444,7 @@ img.ico{display:block;flex:0 0 auto}
 .pop-section{margin-top:12px;margin-bottom:12px}
 .pop-section-centered{max-width:920px;margin-left:auto;margin-right:auto}
 .pop-title{font-size:14px;font-weight:500;font-family:var(--font-body);color:var(--muted);text-align:center;margin-bottom:16px}
-.pop-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;overflow:visible}
+.pop-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;overflow:visible;align-items:start}
 .pop-card{border:1px solid var(--border);border-radius:10px;padding:18px 20px;background:var(--white);cursor:pointer;transition:border-color .2s ease,box-shadow .2s ease}
 .pop-card:hover{border-color:var(--gray-400);box-shadow:0 4px 16px rgba(0,0,0,.07)}
 .pop-card-top{display:flex;align-items:center;gap:12px}
@@ -1023,8 +1023,8 @@ img.ico{display:block;flex:0 0 auto}
     <canvas id="spicy-wave-canvas" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0"></canvas>
     <!-- Illustration -->
     <div id="spicy-cube-wrap" style="display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:1;position:relative">
-      <svg id="spicy-node-ripples" width="260" height="220" viewBox="0 0 300 260" fill="none" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);pointer-events:none;z-index:2;overflow:visible"></svg>
-      <svg id="spicy-cube" width="140" height="108" viewBox="0 0 166.55 128.97" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:relative;z-index:1">
+      <svg id="spicy-node-ripples" width="320" height="270" viewBox="0 0 300 260" fill="none" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);pointer-events:none;z-index:2;overflow:visible"></svg>
+      <svg id="spicy-cube" width="175" height="135" viewBox="0 0 166.55 128.97" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:relative;z-index:1">
         <path d="M143.43 96.41H161.12C161.92 96.41 162.75 96.53 163.52 96.18C164.12 95.91 164.75 96.04 165.14 96.42C165.56 96.82 165.14 97.2 164.88 97.6C163.91 99.07 162.88 100.53 161.86 101.98C159.15 105.81 156.46 109.64 153.75 113.47C150.75 117.74 147.81 122.03 144.72 126.26C143.76 127.57 142.3 128.49 139.84 128.48C94.52 128.4 49.22 128.42 3.9 128.42C3.02 128.42 1.85 128.68 1.41 127.93C1.04 127.29 0.49 126.61 0.6 125.82C0.62 125.66 0.6 125.51 0.6 125.35V35.11C0.6 33.55 1.07 32.15 2.03 30.69C4.53 26.89 7.11 23.13 9.59 19.34C13.54 13.32 17.69 7.38 21.6 1.34C21.82 1.01 22.11 0.64 22.66 0.5C22.97 0.61 23.27 0.74 23.24 1.09C22.9 4.52 23.12 7.97 23.1 11.4C23.05 18.55 23.1 89.24 23.1 96.4" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
         <path d="M23.05 1.24C38.06 16.83 121.42 106.9 136.61 122.41C138.09 123.92 140.21 126.05 142.39 127.37" stroke="black" stroke-miterlimit="10" stroke-dasharray="3 3"/>
         <path d="M23.88 96.63C24.35 97.15 44.33 96.41 45.01 96.41H142.77" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
@@ -1047,7 +1047,7 @@ img.ico{display:block;flex:0 0 auto}
     </div>
   </div>
   <!-- Reservations -->
-  <div class="pop-section spicy-reveal" style="margin-top:24px;padding-bottom:20px">
+  <div class="pop-section spicy-reveal" style="margin-top:44px;padding-bottom:20px">
     <div class="pop-title">Create from your reservations</div>
     <div class="pop-grid">
       <div class="pop-card res-card spicy-reveal" style="transition-delay:.08s">
