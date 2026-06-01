@@ -857,7 +857,7 @@ img.ico{display:block;flex:0 0 auto}
           <div class="etitle">Create your first instance</div>
           <div class="edesc">A dedicated Linux VM with one or more GPUs you can SSH into directly. Stopped VMs are not charged for on-demand usage.</div>
           <div style="margin-top:12px;display:flex;gap:8px;align-items:center;flex-wrap:wrap">
-            <button class="btn btn-p btn-sm" style="opacity:.4;cursor:not-allowed" disabled>
+            <button class="btn btn-p btn-sm">
               <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
               Create instance
             </button>
@@ -865,14 +865,14 @@ img.ico{display:block;flex:0 0 auto}
           </div>
         </div>
       </div>
-      <!-- Bottom: SSH key banner -->
-      <div style="border-top:1px solid var(--border);background:var(--gray-50);padding:14px 32px;display:flex;align-items:center;gap:12px">
-        <svg width="16" height="16" viewBox="0 0 20 20" fill="none" style="flex-shrink:0" stroke="var(--gray-600)" stroke-width="1.5"><circle cx="10" cy="10" r="8"/><line x1="10" y1="9" x2="10" y2="13"/><circle cx="10" cy="7" r=".5" fill="var(--gray-600)" stroke="none"/></svg>
+      <!-- Bottom: SSH key advisory banner -->
+      <div style="border-top:1px solid #fef3c7;background:#fffbeb;padding:14px 32px;display:flex;align-items:center;gap:12px">
+        <svg width="16" height="16" viewBox="0 0 20 20" fill="none" style="flex-shrink:0" stroke="#d97706" stroke-width="1.5"><circle cx="10" cy="10" r="8"/><line x1="10" y1="9" x2="10" y2="13"/><circle cx="10" cy="7" r=".5" fill="#d97706" stroke="none"/></svg>
         <div style="flex:1">
-          <div style="font-size:13px;font-weight:600;font-family:var(--font-body);color:var(--text);margin-bottom:1px">Add an SSH key before creating an instance</div>
-          <div style="font-size:12px;color:var(--muted);font-family:var(--font-body);line-height:150%">You'll need a public SSH key to connect to your VM after it boots. Without one, you won't be able to log in.</div>
+          <div style="font-size:13px;font-weight:600;font-family:var(--font-body);color:#92400e;margin-bottom:1px">You won't be able to connect without an SSH key</div>
+          <div style="font-size:12px;color:#92400e;opacity:.8;font-family:var(--font-body);line-height:150%">You can create the instance now, but you'll need a public SSH key to log in after it boots.</div>
         </div>
-        <button class="btn btn-p btn-sm" onclick="navigate('ssh-keys')" style="flex-shrink:0;white-space:nowrap">+ Add SSH key</button>
+        <button class="btn btn-sm" onclick="navigate('ssh-keys')" style="flex-shrink:0;white-space:nowrap;background:#fef3c7;border:1px solid #fcd34d;color:#92400e;border-radius:6px;padding:5px 12px;font-size:12px;font-weight:500;font-family:var(--font-body);cursor:pointer">+ Add SSH key</button>
       </div>
     </div>
     <div class="pop-section">
@@ -881,24 +881,24 @@ img.ico{display:block;flex:0 0 auto}
         <span class="res-divider-text">Or create from a reservation</span>
         <div class="res-divider-line" style="animation-delay:.4s"></div>
       </div>
-      <div class="pop-grid" style="opacity:.4;pointer-events:none">
+      <div class="pop-grid">
         <div class="pop-card" style="cursor:default;display:flex;flex-direction:column;gap:0">
           <div class="pop-card-top" style="margin-bottom:10px"><div class="pop-icon"><svg width="26" height="26" viewBox="0 0 28 28" fill="none"><rect x="2" y="6" width="24" height="16" rx="3" stroke="var(--gray-800)" stroke-width="1.4"/><rect x="6" y="10" width="6" height="6" rx="1" fill="var(--gray-800)" opacity=".12"/><rect x="16" y="10" width="6" height="6" rx="1" fill="var(--gray-800)" opacity=".12"/><line x1="8" y1="22" x2="20" y2="22" stroke="var(--gray-800)" stroke-width="1.4"/></svg></div><div class="pop-card-info"><div class="pop-card-name">H100 80GB SXM</div><div class="pop-card-price">6 of 32 GPUs available</div></div></div>
           <div class="pop-card-tags" style="margin-bottom:6px"><span class="pop-tag-sub">Training · Multi-node</span></div>
           <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:150%;margin-bottom:12px">State-of-the-art training &amp; inference. NVLink + InfiniBand for multi-node runs.</div>
-          <div style="display:flex;gap:6px;margin-top:auto"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" disabled>Create instance</button><button class="btn btn-o btn-sm" disabled>Copy CLI</button></div>
+          <div style="display:flex;gap:6px;margin-top:auto"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create instance</button><button class="btn btn-o btn-sm" onclick="copyResCli('h100')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
         </div>
         <div class="pop-card" style="cursor:default;display:flex;flex-direction:column;gap:0">
           <div class="pop-card-top" style="margin-bottom:10px"><div class="pop-icon"><svg width="26" height="26" viewBox="0 0 28 28" fill="none"><rect x="2" y="6" width="24" height="16" rx="3" stroke="var(--gray-800)" stroke-width="1.4"/><rect x="6" y="10" width="6" height="6" rx="1" fill="var(--gray-800)" opacity=".12"/><rect x="16" y="10" width="6" height="6" rx="1" fill="var(--gray-800)" opacity=".12"/><line x1="8" y1="22" x2="20" y2="22" stroke="var(--gray-800)" stroke-width="1.4"/></svg></div><div class="pop-card-info"><div class="pop-card-name">H200 141GB</div><div class="pop-card-price">16 of 16 GPUs available</div></div></div>
           <div class="pop-card-tags" style="margin-bottom:6px"><span class="pop-tag-sub">Inference · Large models</span></div>
           <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:150%;margin-bottom:12px">141 GB HBM3e — ideal for 70B+ parameter inference and MoE architectures.</div>
-          <div style="display:flex;gap:6px;margin-top:auto"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" disabled>Create instance</button><button class="btn btn-o btn-sm" disabled>Copy CLI</button></div>
+          <div style="display:flex;gap:6px;margin-top:auto"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create instance</button><button class="btn btn-o btn-sm" onclick="copyResCli('h200')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
         </div>
         <div class="pop-card" style="cursor:default;display:flex;flex-direction:column;gap:0">
           <div class="pop-card-top" style="margin-bottom:10px"><div class="pop-icon"><svg width="26" height="26" viewBox="0 0 28 28" fill="none"><rect x="2" y="6" width="24" height="16" rx="3" stroke="var(--gray-800)" stroke-width="1.4"/><rect x="8" y="10" width="12" height="8" rx="1.5" fill="var(--gray-800)" opacity=".08" stroke="var(--gray-700)" stroke-width="1"/></svg></div><div class="pop-card-info"><div class="pop-card-name">L40S 48GB</div><div class="pop-card-price">4 of 8 GPUs available</div></div></div>
           <div class="pop-card-tags" style="margin-bottom:6px"><span class="pop-tag-sub">Inference · Fine-tuning</span></div>
           <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:150%;margin-bottom:12px">48 GB GDDR6 — cost-efficient inference and fine-tuning.</div>
-          <div style="display:flex;gap:6px;margin-top:auto"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" disabled>Create instance</button><button class="btn btn-o btn-sm" disabled>Copy CLI</button></div>
+          <div style="display:flex;gap:6px;margin-top:auto"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create instance</button><button class="btn btn-o btn-sm" onclick="copyResCli('l40s')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
         </div>
       </div>
     </div>
