@@ -2556,6 +2556,7 @@ function buildSidebar(key) {
 }
 
 function navigate(id) {
+  localStorage.setItem('lastNav', id);
   const viewId = ROUTES[id] || id;
 
   // 1. Direct match: sidebar key == view id (most common case)
@@ -3226,7 +3227,7 @@ function copySnippet(btn, text) {
 }
 
 // ── Init ──
-navigate('instances');
+navigate(localStorage.getItem('lastNav') || 'instances');
 </script>
 </body>
 </html>
