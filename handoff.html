@@ -199,14 +199,19 @@ html,body{height:100%;background:var(--white);color:var(--black);font-family:'Su
 @keyframes grid-breathe{0%,100%{opacity:.8}50%{opacity:1.4}}
 @keyframes scan-line{0%{top:-32px}100%{top:100%}}
 @keyframes icon-pulse{0%,100%{background:rgba(255,255,255,.07);box-shadow:0 0 0 0 rgba(255,255,255,.08)}60%{background:rgba(255,255,255,.13);box-shadow:0 0 0 5px rgba(255,255,255,0)}}
-/* ── Reservation cards: ghost-reveal on hover, no layout shift ── */
-.res-card{cursor:pointer;display:flex;flex-direction:column;gap:0;transition:box-shadow .2s,border-color .2s}
-.res-card:hover{border-color:var(--gray-300);box-shadow:0 4px 20px rgba(0,0,0,.09)}
-.res-card-body{pointer-events:auto}
-.res-card-body-inner{padding-top:10px;padding-bottom:2px}
-/* Buttons hidden until card hover */
-.res-card-actions{opacity:0;transform:translateY(4px);transition:opacity .18s ease,transform .18s ease;pointer-events:none}
-.res-card:hover .res-card-actions{opacity:1;transform:none;pointer-events:auto}
+/* ── Reservation cards: collapse body until hover, pop out on hover ── */
+.res-card{cursor:pointer;display:flex;flex-direction:column;gap:0;
+  transition:box-shadow .22s ease,border-color .22s ease,transform .25s cubic-bezier(.34,1.4,.64,1)}
+.res-card:hover{
+  border-color:var(--gray-300);
+  box-shadow:0 10px 32px rgba(0,0,0,.11);
+  transform:translateY(-4px) scale(1.018)}
+/* Body collapses to zero height via CSS grid trick — no layout shift */
+.res-card-body{display:grid;grid-template-rows:0fr;transition:grid-template-rows .28s cubic-bezier(.4,0,0,1);overflow:hidden}
+.res-card:hover .res-card-body{grid-template-rows:1fr}
+.res-card-body-inner{min-height:0;overflow:hidden;padding-top:10px;padding-bottom:10px}
+/* Buttons always visible inside body (body itself controls visibility) */
+.res-card-actions{display:flex;gap:6px}
 @keyframes spicy-ring{0%,100%{opacity:.6;transform:scale(1)}50%{opacity:1;transform:scale(1.03)}}
 @keyframes cube-float{0%,100%{transform:translateY(0) rotate(0deg)}30%{transform:translateY(-10px) rotate(.6deg)}70%{transform:translateY(-7px) rotate(-.4deg)}}
 @keyframes cursor-blink{0%,49%{opacity:1}50%,100%{opacity:0}}
@@ -1050,7 +1055,7 @@ img.ico{display:block;flex:0 0 auto}
         <div class="res-card-body"><div class="res-card-body-inner">
           <div class="pop-card-tags" style="margin-bottom:5px"><span class="pop-tag-sub">Training · Multi-node</span></div>
           <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">State-of-the-art training &amp; inference. 80 GB HBM3 with NVLink + InfiniBand for multi-node runs.</div>
-          <div class="res-card-actions" style="display:flex;gap:6px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create instance</button><button class="btn btn-o btn-sm" onclick="copyResCli('h100')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
+          <div class="res-card-actions"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create instance</button><button class="btn btn-o btn-sm" onclick="copyResCli('h100')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
         </div></div>
       </div>
       <div class="pop-card res-card spicy-reveal" style="transition-delay:.14s">
@@ -1058,7 +1063,7 @@ img.ico{display:block;flex:0 0 auto}
         <div class="res-card-body"><div class="res-card-body-inner">
           <div class="pop-card-tags" style="margin-bottom:5px"><span class="pop-tag-sub">Inference · Large models</span></div>
           <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">Largest memory for massive models. 141 GB HBM3e — ideal for 70B+ parameter inference and MoE architectures.</div>
-          <div class="res-card-actions" style="display:flex;gap:6px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create instance</button><button class="btn btn-o btn-sm" onclick="copyResCli('h200')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
+          <div class="res-card-actions"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create instance</button><button class="btn btn-o btn-sm" onclick="copyResCli('h200')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
         </div></div>
       </div>
       <div class="pop-card res-card spicy-reveal" style="transition-delay:.2s">
@@ -1066,7 +1071,7 @@ img.ico{display:block;flex:0 0 auto}
         <div class="res-card-body"><div class="res-card-body-inner">
           <div class="pop-card-tags" style="margin-bottom:5px"><span class="pop-tag-sub">Inference · Fine-tuning</span></div>
           <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">Cost-efficient inference &amp; fine-tuning. 48 GB GDDR6, great for model serving and multi-modal workloads.</div>
-          <div class="res-card-actions" style="display:flex;gap:6px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create instance</button><button class="btn btn-o btn-sm" onclick="copyResCli('l40s')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
+          <div class="res-card-actions"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create instance</button><button class="btn btn-o btn-sm" onclick="copyResCli('l40s')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
         </div></div>
       </div>
     </div>
