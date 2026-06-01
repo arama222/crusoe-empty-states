@@ -3257,42 +3257,39 @@ function initSpicyMagic() {
     });
   }
 
-  // ── Periodic glitch (start once, self-loop) ──
-  if (window._spicyGlitchTimer) clearTimeout(window._spicyGlitchTimer);
-  function scheduleGlitch() {
-    window._spicyGlitchTimer = setTimeout(() => {
-      const s = document.getElementById('spicy-cube');
-      if (!s || !document.getElementById('instances-spicy') ||
-          document.getElementById('instances-spicy').style.display === 'none') return;
-      s.style.animation = 'cube-glitch-run .28s steps(1) forwards';
-      setTimeout(() => { if(s) s.style.animation='none'; }, 300);
-      scheduleGlitch();
-    }, 7000 + Math.random()*8000);
-  }
+  // ── Split paths: solid ones use dashoffset draw-in; dashed ones use opacity ──
+  // This keeps the SVG stroke-dasharray="3 3" intact throughout the animation.
+  const solidPaths  = paths.filter(p => !p.getAttribute('stroke-dasharray'));
+  const dashedPaths = paths.filter(p =>  p.getAttribute('stroke-dasharray'));
 
-  // ── SVG draw-in — ping-pong loop (forward → pause → backward → pause → …) ──
-  // Each path's original dash attribute (e.g. "3 3") is stored so we can
-  // restore it after the forward pass, making dashed lines visible again.
-  const pathOrigDash = paths.map(p => p.getAttribute('stroke-dasharray') || null);
+  const STAGGER  = 65;   // ms between each solid-path start
+  const DUR_FWD  = 920;  // ms for solid draw-in
+  const DUR_BWD  = 680;  // ms for solid erase
+  const TOTAL_FWD = solidPaths.length * STAGGER + DUR_FWD;
+  const TOTAL_BWD = solidPaths.length * STAGGER + DUR_BWD;
 
   let _instancesFirstDraw = true;
+  let _drawTimer = null; // guard against overlapping calls
 
   function doDrawIn(dir) {
     if (!document.getElementById('spicy-cube')) return;
+    clearTimeout(_drawTimer);
     dir = dir || 'fwd';
-    const STAGGER = 62;   // ms between each path start
-    const DUR_FWD = 950;  // ms per-path draw-in duration
-    const DUR_BWD = 700;  // ms per-path erase duration
-    const totalFwd = paths.length * STAGGER + DUR_FWD;
-    const totalBwd = paths.length * STAGGER + DUR_BWD;
 
     if (dir === 'fwd') {
-      // ── Prime each path: fully hidden, CSS dash overrides SVG attr ──
-      paths.forEach((p, i) => {
+      // Prime solid paths: fully hidden via CSS dashoffset
+      solidPaths.forEach(p => {
         const l = p.getTotalLength();
         p.style.transition = 'none';
         p.style.strokeDasharray = l;
         p.style.strokeDashoffset = l;
+      });
+      // Prime dashed paths: invisible via opacity (dash pattern untouched)
+      dashedPaths.forEach(p => {
+        p.style.transition = 'none';
+        p.style.strokeDasharray = '';
+        p.style.strokeDashoffset = '';
+        p.style.opacity = '0';
       });
       dots.forEach(c => {
         c.style.transition = 'none';
@@ -3300,71 +3297,81 @@ function initSpicyMagic() {
         c.style.transform = 'scale(0)';
         c.style.transformOrigin = 'center';
       });
-      svg.style.animation = 'none'; svg.style.filter = 'none';
 
-      requestAnimationFrame(() => {
-        // Animate each path from hidden → visible
-        paths.forEach((p, i) => {
+      // Double rAF ensures transition:none has flushed before we apply transitions
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        // Draw in solid paths staggered
+        solidPaths.forEach((p, i) => {
           p.style.transition = `stroke-dashoffset ${DUR_FWD}ms cubic-bezier(.4,0,0,1) ${i*STAGGER}ms`;
           p.style.strokeDashoffset = '0';
         });
-        // Pop in dots near the end of draw-in
-        const circleDelay = paths.length * STAGGER + 520;
+
+        // Fade in dashed paths after the solid frame is mostly drawn
+        const dashStart = solidPaths.length * STAGGER * 0.6;
+        dashedPaths.forEach((p, i) => {
+          setTimeout(() => {
+            p.style.transition = 'opacity 550ms ease';
+            p.style.opacity = '1';
+          }, dashStart + i * 120);
+        });
+
+        // Pop in dots
+        const dotsStart = solidPaths.length * STAGGER + 500;
         dots.forEach((c, i) => setTimeout(() => {
           c.style.transition = 'opacity .3s ease, transform .45s cubic-bezier(.34,1.56,.64,1)';
           c.style.opacity = '1'; c.style.transform = 'scale(1)';
-        }, circleDelay + i * 120));
+        }, dotsStart + i * 120));
 
-        // One-time: start glitch & ripples
+        // One-time: start ripples
         if (_instancesFirstDraw) {
           _instancesFirstDraw = false;
-          setTimeout(scheduleGlitch, totalFwd);
-          setTimeout(startNodeRipples, circleDelay + 400);
+          setTimeout(startNodeRipples, dotsStart + 400);
         }
 
-        // After forward finishes: restore original SVG dash attrs, then reverse
-        setTimeout(() => {
-          // Clear CSS overrides so SVG stroke-dasharray="3 3" takes effect
-          paths.forEach((p, i) => {
-            if (pathOrigDash[i]) {
-              p.style.strokeDasharray = '';
-              p.style.strokeDashoffset = '';
-              p.style.transition = 'none';
-            }
+        // After fully drawn: pause, then reverse
+        _drawTimer = setTimeout(() => {
+          // Clear CSS overrides on solid paths so SVG attrs take over cleanly
+          solidPaths.forEach(p => {
+            p.style.transition = 'none';
+            p.style.strokeDasharray = '';
+            p.style.strokeDashoffset = '';
           });
-          // Pause at full visible state, then erase
-          setTimeout(() => { if (document.getElementById('spicy-cube')) doDrawIn('bwd'); }, 1400);
-        }, totalFwd);
-      });
+          _drawTimer = setTimeout(() => doDrawIn('bwd'), 1400);
+        }, TOTAL_FWD);
+      }));
 
-    } else {
-      // ── Backward pass: re-set CSS dash so we can animate erasure ──
-      paths.forEach((p, i) => {
+    } else { // 'bwd'
+      // Re-prime solid paths at dashoffset=0 (currently shown via SVG attrs)
+      solidPaths.forEach(p => {
         const l = p.getTotalLength();
         p.style.transition = 'none';
         p.style.strokeDasharray = l;
-        p.style.strokeDashoffset = '0';  // currently fully drawn
+        p.style.strokeDashoffset = '0';
       });
 
-      requestAnimationFrame(() => {
-        // Erase in reverse stagger order (last drawn erases first)
-        paths.forEach((p, i) => {
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        // Erase solid paths in reverse stagger
+        solidPaths.forEach((p, i) => {
           const l = p.getTotalLength();
-          const revDelay = (paths.length - 1 - i) * STAGGER;
-          p.style.transition = `stroke-dashoffset ${DUR_BWD}ms cubic-bezier(.6,0,1,.4) ${revDelay}ms`;
+          const revDelay = (solidPaths.length - 1 - i) * STAGGER;
+          p.style.transition = `stroke-dashoffset ${DUR_BWD}ms cubic-bezier(.55,0,1,.45) ${revDelay}ms`;
           p.style.strokeDashoffset = l;
         });
-        // Fade dots out quickly
+        // Fade out dashed paths
+        dashedPaths.forEach((p, i) => {
+          p.style.transition = `opacity 280ms ease ${i*60}ms`;
+          p.style.opacity = '0';
+        });
+        // Fade out dots
         dots.forEach(c => {
-          c.style.transition = 'opacity .25s ease, transform .3s ease';
+          c.style.transition = 'opacity .2s ease, transform .28s ease';
           c.style.opacity = '0'; c.style.transform = 'scale(0)';
         });
 
-        // After backward finishes: pause, then draw forward again
-        setTimeout(() => {
-          if (document.getElementById('spicy-cube')) setTimeout(() => doDrawIn('fwd'), 600);
-        }, totalBwd);
-      });
+        _drawTimer = setTimeout(() => {
+          _drawTimer = setTimeout(() => doDrawIn('fwd'), 550);
+        }, TOTAL_BWD);
+      }));
     }
   }
 
