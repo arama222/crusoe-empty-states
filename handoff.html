@@ -3133,7 +3133,7 @@ function showView(viewId, sbKey) {
   document.querySelector('.main').scrollTop = 0;
   // trigger spicy animations on navigation
   if (viewId === 'instances') {
-    setTimeout(initInstanceSpicyMagic, 60);
+    setTimeout(initSpicyMagic, 60);
   } else if (viewId === 'kubernetes') {
     setTimeout(() => {
       document.querySelectorAll('#clusters-spicy .cluster-spicy-reveal').forEach(el => { el.classList.remove('is-visible'); });
@@ -3149,91 +3149,7 @@ function showView(viewId, sbKey) {
   }
 }
 
-// Instance spicy magic
-function initInstanceSpicyMagic() {
-  const typed = document.getElementById('spicy-typed');
-  const cursor = document.getElementById('spicy-cursor');
-  if (typed && cursor) {
-    const fullText = 'No instances yet.';
-    typed.textContent = '';
-    cursor.style.display = 'inline';
-    cursor.style.animation = 'cursor-blink .9s step-start infinite';
-    let i = 0;
-    function type() {
-      if (!document.getElementById('spicy-typed')) return;
-      if (i < fullText.length) { typed.textContent += fullText[i++]; setTimeout(type, 68 + Math.random()*40); }
-      else { setTimeout(() => { if(cursor) cursor.style.display = 'none'; }, 900); }
-    }
-    setTimeout(type, 400);
-  }
-  // Scroll hint
-  const hint = document.getElementById('spicy-scroll-hint');
-  if (hint) {
-    hint.classList.remove('hidden');
-    const scroller = document.querySelector('.main') || document.documentElement;
-    function onScroll() {
-      if (scroller.scrollTop > 30) { hint.classList.add('hidden'); scroller.removeEventListener('scroll', onScroll); }
-    }
-    scroller.addEventListener('scroll', onScroll, { passive: true });
-  }
-  // Wave
-  const canvas = document.getElementById('spicy-wave-canvas');
-  if (canvas) {
-    const waves = [
-      { yFrac:.16, amp:8,  period:300, phase:0.0,  opacity:.038 },
-      { yFrac:.30, amp:5,  period:220, phase:1.2,  opacity:.028 },
-      { yFrac:.50, amp:11, period:360, phase:2.5,  opacity:.034 },
-      { yFrac:.66, amp:6,  period:250, phase:0.7,  opacity:.026 },
-      { yFrac:.82, amp:9,  period:320, phase:3.8,  opacity:.036 },
-    ];
-    let t = 0;
-    function draw() {
-      if (!canvas.isConnected) return;
-      const W = canvas.offsetWidth, H = canvas.offsetHeight;
-      if (canvas.width !== W || canvas.height !== H) { canvas.width = W; canvas.height = H; }
-      const ctx = canvas.getContext('2d'); ctx.clearRect(0,0,W,H);
-      waves.forEach(w => {
-        ctx.beginPath(); ctx.strokeStyle = 'rgba(0,0,0,' + w.opacity + ')'; ctx.lineWidth = 1.2;
-        for (let x = 0; x <= W; x += 2) {
-          const y = w.yFrac * H + Math.sin((x / w.period) * Math.PI * 2 + t + w.phase) * w.amp;
-          x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
-        }
-        ctx.stroke();
-      });
-      t += 0.008;
-      requestAnimationFrame(draw);
-    }
-    draw();
-  }
-  // Reveal cards
-  setTimeout(() => {
-    document.querySelectorAll('#instances-spicy .spicy-reveal').forEach((el,i) => {
-      setTimeout(() => el.classList.add('is-visible'), i * 100);
-    });
-  }, 300);
-  // Node ripples
-  const rippleSvg = document.getElementById('spicy-node-ripples');
-  if (rippleSvg) {
-    const dotPositions = [{cx:13.2,cy:81.75},{cx:155.15,cy:49.83}];
-    function makeRipple(cx, cy, delay) {
-      setTimeout(() => {
-        if (!rippleSvg.isConnected) return;
-        const c = document.createElementNS('http://www.w3.org/2000/svg','circle');
-        c.setAttribute('cx', cx); c.setAttribute('cy', cy); c.setAttribute('r','3');
-        c.setAttribute('fill','none'); c.setAttribute('stroke','black'); c.setAttribute('stroke-width','1');
-        c.style.animation = 'node-ripple 1.1s ease-out forwards';
-        rippleSvg.appendChild(c);
-        setTimeout(() => c.remove(), 1200);
-      }, delay);
-    }
-    function rippleLoop() {
-      if (!document.getElementById('spicy-cube')) return;
-      dotPositions.forEach((pos, i) => makeRipple(pos.cx, pos.cy, i * 420));
-      setTimeout(rippleLoop, 2400);
-    }
-    setTimeout(rippleLoop, 500);
-  }
-}
+
 
 function switchTab(el, viewId) {
   el.closest('.tabs').querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
@@ -3324,10 +3240,6 @@ function toggleEdgeState(n) {
       setTimeout(initSpicyMagic, 60);
     }
   };
-  // Init if spicy is already active on load
-  if(document.getElementById('instances-spicy') && document.getElementById('instances-spicy').style.display !== 'none') {
-    initSpicyReveal(); initScrollHint(); setTimeout(initSpicyMagic, 60);
-  }
 })();
 
 // ── Spicy magic: draw-in + typewriter + particles + parallax + glitch ──
