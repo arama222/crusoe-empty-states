@@ -2965,7 +2965,7 @@ function toggleClusterState(state) {
     const el = document.getElementById('clusters-' + s);
     if (el) el.style.display = s === state ? '' : 'none';
   });
-  const btns = document.querySelectorAll('#view-kubernetes .state-toggle-btn');
+  const btns = document.querySelectorAll('#k8s-empty-subtabs .state-toggle-btn');
   btns.forEach((b, i) => b.classList.toggle('active', ['medium','mild','spicy'][i] === state));
   document.querySelector('.main').scrollTop = 0;
 }
