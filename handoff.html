@@ -3267,9 +3267,9 @@ function initSpicyMagic() {
   const solidPaths  = paths.filter(p => !p.getAttribute('stroke-dasharray'));
   const dashedPaths = paths.filter(p =>  p.getAttribute('stroke-dasharray'));
 
-  const STAGGER  = 100;  // ms between each solid-path start
-  const DUR_FWD  = 1400; // ms for solid draw-in
-  const DUR_BWD  = 1100; // ms for solid erase
+  const STAGGER  = 130;  // ms between each solid-path start
+  const DUR_FWD  = 1750; // ms for solid draw-in
+  const DUR_BWD  = 1400; // ms for solid erase
   const TOTAL_FWD = solidPaths.length * STAGGER + DUR_FWD;
   const TOTAL_BWD = solidPaths.length * STAGGER + DUR_BWD;
   const PAUSE    = 160;  // ms between forward→backward and backward→forward
