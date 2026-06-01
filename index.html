@@ -2266,14 +2266,22 @@ img.ico{display:block;flex:0 0 auto}
         <button class="btn btn-o btn-sm">Refresh</button>
       </div>
     </div>
-    <!-- Agent banner -->
-    <div id="vm-agent-banner" style="display:flex;align-items:center;gap:12px;padding:14px 18px;border:1px solid var(--border);border-radius:10px;margin-bottom:20px;background:var(--white);transition:opacity .3s">
-      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" style="flex-shrink:0"><circle cx="10" cy="10" r="9" stroke="var(--gray-400)" stroke-width="1.3"/><path d="M10 9v5" stroke="var(--gray-400)" stroke-width="1.4" stroke-linecap="round"/><circle cx="10" cy="6.5" r="1" fill="var(--gray-400)"/></svg>
-      <div style="flex:1">
-        <div style="font-size:14px;font-weight:600;font-family:var(--font-body);color:var(--text)">No agent collected metrics</div>
-        <div style="font-size:13px;font-family:var(--font-body);color:var(--muted);margin-top:1px">Install the Crusoe Telemetry Agent to enable monitoring on Crusoe cloud resources</div>
+    <!-- Agent / no-metrics empty state -->
+    <div id="vm-agent-banner" class="metrics-empty" style="transition:opacity .3s">
+      <div class="metrics-empty-icon">
+        <svg width="140" height="119" viewBox="0 0 176.387 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M128.658 106.742C125.423 102.044 124.142 97.9207 122.45 93.2534C120.154 86.9399 118.13 80.5206 115.411 74.3883C114.475 72.2888 113.312 70.1591 111.348 68.6487C109.234 67.0325 108.101 67.0023 106.032 68.7091C103.449 70.8539 102.029 73.92 100.715 76.956C97.7696 83.7227 95.5341 90.8217 91.9242 97.2863C91.0331 98.8722 90.006 100.322 88.6768 101.531C87.2419 102.83 85.52 102.89 84.07 101.531C82.7258 100.262 81.6383 98.8118 80.7622 97.0899C77.1523 89.9456 75.3247 82.1821 72.9684 74.5997C70.6877 67.2893 68.9809 59.7674 65.5824 52.8497C64.9783 51.6111 64.3742 50.3273 63.4679 49.3304C60.6585 46.2642 59.1481 46.5965 56.7918 49.3002C54.3903 52.0491 53.0913 55.4174 51.6866 58.7554C48.9074 65.3106 46.8835 72.1831 43.8324 78.6175C42.8809 80.6263 41.8538 82.6201 40.3585 84.2966C37.9267 87.0154 35.5402 87.3779 32.7157 84.0701C30.4954 81.4571 29.0152 78.4362 27.6407 75.3096C24.6652 68.5581 22.7167 61.3382 18.9105 54.9492C18.0344 53.4689 17.0678 52.1247 15.8443 50.9767C14.4245 49.6476 12.9443 49.708 11.4641 50.9616C8.65472 53.333 7.7181 56.4675 6.2832 59.6998C4.75767 63.1285 2.77423 70.6258 1.36954 74.0998" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M152.224 63.5597C148.493 72.6374 140.147 102.843 136.25 107.586C133.894 110.455 131.632 110.305 128.758 106.867" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M152.235 63.2414C153.459 61.3987 154.304 59.3294 155.664 57.532C157.839 54.632 160.558 55.2513 162.189 57.3205C164.908 60.7643 166.237 64.8726 167.732 68.9206C168.034 69.7513 168.11 70.6878 168.88 71.2919" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M171.115 79.6311C173.776 79.6311 175.933 77.4739 175.933 74.8128C175.933 72.1518 173.776 69.9946 171.115 69.9946C168.454 69.9946 166.297 72.1518 166.297 74.8128C166.297 77.4739 168.454 79.6311 171.115 79.6311Z" fill="black"/>
+          <path d="M59.9766 52.9358C62.6376 52.9358 64.7948 50.7786 64.7948 48.1175C64.7948 45.4565 62.6376 43.2993 59.9766 43.2993C57.3155 43.2993 55.1583 45.4565 55.1583 48.1175C55.1583 50.7786 57.3155 52.9358 59.9766 52.9358Z" fill="black"/>
+          <path d="M171.539 0.755211H0.906253V149.245H171.539V0.755211Z" stroke="black" stroke-miterlimit="10"/>
+          <path d="M171.07 75.2945L86.5623 132.283L1.35938 74.6904L85.8675 17.7021L171.07 75.2945Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
       </div>
-      <a class="btn btn-p btn-sm" href="https://github.com/crusoecloud/crusoe-watch-agent" target="_blank" style="text-decoration:none;white-space:nowrap;flex-shrink:0">Crusoe Watch Agent page</a>
+      <div class="metrics-empty-title">No metrics data yet</div>
+      <div class="metrics-empty-desc">Install the Crusoe Telemetry Agent to start collecting GPU utilization, memory, and network metrics for this instance.</div>
+      <a class="btn btn-p btn-sm" href="https://github.com/crusoecloud/crusoe-watch-agent" target="_blank" style="text-decoration:none">Install Crusoe Watch Agent →</a>
     </div>
     <!-- Stopped state -->
     <div id="vm-metrics-stopped" style="display:none;border:1px solid var(--border);border-radius:10px;background:var(--white);padding:40px 24px;text-align:center;margin-bottom:16px">
@@ -2519,23 +2527,21 @@ img.ico{display:block;flex:0 0 auto}
   </div>
   <div class="divider"></div>
   <div class="ca">
-    <!-- Spicy hero -->
-    <div id="logs-spicy-hero" style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:56px 40px 52px;text-align:center;position:relative;overflow:hidden;background:var(--white)">
-      <div style="position:absolute;inset:0;background-image:radial-gradient(circle,rgba(0,0,0,.055) 1px,transparent 1px);background-size:28px 28px;pointer-events:none;z-index:0"></div>
-      <canvas id="logs-wave-canvas" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0"></canvas>
-      <div style="display:flex;align-items:center;justify-content:center;margin-bottom:32px;z-index:1;position:relative">
-        <svg id="logs-metrics-svg" width="200" height="170" viewBox="0 0 176.387 150" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:relative;z-index:1">
-          <path id="metrics-wave1" d="M128.658 106.742C125.423 102.044 124.142 97.9207 122.45 93.2534C120.154 86.9399 118.13 80.5206 115.411 74.3883C114.475 72.2888 113.312 70.1591 111.348 68.6487C109.234 67.0325 108.101 67.0023 106.032 68.7091C103.449 70.8539 102.029 73.92 100.715 76.956C97.7696 83.7227 95.5341 90.8217 91.9242 97.2863C91.0331 98.8722 90.006 100.322 88.6768 101.531C87.2419 102.83 85.52 102.89 84.07 101.531C82.7258 100.262 81.6383 98.8118 80.7622 97.0899C77.1523 89.9456 75.3247 82.1821 72.9684 74.5997C70.6877 67.2893 68.9809 59.7674 65.5824 52.8497C64.9783 51.6111 64.3742 50.3273 63.4679 49.3304C60.6585 46.2642 59.1481 46.5965 56.7918 49.3002C54.3903 52.0491 53.0913 55.4174 51.6866 58.7554C48.9074 65.3106 46.8835 72.1831 43.8324 78.6175C42.8809 80.6263 41.8538 82.6201 40.3585 84.2966C37.9267 87.0154 35.5402 87.3779 32.7157 84.0701C30.4954 81.4571 29.0152 78.4362 27.6407 75.3096C24.6652 68.5581 22.7167 61.3382 18.9105 54.9492C18.0344 53.4689 17.0678 52.1247 15.8443 50.9767C14.4245 49.6476 12.9443 49.708 11.4641 50.9616C8.65472 53.333 7.7181 56.4675 6.2832 59.6998C4.75767 63.1285 2.77423 70.6258 1.36954 74.0998" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
-          <path id="metrics-wave2" d="M152.224 63.5597C148.493 72.6374 140.147 102.843 136.25 107.586C133.894 110.455 131.632 110.305 128.758 106.867" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
-          <path id="metrics-wave3" d="M152.235 63.2414C153.459 61.3987 154.304 59.3294 155.664 57.532C157.839 54.632 160.558 55.2513 162.189 57.3205C164.908 60.7643 166.237 64.8726 167.732 68.9206C168.034 69.7513 168.11 70.6878 168.88 71.2919" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
-          <path id="metrics-rect"  d="M171.539 0.755211H0.906253V149.245H171.539V0.755211Z" stroke="black" stroke-miterlimit="10"/>
-          <path id="metrics-diamond" d="M171.07 75.2945L86.5623 132.283L1.35938 74.6904L85.8675 17.7021L171.07 75.2945Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
-          <path id="metrics-dot1" d="M171.115 79.6311C173.776 79.6311 175.933 77.4739 175.933 74.8128C175.933 72.1518 173.776 69.9946 171.115 69.9946C168.454 69.9946 166.297 72.1518 166.297 74.8128C166.297 77.4739 168.454 79.6311 171.115 79.6311Z" fill="black"/>
-          <path id="metrics-dot2" d="M59.9766 52.9358C62.6376 52.9358 64.7948 50.7786 64.7948 48.1175C64.7948 45.4565 62.6376 43.2993 59.9766 43.2993C57.3155 43.2993 55.1583 45.4565 55.1583 48.1175C55.1583 50.7786 57.3155 52.9358 59.9766 52.9358Z" fill="black"/>
+    <!-- Empty state hero -->
+    <div class="metrics-empty" style="padding-top:56px;padding-bottom:40px">
+      <div class="metrics-empty-icon">
+        <svg width="140" height="119" viewBox="0 0 176.387 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M128.658 106.742C125.423 102.044 124.142 97.9207 122.45 93.2534C120.154 86.9399 118.13 80.5206 115.411 74.3883C114.475 72.2888 113.312 70.1591 111.348 68.6487C109.234 67.0325 108.101 67.0023 106.032 68.7091C103.449 70.8539 102.029 73.92 100.715 76.956C97.7696 83.7227 95.5341 90.8217 91.9242 97.2863C91.0331 98.8722 90.006 100.322 88.6768 101.531C87.2419 102.83 85.52 102.89 84.07 101.531C82.7258 100.262 81.6383 98.8118 80.7622 97.0899C77.1523 89.9456 75.3247 82.1821 72.9684 74.5997C70.6877 67.2893 68.9809 59.7674 65.5824 52.8497C64.9783 51.6111 64.3742 50.3273 63.4679 49.3304C60.6585 46.2642 59.1481 46.5965 56.7918 49.3002C54.3903 52.0491 53.0913 55.4174 51.6866 58.7554C48.9074 65.3106 46.8835 72.1831 43.8324 78.6175C42.8809 80.6263 41.8538 82.6201 40.3585 84.2966C37.9267 87.0154 35.5402 87.3779 32.7157 84.0701C30.4954 81.4571 29.0152 78.4362 27.6407 75.3096C24.6652 68.5581 22.7167 61.3382 18.9105 54.9492C18.0344 53.4689 17.0678 52.1247 15.8443 50.9767C14.4245 49.6476 12.9443 49.708 11.4641 50.9616C8.65472 53.333 7.7181 56.4675 6.2832 59.6998C4.75767 63.1285 2.77423 70.6258 1.36954 74.0998" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M152.224 63.5597C148.493 72.6374 140.147 102.843 136.25 107.586C133.894 110.455 131.632 110.305 128.758 106.867" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M152.235 63.2414C153.459 61.3987 154.304 59.3294 155.664 57.532C157.839 54.632 160.558 55.2513 162.189 57.3205C164.908 60.7643 166.237 64.8726 167.732 68.9206C168.034 69.7513 168.11 70.6878 168.88 71.2919" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M171.115 79.6311C173.776 79.6311 175.933 77.4739 175.933 74.8128C175.933 72.1518 173.776 69.9946 171.115 69.9946C168.454 69.9946 166.297 72.1518 166.297 74.8128C166.297 77.4739 168.454 79.6311 171.115 79.6311Z" fill="black"/>
+          <path d="M59.9766 52.9358C62.6376 52.9358 64.7948 50.7786 64.7948 48.1175C64.7948 45.4565 62.6376 43.2993 59.9766 43.2993C57.3155 43.2993 55.1583 45.4565 55.1583 48.1175C55.1583 50.7786 57.3155 52.9358 59.9766 52.9358Z" fill="black"/>
+          <path d="M171.539 0.755211H0.906253V149.245H171.539V0.755211Z" stroke="black" stroke-miterlimit="10"/>
+          <path d="M171.07 75.2945L86.5623 132.283L1.35938 74.6904L85.8675 17.7021L171.07 75.2945Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
       </div>
-      <h1 style="font-size:52px;font-weight:400;font-family:var(--font-heading);color:var(--text);letter-spacing:-1.6px;line-height:100%;margin:0 0 14px;position:relative;z-index:1"><span id="logs-typed">No logs yet.</span><span id="logs-cursor" style="display:none;font-style:normal">|</span></h1>
-      <p style="font-size:14px;color:var(--muted);font-family:var(--font-body);line-height:165%;max-width:320px;margin:0 0 32px;position:relative;z-index:1">Centralized log collection and monitoring for your Crusoe Cloud resources. Install the telemetry agent to start streaming.</p>
+      <div class="metrics-empty-title">No log data yet</div>
+      <div class="metrics-empty-desc">Centralized log collection and monitoring for your Crusoe Cloud resources. Install the telemetry agent to start streaming.</div>
     </div>
 
     <!-- Info cards -->
@@ -2727,19 +2733,20 @@ img.ico{display:block;flex:0 0 auto}
       </div>
     </div>
     <!-- Metrics empty state -->
-    <div class="sec-empty">
-      <div class="sec-empty-illust">
-        <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-          <rect x="7" y="30" width="7" height="10" rx="2" fill="currentColor" opacity=".18"/>
-          <rect x="17" y="22" width="7" height="18" rx="2" fill="currentColor" opacity=".25"/>
-          <rect x="27" y="16" width="7" height="24" rx="2" fill="currentColor" opacity=".35"/>
-          <rect x="37" y="26" width="7" height="14" rx="2" fill="currentColor" opacity=".25"/>
-          <line x1="5" y1="40" x2="46" y2="40" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
-          <path d="M10.5 27 L20.5 19 L30.5 13 L40.5 22" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="3 3" opacity=".45"/>
+    <div class="metrics-empty">
+      <div class="metrics-empty-icon">
+        <svg width="140" height="119" viewBox="0 0 176.387 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M128.658 106.742C125.423 102.044 124.142 97.9207 122.45 93.2534C120.154 86.9399 118.13 80.5206 115.411 74.3883C114.475 72.2888 113.312 70.1591 111.348 68.6487C109.234 67.0325 108.101 67.0023 106.032 68.7091C103.449 70.8539 102.029 73.92 100.715 76.956C97.7696 83.7227 95.5341 90.8217 91.9242 97.2863C91.0331 98.8722 90.006 100.322 88.6768 101.531C87.2419 102.83 85.52 102.89 84.07 101.531C82.7258 100.262 81.6383 98.8118 80.7622 97.0899C77.1523 89.9456 75.3247 82.1821 72.9684 74.5997C70.6877 67.2893 68.9809 59.7674 65.5824 52.8497C64.9783 51.6111 64.3742 50.3273 63.4679 49.3304C60.6585 46.2642 59.1481 46.5965 56.7918 49.3002C54.3903 52.0491 53.0913 55.4174 51.6866 58.7554C48.9074 65.3106 46.8835 72.1831 43.8324 78.6175C42.8809 80.6263 41.8538 82.6201 40.3585 84.2966C37.9267 87.0154 35.5402 87.3779 32.7157 84.0701C30.4954 81.4571 29.0152 78.4362 27.6407 75.3096C24.6652 68.5581 22.7167 61.3382 18.9105 54.9492C18.0344 53.4689 17.0678 52.1247 15.8443 50.9767C14.4245 49.6476 12.9443 49.708 11.4641 50.9616C8.65472 53.333 7.7181 56.4675 6.2832 59.6998C4.75767 63.1285 2.77423 70.6258 1.36954 74.0998" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M152.224 63.5597C148.493 72.6374 140.147 102.843 136.25 107.586C133.894 110.455 131.632 110.305 128.758 106.867" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M152.235 63.2414C153.459 61.3987 154.304 59.3294 155.664 57.532C157.839 54.632 160.558 55.2513 162.189 57.3205C164.908 60.7643 166.237 64.8726 167.732 68.9206C168.034 69.7513 168.11 70.6878 168.88 71.2919" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M171.115 79.6311C173.776 79.6311 175.933 77.4739 175.933 74.8128C175.933 72.1518 173.776 69.9946 171.115 69.9946C168.454 69.9946 166.297 72.1518 166.297 74.8128C166.297 77.4739 168.454 79.6311 171.115 79.6311Z" fill="black"/>
+          <path d="M59.9766 52.9358C62.6376 52.9358 64.7948 50.7786 64.7948 48.1175C64.7948 45.4565 62.6376 43.2993 59.9766 43.2993C57.3155 43.2993 55.1583 45.4565 55.1583 48.1175C55.1583 50.7786 57.3155 52.9358 59.9766 52.9358Z" fill="black"/>
+          <path d="M171.539 0.755211H0.906253V149.245H171.539V0.755211Z" stroke="black" stroke-miterlimit="10"/>
+          <path d="M171.07 75.2945L86.5623 132.283L1.35938 74.6904L85.8675 17.7021L171.07 75.2945Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
       </div>
-      <div class="sec-empty-title">No node pools to monitor</div>
-      <div class="sec-empty-copy">Add a node pool with GPU or CPU nodes to start collecting metrics. Utilization, VRAM, network, and disk I/O are reported automatically once nodes are running.</div>
+      <div class="metrics-empty-title">No metrics data yet</div>
+      <div class="metrics-empty-desc">Add a node pool with GPU or CPU nodes to start collecting metrics. Utilization, VRAM, network, and disk I/O are reported automatically once nodes are running.</div>
     </div>
   </div>
 
