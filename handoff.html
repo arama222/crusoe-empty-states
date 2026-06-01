@@ -1200,6 +1200,15 @@ img.ico{display:block;flex:0 0 auto}
   </div>
 </div>
 
+<!-- ─── VIEW: Instance Templates (blank) ─── -->
+<div class="view" id="view-instance-templates"></div>
+
+<!-- ─── VIEW: Instance Groups (blank) ─── -->
+<div class="view" id="view-instance-groups"></div>
+
+<!-- ─── VIEW: Custom Images (blank) ─── -->
+<div class="view" id="view-custom-images"></div>
+
 <!-- ─── VIEW: Kubernetes Clusters ─── -->
 <div class="view" id="view-kubernetes">
   <div class="ph">
@@ -2952,8 +2961,11 @@ function settingsNav(activeKey) {
   };
 }
 const SIDEBARS = {
-  instances:   {type:'main', topbar:{org:'ManagedOrchestration',proj:'abhatti'}, nav:mainNav('compute','instances')},
-  kubernetes:  {type:'main', topbar:{org:'ManagedOrchestration',proj:'abhatti'}, nav:mainNav('orchestration','kubernetes')},
+  instances:           {type:'main', topbar:{org:'ManagedOrchestration',proj:'abhatti'}, nav:mainNav('compute','instances')},
+  'instance-templates':{type:'main', topbar:{org:'ManagedOrchestration',proj:'abhatti'}, nav:mainNav('compute','instance-templates')},
+  'instance-groups':   {type:'main', topbar:{org:'ManagedOrchestration',proj:'abhatti'}, nav:mainNav('compute','instance-groups')},
+  'custom-images':     {type:'main', topbar:{org:'ManagedOrchestration',proj:'abhatti'}, nav:mainNav('compute','custom-images')},
+  kubernetes:          {type:'main', topbar:{org:'ManagedOrchestration',proj:'abhatti'}, nav:mainNav('orchestration','kubernetes')},
   'k8s-list':  {type:'main', topbar:{org:'ManagedOrchestration',proj:'abhatti'}, nav:mainNav('orchestration','kubernetes')},
   'k8s-detail':{type:'main', topbar:{org:'ManagedOrchestration',proj:'abhatti'}, nav:mainNav('orchestration','kubernetes')},
   'vm-detail': {type:'main', topbar:{org:'ManagedOrchestration',proj:'abhatti'}, nav:mainNav('compute','instances')},
@@ -2977,7 +2989,7 @@ const SIDEBARS = {
 
 // ── Route map: nav id → view id ──
 const ROUTES = {
-  instances:'instances', 'instance-templates':'instances', 'instance-groups':'instances', 'custom-images':'instances',
+  instances:'instances', 'instance-templates':'instance-templates', 'instance-groups':'instance-groups', 'custom-images':'custom-images',
   kubernetes:'kubernetes', slurm:'slurm',
   'k8s-list':'kubernetes', 'k8s-detail':'k8s-detail', 'vm-detail':'vm-detail',
   disks:'disks', buckets:'buckets',
