@@ -3333,6 +3333,13 @@ function initSpicyMagic() {
 
   doDrawIn();
   initSpicyWaves();
+
+  // Reveal below-fold cards
+  setTimeout(() => {
+    document.querySelectorAll('#instances-spicy .spicy-reveal').forEach((el, i) => {
+      setTimeout(() => el.classList.add('is-visible'), i * 100);
+    });
+  }, 300);
 }
 
 // ── Spicy: horizontal sine-wave background ──
