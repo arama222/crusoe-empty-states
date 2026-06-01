@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Crusoe Empty States — Final Handoff</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#d8dce3;font-family:'Inter',sans-serif;min-height:100vh;padding:48px 56px 80px}
+
+/* ── Board ── */
+.board-label{font-size:10px;font-weight:700;letter-spacing:.12em;color:#888;text-transform:uppercase;font-family:'Inter',sans-serif;margin-bottom:6px}
+.board-title{font-family:'Space Mono',monospace;font-size:13px;font-weight:700;letter-spacing:.04em;color:#444;margin-bottom:40px}
+
+.section{margin-bottom:56px}
+.section-label{font-size:11px;font-weight:600;letter-spacing:.1em;color:#999;text-transform:uppercase;font-family:'Inter',sans-serif;margin-bottom:16px}
+.frame-row{display:flex;gap:24px;align-items:flex-start;flex-wrap:wrap}
+
+/* ── Browser Frame ── */
+.frame-wrap{display:flex;flex-direction:column;gap:8px}
+.frame-label{font-size:11px;font-weight:500;color:#555;font-family:'Inter',sans-serif;max-width:220px}
+.frame-sub{font-size:10px;color:#999;font-family:'Inter',sans-serif;margin-top:2px}
+.frame-badge{display:inline-block;font-size:9px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;background:#e9ecef;color:#888;padding:2px 6px;border-radius:4px;font-family:'Inter',sans-serif}
+
+.browser{width:280px;border-radius:10px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,.14),0 1px 4px rgba(0,0,0,.08);background:white;flex-shrink:0}
+.browser.wide{width:340px}
+.browser-chrome{height:28px;background:#f3f4f6;border-bottom:1px solid #e5e7eb;display:flex;align-items:center;padding:0 10px;gap:5px}
+.chrome-dot{width:7px;height:7px;border-radius:50%}
+.chrome-dot.r{background:#fc685c}
+.chrome-dot.y{background:#fdba3a}
+.chrome-dot.g{background:#34c84a}
+.chrome-url{flex:1;margin-left:8px;height:14px;background:#e9ecef;border-radius:3px}
+.browser-body{display:flex;height:220px}
+.browser.tall .browser-body{height:260px}
+.browser-sidebar{width:44px;background:#fafafa;border-right:1px solid #f0f0f0;flex-shrink:0;padding:10px 8px;display:flex;flex-direction:column;gap:6px}
+.sb-item{height:5px;border-radius:2px;background:#e9ecef}
+.sb-item.dark{background:#d4d8de}
+.sb-spacer{height:8px}
+.browser-main{flex:1;overflow:hidden;display:flex;flex-direction:column}
+
+/* Page header strip */
+.pg-header{height:36px;border-bottom:1px solid #f0f0f0;display:flex;align-items:center;justify-content:space-between;padding:0 14px;flex-shrink:0}
+.pg-title{font-size:9px;font-weight:700;font-family:'Space Mono',monospace;color:#111;letter-spacing:-.01em}
+.pg-btn{height:16px;background:#111;border-radius:3px;padding:0 7px;display:flex;align-items:center;font-size:7px;font-weight:600;color:white;font-family:'Inter',sans-serif;letter-spacing:.02em}
+
+/* Empty state hero */
+.es-hero{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:16px 14px 12px;position:relative;background:white;overflow:hidden}
+.es-hero .dot-grid{position:absolute;inset:0;background-image:radial-gradient(circle,rgba(0,0,0,.06) 1px,transparent 1px);background-size:18px 18px;pointer-events:none}
+.es-illus{margin-bottom:10px;position:relative;z-index:1}
+.es-h1{font-size:12px;font-weight:400;font-family:'Space Mono',monospace;color:#111;letter-spacing:-.03em;line-height:1;margin-bottom:6px;position:relative;z-index:1}
+.es-desc{font-size:7px;color:#888;font-family:'Inter',sans-serif;line-height:1.5;max-width:160px;position:relative;z-index:1}
+.es-cards{display:flex;gap:5px;padding:8px 10px;border-top:1px solid #f0f0f0;flex-shrink:0;background:white}
+.es-card{flex:1;border:1px solid #e9ecef;border-radius:5px;padding:6px 7px}
+.es-card-t{font-size:7px;font-weight:600;color:#111;font-family:'Inter',sans-serif;margin-bottom:2px}
+.es-card-d{font-size:6px;color:#aaa;font-family:'Inter',sans-serif;line-height:1.4}
+
+/* Keys page special layout */
+.keys-body{flex:1;padding:12px 14px;overflow:hidden}
+.keys-illus-wrap{display:flex;flex-direction:column;align-items:center;text-align:center;margin-bottom:12px}
+.keys-h{font-size:9px;font-weight:600;font-family:'Inter',sans-serif;color:#111;margin-bottom:3px}
+.keys-sub{font-size:7px;color:#888;font-family:'Inter',sans-serif;line-height:1.4;max-width:160px}
+.keys-stepper{display:flex;gap:8px;margin-top:8px}
+.keys-step{flex:1;border:1px solid #e9ecef;border-radius:5px;padding:6px;background:white}
+.keys-step-n{width:12px;height:12px;border-radius:50%;background:#111;color:white;font-size:6px;font-weight:700;display:flex;align-items:center;justify-content:center;margin-bottom:4px;font-family:'Inter',sans-serif}
+.keys-step-t{font-size:7px;font-weight:600;color:#111;font-family:'Inter',sans-serif;margin-bottom:2px}
+.keys-step-d{font-size:6px;color:#aaa;font-family:'Inter',sans-serif;line-height:1.3}
+
+/* "Also uses" annotation */
+.also-section{margin-bottom:56px}
+.also-row{display:flex;gap:24px;flex-wrap:wrap;align-items:flex-start}
+.also-frame-wrap{display:flex;flex-direction:column;gap:8px}
+.also-badge{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:500;color:#888;font-family:'Inter',sans-serif}
+.also-badge svg{opacity:.5}
+
+/* ── Dropdown Components ── */
+.dropdown-row{display:flex;gap:20px;flex-wrap:wrap;align-items:flex-start}
+.dd-wrap{display:flex;flex-direction:column;gap:8px}
+.dd-label{font-size:11px;font-weight:500;color:#555;font-family:'Inter',sans-serif}
+.dd-sub{font-size:10px;color:#999;font-family:'Inter',sans-serif;margin-top:1px}
+
+.dropdown{width:220px;background:white;border:1px solid #e9ecef;border-radius:8px;box-shadow:0 2px 8px rgba(25,33,61,.12),0 1px 2px rgba(25,33,61,.06);overflow:hidden}
+.dd-search{padding:8px 8px 6px;border-bottom:1px solid #f3f4f6}
+.dd-input{height:32px;border:1px solid #ced4da;border-radius:7px;display:flex;align-items:center;padding:0 10px;gap:6px}
+.dd-input svg{flex-shrink:0;opacity:.4}
+.dd-input-text{font-size:12px;color:#868e96;font-family:'Inter',sans-serif}
+.dd-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:20px 16px 24px;gap:10px}
+.dd-illus{opacity:.9}
+.dd-empty-t{font-size:12px;font-weight:500;color:#343a40;font-family:'Inter',sans-serif}
+.dd-empty-d{font-size:11px;color:#868e96;font-family:'Inter',sans-serif;line-height:1.45;max-width:160px}
+
+/* no-search variant */
+.dropdown.no-search .dd-search{display:none}
+.dropdown.no-search .dd-empty{padding-top:24px}
+
+/* divider */
+.board-divider{height:1px;background:rgba(0,0,0,.08);margin:48px 0}
+</style>
+</head>
+<body>
+
+<div class="board-label">Crusoe Cloud</div>
+<div class="board-title">UPDATED EMPTY STATES — FINAL HANDOFF</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- SECTION 1: Page-level empty states                         -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div class="section">
+  <div class="section-label">Page-level Empty States · Spicy</div>
+  <div class="frame-row">
+
+    <!-- 1. INSTANCES -->
+    <div class="frame-wrap">
+      <div class="frame-label">Compute · Instances</div>
+      <div class="frame-sub">No instances yet</div>
+      <div class="browser">
+        <div class="browser-chrome"><div class="chrome-dot r"></div><div class="chrome-dot y"></div><div class="chrome-dot g"></div><div class="chrome-url"></div></div>
+        <div class="browser-body">
+          <div class="browser-sidebar">
+            <div class="sb-item dark" style="width:28px;height:8px;border-radius:3px"></div>
+            <div class="sb-spacer"></div>
+            <div class="sb-item" style="width:32px"></div><div class="sb-item" style="width:24px"></div><div class="sb-item" style="width:28px"></div><div class="sb-item" style="width:20px"></div>
+            <div class="sb-spacer"></div>
+            <div class="sb-item" style="width:26px"></div><div class="sb-item" style="width:22px"></div>
+          </div>
+          <div class="browser-main">
+            <div class="pg-header">
+              <span class="pg-title">Instances</span>
+              <span class="pg-btn">+ Create</span>
+            </div>
+            <div class="es-hero">
+              <div class="dot-grid"></div>
+              <div class="es-illus">
+                <!-- Instances illustration: 3D perspective box -->
+                <svg width="80" height="62" viewBox="0 0 166.55 128.97" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M143.43 96.41H161.12C161.92 96.41 162.75 96.53 163.52 96.18C164.12 95.91 164.75 96.04 165.14 96.42C165.56 96.82 165.14 97.2 164.88 97.6C163.91 99.07 162.88 100.53 161.86 101.98C159.15 105.81 156.46 109.64 153.75 113.47C150.75 117.74 147.81 122.03 144.72 126.26C143.76 127.57 142.3 128.49 139.84 128.48C94.52 128.4 49.22 128.42 3.9 128.42C3.02 128.42 1.85 128.68 1.41 127.93C1.04 127.29 0.49 126.61 0.6 125.82C0.62 125.66 0.6 125.51 0.6 125.35V35.11C0.6 33.55 1.07 32.15 2.03 30.69C4.53 26.89 7.11 23.13 9.59 19.34C13.54 13.32 17.69 7.38 21.6 1.34C21.82 1.01 22.11 0.64 22.66 0.5C22.97 0.61 23.27 0.74 23.24 1.09C22.9 4.52 23.12 7.97 23.1 11.4C23.05 18.55 23.1 89.24 23.1 96.4" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M23.05 1.24C38.06 16.83 121.42 106.9 136.61 122.41C138.09 123.92 140.21 126.05 142.39 127.37" stroke="black" stroke-miterlimit="10" stroke-dasharray="3 3"/>
+                  <path d="M23.88 96.63C24.35 97.15 44.33 96.41 45.01 96.41H142.77" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M142.45 33.7C141.97 33.25 121.93 33.66 121.24 33.66C99.36 33.66 1.19 33.9 1.19 33.9" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M0.11 34.56C1.24 34.31 2.27 34.69 3.15 35.07C10.55 38.22 18.32 40.8 25.86 43.72C49.63 52.88 73.52 61.82 97.31 70.95C116.7 78.38 136.24 85.57 155.53 93.2C157.82 94.1 160.81 94.27 161.99 96.54" stroke="black" stroke-miterlimit="10" stroke-dasharray="3 3"/>
+                  <path d="M143.28 33.57V127.37" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M1.55 128.11L25 95.59L83.7 65.46L84.54 65.03L165.97 1.13L144.1 33.5L83.93 66.34L1.55 128.11Z" stroke="black" stroke-linejoin="round" stroke-dasharray="3 3"/>
+                  <path d="M12.58 81.75L153.13 49.83" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M13.2 83.93C14.51 84.04 15.66 83.08 15.77 81.77C15.88 80.46 14.91 79.31 13.61 79.2C12.31 79.09 11.15 80.06 11.04 81.36C10.93 82.66 11.9 83.82 13.2 83.93Z" fill="black"/>
+                  <path d="M155.15 51.89C156.46 52 157.61 51.03 157.72 49.73C157.83 48.43 156.86 47.27 155.56 47.16C154.26 47.05 153.1 48.02 152.99 49.32C152.88 50.62 153.84 51.78 155.15 51.89Z" fill="black"/>
+                  <path d="M165.45 1.63C166.19 2.1 166.05 2.76 166.05 3.39V94.43C166.05 94.95 166.07 95.47 165.45 95.83" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M22.35 0.58H165.77" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <div class="es-h1">No instances yet</div>
+              <div class="es-desc">Launch GPU-accelerated VMs. Choose from H100, A100, L40S and more.</div>
+            </div>
+            <div class="es-cards">
+              <div class="es-card"><div class="es-card-t">Quick start</div><div class="es-card-d">H100 single GPU</div></div>
+              <div class="es-card"><div class="es-card-t">Docs</div><div class="es-card-d">View quickstart</div></div>
+              <div class="es-card"><div class="es-card-t">CLI</div><div class="es-card-d">crusoe compute…</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. KUBERNETES -->
+    <div class="frame-wrap">
+      <div class="frame-label">Orchestration · Kubernetes</div>
+      <div class="frame-sub">No clusters yet</div>
+      <div class="browser">
+        <div class="browser-chrome"><div class="chrome-dot r"></div><div class="chrome-dot y"></div><div class="chrome-dot g"></div><div class="chrome-url"></div></div>
+        <div class="browser-body">
+          <div class="browser-sidebar">
+            <div class="sb-item dark" style="width:28px;height:8px;border-radius:3px"></div>
+            <div class="sb-spacer"></div>
+            <div class="sb-item" style="width:32px"></div><div class="sb-item" style="width:24px"></div><div class="sb-item" style="width:28px"></div>
+            <div class="sb-spacer"></div>
+            <div class="sb-item dark" style="width:28px"></div><div class="sb-item" style="width:22px"></div>
+          </div>
+          <div class="browser-main">
+            <div class="pg-header">
+              <span class="pg-title">Kubernetes</span>
+              <span class="pg-btn">+ Create</span>
+            </div>
+            <div class="es-hero">
+              <div class="dot-grid"></div>
+              <div class="es-illus">
+                <!-- Orchestration: concentric offset squares + X -->
+                <svg width="76" height="75" viewBox="0 0 153.881 152.019" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M87.2031 65.5249H66.1768V86.4529H87.2031V65.5249Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M11.67 140.399H0.5V151.519H11.67V140.399Z" fill="black" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M153.381 0.5H142.211V11.62H153.381V0.5Z" fill="black" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M113.7 39.2188H5.81006V146.629H113.7V39.2188Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M130.63 22.2891H22.7402V129.699H130.63V22.2891Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M147.57 5.34863H39.6802V112.759H147.57V5.34863Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M66.5181 66.0903L87.167 86.019" stroke="black"/>
+                  <path d="M86.8652 66.1665L66.2163 86.0952" stroke="black"/>
+                </svg>
+              </div>
+              <div class="es-h1">No clusters yet</div>
+              <div class="es-desc">Managed Kubernetes with GPU operators and InfiniBand pre-installed.</div>
+            </div>
+            <div class="es-cards">
+              <div class="es-card"><div class="es-card-t">GPU Training</div><div class="es-card-d">H100 8× node pool</div></div>
+              <div class="es-card"><div class="es-card-t">Inference</div><div class="es-card-d">L40S autoscale</div></div>
+              <div class="es-card"><div class="es-card-t">CPU only</div><div class="es-card-d">Pipelines & APIs</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. DISKS -->
+    <div class="frame-wrap">
+      <div class="frame-label">Storage · Disks</div>
+      <div class="frame-sub">No disks yet</div>
+      <div class="browser">
+        <div class="browser-chrome"><div class="chrome-dot r"></div><div class="chrome-dot y"></div><div class="chrome-dot g"></div><div class="chrome-url"></div></div>
+        <div class="browser-body">
+          <div class="browser-sidebar">
+            <div class="sb-item dark" style="width:28px;height:8px;border-radius:3px"></div>
+            <div class="sb-spacer"></div>
+            <div class="sb-item" style="width:32px"></div><div class="sb-item" style="width:24px"></div>
+            <div class="sb-spacer"></div>
+            <div class="sb-item dark" style="width:26px"></div><div class="sb-item" style="width:20px"></div><div class="sb-item" style="width:28px"></div>
+          </div>
+          <div class="browser-main">
+            <div class="pg-header">
+              <span class="pg-title">Disks</span>
+              <span class="pg-btn">+ Create</span>
+            </div>
+            <div class="es-hero">
+              <div class="dot-grid"></div>
+              <div class="es-illus">
+                <!-- Disks: concentric rings (stacked platters) -->
+                <svg width="72" height="72" viewBox="0 0 150.588 150.588" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M75.2938 150.088C116.601 150.088 150.088 116.601 150.088 75.2938C150.088 33.9863 116.601 0.5 75.2938 0.5C33.9863 0.5 0.5 33.9863 0.5 75.2938C0.5 116.601 33.9863 150.088 75.2938 150.088Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path transform="translate(0,16.149)" d="M75.2938 117.79C116.601 117.79 150.088 91.5341 150.088 59.1452C150.088 26.7564 116.601 0.5 75.2938 0.5C33.9863 0.5 0.5 26.7564 0.5 59.1452C0.5 91.5341 33.9863 117.79 75.2938 117.79Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path transform="translate(0,32.307)" d="M75.2938 85.4742C116.601 85.4742 150.088 66.4521 150.088 42.9871C150.088 19.5221 116.601 0.5 75.2938 0.5C33.9863 0.5 0.5 19.5221 0.5 42.9871C0.5 66.4521 33.9863 85.4742 75.2938 85.4742Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path transform="translate(0,48.455)" d="M75.2938 53.1771C116.601 53.1771 150.088 41.3849 150.088 26.8385C150.088 12.2922 116.601 0.5 75.2938 0.5C33.9863 0.5 0.5 12.2922 0.5 26.8385C0.5 41.3849 33.9863 53.1771 75.2938 53.1771Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path transform="translate(0,64.604)" d="M75.2938 20.88C116.601 20.88 150.088 16.3178 150.088 10.69C150.088 5.06222 116.601 0.5 75.2938 0.5C33.9863 0.5 0.5 5.06222 0.5 10.69C0.5 16.3178 33.9863 20.88 75.2938 20.88Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <div class="es-h1">No disks yet</div>
+              <div class="es-desc">Persistent block storage — attach, detach, snapshot across instances.</div>
+            </div>
+            <div class="es-cards">
+              <div class="es-card"><div class="es-card-t">Create disk</div><div class="es-card-d">Choose size & type</div></div>
+              <div class="es-card"><div class="es-card-t">Attach</div><div class="es-card-d">Mount to instance</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. METRICS (in-context: VM / Cluster detail → Metrics tab) -->
+    <div class="frame-wrap">
+      <div class="frame-label">Metrics · No data</div>
+      <div class="frame-sub">VM detail &amp; cluster detail → Metrics tab</div>
+      <div class="browser tall">
+        <div class="browser-chrome"><div class="chrome-dot r"></div><div class="chrome-dot y"></div><div class="chrome-dot g"></div><div class="chrome-url"></div></div>
+        <div class="browser-body">
+          <div class="browser-sidebar">
+            <div class="sb-item dark" style="width:28px;height:8px;border-radius:3px"></div>
+            <div class="sb-spacer"></div>
+            <div class="sb-item dark" style="width:28px"></div><div class="sb-item" style="width:22px"></div><div class="sb-item" style="width:26px"></div>
+          </div>
+          <div class="browser-main">
+            <div class="pg-header">
+              <span class="pg-title">np-9cef4f52-2</span>
+              <span style="display:flex;gap:4px"><span style="background:#dcfce7;color:#16a34a;border-radius:3px;font-size:6px;padding:2px 5px;font-family:Inter,sans-serif;font-weight:600">Running</span></span>
+            </div>
+            <!-- Tab bar -->
+            <div style="display:flex;gap:0;border-bottom:1px solid #f0f0f0;padding:0 14px;background:white;flex-shrink:0">
+              <div style="font-size:7px;color:#aaa;font-family:Inter,sans-serif;padding:6px 8px 5px">Overview</div>
+              <div style="font-size:7px;color:#aaa;font-family:Inter,sans-serif;padding:6px 8px 5px">Disks</div>
+              <div style="font-size:7px;color:#111;font-family:Inter,sans-serif;padding:6px 8px 5px;font-weight:600;border-bottom:1.5px solid #111">Metrics</div>
+              <div style="font-size:7px;color:#aaa;font-family:Inter,sans-serif;padding:6px 8px 5px">Logs</div>
+            </div>
+            <div class="es-hero" style="justify-content:center;padding:14px 14px 10px">
+              <div class="es-illus">
+                <!-- Metrics: wave + diamond + rectangle -->
+                <svg width="110" height="94" viewBox="0 0 176.387 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M128.658 106.742C125.423 102.044 124.142 97.9207 122.45 93.2534C120.154 86.9399 118.13 80.5206 115.411 74.3883C114.475 72.2888 113.312 70.1591 111.348 68.6487C109.234 67.0325 108.101 67.0023 106.032 68.7091C103.449 70.8539 102.029 73.92 100.715 76.956C97.7696 83.7227 95.5341 90.8217 91.9242 97.2863C91.0331 98.8722 90.006 100.322 88.6768 101.531C87.2419 102.83 85.52 102.89 84.07 101.531C82.7258 100.262 81.6383 98.8118 80.7622 97.0899C77.1523 89.9456 75.3247 82.1821 72.9684 74.5997C70.6877 67.2893 68.9809 59.7674 65.5824 52.8497C64.9783 51.6111 64.3742 50.3273 63.4679 49.3304C60.6585 46.2642 59.1481 46.5965 56.7918 49.3002C54.3903 52.0491 53.0913 55.4174 51.6866 58.7554C48.9074 65.3106 46.8835 72.1831 43.8324 78.6175C42.8809 80.6263 41.8538 82.6201 40.3585 84.2966C37.9267 87.0154 35.5402 87.3779 32.7157 84.0701C30.4954 81.4571 29.0152 78.4362 27.6407 75.3096C24.6652 68.5581 22.7167 61.3382 18.9105 54.9492C18.0344 53.4689 17.0678 52.1247 15.8443 50.9767C14.4245 49.6476 12.9443 49.708 11.4641 50.9616C8.65472 53.333 7.7181 56.4675 6.2832 59.6998C4.75767 63.1285 2.77423 70.6258 1.36954 74.0998" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M152.224 63.5597C148.493 72.6374 140.147 102.843 136.25 107.586C133.894 110.455 131.632 110.305 128.758 106.867" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M152.235 63.2414C153.459 61.3987 154.304 59.3294 155.664 57.532C157.839 54.632 160.558 55.2513 162.189 57.3205C164.908 60.7643 166.237 64.8726 167.732 68.9206C168.034 69.7513 168.11 70.6878 168.88 71.2919" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M171.115 79.6311C173.776 79.6311 175.933 77.4739 175.933 74.8128C175.933 72.1518 173.776 69.9946 171.115 69.9946C168.454 69.9946 166.297 72.1518 166.297 74.8128C166.297 77.4739 168.454 79.6311 171.115 79.6311Z" fill="black"/>
+                  <path d="M59.9766 52.9358C62.6376 52.9358 64.7948 50.7786 64.7948 48.1175C64.7948 45.4565 62.6376 43.2993 59.9766 43.2993C57.3155 43.2993 55.1583 45.4565 55.1583 48.1175C55.1583 50.7786 57.3155 52.9358 59.9766 52.9358Z" fill="black"/>
+                  <path d="M171.539 0.755211H0.906253V149.245H171.539V0.755211Z" stroke="black" stroke-miterlimit="10"/>
+                  <path d="M171.07 75.2945L86.5623 132.283L1.35938 74.6904L85.8675 17.7021L171.07 75.2945Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <div class="es-h1" style="font-size:11px">No metrics data yet</div>
+              <div class="es-desc">Install the Crusoe Telemetry Agent to enable monitoring.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. API KEYS + SSH KEYS -->
+    <div class="frame-wrap">
+      <div class="frame-label">Security · API Keys &amp; SSH Keys</div>
+      <div class="frame-sub">No keys yet</div>
+      <div class="browser tall">
+        <div class="browser-chrome"><div class="chrome-dot r"></div><div class="chrome-dot y"></div><div class="chrome-dot g"></div><div class="chrome-url"></div></div>
+        <div class="browser-body">
+          <div class="browser-sidebar">
+            <div class="sb-item dark" style="width:28px;height:8px;border-radius:3px"></div>
+            <div class="sb-spacer"></div>
+            <div class="sb-item" style="width:26px"></div><div class="sb-item" style="width:20px"></div>
+            <div class="sb-spacer"></div>
+            <div class="sb-item" style="width:22px"></div><div class="sb-item dark" style="width:28px"></div><div class="sb-item dark" style="width:24px"></div>
+          </div>
+          <div class="browser-main">
+            <div class="pg-header">
+              <span class="pg-title">Cloud API Keys</span>
+              <span class="pg-btn">+ Create</span>
+            </div>
+            <div class="keys-body">
+              <div class="keys-illus-wrap">
+                <!-- Keys: outer circle + inner dashed circle + crosshairs + diamond -->
+                <svg width="60" height="60" viewBox="0 0 151 151" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-bottom:6px">
+                  <path d="M75.5 150.5C116.921 150.5 150.5 116.921 150.5 75.5C150.5 34.0786 116.921 0.5 75.5 0.5C34.0786 0.5 0.5 34.0786 0.5 75.5C0.5 116.921 34.0786 150.5 75.5 150.5Z" stroke="black" stroke-miterlimit="10"/>
+                  <path transform="translate(25.667,25.667)" d="M49.8326 99.1652C77.0782 99.1652 99.1652 77.0782 99.1652 49.8326C99.1652 22.587 77.0782 0.5 49.8326 0.5C22.587 0.5 0.5 22.587 0.5 49.8326C0.5 77.0782 22.587 99.1652 49.8326 99.1652Z" stroke="black" stroke-miterlimit="10" stroke-dasharray="3 3"/>
+                  <path transform="translate(75,0.886)" d="M0.5 0V149.228" stroke="black" stroke-miterlimit="10" stroke-dasharray="3 3"/>
+                  <path transform="translate(0.886,75)" d="M0 0.5H149.228" stroke="black" stroke-miterlimit="10" stroke-dasharray="3 3"/>
+                  <path transform="translate(54.35,54.35) rotate(45,21.15,21.15)" d="M41.7995 0.5H0.5V41.7995H41.7995V0.5Z" stroke="black" stroke-miterlimit="10"/>
+                </svg>
+                <div class="keys-h">No API keys yet</div>
+                <div class="keys-sub">Create a key to authenticate the CLI and SDK.</div>
+              </div>
+              <div class="keys-stepper">
+                <div class="keys-step">
+                  <div class="keys-step-n">1</div>
+                  <div class="keys-step-t">Generate key</div>
+                  <div class="keys-step-d">Create your API key in the console</div>
+                </div>
+                <div class="keys-step">
+                  <div class="keys-step-n">2</div>
+                  <div class="keys-step-t">Install CLI</div>
+                  <div class="keys-step-d">pip install crusoe</div>
+                </div>
+                <div class="keys-step">
+                  <div class="keys-step-n">3</div>
+                  <div class="keys-step-t">Configure</div>
+                  <div class="keys-step-d">crusoe init</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- SECTION 2: Same illustration reuse                         -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div class="also-section">
+  <div class="section-label">Same Illustration · Also Used On</div>
+  <div class="also-row">
+
+    <!-- Infra Dashboard → same as Instances -->
+    <div class="frame-wrap">
+      <div class="frame-label">Infra Dashboard · No Compute</div>
+      <div class="also-badge">
+        <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1 5h8M5 1l4 4-4 4" stroke="#888" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Same as Instances
+      </div>
+      <div class="browser" style="width:240px">
+        <div class="browser-chrome"><div class="chrome-dot r"></div><div class="chrome-dot y"></div><div class="chrome-dot g"></div><div class="chrome-url"></div></div>
+        <div class="browser-body" style="height:180px">
+          <div class="browser-sidebar">
+            <div class="sb-item dark" style="width:24px;height:8px;border-radius:3px"></div>
+            <div class="sb-spacer"></div>
+            <div class="sb-item" style="width:28px"></div><div class="sb-item" style="width:20px"></div>
+          </div>
+          <div class="browser-main">
+            <div class="pg-header"><span class="pg-title">Infrastructure</span></div>
+            <div class="es-hero" style="padding:12px 10px">
+              <div class="dot-grid"></div>
+              <div class="es-illus">
+                <svg width="64" height="50" viewBox="0 0 166.55 128.97" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M143.43 96.41H161.12C162.75 96.53 163.52 96.18 164.12 95.91 165.14 96.42 165.56 96.82 165.14 97.2 163.91 99.07 161.86 101.98 159.15 105.81 156.46 109.64 153.75 113.47 150.75 117.74 147.81 122.03 144.72 126.26 143.76 127.57 142.3 128.49 139.84 128.48 94.52 128.4 49.22 128.42 3.9 128.42 1.85 128.68 1.41 127.93 1.04 127.29 0.49 126.61 0.6 125.82V35.11C0.6 33.55 2.03 30.69 4.53 26.89 7.11 23.13 9.59 19.34 13.54 13.32 17.69 7.38 21.6 1.34 22.66 0.5 22.97 0.61 23.27 0.74 23.24 1.09 22.9 4.52 23.12 7.97 23.1 11.4V96.4" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M23.05 1.24C38.06 16.83 121.42 106.9 136.61 122.41 138.09 123.92 140.21 126.05 142.39 127.37" stroke="black" stroke-miterlimit="10" stroke-dasharray="3 3"/>
+                  <path d="M23.88 96.63H142.77" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M142.45 33.7C99.36 33.66 1.19 33.9 1.19 33.9" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M143.28 33.57V127.37" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M12.58 81.75L153.13 49.83" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M13.2 83.93C14.51 84.04 15.66 83.08 15.77 81.77 15.88 80.46 14.91 79.31 13.61 79.2 12.31 79.09 11.15 80.06 11.04 81.36 10.93 82.66 11.9 83.82 13.2 83.93Z" fill="black"/>
+                  <path d="M155.15 51.89C156.46 52 157.61 51.03 157.72 49.73 157.83 48.43 156.86 47.27 155.56 47.16 154.26 47.05 153.1 48.02 152.99 49.32 152.88 50.62 153.84 51.78 155.15 51.89Z" fill="black"/>
+                  <path d="M22.35 0.58H165.77" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <div class="es-h1" style="font-size:10px">No compute yet</div>
+              <div class="es-desc" style="font-size:6.5px">Create an instance to start using the Command Center.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slurm → same as K8s Orchestration -->
+    <div class="frame-wrap">
+      <div class="frame-label">Orchestration · Slurm Clusters</div>
+      <div class="also-badge">
+        <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1 5h8M5 1l4 4-4 4" stroke="#888" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Same as Kubernetes
+      </div>
+      <div class="browser" style="width:240px">
+        <div class="browser-chrome"><div class="chrome-dot r"></div><div class="chrome-dot y"></div><div class="chrome-dot g"></div><div class="chrome-url"></div></div>
+        <div class="browser-body" style="height:180px">
+          <div class="browser-sidebar">
+            <div class="sb-item dark" style="width:24px;height:8px;border-radius:3px"></div>
+            <div class="sb-spacer"></div>
+            <div class="sb-item" style="width:28px"></div><div class="sb-item dark" style="width:22px"></div><div class="sb-item" style="width:26px"></div>
+          </div>
+          <div class="browser-main">
+            <div class="pg-header"><span class="pg-title">Slurm Clusters</span><span class="pg-btn">+ Create</span></div>
+            <div class="es-hero" style="padding:12px 10px">
+              <div class="dot-grid"></div>
+              <div class="es-illus">
+                <svg width="62" height="62" viewBox="0 0 153.881 152.019" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M87.2031 65.5249H66.1768V86.4529H87.2031V65.5249Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M11.67 140.399H0.5V151.519H11.67V140.399Z" fill="black" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M153.381 0.5H142.211V11.62H153.381V0.5Z" fill="black" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M113.7 39.2188H5.81006V146.629H113.7V39.2188Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M130.63 22.2891H22.7402V129.699H130.63V22.2891Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M147.57 5.34863H39.6802V112.759H147.57V5.34863Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M66.5181 66.0903L87.167 86.019" stroke="black"/>
+                  <path d="M86.8652 66.1665L66.2163 86.0952" stroke="black"/>
+                </svg>
+              </div>
+              <div class="es-h1" style="font-size:10px">No clusters yet</div>
+              <div class="es-desc" style="font-size:6.5px">HPC Slurm clusters with GPU-optimized nodes.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SSH Keys → same as API Keys -->
+    <div class="frame-wrap">
+      <div class="frame-label">Security · SSH Keys</div>
+      <div class="also-badge">
+        <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1 5h8M5 1l4 4-4 4" stroke="#888" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Same as Cloud API Keys
+      </div>
+      <div class="browser" style="width:240px">
+        <div class="browser-chrome"><div class="chrome-dot r"></div><div class="chrome-dot y"></div><div class="chrome-dot g"></div><div class="chrome-url"></div></div>
+        <div class="browser-body" style="height:180px">
+          <div class="browser-sidebar">
+            <div class="sb-item dark" style="width:24px;height:8px;border-radius:3px"></div>
+            <div class="sb-spacer"></div>
+            <div class="sb-item" style="width:22px"></div><div class="sb-item dark" style="width:28px"></div>
+          </div>
+          <div class="browser-main">
+            <div class="pg-header"><span class="pg-title">SSH Keys</span><span class="pg-btn">+ Add Key</span></div>
+            <div class="es-hero" style="padding:14px 12px">
+              <div class="dot-grid"></div>
+              <div class="es-illus">
+                <svg width="56" height="56" viewBox="0 0 151 151" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M75.5 150.5C116.921 150.5 150.5 116.921 150.5 75.5C150.5 34.0786 116.921 0.5 75.5 0.5C34.0786 0.5 0.5 34.0786 0.5 75.5C0.5 116.921 34.0786 150.5 75.5 150.5Z" stroke="black" stroke-miterlimit="10"/>
+                  <path transform="translate(25.667,25.667)" d="M49.8326 99.1652C77.0782 99.1652 99.1652 77.0782 99.1652 49.8326C99.1652 22.587 77.0782 0.5 49.8326 0.5C22.587 0.5 0.5 22.587 0.5 49.8326C0.5 77.0782 22.587 99.1652 49.8326 99.1652Z" stroke="black" stroke-miterlimit="10" stroke-dasharray="3 3"/>
+                  <path transform="translate(75,0.886)" d="M0.5 0V149.228" stroke="black" stroke-miterlimit="10" stroke-dasharray="3 3"/>
+                  <path transform="translate(0.886,75)" d="M0 0.5H149.228" stroke="black" stroke-miterlimit="10" stroke-dasharray="3 3"/>
+                  <path transform="translate(54.35,54.35) rotate(45,21.15,21.15)" d="M41.7995 0.5H0.5V41.7995H41.7995V0.5Z" stroke="black" stroke-miterlimit="10"/>
+                </svg>
+              </div>
+              <div class="es-h1" style="font-size:10px">No SSH keys added</div>
+              <div class="es-desc" style="font-size:6.5px">Add a public key to authenticate with VMs.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- K8s Metrics tab → same as Metrics illustration -->
+    <div class="frame-wrap">
+      <div class="frame-label">Kubernetes Detail · Metrics tab</div>
+      <div class="also-badge">
+        <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1 5h8M5 1l4 4-4 4" stroke="#888" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Same as VM Metrics tab
+      </div>
+      <div class="browser" style="width:240px">
+        <div class="browser-chrome"><div class="chrome-dot r"></div><div class="chrome-dot y"></div><div class="chrome-dot g"></div><div class="chrome-url"></div></div>
+        <div class="browser-body" style="height:180px">
+          <div class="browser-sidebar">
+            <div class="sb-item dark" style="width:24px;height:8px;border-radius:3px"></div>
+            <div class="sb-spacer"></div>
+            <div class="sb-item dark" style="width:26px"></div><div class="sb-item" style="width:20px"></div>
+          </div>
+          <div class="browser-main">
+            <div class="pg-header"><span class="pg-title">omni-man</span><span style="background:#dcfce7;color:#16a34a;border-radius:3px;font-size:6px;padding:2px 5px;font-family:Inter,sans-serif;font-weight:600">Running</span></div>
+            <div style="display:flex;gap:0;border-bottom:1px solid #f0f0f0;padding:0 10px;flex-shrink:0">
+              <div style="font-size:6.5px;color:#aaa;font-family:Inter,sans-serif;padding:5px 6px 4px">Overview</div>
+              <div style="font-size:6.5px;color:#111;font-family:Inter,sans-serif;padding:5px 6px 4px;font-weight:600;border-bottom:1.5px solid #111">Metrics</div>
+              <div style="font-size:6.5px;color:#aaa;font-family:Inter,sans-serif;padding:5px 6px 4px">Nodes</div>
+            </div>
+            <div class="es-hero" style="padding:10px 10px">
+              <div class="es-illus">
+                <svg width="90" height="77" viewBox="0 0 176.387 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M128.658 106.742C125.423 102.044 124.142 97.9207 122.45 93.2534C120.154 86.9399 118.13 80.5206 115.411 74.3883C114.475 72.2888 113.312 70.1591 111.348 68.6487C109.234 67.0325 108.101 67.0023 106.032 68.7091C103.449 70.8539 102.029 73.92 100.715 76.956C97.7696 83.7227 95.5341 90.8217 91.9242 97.2863C91.0331 98.8722 90.006 100.322 88.6768 101.531C87.2419 102.83 85.52 102.89 84.07 101.531C82.7258 100.262 81.6383 98.8118 80.7622 97.0899C77.1523 89.9456 75.3247 82.1821 72.9684 74.5997C70.6877 67.2893 68.9809 59.7674 65.5824 52.8497C64.9783 51.6111 64.3742 50.3273 63.4679 49.3304C60.6585 46.2642 59.1481 46.5965 56.7918 49.3002C54.3903 52.0491 53.0913 55.4174 51.6866 58.7554C48.9074 65.3106 46.8835 72.1831 43.8324 78.6175C42.8809 80.6263 41.8538 82.6201 40.3585 84.2966C37.9267 87.0154 35.5402 87.3779 32.7157 84.0701C30.4954 81.4571 29.0152 78.4362 27.6407 75.3096C24.6652 68.5581 22.7167 61.3382 18.9105 54.9492C18.0344 53.4689 17.0678 52.1247 15.8443 50.9767C14.4245 49.6476 12.9443 49.708 11.4641 50.9616C8.65472 53.333 7.7181 56.4675 6.2832 59.6998C4.75767 63.1285 2.77423 70.6258 1.36954 74.0998" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M152.224 63.5597C148.493 72.6374 140.147 102.843 136.25 107.586C133.894 110.455 131.632 110.305 128.758 106.867" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M171.115 79.6311C173.776 79.6311 175.933 77.4739 175.933 74.8128C175.933 72.1518 173.776 69.9946 171.115 69.9946C168.454 69.9946 166.297 72.1518 166.297 74.8128C166.297 77.4739 168.454 79.6311 171.115 79.6311Z" fill="black"/>
+                  <path d="M59.9766 52.9358C62.6376 52.9358 64.7948 50.7786 64.7948 48.1175C64.7948 45.4565 62.6376 43.2993 59.9766 43.2993C57.3155 43.2993 55.1583 45.4565 55.1583 48.1175C55.1583 50.7786 57.3155 52.9358 59.9766 52.9358Z" fill="black"/>
+                  <path d="M171.539 0.755211H0.906253V149.245H171.539V0.755211Z" stroke="black" stroke-miterlimit="10"/>
+                  <path d="M171.07 75.2945L86.5623 132.283L1.35938 74.6904L85.8675 17.7021L171.07 75.2945Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <div class="es-h1" style="font-size:9px">No metrics data yet</div>
+              <div class="es-desc" style="font-size:6px">Add a node pool to start collecting metrics.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="board-divider"></div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- SECTION 3: Component-level — Dropdown empty states         -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div class="section">
+  <div class="section-label">Component-level Empty States · Dropdowns</div>
+  <div class="dropdown-row">
+
+    <!-- 1. Instance Type (with search) -->
+    <div class="dd-wrap">
+      <div class="dd-label">Instance Type</div>
+      <div class="dd-sub">With search · No match</div>
+      <div class="dropdown">
+        <div class="dd-search">
+          <div class="dd-input">
+            <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><circle cx="7" cy="7" r="5.5" stroke="#868e96" stroke-width="1.3"/><path d="M11 11l3 3" stroke="#868e96" stroke-width="1.3" stroke-linecap="round"/></svg>
+            <span class="dd-input-text">Search instance types…</span>
+          </div>
+        </div>
+        <div class="dd-empty">
+          <div class="dd-illus">
+            <!-- Instances illustration, small -->
+            <svg width="52" height="40" viewBox="0 0 166.55 128.97" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M143.43 96.41H161.12C162.75 96.53 163.52 96.18 164.12 95.91 165.14 96.42 165.56 96.82 165.14 97.2 163.91 99.07 161.86 101.98 159.15 105.81 156.46 109.64 153.75 113.47 150.75 117.74 147.81 122.03 144.72 126.26 143.76 127.57 142.3 128.49 139.84 128.48 94.52 128.4 49.22 128.42 3.9 128.42 1.85 128.68 1.41 127.93 1.04 127.29 0.49 126.61 0.6 125.82V35.11C0.6 33.55 2.03 30.69 4.53 26.89 7.11 23.13 9.59 19.34 13.54 13.32 17.69 7.38 21.6 1.34 22.66 0.5 22.97 0.61 23.27 0.74 23.24 1.09 22.9 4.52 23.1 11.4 23.1 11.4V96.4" stroke="#343a40" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M23.05 1.24C38.06 16.83 121.42 106.9 136.61 122.41 138.09 123.92 140.21 126.05 142.39 127.37" stroke="#343a40" stroke-miterlimit="10" stroke-dasharray="4 4"/>
+              <path d="M23.88 96.63H142.77" stroke="#343a40" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M142.45 33.7C99.36 33.66 1.19 33.9 1.19 33.9" stroke="#343a40" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M143.28 33.57V127.37" stroke="#343a40" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M12.58 81.75L153.13 49.83" stroke="#343a40" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M13.2 83.93C14.51 84.04 15.66 83.08 15.77 81.77 15.88 80.46 14.91 79.31 13.61 79.2 12.31 79.09 11.15 80.06 11.04 81.36 10.93 82.66 11.9 83.82 13.2 83.93Z" fill="#343a40"/>
+              <path d="M155.15 51.89C156.46 52 157.61 51.03 157.72 49.73 157.83 48.43 156.86 47.27 155.56 47.16 154.26 47.05 153.1 48.02 152.99 49.32 152.88 50.62 153.84 51.78 155.15 51.89Z" fill="#343a40"/>
+              <path d="M22.35 0.58H165.77" stroke="#343a40" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="dd-empty-t">No instance types found</div>
+          <div class="dd-empty-d">Try a different search or check your region availability.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. Images (with search) -->
+    <div class="dd-wrap">
+      <div class="dd-label">Images</div>
+      <div class="dd-sub">With search · No match</div>
+      <div class="dropdown">
+        <div class="dd-search">
+          <div class="dd-input">
+            <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><circle cx="7" cy="7" r="5.5" stroke="#868e96" stroke-width="1.3"/><path d="M11 11l3 3" stroke="#868e96" stroke-width="1.3" stroke-linecap="round"/></svg>
+            <span class="dd-input-text">Search images…</span>
+          </div>
+        </div>
+        <div class="dd-empty">
+          <div class="dd-illus">
+            <!-- Instances illustration (images are part of instance creation) -->
+            <svg width="52" height="40" viewBox="0 0 166.55 128.97" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M143.43 96.41H161.12C162.75 96.53 163.52 96.18 164.12 95.91 165.14 96.42 165.56 96.82 165.14 97.2 163.91 99.07 161.86 101.98 159.15 105.81 156.46 109.64 153.75 113.47 150.75 117.74 147.81 122.03 144.72 126.26 143.76 127.57 142.3 128.49 139.84 128.48 94.52 128.4 49.22 128.42 3.9 128.42 1.85 128.68 1.41 127.93 1.04 127.29 0.49 126.61 0.6 125.82V35.11C0.6 33.55 2.03 30.69 4.53 26.89 7.11 23.13 9.59 19.34 13.54 13.32 17.69 7.38 21.6 1.34 22.66 0.5 22.97 0.61 23.27 0.74 23.24 1.09 22.9 4.52 23.1 11.4 23.1 11.4V96.4" stroke="#343a40" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M23.05 1.24C38.06 16.83 121.42 106.9 136.61 122.41 138.09 123.92 140.21 126.05 142.39 127.37" stroke="#343a40" stroke-miterlimit="10" stroke-dasharray="4 4"/>
+              <path d="M23.88 96.63H142.77" stroke="#343a40" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M142.45 33.7C99.36 33.66 1.19 33.9 1.19 33.9" stroke="#343a40" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M143.28 33.57V127.37" stroke="#343a40" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M12.58 81.75L153.13 49.83" stroke="#343a40" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M13.2 83.93C14.51 84.04 15.66 83.08 15.77 81.77 15.88 80.46 14.91 79.31 13.61 79.2 12.31 79.09 11.15 80.06 11.04 81.36 10.93 82.66 11.9 83.82 13.2 83.93Z" fill="#343a40"/>
+              <path d="M155.15 51.89C156.46 52 157.61 51.03 157.72 49.73 157.83 48.43 156.86 47.27 155.56 47.16 154.26 47.05 153.1 48.02 152.99 49.32 152.88 50.62 153.84 51.78 155.15 51.89Z" fill="#343a40"/>
+              <path d="M22.35 0.58H165.77" stroke="#343a40" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="dd-empty-t">No images found</div>
+          <div class="dd-empty-d">No OS images match your search. Try "ubuntu" or "debian".</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. Disks (with search) -->
+    <div class="dd-wrap">
+      <div class="dd-label">Disks</div>
+      <div class="dd-sub">With search · No disks</div>
+      <div class="dropdown">
+        <div class="dd-search">
+          <div class="dd-input">
+            <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><circle cx="7" cy="7" r="5.5" stroke="#868e96" stroke-width="1.3"/><path d="M11 11l3 3" stroke="#868e96" stroke-width="1.3" stroke-linecap="round"/></svg>
+            <span class="dd-input-text">Search disks…</span>
+          </div>
+        </div>
+        <div class="dd-empty">
+          <div class="dd-illus">
+            <!-- Disk illustration, small -->
+            <svg width="46" height="46" viewBox="0 0 150.588 150.588" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M75.2938 150.088C116.601 150.088 150.088 116.601 150.088 75.2938C150.088 33.9863 116.601 0.5 75.2938 0.5C33.9863 0.5 0.5 33.9863 0.5 75.2938C0.5 116.601 33.9863 150.088 75.2938 150.088Z" stroke="#343a40" stroke-linecap="round" stroke-linejoin="round"/>
+              <path transform="translate(0,16.149)" d="M75.2938 117.79C116.601 117.79 150.088 91.5341 150.088 59.1452C150.088 26.7564 116.601 0.5 75.2938 0.5C33.9863 0.5 0.5 26.7564 0.5 59.1452C0.5 91.5341 33.9863 117.79 75.2938 117.79Z" stroke="#343a40" stroke-linecap="round" stroke-linejoin="round"/>
+              <path transform="translate(0,32.307)" d="M75.2938 85.4742C116.601 85.4742 150.088 66.4521 150.088 42.9871C150.088 19.5221 116.601 0.5 75.2938 0.5C33.9863 0.5 0.5 19.5221 0.5 42.9871C0.5 66.4521 33.9863 85.4742 75.2938 85.4742Z" stroke="#343a40" stroke-linecap="round" stroke-linejoin="round"/>
+              <path transform="translate(0,48.455)" d="M75.2938 53.1771C116.601 53.1771 150.088 41.3849 150.088 26.8385C150.088 12.2922 116.601 0.5 75.2938 0.5C33.9863 0.5 0.5 12.2922 0.5 26.8385C0.5 41.3849 33.9863 53.1771 75.2938 53.1771Z" stroke="#343a40" stroke-linecap="round" stroke-linejoin="round"/>
+              <path transform="translate(0,64.604)" d="M75.2938 20.88C116.601 20.88 150.088 16.3178 150.088 10.69C150.088 5.06222 116.601 0.5 75.2938 0.5C33.9863 0.5 0.5 5.06222 0.5 10.69C0.5 16.3178 33.9863 20.88 75.2938 20.88Z" stroke="#343a40" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="dd-empty-t">No disks available</div>
+          <div class="dd-empty-d">Create a disk first, then attach it here.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. SSH Keys (no search) -->
+    <div class="dd-wrap">
+      <div class="dd-label">SSH Keys</div>
+      <div class="dd-sub">No search · No keys added</div>
+      <div class="dropdown no-search">
+        <div class="dd-search"><!-- hidden --></div>
+        <div class="dd-empty">
+          <div class="dd-illus">
+            <!-- Keys illustration, small -->
+            <svg width="46" height="46" viewBox="0 0 151 151" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M75.5 150.5C116.921 150.5 150.5 116.921 150.5 75.5C150.5 34.0786 116.921 0.5 75.5 0.5C34.0786 0.5 0.5 34.0786 0.5 75.5C0.5 116.921 34.0786 150.5 75.5 150.5Z" stroke="#343a40" stroke-miterlimit="10"/>
+              <path transform="translate(25.667,25.667)" d="M49.8326 99.1652C77.0782 99.1652 99.1652 77.0782 99.1652 49.8326C99.1652 22.587 77.0782 0.5 49.8326 0.5C22.587 0.5 0.5 22.587 0.5 49.8326C0.5 77.0782 22.587 99.1652 49.8326 99.1652Z" stroke="#343a40" stroke-miterlimit="10" stroke-dasharray="3 3"/>
+              <path transform="translate(75,0.886)" d="M0.5 0V149.228" stroke="#343a40" stroke-miterlimit="10" stroke-dasharray="3 3"/>
+              <path transform="translate(0.886,75)" d="M0 0.5H149.228" stroke="#343a40" stroke-miterlimit="10" stroke-dasharray="3 3"/>
+              <path transform="translate(54.35,54.35) rotate(45,21.15,21.15)" d="M41.7995 0.5H0.5V41.7995H41.7995V0.5Z" stroke="#343a40" stroke-miterlimit="10"/>
+            </svg>
+          </div>
+          <div class="dd-empty-t">No SSH keys added</div>
+          <div class="dd-empty-d">Add a public SSH key on the SSH Keys page before creating an instance.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>
