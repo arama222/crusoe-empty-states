@@ -3137,7 +3137,7 @@ img.ico{display:block;flex:0 0 auto}
       <div class="ph-title">SSH Keys</div>
       <div class="ph-sub">Public keys used for SSH access to your VMs.</div>
     </div>
-    <div class="ph-r"></div>
+    <div class="ph-r"><button class="btn btn-p"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.99967 3.33337V12.6667M3.33301 8.00004H12.6663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Add SSH Key</button></div>
   </div>
   <div class="divider"></div>
   <div class="ca">
@@ -3160,7 +3160,7 @@ img.ico{display:block;flex:0 0 auto}
       <!-- Text block -->
       <div style="position:relative;z-index:1;max-width:380px">
         <h1 style="font-size:40px;font-weight:400;font-family:var(--font-heading);color:var(--text);letter-spacing:-1.2px;line-height:110%;margin:0 0 10px;white-space:nowrap">No SSH keys yet.</h1>
-        <p style="font-size:14px;color:var(--muted);font-family:var(--font-body);line-height:160%;margin:0 0 16px">Add your public SSH key to authenticate with Crusoe VMs. Keys added here can be attached to instances at creation time.</p>
+        <p style="font-size:14px;color:var(--muted);font-family:var(--font-body);line-height:160%;margin:0 0 16px">Upload your public SSH key so it's available when creating VMs. Keys must be selected at VM creation to take effect — adding one here alone doesn't grant access.</p>
         <a href="https://docs.crusoecloud.com/compute/ssh-keys" target="_blank" style="display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:500;font-family:var(--font-body);color:var(--white);background:var(--black);padding:6px 14px;border-radius:8px;text-decoration:none;letter-spacing:.01em;transition:opacity .15s ease" onmouseenter="this.style.opacity='.8'" onmouseleave="this.style.opacity='1'">View docs →</a>
       </div>
     </div>
@@ -3187,7 +3187,7 @@ img.ico{display:block;flex:0 0 auto}
           </div>
           <div class="pop-card-tags" style="margin-bottom:0;padding-top:2px"><span class="pop-tag-sub">Step 2 · Access</span></div>
           <div class="res-card-body"><div class="res-card-body-inner">
-            <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:8px">After adding your key, select it when creating an instance and SSH in once the VM is running.</div>
+            <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:8px">Select your key when creating an instance — it won't grant access unless chosen at creation time. SSH in once the VM is running.</div>
             <div class="action-card-cli" style="margin-bottom:8px"><code style="font-size:11px">ssh ubuntu@&lt;instance-ip&gt;</code></div>
             <div class="res-card-actions"><button class="btn btn-o btn-sm" style="flex:1;justify-content:center">Create instance</button></div>
           </div></div>
