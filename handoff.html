@@ -142,6 +142,7 @@ html,body{height:100%;background:var(--white);color:var(--black);font-family:'Su
 [data-theme="dark"] #slurm-orch-svg,
 [data-theme="dark"] #slurm-node-ripples,
 [data-theme="dark"] #np-orch-svg,
+[data-theme="dark"] #met-wave-svg-vm,
 [data-theme="dark"] #met-wave-svg,
 [data-theme="dark"] #logs-wave-svg,
 [data-theme="dark"] #disk-spicy-svg,
@@ -2542,14 +2543,16 @@ img.ico{display:block;flex:0 0 auto}
     <!-- Agent / no-metrics empty state -->
     <div id="vm-agent-banner" class="metrics-empty" style="transition:opacity .3s">
       <div class="metrics-empty-icon">
-        <svg width="140" height="119" viewBox="0 0 176.387 150" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M128.658 106.742C125.423 102.044 124.142 97.9207 122.45 93.2534C120.154 86.9399 118.13 80.5206 115.411 74.3883C114.475 72.2888 113.312 70.1591 111.348 68.6487C109.234 67.0325 108.101 67.0023 106.032 68.7091C103.449 70.8539 102.029 73.92 100.715 76.956C97.7696 83.7227 95.5341 90.8217 91.9242 97.2863C91.0331 98.8722 90.006 100.322 88.6768 101.531C87.2419 102.83 85.52 102.89 84.07 101.531C82.7258 100.262 81.6383 98.8118 80.7622 97.0899C77.1523 89.9456 75.3247 82.1821 72.9684 74.5997C70.6877 67.2893 68.9809 59.7674 65.5824 52.8497C64.9783 51.6111 64.3742 50.3273 63.4679 49.3304C60.6585 46.2642 59.1481 46.5965 56.7918 49.3002C54.3903 52.0491 53.0913 55.4174 51.6866 58.7554C48.9074 65.3106 46.8835 72.1831 43.8324 78.6175C42.8809 80.6263 41.8538 82.6201 40.3585 84.2966C37.9267 87.0154 35.5402 87.3779 32.7157 84.0701C30.4954 81.4571 29.0152 78.4362 27.6407 75.3096C24.6652 68.5581 22.7167 61.3382 18.9105 54.9492C18.0344 53.4689 17.0678 52.1247 15.8443 50.9767C14.4245 49.6476 12.9443 49.708 11.4641 50.9616C8.65472 53.333 7.7181 56.4675 6.2832 59.6998C4.75767 63.1285 2.77423 70.6258 1.36954 74.0998" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M152.224 63.5597C148.493 72.6374 140.147 102.843 136.25 107.586C133.894 110.455 131.632 110.305 128.758 106.867" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M152.235 63.2414C153.459 61.3987 154.304 59.3294 155.664 57.532C157.839 54.632 160.558 55.2513 162.189 57.3205C164.908 60.7643 166.237 64.8726 167.732 68.9206C168.034 69.7513 168.11 70.6878 168.88 71.2919" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+        <svg id="met-wave-svg-vm" width="140" height="119" viewBox="0 0 176.387 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path id="vm-wave-a" d="M128.658 106.742C125.423 102.044 124.142 97.9207 122.45 93.2534C120.154 86.9399 118.13 80.5206 115.411 74.3883C114.475 72.2888 113.312 70.1591 111.348 68.6487C109.234 67.0325 108.101 67.0023 106.032 68.7091C103.449 70.8539 102.029 73.92 100.715 76.956C97.7696 83.7227 95.5341 90.8217 91.9242 97.2863C91.0331 98.8722 90.006 100.322 88.6768 101.531C87.2419 102.83 85.52 102.89 84.07 101.531C82.7258 100.262 81.6383 98.8118 80.7622 97.0899C77.1523 89.9456 75.3247 82.1821 72.9684 74.5997C70.6877 67.2893 68.9809 59.7674 65.5824 52.8497C64.9783 51.6111 64.3742 50.3273 63.4679 49.3304C60.6585 46.2642 59.1481 46.5965 56.7918 49.3002C54.3903 52.0491 53.0913 55.4174 51.6866 58.7554C48.9074 65.3106 46.8835 72.1831 43.8324 78.6175C42.8809 80.6263 41.8538 82.6201 40.3585 84.2966C37.9267 87.0154 35.5402 87.3779 32.7157 84.0701C30.4954 81.4571 29.0152 78.4362 27.6407 75.3096C24.6652 68.5581 22.7167 61.3382 18.9105 54.9492C18.0344 53.4689 17.0678 52.1247 15.8443 50.9767C14.4245 49.6476 12.9443 49.708 11.4641 50.9616C8.65472 53.333 7.7181 56.4675 6.2832 59.6998C4.75767 63.1285 2.77423 70.6258 1.36954 74.0998" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+          <path id="vm-wave-b" d="M152.224 63.5597C148.493 72.6374 140.147 102.843 136.25 107.586C133.894 110.455 131.632 110.305 128.758 106.867" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+          <path id="vm-wave-c" d="M152.235 63.2414C153.459 61.3987 154.304 59.3294 155.664 57.532C157.839 54.632 160.558 55.2513 162.189 57.3205C164.908 60.7643 166.237 64.8726 167.732 68.9206C168.034 69.7513 168.11 70.6878 168.88 71.2919" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
           <path d="M171.115 79.6311C173.776 79.6311 175.933 77.4739 175.933 74.8128C175.933 72.1518 173.776 69.9946 171.115 69.9946C168.454 69.9946 166.297 72.1518 166.297 74.8128C166.297 77.4739 168.454 79.6311 171.115 79.6311Z" fill="black"/>
           <path d="M59.9766 52.9358C62.6376 52.9358 64.7948 50.7786 64.7948 48.1175C64.7948 45.4565 62.6376 43.2993 59.9766 43.2993C57.3155 43.2993 55.1583 45.4565 55.1583 48.1175C55.1583 50.7786 57.3155 52.9358 59.9766 52.9358Z" fill="black"/>
           <path d="M171.539 0.755211H0.906253V149.245H171.539V0.755211Z" stroke="black" stroke-miterlimit="10"/>
           <path d="M171.07 75.2945L86.5623 132.283L1.35938 74.6904L85.8675 17.7021L171.07 75.2945Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle id="vm-dot-1" r="4.82" fill="black" cx="-20" cy="-20"/>
+          <circle id="vm-dot-2" r="4.82" fill="black" cx="-20" cy="-20"/>
         </svg>
       </div>
       <div class="metrics-empty-title">No metrics data yet</div>
@@ -3588,6 +3591,7 @@ function switchDetailTab(el, panelId) {
   const panel = document.getElementById(panelId);
   if (panel) { panel.classList.add('active'); panel.style.display='block'; }
   if (panelId === 'k8s-det-metrics') setTimeout(initMetricsAnimation, 60);
+  if (panelId === 'vm-det-metrics')  setTimeout(initVmMetricsAnimation, 60);
 }
 
 // ── Avatar dropdown ──
@@ -4338,18 +4342,25 @@ function initLogsIllusAnimation() {
   animDots(performance.now());
 }
 
-// ── Metrics tab: looping dots on wave illustration ──
-function initMetricsAnimation() {
-  const svg = document.getElementById('met-wave-svg');
+// ── Metrics wave animation: marching dashes + looping dots ──
+function initMetricsWave(prefix, rafKey) {
+  const svg   = document.getElementById(prefix === 'met' ? 'met-wave-svg' : 'met-wave-svg-vm');
   if (!svg) return;
-  if (window._metRafId) { cancelAnimationFrame(window._metRafId); window._metRafId = null; }
+  if (window[rafKey]) { cancelAnimationFrame(window[rafKey]); window[rafKey] = null; }
 
-  const waveA = document.getElementById('met-wave-a');
-  const waveB = document.getElementById('met-wave-b');
-  const waveC = document.getElementById('met-wave-c');
-  const dot1  = document.getElementById('met-dot-1');
-  const dot2  = document.getElementById('met-dot-2');
+  const waveA = document.getElementById(prefix + '-wave-a');
+  const waveB = document.getElementById(prefix + '-wave-b');
+  const waveC = document.getElementById(prefix + '-wave-c');
+  const dot1  = document.getElementById(prefix + '-dot-1');
+  const dot2  = document.getElementById(prefix + '-dot-2');
   if (!waveA || !waveB || !waveC || !dot1 || !dot2) return;
+
+  // Marching dashes on the wave line
+  [waveA, waveB, waveC].forEach(p => {
+    p.style.strokeDasharray  = '4 4';
+    p.style.strokeDashoffset = '0';
+    p.style.animation        = 'inst-dash-march 0.6s linear infinite';
+  });
 
   const DOT_SPEED  = 0.00013;
   const DOT_OFFSET = 0.48;
@@ -4368,16 +4379,18 @@ function initMetricsAnimation() {
   }
 
   function frame(ts) {
-    if (!document.getElementById('met-wave-svg')) return;
+    if (!svg.isConnected) return;
     if (_lastTs !== null) _phase = (_phase + DOT_SPEED * (ts - _lastTs)) % 1;
     _lastTs = ts;
     const p1 = getPoint(_phase), p2 = getPoint(_phase + DOT_OFFSET);
     dot1.setAttribute('cx', p1.x.toFixed(2)); dot1.setAttribute('cy', p1.y.toFixed(2));
     dot2.setAttribute('cx', p2.x.toFixed(2)); dot2.setAttribute('cy', p2.y.toFixed(2));
-    window._metRafId = requestAnimationFrame(frame);
+    window[rafKey] = requestAnimationFrame(frame);
   }
   frame(performance.now());
 }
+function initMetricsAnimation()   { initMetricsWave('met',  '_metRafId'); }
+function initVmMetricsAnimation() { initMetricsWave('vm',   '_vmMetRafId'); }
 
 // ── Managed Logs (metrics) spicy magic ──
 function initLogsMagic() {
