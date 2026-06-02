@@ -1948,10 +1948,10 @@ img.ico{display:block;flex:0 0 auto}
     </div>
   </div>
   <!-- Template cards -->
-  <div class="pop-section pop-section-centered slurm-spicy-reveal" style="margin-top:60px;padding-bottom:20px">
+  <div class="pop-section slurm-spicy-reveal" style="margin-top:60px;padding-bottom:20px">
     <div class="pop-title">Start with a popular cluster template</div>
-    <div style="display:flex;gap:14px;justify-content:center;align-items:start;overflow:visible">
-      <div class="pop-card res-card slurm-spicy-reveal" style="transition-delay:.08s;flex:0 1 360px">
+    <div class="pop-grid">
+      <div class="pop-card res-card slurm-spicy-reveal" style="transition-delay:.08s">
         <div class="pop-card-top" style="margin-bottom:8px">
           <div class="pop-icon"><svg width="38" height="38" viewBox="0 0 65 64.2205" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M36.7962 27.7211H27.994V36.4821H36.7962V27.7211Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/><path d="M5.17606 59.0654H0.5V63.7205H5.17606V59.0654Z" fill="black" stroke="black" stroke-linecap="round" stroke-linejoin="round"/><path d="M64.5 0.5H59.8239V5.15513H64.5V0.5Z" fill="black" stroke="black" stroke-linecap="round" stroke-linejoin="round"/><path d="M47.8886 16.7087H2.72296V61.6733H47.8886V16.7087Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/><path d="M54.976 9.62146H9.81038V54.5861H54.976V9.62146Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/><path d="M62.0675 2.52975H16.9019V47.4944H62.0675V2.52975Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
           <div class="pop-card-info"><div class="pop-card-name">GPU HPC Cluster</div><div class="pop-card-price">H100 multi-node</div></div>
@@ -1962,7 +1962,7 @@ img.ico{display:block;flex:0 0 auto}
           <div class="res-card-actions"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createClusterFromTemplate('slurm','gpu-hpc',this)">Create cluster</button><a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/orchestration/slurm" target="_blank" style="text-decoration:none">View docs</a></div>
         </div></div>
       </div>
-      <div class="pop-card res-card slurm-spicy-reveal" style="transition-delay:.14s;flex:0 1 360px">
+      <div class="pop-card res-card slurm-spicy-reveal" style="transition-delay:.14s">
         <div class="pop-card-top" style="margin-bottom:8px">
           <div class="pop-icon"><svg width="38" height="38" viewBox="0 0 65 64.2205" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M36.7962 27.7211H27.994V36.4821H36.7962V27.7211Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/><path d="M5.17606 59.0654H0.5V63.7205H5.17606V59.0654Z" fill="black" stroke="black" stroke-linecap="round" stroke-linejoin="round"/><path d="M64.5 0.5H59.8239V5.15513H64.5V0.5Z" fill="black" stroke="black" stroke-linecap="round" stroke-linejoin="round"/><path d="M47.8886 16.7087H2.72296V61.6733H47.8886V16.7087Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/><path d="M54.976 9.62146H9.81038V54.5861H54.976V9.62146Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/><path d="M62.0675 2.52975H16.9019V47.4944H62.0675V2.52975Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
           <div class="pop-card-info"><div class="pop-card-name">Multi-GPU Fine-tuning</div><div class="pop-card-price">A100 node pool</div></div>
@@ -3167,7 +3167,8 @@ const ICONS = {
   chevDown:`<svg class="ico" width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 11L3 6 3.7 5.3 8 9.6 12.3 5.3 13 6z"></path></svg>`,
   gear:`<svg class="ico" width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="10" cy="10" r="2.5"/><path d="M10 2v2M10 16v2M2 10h2M16 10h2M4.1 4.1l1.4 1.4M14.5 14.5l1.4 1.4M4.1 15.9l1.4-1.4M14.5 5.5l1.4-1.4"/></svg>`,
   panel:`<img class="ico" width="20" height="20" src="https://www.figma.com/api/mcp/asset/a785d781-576a-4c02-a1e3-a3b30823f14f"/>`,
-  arrowLeft:`<svg class="ico" width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><line x1="17" y1="10" x2="3" y2="10"/><polyline points="8,5 3,10 8,15"/></svg>`
+  arrowLeft:`<svg class="ico" width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><line x1="17" y1="10" x2="3" y2="10"/><polyline points="8,5 3,10 8,15"/></svg>`,
+  dropdown:`<svg class="ico" width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="2" y="5" width="16" height="10" rx="2"/><polyline points="7,9 10,12 13,9"/></svg>`
 };
 
 // ── Shared nav group items ──
@@ -3211,6 +3212,7 @@ function mainNav(activeGrp, activeItem) {
     grp('networking','networking','Networking', activeGrp==='networking'?activeItem:null, activeGrp==='networking'),
     {id:'managed-logs',icon:'logs',label:'Managed Logs',solo:true},
     {id:'registry',icon:'registry',label:'Container Registry',solo:true},
+    {id:'dropdown-states',icon:'dropdown',label:'Dropdown States',solo:true},
   ];
 }
 function settingsNav(activeKey) {
@@ -3252,6 +3254,7 @@ const SIDEBARS = {
   buckets:     {type:'main', topbar:{org:'ManagedOrchestration',proj:'abhatti'}, nav:mainNav('storage','buckets')},
   apikeys:     settingsNav('cloud-api-keys'),
   sshkeys:     settingsNav('ssh-keys'),
+  'dropdown-states': {type:'main', topbar:{org:'ManagedOrchestration',proj:'abhatti'}, nav:mainNav(null,'dropdown-states')},
   infra: {
     type:'cc', topbar:{org:'ManagedOrchestration',proj:'abhatti'}, notif:true,
     nav:[
@@ -3837,14 +3840,14 @@ function initClusterSpicyMagic() {
           try { p.style.transition = `stroke-dashoffset ${DUR_FWD}ms cubic-bezier(.4,0,0,1) ${i*STAGGER}ms`; p.style.strokeDashoffset = '0'; } catch(e) {}
         });
         const dotsStart = (pathIds.length - 1) * STAGGER + 600;
-        dots.forEach((d, i) => setTimeout(() => { d.style.transition = 'opacity 450ms ease'; d.style.opacity = '1'; }, dotsStart + i * 150));
+        setTimeout(() => { dots.forEach(d => { d.style.transition = 'opacity 400ms ease'; d.style.opacity = '1'; }); }, dotsStart);
         window._clusterDrawTimer = setTimeout(() => doClusterDraw('bwd'), TOTAL_FWD + PAUSE);
       });
     } else {
       paths.forEach((p, i) => {
         try { const l = p.getTotalLength(); const rd = (paths.length-1-i)*STAGGER; p.style.transition = `stroke-dashoffset ${DUR_BWD}ms cubic-bezier(.55,0,1,.45) ${rd}ms`; p.style.strokeDashoffset = l; } catch(e) {}
       });
-      dots.forEach((d, i) => { d.style.transition = `opacity 150ms ease ${i*60}ms`; d.style.opacity = '0'; });
+      dots.forEach(d => { d.style.transition = 'opacity 280ms ease'; d.style.opacity = '0'; });
       window._clusterDrawTimer = setTimeout(() => doClusterDraw('fwd'), TOTAL_BWD + PAUSE);
     }
   }
@@ -4017,7 +4020,7 @@ function initNodePoolAnimation() {
           try { p.style.transition = `stroke-dashoffset ${DUR_FWD}ms cubic-bezier(.4,0,0,1) ${i*STAGGER}ms`; p.style.strokeDashoffset = '0'; } catch(e) {}
         });
         const dotsStart = (pathIds.length - 1) * STAGGER + 600;
-        dots.forEach((d, i) => setTimeout(() => { d.style.transition = 'opacity 450ms ease'; d.style.opacity = '1'; }, dotsStart + i * 150));
+        setTimeout(() => { dots.forEach(d => { d.style.transition = 'opacity 400ms ease'; d.style.opacity = '1'; }); }, dotsStart);
         window._npDrawTimer = setTimeout(() => doNpDraw('bwd'), TOTAL_FWD + PAUSE);
       });
     } else {
@@ -4026,8 +4029,7 @@ function initNodePoolAnimation() {
       paths.forEach((p, i) => {
         try { const l = p.getTotalLength(); const rd = (paths.length-1-i)*STAGGER; p.style.transition = `stroke-dashoffset ${DUR_BWD}ms cubic-bezier(.55,0,1,.45) ${rd}ms`; p.style.strokeDashoffset = l; } catch(e) {}
       });
-      const dotsHideDelay = TOTAL_BWD;
-      dots.forEach((d, i) => { d.style.transition = `opacity 320ms ease ${dotsHideDelay + i*80}ms`; d.style.opacity = '0'; });
+      dots.forEach(d => { d.style.transition = 'opacity 280ms ease'; d.style.opacity = '0'; });
       window._npDrawTimer = setTimeout(() => doNpDraw('fwd'), TOTAL_BWD + PAUSE);
     }
   }
