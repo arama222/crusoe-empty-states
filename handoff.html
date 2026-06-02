@@ -599,7 +599,7 @@ img.ico{display:block;flex:0 0 auto}
     </div>
   </div>
   <!-- Your reservations -->
-  <div class="pop-section">
+  <div class="pop-section pop-section-centered">
     <div class="pop-title">Create from your reservations</div>
     <div class="pop-grid">
       <!-- H100 card -->
@@ -2799,7 +2799,7 @@ img.ico{display:block;flex:0 0 auto}
       <div class="ph-title">SSH Keys</div>
       <div class="ph-sub">Public keys used for SSH access to your VMs.</div>
     </div>
-    <div class="ph-r"><button class="btn btn-p">+ Add SSH Key</button></div>
+    <div class="ph-r"></div>
   </div>
   <div class="divider"></div>
   <div class="ca">
@@ -3352,9 +3352,8 @@ function initSpicyMagic() {
     dir = dir || 'fwd';
 
     if (dir === 'fwd') {
-      // First run only: prime everything hidden so browser paints the start state
-      // before transitions begin. Subsequent runs: paths already at dashoffset=l
-      // (set by backward pass), so no re-priming needed.
+      // Every forward pass: clear any lingering backward transition before animating.
+      // First run also primes dasharray/dashoffset and hides dashed+dots.
       if (_drawFirstRun) {
         _drawFirstRun = false;
         solidPaths.forEach(p => {
@@ -3375,9 +3374,15 @@ function initSpicyMagic() {
           c.style.transform = 'scale(0)';
           c.style.transformOrigin = 'center';
         });
-        // Force synchronous reflow to flush the transition:none before we animate
-        void svg.getBoundingClientRect();
+      } else {
+        // Subsequent runs: paths are at dashoffset=l from backward pass.
+        // Clear the backward transition so the browser doesn't carry it into the new one.
+        solidPaths.forEach(p => { p.style.transition = 'none'; });
+        dashedPaths.forEach(p => { p.style.transition = 'none'; });
+        dots.forEach(c => { c.style.transition = 'none'; });
       }
+      // Force synchronous reflow to flush transition:none before we start animating
+      void svg.getBoundingClientRect();
 
       requestAnimationFrame(() => {
         // Draw in solid paths staggered (from dashoffset=l → 0)
@@ -4284,8 +4289,12 @@ function copySnippet(btn, text) {
 }
 
 // ── Init ──
-// On first load always go to instances spicy
-navigate('instances');
+// Restore last visited page on reload; default to instances
+(function() {
+  const saved = localStorage.getItem('lastNav');
+  const valid = saved && (ROUTES[saved] !== undefined || Object.values(ROUTES).includes(saved));
+  navigate(valid ? saved : 'instances');
+})();
 </script>
 </body>
 </html>
