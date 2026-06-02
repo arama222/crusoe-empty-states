@@ -2706,7 +2706,9 @@ img.ico{display:block;flex:0 0 auto}
   <div class="tabs-bar">
     <div class="tabs" id="k8s-detail-tabs">
       <div class="tab active" onclick="switchDetailTab(this,'k8s-det-details')">Details</div>
+      <div class="tab" onclick="switchDetailTab(this,'k8s-det-topology')">Topology</div>
       <div class="tab" onclick="switchDetailTab(this,'k8s-det-metrics')">Metrics</div>
+      <div class="tab" onclick="switchDetailTab(this,'k8s-det-logs')">Logs</div>
     </div>
   </div>
 
@@ -2810,6 +2812,39 @@ img.ico{display:block;flex:0 0 auto}
       </div>
       <div class="metrics-empty-title">No metrics data yet</div>
       <div class="metrics-empty-desc">Add a node pool with GPU or CPU nodes to start collecting metrics. Utilization, VRAM, network, and disk I/O are reported automatically once nodes are running.</div>
+    </div>
+  </div>
+
+  <!-- Topology tab -->
+  <div id="k8s-det-topology" class="tab-panel ca" style="display:none">
+    <div class="sec-empty" style="margin-top:16px">
+      <div class="sec-empty-illust">
+        <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+          <circle cx="24" cy="10" r="5" stroke="currentColor" stroke-width="1.4"/>
+          <circle cx="10" cy="34" r="5" stroke="currentColor" stroke-width="1.4"/>
+          <circle cx="38" cy="34" r="5" stroke="currentColor" stroke-width="1.4"/>
+          <line x1="24" y1="15" x2="10" y2="29" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+          <line x1="24" y1="15" x2="38" y2="29" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="sec-empty-title">No topology data yet</div>
+      <div class="sec-empty-copy">Add a node pool to see cluster topology — node groups, availability zones, and GPU interconnect fabric.</div>
+    </div>
+  </div>
+
+  <!-- Logs tab -->
+  <div id="k8s-det-logs" class="tab-panel ca" style="display:none">
+    <div class="sec-empty" style="margin-top:16px">
+      <div class="sec-empty-illust">
+        <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+          <rect x="8" y="6" width="32" height="36" rx="4" stroke="currentColor" stroke-width="1.4"/>
+          <line x1="14" y1="16" x2="28" y2="16" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" opacity=".5"/>
+          <line x1="14" y1="22" x2="34" y2="22" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" opacity=".35"/>
+          <line x1="14" y1="28" x2="24" y2="28" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" opacity=".2"/>
+        </svg>
+      </div>
+      <div class="sec-empty-title">No logs yet</div>
+      <div class="sec-empty-copy">Control plane logs will appear here once the cluster is running and has active workloads.</div>
     </div>
   </div>
 
@@ -2942,22 +2977,141 @@ img.ico{display:block;flex:0 0 auto}
 
 <!-- ─── Avatar Dropdown ─── -->
 <div class="avatar-dd" id="avatar-dd">
-  <div class="avatar-dd-header">
-    <div class="avatar-dd-name">ybosenko</div>
-    <div class="avatar-dd-meta">ManagedOrchestration · Org editor</div>
+  <div class="avatar-dd-header" style="display:flex;align-items:center;gap:10px">
+    <div style="width:32px;height:32px;background:var(--gray-200);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:500;color:var(--text);flex-shrink:0;font-family:var(--font-body)">Y</div>
+    <div style="flex:1;min-width:0">
+      <div style="display:flex;align-items:center;gap:6px">
+        <span class="avatar-dd-name">Yar</span>
+        <span style="font-size:11px;font-weight:500;font-family:var(--font-body);color:#16a34a;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:4px;padding:1px 6px;line-height:16px">Org editor</span>
+      </div>
+      <div class="avatar-dd-meta">ybosenko+mo@crusoe.ai</div>
+    </div>
   </div>
   <div class="avatar-dd-item" onclick="closeAvatarDd()">
     <svg class="ico" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
     Profile
   </div>
   <div class="avatar-dd-item" onclick="closeAvatarDd();navigate('cloud-api-keys')">
-    <svg class="ico" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+    <svg class="ico" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 11-7.778 7.778 5.5 5.5 0 017.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>
     Security
+  </div>
+  <div class="avatar-dd-sep"></div>
+  <div style="margin:4px 10px 4px;padding:8px 10px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:6px;display:flex;align-items:center;gap:8px;font-size:13px;font-family:var(--font-body);color:#16a34a">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22,4 12,14.01 9,11.01"/></svg>
+    No known issues
+  </div>
+  <div class="avatar-dd-sep"></div>
+  <div style="display:flex;align-items:center;gap:6px;padding:8px 14px">
+    <button id="theme-light-btn" onclick="setTheme('light')" style="flex:1;display:flex;align-items:center;justify-content:center;padding:7px;border-radius:6px;border:1px solid var(--border);background:var(--sel);cursor:pointer;transition:background .15s">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+    </button>
+    <button id="theme-dark-btn" onclick="setTheme('dark')" style="flex:1;display:flex;align-items:center;justify-content:center;padding:7px;border-radius:6px;border:1px solid transparent;background:transparent;cursor:pointer;transition:background .15s">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+    </button>
   </div>
   <div class="avatar-dd-sep"></div>
   <div class="avatar-dd-item" onclick="closeAvatarDd()" style="color:var(--gray-600)">
     <svg class="ico" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16,17 21,12 16,7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
     Log out
+  </div>
+</div>
+
+<!-- ─── VIEW: Dropdown Empty States Demo ─── -->
+<div class="view" id="view-dropdown-states">
+  <div style="padding:24px 32px;max-width:900px">
+    <div style="font-size:22px;font-weight:400;font-family:var(--font-heading);letter-spacing:-.5px;color:var(--text);margin-bottom:4px">Dropdown empty states</div>
+    <div style="font-size:14px;color:var(--muted);font-family:var(--font-body);margin-bottom:32px">Component-level empty states shown inside select dropdowns when no options are available.</div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
+
+      <!-- Instance Type -->
+      <div>
+        <div style="font-size:12px;font-weight:500;font-family:var(--font-body);color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px">Instance type</div>
+        <div style="border:1px solid var(--border);border-radius:8px;overflow:hidden">
+          <!-- simulated dropdown trigger -->
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 12px;border-bottom:1px solid var(--border);background:var(--white);font-size:14px;font-family:var(--font-body);color:var(--muted)">
+            Select instance type
+            <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4,6 8,10 12,6"/></svg>
+          </div>
+          <!-- dropdown empty body -->
+          <div style="padding:28px 20px;display:flex;flex-direction:column;align-items:center;text-align:center;background:var(--white)">
+            <svg width="36" height="36" viewBox="0 0 48 48" fill="none" style="color:var(--gray-300);margin-bottom:10px">
+              <rect x="6" y="8" width="36" height="12" rx="3" stroke="currentColor" stroke-width="1.4"/>
+              <circle cx="13" cy="14" r="2" fill="currentColor"/>
+              <line x1="18" y1="14" x2="34" y2="14" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+              <rect x="6" y="26" width="36" height="12" rx="3" stroke="currentColor" stroke-width="1.4" opacity=".4"/>
+              <circle cx="13" cy="32" r="2" fill="currentColor" opacity=".4"/>
+              <line x1="18" y1="32" x2="30" y2="32" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" opacity=".4"/>
+            </svg>
+            <div style="font-size:13px;font-weight:500;font-family:var(--font-body);color:var(--text);margin-bottom:4px">No instance types available</div>
+            <div style="font-size:12px;color:var(--muted);font-family:var(--font-body);line-height:150%;max-width:220px">No GPU or CPU instance types are available in this region. Try a different location.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Images -->
+      <div>
+        <div style="font-size:12px;font-weight:500;font-family:var(--font-body);color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px">Images</div>
+        <div style="border:1px solid var(--border);border-radius:8px;overflow:hidden">
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 12px;border-bottom:1px solid var(--border);background:var(--white);font-size:14px;font-family:var(--font-body);color:var(--muted)">
+            Select image
+            <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4,6 8,10 12,6"/></svg>
+          </div>
+          <div style="padding:28px 20px;display:flex;flex-direction:column;align-items:center;text-align:center;background:var(--white)">
+            <svg width="36" height="36" viewBox="0 0 48 48" fill="none" style="color:var(--gray-300);margin-bottom:10px">
+              <rect x="6" y="6" width="36" height="36" rx="4" stroke="currentColor" stroke-width="1.4"/>
+              <circle cx="17" cy="18" r="3" stroke="currentColor" stroke-width="1.3"/>
+              <polyline points="6,32 16,22 24,30 30,24 42,36" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" opacity=".5"/>
+            </svg>
+            <div style="font-size:13px;font-weight:500;font-family:var(--font-body);color:var(--text);margin-bottom:4px">No images found</div>
+            <div style="font-size:12px;color:var(--muted);font-family:var(--font-body);line-height:150%;max-width:220px">No disk images match your search. Try a different OS, CUDA version, or clear filters.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Disks -->
+      <div>
+        <div style="font-size:12px;font-weight:500;font-family:var(--font-body);color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px">Disks</div>
+        <div style="border:1px solid var(--border);border-radius:8px;overflow:hidden">
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 12px;border-bottom:1px solid var(--border);background:var(--white);font-size:14px;font-family:var(--font-body);color:var(--muted)">
+            Attach a disk
+            <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4,6 8,10 12,6"/></svg>
+          </div>
+          <div style="padding:28px 20px;display:flex;flex-direction:column;align-items:center;text-align:center;background:var(--white)">
+            <svg width="36" height="36" viewBox="0 0 48 48" fill="none" style="color:var(--gray-300);margin-bottom:10px">
+              <ellipse cx="24" cy="14" rx="16" ry="6" stroke="currentColor" stroke-width="1.4"/>
+              <path d="M8 14v8c0 3.314 7.163 6 16 6s16-2.686 16-6v-8" stroke="currentColor" stroke-width="1.4"/>
+              <path d="M8 22v8c0 3.314 7.163 6 16 6s16-2.686 16-6v-8" stroke="currentColor" stroke-width="1.4" opacity=".4"/>
+            </svg>
+            <div style="font-size:13px;font-weight:500;font-family:var(--font-body);color:var(--text);margin-bottom:4px">No disks available</div>
+            <div style="font-size:12px;color:var(--muted);font-family:var(--font-body);line-height:150%;max-width:220px">You don't have any disks in this project yet. Create a disk first, then attach it here.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Keys -->
+      <div>
+        <div style="font-size:12px;font-weight:500;font-family:var(--font-body);color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px">Keys</div>
+        <div style="border:1px solid var(--border);border-radius:8px;overflow:hidden">
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 12px;border-bottom:1px solid var(--border);background:var(--white);font-size:14px;font-family:var(--font-body);color:var(--muted)">
+            Select SSH key
+            <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4,6 8,10 12,6"/></svg>
+          </div>
+          <div style="padding:28px 20px;display:flex;flex-direction:column;align-items:center;text-align:center;background:var(--white)">
+            <svg width="36" height="36" viewBox="0 0 48 48" fill="none" style="color:var(--gray-300);margin-bottom:10px">
+              <circle cx="18" cy="22" r="8" stroke="currentColor" stroke-width="1.4"/>
+              <path d="M24 28l14 8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+              <path d="M34 32l2 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+              <path d="M38 34l2 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+            </svg>
+            <div style="font-size:13px;font-weight:500;font-family:var(--font-body);color:var(--text);margin-bottom:4px">No SSH keys added</div>
+            <div style="font-size:12px;color:var(--muted);font-family:var(--font-body);line-height:150%;max-width:220px">Add an SSH public key to your account under Security settings before creating an instance.</div>
+            <a onclick="closeAvatarDd();navigate('sshkeys')" style="margin-top:10px;font-size:12px;font-weight:500;font-family:var(--font-body);color:var(--text);text-decoration:underline;cursor:pointer">Go to SSH keys →</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
   </div>
 </div>
 
@@ -3089,6 +3243,7 @@ const ROUTES = {
   vpc:'instances', subnets:'instances', firewall:'instances', infiniband:'instances', 'load-balancers':'instances',
   'cloud-api-keys':'apikeys', 'ssh-keys':'sshkeys',
   'infra-overview':'infra', 'managed-logs':'managed-logs',
+  'dropdown-states':'dropdown-states',
 };
 
 let currentView = 'instances';
@@ -3608,16 +3763,52 @@ function initClusterSpicyMagic() {
   const svg = document.getElementById('cluster-orch-svg');
   if (!svg) return;
 
-  // Show all paths and dots immediately — no draw-in animation
-  ['co-sq-tr','co-sq-mid','co-sq-bl','co-center','co-diag-1','co-diag-2'].forEach(id => {
-    const p = document.getElementById(id);
-    if (!p) return;
-    p.style.transition = 'none'; p.style.strokeDasharray = ''; p.style.strokeDashoffset = '';
-  });
-  ['co-dot-bl','co-dot-tr'].forEach(id => {
-    const d = document.getElementById(id);
-    if (d) { d.style.transition = 'none'; d.style.opacity = '1'; }
-  });
+  const pathIds = ['co-sq-tr','co-sq-mid','co-sq-bl','co-center','co-diag-1','co-diag-2'];
+  const dotIds  = ['co-dot-bl','co-dot-tr'];
+  const STAGGER  = 200;
+  const DUR_FWD  = 2100;
+  const DUR_BWD  = 1800;
+  const TOTAL_FWD = (pathIds.length - 1) * STAGGER + DUR_FWD;
+  const TOTAL_BWD = (pathIds.length - 1) * STAGGER + DUR_BWD;
+  const PAUSE    = 800;
+
+  clearTimeout(window._clusterDrawTimer);
+  window._clusterDrawFirstRun = true;
+
+  function doClusterDraw(dir) {
+    if (!document.getElementById('cluster-orch-svg')) return;
+    clearTimeout(window._clusterDrawTimer);
+    const paths = pathIds.map(id => document.getElementById(id)).filter(Boolean);
+    const dots  = dotIds.map(id  => document.getElementById(id)).filter(Boolean);
+
+    if (dir === 'fwd') {
+      if (window._clusterDrawFirstRun) {
+        window._clusterDrawFirstRun = false;
+        paths.forEach(p => {
+          try { const l = p.getTotalLength(); p.style.transition = 'none'; p.style.strokeDasharray = l; p.style.strokeDashoffset = l; } catch(e) {}
+        });
+        dots.forEach(d => { d.style.transition = 'none'; d.style.opacity = '0'; });
+        void svg.getBoundingClientRect();
+      }
+      requestAnimationFrame(() => {
+        paths.forEach((p, i) => {
+          try { p.style.transition = `stroke-dashoffset ${DUR_FWD}ms cubic-bezier(.4,0,0,1) ${i*STAGGER}ms`; p.style.strokeDashoffset = '0'; } catch(e) {}
+        });
+        const dotsStart = (pathIds.length - 1) * STAGGER + 600;
+        dots.forEach((d, i) => setTimeout(() => { d.style.transition = 'opacity 450ms ease'; d.style.opacity = '1'; }, dotsStart + i * 150));
+        window._clusterDrawTimer = setTimeout(() => doClusterDraw('bwd'), TOTAL_FWD + PAUSE);
+      });
+    } else {
+      paths.forEach((p, i) => {
+        try { const l = p.getTotalLength(); const rd = (paths.length-1-i)*STAGGER; p.style.transition = `stroke-dashoffset ${DUR_BWD}ms cubic-bezier(.55,0,1,.45) ${rd}ms`; p.style.strokeDashoffset = l; } catch(e) {}
+      });
+      const dotsHideDelay = TOTAL_BWD;
+      dots.forEach((d, i) => { d.style.transition = `opacity 320ms ease ${dotsHideDelay + i*80}ms`; d.style.opacity = '0'; });
+      window._clusterDrawTimer = setTimeout(() => doClusterDraw('fwd'), TOTAL_BWD + PAUSE);
+    }
+  }
+
+  doClusterDraw('fwd');
 
   if (!window._clusterRipplesStarted) {
     window._clusterRipplesStarted = true;
@@ -3664,21 +3855,57 @@ function initClusterSpicyMagic() {
   document.head.appendChild(style);
 })();
 
-// ── Slurm spicy: static illustration + ripples ──
+// ── Slurm spicy: draw-in/erase loop ──
 function initSlurmSpicyMagic() {
   const svg = document.getElementById('slurm-orch-svg');
   if (!svg) return;
 
-  // Show all paths and dots immediately — no draw-in animation
-  ['sl-sq-tr','sl-sq-mid','sl-sq-bl','sl-center','sl-diag-1','sl-diag-2'].forEach(id => {
-    const p = document.getElementById(id);
-    if (!p) return;
-    p.style.transition = 'none'; p.style.strokeDasharray = ''; p.style.strokeDashoffset = '';
-  });
-  ['sl-dot-bl','sl-dot-tr'].forEach(id => {
-    const d = document.getElementById(id);
-    if (d) { d.style.transition = 'none'; d.style.opacity = '1'; }
-  });
+  const pathIds = ['sl-sq-tr','sl-sq-mid','sl-sq-bl','sl-center','sl-diag-1','sl-diag-2'];
+  const dotIds  = ['sl-dot-bl','sl-dot-tr'];
+  const STAGGER  = 130;
+  const DUR_FWD  = 1400;
+  const DUR_BWD  = 1100;
+  const TOTAL_FWD = (pathIds.length - 1) * STAGGER + DUR_FWD;
+  const TOTAL_BWD = (pathIds.length - 1) * STAGGER + DUR_BWD;
+  const PAUSE    = 160;
+
+  clearTimeout(window._slurmDrawTimer);
+  window._slurmDrawFirstRun = true;
+
+  function doSlurmDraw(dir) {
+    if (!document.getElementById('slurm-orch-svg')) return;
+    clearTimeout(window._slurmDrawTimer);
+    const paths = pathIds.map(id => document.getElementById(id)).filter(Boolean);
+    const dots  = dotIds.map(id  => document.getElementById(id)).filter(Boolean);
+
+    if (dir === 'fwd') {
+      if (window._slurmDrawFirstRun) {
+        window._slurmDrawFirstRun = false;
+        paths.forEach(p => {
+          try { const l = p.getTotalLength(); p.style.transition = 'none'; p.style.strokeDasharray = l; p.style.strokeDashoffset = l; } catch(e) {}
+        });
+        dots.forEach(d => { d.style.transition = 'none'; d.style.opacity = '0'; });
+        void svg.getBoundingClientRect();
+      }
+      requestAnimationFrame(() => {
+        paths.forEach((p, i) => {
+          try { p.style.transition = `stroke-dashoffset ${DUR_FWD}ms cubic-bezier(.4,0,0,1) ${i*STAGGER}ms`; p.style.strokeDashoffset = '0'; } catch(e) {}
+        });
+        const dotsStart = (pathIds.length - 1) * STAGGER + 600;
+        dots.forEach((d, i) => setTimeout(() => { d.style.transition = 'opacity 450ms ease'; d.style.opacity = '1'; }, dotsStart + i * 150));
+        window._slurmDrawTimer = setTimeout(() => doSlurmDraw('bwd'), TOTAL_FWD + PAUSE);
+      });
+    } else {
+      paths.forEach((p, i) => {
+        try { const l = p.getTotalLength(); const rd = (paths.length-1-i)*STAGGER; p.style.transition = `stroke-dashoffset ${DUR_BWD}ms cubic-bezier(.55,0,1,.45) ${rd}ms`; p.style.strokeDashoffset = l; } catch(e) {}
+      });
+      const dotsHideDelay = TOTAL_BWD;
+      dots.forEach((d, i) => { d.style.transition = `opacity 320ms ease ${dotsHideDelay + i*80}ms`; d.style.opacity = '0'; });
+      window._slurmDrawTimer = setTimeout(() => doSlurmDraw('fwd'), TOTAL_BWD + PAUSE);
+    }
+  }
+
+  doSlurmDraw('fwd');
 
   // Node ripples — start once only
   if (!window._slurmRipplesStarted) {
@@ -4221,32 +4448,45 @@ function copySnippet(btn, text) {
 }
 
 // ── Dark mode ──
-function toggleDarkMode() {
-  const isDark = document.documentElement.dataset.theme === 'dark';
-  document.documentElement.dataset.theme = isDark ? '' : 'dark';
-  if (isDark) {
-    delete document.documentElement.dataset.theme;
-    localStorage.removeItem('crusoe-theme');
-  } else {
-    document.documentElement.dataset.theme = 'dark';
+function setTheme(mode) {
+  if (mode === 'dark') {
+    document.documentElement.setAttribute('data-theme', 'dark');
     localStorage.setItem('crusoe-theme', 'dark');
+  } else {
+    document.documentElement.removeAttribute('data-theme');
+    localStorage.removeItem('crusoe-theme');
   }
+  // Update topbar toggle icons
   const moon = document.getElementById('tb-moon');
   const sun  = document.getElementById('tb-sun');
-  if (moon) moon.style.display = isDark ? '' : 'none';
-  if (sun)  sun.style.display  = isDark ? 'none' : '';
+  if (moon) moon.style.display = mode === 'dark' ? 'none' : '';
+  if (sun)  sun.style.display  = mode === 'dark' ? '' : 'none';
+  // Update avatar dropdown theme buttons
+  const lightBtn = document.getElementById('theme-light-btn');
+  const darkBtn  = document.getElementById('theme-dark-btn');
+  if (lightBtn) {
+    lightBtn.style.background   = mode === 'dark' ? 'transparent' : 'var(--sel)';
+    lightBtn.style.borderColor  = mode === 'dark' ? 'transparent' : 'var(--border)';
+  }
+  if (darkBtn) {
+    darkBtn.style.background  = mode === 'dark' ? 'var(--sel)' : 'transparent';
+    darkBtn.style.borderColor = mode === 'dark' ? 'var(--border)' : 'transparent';
+  }
+}
+function toggleDarkMode() {
+  const isDark = document.documentElement.dataset.theme === 'dark';
+  setTheme(isDark ? 'light' : 'dark');
 }
 (function initTheme() {
-  if (localStorage.getItem('crusoe-theme') === 'dark') {
-    document.documentElement.dataset.theme = 'dark';
-    // icons updated after DOM load
-    document.addEventListener('DOMContentLoaded', () => {
-      const moon = document.getElementById('tb-moon');
-      const sun  = document.getElementById('tb-sun');
-      if (moon) moon.style.display = 'none';
-      if (sun)  sun.style.display  = '';
-    });
+  const saved = localStorage.getItem('crusoe-theme');
+  if (saved === 'dark') {
+    document.documentElement.setAttribute('data-theme', 'dark');
   }
+  // Set button states after DOM load
+  document.addEventListener('DOMContentLoaded', () => {
+    const isDark = document.documentElement.dataset.theme === 'dark';
+    setTheme(isDark ? 'dark' : 'light');
+  });
 })();
 
 // ── Init ──
