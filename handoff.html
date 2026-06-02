@@ -520,6 +520,17 @@ img.ico{display:block;flex:0 0 auto}
 @keyframes spin-ccw { from { transform:rotate(0deg)   } to { transform:rotate(-360deg) } }
 .keys-outer-spin { animation: spin-cw  28s linear infinite; transform-box:fill-box; transform-origin:center; }
 .keys-inner-spin { animation: spin-ccw 20s linear infinite; transform-box:fill-box; transform-origin:center; }
+/* ── Mini condensed reservation/template bar ── */
+.res-mini-bar{margin-bottom:18px}
+.res-mini-bar-label{font-size:11px;font-weight:500;color:var(--muted);font-family:var(--font-body);text-transform:uppercase;letter-spacing:.05em;margin-bottom:7px}
+.res-mini-grid{display:flex;flex-wrap:wrap;gap:8px}
+.res-mini-item{display:flex;align-items:center;gap:10px;border:1px solid var(--border);border-radius:8px;padding:8px 12px;background:var(--white);cursor:default;transition:box-shadow .15s,border-color .15s;min-width:0}
+.res-mini-item:hover{box-shadow:0 2px 8px rgba(0,0,0,.07);border-color:#d1d5db}
+.res-mini-item-body{flex:1;min-width:0}
+.res-mini-item-name{font-size:13px;font-weight:600;font-family:var(--font-body);color:var(--text);white-space:nowrap}
+.res-mini-item-sub{font-size:11px;color:#16a34a;font-family:var(--font-body);margin-top:1px;white-space:nowrap}
+.res-mini-item-actions{display:flex;gap:5px;align-items:center;flex-shrink:0;opacity:0;transform:translateX(6px);transition:opacity .18s ease,transform .18s ease;pointer-events:none}
+.res-mini-item:hover .res-mini-item-actions{opacity:1;transform:none;pointer-events:auto}
 </style>
 </head>
 <body>
@@ -1090,6 +1101,42 @@ img.ico{display:block;flex:0 0 auto}
 
 <!-- ── FILLED STATE ── -->
 <div id="instances-filled" style="display:none">
+  <!-- Condensed reservation mini-bar -->
+  <div class="res-mini-bar">
+    <div class="res-mini-bar-label">Reservations</div>
+    <div class="res-mini-grid">
+      <div class="res-mini-item">
+        <div class="res-mini-item-body">
+          <div class="res-mini-item-name">H100 SXM 8×</div>
+          <div class="res-mini-item-sub">4 available</div>
+        </div>
+        <div class="res-mini-item-actions">
+          <button class="btn btn-p btn-sm" onclick="createInstanceFromRes('h100',this)">Create</button>
+          <button class="btn btn-o btn-sm" onclick="copyResCli('h100')" style="gap:4px"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> CLI</button>
+        </div>
+      </div>
+      <div class="res-mini-item">
+        <div class="res-mini-item-body">
+          <div class="res-mini-item-name">H200 141GB 8×</div>
+          <div class="res-mini-item-sub">2 available</div>
+        </div>
+        <div class="res-mini-item-actions">
+          <button class="btn btn-p btn-sm" onclick="createInstanceFromRes('h200',this)">Create</button>
+          <button class="btn btn-o btn-sm" onclick="copyResCli('h200')" style="gap:4px"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> CLI</button>
+        </div>
+      </div>
+      <div class="res-mini-item">
+        <div class="res-mini-item-body">
+          <div class="res-mini-item-name">L40S 48GB 4×</div>
+          <div class="res-mini-item-sub">6 available</div>
+        </div>
+        <div class="res-mini-item-actions">
+          <button class="btn btn-p btn-sm" onclick="createInstanceFromRes('l40s',this)">Create</button>
+          <button class="btn btn-o btn-sm" onclick="copyResCli('l40s')" style="gap:4px"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> CLI</button>
+        </div>
+      </div>
+    </div>
+  </div>
   <!-- Search + filter bar -->
   <div class="tbl-filter" style="margin-bottom:0">
     <div class="tbl-search-wrap">
@@ -1115,36 +1162,12 @@ img.ico{display:block;flex:0 0 auto}
         </tr>
       </thead>
       <tbody id="instances-tbl-body">
-        <tr onclick="navigate('vm-detail')" style="cursor:pointer" class="tbl-row-reveal">
-          <td><span class="tbl-link">np-197c61b1-1</span></td>
-          <td>us-southcentral1-a</td>
-          <td><span class="badge-outline" style="font-family:var(--mono);font-size:11px;padding:2px 7px;border-radius:5px">c1a.2x</span></td>
-          <td><span style="font-family:var(--mono);font-size:12px">216.86.164.154</span> <button class="tbl-icon-btn" onclick="event.stopPropagation();copySnippet(this,'216.86.164.154')" style="opacity:.5"><svg class="ico" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></td>
-          <td><span style="font-family:var(--mono);font-size:12px">172.27.46.123</span> <button class="tbl-icon-btn" onclick="event.stopPropagation();copySnippet(this,'172.27.46.123')" style="opacity:.5"><svg class="ico" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></td>
-          <td></td>
-          <td style="color:var(--muted);font-size:12px">22 hr. ago</td>
-          <td style="color:var(--muted);font-size:12px">22 hr. ago</td>
-          <td><span class="pill-green">Running</span></td>
-          <td><button class="tbl-icon-btn" onclick="event.stopPropagation()"><svg class="ico" width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="5" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="12" cy="19" r="1.5"/></svg></button></td>
-        </tr>
-        <tr onclick="navigate('vm-detail')" style="cursor:pointer" class="tbl-row-reveal">
-          <td><span class="tbl-link">np-197c61b1-2</span></td>
-          <td>us-southcentral1-a</td>
-          <td><span class="badge-outline" style="font-family:var(--mono);font-size:11px;padding:2px 7px;border-radius:5px">c1a.2x</span></td>
-          <td><span style="font-family:var(--mono);font-size:12px">216.86.160.172</span> <button class="tbl-icon-btn" onclick="event.stopPropagation();copySnippet(this,'216.86.160.172')" style="opacity:.5"><svg class="ico" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></td>
-          <td><span style="font-family:var(--mono);font-size:12px">172.27.37.95</span> <button class="tbl-icon-btn" onclick="event.stopPropagation();copySnippet(this,'172.27.37.95')" style="opacity:.5"><svg class="ico" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></td>
-          <td></td>
-          <td style="color:var(--muted);font-size:12px">22 hr. ago</td>
-          <td style="color:var(--muted);font-size:12px">22 hr. ago</td>
-          <td><span class="pill-green">Running</span></td>
-          <td><button class="tbl-icon-btn" onclick="event.stopPropagation()"><svg class="ico" width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="5" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="12" cy="19" r="1.5"/></svg></button></td>
-        </tr>
       </tbody>
     </table>
   </div>
   <!-- Pagination -->
   <div style="display:flex;align-items:center;justify-content:flex-end;gap:8px;padding:14px 4px 4px;font-size:12px;color:var(--muted);font-family:var(--font-body)">
-    <span id="inst-page-count">1-2</span>
+    <span id="inst-page-count">1</span>
     <button class="tbl-icon-btn" disabled style="opacity:.3"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15,18 9,12 15,6"/></svg></button>
     <button class="tbl-icon-btn" disabled style="opacity:.3"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9,18 15,12 9,6"/></svg></button>
     <div style="border:1px solid var(--border);border-radius:6px;padding:4px 10px;display:flex;align-items:center;gap:6px;background:var(--white);cursor:pointer">20 per page <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6,9 12,15 18,9"/></svg></div>
@@ -1375,6 +1398,42 @@ img.ico{display:block;flex:0 0 auto}
 
 <!-- ── FILLED state ── -->
 <div id="clusters-filled" style="display:none">
+  <!-- Condensed template mini-bar -->
+  <div class="res-mini-bar">
+    <div class="res-mini-bar-label">Templates</div>
+    <div class="res-mini-grid">
+      <div class="res-mini-item">
+        <div class="res-mini-item-body">
+          <div class="res-mini-item-name">GPU Training</div>
+          <div class="res-mini-item-sub">H100 8× node pool</div>
+        </div>
+        <div class="res-mini-item-actions">
+          <button class="btn btn-p btn-sm" onclick="createClusterFromTemplate('k8s','gpu-training',this)">Create</button>
+          <a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/orchestration/cmk" target="_blank" style="text-decoration:none">Docs</a>
+        </div>
+      </div>
+      <div class="res-mini-item">
+        <div class="res-mini-item-body">
+          <div class="res-mini-item-name">Inference</div>
+          <div class="res-mini-item-sub">L40S autoscaling pool</div>
+        </div>
+        <div class="res-mini-item-actions">
+          <button class="btn btn-p btn-sm" onclick="createClusterFromTemplate('k8s','inference',this)">Create</button>
+          <a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/orchestration/cmk" target="_blank" style="text-decoration:none">Docs</a>
+        </div>
+      </div>
+      <div class="res-mini-item">
+        <div class="res-mini-item-body">
+          <div class="res-mini-item-name">CPU-only</div>
+          <div class="res-mini-item-sub">General-purpose nodes</div>
+        </div>
+        <div class="res-mini-item-actions">
+          <button class="btn btn-p btn-sm" onclick="createClusterFromTemplate('k8s','cpu',this)">Create</button>
+          <a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/orchestration/cmk" target="_blank" style="text-decoration:none">Docs</a>
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="tbl-wrap">
     <div class="tbl-filter">
       <div class="tbl-search-wrap">
@@ -1388,79 +1447,8 @@ img.ico{display:block;flex:0 0 auto}
         <tr><th>Name</th><th>State</th><th>Version</th><th>DNS</th><th># of Node Pools</th><th>Actions</th></tr>
       </thead>
       <tbody id="k8s-tbl-body">
-        <tr onclick="navigate('k8s-detail')" style="cursor:pointer">
-          <td><span class="tbl-link">slurm-pyxis-problem</span></td>
-          <td><span class="pill-green">Running</span></td>
-          <td><span class="tbl-mono">1.33.4-cmk.84</span></td>
-          <td><button class="tbl-icon-btn" onclick="event.stopPropagation()"><svg class="ico" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></td>
-          <td>2</td>
-          <td><div class="tbl-actions"><button class="tbl-icon-btn" onclick="event.stopPropagation()"><svg class="ico" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3,6 5,6 21,6"/><path d="M19,6l-1,14a2,2 0 01-2,2H8a2,2 0 01-2-2L5,6"/><path d="M10,11v6"/><path d="M14,11v6"/></svg></button></div></td>
-        </tr>
-        <tr onclick="navigate('k8s-detail')" style="cursor:pointer">
-          <td><span class="tbl-link">shashank-a100-east</span></td>
-          <td><span class="pill-green">Running</span></td>
-          <td><span class="tbl-mono">1.33.4-cmk.43</span></td>
-          <td><button class="tbl-icon-btn" onclick="event.stopPropagation()"><svg class="ico" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></td>
-          <td>0</td>
-          <td><div class="tbl-actions"><button class="tbl-icon-btn" onclick="event.stopPropagation()"><svg class="ico" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3,6 5,6 21,6"/><path d="M19,6l-1,14a2,2 0 01-2,2H8a2,2 0 01-2-2L5,6"/><path d="M10,11v6"/><path d="M14,11v6"/></svg></button></div></td>
-        </tr>
-        <tr onclick="navigate('k8s-detail')" style="cursor:pointer">
-          <td><span class="tbl-link">shashank-ha-test</span></td>
-          <td><span class="pill-green">Running</span></td>
-          <td><span class="tbl-mono">1.33.4-cmk.43</span></td>
-          <td><button class="tbl-icon-btn" onclick="event.stopPropagation()"><svg class="ico" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></td>
-          <td>0</td>
-          <td><div class="tbl-actions"><button class="tbl-icon-btn" onclick="event.stopPropagation()"><svg class="ico" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3,6 5,6 21,6"/><path d="M19,6l-1,14a2,2 0 01-2,2H8a2,2 0 01-2-2L5,6"/><path d="M10,11v6"/><path d="M14,11v6"/></svg></button></div></td>
-        </tr>
-        <tr onclick="navigate('k8s-detail')" style="cursor:pointer">
-          <td><span class="tbl-link">mega-train-prod</span></td>
-          <td><span class="badge-outline" style="background:var(--gray-50);color:var(--gray-600);border-color:var(--gray-300)">Provisioning</span></td>
-          <td><span class="tbl-mono">1.33.4-cmk.84</span></td>
-          <td>—</td>
-          <td>1</td>
-          <td><div class="tbl-actions"><button class="tbl-icon-btn" onclick="event.stopPropagation()"><svg class="ico" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3,6 5,6 21,6"/><path d="M19,6l-1,14a2,2 0 01-2,2H8a2,2 0 01-2-2L5,6"/><path d="M10,11v6"/><path d="M14,11v6"/></svg></button></div></td>
-        </tr>
       </tbody>
     </table>
-  </div>
-  <!-- Template cards — persist below the table -->
-  <div class="pop-section" style="margin-top:36px;padding-bottom:20px">
-    <div class="pop-title" style="font-size:14px;color:var(--muted)">Create from a template</div>
-    <div class="pop-grid">
-      <div class="pop-card res-card" style="">
-        <div class="pop-card-top" style="margin-bottom:8px">
-          <div class="pop-icon"><svg width="38" height="38" viewBox="0 0 65 64.2205" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M36.7962 27.7211H27.994V36.4821H36.7962V27.7211Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/><path d="M5.17606 59.0654H0.5V63.7205H5.17606V59.0654Z" fill="black" stroke="black" stroke-linecap="round" stroke-linejoin="round"/><path d="M64.5 0.5H59.8239V5.15513H64.5V0.5Z" fill="black" stroke="black" stroke-linecap="round" stroke-linejoin="round"/><path d="M47.8886 16.7087H2.72296V61.6733H47.8886V16.7087Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/><path d="M54.976 9.62146H9.81038V54.5861H54.976V9.62146Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/><path d="M62.0675 2.52975H16.9019V47.4944H62.0675V2.52975Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-          <div class="pop-card-info"><div class="pop-card-name">GPU Training Cluster</div><div class="pop-card-price">H100 8x node pool</div></div>
-        </div>
-        <div class="pop-card-tags" style="margin-bottom:0;padding-top:2px"><span class="pop-tag-sub">Training · Multi-node</span></div>
-        <div class="res-card-body"><div class="res-card-body-inner">
-          <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">Pre-configured with GPU operator, network operator, and CSI. Optimized for distributed training with NVLink + InfiniBand.</div>
-          <div class="res-card-actions"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createClusterFromTemplate('k8s','gpu-training',this)">Create cluster</button><a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/orchestration/cmk" target="_blank" style="text-decoration:none">View docs</a></div>
-        </div></div>
-      </div>
-      <div class="pop-card res-card" style="">
-        <div class="pop-card-top" style="margin-bottom:8px">
-          <div class="pop-icon"><svg width="38" height="38" viewBox="0 0 65 64.2205" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M36.7962 27.7211H27.994V36.4821H36.7962V27.7211Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/><path d="M5.17606 59.0654H0.5V63.7205H5.17606V59.0654Z" fill="black" stroke="black" stroke-linecap="round" stroke-linejoin="round"/><path d="M64.5 0.5H59.8239V5.15513H64.5V0.5Z" fill="black" stroke="black" stroke-linecap="round" stroke-linejoin="round"/><path d="M47.8886 16.7087H2.72296V61.6733H47.8886V16.7087Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/><path d="M54.976 9.62146H9.81038V54.5861H54.976V9.62146Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/><path d="M62.0675 2.52975H16.9019V47.4944H62.0675V2.52975Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-          <div class="pop-card-info"><div class="pop-card-name">Inference Cluster</div><div class="pop-card-price">L40S autoscaling pool</div></div>
-        </div>
-        <div class="pop-card-tags" style="margin-bottom:0;padding-top:2px"><span class="pop-tag-sub">Inference · Autoscale</span></div>
-        <div class="res-card-body"><div class="res-card-body-inner">
-          <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">Cost-efficient serving with autoscaling node pools. Ideal for vLLM, TGI, or Triton inference endpoints on L40S GPUs.</div>
-          <div class="res-card-actions"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createClusterFromTemplate('k8s','inference',this)">Create cluster</button><a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/orchestration/cmk" target="_blank" style="text-decoration:none">View docs</a></div>
-        </div></div>
-      </div>
-      <div class="pop-card res-card" style="">
-        <div class="pop-card-top" style="margin-bottom:8px">
-          <div class="pop-icon"><svg width="38" height="38" viewBox="0 0 65 64.2205" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M36.7962 27.7211H27.994V36.4821H36.7962V27.7211Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/><path d="M5.17606 59.0654H0.5V63.7205H5.17606V59.0654Z" fill="black" stroke="black" stroke-linecap="round" stroke-linejoin="round"/><path d="M64.5 0.5H59.8239V5.15513H64.5V0.5Z" fill="black" stroke="black" stroke-linecap="round" stroke-linejoin="round"/><path d="M47.8886 16.7087H2.72296V61.6733H47.8886V16.7087Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/><path d="M54.976 9.62146H9.81038V54.5861H54.976V9.62146Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/><path d="M62.0675 2.52975H16.9019V47.4944H62.0675V2.52975Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-          <div class="pop-card-info"><div class="pop-card-name">CPU-only Cluster</div><div class="pop-card-price">General-purpose nodes</div></div>
-        </div>
-        <div class="pop-card-tags" style="margin-bottom:0;padding-top:2px"><span class="pop-tag-sub">CPU · APIs · Pipelines</span></div>
-        <div class="res-card-body"><div class="res-card-body-inner">
-          <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">Standard Kubernetes cluster for APIs, data pipelines, and services that don't require GPU acceleration.</div>
-          <div class="res-card-actions"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createClusterFromTemplate('k8s','cpu',this)">Create cluster</button><a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/orchestration/cmk" target="_blank" style="text-decoration:none">View docs</a></div>
-        </div></div>
-      </div>
-    </div>
   </div>
 </div><!-- /clusters-filled -->
 
@@ -1945,6 +1933,32 @@ img.ico{display:block;flex:0 0 auto}
 
 <!-- ── SLURM FILLED STATE ── -->
 <div id="slurm-filled" style="display:none">
+  <!-- Condensed template mini-bar -->
+  <div class="res-mini-bar">
+    <div class="res-mini-bar-label">Templates</div>
+    <div class="res-mini-grid">
+      <div class="res-mini-item">
+        <div class="res-mini-item-body">
+          <div class="res-mini-item-name">GPU HPC Cluster</div>
+          <div class="res-mini-item-sub">H100 multi-node</div>
+        </div>
+        <div class="res-mini-item-actions">
+          <button class="btn btn-p btn-sm" onclick="createClusterFromTemplate('slurm','gpu-hpc',this)">Create</button>
+          <a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/orchestration/slurm" target="_blank" style="text-decoration:none">Docs</a>
+        </div>
+      </div>
+      <div class="res-mini-item">
+        <div class="res-mini-item-body">
+          <div class="res-mini-item-name">Multi-GPU Fine-tuning</div>
+          <div class="res-mini-item-sub">A100 node pool</div>
+        </div>
+        <div class="res-mini-item-actions">
+          <button class="btn btn-p btn-sm" onclick="createClusterFromTemplate('slurm','fine-tune',this)">Create</button>
+          <a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/orchestration/slurm" target="_blank" style="text-decoration:none">Docs</a>
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="tbl-wrap">
     <div class="tbl-filter">
       <div class="tbl-search-wrap">
@@ -1958,44 +1972,8 @@ img.ico{display:block;flex:0 0 auto}
         <tr><th>Name</th><th>State</th><th>Compute</th><th>Node Count</th><th>Created</th><th>Actions</th></tr>
       </thead>
       <tbody id="slurm-tbl-body">
-        <tr style="cursor:pointer">
-          <td><span class="tbl-link">prod-training-slurm</span></td>
-          <td><span class="pill-green">Running</span></td>
-          <td><span class="tbl-mono" style="font-size:11px">h100-80gb-sxm-ib.8x</span></td>
-          <td>16</td>
-          <td style="color:var(--muted);font-size:12px">3 days ago</td>
-          <td><div class="tbl-actions"><button class="tbl-icon-btn" onclick="event.stopPropagation()"><svg class="ico" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3,6 5,6 21,6"/><path d="M19,6l-1,14a2,2 0 01-2,2H8a2,2 0 01-2-2L5,6"/><path d="M10,11v6"/><path d="M14,11v6"/></svg></button></div></td>
-        </tr>
       </tbody>
     </table>
-  </div>
-  <!-- Template cards — persist below the table -->
-  <div class="pop-section pop-section-centered" style="margin-top:36px;padding-bottom:20px">
-    <div class="pop-title" style="font-size:14px;color:var(--muted)">Create from a template</div>
-    <div class="pop-grid">
-      <div class="pop-card res-card">
-        <div class="pop-card-top" style="margin-bottom:8px">
-          <div class="pop-icon"><svg width="38" height="38" viewBox="0 0 65 64.2205" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M36.7962 27.7211H27.994V36.4821H36.7962V27.7211Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/><path d="M5.17606 59.0654H0.5V63.7205H5.17606V59.0654Z" fill="black" stroke="black" stroke-linecap="round" stroke-linejoin="round"/><path d="M64.5 0.5H59.8239V5.15513H64.5V0.5Z" fill="black" stroke="black" stroke-linecap="round" stroke-linejoin="round"/><path d="M47.8886 16.7087H2.72296V61.6733H47.8886V16.7087Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/><path d="M54.976 9.62146H9.81038V54.5861H54.976V9.62146Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/><path d="M62.0675 2.52975H16.9019V47.4944H62.0675V2.52975Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-          <div class="pop-card-info"><div class="pop-card-name">GPU HPC Cluster</div><div class="pop-card-price">H100 multi-node</div></div>
-        </div>
-        <div class="pop-card-tags" style="margin-bottom:0;padding-top:2px"><span class="pop-tag-sub">Training · HPC</span></div>
-        <div class="res-card-body"><div class="res-card-body-inner">
-          <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">Pre-configured with Pyxis, PMIx, and RDMA. Optimized for distributed training workloads with InfiniBand fabric.</div>
-          <div class="res-card-actions"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createClusterFromTemplate('slurm','gpu-hpc',this)">Create cluster</button><a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/orchestration/slurm" target="_blank" style="text-decoration:none">View docs</a></div>
-        </div></div>
-      </div>
-      <div class="pop-card res-card">
-        <div class="pop-card-top" style="margin-bottom:8px">
-          <div class="pop-icon"><svg width="38" height="38" viewBox="0 0 65 64.2205" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M36.7962 27.7211H27.994V36.4821H36.7962V27.7211Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/><path d="M5.17606 59.0654H0.5V63.7205H5.17606V59.0654Z" fill="black" stroke="black" stroke-linecap="round" stroke-linejoin="round"/><path d="M64.5 0.5H59.8239V5.15513H64.5V0.5Z" fill="black" stroke="black" stroke-linecap="round" stroke-linejoin="round"/><path d="M47.8886 16.7087H2.72296V61.6733H47.8886V16.7087Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/><path d="M54.976 9.62146H9.81038V54.5861H54.976V9.62146Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/><path d="M62.0675 2.52975H16.9019V47.4944H62.0675V2.52975Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-          <div class="pop-card-info"><div class="pop-card-name">Multi-GPU Fine-tuning</div><div class="pop-card-price">A100 node pool</div></div>
-        </div>
-        <div class="pop-card-tags" style="margin-bottom:0;padding-top:2px"><span class="pop-tag-sub">Fine-tuning · Multi-node</span></div>
-        <div class="res-card-body"><div class="res-card-body-inner">
-          <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">Shared storage with Lustre, topology-aware scheduling, and multi-user access for team fine-tuning workflows.</div>
-          <div class="res-card-actions"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createClusterFromTemplate('slurm','fine-tune',this)">Create cluster</button><a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/orchestration/slurm" target="_blank" style="text-decoration:none">View docs</a></div>
-        </div></div>
-      </div>
-    </div>
   </div>
 </div><!-- /slurm-filled -->
 
@@ -3671,15 +3649,15 @@ function createInstanceFromRes(gpuType, btn) {
 
   const spicy  = document.getElementById('instances-spicy');
   const filled = document.getElementById('instances-filled');
+  const alreadyFilled = filled && filled.style.display !== 'none';
 
-  // Fade out spicy
-  spicy.style.transition = 'opacity .3s ease';
-  spicy.style.opacity = '0';
+  if (!alreadyFilled && spicy) {
+    spicy.style.transition = 'opacity .3s ease';
+    spicy.style.opacity = '0';
+  }
 
   setTimeout(() => {
-    spicy.style.display = 'none';
-    spicy.style.opacity = '';
-    spicy.style.transition = '';
+    if (spicy) { spicy.style.display = 'none'; spicy.style.opacity = ''; spicy.style.transition = ''; }
 
     const tbody = document.getElementById('instances-tbl-body');
     const cpBtn = `<button class="tbl-icon-btn" onclick="event.stopPropagation()" style="opacity:.5;margin-left:4px;background:none;border:none;cursor:pointer;color:var(--muted)"><svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="5" width="9" height="9" rx="1.5"/><path d="M3 11V3a1 1 0 0 1 1-1h8"/></svg></button>`;
@@ -3699,19 +3677,17 @@ function createInstanceFromRes(gpuType, btn) {
       <td><button class="tbl-icon-btn" onclick="event.stopPropagation()" style="background:none;border:none;cursor:pointer;color:var(--muted)">•••</button></td>`;
     tbody.insertBefore(tr, tbody.firstChild);
 
-    filled.style.display = '';
-    filled.style.opacity = '0';
-    filled.style.transition = 'opacity .4s ease';
-
-    requestAnimationFrame(() => {
-      filled.style.opacity = '1';
-      // Stagger existing rows
-      document.querySelectorAll('#instances-tbl-body .tbl-row-reveal').forEach((row, i) => {
-        row.style.cssText = 'opacity:0;transform:translateY(6px);transition:opacity .4s ease,transform .4s ease;cursor:pointer';
-        setTimeout(() => { row.style.opacity='1'; row.style.transform='none'; }, 100 + i*80);
+    if (!alreadyFilled && filled) {
+      filled.style.display = '';
+      filled.style.opacity = '0';
+      filled.style.transition = 'opacity .4s ease';
+      requestAnimationFrame(() => {
+        filled.style.opacity = '1';
+        setTimeout(() => { tr.style.opacity='1'; tr.style.transform='none'; }, 80);
       });
-      setTimeout(() => { tr.style.opacity='1'; tr.style.transform='none'; }, 50);
-    });
+    } else {
+      requestAnimationFrame(() => setTimeout(() => { tr.style.opacity='1'; tr.style.transform='none'; }, 40));
+    }
 
     const pageCount = document.getElementById('inst-page-count');
     if (pageCount) pageCount.textContent = `1-${tbody.querySelectorAll('tr').length}`;
@@ -3724,7 +3700,7 @@ function createInstanceFromRes(gpuType, btn) {
       if (cells[3]) cells[3].innerHTML = `<span style="font-family:var(--mono);font-size:12px">${pubIp}</span>${cpBtn}`;
       if (cells[4]) cells[4].innerHTML = `<span style="font-family:var(--mono);font-size:12px">${privIp}</span>${cpBtn}`;
     }, 2800);
-  }, 350);
+  }, alreadyFilled ? 0 : 350);
 }
 
 function copyResCli(gpu) {
@@ -4436,10 +4412,8 @@ function createClusterFromTemplate(service, type, btn) {
           <td>${info.pools}</td>
           <td><div class="tbl-actions"><button class="tbl-icon-btn" onclick="event.stopPropagation()"><svg class="ico" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3,6 5,6 21,6"/><path d="M19,6l-1,14a2,2 0 01-2,2H8a2,2 0 01-2-2L5,6"/><path d="M10,11v6"/><path d="M14,11v6"/></svg></button></div></td>`;
         tbody.insertBefore(newRow, tbody.firstChild);
-        const rows = [...tbody.querySelectorAll('tr')];
-        rows.forEach(row => row.classList.add('tbl-row-enter'));
-        void tbody.getBoundingClientRect();
-        rows.forEach((row, i) => setTimeout(() => row.classList.add('tbl-row-visible'), i * 60));
+        void newRow.getBoundingClientRect();
+        setTimeout(() => newRow.classList.add('tbl-row-visible'), 40);
         setTimeout(() => {
           const badge = newRow.querySelector('.badge-outline');
           if (badge) { badge.className = 'pill-green'; badge.style = ''; badge.textContent = 'Running'; }
@@ -4467,10 +4441,8 @@ function createClusterFromTemplate(service, type, btn) {
           <td>Just now</td>
           <td><div class="tbl-actions"><button class="tbl-icon-btn" onclick="event.stopPropagation()"><svg class="ico" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3,6 5,6 21,6"/><path d="M19,6l-1,14a2,2 0 01-2,2H8a2,2 0 01-2-2L5,6"/><path d="M10,11v6"/><path d="M14,11v6"/></svg></button></div></td>`;
         tbody.insertBefore(newRow, tbody.firstChild);
-        const rows = [...tbody.querySelectorAll('tr')];
-        rows.forEach(row => row.classList.add('tbl-row-enter'));
-        void tbody.getBoundingClientRect();
-        rows.forEach((row, i) => setTimeout(() => row.classList.add('tbl-row-visible'), i * 60));
+        void newRow.getBoundingClientRect();
+        setTimeout(() => newRow.classList.add('tbl-row-visible'), 40);
         setTimeout(() => {
           const badge = newRow.querySelector('.badge-outline');
           if (badge) { badge.className = 'pill-green'; badge.style = ''; badge.textContent = 'Running'; }
