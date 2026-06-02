@@ -3350,65 +3350,43 @@ function toggleEdgeState(n) {
   };
 })();
 
-// ── Spicy magic: unified draw-in loop ──
+// ── Spicy magic: solid lines static, dotted lines march continuously ──
 function initSpicyMagic() {
   const svg = document.getElementById('spicy-cube');
   if (!svg) return;
 
+  // Cancel any previous timer
+  if (window._spicyDrawTimer) { clearTimeout(window._spicyDrawTimer); window._spicyDrawTimer = null; }
+
   const allPaths = [...svg.querySelectorAll('path')];
-  // All paths animate with strokeDashoffset — no snap-to-dashed needed,
-  // keeping L L dasharray throughout gives smooth artifact-free animation.
-  const paths = allPaths;
+  const dashedPaths = allPaths.filter(p => p.getAttribute('stroke-dasharray') === '3 3');
+  const solidPaths  = allPaths.filter(p => p.getAttribute('stroke-dasharray') !== '3 3');
 
-  const STAGGER = 145;
-  const DUR     = 1900;
-  const PAUSE   = 900;
-  const EASE    = 'cubic-bezier(.4,0,.2,1)';
-
-  let _firstRun = true;
-  let _drawTimer = null;
-
-  const lengths = paths.map(p => { try { return p.getTotalLength(); } catch(e) { return 1; } });
-
-  function doDrawIn(dir) {
-    if (!document.getElementById('spicy-cube')) return;
-    clearTimeout(_drawTimer);
-
-    if (dir === 'fwd') {
-      paths.forEach((p, i) => {
-        p.style.transition = 'none';
-        p.style.strokeDasharray  = `${lengths[i]} ${lengths[i]}`;
-        if (_firstRun) p.style.strokeDashoffset = `${lengths[i]}`;
-      });
-      _firstRun = false;
-      void svg.getBoundingClientRect();
-
-      requestAnimationFrame(() => {
-        const TOTAL = paths.length * STAGGER + DUR;
-        paths.forEach((p, i) => {
-          p.style.transition       = `stroke-dashoffset ${DUR}ms ${EASE} ${i * STAGGER}ms`;
-          p.style.strokeDashoffset = '0';
-        });
-        _drawTimer = setTimeout(() => doDrawIn('bwd'), TOTAL + PAUSE);
-      });
-
-    } else {
-      void svg.getBoundingClientRect();
-      requestAnimationFrame(() => {
-        const TOTAL = paths.length * STAGGER + DUR;
-        paths.forEach((p, i) => {
-          const revDelay = (paths.length - 1 - i) * STAGGER;
-          p.style.transition       = `stroke-dashoffset ${DUR}ms ${EASE} ${revDelay}ms`;
-          p.style.strokeDashoffset = `${lengths[i]}`;
-        });
-        _drawTimer = setTimeout(() => doDrawIn('fwd'), TOTAL + PAUSE);
-      });
-    }
+  // Inject keyframe once
+  if (!document.getElementById('inst-dash-keyframe')) {
+    const s = document.createElement('style');
+    s.id = 'inst-dash-keyframe';
+    s.textContent = '@keyframes inst-dash-march { to { stroke-dashoffset: -6; } }';
+    document.head.appendChild(s);
   }
 
-  doDrawIn('fwd');
+  // Solid paths — fully visible, static
+  solidPaths.forEach(p => {
+    p.style.animation        = 'none';
+    p.style.transition       = 'none';
+    p.style.strokeDasharray  = '';
+    p.style.strokeDashoffset = '';
+  });
 
-  // Reveal reservation cards below
+  // Dashed paths — marching/rotating continuously
+  dashedPaths.forEach(p => {
+    p.style.transition       = 'none';
+    p.style.strokeDasharray  = '3 3';
+    p.style.strokeDashoffset = '0';
+    p.style.animation        = 'inst-dash-march 0.55s linear infinite';
+  });
+
+  // Reveal reservation cards
   setTimeout(() => {
     document.querySelectorAll('#instances-spicy .spicy-reveal').forEach((el, i) => {
       setTimeout(() => el.classList.add('is-visible'), i * 100);
@@ -3912,106 +3890,62 @@ function initKeysSpicyMagic(svgId, outerRingId, innerRingId, waveCanvasId, revea
   }, 200);
 }
 
-// ── Managed Logs SVG illustration animation ──
+// ── Managed Logs SVG illustration animation — everything static, only dots loop ──
 function initLogsIllusAnimation() {
   const svg = document.getElementById('logs-wave-svg');
   if (!svg) return;
 
-  const strokeIds = ['logs-box','logs-diamond','logs-wave-a','logs-wave-b','logs-wave-c'];
-  const strokePaths = strokeIds.map(id => document.getElementById(id)).filter(Boolean);
+  // Cancel any previous animation
+  if (window._logsIllusRafId) { cancelAnimationFrame(window._logsIllusRafId); window._logsIllusRafId = null; }
+
+  // All stroke paths: immediately fully visible, no animation
+  ['logs-box','logs-diamond','logs-wave-a','logs-wave-b','logs-wave-c'].forEach(id => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.style.animation        = 'none';
+    el.style.transition       = 'none';
+    el.style.strokeDasharray  = '';
+    el.style.strokeDashoffset = '';
+  });
+
   const waveA = document.getElementById('logs-wave-a');
   const waveB = document.getElementById('logs-wave-b');
   const waveC = document.getElementById('logs-wave-c');
   const dot1  = document.getElementById('logs-dot-1');
   const dot2  = document.getElementById('logs-dot-2');
 
-  const STAGGER = 120; const DUR = 1800; const PAUSE = 900;
-  const EASE = 'cubic-bezier(.4,0,.2,1)';
-  const DOT_SPEED = 0.00022; const DOT_OFFSET = 0.48;
-
-  let _firstRun = true, _drawTimer = null, _dotRafId = null;
+  const DOT_SPEED  = 0.00022; // fraction of wave per ms (~4.5s full loop)
+  const DOT_OFFSET = 0.48;    // dot2 is ~half a loop behind dot1
   let _dotPhase = 0, _dotLastTs = null;
   let LA, LB, LC;
 
-  const lengths = strokePaths.map(p => { try { return p.getTotalLength(); } catch(e) { return 1; } });
+  try { LA = waveA.getTotalLength(); } catch(e) { LA = 1; }
+  try { LB = waveB.getTotalLength(); } catch(e) { LB = 1; }
+  try { LC = waveC.getTotalLength(); } catch(e) { LC = 1; }
 
-  // Clear any previous run
-  if (window._logsIllusDrawTimer) clearTimeout(window._logsIllusDrawTimer);
-  if (window._logsIllusRafId)   cancelAnimationFrame(window._logsIllusRafId);
-
-  function initWaveLengths() {
-    try { LA = waveA.getTotalLength(); } catch(e) { LA = 1; }
-    try { LB = waveB.getTotalLength(); } catch(e) { LB = 1; }
-    try { LC = waveC.getTotalLength(); } catch(e) { LC = 1; }
-  }
-
+  // Travel the combined wave left→right.
+  // waveA/waveB are physically drawn right→left, so we read them backwards.
+  // waveC is drawn left→right, read forwards.
   function getWavePoint(t) {
     const total = LA + LB + LC;
-    let d = ((t % 1) + 1) % 1 * total;
-    if (d <= LA)         return waveA.getPointAtLength(LA - d);
-    else if (d <= LA+LB) return waveB.getPointAtLength(LB - (d - LA));
-    else                 return waveC.getPointAtLength(d - LA - LB);
-  }
-
-  function stopDots() {
-    if (_dotRafId) { cancelAnimationFrame(_dotRafId); _dotRafId = null; }
-    _dotLastTs = null;
-    if (dot1) { dot1.setAttribute('cx','-20'); dot1.setAttribute('cy','-20'); }
-    if (dot2) { dot2.setAttribute('cx','-20'); dot2.setAttribute('cy','-20'); }
+    const d = ((t % 1) + 1) % 1 * total;
+    if (d <= LA)          return waveA.getPointAtLength(LA - d);
+    else if (d <= LA + LB) return waveB.getPointAtLength(LB - (d - LA));
+    else                   return waveC.getPointAtLength(d - LA - LB);
   }
 
   function animDots(ts) {
-    if (!document.getElementById('logs-wave-svg')) { stopDots(); return; }
+    if (!document.getElementById('logs-wave-svg')) return;
     if (_dotLastTs !== null) _dotPhase = (_dotPhase + DOT_SPEED * (ts - _dotLastTs)) % 1;
     _dotLastTs = ts;
-    const p1 = getWavePoint(_dotPhase), p2 = getWavePoint(_dotPhase + DOT_OFFSET);
+    const p1 = getWavePoint(_dotPhase);
+    const p2 = getWavePoint(_dotPhase + DOT_OFFSET);
     if (dot1) { dot1.setAttribute('cx', p1.x.toFixed(2)); dot1.setAttribute('cy', p1.y.toFixed(2)); }
     if (dot2) { dot2.setAttribute('cx', p2.x.toFixed(2)); dot2.setAttribute('cy', p2.y.toFixed(2)); }
-    _dotRafId = requestAnimationFrame(animDots);
-    window._logsIllusRafId = _dotRafId;
+    window._logsIllusRafId = requestAnimationFrame(animDots);
   }
 
-  function doDrawIn(dir) {
-    if (!document.getElementById('logs-wave-svg')) return;
-    clearTimeout(_drawTimer);
-
-    if (dir === 'fwd') {
-      strokePaths.forEach((p, i) => {
-        p.style.transition = 'none';
-        p.style.strokeDasharray  = `${lengths[i]} ${lengths[i]}`;
-        if (_firstRun) p.style.strokeDashoffset = `${lengths[i]}`;
-      });
-      _firstRun = false;
-      void svg.getBoundingClientRect();
-      requestAnimationFrame(() => {
-        const TOTAL = strokePaths.length * STAGGER + DUR;
-        strokePaths.forEach((p, i) => {
-          p.style.transition       = `stroke-dashoffset ${DUR}ms ${EASE} ${i * STAGGER}ms`;
-          p.style.strokeDashoffset = '0';
-        });
-        const dotDelay = 3 * STAGGER + DUR * 0.6;
-        setTimeout(() => { if (document.getElementById('logs-wave-svg')) animDots(performance.now()); }, dotDelay);
-        _drawTimer = setTimeout(() => doDrawIn('bwd'), TOTAL + PAUSE);
-        window._logsIllusDrawTimer = _drawTimer;
-      });
-    } else {
-      stopDots();
-      void svg.getBoundingClientRect();
-      requestAnimationFrame(() => {
-        const TOTAL = strokePaths.length * STAGGER + DUR;
-        strokePaths.forEach((p, i) => {
-          const revDelay = (strokePaths.length - 1 - i) * STAGGER;
-          p.style.transition       = `stroke-dashoffset ${DUR}ms ${EASE} ${revDelay}ms`;
-          p.style.strokeDashoffset = `${lengths[i]}`;
-        });
-        _drawTimer = setTimeout(() => doDrawIn('fwd'), TOTAL + PAUSE);
-        window._logsIllusDrawTimer = _drawTimer;
-      });
-    }
-  }
-
-  initWaveLengths();
-  doDrawIn('fwd');
+  animDots(performance.now());
 }
 
 // ── Managed Logs (metrics) spicy magic ──
