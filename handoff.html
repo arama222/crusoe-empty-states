@@ -301,6 +301,7 @@ html,body{height:100%;background:var(--white);color:var(--black);font-family:'Su
 @keyframes cube-glitch-run{0%,8%{transform:none;filter:none}10%{transform:translate(3px,-2px) skewX(-2deg);filter:contrast(1.4)}16%{transform:translate(-2px,1px)}20%{transform:translate(1px,-1px) skewX(1deg);filter:none}25%,100%{transform:none}}
 @keyframes node-ripple{0%{r:3;opacity:.7}100%{r:18;opacity:0}}
 @keyframes inst-dash-march{to{stroke-dashoffset:-6}}
+.dash-march{animation:inst-dash-march 0.55s linear infinite}
 /* ── Spicy scroll-reveal ── */
 .spicy-reveal{opacity:1;transform:none}
 /* ── Scroll hint ── */
@@ -1282,30 +1283,32 @@ img.ico{display:block;flex:0 0 auto}
         <a href="https://docs.crusoecloud.com/compute/instance-templates" target="_blank" style="display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:500;font-family:var(--font-body);color:var(--white);background:var(--black);padding:6px 14px;border-radius:8px;text-decoration:none;letter-spacing:.01em;transition:opacity .15s ease" onmouseenter="this.style.opacity='.8'" onmouseleave="this.style.opacity='1'">View docs →</a>
       </div>
     </div>
-    <!-- Step cards -->
+    <!-- Popular templates -->
     <div class="pop-section" style="margin-top:60px;padding-bottom:20px">
-      <div class="pop-title">Get started in two steps</div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;overflow:visible;align-items:start">
+      <div class="pop-title">Start with a popular template</div>
+      <div class="pop-grid">
         <div class="pop-card res-card">
-          <div class="pop-card-top" style="margin-bottom:8px">
-            <div class="pop-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="13" fill="#111"/><text x="14" y="18.5" text-anchor="middle" fill="white" font-size="13" font-weight="700" font-family="sans-serif">1</text></svg></div>
-            <div class="pop-card-info"><div class="pop-card-name">Configure your template</div><div class="pop-card-price">Instance type, image, storage</div></div>
-          </div>
-          <div class="pop-card-tags" style="margin-bottom:0;padding-top:2px"><span class="pop-tag-sub">Step 1 · Config</span></div>
+          <div class="pop-card-top" style="margin-bottom:8px"><div class="pop-icon"><svg width="38" height="30" viewBox="0 0 64.8166 50.3564" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M55.5889 37.4884H62.4112C62.7197 37.4884 63.0398 37.5346 63.3368 37.3996C63.5681 37.2955 63.8111 37.3457 63.9615 37.4922C64.1235 37.6465 63.9615 37.793 63.8612 37.9473C63.4872 38.5142 63.0899 39.0773 62.6966 39.6365C61.6514 41.1135 60.614 42.5906 59.5689 44.0677C58.4119 45.7144 57.2781 47.3689 56.0864 49.0002C55.7162 49.5054 55.1531 49.8602 54.2044 49.8564C36.7264 49.8255 19.2562 49.8332 1.77821 49.8332C1.43883 49.8332 0.987612 49.9335 0.817923 49.6443C0.67523 49.3974 0.463119 49.1352 0.505541 48.8305C0.513254 48.7688 0.505541 48.711 0.505541 48.6493V13.8476C0.505541 13.246 0.686799 12.706 1.05703 12.143C2.02117 10.6775 3.01617 9.22741 3.9726 7.76578C5.49594 5.44412 7.09642 3.15332 8.60433 0.823952C8.68918 0.696685 8.80102 0.553992 9.01313 0.5C9.13268 0.542422 9.24838 0.592558 9.23681 0.727538C9.10569 2.05034 9.19053 3.38086 9.18282 4.70366C9.16354 7.46111 9.18282 34.7232 9.18282 37.4845" stroke="black" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M9.16357 0.785382C14.9523 6.79777 47.1006 41.5339 52.9588 47.5154C53.5295 48.0978 54.3471 48.9192 55.1879 49.4283" stroke="black" stroke-width="1.2" stroke-miterlimit="10" stroke-dasharray="3 3"/><path d="M9.48364 37.5732C9.6649 37.7737 17.3703 37.4883 17.6326 37.4883H55.3344" stroke="black" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M55.211 13.3038C55.0258 13.1302 47.2973 13.2884 47.0312 13.2884C38.593 13.2884 0.733066 13.3809 0.733066 13.3809" stroke="black" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M0.316574 13.6355C0.752366 13.5391 1.14959 13.6856 1.48897 13.8322C4.34283 15.047 7.33939 16.042 10.2472 17.1681C19.4143 20.7007 28.6276 24.1485 37.8024 27.6695C45.2803 30.5349 52.816 33.3078 60.2554 36.2504C61.1385 36.5975 62.2916 36.663 62.7467 37.5385" stroke="black" stroke-width="1.2" stroke-miterlimit="10" stroke-dasharray="3 3"/><path d="M55.5311 13.2537V49.4283" stroke="black" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M0.871944 49.7136L9.9156 37.1721L32.5537 25.5522L32.8776 25.3864L64.2816 0.742919L55.8473 13.2266L32.6424 25.8916L0.871944 49.7136Z" stroke="black" stroke-width="1.2" stroke-linejoin="round" stroke-dasharray="3 3"/><path d="M64.0811 0.935747C64.3665 1.11701 64.3125 1.37154 64.3125 1.6145V36.7247C64.3125 36.9252 64.3202 37.1258 64.0811 37.2646" stroke="black" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M8.89358 0.530883H64.2045" stroke="black" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="pop-card-info"><div class="pop-card-name">H100 Training</div><div class="pop-card-price">h100-80gb-sxm-ib · 8× GPU</div></div></div>
+          <div class="pop-card-tags" style="margin-bottom:0;padding-top:2px"><span class="pop-tag-sub">Training · Multi-node</span></div>
           <div class="res-card-body"><div class="res-card-body-inner">
-            <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">Choose the instance type, base image, attached disks, SSH keys, and network settings you want to reuse.</div>
-            <div class="res-card-actions"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create Template</button></div>
+            <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">8× H100 80GB SXM with InfiniBand, Ubuntu 22.04, NVMe attached storage. Ideal for LLM training runs.</div>
+            <div class="res-card-actions"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Use template</button></div>
           </div></div>
         </div>
         <div class="pop-card res-card">
-          <div class="pop-card-top" style="margin-bottom:8px">
-            <div class="pop-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="13" fill="#111"/><text x="14" y="18.5" text-anchor="middle" fill="white" font-size="13" font-weight="700" font-family="sans-serif">2</text></svg></div>
-            <div class="pop-card-info"><div class="pop-card-name">Launch from template</div><div class="pop-card-price">Identical instances every time</div></div>
-          </div>
-          <div class="pop-card-tags" style="margin-bottom:0;padding-top:2px"><span class="pop-tag-sub">Step 2 · Deploy</span></div>
+          <div class="pop-card-top" style="margin-bottom:8px"><div class="pop-icon"><svg width="38" height="30" viewBox="0 0 64.8166 50.3564" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M55.5889 37.4884H62.4112C62.7197 37.4884 63.0398 37.5346 63.3368 37.3996C63.5681 37.2955 63.8111 37.3457 63.9615 37.4922C64.1235 37.6465 63.9615 37.793 63.8612 37.9473C63.4872 38.5142 63.0899 39.0773 62.6966 39.6365C61.6514 41.1135 60.614 42.5906 59.5689 44.0677C58.4119 45.7144 57.2781 47.3689 56.0864 49.0002C55.7162 49.5054 55.1531 49.8602 54.2044 49.8564C36.7264 49.8255 19.2562 49.8332 1.77821 49.8332C1.43883 49.8332 0.987612 49.9335 0.817923 49.6443C0.67523 49.3974 0.463119 49.1352 0.505541 48.8305C0.513254 48.7688 0.505541 48.711 0.505541 48.6493V13.8476C0.505541 13.246 0.686799 12.706 1.05703 12.143C2.02117 10.6775 3.01617 9.22741 3.9726 7.76578C5.49594 5.44412 7.09642 3.15332 8.60433 0.823952C8.68918 0.696685 8.80102 0.553992 9.01313 0.5C9.13268 0.542422 9.24838 0.592558 9.23681 0.727538C9.10569 2.05034 9.19053 3.38086 9.18282 4.70366C9.16354 7.46111 9.18282 34.7232 9.18282 37.4845" stroke="black" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M9.16357 0.785382C14.9523 6.79777 47.1006 41.5339 52.9588 47.5154C53.5295 48.0978 54.3471 48.9192 55.1879 49.4283" stroke="black" stroke-width="1.2" stroke-miterlimit="10" stroke-dasharray="3 3"/><path d="M9.48364 37.5732C9.6649 37.7737 17.3703 37.4883 17.6326 37.4883H55.3344" stroke="black" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M55.211 13.3038C55.0258 13.1302 47.2973 13.2884 47.0312 13.2884C38.593 13.2884 0.733066 13.3809 0.733066 13.3809" stroke="black" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M0.316574 13.6355C0.752366 13.5391 1.14959 13.6856 1.48897 13.8322C4.34283 15.047 7.33939 16.042 10.2472 17.1681C19.4143 20.7007 28.6276 24.1485 37.8024 27.6695C45.2803 30.5349 52.816 33.3078 60.2554 36.2504C61.1385 36.5975 62.2916 36.663 62.7467 37.5385" stroke="black" stroke-width="1.2" stroke-miterlimit="10" stroke-dasharray="3 3"/><path d="M55.5311 13.2537V49.4283" stroke="black" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M0.871944 49.7136L9.9156 37.1721L32.5537 25.5522L32.8776 25.3864L64.2816 0.742919L55.8473 13.2266L32.6424 25.8916L0.871944 49.7136Z" stroke="black" stroke-width="1.2" stroke-linejoin="round" stroke-dasharray="3 3"/><path d="M64.0811 0.935747C64.3665 1.11701 64.3125 1.37154 64.3125 1.6145V36.7247C64.3125 36.9252 64.3202 37.1258 64.0811 37.2646" stroke="black" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M8.89358 0.530883H64.2045" stroke="black" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="pop-card-info"><div class="pop-card-name">H200 Inference</div><div class="pop-card-price">h200-141gb-sxm · 8× GPU</div></div></div>
+          <div class="pop-card-tags" style="margin-bottom:0;padding-top:2px"><span class="pop-tag-sub">Inference · Large models</span></div>
           <div class="res-card-body"><div class="res-card-body-inner">
-            <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">Use the template to spin up one or many identically configured VMs — great for scaling and reproducibility.</div>
-            <div class="res-card-actions"><a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/compute/instance-templates" target="_blank" style="flex:1;justify-content:center;text-decoration:none">View docs →</a></div>
+            <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">8× H200 141GB with vLLM pre-installed, optimized for serving 70B+ parameter models at low latency.</div>
+            <div class="res-card-actions"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Use template</button></div>
+          </div></div>
+        </div>
+        <div class="pop-card res-card">
+          <div class="pop-card-top" style="margin-bottom:8px"><div class="pop-icon"><svg width="38" height="30" viewBox="0 0 64.8166 50.3564" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M55.5889 37.4884H62.4112C62.7197 37.4884 63.0398 37.5346 63.3368 37.3996C63.5681 37.2955 63.8111 37.3457 63.9615 37.4922C64.1235 37.6465 63.9615 37.793 63.8612 37.9473C63.4872 38.5142 63.0899 39.0773 62.6966 39.6365C61.6514 41.1135 60.614 42.5906 59.5689 44.0677C58.4119 45.7144 57.2781 47.3689 56.0864 49.0002C55.7162 49.5054 55.1531 49.8602 54.2044 49.8564C36.7264 49.8255 19.2562 49.8332 1.77821 49.8332C1.43883 49.8332 0.987612 49.9335 0.817923 49.6443C0.67523 49.3974 0.463119 49.1352 0.505541 48.8305C0.513254 48.7688 0.505541 48.711 0.505541 48.6493V13.8476C0.505541 13.246 0.686799 12.706 1.05703 12.143C2.02117 10.6775 3.01617 9.22741 3.9726 7.76578C5.49594 5.44412 7.09642 3.15332 8.60433 0.823952C8.68918 0.696685 8.80102 0.553992 9.01313 0.5C9.13268 0.542422 9.24838 0.592558 9.23681 0.727538C9.10569 2.05034 9.19053 3.38086 9.18282 4.70366C9.16354 7.46111 9.18282 34.7232 9.18282 37.4845" stroke="black" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M9.16357 0.785382C14.9523 6.79777 47.1006 41.5339 52.9588 47.5154C53.5295 48.0978 54.3471 48.9192 55.1879 49.4283" stroke="black" stroke-width="1.2" stroke-miterlimit="10" stroke-dasharray="3 3"/><path d="M9.48364 37.5732C9.6649 37.7737 17.3703 37.4883 17.6326 37.4883H55.3344" stroke="black" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M55.211 13.3038C55.0258 13.1302 47.2973 13.2884 47.0312 13.2884C38.593 13.2884 0.733066 13.3809 0.733066 13.3809" stroke="black" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M0.316574 13.6355C0.752366 13.5391 1.14959 13.6856 1.48897 13.8322C4.34283 15.047 7.33939 16.042 10.2472 17.1681C19.4143 20.7007 28.6276 24.1485 37.8024 27.6695C45.2803 30.5349 52.816 33.3078 60.2554 36.2504C61.1385 36.5975 62.2916 36.663 62.7467 37.5385" stroke="black" stroke-width="1.2" stroke-miterlimit="10" stroke-dasharray="3 3"/><path d="M55.5311 13.2537V49.4283" stroke="black" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M0.871944 49.7136L9.9156 37.1721L32.5537 25.5522L32.8776 25.3864L64.2816 0.742919L55.8473 13.2266L32.6424 25.8916L0.871944 49.7136Z" stroke="black" stroke-width="1.2" stroke-linejoin="round" stroke-dasharray="3 3"/><path d="M64.0811 0.935747C64.3665 1.11701 64.3125 1.37154 64.3125 1.6145V36.7247C64.3125 36.9252 64.3202 37.1258 64.0811 37.2646" stroke="black" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M8.89358 0.530883H64.2045" stroke="black" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="pop-card-info"><div class="pop-card-name">L40S Fine-tuning</div><div class="pop-card-price">l40s-48gb · 4× GPU</div></div></div>
+          <div class="pop-card-tags" style="margin-bottom:0;padding-top:2px"><span class="pop-tag-sub">Fine-tuning · Cost-efficient</span></div>
+          <div class="res-card-body"><div class="res-card-body-inner">
+            <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">4× L40S 48GB with PyTorch and HuggingFace pre-installed. Great for supervised fine-tuning and LoRA runs.</div>
+            <div class="res-card-actions"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Use template</button></div>
           </div></div>
         </div>
       </div>
@@ -3670,34 +3673,21 @@ function initSpicyMagic() {
   const dashedPaths = allPaths.filter(p => p.getAttribute('stroke-dasharray') === '3 3');
   const solidPaths  = allPaths.filter(p => p.getAttribute('stroke-dasharray') !== '3 3');
 
-  // Solid paths — fully visible, static
-  solidPaths.forEach(p => {
-    p.style.animation        = 'none';
-    p.style.transition       = 'none';
-    p.style.strokeDasharray  = '';
-    p.style.strokeDashoffset = '';
-  });
+  // Solid paths — static
+  solidPaths.forEach(p => { p.classList.remove('dash-march'); p.style.animation = 'none'; });
+  // Dashed paths — use CSS class to avoid inline-style conflicts
+  dashedPaths.forEach(p => p.classList.add('dash-march'));
 
-  // Dashed paths — marching/rotating continuously
-  dashedPaths.forEach(p => {
-    p.style.transition       = 'none';
-    p.style.strokeDasharray  = '3 3';
-    p.style.strokeDashoffset = '0';
-    p.style.animation        = 'inst-dash-march 0.55s linear infinite';
-  });
-
-  // Stagger-reveal cards
+  // Stagger-reveal cards using double rAF
   const cards = [...document.querySelectorAll('#instances-spicy .pop-card')];
-  cards.forEach(c => { c.style.opacity = '0'; c.style.transform = 'translateY(10px)'; c.style.transition = 'none'; });
-  setTimeout(() => {
+  cards.forEach(c => { c.style.transition = 'none'; c.style.opacity = '0'; c.style.transform = 'translateY(10px)'; });
+  requestAnimationFrame(() => requestAnimationFrame(() => {
     cards.forEach((c, i) => {
-      setTimeout(() => {
-        c.style.transition = 'opacity .4s ease, transform .4s cubic-bezier(.4,0,.2,1)';
-        c.style.opacity = '1';
-        c.style.transform = 'none';
-      }, i * 80);
+      c.style.transition = `opacity .4s ease ${i*80}ms, transform .4s cubic-bezier(.4,0,.2,1) ${i*80}ms`;
+      c.style.opacity = '1';
+      c.style.transform = 'none';
     });
-  }, 80);
+  }));
 }
 
 function initCubeMagic(svgId) {
@@ -3706,22 +3696,21 @@ function initCubeMagic(svgId) {
   const allPaths    = [...svg.querySelectorAll('path')];
   const dashedPaths = allPaths.filter(p => p.getAttribute('stroke-dasharray') === '3 3');
   const solidPaths  = allPaths.filter(p => p.getAttribute('stroke-dasharray') !== '3 3');
-  solidPaths.forEach(p => { p.style.animation = 'none'; p.style.strokeDasharray = ''; p.style.strokeDashoffset = ''; });
-  dashedPaths.forEach(p => { p.style.strokeDasharray = '3 3'; p.style.strokeDashoffset = '0'; p.style.animation = 'inst-dash-march 0.55s linear infinite'; });
-  // Stagger-reveal cards in the parent view (same as Instances)
+  // Use CSS class for dashes — avoids inline-style vs animation conflicts
+  solidPaths.forEach(p => { p.classList.remove('dash-march'); p.style.animation = 'none'; });
+  dashedPaths.forEach(p => { p.classList.add('dash-march'); });
+  // Stagger-reveal cards — double rAF forces the browser to commit initial state before transitioning
   const view = svg.closest('.view');
   if (view) {
     const cards = [...view.querySelectorAll('.pop-card')];
-    cards.forEach(c => { c.style.opacity = '0'; c.style.transform = 'translateY(10px)'; c.style.transition = 'none'; });
-    setTimeout(() => {
+    cards.forEach(c => { c.style.transition = 'none'; c.style.opacity = '0'; c.style.transform = 'translateY(10px)'; });
+    requestAnimationFrame(() => requestAnimationFrame(() => {
       cards.forEach((c, i) => {
-        setTimeout(() => {
-          c.style.transition = 'opacity .4s ease, transform .4s cubic-bezier(.4,0,.2,1)';
-          c.style.opacity = '1';
-          c.style.transform = 'none';
-        }, i * 80);
+        c.style.transition = `opacity .4s ease ${i*80}ms, transform .4s cubic-bezier(.4,0,.2,1) ${i*80}ms`;
+        c.style.opacity = '1';
+        c.style.transform = 'none';
       });
-    }, 80);
+    }));
   }
 }
 function initTemplSpicyMagic()  { initCubeMagic('tmpl-cube'); }
@@ -4348,11 +4337,10 @@ function initMetricsWave(prefix, rafKey) {
   const dot2  = document.getElementById(prefix + '-dot-2');
   if (!waveA || !waveB || !waveC || !dot1 || !dot2) return;
 
-  // Marching dashes on the wave line
+  // Marching dashes — CSS class avoids inline-style vs animation conflicts
   [waveA, waveB, waveC].forEach(p => {
-    p.style.strokeDasharray  = '4 4';
-    p.style.strokeDashoffset = '0';
-    p.style.animation        = 'inst-dash-march 0.6s linear infinite';
+    p.style.strokeDasharray = '4 4';
+    p.classList.add('dash-march');
   });
 
   const DOT_SPEED  = 0.00013;
