@@ -1119,6 +1119,9 @@ img.ico{display:block;flex:0 0 auto}
         <path d="M12.58 81.75L153.13 49.83" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
         <path d="M165.45 1.63C166.19 2.1 166.05 2.76 166.05 3.39V94.43C166.05 94.95 166.07 95.47 165.45 95.83" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
         <path d="M22.35 0.58H165.77" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+        <!-- Black dots at each end of the diagonal line -->
+        <circle cx="12.58" cy="81.75" r="2.8" fill="black"/>
+        <circle cx="153.13" cy="49.83" r="2.8" fill="black"/>
       </svg>
     </div>
     <!-- Text block -->
@@ -3916,7 +3919,7 @@ function initLogsIllusAnimation() {
   const dot1  = document.getElementById('logs-dot-1');
   const dot2  = document.getElementById('logs-dot-2');
 
-  const DOT_SPEED  = 0.00022; // fraction of wave per ms (~4.5s full loop)
+  const DOT_SPEED  = 0.00013; // fraction of wave per ms (~7.7s full loop, slow & smooth)
   const DOT_OFFSET = 0.48;    // dot2 is ~half a loop behind dot1
   let _dotPhase = 0, _dotLastTs = null;
   let LA, LB, LC;
