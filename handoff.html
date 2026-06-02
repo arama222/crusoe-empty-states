@@ -300,6 +300,7 @@ html,body{height:100%;background:var(--white);color:var(--black);font-family:'Su
 @keyframes cursor-blink{0%,49%{opacity:1}50%,100%{opacity:0}}
 @keyframes cube-glitch-run{0%,8%{transform:none;filter:none}10%{transform:translate(3px,-2px) skewX(-2deg);filter:contrast(1.4)}16%{transform:translate(-2px,1px)}20%{transform:translate(1px,-1px) skewX(1deg);filter:none}25%,100%{transform:none}}
 @keyframes node-ripple{0%{r:3;opacity:.7}100%{r:18;opacity:0}}
+@keyframes inst-dash-march{to{stroke-dashoffset:-6}}
 /* ── Spicy scroll-reveal ── */
 .spicy-reveal{opacity:1;transform:none}
 /* ── Scroll hint ── */
@@ -3668,14 +3669,6 @@ function initSpicyMagic() {
   const allPaths = [...svg.querySelectorAll('path')];
   const dashedPaths = allPaths.filter(p => p.getAttribute('stroke-dasharray') === '3 3');
   const solidPaths  = allPaths.filter(p => p.getAttribute('stroke-dasharray') !== '3 3');
-
-  // Inject keyframe once
-  if (!document.getElementById('inst-dash-keyframe')) {
-    const s = document.createElement('style');
-    s.id = 'inst-dash-keyframe';
-    s.textContent = '@keyframes inst-dash-march { to { stroke-dashoffset: -6; } }';
-    document.head.appendChild(s);
-  }
 
   // Solid paths — fully visible, static
   solidPaths.forEach(p => {
