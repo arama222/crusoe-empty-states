@@ -3602,12 +3602,12 @@ function initClusterSpicyMagic() {
 
   const pathIds = ['co-sq-tr','co-sq-mid','co-sq-bl','co-center','co-diag-1','co-diag-2'];
   const dotIds  = ['co-dot-bl','co-dot-tr'];
-  const STAGGER  = 130;
-  const DUR_FWD  = 1400;
-  const DUR_BWD  = 1100;
+  const STAGGER  = 200;
+  const DUR_FWD  = 2100;
+  const DUR_BWD  = 1800;
   const TOTAL_FWD = (pathIds.length - 1) * STAGGER + DUR_FWD;
   const TOTAL_BWD = (pathIds.length - 1) * STAGGER + DUR_BWD;
-  const PAUSE    = 160;
+  const PAUSE    = 800;
 
   clearTimeout(window._clusterDrawTimer);
   window._clusterDrawFirstRun = true;
@@ -3631,15 +3631,17 @@ function initClusterSpicyMagic() {
         paths.forEach((p, i) => {
           try { p.style.transition = `stroke-dashoffset ${DUR_FWD}ms cubic-bezier(.4,0,0,1) ${i*STAGGER}ms`; p.style.strokeDashoffset = '0'; } catch(e) {}
         });
-        const dotsStart = (pathIds.length - 1) * STAGGER + 500;
-        dots.forEach((d, i) => setTimeout(() => { d.style.transition = 'opacity 400ms ease'; d.style.opacity = '1'; }, dotsStart + i * 120));
+        const dotsStart = (pathIds.length - 1) * STAGGER + 600;
+        dots.forEach((d, i) => setTimeout(() => { d.style.transition = 'opacity 450ms ease'; d.style.opacity = '1'; }, dotsStart + i * 150));
         window._clusterDrawTimer = setTimeout(() => doClusterDraw('bwd'), TOTAL_FWD + PAUSE);
       });
     } else {
       paths.forEach((p, i) => {
         try { const l = p.getTotalLength(); const rd = (paths.length-1-i)*STAGGER; p.style.transition = `stroke-dashoffset ${DUR_BWD}ms cubic-bezier(.55,0,1,.45) ${rd}ms`; p.style.strokeDashoffset = l; } catch(e) {}
       });
-      dots.forEach((d, i) => { d.style.transition = `opacity 280ms ease ${i*60}ms`; d.style.opacity = '0'; });
+      // Dots disappear LAST — after all paths have finished erasing
+      const dotsHideDelay = TOTAL_BWD;
+      dots.forEach((d, i) => { d.style.transition = `opacity 320ms ease ${dotsHideDelay + i*80}ms`; d.style.opacity = '0'; });
       window._clusterDrawTimer = setTimeout(() => doClusterDraw('fwd'), TOTAL_BWD + PAUSE);
     }
   }
