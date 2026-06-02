@@ -3576,7 +3576,7 @@ function buildSidebar(key) {
 
 function navigate(id) {
   if (id in ROUTES && ROUTES[id] === null) return; // disabled nav item
-  localStorage.setItem('lastNav', id);
+  if (id !== 'dropdown-states') localStorage.setItem('lastNav', id); // don't persist utility pages
   const viewId = ROUTES[id] || id;
 
   // 1. Direct match: sidebar key == view id (most common case)
@@ -4794,7 +4794,7 @@ function toggleDarkMode() {
 // Restore last visited page on reload; default to instances
 (function() {
   const saved = localStorage.getItem('lastNav');
-  const valid = saved && (ROUTES[saved] !== undefined || Object.values(ROUTES).includes(saved));
+  const valid = saved && saved !== 'dropdown-states' && ROUTES[saved] !== null && (ROUTES[saved] !== undefined || Object.values(ROUTES).filter(Boolean).includes(saved));
   navigate(valid ? saved : 'instances');
 })();
 </script>
