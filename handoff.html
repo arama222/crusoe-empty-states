@@ -1976,12 +1976,12 @@ img.ico{display:block;flex:0 0 auto}
       <div class="pop-card res-card slurm-spicy-reveal" style="transition-delay:.2s">
         <div class="pop-card-top" style="margin-bottom:8px">
           <div class="pop-icon"><svg width="38" height="38" viewBox="0 0 65 64.2205" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M36.7962 27.7211H27.994V36.4821H36.7962V27.7211Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/><path d="M5.17606 59.0654H0.5V63.7205H5.17606V59.0654Z" fill="black" stroke="black" stroke-linecap="round" stroke-linejoin="round"/><path d="M64.5 0.5H59.8239V5.15513H64.5V0.5Z" fill="black" stroke="black" stroke-linecap="round" stroke-linejoin="round"/><path d="M47.8886 16.7087H2.72296V61.6733H47.8886V16.7087Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/><path d="M54.976 9.62146H9.81038V54.5861H54.976V9.62146Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/><path d="M62.0675 2.52975H16.9019V47.4944H62.0675V2.52975Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-          <div class="pop-card-info"><div class="pop-card-name">CPU Login Node</div><div class="pop-card-price">Workflow validation</div></div>
+          <div class="pop-card-info"><div class="pop-card-name">LLM Pre-training</div><div class="pop-card-price">H200 multi-node</div></div>
         </div>
-        <div class="pop-card-tags" style="margin-bottom:0;padding-top:2px"><span class="pop-tag-sub">CPU · Dev · Scheduling</span></div>
+        <div class="pop-card-tags" style="margin-bottom:0;padding-top:2px"><span class="pop-tag-sub">Pre-training · Large scale</span></div>
         <div class="res-card-body"><div class="res-card-body-inner">
-          <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">Start with a CPU-only login node to validate job scripts and scheduling before attaching GPU compute partitions.</div>
-          <div class="res-card-actions"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createClusterFromTemplate('slurm','cpu-login',this)">Create cluster</button><a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/orchestration/slurm" target="_blank" style="text-decoration:none">View docs</a></div>
+          <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">Frontier-scale pre-training on H200 nodes with InfiniBand fabric, Pyxis container runtime, and checkpoint storage.</div>
+          <div class="res-card-actions"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createClusterFromTemplate('slurm','llm-pretrain',this)">Create cluster</button><a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/orchestration/slurm" target="_blank" style="text-decoration:none">View docs</a></div>
         </div></div>
       </div>
     </div>
