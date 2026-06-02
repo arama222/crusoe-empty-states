@@ -1384,7 +1384,7 @@ img.ico{display:block;flex:0 0 auto}
   <div class="ph">
     <div class="ph-l"><div class="ph-title">Custom Images</div></div>
     <div class="ph-r">
-      <button class="btn btn-p"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.99967 3.33337V12.6667M3.33301 8.00004H12.6663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Import Image</button>
+      <button class="btn btn-p"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.99967 3.33337V12.6667M3.33301 8.00004H12.6663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Create Image</button>
     </div>
   </div>
   <div class="divider"></div>
@@ -1408,7 +1408,7 @@ img.ico{display:block;flex:0 0 auto}
       </div>
       <div style="position:relative;z-index:1;max-width:380px">
         <h1 style="font-size:40px;font-weight:400;font-family:var(--font-heading);color:var(--text);letter-spacing:-1.2px;line-height:110%;margin:0 0 10px;white-space:nowrap">No custom images yet.</h1>
-        <p style="font-size:14px;color:var(--muted);font-family:var(--font-body);line-height:160%;margin:0 0 16px">Import your own disk images or capture snapshots of running instances to create reusable base images.</p>
+        <p style="font-size:14px;color:var(--muted);font-family:var(--font-body);line-height:160%;margin:0 0 16px">Capture the boot disk of a stopped VM as a reusable base image. Custom images are project and region-specific and can be used to launch identically configured instances.</p>
         <a href="https://docs.crusoecloud.com/compute/custom-images" target="_blank" style="display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:500;font-family:var(--font-body);color:var(--white);background:var(--black);padding:6px 14px;border-radius:8px;text-decoration:none;letter-spacing:.01em;transition:opacity .15s ease" onmouseenter="this.style.opacity='.8'" onmouseleave="this.style.opacity='1'">View docs →</a>
       </div>
     </div>
@@ -1418,23 +1418,23 @@ img.ico{display:block;flex:0 0 auto}
         <div class="pop-card res-card">
           <div class="pop-card-top" style="margin-bottom:8px">
             <div class="pop-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="13" fill="#111"/><text x="14" y="18.5" text-anchor="middle" fill="white" font-size="13" font-weight="700" font-family="sans-serif">1</text></svg></div>
-            <div class="pop-card-info"><div class="pop-card-name">Import an image</div><div class="pop-card-price">From URL or snapshot</div></div>
+            <div class="pop-card-info"><div class="pop-card-name">Customize a VM</div><div class="pop-card-price">Install software &amp; configure</div></div>
           </div>
-          <div class="pop-card-tags" style="margin-bottom:0;padding-top:2px"><span class="pop-tag-sub">Step 1 · Import</span></div>
+          <div class="pop-card-tags" style="margin-bottom:0;padding-top:2px"><span class="pop-tag-sub">Step 1 · Prep</span></div>
           <div class="res-card-body"><div class="res-card-body-inner">
-            <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">Upload a custom disk image via URL, or capture a snapshot of an existing instance to use as a base.</div>
-            <div class="res-card-actions"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Import Image</button></div>
+            <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">Start from a curated image — Ubuntu 22.04 with NVIDIA drivers, Docker, or Slurm. SSH in and install your libraries, tools, and config.</div>
+            <div class="res-card-actions"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="navigate('instances')">Create Instance</button></div>
           </div></div>
         </div>
         <div class="pop-card res-card">
           <div class="pop-card-top" style="margin-bottom:8px">
             <div class="pop-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="13" fill="#111"/><text x="14" y="18.5" text-anchor="middle" fill="white" font-size="13" font-weight="700" font-family="sans-serif">2</text></svg></div>
-            <div class="pop-card-info"><div class="pop-card-name">Launch from image</div><div class="pop-card-price">Consistent environments</div></div>
+            <div class="pop-card-info"><div class="pop-card-name">Capture from boot disk</div><div class="pop-card-price">Stop VM first, then create</div></div>
           </div>
-          <div class="pop-card-tags" style="margin-bottom:0;padding-top:2px"><span class="pop-tag-sub">Step 2 · Deploy</span></div>
+          <div class="pop-card-tags" style="margin-bottom:0;padding-top:2px"><span class="pop-tag-sub">Step 2 · Capture</span></div>
           <div class="res-card-body"><div class="res-card-body-inner">
-            <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">Use your custom image when creating instances to guarantee a consistent, pre-configured environment every time.</div>
-            <div class="res-card-actions"><a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/compute/custom-images" target="_blank" style="flex:1;justify-content:center;text-decoration:none">View docs →</a></div>
+            <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">Shut down your VM, then create a custom image from its boot disk. Images are scoped to this project and region.</div>
+            <div class="res-card-actions"><a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/compute/images/overview" target="_blank" style="flex:1;justify-content:center;text-decoration:none">View docs →</a></div>
           </div></div>
         </div>
       </div>
