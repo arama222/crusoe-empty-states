@@ -73,6 +73,74 @@ html,body{height:100%;background:var(--white);color:var(--black);font-family:'Su
   --th:40px;
 }
 
+[data-theme="dark"] {
+  --black:    #f0f0f0;
+  --white:    #141414;
+  --gray-50:  #1c1c1c;
+  --gray-100: #222222;
+  --gray-200: #2c2c2c;
+  --gray-300: #3a3a3a;
+  --gray-400: #484848;
+  --gray-500: #686868;
+  --gray-600: #909090;
+  --gray-700: #b8b8b8;
+  --gray-800: #d4d4d4;
+  --gray-900: #e8e8e8;
+  --gray-1000:#f2f2f2;
+  --green-50:  #052e1e;
+  --green-100: #0a4a2f;
+  --green-600: #10b981;
+  --green-700: #34d399;
+  --green-800: #6ee7b7;
+  --border:   var(--gray-300);
+  --text:     var(--black);
+  --text2:    var(--gray-700);
+  --muted:    var(--gray-500);
+  --sel:      var(--gray-100);
+}
+
+/* ── Dark mode component overrides ── */
+[data-theme="dark"] .btn-p { background: #efefef; color: #111; }
+[data-theme="dark"] .btn-p:hover { background: #d0d0d0; }
+[data-theme="dark"] .btn-o { background: var(--gray-100); color: var(--gray-800); border-color: var(--gray-400); }
+[data-theme="dark"] .btn-o:hover { background: var(--gray-200); }
+[data-theme="dark"] .sitem.active { background: var(--gray-300); color: var(--black); }
+[data-theme="dark"] .tbl tr:hover td { background: var(--gray-100); }
+[data-theme="dark"] .tbl thead th { background: var(--gray-50); border-bottom-color: var(--gray-300); }
+[data-theme="dark"] .tbl td { border-bottom-color: var(--gray-200); }
+[data-theme="dark"] .pop-card { background: var(--gray-50); border-color: var(--gray-300); }
+[data-theme="dark"] .ecard { background: var(--gray-50); border-color: var(--gray-300); }
+[data-theme="dark"] .action-card { background: var(--gray-50); border-color: var(--gray-300); }
+[data-theme="dark"] .res-mini-item { background: var(--gray-50); }
+[data-theme="dark"] .pill-green { background: var(--green-50); color: var(--green-600); border-color: var(--green-100); }
+[data-theme="dark"] .badge-outline { background: var(--gray-100); border-color: var(--gray-300); }
+[data-theme="dark"] .tabs-bar { border-bottom-color: var(--gray-400); }
+[data-theme="dark"] .tab.active { border-bottom-color: var(--black); color: var(--black); }
+[data-theme="dark"] .res-cli-block { background: #0d0d0d; border-color: var(--gray-300); }
+[data-theme="dark"] .res-divider-line { background: linear-gradient(90deg,transparent,var(--gray-400),var(--gray-500),var(--gray-400),transparent); background-size:200% 100%; }
+[data-theme="dark"] .state-toggle { background: var(--gray-100); }
+[data-theme="dark"] .state-toggle-btn.active { background: var(--gray-300); color: var(--black); }
+[data-theme="dark"] .tbl-wrap { border-color: var(--gray-300); }
+[data-theme="dark"] .tbl-filter { border-color: var(--gray-300); background: var(--white); }
+[data-theme="dark"] .tbl-search-wrap { border-color: var(--gray-400); }
+[data-theme="dark"] .tbl-search-wrap input { background: var(--gray-50); color: var(--text); }
+[data-theme="dark"] #spicy-hero { background: var(--white); }
+[data-theme="dark"] .pop-section { background: transparent; }
+[data-theme="dark"] input { background: var(--gray-50); color: var(--text); border-color: var(--gray-400); }
+[data-theme="dark"] .tbl-link { color: var(--black); }
+[data-theme="dark"] .tbl-mono { color: var(--gray-700); }
+[data-theme="dark"] .tbl-icon-btn { color: var(--gray-600); }
+[data-theme="dark"] .tbl-icon-btn:hover { background: var(--gray-200); }
+
+/* Invert black-on-white SVG illustrations in dark mode */
+[data-theme="dark"] #spicy-cube,
+[data-theme="dark"] #disk-spicy-svg,
+[data-theme="dark"] #bucket-spicy-svg,
+[data-theme="dark"] #apikey-spicy-svg,
+[data-theme="dark"] #sshkey-spicy-svg,
+[data-theme="dark"] .pop-icon svg { filter: invert(1); }
+[data-theme="dark"] #logs-illus-canvas { filter: invert(1); }
+
 /* ── App ── */
 .app{display:flex;flex-direction:column;height:100vh;overflow:hidden}
 
@@ -560,6 +628,11 @@ img.ico{display:block;flex:0 0 auto}
     <div class="tb-icon">
       <svg class="ico" width="20" height="20" viewBox="0 0 32 32" fill="currentColor"><path d="M19 10H26V12H19zM19 15H26V17H19zM19 20H26V22H19zM6 10H13V12H6zM6 15H13V17H6zM6 20H13V22H6z"></path><path d="M28,5H4A2.002,2.002,0,0,0,2,7V25a2.002,2.002,0,0,0,2,2H28a2.002,2.002,0,0,0,2-2V7A2.002,2.002,0,0,0,28,5ZM4,7H15V25H4ZM17,25V7H28V25Z"></path></svg>
     </div>
+    <!-- Dark mode toggle -->
+    <div class="tb-icon" id="tb-dark-toggle" onclick="toggleDarkMode()" title="Toggle dark mode">
+      <svg id="tb-moon" class="ico" width="20" height="20" viewBox="0 0 32 32" fill="currentColor"><path d="M13.502 5.414a15.075 15.075 0 0 0 11.594 17.701 11.113 11.113 0 0 1-7.975 3.85c-.174.01-.348.015-.522.015a11.108 11.108 0 0 1-3.097-21.566M14.98 3a1.002 1.002 0 0 0-.175.016 13.096 13.096 0 0 0 1.825 25.981c.164.006.328.006.49 0a13.072 13.072 0 0 0 10.703-5.555 1.001 1.001 0 0 0-.783-1.565A13.08 13.08 0 0 1 15.89 4.38 1.002 1.002 0 0 0 14.98 3z"/></svg>
+      <svg id="tb-sun" class="ico" width="20" height="20" viewBox="0 0 32 32" fill="currentColor" style="display:none"><path d="M16 12a4 4 0 1 1-4 4 4.005 4.005 0 0 1 4-4m0-2a6 6 0 1 0 6 6 6 6 0 0 0-6-6zm0-6a1 1 0 0 0-1 1v2a1 1 0 0 0 2 0V5a1 1 0 0 0-1-1zm0 22a1 1 0 0 0-1 1v2a1 1 0 0 0 2 0v-2a1 1 0 0 0-1-1zM5 16a1 1 0 0 0-1-1H2a1 1 0 0 0 0 2h2a1 1 0 0 0 1-1zm26 0a1 1 0 0 0-1-1h-2a1 1 0 0 0 0 2h2a1 1 0 0 0 1-1zM7.05 6.636 5.636 5.222a1 1 0 0 0-1.414 1.414L5.636 8.05A1 1 0 0 0 7.05 6.636zm19.728 19.728-1.414-1.414a1 1 0 0 0-1.414 1.414l1.414 1.414a1 1 0 0 0 1.414-1.414zM7.05 25.364a1 1 0 0 0-1.414-1.414L4.222 25.364a1 1 1 0 1 0 1.414 1.414zm19.728-19.728a1 1 0 0 0-1.414-1.414l-1.414 1.414a1 1 0 0 0 1.414 1.414z"/></svg>
+    </div>
     <div class="tb-divider"></div>
     <!-- App menu (Carbon: Grid) -->
     <div class="tb-icon">
@@ -1033,10 +1106,8 @@ img.ico{display:block;flex:0 0 auto}
 <div id="instances-spicy">
   <!-- Side-by-side hero: illustration left, text right -->
   <div id="spicy-hero" style="display:flex;flex-direction:row;align-items:center;justify-content:flex-start;gap:48px;padding:32px 40px 28px 72px;text-align:left;position:relative;overflow:hidden;background:var(--white)">
-    <canvas id="spicy-wave-canvas" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0"></canvas>
     <!-- Illustration -->
     <div id="spicy-cube-wrap" style="display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:1;position:relative">
-      <svg id="spicy-node-ripples" width="360" height="300" viewBox="0 0 300 260" fill="none" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);pointer-events:none;z-index:2;overflow:visible"></svg>
       <svg id="spicy-cube" width="195" height="151" viewBox="0 0 166.55 128.97" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:relative;z-index:1">
         <path d="M143.43 96.41H161.12C161.92 96.41 162.75 96.53 163.52 96.18C164.12 95.91 164.75 96.04 165.14 96.42C165.56 96.82 165.14 97.2 164.88 97.6C163.91 99.07 162.88 100.53 161.86 101.98C159.15 105.81 156.46 109.64 153.75 113.47C150.75 117.74 147.81 122.03 144.72 126.26C143.76 127.57 142.3 128.49 139.84 128.48C94.52 128.4 49.22 128.42 3.9 128.42C3.02 128.42 1.85 128.68 1.41 127.93C1.04 127.29 0.49 126.61 0.6 125.82C0.62 125.66 0.6 125.51 0.6 125.35V35.11C0.6 33.55 1.07 32.15 2.03 30.69C4.53 26.89 7.11 23.13 9.59 19.34C13.54 13.32 17.69 7.38 21.6 1.34C21.82 1.01 22.11 0.64 22.66 0.5C22.97 0.61 23.27 0.74 23.24 1.09C22.9 4.52 23.12 7.97 23.1 11.4C23.05 18.55 23.1 89.24 23.1 96.4" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
         <path d="M23.05 1.24C38.06 16.83 121.42 106.9 136.61 122.41C138.09 123.92 140.21 126.05 142.39 127.37" stroke="black" stroke-miterlimit="10" stroke-dasharray="3 3"/>
@@ -1046,8 +1117,6 @@ img.ico{display:block;flex:0 0 auto}
         <path d="M143.28 33.57V127.37" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
         <path d="M1.55 128.11L25 95.59L83.7 65.46L84.54 65.03L165.97 1.13L144.1 33.5L83.93 66.34L1.55 128.11Z" stroke="black" stroke-linejoin="round" stroke-dasharray="3 3"/>
         <path d="M12.58 81.75L153.13 49.83" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
-        <path id="inst-dot-1" d="M13.2 83.93C14.51 84.04 15.66 83.08 15.77 81.77C15.88 80.46 14.91 79.31 13.61 79.2C12.31 79.09 11.15 80.06 11.04 81.36C10.93 82.66 11.9 83.82 13.2 83.93Z" fill="black"/>
-        <path id="inst-dot-2" d="M155.15 51.89C156.46 52 157.61 51.03 157.72 49.73C157.83 48.43 156.86 47.27 155.56 47.16C154.26 47.05 153.1 48.02 152.99 49.32C152.88 50.62 153.84 51.78 155.15 51.89Z" fill="black"/>
         <path d="M165.45 1.63C166.19 2.1 166.05 2.76 166.05 3.39V94.43C166.05 94.95 166.07 95.47 165.45 95.83" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
         <path d="M22.35 0.58H165.77" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
@@ -1317,7 +1386,6 @@ img.ico{display:block;flex:0 0 auto}
 <div id="clusters-spicy">
   <!-- Side-by-side hero: illustration left, text right -->
   <div id="cluster-spicy-hero" style="display:flex;flex-direction:row;align-items:center;justify-content:flex-start;gap:48px;padding:32px 40px 28px 72px;text-align:left;position:relative;overflow:hidden;background:var(--white)">
-    <canvas id="cluster-wave-canvas" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0"></canvas>
     <!-- Illustration -->
     <div id="cluster-illus-wrap" style="display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:1;position:relative">
       <svg id="cluster-node-ripples" width="360" height="360" viewBox="0 0 153.881 152.019" fill="none" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);pointer-events:none;z-index:2;overflow:visible"></svg>
@@ -1856,7 +1924,6 @@ img.ico{display:block;flex:0 0 auto}
 <div id="slurm-spicy">
   <!-- Side-by-side hero: illustration left, text right -->
   <div id="slurm-spicy-hero" style="display:flex;flex-direction:row;align-items:center;justify-content:flex-start;gap:48px;padding:32px 40px 28px 72px;text-align:left;position:relative;overflow:hidden;background:var(--white)">
-    <canvas id="slurm-wave-canvas" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0"></canvas>
     <!-- Illustration -->
     <div id="slurm-illus-wrap" style="display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:1;position:relative">
       <svg id="slurm-node-ripples" width="360" height="360" viewBox="0 0 153.881 152.019" fill="none" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);pointer-events:none;z-index:2;overflow:visible"></svg>
@@ -2018,7 +2085,6 @@ img.ico{display:block;flex:0 0 auto}
     <div id="disks-spicy">
       <!-- Side-by-side hero: animation left, text right -->
       <div id="disk-spicy-hero" style="display:flex;flex-direction:row;align-items:center;justify-content:flex-start;gap:48px;padding:12px 40px 8px 72px;text-align:left;position:relative;overflow:visible;background:var(--white)">
-            <canvas id="disk-wave-canvas" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0"></canvas>
         <!-- Illustration -->
         <div id="disk-illus-wrap" style="display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:1;position:relative;padding:20px 0">
           <svg id="disk-spicy-svg" width="185" height="185" viewBox="0 0 150.588 150.588" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:relative;z-index:1;overflow:visible">
@@ -2119,7 +2185,6 @@ img.ico{display:block;flex:0 0 auto}
   <div class="ca">
     <!-- Side-by-side hero: animation left, text right -->
     <div id="bucket-spicy-hero" style="display:flex;flex-direction:row;align-items:center;justify-content:flex-start;gap:48px;padding:12px 40px 8px 72px;text-align:left;position:relative;overflow:visible;background:var(--white)">
-        <canvas id="bucket-wave-canvas" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0"></canvas>
       <!-- Illustration -->
       <div id="bucket-illus-wrap" style="display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:1;position:relative;padding:20px 0">
         <svg id="bucket-spicy-svg" width="185" height="185" viewBox="0 0 150.588 150.588" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:relative;z-index:1;overflow:visible">
@@ -2437,7 +2502,6 @@ img.ico{display:block;flex:0 0 auto}
   <div class="ca">
     <!-- Side-by-side hero: animation left, text right -->
     <div id="apikey-spicy-hero" style="display:flex;flex-direction:row;align-items:center;justify-content:flex-start;gap:48px;padding:12px 40px 8px 72px;text-align:left;position:relative;overflow:visible;background:var(--white)">
-        <canvas id="apikey-wave-canvas" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0"></canvas>
       <!-- Animated illustration -->
       <div id="apikey-illus-wrap" style="display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:1;position:relative;padding:20px 0">
         <svg id="apikey-spicy-svg" width="160" height="160" viewBox="-2 -2 155 155" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:relative;z-index:1">
@@ -2798,7 +2862,6 @@ img.ico{display:block;flex:0 0 auto}
   <div class="ca">
     <!-- Side-by-side hero: animation left, text right -->
     <div id="sshkey-spicy-hero" style="display:flex;flex-direction:row;align-items:center;justify-content:flex-start;gap:48px;padding:12px 40px 8px 72px;text-align:left;position:relative;overflow:visible;background:var(--white)">
-        <canvas id="sshkey-wave-canvas" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0"></canvas>
       <!-- Animated illustration -->
       <div id="sshkey-illus-wrap" style="display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:1;position:relative;padding:20px 0">
         <svg id="sshkey-spicy-svg" width="160" height="160" viewBox="-2 -2 155 155" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:relative;z-index:1">
@@ -3333,163 +3396,118 @@ function toggleEdgeState(n) {
   };
 })();
 
-// ── Spicy magic: draw-in loop + ripples + glitch ──
+// ── Spicy magic: unified draw-in loop ──
 function initSpicyMagic() {
   const svg = document.getElementById('spicy-cube');
   if (!svg) return;
 
   const dotIds = ['inst-dot-1','inst-dot-2'];
   const allPaths = [...svg.querySelectorAll('path')];
+  // Separate dots from stroked paths
   const paths = allPaths.filter(p => !dotIds.includes(p.id));
-  const dots = dotIds.map(id => document.getElementById(id)).filter(Boolean);
+  const dots  = dotIds.map(id => document.getElementById(id)).filter(Boolean);
 
-  // ── Node ripples (start once, self-loop) ──
-  const scaleX = 160/166.55, scaleY = 124/128.97;
-  const offX = (300-160)/2, offY = (260-124)/2;
-  const nodeCoords = [
-    { x: offX + 13.4*scaleX,  y: offY + 81.6*scaleY },
-    { x: offX + 155.4*scaleX, y: offY + 49.6*scaleY }
-  ];
-  function startNodeRipples() {
-    if (!document.getElementById('spicy-node-ripples')) return;
-    nodeCoords.forEach((nc, ni) => {
-      function pulse() {
-        const rippleSvg = document.getElementById('spicy-node-ripples');
-        if (!rippleSvg || !document.getElementById('instances-spicy') ||
-            document.getElementById('instances-spicy').style.display === 'none') return;
-        const c = document.createElementNS('http://www.w3.org/2000/svg','circle');
-        c.setAttribute('cx', nc.x); c.setAttribute('cy', nc.y);
-        c.setAttribute('r', '3'); c.setAttribute('fill','none');
-        c.setAttribute('stroke','rgba(0,0,0,.5)'); c.setAttribute('stroke-width','1');
-        rippleSvg.appendChild(c);
-        let start=null;
-        function animRipple(ts) {
-          if(!start) start=ts;
-          const t=Math.min((ts-start)/800,1);
-          const r=3+t*15, a=(1-t)*.45;
-          c.setAttribute('r',r); c.setAttribute('stroke',`rgba(0,0,0,${a})`);
-          c.setAttribute('stroke-width', 1-t*.5);
-          if(t<1) requestAnimationFrame(animRipple);
-          else c.remove();
-        }
-        requestAnimationFrame(animRipple);
-        setTimeout(pulse, 2200 + ni*700);
-      }
-      setTimeout(pulse, ni*600);
+  // Identify which paths are natively dashed (SVG attribute) so we can restore them
+  const isDashed = paths.map(p => p.getAttribute('stroke-dasharray') === '3 3');
+
+  // Unified timing — same speed for every path, solid or dashed
+  const STAGGER = 145;   // ms between each path's start
+  const DUR     = 1900;  // ms per path (draw-in = erase)
+  const PAUSE   = 900;   // ms rest at each end so the viewer can see the full drawing
+  const EASE    = 'cubic-bezier(.4,0,.2,1)';
+
+  let _firstRun = true;
+  let _drawTimer = null;
+
+  // Pre-compute total lengths once
+  const lengths = paths.map(p => p.getTotalLength());
+
+  function setup() {
+    // Prime every path: dasharray=L (solid proxy), dashoffset=L (invisible)
+    paths.forEach((p, i) => {
+      p.style.transition  = 'none';
+      p.style.strokeDasharray  = `${lengths[i]} ${lengths[i]}`;
+      p.style.strokeDashoffset = `${lengths[i]}`;
     });
+    dots.forEach(c => {
+      c.style.transition = 'none';
+      c.style.opacity    = '0';
+      c.style.transform  = 'scale(0)';
+      c.style.transformOrigin = 'center';
+    });
+    void svg.getBoundingClientRect(); // flush
   }
-
-  // ── Split paths: solid ones use dashoffset draw-in; dashed ones use opacity ──
-  // This keeps the SVG stroke-dasharray="3 3" intact throughout the animation.
-  const solidPaths  = paths.filter(p => !p.getAttribute('stroke-dasharray'));
-  const dashedPaths = paths.filter(p =>  p.getAttribute('stroke-dasharray'));
-
-  const STAGGER  = 130;  // ms between each solid-path start
-  const DUR_FWD  = 1750; // ms for solid draw-in
-  const DUR_BWD  = 1400; // ms for solid erase
-  const TOTAL_FWD = solidPaths.length * STAGGER + DUR_FWD;
-  const TOTAL_BWD = solidPaths.length * STAGGER + DUR_BWD;
-  const PAUSE    = 160;  // ms between forward→backward and backward→forward
-
-  let _instancesFirstDraw = true;
-  let _drawTimer = null; // guard against overlapping calls
-  let _drawFirstRun = true; // one-time initial priming flag
 
   function doDrawIn(dir) {
     if (!document.getElementById('spicy-cube')) return;
     clearTimeout(_drawTimer);
-    dir = dir || 'fwd';
 
     if (dir === 'fwd') {
-      // Every forward pass: clear any lingering backward transition before animating.
-      // First run also primes dasharray/dashoffset and hides dashed+dots.
-      if (_drawFirstRun) {
-        _drawFirstRun = false;
-        solidPaths.forEach(p => {
-          const l = p.getTotalLength();
+      if (_firstRun) { _firstRun = false; setup(); }
+      else {
+        // Re-prime after erase: dashoffset is already at L, just clear transitions
+        paths.forEach((p, i) => {
           p.style.transition = 'none';
-          p.style.strokeDasharray = l;
-          p.style.strokeDashoffset = l;
+          p.style.strokeDasharray = `${lengths[i]} ${lengths[i]}`;
         });
-        dashedPaths.forEach(p => {
-          p.style.transition = 'none';
-          p.style.strokeDasharray = '';
-          p.style.strokeDashoffset = '';
-          p.style.opacity = '0';
-        });
-        dots.forEach(c => {
-          c.style.transition = 'none';
-          c.style.opacity = '0';
-          c.style.transform = 'scale(0)';
-          c.style.transformOrigin = 'center';
-        });
-      } else {
-        // Subsequent runs: paths are at dashoffset=l from backward pass.
-        // Clear the backward transition so the browser doesn't carry it into the new one.
-        solidPaths.forEach(p => { p.style.transition = 'none'; });
-        dashedPaths.forEach(p => { p.style.transition = 'none'; });
         dots.forEach(c => { c.style.transition = 'none'; });
+        void svg.getBoundingClientRect();
       }
-      // Force synchronous reflow to flush transition:none before we start animating
-      void svg.getBoundingClientRect();
 
       requestAnimationFrame(() => {
-        // Draw in solid paths staggered (from dashoffset=l → 0)
-        solidPaths.forEach((p, i) => {
-          p.style.transition = `stroke-dashoffset ${DUR_FWD}ms cubic-bezier(.4,0,0,1) ${i*STAGGER}ms`;
+        const TOTAL = paths.length * STAGGER + DUR;
+
+        // Draw all paths in staggered order (dashoffset L → 0)
+        paths.forEach((p, i) => {
+          p.style.transition      = `stroke-dashoffset ${DUR}ms ${EASE} ${i * STAGGER}ms`;
           p.style.strokeDashoffset = '0';
         });
 
-        // Fade in dashed paths after the solid frame is mostly drawn
-        const dashStart = solidPaths.length * STAGGER * 0.6;
-        dashedPaths.forEach((p, i) => {
+        // After each dashed path fully draws, snap it to its true "3 3" pattern
+        paths.forEach((p, i) => {
+          if (!isDashed[i]) return;
+          const snapAt = i * STAGGER + DUR + 30;
           setTimeout(() => {
-            p.style.transition = 'opacity 550ms ease';
-            p.style.opacity = '1';
-          }, dashStart + i * 120);
+            p.style.transition = 'none';
+            p.style.strokeDasharray  = '3 3';
+            p.style.strokeDashoffset = '0';
+          }, snapAt);
         });
 
-        // Pop in dots
-        const dotsStart = solidPaths.length * STAGGER + 500;
+        // Pop dots in near the end of the draw sequence
+        const dotsDelay = (paths.length - 1) * STAGGER + DUR * 0.5;
         dots.forEach((c, i) => setTimeout(() => {
-          c.style.transition = 'opacity .3s ease, transform .45s cubic-bezier(.34,1.56,.64,1)';
+          c.style.transition = 'opacity .4s ease, transform .55s cubic-bezier(.34,1.56,.64,1)';
           c.style.opacity = '1'; c.style.transform = 'scale(1)';
-        }, dotsStart + i * 120));
+        }, dotsDelay + i * 200));
 
-        // One-time: start ripples
-        if (_instancesFirstDraw) {
-          _instancesFirstDraw = false;
-          setTimeout(startNodeRipples, dotsStart + 400);
+        _drawTimer = setTimeout(() => doDrawIn('bwd'), TOTAL + PAUSE);
+      });
+
+    } else { // 'bwd' — erase in reverse stagger
+      // Dashed paths may be at "3 3" — snap back to L L before erasing
+      paths.forEach((p, i) => {
+        if (isDashed[i]) {
+          p.style.transition = 'none';
+          p.style.strokeDasharray  = `${lengths[i]} ${lengths[i]}`;
+          p.style.strokeDashoffset = '0';
         }
-
-        // After forward completes: short pause then reverse
-        // No CSS clearing needed — solid paths keep dasharray=l throughout
-        _drawTimer = setTimeout(() => doDrawIn('bwd'), TOTAL_FWD + PAUSE);
       });
-
-    } else { // 'bwd'
-      // Paths arrive here at dasharray=l, dashoffset=0 (fully drawn by forward pass).
-      // Apply backward transitions directly — no re-priming or reflow needed.
-      solidPaths.forEach((p, i) => {
-        const l = p.getTotalLength();
-        const revDelay = (solidPaths.length - 1 - i) * STAGGER;
-        p.style.transition = `stroke-dashoffset ${DUR_BWD}ms cubic-bezier(.55,0,1,.45) ${revDelay}ms`;
-        p.style.strokeDashoffset = l; // erase: animate dashoffset back to l
-      });
-      // Fade out dashed paths
-      dashedPaths.forEach((p, i) => {
-        p.style.transition = `opacity 280ms ease ${i*60}ms`;
-        p.style.opacity = '0';
-      });
-      // Fade out dots
       dots.forEach(c => {
-        c.style.transition = 'opacity .2s ease, transform .28s ease';
+        c.style.transition = 'opacity .3s ease, transform .4s ease';
         c.style.opacity = '0'; c.style.transform = 'scale(0)';
       });
+      void svg.getBoundingClientRect();
 
-      // After backward completes: short pause then forward
-      // Paths now at dashoffset=l — ready for forward to animate without re-priming
-      _drawTimer = setTimeout(() => doDrawIn('fwd'), TOTAL_BWD + PAUSE);
+      requestAnimationFrame(() => {
+        const TOTAL = paths.length * STAGGER + DUR;
+        paths.forEach((p, i) => {
+          const revDelay = (paths.length - 1 - i) * STAGGER;
+          p.style.transition      = `stroke-dashoffset ${DUR}ms ${EASE} ${revDelay}ms`;
+          p.style.strokeDashoffset = `${lengths[i]}`;
+        });
+        _drawTimer = setTimeout(() => doDrawIn('fwd'), TOTAL + PAUSE);
+      });
     }
   }
 
@@ -3502,48 +3520,6 @@ function initSpicyMagic() {
       setTimeout(() => el.classList.add('is-visible'), i * 100);
     });
   }, 300);
-}
-
-// ── Spicy: horizontal sine-wave background ──
-function initSpicyWaves() {
-  const canvas = document.getElementById('spicy-wave-canvas');
-  if (!canvas) return;
-  if (window._spicyWaveRaf) cancelAnimationFrame(window._spicyWaveRaf);
-  const hero = document.getElementById('spicy-hero');
-  const setSize = () => {
-    const r = hero.getBoundingClientRect();
-    canvas.width  = r.width  || 900;
-    canvas.height = r.height || 440;
-  };
-  setSize();
-  const ctx = canvas.getContext('2d');
-  const waves = [
-    { yFrac:.16, amp:8,  period:300, phase:0.0,  opacity:.038 },
-    { yFrac:.30, amp:5,  period:220, phase:1.2,  opacity:.028 },
-    { yFrac:.50, amp:11, period:360, phase:2.5,  opacity:.034 },
-    { yFrac:.66, amp:6,  period:250, phase:0.7,  opacity:.026 },
-    { yFrac:.82, amp:9,  period:320, phase:3.8,  opacity:.036 },
-  ];
-  let t = 0;
-  function draw() {
-    const W = canvas.width, H = canvas.height;
-    ctx.clearRect(0, 0, W, H);
-    waves.forEach(w => {
-      const y0 = w.yFrac * H;
-      ctx.beginPath();
-      ctx.strokeStyle = `rgba(0,0,0,${w.opacity})`;
-      ctx.lineWidth = 1;
-      let first = true;
-      for (let x = 0; x <= W; x += 3) {
-        const y = y0 + w.amp * Math.sin((x / w.period) * Math.PI * 2 + w.phase + t * 0.009);
-        if (first) { ctx.moveTo(x, y); first = false; } else ctx.lineTo(x, y);
-      }
-      ctx.stroke();
-    });
-    t++;
-    window._spicyWaveRaf = requestAnimationFrame(draw);
-  }
-  draw();
 }
 
 function toggleAvatarDd() {
@@ -3798,7 +3774,6 @@ function initClusterSpicyMagic() {
 
   doClusterDraw('fwd');
 
-  if (!window._clusterWavesStarted) { window._clusterWavesStarted = true; initClusterWaves(); }
 
   if (!window._clusterRipplesStarted) {
     window._clusterRipplesStarted = true;
@@ -3827,36 +3802,6 @@ function initClusterSpicyMagic() {
     }
   }
 }
-function initClusterWaves() {
-  const canvas = document.getElementById('cluster-wave-canvas');
-  if (!canvas) return;
-  const waves = [
-    { yFrac:.16, amp:8,  period:300, phase:0.0,  opacity:.038 },
-    { yFrac:.30, amp:5,  period:220, phase:1.2,  opacity:.028 },
-    { yFrac:.50, amp:11, period:360, phase:2.5,  opacity:.034 },
-    { yFrac:.66, amp:6,  period:250, phase:0.7,  opacity:.026 },
-    { yFrac:.82, amp:9,  period:320, phase:3.8,  opacity:.036 },
-  ];
-  let t = 0; let raf;
-  function draw() {
-    if (!canvas.isConnected) { cancelAnimationFrame(raf); return; }
-    const W = canvas.offsetWidth, H = canvas.offsetHeight;
-    if (canvas.width !== W || canvas.height !== H) { canvas.width = W; canvas.height = H; }
-    const ctx = canvas.getContext('2d'); ctx.clearRect(0,0,W,H);
-    waves.forEach(w => {
-      ctx.beginPath(); ctx.strokeStyle = `rgba(0,0,0,${w.opacity})`; ctx.lineWidth = 1.2;
-      for (let x = 0; x <= W; x += 2) {
-        const y = w.yFrac * H + Math.sin((x / w.period) * Math.PI * 2 + t + w.phase) * w.amp;
-        x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
-      }
-      ctx.stroke();
-    });
-    t += 0.008;
-    raf = requestAnimationFrame(draw);
-  }
-  draw();
-}
-
 // Add reveal class styles for cluster, slurm, disk, logs
 (function(){
   const style = document.createElement('style');
@@ -3933,7 +3878,6 @@ function initSlurmSpicyMagic() {
     });
   }, 200);
   // Wave canvas — start once only
-  if (!window._slurmWavesStarted) { window._slurmWavesStarted = true; initSlurmWaves(); }
   // Node ripples — start once only
   if (!window._slurmRipplesStarted) {
     window._slurmRipplesStarted = true;
@@ -3962,36 +3906,6 @@ function initSlurmSpicyMagic() {
     }
   }
 }
-function initSlurmWaves() {
-  const canvas = document.getElementById('slurm-wave-canvas');
-  if (!canvas) return;
-  const waves = [
-    { yFrac:.16, amp:8,  period:300, phase:0.0,  opacity:.038 },
-    { yFrac:.30, amp:5,  period:220, phase:1.2,  opacity:.028 },
-    { yFrac:.50, amp:11, period:360, phase:2.5,  opacity:.034 },
-    { yFrac:.66, amp:6,  period:250, phase:0.7,  opacity:.026 },
-    { yFrac:.82, amp:9,  period:320, phase:3.8,  opacity:.036 },
-  ];
-  let t = 0; let raf;
-  function draw() {
-    if (!canvas.isConnected) { cancelAnimationFrame(raf); return; }
-    const W = canvas.offsetWidth, H = canvas.offsetHeight;
-    if (canvas.width !== W || canvas.height !== H) { canvas.width = W; canvas.height = H; }
-    const ctx = canvas.getContext('2d'); ctx.clearRect(0,0,W,H);
-    waves.forEach(w => {
-      ctx.beginPath(); ctx.strokeStyle = `rgba(0,0,0,${w.opacity})`; ctx.lineWidth = 1.2;
-      for (let x = 0; x <= W; x += 2) {
-        const y = w.yFrac * H + Math.sin((x / w.period) * Math.PI * 2 + t + w.phase) * w.amp;
-        x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
-      }
-      ctx.stroke();
-    });
-    t += 0.008;
-    raf = requestAnimationFrame(draw);
-  }
-  draw();
-}
-
 // ── Disk spicy: spring physics loop — ellipses fall in and bounce back ──
 function initDiskSpicyMagic() {
   const svg = document.getElementById('disk-spicy-svg');
@@ -4034,8 +3948,7 @@ function initDiskSpicyMagic() {
   if (window._diskAnimRaf) cancelAnimationFrame(window._diskAnimRaf);
   window._diskAnimRaf = requestAnimationFrame(ts => { startTime = ts; loop(ts); });
 
-  // One-time setup: waves, scroll hint, reveal cards
-  initDiskWaves();
+  // One-time setup: scroll hint, reveal cards
   const hint = document.getElementById('disk-scroll-hint');
   if (hint) {
     hint.classList.remove('hidden');
@@ -4051,35 +3964,6 @@ function initDiskSpicyMagic() {
     });
   }, 200);
 }
-function initDiskWaves() {
-  const canvas = document.getElementById('disk-wave-canvas');
-  if (!canvas) return;
-  const waves = [
-    { yFrac:.20, amp:7,  period:280, phase:0.5,  opacity:.035 },
-    { yFrac:.40, amp:10, period:340, phase:2.1,  opacity:.030 },
-    { yFrac:.60, amp:6,  period:240, phase:1.4,  opacity:.032 },
-    { yFrac:.80, amp:9,  period:310, phase:3.2,  opacity:.028 },
-  ];
-  let t = 0; let raf;
-  function draw() {
-    if (!canvas.isConnected) { cancelAnimationFrame(raf); return; }
-    const W = canvas.offsetWidth, H = canvas.offsetHeight;
-    if (canvas.width !== W || canvas.height !== H) { canvas.width = W; canvas.height = H; }
-    const ctx = canvas.getContext('2d'); ctx.clearRect(0,0,W,H);
-    waves.forEach(w => {
-      ctx.beginPath(); ctx.strokeStyle = `rgba(0,0,0,${w.opacity})`; ctx.lineWidth = 1.2;
-      for (let x = 0; x <= W; x += 2) {
-        const y = w.yFrac * H + Math.sin((x / w.period) * Math.PI * 2 + t + w.phase) * w.amp;
-        x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
-      }
-      ctx.stroke();
-    });
-    t += 0.008;
-    raf = requestAnimationFrame(draw);
-  }
-  draw();
-}
-
 function initBucketSpicyMagic() {
   const svg = document.getElementById('bucket-spicy-svg');
   if (!svg) return;
@@ -4116,72 +4000,15 @@ function initBucketSpicyMagic() {
   if (window._bucketAnimRaf) cancelAnimationFrame(window._bucketAnimRaf);
   window._bucketAnimRaf = requestAnimationFrame(ts => { startTime = ts; loop(ts); });
 
-  initBucketWaves();
   setTimeout(() => {
     document.querySelectorAll('.bucket-spicy-reveal').forEach((el, i) => {
       setTimeout(() => el.classList.add('is-visible'), i * 80);
     });
   }, 200);
 }
-function initBucketWaves() {
-  const canvas = document.getElementById('bucket-wave-canvas');
-  if (!canvas) return;
-  const waves = [
-    { yFrac:.20, amp:7,  period:280, phase:0.5,  opacity:.035 },
-    { yFrac:.40, amp:10, period:340, phase:2.1,  opacity:.030 },
-    { yFrac:.60, amp:6,  period:240, phase:1.4,  opacity:.032 },
-    { yFrac:.80, amp:9,  period:310, phase:3.2,  opacity:.028 },
-  ];
-  let t = 0; let raf;
-  function draw() {
-    if (!canvas.isConnected) { cancelAnimationFrame(raf); return; }
-    const W = canvas.offsetWidth, H = canvas.offsetHeight;
-    if (canvas.width !== W || canvas.height !== H) { canvas.width = W; canvas.height = H; }
-    const ctx = canvas.getContext('2d'); ctx.clearRect(0,0,W,H);
-    waves.forEach(w => {
-      ctx.beginPath(); ctx.strokeStyle = `rgba(0,0,0,${w.opacity})`; ctx.lineWidth = 1.2;
-      for (let x = 0; x <= W; x += 2) {
-        const y = w.yFrac * H + Math.sin((x / w.period) * Math.PI * 2 + t + w.phase) * w.amp;
-        x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
-      }
-      ctx.stroke();
-    });
-    t += 0.008;
-    raf = requestAnimationFrame(draw);
-  }
-  draw();
-}
 
 function initKeysSpicyMagic(svgId, outerRingId, innerRingId, waveCanvasId, revealClass) {
   // CSS keyframe animations handle the spinning (keys-outer-spin / keys-inner-spin classes)
-  // Wave canvas
-  const canvas = document.getElementById(waveCanvasId);
-  if (canvas) {
-    const waves = [
-      { yFrac:.22, amp:7,  period:290, phase:0.7,  opacity:.034 },
-      { yFrac:.45, amp:9,  period:350, phase:1.9,  opacity:.028 },
-      { yFrac:.68, amp:6,  period:240, phase:3.1,  opacity:.031 },
-      { yFrac:.85, amp:8,  period:310, phase:0.4,  opacity:.026 },
-    ];
-    let t = 0; let wRaf;
-    function drawWave() {
-      if (!canvas.isConnected) { cancelAnimationFrame(wRaf); return; }
-      const W = canvas.offsetWidth, H = canvas.offsetHeight;
-      if (canvas.width !== W || canvas.height !== H) { canvas.width = W; canvas.height = H; }
-      const ctx = canvas.getContext('2d'); ctx.clearRect(0,0,W,H);
-      waves.forEach(w => {
-        ctx.beginPath(); ctx.strokeStyle = `rgba(0,0,0,${w.opacity})`; ctx.lineWidth = 1.2;
-        for (let x = 0; x <= W; x += 2) {
-          const y = w.yFrac * H + Math.sin((x / w.period) * Math.PI * 2 + t + w.phase) * w.amp;
-          x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
-        }
-        ctx.stroke();
-      });
-      t += 0.008;
-      wRaf = requestAnimationFrame(drawWave);
-    }
-    drawWave();
-  }
 
   // Reveal cards
   setTimeout(() => {
