@@ -2422,6 +2422,7 @@ img.ico{display:block;flex:0 0 auto}
 </div>
 
 <!-- ─── VIEW: Cloud API Keys ─── -->
+<!-- ─── VIEW: Cloud API Keys ─── -->
 <div class="view" id="view-apikeys">
   <div class="ph">
     <div class="ph-l">
@@ -2432,92 +2433,72 @@ img.ico{display:block;flex:0 0 auto}
   </div>
   <div class="divider"></div>
   <div class="ca">
-    <!-- Illustration + headline, centered -->
-    <div style="display:flex;flex-direction:column;align-items:center;text-align:center;margin-bottom:32px">
-      <svg width="110" height="110" viewBox="0 0 151 151" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-bottom:20px">
-        <!-- Outer solid circle -->
-        <path d="M75.5 150.5C116.921 150.5 150.5 116.921 150.5 75.5C150.5 34.0786 116.921 0.5 75.5 0.5C34.0786 0.5 0.5 34.0786 0.5 75.5C0.5 116.921 34.0786 150.5 75.5 150.5Z" stroke="black" stroke-miterlimit="10"/>
-        <!-- Inner dashed circle (centered at 75.5,75.5) -->
-        <path transform="translate(25.667,25.667)" d="M49.8326 99.1652C77.0782 99.1652 99.1652 77.0782 99.1652 49.8326C99.1652 22.587 77.0782 0.5 49.8326 0.5C22.587 0.5 0.5 22.587 0.5 49.8326C0.5 77.0782 22.587 99.1652 49.8326 99.1652Z" stroke="black" stroke-miterlimit="10" stroke-dasharray="3 3"/>
-        <!-- Vertical dashed line through center -->
-        <path transform="translate(75,0.886)" d="M0.5 0V149.228" stroke="black" stroke-miterlimit="10" stroke-dasharray="3 3"/>
-        <!-- Horizontal dashed line through center -->
-        <path transform="translate(0.886,75)" d="M0 0.5H149.228" stroke="black" stroke-miterlimit="10" stroke-dasharray="3 3"/>
-        <!-- Diamond (square rotated 45°, centered at 75.5,75.5) -->
-        <path transform="translate(54.35,54.35) rotate(45,21.15,21.15)" d="M41.7995 0.5H0.5V41.7995H41.7995V0.5Z" stroke="black" stroke-miterlimit="10"/>
-      </svg>
-      <div style="font-size:16px;font-weight:600;font-family:var(--font-body);color:var(--text);margin-bottom:6px">Get started with the Crusoe CLI</div>
-      <div style="font-size:13px;color:var(--muted);font-family:var(--font-body);max-width:380px">Follow these steps to connect the CLI to your account. Takes about 2 minutes.</div>
+    <!-- Side-by-side hero: animation left, text right -->
+    <div id="apikey-spicy-hero" style="display:flex;flex-direction:row;align-items:center;justify-content:flex-start;gap:48px;padding:12px 40px 8px 72px;text-align:left;position:relative;overflow:visible;background:var(--white)">
+      <div style="position:absolute;inset:0;background-image:radial-gradient(circle,rgba(0,0,0,.045) 1px,transparent 1px);background-size:28px 28px;pointer-events:none;z-index:0"></div>
+      <canvas id="apikey-wave-canvas" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0"></canvas>
+      <!-- Animated illustration -->
+      <div id="apikey-illus-wrap" style="display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:1;position:relative;padding:20px 0">
+        <svg id="apikey-spicy-svg" width="185" height="185" viewBox="0 0 151 151" fill="none" xmlns="http://www.w3.org/2000/svg" style="overflow:visible;position:relative;z-index:1">
+          <g id="apikey-outer-ring">
+            <circle cx="75.5" cy="75.5" r="75" stroke="black" stroke-miterlimit="10"/>
+            <line x1="75.5" y1="0.886" x2="75.5" y2="150.114" stroke="black" stroke-miterlimit="10" stroke-dasharray="3 3"/>
+            <line x1="0.886" y1="75.5" x2="150.114" y2="75.5" stroke="black" stroke-miterlimit="10" stroke-dasharray="3 3"/>
+          </g>
+          <g id="apikey-inner-ring">
+            <circle cx="75.5" cy="75.5" r="49.333" stroke="black" stroke-miterlimit="10" stroke-dasharray="3 3"/>
+            <rect x="54.85" y="54.85" width="41.3" height="41.3" stroke="black" stroke-miterlimit="10" transform="rotate(45 75.5 75.5)"/>
+          </g>
+        </svg>
+      </div>
+      <!-- Text block -->
+      <div style="position:relative;z-index:1;max-width:380px">
+        <h1 style="font-size:36px;font-weight:400;font-family:var(--font-heading);color:var(--text);letter-spacing:-1px;line-height:105%;margin:0 0 8px">No API keys yet.</h1>
+        <p style="font-size:13px;color:var(--muted);font-family:var(--font-body);line-height:160%;margin:0 0 14px">Generate a key to unlock the Crusoe CLI and SDKs — access VMs, storage, and reservations programmatically.</p>
+        <a href="https://docs.crusoecloud.com/development-tools/api/generating-api-keys" target="_blank" style="display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:500;font-family:var(--font-body);color:var(--white);background:var(--black);padding:6px 14px;border-radius:8px;text-decoration:none;letter-spacing:.01em;transition:opacity .15s ease" onmouseenter="this.style.opacity='.8'" onmouseleave="this.style.opacity='1'">View docs →</a>
+      </div>
     </div>
-
-    <!-- Horizontal 3-step stepper -->
-    <div style="display:flex;align-items:flex-start;gap:10px;margin:0 auto;max-width:820px">
-
-      <!-- Step 1 -->
-      <div class="setup-step active" id="api-step-1" style="flex:1;flex-direction:column;min-width:0">
-        <div class="setup-step-num" id="api-num-1" style="margin-bottom:10px">1</div>
-        <div class="setup-step-body">
-          <div class="setup-step-title">Generate an API key</div>
-          <div class="setup-step-desc">Your API key gives the CLI and SDKs access to your Crusoe account. The secret is shown once — store it safely.</div>
-          <div id="api-step-1-cta">
-            <button class="btn btn-p btn-sm" onclick="apiKeyCreated()" style="width:fit-content;margin-top:4px">Create Cloud API Key</button>
+    <!-- 3 step cards -->
+    <div class="pop-section apikey-spicy-reveal" style="margin-top:60px;padding-bottom:20px">
+      <div class="pop-title">Get started in three steps</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;overflow:visible;align-items:start">
+        <div class="pop-card res-card apikey-spicy-reveal" style="transition-delay:.08s">
+          <div class="pop-card-top" style="margin-bottom:8px">
+            <div class="pop-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="13" fill="#111"/><text x="14" y="18.5" text-anchor="middle" fill="white" font-size="13" font-weight="700" font-family="sans-serif">1</text></svg></div>
+            <div class="pop-card-info"><div class="pop-card-name">Generate an API key</div><div class="pop-card-price">Programmatic access</div></div>
           </div>
-          <div id="api-step-1-done" style="display:none">
-            <div class="setup-key-box">
-              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
-                <span style="font-weight:600;color:var(--text);font-size:13px">my-api-key</span>
-                <span style="font-size:11px;color:var(--muted)">Created just now</span>
-              </div>
-              <div style="display:flex;flex-direction:column;gap:6px">
-                <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
-                  <span style="color:var(--muted);font-size:11px;min-width:40px;font-family:var(--font-body)">Key ID</span>
-                  <code style="font-size:11px;color:var(--text);background:none">ak_7f3a2b19c4d8…</code>
-                  <button class="cli-snippet-copy" style="font-size:10px;padding:2px 8px" onclick="copySnippet(this,'ak_7f3a2b19c4d8')">Copy</button>
-                </div>
-                <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
-                  <span style="color:var(--muted);font-size:11px;min-width:40px;font-family:var(--font-body)">Secret</span>
-                  <code style="font-size:11px;color:var(--text);background:none">cs_••••••••••••</code>
-                  <span style="font-size:10px;color:#16a34a;font-weight:500;font-family:var(--font-body)">Copy now — shown once</span>
-                </div>
-              </div>
-            </div>
+          <div class="pop-card-tags" style="margin-bottom:0;padding-top:2px"><span class="pop-tag-sub">Step 1 · Security</span></div>
+          <div class="res-card-body"><div class="res-card-body-inner">
+            <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">Your API key gives the CLI and SDKs access to your Crusoe account. The secret is shown once — store it safely.</div>
+            <div class="res-card-actions"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create API Key</button></div>
+          </div></div>
+        </div>
+        <div class="pop-card res-card apikey-spicy-reveal" style="transition-delay:.14s">
+          <div class="pop-card-top" style="margin-bottom:8px">
+            <div class="pop-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="13" fill="#111"/><text x="14" y="18.5" text-anchor="middle" fill="white" font-size="13" font-weight="700" font-family="sans-serif">2</text></svg></div>
+            <div class="pop-card-info"><div class="pop-card-name">Install the Crusoe CLI</div><div class="pop-card-price">Manage from your terminal</div></div>
           </div>
+          <div class="pop-card-tags" style="margin-bottom:0;padding-top:2px"><span class="pop-tag-sub">Step 2 · Setup</span></div>
+          <div class="res-card-body"><div class="res-card-body-inner">
+            <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">Install the CLI to manage VMs, storage, and reservations from your terminal.</div>
+            <div style="display:flex;gap:4px;margin-bottom:8px"><button class="pkg-btn active" onclick="setPkg('pip')" style="font-size:11px">pip</button><button class="pkg-btn" onclick="setPkg('brew')" style="font-size:11px">brew</button></div>
+            <div id="pkg-pip2" class="action-card-cli" style="display:flex;align-items:center;justify-content:space-between;font-size:11px"><code style="font-size:11px">pip install crusoe</code><button class="cli-snippet-copy" onclick="copySnippet(this,'pip install crusoe')" style="font-size:10px">Copy</button></div>
+            <div id="pkg-brew2" class="action-card-cli" style="display:none;align-items:center;justify-content:space-between;font-size:11px"><code style="font-size:11px">brew install crusoe-cloud/tap/crusoe</code><button class="cli-snippet-copy" onclick="copySnippet(this,'brew install crusoe-cloud/tap/crusoe')" style="font-size:10px">Copy</button></div>
+          </div></div>
+        </div>
+        <div class="pop-card res-card apikey-spicy-reveal" style="transition-delay:.20s">
+          <div class="pop-card-top" style="margin-bottom:8px">
+            <div class="pop-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="13" fill="#111"/><text x="14" y="18.5" text-anchor="middle" fill="white" font-size="13" font-weight="700" font-family="sans-serif">3</text></svg></div>
+            <div class="pop-card-info"><div class="pop-card-name">Configure the CLI</div><div class="pop-card-price">Connect to your account</div></div>
+          </div>
+          <div class="pop-card-tags" style="margin-bottom:0;padding-top:2px"><span class="pop-tag-sub">Step 3 · Setup</span></div>
+          <div class="res-card-body"><div class="res-card-body-inner">
+            <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">Run <code style="font-size:11px;background:var(--gray-100);padding:1px 4px;border-radius:3px;font-family:var(--mono)">crusoe init</code> and paste your API key ID and secret when prompted.</div>
+            <div class="action-card-cli" style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;font-size:11px"><code style="font-size:11px">crusoe init</code><button class="cli-snippet-copy" onclick="copySnippet(this,'crusoe init')" style="font-size:10px">Copy</button></div>
+            <div class="res-card-actions"><a href="https://docs.crusoecloud.com/development-tools/api/generating-api-keys" target="_blank" style="font-size:11px;color:var(--muted);font-family:var(--font-body)">API key docs →</a></div>
+          </div></div>
         </div>
       </div>
-
-      <!-- H connector -->
-      <div style="flex-shrink:0;width:1px;background:var(--border);height:44px;margin-top:14px"></div>
-
-      <!-- Step 2 -->
-      <div class="setup-step locked" id="api-step-2" style="flex:1;flex-direction:column;min-width:0">
-        <div class="setup-step-num" id="api-num-2" style="margin-bottom:10px">2</div>
-        <div class="setup-step-body">
-          <div class="setup-step-title">Install the Crusoe CLI</div>
-          <div class="setup-step-desc">Install the CLI to manage VMs, storage, and reservations from your terminal.</div>
-          <div class="pkg-toggle">
-            <button class="pkg-btn active" onclick="setPkg('pip')">pip</button>
-            <button class="pkg-btn" onclick="setPkg('brew')">brew</button>
-          </div>
-          <div id="pkg-pip" class="action-card-cli" style="display:flex;align-items:center;justify-content:space-between"><code>pip install crusoe</code><button class="cli-snippet-copy" onclick="copySnippet(this,'pip install crusoe')">Copy</button></div>
-          <div id="pkg-brew" class="action-card-cli" style="display:none;align-items:center;justify-content:space-between"><code>brew install crusoe-cloud/tap/crusoe</code><button class="cli-snippet-copy" onclick="copySnippet(this,'brew install crusoe-cloud/tap/crusoe')">Copy</button></div>
-          <button class="btn btn-o btn-sm" style="margin-top:6px;width:fit-content" onclick="cliInstalled()">I've installed it →</button>
-        </div>
-      </div>
-
-      <!-- H connector -->
-      <div style="flex-shrink:0;width:1px;background:var(--border);height:44px;margin-top:14px"></div>
-
-      <!-- Step 3 -->
-      <div class="setup-step locked" id="api-step-3" style="flex:1;flex-direction:column;min-width:0">
-        <div class="setup-step-num" id="api-num-3" style="margin-bottom:10px">3</div>
-        <div class="setup-step-body">
-          <div class="setup-step-title">Configure the CLI</div>
-          <div class="setup-step-desc">Run <code style="font-size:12px;background:var(--gray-100);padding:1px 5px;border-radius:3px;font-family:var(--mono)">crusoe init</code> and paste your API key ID and secret when prompted.</div>
-          <div class="action-card-cli" style="display:flex;align-items:center;justify-content:space-between;margin-top:4px"><code>crusoe init</code><button class="cli-snippet-copy" onclick="copySnippet(this,'crusoe init')">Copy</button></div>
-          <a href="https://docs.crusoecloud.com/development-tools/api/generating-api-keys" style="font-size:12px;color:var(--muted);font-family:var(--font-body);margin-top:6px;display:block">API key docs →</a>
-        </div>
-      </div>
-
     </div>
   </div>
 </div>
@@ -2811,49 +2792,70 @@ img.ico{display:block;flex:0 0 auto}
 -->
 
 <!-- ─── VIEW: SSH Keys ─── -->
+<!-- ─── VIEW: SSH Keys ─── -->
 <div class="view" id="view-sshkeys">
   <div class="ph">
     <div class="ph-l">
       <div class="ph-title">SSH Keys</div>
-      <div class="ph-sub">Public keys used for SSH access to your VMs. <span style="color:var(--black);text-decoration:underline;cursor:pointer">View docs →</span></div>
+      <div class="ph-sub">Public keys used for SSH access to your VMs.</div>
     </div>
     <div class="ph-r"><button class="btn btn-p">+ Add SSH Key</button></div>
   </div>
   <div class="divider"></div>
   <div class="ca">
-    <div class="ecard">
-      <div class="illus">
-        <svg width="72" height="72" viewBox="0 0 151 151" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M75.5 150.5C116.921 150.5 150.5 116.921 150.5 75.5C150.5 34.0786 116.921 0.5 75.5 0.5C34.0786 0.5 0.5 34.0786 0.5 75.5C0.5 116.921 34.0786 150.5 75.5 150.5Z" stroke="black" stroke-miterlimit="10"/>
-          <path transform="translate(25.667,25.667)" d="M49.8326 99.1652C77.0782 99.1652 99.1652 77.0782 99.1652 49.8326C99.1652 22.587 77.0782 0.5 49.8326 0.5C22.587 0.5 0.5 22.587 0.5 49.8326C0.5 77.0782 22.587 99.1652 49.8326 99.1652Z" stroke="black" stroke-miterlimit="10" stroke-dasharray="3 3"/>
-          <path transform="translate(75,0.886)" d="M0.5 0V149.228" stroke="black" stroke-miterlimit="10" stroke-dasharray="3 3"/>
-          <path transform="translate(0.886,75)" d="M0 0.5H149.228" stroke="black" stroke-miterlimit="10" stroke-dasharray="3 3"/>
-          <path transform="translate(54.35,54.35) rotate(45,21.15,21.15)" d="M41.7995 0.5H0.5V41.7995H41.7995V0.5Z" stroke="black" stroke-miterlimit="10"/>
+    <!-- Side-by-side hero: animation left, text right -->
+    <div id="sshkey-spicy-hero" style="display:flex;flex-direction:row;align-items:center;justify-content:flex-start;gap:48px;padding:12px 40px 8px 72px;text-align:left;position:relative;overflow:visible;background:var(--white)">
+      <div style="position:absolute;inset:0;background-image:radial-gradient(circle,rgba(0,0,0,.045) 1px,transparent 1px);background-size:28px 28px;pointer-events:none;z-index:0"></div>
+      <canvas id="sshkey-wave-canvas" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0"></canvas>
+      <!-- Animated illustration -->
+      <div id="sshkey-illus-wrap" style="display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:1;position:relative;padding:20px 0">
+        <svg id="sshkey-spicy-svg" width="185" height="185" viewBox="0 0 151 151" fill="none" xmlns="http://www.w3.org/2000/svg" style="overflow:visible;position:relative;z-index:1">
+          <g id="sshkey-outer-ring">
+            <circle cx="75.5" cy="75.5" r="75" stroke="black" stroke-miterlimit="10"/>
+            <line x1="75.5" y1="0.886" x2="75.5" y2="150.114" stroke="black" stroke-miterlimit="10" stroke-dasharray="3 3"/>
+            <line x1="0.886" y1="75.5" x2="150.114" y2="75.5" stroke="black" stroke-miterlimit="10" stroke-dasharray="3 3"/>
+          </g>
+          <g id="sshkey-inner-ring">
+            <circle cx="75.5" cy="75.5" r="49.333" stroke="black" stroke-miterlimit="10" stroke-dasharray="3 3"/>
+            <rect x="54.85" y="54.85" width="41.3" height="41.3" stroke="black" stroke-miterlimit="10" transform="rotate(45 75.5 75.5)"/>
+          </g>
         </svg>
       </div>
-      <div class="etxt">
-        <div class="ecat">Security</div>
-        <div class="etitle">No SSH keys added</div>
-        <div class="edesc">Add your public SSH key to authenticate with Crusoe VMs. Keys added here can be attached to instances at creation time. Your private key stays on your machine — only the public key is stored.</div>
-        <div style="margin-top:16px;display:flex;gap:8px">
-          <button class="btn btn-p">+ Add SSH Key</button>
-          <a class="btn btn-o" href="https://docs.crusoecloud.com/compute/ssh-keys" target="_blank" style="text-decoration:none">View docs →</a>
-        </div>
+      <!-- Text block -->
+      <div style="position:relative;z-index:1;max-width:380px">
+        <h1 style="font-size:36px;font-weight:400;font-family:var(--font-heading);color:var(--text);letter-spacing:-1px;line-height:105%;margin:0 0 8px">No SSH keys yet.</h1>
+        <p style="font-size:13px;color:var(--muted);font-family:var(--font-body);line-height:160%;margin:0 0 14px">Add your public SSH key to authenticate with Crusoe VMs. Keys added here can be attached to instances at creation time.</p>
+        <a href="https://docs.crusoecloud.com/compute/ssh-keys" target="_blank" style="display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:500;font-family:var(--font-body);color:var(--white);background:var(--black);padding:6px 14px;border-radius:8px;text-decoration:none;letter-spacing:.01em;transition:opacity .15s ease" onmouseenter="this.style.opacity='.8'" onmouseleave="this.style.opacity='1'">View docs →</a>
       </div>
     </div>
-    <!-- How to generate a key card -->
-    <div class="action-cards" style="grid-template-columns:1fr 1fr">
-      <div class="action-card">
-        <div class="action-card-title">Generate a key pair</div>
-        <div class="action-card-desc">Run this command in your terminal to generate an Ed25519 key pair — then add the public key here.</div>
-        <div class="action-card-cli"><code>ssh-keygen -t ed25519 -C "your@email.com"
-# Then copy the public key:
-cat ~/.ssh/id_ed25519.pub</code><button class="cli-snippet-copy">Copy</button></div>
-      </div>
-      <div class="action-card">
-        <div class="action-card-title">Using your key</div>
-        <div class="action-card-desc">After adding your key here, select it when creating an instance. You'll be able to SSH in immediately once the VM is running:</div>
-        <div class="action-card-cli"><code>ssh ubuntu@&lt;instance-ip&gt;</code><button class="cli-snippet-copy">Copy</button></div>
+    <!-- 2 step cards -->
+    <div class="pop-section sshkey-spicy-reveal" style="margin-top:60px;padding-bottom:20px">
+      <div class="pop-title">Get started in two steps</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;overflow:visible;align-items:start">
+        <div class="pop-card res-card sshkey-spicy-reveal" style="transition-delay:.08s">
+          <div class="pop-card-top" style="margin-bottom:8px">
+            <div class="pop-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="13" fill="#111"/><text x="14" y="18.5" text-anchor="middle" fill="white" font-size="13" font-weight="700" font-family="sans-serif">1</text></svg></div>
+            <div class="pop-card-info"><div class="pop-card-name">Generate a key pair</div><div class="pop-card-price">Ed25519 recommended</div></div>
+          </div>
+          <div class="pop-card-tags" style="margin-bottom:0;padding-top:2px"><span class="pop-tag-sub">Step 1 · Security</span></div>
+          <div class="res-card-body"><div class="res-card-body-inner">
+            <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:8px">Run this in your terminal to generate an Ed25519 key pair, then add the public key here.</div>
+            <div class="action-card-cli" style="margin-bottom:8px"><code style="font-size:11px">ssh-keygen -t ed25519 -C "you@email.com"</code></div>
+            <div class="res-card-actions"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Add SSH Key</button></div>
+          </div></div>
+        </div>
+        <div class="pop-card res-card sshkey-spicy-reveal" style="transition-delay:.14s">
+          <div class="pop-card-top" style="margin-bottom:8px">
+            <div class="pop-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="13" fill="#111"/><text x="14" y="18.5" text-anchor="middle" fill="white" font-size="13" font-weight="700" font-family="sans-serif">2</text></svg></div>
+            <div class="pop-card-info"><div class="pop-card-name">Connect to a VM</div><div class="pop-card-price">SSH in directly</div></div>
+          </div>
+          <div class="pop-card-tags" style="margin-bottom:0;padding-top:2px"><span class="pop-tag-sub">Step 2 · Access</span></div>
+          <div class="res-card-body"><div class="res-card-body-inner">
+            <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:8px">After adding your key, select it when creating an instance and SSH in once the VM is running.</div>
+            <div class="action-card-cli" style="margin-bottom:8px"><code style="font-size:11px">ssh ubuntu@&lt;instance-ip&gt;</code></div>
+            <div class="res-card-actions"><button class="btn btn-o btn-sm" style="flex:1;justify-content:center">Create instance</button></div>
+          </div></div>
+        </div>
       </div>
     </div>
   </div>
@@ -3182,6 +3184,10 @@ function showView(viewId, sbKey) {
     setTimeout(initDiskSpicyMagic, 60);
   } else if (viewId === 'buckets') {
     setTimeout(initBucketSpicyMagic, 60);
+  } else if (viewId === 'apikeys') {
+    setTimeout(() => initKeysSpicyMagic('apikey-spicy-svg','apikey-outer-ring','apikey-inner-ring','apikey-wave-canvas','apikey-spicy-reveal'), 60);
+  } else if (viewId === 'sshkeys') {
+    setTimeout(() => initKeysSpicyMagic('sshkey-spicy-svg','sshkey-outer-ring','sshkey-inner-ring','sshkey-wave-canvas','sshkey-spicy-reveal'), 60);
   }
 }
 
@@ -3736,6 +3742,8 @@ function initClusterWaves() {
     '.slurm-spicy-reveal{opacity:0;transform:translateY(14px);transition:opacity .55s ease,transform .55s ease}.slurm-spicy-reveal.is-visible{opacity:1;transform:none}',
     '.disk-spicy-reveal{opacity:0;transform:translateY(14px);transition:opacity .55s ease,transform .55s ease}.disk-spicy-reveal.is-visible{opacity:1;transform:none}',
     '.bucket-spicy-reveal{opacity:0;transform:translateY(14px);transition:opacity .55s ease,transform .55s ease}.bucket-spicy-reveal.is-visible{opacity:1;transform:none}',
+    '.apikey-spicy-reveal{opacity:0;transform:translateY(14px);transition:opacity .55s ease,transform .55s ease}.apikey-spicy-reveal.is-visible{opacity:1;transform:none}',
+    '.sshkey-spicy-reveal{opacity:0;transform:translateY(14px);transition:opacity .55s ease,transform .55s ease}.sshkey-spicy-reveal.is-visible{opacity:1;transform:none}',
     '.logs-spicy-reveal{opacity:0;transform:translateY(14px);transition:opacity .55s ease,transform .55s ease}.logs-spicy-reveal.is-visible{opacity:1;transform:none}',
   ].join('');
   document.head.appendChild(style);
@@ -4016,6 +4024,68 @@ function initBucketWaves() {
     raf = requestAnimationFrame(draw);
   }
   draw();
+}
+
+function initKeysSpicyMagic(svgId, outerRingId, innerRingId, waveCanvasId, revealClass) {
+  const svg = document.getElementById(svgId);
+  if (!svg) return;
+  const outerRing = document.getElementById(outerRingId);
+  const innerRing = document.getElementById(innerRingId);
+  if (!outerRing || !innerRing) return;
+  const cx = 75.5, cy = 75.5;
+  const PERIOD_OUTER = 28000; // ms per revolution CW
+  const PERIOD_INNER = 20000; // ms per revolution CCW
+  let startTime = null;
+  let rafId;
+  function loop(ts) {
+    if (!svg.isConnected) { cancelAnimationFrame(rafId); return; }
+    if (startTime === null) startTime = ts;
+    const elapsed = ts - startTime;
+    const angleOuter = (elapsed / PERIOD_OUTER) * 360;
+    const angleInner = -(elapsed / PERIOD_INNER) * 360;
+    outerRing.setAttribute('transform', `rotate(${angleOuter.toFixed(3)},${cx},${cy})`);
+    innerRing.setAttribute('transform', `rotate(${angleInner.toFixed(3)},${cx},${cy})`);
+    rafId = requestAnimationFrame(loop);
+  }
+  const rafKey = `_keysAnimRaf_${svgId}`;
+  if (window[rafKey]) cancelAnimationFrame(window[rafKey]);
+  window[rafKey] = requestAnimationFrame(ts => { startTime = ts; loop(ts); });
+
+  // Wave canvas
+  const canvas = document.getElementById(waveCanvasId);
+  if (canvas) {
+    const waves = [
+      { yFrac:.22, amp:7,  period:290, phase:0.7,  opacity:.034 },
+      { yFrac:.45, amp:9,  period:350, phase:1.9,  opacity:.028 },
+      { yFrac:.68, amp:6,  period:240, phase:3.1,  opacity:.031 },
+      { yFrac:.85, amp:8,  period:310, phase:0.4,  opacity:.026 },
+    ];
+    let t = 0; let wRaf;
+    function drawWave() {
+      if (!canvas.isConnected) { cancelAnimationFrame(wRaf); return; }
+      const W = canvas.offsetWidth, H = canvas.offsetHeight;
+      if (canvas.width !== W || canvas.height !== H) { canvas.width = W; canvas.height = H; }
+      const ctx = canvas.getContext('2d'); ctx.clearRect(0,0,W,H);
+      waves.forEach(w => {
+        ctx.beginPath(); ctx.strokeStyle = `rgba(0,0,0,${w.opacity})`; ctx.lineWidth = 1.2;
+        for (let x = 0; x <= W; x += 2) {
+          const y = w.yFrac * H + Math.sin((x / w.period) * Math.PI * 2 + t + w.phase) * w.amp;
+          x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+        }
+        ctx.stroke();
+      });
+      t += 0.008;
+      wRaf = requestAnimationFrame(drawWave);
+    }
+    drawWave();
+  }
+
+  // Reveal cards
+  setTimeout(() => {
+    document.querySelectorAll(`.${revealClass}`).forEach((el, i) => {
+      setTimeout(() => el.classList.add('is-visible'), i * 80);
+    });
+  }, 200);
 }
 
 // ── Managed Logs (metrics) spicy magic ──
