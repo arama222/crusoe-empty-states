@@ -146,6 +146,7 @@ html,body{height:100%;background:var(--white);color:var(--black);font-family:'Su
 [data-theme="dark"] #apikey-spicy-svg,
 [data-theme="dark"] #sshkey-spicy-svg,
 [data-theme="dark"] .pop-icon svg { filter: invert(1); }
+[data-theme="dark"] img.ico { filter: invert(1); }
 
 /* ── App ── */
 .app{display:flex;flex-direction:column;height:100vh;overflow:hidden}
@@ -3032,12 +3033,14 @@ img.ico{display:block;flex:0 0 auto}
     No known issues
   </div>
   <div class="avatar-dd-sep"></div>
-  <div style="display:flex;align-items:center;gap:6px;padding:8px 14px">
-    <button id="theme-light-btn" onclick="setTheme('light')" style="flex:1;display:flex;align-items:center;justify-content:center;padding:7px;border-radius:6px;border:1px solid var(--border);background:var(--sel);cursor:pointer;transition:background .15s">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+  <div id="theme-toggle-wrap" style="display:flex;align-items:center;gap:4px;padding:8px 14px">
+    <button id="theme-light-btn" onclick="setTheme('light')" style="flex:1;display:flex;align-items:center;justify-content:center;gap:6px;padding:7px 10px;border-radius:6px;border:1px solid var(--border);background:var(--gray-200);color:var(--text);cursor:pointer;transition:background .15s,border-color .15s;font-size:12px;font-family:var(--font-body);font-weight:500">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      Light
     </button>
-    <button id="theme-dark-btn" onclick="setTheme('dark')" style="flex:1;display:flex;align-items:center;justify-content:center;padding:7px;border-radius:6px;border:1px solid transparent;background:transparent;cursor:pointer;transition:background .15s">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+    <button id="theme-dark-btn" onclick="setTheme('dark')" style="flex:1;display:flex;align-items:center;justify-content:center;gap:6px;padding:7px 10px;border-radius:6px;border:1px solid transparent;background:transparent;color:var(--muted);cursor:pointer;transition:background .15s,border-color .15s;font-size:12px;font-family:var(--font-body);font-weight:500">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+      Dark
     </button>
   </div>
   <div class="avatar-dd-sep"></div>
@@ -3889,8 +3892,8 @@ function initClusterSpicyMagic() {
     '.slurm-spicy-reveal{opacity:1;transform:none}',
     '.disk-spicy-reveal{opacity:1;transform:none}',
     '.bucket-spicy-reveal{opacity:1;transform:none}',
-    '.apikey-spicy-reveal{opacity:0;transform:translateY(14px);transition:opacity .55s ease,transform .55s ease}.apikey-spicy-reveal.is-visible{opacity:1;transform:none}',
-    '.sshkey-spicy-reveal{opacity:0;transform:translateY(14px);transition:opacity .55s ease,transform .55s ease}.sshkey-spicy-reveal.is-visible{opacity:1;transform:none}',
+    '.apikey-spicy-reveal{opacity:1;transform:none}',
+    '.sshkey-spicy-reveal{opacity:1;transform:none}',
     '.logs-spicy-reveal{opacity:0;transform:translateY(14px);transition:opacity .55s ease,transform .55s ease}.logs-spicy-reveal.is-visible{opacity:1;transform:none}',
     '.tbl-row-enter{opacity:0;transform:translateY(8px)}.tbl-row-enter.tbl-row-visible{opacity:1;transform:none;transition:opacity .35s ease,transform .35s cubic-bezier(.4,0,.2,1)}',
     '.tbl-creating td{background:rgba(0,0,0,.018)}',
@@ -4528,12 +4531,16 @@ function setTheme(mode) {
   const lightBtn = document.getElementById('theme-light-btn');
   const darkBtn  = document.getElementById('theme-dark-btn');
   if (lightBtn) {
-    lightBtn.style.background   = mode === 'dark' ? 'transparent' : 'var(--sel)';
-    lightBtn.style.borderColor  = mode === 'dark' ? 'transparent' : 'var(--border)';
+    const active = mode === 'light';
+    lightBtn.style.background   = active ? 'var(--gray-200)' : 'transparent';
+    lightBtn.style.borderColor  = active ? 'var(--border)'   : 'transparent';
+    lightBtn.style.color        = active ? 'var(--text)'     : 'var(--muted)';
   }
   if (darkBtn) {
-    darkBtn.style.background  = mode === 'dark' ? 'var(--sel)' : 'transparent';
-    darkBtn.style.borderColor = mode === 'dark' ? 'var(--border)' : 'transparent';
+    const active = mode === 'dark';
+    darkBtn.style.background  = active ? 'var(--gray-200)' : 'transparent';
+    darkBtn.style.borderColor = active ? 'var(--border)'   : 'transparent';
+    darkBtn.style.color       = active ? 'var(--text)'     : 'var(--muted)';
   }
 }
 function toggleDarkMode() {
