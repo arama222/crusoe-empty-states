@@ -515,6 +515,11 @@ img.ico{display:block;flex:0 0 auto}
 /* ── Filled reservation cards — hover-expand, no layout shift ── */
 .filled-res-card{transition:border-color .18s,box-shadow .18s}
 .filled-res-expand{max-height:0;overflow:hidden;padding:0 20px;font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:155%;opacity:0}
+/* Keys smooth CSS spin */
+@keyframes spin-cw  { from { transform:rotate(0deg)   } to { transform:rotate(360deg)  } }
+@keyframes spin-ccw { from { transform:rotate(0deg)   } to { transform:rotate(-360deg) } }
+.keys-outer-spin { animation: spin-cw  28s linear infinite; transform-box:fill-box; transform-origin:center; }
+.keys-inner-spin { animation: spin-ccw 20s linear infinite; transform-box:fill-box; transform-origin:center; }
 </style>
 </head>
 <body>
@@ -1909,7 +1914,7 @@ img.ico{display:block;flex:0 0 auto}
     </div>
   </div>
   <!-- Template cards -->
-  <div class="pop-section slurm-spicy-reveal" style="margin-top:60px;padding-bottom:20px">
+  <div class="pop-section pop-section-centered slurm-spicy-reveal" style="margin-top:60px;padding-bottom:20px">
     <div class="pop-title">Start with a popular cluster template</div>
     <div class="pop-grid">
       <div class="pop-card res-card slurm-spicy-reveal" style="transition-delay:.08s">
@@ -1965,7 +1970,7 @@ img.ico{display:block;flex:0 0 auto}
     </table>
   </div>
   <!-- Template cards — persist below the table -->
-  <div class="pop-section" style="margin-top:36px;padding-bottom:20px">
+  <div class="pop-section pop-section-centered" style="margin-top:36px;padding-bottom:20px">
     <div class="pop-title" style="font-size:14px;color:var(--muted)">Create from a template</div>
     <div class="pop-grid">
       <div class="pop-card res-card">
@@ -2483,13 +2488,13 @@ img.ico{display:block;flex:0 0 auto}
       <canvas id="apikey-wave-canvas" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0"></canvas>
       <!-- Animated illustration -->
       <div id="apikey-illus-wrap" style="display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:1;position:relative;padding:20px 0">
-        <svg id="apikey-spicy-svg" width="185" height="185" viewBox="0 0 151 151" fill="none" xmlns="http://www.w3.org/2000/svg" style="overflow:visible;position:relative;z-index:1">
-          <g id="apikey-outer-ring">
+        <svg id="apikey-spicy-svg" width="160" height="160" viewBox="-2 -2 155 155" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:relative;z-index:1">
+          <g id="apikey-outer-ring" class="keys-outer-spin">
             <circle cx="75.5" cy="75.5" r="75" stroke="black" stroke-miterlimit="10"/>
-            <line x1="75.5" y1="0.886" x2="75.5" y2="150.114" stroke="black" stroke-miterlimit="10" stroke-dasharray="3 3"/>
-            <line x1="0.886" y1="75.5" x2="150.114" y2="75.5" stroke="black" stroke-miterlimit="10" stroke-dasharray="3 3"/>
+            <line x1="75.5" y1="0.5" x2="75.5" y2="150.5" stroke="black" stroke-miterlimit="10" stroke-dasharray="3 3"/>
+            <line x1="0.5" y1="75.5" x2="150.5" y2="75.5" stroke="black" stroke-miterlimit="10" stroke-dasharray="3 3"/>
           </g>
-          <g id="apikey-inner-ring">
+          <g id="apikey-inner-ring" class="keys-inner-spin">
             <circle cx="75.5" cy="75.5" r="49.333" stroke="black" stroke-miterlimit="10" stroke-dasharray="3 3"/>
             <rect x="54.85" y="54.85" width="41.3" height="41.3" stroke="black" stroke-miterlimit="10" transform="rotate(45 75.5 75.5)"/>
           </g>
@@ -2559,16 +2564,8 @@ img.ico{display:block;flex:0 0 auto}
   <div class="ca">
     <!-- Empty state hero -->
     <div class="metrics-empty" style="padding-top:56px;padding-bottom:40px">
-      <div class="metrics-empty-icon">
-        <svg width="140" height="119" viewBox="0 0 176.387 150" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M128.658 106.742C125.423 102.044 124.142 97.9207 122.45 93.2534C120.154 86.9399 118.13 80.5206 115.411 74.3883C114.475 72.2888 113.312 70.1591 111.348 68.6487C109.234 67.0325 108.101 67.0023 106.032 68.7091C103.449 70.8539 102.029 73.92 100.715 76.956C97.7696 83.7227 95.5341 90.8217 91.9242 97.2863C91.0331 98.8722 90.006 100.322 88.6768 101.531C87.2419 102.83 85.52 102.89 84.07 101.531C82.7258 100.262 81.6383 98.8118 80.7622 97.0899C77.1523 89.9456 75.3247 82.1821 72.9684 74.5997C70.6877 67.2893 68.9809 59.7674 65.5824 52.8497C64.9783 51.6111 64.3742 50.3273 63.4679 49.3304C60.6585 46.2642 59.1481 46.5965 56.7918 49.3002C54.3903 52.0491 53.0913 55.4174 51.6866 58.7554C48.9074 65.3106 46.8835 72.1831 43.8324 78.6175C42.8809 80.6263 41.8538 82.6201 40.3585 84.2966C37.9267 87.0154 35.5402 87.3779 32.7157 84.0701C30.4954 81.4571 29.0152 78.4362 27.6407 75.3096C24.6652 68.5581 22.7167 61.3382 18.9105 54.9492C18.0344 53.4689 17.0678 52.1247 15.8443 50.9767C14.4245 49.6476 12.9443 49.708 11.4641 50.9616C8.65472 53.333 7.7181 56.4675 6.2832 59.6998C4.75767 63.1285 2.77423 70.6258 1.36954 74.0998" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M152.224 63.5597C148.493 72.6374 140.147 102.843 136.25 107.586C133.894 110.455 131.632 110.305 128.758 106.867" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M152.235 63.2414C153.459 61.3987 154.304 59.3294 155.664 57.532C157.839 54.632 160.558 55.2513 162.189 57.3205C164.908 60.7643 166.237 64.8726 167.732 68.9206C168.034 69.7513 168.11 70.6878 168.88 71.2919" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M171.115 79.6311C173.776 79.6311 175.933 77.4739 175.933 74.8128C175.933 72.1518 173.776 69.9946 171.115 69.9946C168.454 69.9946 166.297 72.1518 166.297 74.8128C166.297 77.4739 168.454 79.6311 171.115 79.6311Z" fill="black"/>
-          <path d="M59.9766 52.9358C62.6376 52.9358 64.7948 50.7786 64.7948 48.1175C64.7948 45.4565 62.6376 43.2993 59.9766 43.2993C57.3155 43.2993 55.1583 45.4565 55.1583 48.1175C55.1583 50.7786 57.3155 52.9358 59.9766 52.9358Z" fill="black"/>
-          <path d="M171.539 0.755211H0.906253V149.245H171.539V0.755211Z" stroke="black" stroke-miterlimit="10"/>
-          <path d="M171.07 75.2945L86.5623 132.283L1.35938 74.6904L85.8675 17.7021L171.07 75.2945Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
+      <div class="metrics-empty-icon" style="position:relative">
+        <canvas id="logs-illus-canvas" width="185" height="157" style="width:185px;height:157px;display:block"></canvas>
       </div>
       <div class="metrics-empty-title">No log data yet</div>
       <div class="metrics-empty-desc">Centralized log collection and monitoring for your Crusoe Cloud resources. Install the telemetry agent to start streaming.</div>
@@ -2853,13 +2850,13 @@ img.ico{display:block;flex:0 0 auto}
       <canvas id="sshkey-wave-canvas" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0"></canvas>
       <!-- Animated illustration -->
       <div id="sshkey-illus-wrap" style="display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:1;position:relative;padding:20px 0">
-        <svg id="sshkey-spicy-svg" width="185" height="185" viewBox="0 0 151 151" fill="none" xmlns="http://www.w3.org/2000/svg" style="overflow:visible;position:relative;z-index:1">
-          <g id="sshkey-outer-ring">
+        <svg id="sshkey-spicy-svg" width="160" height="160" viewBox="-2 -2 155 155" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:relative;z-index:1">
+          <g id="sshkey-outer-ring" class="keys-outer-spin">
             <circle cx="75.5" cy="75.5" r="75" stroke="black" stroke-miterlimit="10"/>
-            <line x1="75.5" y1="0.886" x2="75.5" y2="150.114" stroke="black" stroke-miterlimit="10" stroke-dasharray="3 3"/>
-            <line x1="0.886" y1="75.5" x2="150.114" y2="75.5" stroke="black" stroke-miterlimit="10" stroke-dasharray="3 3"/>
+            <line x1="75.5" y1="0.5" x2="75.5" y2="150.5" stroke="black" stroke-miterlimit="10" stroke-dasharray="3 3"/>
+            <line x1="0.5" y1="75.5" x2="150.5" y2="75.5" stroke="black" stroke-miterlimit="10" stroke-dasharray="3 3"/>
           </g>
-          <g id="sshkey-inner-ring">
+          <g id="sshkey-inner-ring" class="keys-inner-spin">
             <circle cx="75.5" cy="75.5" r="49.333" stroke="black" stroke-miterlimit="10" stroke-dasharray="3 3"/>
             <rect x="54.85" y="54.85" width="41.3" height="41.3" stroke="black" stroke-miterlimit="10" transform="rotate(45 75.5 75.5)"/>
           </g>
@@ -3232,6 +3229,8 @@ function showView(viewId, sbKey) {
     setTimeout(() => initKeysSpicyMagic('apikey-spicy-svg','apikey-outer-ring','apikey-inner-ring','apikey-wave-canvas','apikey-spicy-reveal'), 60);
   } else if (viewId === 'sshkeys') {
     setTimeout(() => initKeysSpicyMagic('sshkey-spicy-svg','sshkey-outer-ring','sshkey-inner-ring','sshkey-wave-canvas','sshkey-spicy-reveal'), 60);
+  } else if (viewId === 'managed-logs') {
+    setTimeout(initLogsIllusAnimation, 60);
   }
 }
 
@@ -4205,30 +4204,7 @@ function initBucketWaves() {
 }
 
 function initKeysSpicyMagic(svgId, outerRingId, innerRingId, waveCanvasId, revealClass) {
-  const svg = document.getElementById(svgId);
-  if (!svg) return;
-  const outerRing = document.getElementById(outerRingId);
-  const innerRing = document.getElementById(innerRingId);
-  if (!outerRing || !innerRing) return;
-  const cx = 75.5, cy = 75.5;
-  const PERIOD_OUTER = 28000; // ms per revolution CW
-  const PERIOD_INNER = 20000; // ms per revolution CCW
-  let startTime = null;
-  let rafId;
-  function loop(ts) {
-    if (!svg.isConnected) { cancelAnimationFrame(rafId); return; }
-    if (startTime === null) startTime = ts;
-    const elapsed = ts - startTime;
-    const angleOuter = (elapsed / PERIOD_OUTER) * 360;
-    const angleInner = -(elapsed / PERIOD_INNER) * 360;
-    outerRing.setAttribute('transform', `rotate(${angleOuter.toFixed(3)},${cx},${cy})`);
-    innerRing.setAttribute('transform', `rotate(${angleInner.toFixed(3)},${cx},${cy})`);
-    rafId = requestAnimationFrame(loop);
-  }
-  const rafKey = `_keysAnimRaf_${svgId}`;
-  if (window[rafKey]) cancelAnimationFrame(window[rafKey]);
-  window[rafKey] = requestAnimationFrame(ts => { startTime = ts; loop(ts); });
-
+  // CSS keyframe animations handle the spinning (keys-outer-spin / keys-inner-spin classes)
   // Wave canvas
   const canvas = document.getElementById(waveCanvasId);
   if (canvas) {
@@ -4264,6 +4240,61 @@ function initKeysSpicyMagic(svgId, outerRingId, innerRingId, waveCanvasId, revea
       setTimeout(() => el.classList.add('is-visible'), i * 80);
     });
   }, 200);
+}
+
+// ── Managed Logs canvas illustration animation ──
+function initLogsIllusAnimation() {
+  const canvas = document.getElementById('logs-illus-canvas');
+  if (!canvas) return;
+  canvas.width = 185; canvas.height = 157;
+  const W = 185, H = 157;
+  // Figma coords: 176.387 x 150
+  const sx = W / 176.387, sy = H / 150;
+  let phase = 0;
+  const rafKey = '_logsIllusRaf';
+  if (window[rafKey]) cancelAnimationFrame(window[rafKey]);
+  function draw() {
+    if (!canvas.isConnected) { cancelAnimationFrame(window[rafKey]); return; }
+    const ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, W, H);
+    ctx.strokeStyle = '#000';
+    ctx.lineWidth = 1;
+    // Outer rectangle (Figma: 0.906 to 171.539, 0.755 to 149.245)
+    ctx.beginPath();
+    ctx.rect(0.906 * sx, 0.755 * sy, 170.633 * sx, 148.49 * sy);
+    ctx.stroke();
+    // Inner diamond
+    ctx.beginPath();
+    ctx.moveTo(85.8675 * sx,  17.7021 * sy);
+    ctx.lineTo(171.07  * sx,  75.2945 * sy);
+    ctx.lineTo(86.5623 * sx, 132.283  * sy);
+    ctx.lineTo(1.35938 * sx,  74.6904 * sy);
+    ctx.closePath();
+    ctx.stroke();
+    // Flowing sine wave
+    const wy = 75 * sy;
+    const amp = 18 * sy;
+    const period = 70 * sx;
+    ctx.beginPath();
+    ctx.lineWidth = 1;
+    for (let px = 0; px <= W; px++) {
+      const py = wy + amp * Math.sin((px / period) * Math.PI * 2 + phase);
+      px === 0 ? ctx.moveTo(px, py) : ctx.lineTo(px, py);
+    }
+    ctx.stroke();
+    // Two dots on the wave
+    const dotR = 4.5;
+    [[60 * sx, 1], [116 * sx, -1]].forEach(([dx]) => {
+      const dy = wy + amp * Math.sin((dx / period) * Math.PI * 2 + phase);
+      ctx.beginPath();
+      ctx.arc(dx, dy, dotR, 0, Math.PI * 2);
+      ctx.fillStyle = '#000';
+      ctx.fill();
+    });
+    phase += 0.016;
+    window[rafKey] = requestAnimationFrame(draw);
+  }
+  draw();
 }
 
 // ── Managed Logs (metrics) spicy magic ──
