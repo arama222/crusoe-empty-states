@@ -3815,6 +3815,7 @@ function initClusterSpicyMagic() {
     const paths = pathIds.map(id => document.getElementById(id)).filter(Boolean);
     const dots  = dotIds.map(id  => document.getElementById(id)).filter(Boolean);
 
+    const centerEl = document.getElementById('co-center');
     if (dir === 'fwd') {
       if (window._clusterDrawFirstRun) {
         window._clusterDrawFirstRun = false;
@@ -3824,6 +3825,8 @@ function initClusterSpicyMagic() {
         dots.forEach(d => { d.style.transition = 'none'; d.style.opacity = '0'; });
         void svg.getBoundingClientRect();
       }
+      // Restore fill before drawing in
+      if (centerEl) { centerEl.style.transition = 'none'; centerEl.style.fillOpacity = '1'; }
       requestAnimationFrame(() => {
         paths.forEach((p, i) => {
           try { p.style.transition = `stroke-dashoffset ${DUR_FWD}ms cubic-bezier(.4,0,0,1) ${i*STAGGER}ms`; p.style.strokeDashoffset = '0'; } catch(e) {}
@@ -3833,6 +3836,8 @@ function initClusterSpicyMagic() {
         window._clusterDrawTimer = setTimeout(() => doClusterDraw('bwd'), TOTAL_FWD + PAUSE);
       });
     } else {
+      // Fade the filled center square out immediately, before the strokes erase
+      if (centerEl) { centerEl.style.transition = 'fill-opacity 280ms ease 0ms'; centerEl.style.fillOpacity = '0'; }
       paths.forEach((p, i) => {
         try { const l = p.getTotalLength(); const rd = (paths.length-1-i)*STAGGER; p.style.transition = `stroke-dashoffset ${DUR_BWD}ms cubic-bezier(.55,0,1,.45) ${rd}ms`; p.style.strokeDashoffset = l; } catch(e) {}
       });
@@ -3993,6 +3998,7 @@ function initNodePoolAnimation() {
     const paths = pathIds.map(id => document.getElementById(id)).filter(Boolean);
     const dots  = dotIds.map(id  => document.getElementById(id)).filter(Boolean);
 
+    const centerEl = document.getElementById('np-center');
     if (dir === 'fwd') {
       if (window._npDrawFirstRun) {
         window._npDrawFirstRun = false;
@@ -4002,6 +4008,8 @@ function initNodePoolAnimation() {
         dots.forEach(d => { d.style.transition = 'none'; d.style.opacity = '0'; });
         void svg.getBoundingClientRect();
       }
+      // Restore fill before drawing in
+      if (centerEl) { centerEl.style.transition = 'none'; centerEl.style.fillOpacity = '1'; }
       requestAnimationFrame(() => {
         paths.forEach((p, i) => {
           try { p.style.transition = `stroke-dashoffset ${DUR_FWD}ms cubic-bezier(.4,0,0,1) ${i*STAGGER}ms`; p.style.strokeDashoffset = '0'; } catch(e) {}
@@ -4011,6 +4019,8 @@ function initNodePoolAnimation() {
         window._npDrawTimer = setTimeout(() => doNpDraw('bwd'), TOTAL_FWD + PAUSE);
       });
     } else {
+      // Fade the filled center square out immediately, before the strokes erase
+      if (centerEl) { centerEl.style.transition = 'fill-opacity 280ms ease 0ms'; centerEl.style.fillOpacity = '0'; }
       paths.forEach((p, i) => {
         try { const l = p.getTotalLength(); const rd = (paths.length-1-i)*STAGGER; p.style.transition = `stroke-dashoffset ${DUR_BWD}ms cubic-bezier(.55,0,1,.45) ${rd}ms`; p.style.strokeDashoffset = l; } catch(e) {}
       });
