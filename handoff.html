@@ -1164,7 +1164,7 @@ img.ico{display:block;flex:0 0 auto}
     <div class="ph-l">
       <div class="ph-title-sans">Kubernetes Clusters</div>
     </div>
-    <div class="ph-r"><button class="btn btn-p"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.99967 3.33337V12.6667M3.33301 8.00004H12.6663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Create Cluster</button></div>
+    <div class="ph-r"><button class="btn btn-p" onclick="createClusterFromTemplate('k8s','gpu-training',this)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.99967 3.33337V12.6667M3.33301 8.00004H12.6663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Create Cluster</button></div>
   </div>
   <div class="divider"></div>
   <div class="ca">
@@ -1200,7 +1200,7 @@ img.ico{display:block;flex:0 0 auto}
           <div class="pop-card-info"><div class="pop-card-name">GPU Training Cluster</div><div class="pop-card-price">H100 8x node pool</div></div>
         </div>
         <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Training · Multi-node</span></div>
-        <div style="display:flex;gap:6px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create cluster</button><a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/orchestration/cmk" target="_blank" style="text-decoration:none;gap:5px">View docs</a></div>
+        <div style="display:flex;gap:6px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createClusterFromTemplate('k8s','gpu-training',this)">Create cluster</button><a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/orchestration/cmk" target="_blank" style="text-decoration:none;gap:5px">View docs</a></div>
         <div class="med-res-expand">Pre-configured with GPU operator, network operator, and CSI. Optimized for distributed training with NVLink + InfiniBand across H100 nodes.</div>
       </div>
       <div class="pop-card med-res-card" style="display:flex;flex-direction:column;gap:0">
@@ -1209,7 +1209,7 @@ img.ico{display:block;flex:0 0 auto}
           <div class="pop-card-info"><div class="pop-card-name">Inference Cluster</div><div class="pop-card-price">L40S autoscaling pool</div></div>
         </div>
         <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Inference · Autoscale</span></div>
-        <div style="display:flex;gap:6px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create cluster</button><a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/orchestration/cmk" target="_blank" style="text-decoration:none;gap:5px">View docs</a></div>
+        <div style="display:flex;gap:6px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createClusterFromTemplate('k8s','inference',this)">Create cluster</button><a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/orchestration/cmk" target="_blank" style="text-decoration:none;gap:5px">View docs</a></div>
         <div class="med-res-expand">Cost-efficient serving with autoscaling node pools. Ideal for vLLM, TGI, or Triton inference endpoints on L40S GPUs.</div>
       </div>
       <div class="pop-card med-res-card" style="display:flex;flex-direction:column;gap:0">
@@ -1218,7 +1218,7 @@ img.ico{display:block;flex:0 0 auto}
           <div class="pop-card-info"><div class="pop-card-name">CPU-only Cluster</div><div class="pop-card-price">General-purpose nodes</div></div>
         </div>
         <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">CPU · APIs · Pipelines</span></div>
-        <div style="display:flex;gap:6px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create cluster</button><a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/orchestration/cmk" target="_blank" style="text-decoration:none;gap:5px">View docs</a></div>
+        <div style="display:flex;gap:6px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createClusterFromTemplate('k8s','cpu',this)">Create cluster</button><a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/orchestration/cmk" target="_blank" style="text-decoration:none;gap:5px">View docs</a></div>
         <div class="med-res-expand">Standard Kubernetes cluster for APIs, data pipelines, and services that don't require GPU acceleration.</div>
       </div>
     </div>
@@ -1277,7 +1277,7 @@ img.ico{display:block;flex:0 0 auto}
       </div>
       <div class="pop-card-tags" style="margin-bottom:6px"><span class="pop-tag-sub">Training · Multi-node</span></div>
       <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:150%;margin-bottom:12px">Pre-configured with GPU operator, network operator, and CSI. Optimized for distributed training workloads.</div>
-      <div style="display:flex;gap:6px;margin-top:auto"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create cluster</button><a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/orchestration/cmk" target="_blank" style="text-decoration:none">View docs</a></div>
+      <div style="display:flex;gap:6px;margin-top:auto"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createClusterFromTemplate('k8s','gpu-training',this)">Create cluster</button><a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/orchestration/cmk" target="_blank" style="text-decoration:none">View docs</a></div>
     </div>
     <div class="pop-card" style="cursor:default;display:flex;flex-direction:column;gap:0">
       <div class="pop-card-top" style="margin-bottom:10px">
@@ -1286,7 +1286,7 @@ img.ico{display:block;flex:0 0 auto}
       </div>
       <div class="pop-card-tags" style="margin-bottom:6px"><span class="pop-tag-sub">Inference · Autoscale</span></div>
       <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:150%;margin-bottom:12px">Cost-efficient serving with autoscaling node pools. Ideal for vLLM, TGI, or Triton inference endpoints.</div>
-      <div style="display:flex;gap:6px;margin-top:auto"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create cluster</button><a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/orchestration/cmk" target="_blank" style="text-decoration:none">View docs</a></div>
+      <div style="display:flex;gap:6px;margin-top:auto"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createClusterFromTemplate('k8s','inference',this)">Create cluster</button><a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/orchestration/cmk" target="_blank" style="text-decoration:none">View docs</a></div>
     </div>
     <div class="pop-card" style="cursor:default;display:flex;flex-direction:column;gap:0">
       <div class="pop-card-top" style="margin-bottom:10px">
@@ -1295,7 +1295,7 @@ img.ico{display:block;flex:0 0 auto}
       </div>
       <div class="pop-card-tags" style="margin-bottom:6px"><span class="pop-tag-sub">CPU · APIs · Pipelines</span></div>
       <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:150%;margin-bottom:12px">Standard Kubernetes cluster for APIs, data pipelines, and services that don't require GPU acceleration.</div>
-      <div style="display:flex;gap:6px;margin-top:auto"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create cluster</button><a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/orchestration/cmk" target="_blank" style="text-decoration:none">View docs</a></div>
+      <div style="display:flex;gap:6px;margin-top:auto"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createClusterFromTemplate('k8s','cpu',this)">Create cluster</button><a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/orchestration/cmk" target="_blank" style="text-decoration:none">View docs</a></div>
     </div>
   </div>
 </div><!-- /clusters-mild -->
@@ -1339,7 +1339,7 @@ img.ico{display:block;flex:0 0 auto}
         <div class="pop-card-tags" style="margin-bottom:0;padding-top:2px"><span class="pop-tag-sub">Training · Multi-node</span></div>
         <div class="res-card-body"><div class="res-card-body-inner">
           <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">Pre-configured with GPU operator, network operator, and CSI. Optimized for distributed training with NVLink + InfiniBand.</div>
-          <div class="res-card-actions"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create cluster</button><a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/orchestration/cmk" target="_blank" style="text-decoration:none">View docs</a></div>
+          <div class="res-card-actions"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createClusterFromTemplate('k8s','gpu-training',this)">Create cluster</button><a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/orchestration/cmk" target="_blank" style="text-decoration:none">View docs</a></div>
         </div></div>
       </div>
       <div class="pop-card res-card cluster-spicy-reveal" style="transition-delay:.14s">
@@ -1350,7 +1350,7 @@ img.ico{display:block;flex:0 0 auto}
         <div class="pop-card-tags" style="margin-bottom:0;padding-top:2px"><span class="pop-tag-sub">Inference · Autoscale</span></div>
         <div class="res-card-body"><div class="res-card-body-inner">
           <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">Cost-efficient serving with autoscaling node pools. Ideal for vLLM, TGI, or Triton inference endpoints on L40S GPUs.</div>
-          <div class="res-card-actions"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create cluster</button><a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/orchestration/cmk" target="_blank" style="text-decoration:none">View docs</a></div>
+          <div class="res-card-actions"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createClusterFromTemplate('k8s','inference',this)">Create cluster</button><a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/orchestration/cmk" target="_blank" style="text-decoration:none">View docs</a></div>
         </div></div>
       </div>
       <div class="pop-card res-card cluster-spicy-reveal" style="transition-delay:.2s">
@@ -1361,7 +1361,7 @@ img.ico{display:block;flex:0 0 auto}
         <div class="pop-card-tags" style="margin-bottom:0;padding-top:2px"><span class="pop-tag-sub">CPU · APIs · Pipelines</span></div>
         <div class="res-card-body"><div class="res-card-body-inner">
           <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">Standard Kubernetes cluster for APIs, data pipelines, and services that don't require GPU acceleration.</div>
-          <div class="res-card-actions"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create cluster</button><a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/orchestration/cmk" target="_blank" style="text-decoration:none">View docs</a></div>
+          <div class="res-card-actions"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createClusterFromTemplate('k8s','cpu',this)">Create cluster</button><a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/orchestration/cmk" target="_blank" style="text-decoration:none">View docs</a></div>
         </div></div>
       </div>
     </div>
@@ -1382,7 +1382,7 @@ img.ico{display:block;flex:0 0 auto}
       <thead>
         <tr><th>Name</th><th>State</th><th>Version</th><th>DNS</th><th># of Node Pools</th><th>Actions</th></tr>
       </thead>
-      <tbody>
+      <tbody id="k8s-tbl-body">
         <tr onclick="navigate('k8s-detail')" style="cursor:pointer">
           <td><span class="tbl-link">slurm-pyxis-problem</span></td>
           <td><span class="pill-green">Running</span></td>
@@ -1417,6 +1417,45 @@ img.ico{display:block;flex:0 0 auto}
         </tr>
       </tbody>
     </table>
+  </div>
+  <!-- Template cards — persist below the table -->
+  <div class="pop-section" style="margin-top:36px;padding-bottom:20px">
+    <div class="pop-title" style="font-size:14px;color:var(--muted)">Create from a template</div>
+    <div class="pop-grid">
+      <div class="pop-card res-card" style="">
+        <div class="pop-card-top" style="margin-bottom:8px">
+          <div class="pop-icon"><svg width="38" height="38" viewBox="0 0 65 64.2205" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M36.7962 27.7211H27.994V36.4821H36.7962V27.7211Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/><path d="M5.17606 59.0654H0.5V63.7205H5.17606V59.0654Z" fill="black" stroke="black" stroke-linecap="round" stroke-linejoin="round"/><path d="M64.5 0.5H59.8239V5.15513H64.5V0.5Z" fill="black" stroke="black" stroke-linecap="round" stroke-linejoin="round"/><path d="M47.8886 16.7087H2.72296V61.6733H47.8886V16.7087Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/><path d="M54.976 9.62146H9.81038V54.5861H54.976V9.62146Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/><path d="M62.0675 2.52975H16.9019V47.4944H62.0675V2.52975Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="pop-card-info"><div class="pop-card-name">GPU Training Cluster</div><div class="pop-card-price">H100 8x node pool</div></div>
+        </div>
+        <div class="pop-card-tags" style="margin-bottom:0;padding-top:2px"><span class="pop-tag-sub">Training · Multi-node</span></div>
+        <div class="res-card-body"><div class="res-card-body-inner">
+          <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">Pre-configured with GPU operator, network operator, and CSI. Optimized for distributed training with NVLink + InfiniBand.</div>
+          <div class="res-card-actions"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createClusterFromTemplate('k8s','gpu-training',this)">Create cluster</button><a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/orchestration/cmk" target="_blank" style="text-decoration:none">View docs</a></div>
+        </div></div>
+      </div>
+      <div class="pop-card res-card" style="">
+        <div class="pop-card-top" style="margin-bottom:8px">
+          <div class="pop-icon"><svg width="38" height="38" viewBox="0 0 65 64.2205" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M36.7962 27.7211H27.994V36.4821H36.7962V27.7211Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/><path d="M5.17606 59.0654H0.5V63.7205H5.17606V59.0654Z" fill="black" stroke="black" stroke-linecap="round" stroke-linejoin="round"/><path d="M64.5 0.5H59.8239V5.15513H64.5V0.5Z" fill="black" stroke="black" stroke-linecap="round" stroke-linejoin="round"/><path d="M47.8886 16.7087H2.72296V61.6733H47.8886V16.7087Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/><path d="M54.976 9.62146H9.81038V54.5861H54.976V9.62146Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/><path d="M62.0675 2.52975H16.9019V47.4944H62.0675V2.52975Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="pop-card-info"><div class="pop-card-name">Inference Cluster</div><div class="pop-card-price">L40S autoscaling pool</div></div>
+        </div>
+        <div class="pop-card-tags" style="margin-bottom:0;padding-top:2px"><span class="pop-tag-sub">Inference · Autoscale</span></div>
+        <div class="res-card-body"><div class="res-card-body-inner">
+          <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">Cost-efficient serving with autoscaling node pools. Ideal for vLLM, TGI, or Triton inference endpoints on L40S GPUs.</div>
+          <div class="res-card-actions"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createClusterFromTemplate('k8s','inference',this)">Create cluster</button><a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/orchestration/cmk" target="_blank" style="text-decoration:none">View docs</a></div>
+        </div></div>
+      </div>
+      <div class="pop-card res-card" style="">
+        <div class="pop-card-top" style="margin-bottom:8px">
+          <div class="pop-icon"><svg width="38" height="38" viewBox="0 0 65 64.2205" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M36.7962 27.7211H27.994V36.4821H36.7962V27.7211Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/><path d="M5.17606 59.0654H0.5V63.7205H5.17606V59.0654Z" fill="black" stroke="black" stroke-linecap="round" stroke-linejoin="round"/><path d="M64.5 0.5H59.8239V5.15513H64.5V0.5Z" fill="black" stroke="black" stroke-linecap="round" stroke-linejoin="round"/><path d="M47.8886 16.7087H2.72296V61.6733H47.8886V16.7087Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/><path d="M54.976 9.62146H9.81038V54.5861H54.976V9.62146Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/><path d="M62.0675 2.52975H16.9019V47.4944H62.0675V2.52975Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="pop-card-info"><div class="pop-card-name">CPU-only Cluster</div><div class="pop-card-price">General-purpose nodes</div></div>
+        </div>
+        <div class="pop-card-tags" style="margin-bottom:0;padding-top:2px"><span class="pop-tag-sub">CPU · APIs · Pipelines</span></div>
+        <div class="res-card-body"><div class="res-card-body-inner">
+          <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">Standard Kubernetes cluster for APIs, data pipelines, and services that don't require GPU acceleration.</div>
+          <div class="res-card-actions"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createClusterFromTemplate('k8s','cpu',this)">Create cluster</button><a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/orchestration/cmk" target="_blank" style="text-decoration:none">View docs</a></div>
+        </div></div>
+      </div>
+    </div>
   </div>
 </div><!-- /clusters-filled -->
 
@@ -1746,7 +1785,7 @@ img.ico{display:block;flex:0 0 auto}
     <div class="ph-l">
       <div class="ph-title">Slurm Clusters</div>
     </div>
-    <div class="ph-r"><button class="btn btn-p"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.99967 3.33337V12.6667M3.33301 8.00004H12.6663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Create Cluster</button></div>
+    <div class="ph-r"><button class="btn btn-p" onclick="createClusterFromTemplate('slurm','gpu-hpc',this)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.99967 3.33337V12.6667M3.33301 8.00004H12.6663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Create Cluster</button></div>
   </div>
   <div class="divider"></div>
   <div class="ca">
@@ -1783,13 +1822,13 @@ img.ico{display:block;flex:0 0 auto}
     <div class="action-card">
       <div class="action-card-title">Create from template</div>
       <div class="action-card-desc">Start from a pre-configured Slurm cluster template. Includes recommended node counts, instance types, and storage.</div>
-      <button class="btn btn-o" style="margin-top:auto">Browse templates →</button>
+      <button class="btn btn-o" style="margin-top:auto" onclick="createClusterFromTemplate('slurm','gpu-hpc',this)">Browse templates →</button>
     </div>
   </div>
 </div><!-- /slurm-medium -->
 
 <!-- ── MEDIUM (big centered hero) ── -->
-<div id="slurm-mild-hidden" style="display:none">
+<div id="slurm-mild" style="display:none">
   <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:64px 40px 56px;text-align:center;position:relative;">
     <svg style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none" xmlns="http://www.w3.org/2000/svg">
       <defs><radialGradient id="hbg-s" cx="50%" cy="36%" r="50%"><stop offset="0%" stop-color="#f9fafb"/><stop offset="100%" stop-color="white" stop-opacity="0"/></radialGradient></defs>
@@ -1831,13 +1870,13 @@ img.ico{display:block;flex:0 0 auto}
       <div class="action-card-title">GPU HPC Cluster</div>
       <div style="font-size:12px;color:var(--muted);font-family:var(--font-body);margin-bottom:4px">H100 multi-node</div>
       <div class="action-card-desc">Pre-configured with Pyxis, PMIx, and RDMA. Optimized for distributed training with NVLink + InfiniBand across H100 nodes.</div>
-      <div style="display:flex;gap:6px;margin-top:auto"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create cluster</button><a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/orchestration/slurm" target="_blank" style="text-decoration:none">View docs</a></div>
+      <div style="display:flex;gap:6px;margin-top:auto"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createClusterFromTemplate('slurm','gpu-hpc',this)">Create cluster</button><a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/orchestration/slurm" target="_blank" style="text-decoration:none">View docs</a></div>
     </div>
     <div class="action-card" style="cursor:default">
       <div class="action-card-title">CPU Login Node</div>
       <div style="font-size:12px;color:var(--muted);font-family:var(--font-body);margin-bottom:4px">General-purpose</div>
       <div class="action-card-desc">Start with a CPU-only login node to validate your workflow before attaching GPU compute nodes.</div>
-      <div style="display:flex;gap:6px;margin-top:auto"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create cluster</button><a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/orchestration/slurm" target="_blank" style="text-decoration:none">View docs</a></div>
+      <div style="display:flex;gap:6px;margin-top:auto"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createClusterFromTemplate('slurm','cpu-login',this)">Create cluster</button><a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/orchestration/slurm" target="_blank" style="text-decoration:none">View docs</a></div>
     </div>
   </div>
 </div><!-- /slurm-mild -->
@@ -1881,7 +1920,7 @@ img.ico{display:block;flex:0 0 auto}
         <div class="pop-card-tags" style="margin-bottom:0;padding-top:2px"><span class="pop-tag-sub">Training · HPC</span></div>
         <div class="res-card-body"><div class="res-card-body-inner">
           <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">Pre-configured with Pyxis, PMIx, and RDMA. Optimized for distributed training workloads with InfiniBand fabric.</div>
-          <div class="res-card-actions"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create cluster</button><a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/orchestration/slurm" target="_blank" style="text-decoration:none">View docs</a></div>
+          <div class="res-card-actions"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createClusterFromTemplate('slurm','gpu-hpc',this)">Create cluster</button><a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/orchestration/slurm" target="_blank" style="text-decoration:none">View docs</a></div>
         </div></div>
       </div>
       <div class="pop-card res-card slurm-spicy-reveal" style="transition-delay:.14s">
@@ -1892,12 +1931,68 @@ img.ico{display:block;flex:0 0 auto}
         <div class="pop-card-tags" style="margin-bottom:0;padding-top:2px"><span class="pop-tag-sub">Fine-tuning · Multi-node</span></div>
         <div class="res-card-body"><div class="res-card-body-inner">
           <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">Shared storage with Lustre, topology-aware scheduling, and multi-user access for team fine-tuning workflows.</div>
-          <div class="res-card-actions"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create cluster</button><a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/orchestration/slurm" target="_blank" style="text-decoration:none">View docs</a></div>
+          <div class="res-card-actions"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createClusterFromTemplate('slurm','fine-tune',this)">Create cluster</button><a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/orchestration/slurm" target="_blank" style="text-decoration:none">View docs</a></div>
         </div></div>
       </div>
     </div>
   </div>
 </div><!-- /slurm-spicy -->
+
+<!-- ── SLURM FILLED STATE ── -->
+<div id="slurm-filled" style="display:none">
+  <div class="tbl-wrap">
+    <div class="tbl-filter">
+      <div class="tbl-search-wrap">
+        <svg class="ico" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="text" placeholder="Search clusters by name"/>
+      </div>
+      <div class="tbl-add-filter">+ Add filter option</div>
+    </div>
+    <table class="tbl">
+      <thead>
+        <tr><th>Name</th><th>State</th><th>Compute</th><th>Node Count</th><th>Created</th><th>Actions</th></tr>
+      </thead>
+      <tbody id="slurm-tbl-body">
+        <tr style="cursor:pointer">
+          <td><span class="tbl-link">prod-training-slurm</span></td>
+          <td><span class="pill-green">Running</span></td>
+          <td><span class="tbl-mono" style="font-size:11px">h100-80gb-sxm-ib.8x</span></td>
+          <td>16</td>
+          <td style="color:var(--muted);font-size:12px">3 days ago</td>
+          <td><div class="tbl-actions"><button class="tbl-icon-btn" onclick="event.stopPropagation()"><svg class="ico" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3,6 5,6 21,6"/><path d="M19,6l-1,14a2,2 0 01-2,2H8a2,2 0 01-2-2L5,6"/><path d="M10,11v6"/><path d="M14,11v6"/></svg></button></div></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <!-- Template cards — persist below the table -->
+  <div class="pop-section" style="margin-top:36px;padding-bottom:20px">
+    <div class="pop-title" style="font-size:14px;color:var(--muted)">Create from a template</div>
+    <div class="pop-grid">
+      <div class="pop-card res-card">
+        <div class="pop-card-top" style="margin-bottom:8px">
+          <div class="pop-icon"><svg width="38" height="38" viewBox="0 0 65 64.2205" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M36.7962 27.7211H27.994V36.4821H36.7962V27.7211Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/><path d="M5.17606 59.0654H0.5V63.7205H5.17606V59.0654Z" fill="black" stroke="black" stroke-linecap="round" stroke-linejoin="round"/><path d="M64.5 0.5H59.8239V5.15513H64.5V0.5Z" fill="black" stroke="black" stroke-linecap="round" stroke-linejoin="round"/><path d="M47.8886 16.7087H2.72296V61.6733H47.8886V16.7087Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/><path d="M54.976 9.62146H9.81038V54.5861H54.976V9.62146Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/><path d="M62.0675 2.52975H16.9019V47.4944H62.0675V2.52975Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="pop-card-info"><div class="pop-card-name">GPU HPC Cluster</div><div class="pop-card-price">H100 multi-node</div></div>
+        </div>
+        <div class="pop-card-tags" style="margin-bottom:0;padding-top:2px"><span class="pop-tag-sub">Training · HPC</span></div>
+        <div class="res-card-body"><div class="res-card-body-inner">
+          <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">Pre-configured with Pyxis, PMIx, and RDMA. Optimized for distributed training workloads with InfiniBand fabric.</div>
+          <div class="res-card-actions"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createClusterFromTemplate('slurm','gpu-hpc',this)">Create cluster</button><a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/orchestration/slurm" target="_blank" style="text-decoration:none">View docs</a></div>
+        </div></div>
+      </div>
+      <div class="pop-card res-card">
+        <div class="pop-card-top" style="margin-bottom:8px">
+          <div class="pop-icon"><svg width="38" height="38" viewBox="0 0 65 64.2205" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M36.7962 27.7211H27.994V36.4821H36.7962V27.7211Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/><path d="M5.17606 59.0654H0.5V63.7205H5.17606V59.0654Z" fill="black" stroke="black" stroke-linecap="round" stroke-linejoin="round"/><path d="M64.5 0.5H59.8239V5.15513H64.5V0.5Z" fill="black" stroke="black" stroke-linecap="round" stroke-linejoin="round"/><path d="M47.8886 16.7087H2.72296V61.6733H47.8886V16.7087Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/><path d="M54.976 9.62146H9.81038V54.5861H54.976V9.62146Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/><path d="M62.0675 2.52975H16.9019V47.4944H62.0675V2.52975Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="pop-card-info"><div class="pop-card-name">Multi-GPU Fine-tuning</div><div class="pop-card-price">A100 node pool</div></div>
+        </div>
+        <div class="pop-card-tags" style="margin-bottom:0;padding-top:2px"><span class="pop-tag-sub">Fine-tuning · Multi-node</span></div>
+        <div class="res-card-body"><div class="res-card-body-inner">
+          <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">Shared storage with Lustre, topology-aware scheduling, and multi-user access for team fine-tuning workflows.</div>
+          <div class="res-card-actions"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createClusterFromTemplate('slurm','fine-tune',this)">Create cluster</button><a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/orchestration/slurm" target="_blank" style="text-decoration:none">View docs</a></div>
+        </div></div>
+      </div>
+    </div>
+  </div>
+</div><!-- /slurm-filled -->
 
   </div>
 </div>
@@ -3562,6 +3657,77 @@ const RES_CLI = {
   }
 })();
 
+function createInstanceFromRes(gpuType, btn) {
+  const typeMap = { h100:'h100-sxm.8x', h200:'h200.8x', l40s:'l40s.4x' };
+  const locMap  = { h100:'us-southcentral1-a', h200:'us-northcentral1-a', l40s:'us-east1-a' };
+  const instType = typeMap[gpuType] || 'h100-sxm.8x';
+  const loc      = locMap[gpuType]  || 'us-southcentral1-a';
+  const hex8     = () => Array.from({length:8},()=>Math.floor(Math.random()*16).toString(16)).join('');
+  const id       = hex8();
+  const name     = `np-${id.slice(0,8)}-1`;
+  const pubIp    = `216.86.${160+Math.floor(Math.random()*30)}.${10+Math.floor(Math.random()*200)}`;
+  const privIp   = `172.27.${20+Math.floor(Math.random()*40)}.${5+Math.floor(Math.random()*200)}`;
+
+  if (btn) { btn.textContent = 'Creating…'; btn.disabled = true; }
+
+  const spicy  = document.getElementById('instances-spicy');
+  const filled = document.getElementById('instances-filled');
+
+  // Fade out spicy
+  spicy.style.transition = 'opacity .3s ease';
+  spicy.style.opacity = '0';
+
+  setTimeout(() => {
+    spicy.style.display = 'none';
+    spicy.style.opacity = '';
+    spicy.style.transition = '';
+
+    const tbody = document.getElementById('instances-tbl-body');
+    const cpBtn = `<button class="tbl-icon-btn" onclick="event.stopPropagation()" style="opacity:.5;margin-left:4px;background:none;border:none;cursor:pointer;color:var(--muted)"><svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="5" width="9" height="9" rx="1.5"/><path d="M3 11V3a1 1 0 0 1 1-1h8"/></svg></button>`;
+    const tr = document.createElement('tr');
+    tr.style.cssText = 'opacity:0;transform:translateY(-10px);transition:opacity .45s ease,transform .45s ease;cursor:pointer';
+    tr.onclick = () => navigate('vm-detail');
+    tr.innerHTML = `
+      <td><span class="tbl-link">${name}</span></td>
+      <td>${loc}</td>
+      <td><span class="badge-outline" style="font-family:var(--mono);font-size:11px;padding:2px 7px;border-radius:5px">${instType}</span></td>
+      <td><span style="font-family:var(--mono);font-size:12px;color:var(--muted)">—</span></td>
+      <td><span style="font-family:var(--mono);font-size:12px;color:var(--muted)">—</span></td>
+      <td></td>
+      <td style="color:var(--muted);font-size:12px">just now</td>
+      <td style="color:var(--muted);font-size:12px">just now</td>
+      <td id="new-inst-status"><span class="badge-outline" style="background:#fefce8;color:#a16207;border-color:#fde68a;font-size:11px;white-space:nowrap;padding:2px 8px;border-radius:5px">Provisioning</span></td>
+      <td><button class="tbl-icon-btn" onclick="event.stopPropagation()" style="background:none;border:none;cursor:pointer;color:var(--muted)">•••</button></td>`;
+    tbody.insertBefore(tr, tbody.firstChild);
+
+    filled.style.display = '';
+    filled.style.opacity = '0';
+    filled.style.transition = 'opacity .4s ease';
+
+    requestAnimationFrame(() => {
+      filled.style.opacity = '1';
+      // Stagger existing rows
+      document.querySelectorAll('#instances-tbl-body .tbl-row-reveal').forEach((row, i) => {
+        row.style.cssText = 'opacity:0;transform:translateY(6px);transition:opacity .4s ease,transform .4s ease;cursor:pointer';
+        setTimeout(() => { row.style.opacity='1'; row.style.transform='none'; }, 100 + i*80);
+      });
+      setTimeout(() => { tr.style.opacity='1'; tr.style.transform='none'; }, 50);
+    });
+
+    const pageCount = document.getElementById('inst-page-count');
+    if (pageCount) pageCount.textContent = `1-${tbody.querySelectorAll('tr').length}`;
+
+    // After 2.8s: Provisioning → Running, fill IPs
+    setTimeout(() => {
+      const statusCell = document.getElementById('new-inst-status');
+      if (statusCell) statusCell.innerHTML = `<span class="pill-green">Running</span>`;
+      const cells = tr.querySelectorAll('td');
+      if (cells[3]) cells[3].innerHTML = `<span style="font-family:var(--mono);font-size:12px">${pubIp}</span>${cpBtn}`;
+      if (cells[4]) cells[4].innerHTML = `<span style="font-family:var(--mono);font-size:12px">${privIp}</span>${cpBtn}`;
+    }, 2800);
+  }, 350);
+}
+
 function copyResCli(gpu) {
   const cmd = RES_CLI[gpu] || '';
   navigator.clipboard.writeText(cmd).then(() => {
@@ -4202,15 +4368,86 @@ function toggleDiskState(state) {
 }
 
 function toggleSlurmState(state) {
-  ['medium','mild','spicy'].forEach(s => {
+  ['medium','mild','spicy','filled'].forEach(s => {
     const el = document.getElementById('slurm-' + s);
     if (el) el.style.display = s === state ? '' : 'none';
   });
   document.querySelectorAll('#slurm-subtabs .state-toggle-btn').forEach((b,i) => {
-    b.classList.toggle('active', ['medium','mild','spicy'][i] === state);
+    b.classList.toggle('active', ['medium','mild','spicy','filled'][i] === state);
   });
   document.querySelector('.main').scrollTop = 0;
   if (state === 'spicy') setTimeout(initSlurmSpicyMagic, 60);
+}
+
+function createClusterFromTemplate(service, type, btn) {
+  if (btn) { btn.textContent = 'Creating…'; btn.classList.add('btn-creating'); }
+  setTimeout(() => {
+    if (service === 'k8s') {
+      const typeMap = {
+        'gpu-training': { name: 'my-gpu-cluster-01', version: '1.35.5-cmk.5', pools: 1 },
+        'inference':    { name: 'my-inference-01',   version: '1.35.5-cmk.5', pools: 1 },
+        'cpu':          { name: 'my-cpu-cluster-01', version: '1.35.5-cmk.5', pools: 0 },
+      };
+      const info = typeMap[type] || typeMap['gpu-training'];
+      toggleClusterState('filled');
+      requestAnimationFrame(() => {
+        const tbody = document.getElementById('k8s-tbl-body');
+        if (!tbody) return;
+        const newRow = document.createElement('tr');
+        newRow.className = 'tbl-row-enter tbl-creating';
+        newRow.style.cursor = 'pointer';
+        newRow.setAttribute('onclick', "navigate('k8s-detail')");
+        newRow.innerHTML = `
+          <td><span class="tbl-link">${info.name}</span></td>
+          <td><span class="badge-outline" style="background:#fefce8;color:#854d0e;border-color:#fde68a">Provisioning</span></td>
+          <td><span class="tbl-mono">${info.version}</span></td>
+          <td>—</td>
+          <td>${info.pools}</td>
+          <td><div class="tbl-actions"><button class="tbl-icon-btn" onclick="event.stopPropagation()"><svg class="ico" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3,6 5,6 21,6"/><path d="M19,6l-1,14a2,2 0 01-2,2H8a2,2 0 01-2-2L5,6"/><path d="M10,11v6"/><path d="M14,11v6"/></svg></button></div></td>`;
+        tbody.insertBefore(newRow, tbody.firstChild);
+        const rows = [...tbody.querySelectorAll('tr')];
+        rows.forEach(row => row.classList.add('tbl-row-enter'));
+        void tbody.getBoundingClientRect();
+        rows.forEach((row, i) => setTimeout(() => row.classList.add('tbl-row-visible'), i * 60));
+        setTimeout(() => {
+          const badge = newRow.querySelector('.badge-outline');
+          if (badge) { badge.className = 'pill-green'; badge.style = ''; badge.textContent = 'Running'; }
+          newRow.classList.remove('tbl-creating');
+        }, 1800);
+      });
+    } else if (service === 'slurm') {
+      const typeMap = {
+        'gpu-hpc':   { name: 'my-hpc-cluster-01', compute: 'h100-80gb-sxm-ib.8x', nodes: 8 },
+        'fine-tune': { name: 'my-finetune-01',    compute: 'a100-80gb-sxm.8x',    nodes: 4 },
+        'cpu-login': { name: 'my-login-node-01',  compute: 'c1a.2x',               nodes: 1 },
+      };
+      const info = typeMap[type] || typeMap['gpu-hpc'];
+      toggleSlurmState('filled');
+      requestAnimationFrame(() => {
+        const tbody = document.getElementById('slurm-tbl-body');
+        if (!tbody) return;
+        const newRow = document.createElement('tr');
+        newRow.className = 'tbl-row-enter tbl-creating';
+        newRow.innerHTML = `
+          <td><span class="tbl-link">${info.name}</span></td>
+          <td><span class="badge-outline" style="background:#fefce8;color:#854d0e;border-color:#fde68a">Provisioning</span></td>
+          <td><span class="tbl-mono" style="font-size:11px">${info.compute}</span></td>
+          <td>${info.nodes}</td>
+          <td>Just now</td>
+          <td><div class="tbl-actions"><button class="tbl-icon-btn" onclick="event.stopPropagation()"><svg class="ico" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3,6 5,6 21,6"/><path d="M19,6l-1,14a2,2 0 01-2,2H8a2,2 0 01-2-2L5,6"/><path d="M10,11v6"/><path d="M14,11v6"/></svg></button></div></td>`;
+        tbody.insertBefore(newRow, tbody.firstChild);
+        const rows = [...tbody.querySelectorAll('tr')];
+        rows.forEach(row => row.classList.add('tbl-row-enter'));
+        void tbody.getBoundingClientRect();
+        rows.forEach((row, i) => setTimeout(() => row.classList.add('tbl-row-visible'), i * 60));
+        setTimeout(() => {
+          const badge = newRow.querySelector('.badge-outline');
+          if (badge) { badge.className = 'pill-green'; badge.style = ''; badge.textContent = 'Running'; }
+          newRow.classList.remove('tbl-creating');
+        }, 1800);
+      });
+    }
+  }, 600);
 }
 
 // ── Stop VM toggle ──
