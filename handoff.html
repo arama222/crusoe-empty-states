@@ -3788,12 +3788,18 @@ function initSpicyMagic() {
     p.style.animation        = 'inst-dash-march 0.55s linear infinite';
   });
 
-  // Reveal reservation cards
+  // Stagger-reveal cards
+  const cards = [...document.querySelectorAll('#instances-spicy .pop-card')];
+  cards.forEach(c => { c.style.opacity = '0'; c.style.transform = 'translateY(10px)'; c.style.transition = 'none'; });
   setTimeout(() => {
-    document.querySelectorAll('#instances-spicy .spicy-reveal').forEach((el, i) => {
-      setTimeout(() => el.classList.add('is-visible'), i * 100);
+    cards.forEach((c, i) => {
+      setTimeout(() => {
+        c.style.transition = 'opacity .4s ease, transform .4s cubic-bezier(.4,0,.2,1)';
+        c.style.opacity = '1';
+        c.style.transform = 'none';
+      }, i * 80);
     });
-  }, 300);
+  }, 80);
 }
 
 function initCubeMagic(svgId) {
@@ -3804,6 +3810,21 @@ function initCubeMagic(svgId) {
   const solidPaths  = allPaths.filter(p => p.getAttribute('stroke-dasharray') !== '3 3');
   solidPaths.forEach(p => { p.style.animation = 'none'; p.style.strokeDasharray = ''; p.style.strokeDashoffset = ''; });
   dashedPaths.forEach(p => { p.style.strokeDasharray = '3 3'; p.style.strokeDashoffset = '0'; p.style.animation = 'inst-dash-march 0.55s linear infinite'; });
+  // Stagger-reveal cards in the parent view (same as Instances)
+  const view = svg.closest('.view');
+  if (view) {
+    const cards = [...view.querySelectorAll('.pop-card')];
+    cards.forEach(c => { c.style.opacity = '0'; c.style.transform = 'translateY(10px)'; c.style.transition = 'none'; });
+    setTimeout(() => {
+      cards.forEach((c, i) => {
+        setTimeout(() => {
+          c.style.transition = 'opacity .4s ease, transform .4s cubic-bezier(.4,0,.2,1)';
+          c.style.opacity = '1';
+          c.style.transform = 'none';
+        }, i * 80);
+      });
+    }, 80);
+  }
 }
 function initTemplSpicyMagic()  { initCubeMagic('tmpl-cube'); }
 function initGroupsSpicyMagic() { initCubeMagic('groups-cube'); }
