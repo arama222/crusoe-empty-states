@@ -1410,7 +1410,7 @@ img.ico{display:block;flex:0 0 auto}
     </div>
     <!-- Text block -->
     <div style="position:relative;z-index:1;max-width:380px">
-      <h1 style="font-size:36px;font-weight:400;font-family:var(--font-heading);color:var(--text);letter-spacing:-1px;line-height:105%;margin:0 0 8px"><span id="cluster-typed">No clusters yet.</span><span id="cluster-cursor" style="display:none;font-style:normal">|</span></h1>
+      <h1 style="font-size:40px;font-weight:400;font-family:var(--font-heading);color:var(--text);letter-spacing:-1.2px;line-height:110%;margin:0 0 10px;white-space:nowrap"><span id="cluster-typed">No clusters yet.</span><span id="cluster-cursor" style="display:none;font-style:normal">|</span></h1>
       <p style="font-size:13px;color:var(--muted);font-family:var(--font-body);line-height:160%;margin:0 0 14px">Launch a fully-managed Kubernetes cluster with GPU operators pre-installed. Ready in minutes.</p>
       <a href="https://docs.crusoecloud.com/orchestration/cmk" target="_blank" style="display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:500;font-family:var(--font-body);color:var(--white);background:var(--black);padding:6px 14px;border-radius:8px;text-decoration:none;letter-spacing:.01em;transition:opacity .15s ease" onmouseenter="this.style.opacity='.8'" onmouseleave="this.style.opacity='1'">View docs →</a>
     </div>
@@ -1931,7 +1931,7 @@ img.ico{display:block;flex:0 0 auto}
 <!-- ── SPICY (motion-forward) ── -->
 <div id="slurm-spicy">
   <!-- Side-by-side hero: illustration left, text right -->
-  <div id="slurm-spicy-hero" style="display:flex;flex-direction:row;align-items:center;justify-content:center;gap:48px;padding:32px 48px 28px 48px;text-align:left;position:relative;overflow:hidden;background:var(--white)">
+  <div id="slurm-spicy-hero" style="display:flex;flex-direction:row;align-items:center;justify-content:flex-start;gap:48px;padding:32px 40px 28px 72px;text-align:left;position:relative;overflow:hidden;background:var(--white)">
     <!-- Illustration -->
     <div id="slurm-illus-wrap" style="display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:1;position:relative">
       <svg id="slurm-node-ripples" width="360" height="360" viewBox="0 0 153.881 152.019" fill="none" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);pointer-events:none;z-index:2;overflow:visible"></svg>
@@ -1948,8 +1948,8 @@ img.ico{display:block;flex:0 0 auto}
     </div>
     <!-- Text block -->
     <div style="position:relative;z-index:1;max-width:380px">
-      <h1 style="font-size:36px;font-weight:400;font-family:var(--font-heading);color:var(--text);letter-spacing:-1px;line-height:105%;margin:0 0 8px"><span id="slurm-typed">No clusters yet.</span><span id="slurm-cursor" style="display:none;font-style:normal">|</span></h1>
-      <p style="font-size:13px;color:var(--muted);font-family:var(--font-body);line-height:160%;margin:0 0 14px">Provision a complete HPC Slurm cluster with GPU-optimized nodes, shared storage, and topology-aware scheduling.</p>
+      <h1 style="font-size:40px;font-weight:400;font-family:var(--font-heading);color:var(--text);letter-spacing:-1.2px;line-height:110%;margin:0 0 10px;white-space:nowrap"><span id="slurm-typed">No clusters yet.</span><span id="slurm-cursor" style="display:none;font-style:normal">|</span></h1>
+      <p style="font-size:14px;color:var(--muted);font-family:var(--font-body);line-height:160%;margin:0 0 16px">Provision a complete HPC Slurm cluster with GPU-optimized nodes, shared storage, and topology-aware scheduling.</p>
       <a href="https://docs.crusoecloud.com/orchestration/slurm" target="_blank" style="display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:500;font-family:var(--font-body);color:var(--white);background:var(--black);padding:6px 14px;border-radius:8px;text-decoration:none;letter-spacing:.01em;transition:opacity .15s ease" onmouseenter="this.style.opacity='.8'" onmouseleave="this.style.opacity='1'">View docs →</a>
     </div>
   </div>
@@ -3422,6 +3422,13 @@ function showView(viewId, sbKey) {
   } else if (viewId === 'k8s-detail') {
     window._npRipplesStarted = false;
     setTimeout(initNodePoolAnimation, 60);
+    // Restart metrics animation if metrics tab is currently active
+    setTimeout(() => {
+      const metPanel = document.getElementById('k8s-det-metrics');
+      if (metPanel && metPanel.style.display !== 'none' && metPanel.classList.contains('active')) {
+        initMetricsAnimation();
+      }
+    }, 80);
   }
 }
 
