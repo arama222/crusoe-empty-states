@@ -609,7 +609,7 @@ img.ico{display:block;flex:0 0 auto}
           <div class="pop-card-info"><div class="pop-card-name">H100 80GB SXM</div><div class="pop-card-price">6 of 32 GPUs available</div></div>
         </div>
         <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Training · Multi-node</span></div>
-        <div style="display:flex;gap:6px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create instance</button><button class="btn btn-o btn-sm" onclick="copyResCli('h100')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
+        <div style="display:flex;gap:6px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createInstanceFromRes('h100',this)">Create instance</button><button class="btn btn-o btn-sm" onclick="copyResCli('h100')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
         <div class="med-res-expand">State-of-the-art training &amp; inference. 80 GB HBM3 with NVLink + InfiniBand for multi-node runs. Best for LLM training, RLHF, and fine-tuning.</div>
       </div>
       <!-- H200 card -->
@@ -619,7 +619,7 @@ img.ico{display:block;flex:0 0 auto}
           <div class="pop-card-info"><div class="pop-card-name">H200 141GB</div><div class="pop-card-price">16 of 16 GPUs available</div></div>
         </div>
         <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Inference · Large models</span></div>
-        <div style="display:flex;gap:6px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create instance</button><button class="btn btn-o btn-sm" onclick="copyResCli('h200')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
+        <div style="display:flex;gap:6px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createInstanceFromRes('h200',this)">Create instance</button><button class="btn btn-o btn-sm" onclick="copyResCli('h200')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
         <div class="med-res-expand">Largest memory for massive models. 141 GB HBM3e — ideal for 70B+ parameter inference, long-context workloads, and MoE architectures.</div>
       </div>
       <!-- L40S card -->
@@ -629,7 +629,7 @@ img.ico{display:block;flex:0 0 auto}
           <div class="pop-card-info"><div class="pop-card-name">L40S 48GB</div><div class="pop-card-price">4 of 8 GPUs available</div></div>
         </div>
         <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Inference · Fine-tuning</span></div>
-        <div style="display:flex;gap:6px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create instance</button><button class="btn btn-o btn-sm" onclick="copyResCli('l40s')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
+        <div style="display:flex;gap:6px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createInstanceFromRes('l40s',this)">Create instance</button><button class="btn btn-o btn-sm" onclick="copyResCli('l40s')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
         <div class="med-res-expand">Cost-efficient inference &amp; fine-tuning. 48 GB GDDR6, great for model serving, small-scale training, and multi-modal workloads.</div>
       </div>
     </div>
@@ -1060,7 +1060,7 @@ img.ico{display:block;flex:0 0 auto}
         <div class="pop-card-tags" style="margin-bottom:0;padding-top:2px"><span class="pop-tag-sub">Training · Multi-node</span></div>
         <div class="res-card-body"><div class="res-card-body-inner">
           <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">State-of-the-art training &amp; inference. 80 GB HBM3 with NVLink + InfiniBand for multi-node runs.</div>
-          <div class="res-card-actions"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create instance</button><button class="btn btn-o btn-sm" onclick="copyResCli('h100')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
+          <div class="res-card-actions"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createInstanceFromRes('h100',this)">Create instance</button><button class="btn btn-o btn-sm" onclick="copyResCli('h100')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
         </div></div>
       </div>
       <div class="pop-card res-card spicy-reveal" style="transition-delay:.14s">
@@ -1068,7 +1068,7 @@ img.ico{display:block;flex:0 0 auto}
         <div class="pop-card-tags" style="margin-bottom:0;padding-top:2px"><span class="pop-tag-sub">Inference · Large models</span></div>
         <div class="res-card-body"><div class="res-card-body-inner">
           <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">Largest memory for massive models. 141 GB HBM3e — ideal for 70B+ parameter inference and MoE architectures.</div>
-          <div class="res-card-actions"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create instance</button><button class="btn btn-o btn-sm" onclick="copyResCli('h200')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
+          <div class="res-card-actions"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createInstanceFromRes('h200',this)">Create instance</button><button class="btn btn-o btn-sm" onclick="copyResCli('h200')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
         </div></div>
       </div>
       <div class="pop-card res-card spicy-reveal" style="transition-delay:.2s">
@@ -1076,7 +1076,7 @@ img.ico{display:block;flex:0 0 auto}
         <div class="pop-card-tags" style="margin-bottom:0;padding-top:2px"><span class="pop-tag-sub">Inference · Fine-tuning</span></div>
         <div class="res-card-body"><div class="res-card-body-inner">
           <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">Cost-efficient inference &amp; fine-tuning. 48 GB GDDR6, great for model serving and multi-modal workloads.</div>
-          <div class="res-card-actions"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create instance</button><button class="btn btn-o btn-sm" onclick="copyResCli('l40s')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
+          <div class="res-card-actions"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createInstanceFromRes('l40s',this)">Create instance</button><button class="btn btn-o btn-sm" onclick="copyResCli('l40s')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
         </div></div>
       </div>
     </div>
@@ -1085,115 +1085,64 @@ img.ico{display:block;flex:0 0 auto}
 
 <!-- ── FILLED STATE ── -->
 <div id="instances-filled" style="display:none">
-  <!-- Reservation cards persist at top -->
-  <div class="pop-section" style="margin-bottom:0">
-    <div class="pop-title">Create from your reservations</div>
-    <div class="pop-grid" style="align-items:start">
-      <div class="pop-card filled-res-card" style="cursor:default;display:flex;flex-direction:column;gap:0">
-        <div class="pop-card-top" style="margin-bottom:10px">
-          <div class="pop-icon"><svg width="26" height="26" viewBox="0 0 28 28" fill="none"><rect x="2" y="6" width="24" height="16" rx="3" stroke="var(--gray-800)" stroke-width="1.4"/><rect x="6" y="10" width="6" height="6" rx="1" fill="var(--gray-800)" opacity=".12"/><rect x="16" y="10" width="6" height="6" rx="1" fill="var(--gray-800)" opacity=".12"/><line x1="8" y1="22" x2="20" y2="22" stroke="var(--gray-800)" stroke-width="1.4"/></svg></div>
-          <div class="pop-card-info">
-            <div class="pop-card-name">H100 80GB SXM</div>
-            <div class="pop-card-price">6 of 32 GPUs available</div>
-          </div>
-        </div>
-        <div style="display:flex;gap:6px;margin-top:12px">
-          <button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create instance</button>
-          <button class="btn btn-o btn-sm" onclick="copyResCli('h100')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button>
-        </div>
-        <div class="filled-res-expand">State-of-the-art training &amp; inference. 80 GB HBM3 with NVLink + InfiniBand for multi-node runs. Best for LLM training, RLHF, and fine-tuning.</div>
-      </div>
-      <div class="pop-card filled-res-card" style="cursor:default;display:flex;flex-direction:column;gap:0">
-        <div class="pop-card-top" style="margin-bottom:10px">
-          <div class="pop-icon"><svg width="26" height="26" viewBox="0 0 28 28" fill="none"><rect x="2" y="6" width="24" height="16" rx="3" stroke="var(--gray-800)" stroke-width="1.4"/><rect x="6" y="10" width="6" height="6" rx="1" fill="var(--gray-800)" opacity=".12"/><rect x="16" y="10" width="6" height="6" rx="1" fill="var(--gray-800)" opacity=".12"/><line x1="8" y1="22" x2="20" y2="22" stroke="var(--gray-800)" stroke-width="1.4"/></svg></div>
-          <div class="pop-card-info">
-            <div class="pop-card-name">H200 141GB</div>
-            <div class="pop-card-price">16 of 16 GPUs available</div>
-          </div>
-        </div>
-        <div style="display:flex;gap:6px;margin-top:12px">
-          <button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create instance</button>
-          <button class="btn btn-o btn-sm" onclick="copyResCli('h200')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button>
-        </div>
-        <div class="filled-res-expand">Largest memory for massive models. 141 GB HBM3e — ideal for 70B+ inference, long-context workloads, and MoE architectures.</div>
-      </div>
-      <div class="pop-card filled-res-card" style="cursor:default;display:flex;flex-direction:column;gap:0">
-        <div class="pop-card-top" style="margin-bottom:10px">
-          <div class="pop-icon"><svg width="26" height="26" viewBox="0 0 28 28" fill="none"><rect x="2" y="6" width="24" height="16" rx="3" stroke="var(--gray-800)" stroke-width="1.4"/><rect x="8" y="10" width="12" height="8" rx="1.5" fill="var(--gray-800)" opacity=".08" stroke="var(--gray-700)" stroke-width="1"/></svg></div>
-          <div class="pop-card-info">
-            <div class="pop-card-name">L40S 48GB</div>
-            <div class="pop-card-price">4 of 8 GPUs available</div>
-          </div>
-        </div>
-        <div style="display:flex;gap:6px;margin-top:12px">
-          <button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create instance</button>
-          <button class="btn btn-o btn-sm" onclick="copyResCli('l40s')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button>
-        </div>
-        <div class="filled-res-expand">Cost-efficient inference &amp; fine-tuning. 48 GB GDDR6, great for serving, small-scale training, and multi-modal workloads.</div>
-      </div>
+  <!-- Search + filter bar -->
+  <div class="tbl-filter" style="margin-bottom:0">
+    <div class="tbl-search-wrap">
+      <svg class="ico" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="text" placeholder="Search instance by name" style="min-width:220px"/>
     </div>
+    <div class="tbl-add-filter">+ Add filter option</div>
   </div>
-  <!-- Table of existing instances -->
-  <div class="tbl-wrap" style="margin-top:24px">
-    <div class="tbl-filter">
-      <div class="tbl-search-wrap">
-        <svg class="ico" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-        <input type="text" placeholder="Search instances by name"/>
-      </div>
-      <div class="tbl-add-filter">+ Add filter option</div>
-    </div>
+  <div class="tbl-wrap" style="margin-top:0">
     <table class="tbl">
       <thead>
-        <tr><th>Name</th><th>State</th><th>Type</th><th>Location</th><th>Cluster</th><th>Created</th><th>Actions</th></tr>
+        <tr>
+          <th style="white-space:nowrap">Name <svg style="display:inline;vertical-align:-2px" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18,15 12,9 6,15"/></svg></th>
+          <th>Location</th>
+          <th>Type</th>
+          <th>Public IP</th>
+          <th>Private IP</th>
+          <th>Disks</th>
+          <th>Created</th>
+          <th>Updated</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
       </thead>
-      <tbody>
-        <tr onclick="navigate('vm-detail')" style="cursor:pointer">
-          <td><span class="tbl-link">np-9cef4f52-2</span></td>
-          <td><span class="pill-green">Running</span></td>
-          <td><span class="tbl-mono">h100-80gb-sxm-ib.8x</span></td>
+      <tbody id="instances-tbl-body">
+        <tr onclick="navigate('vm-detail')" style="cursor:pointer" class="tbl-row-reveal">
+          <td><span class="tbl-link">np-197c61b1-1</span></td>
           <td>us-southcentral1-a</td>
-          <td><span style="text-decoration:underline;cursor:pointer">omni-man</span></td>
-          <td>05/26, 4:23 pm</td>
-          <td><div class="tbl-actions"><button class="tbl-icon-btn" onclick="event.stopPropagation()"><svg class="ico" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg></button></div></td>
-        </tr>
-        <tr onclick="navigate('vm-detail')" style="cursor:pointer">
-          <td><span class="tbl-link">np-9cef4f52-1</span></td>
+          <td><span class="badge-outline" style="font-family:var(--mono);font-size:11px;padding:2px 7px;border-radius:5px">c1a.2x</span></td>
+          <td><span style="font-family:var(--mono);font-size:12px">216.86.164.154</span> <button class="tbl-icon-btn" onclick="event.stopPropagation();copySnippet(this,'216.86.164.154')" style="opacity:.5"><svg class="ico" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></td>
+          <td><span style="font-family:var(--mono);font-size:12px">172.27.46.123</span> <button class="tbl-icon-btn" onclick="event.stopPropagation();copySnippet(this,'172.27.46.123')" style="opacity:.5"><svg class="ico" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></td>
+          <td></td>
+          <td style="color:var(--muted);font-size:12px">22 hr. ago</td>
+          <td style="color:var(--muted);font-size:12px">22 hr. ago</td>
           <td><span class="pill-green">Running</span></td>
-          <td><span class="tbl-mono">h100-80gb-sxm-ib.8x</span></td>
+          <td><button class="tbl-icon-btn" onclick="event.stopPropagation()"><svg class="ico" width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="5" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="12" cy="19" r="1.5"/></svg></button></td>
+        </tr>
+        <tr onclick="navigate('vm-detail')" style="cursor:pointer" class="tbl-row-reveal">
+          <td><span class="tbl-link">np-197c61b1-2</span></td>
           <td>us-southcentral1-a</td>
-          <td><span style="text-decoration:underline;cursor:pointer">omni-man</span></td>
-          <td>05/26, 4:22 pm</td>
-          <td><div class="tbl-actions"><button class="tbl-icon-btn" onclick="event.stopPropagation()"><svg class="ico" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg></button></div></td>
-        </tr>
-        <tr onclick="navigate('vm-detail')" style="cursor:pointer">
-          <td><span class="tbl-link">inference-node-01</span></td>
+          <td><span class="badge-outline" style="font-family:var(--mono);font-size:11px;padding:2px 7px;border-radius:5px">c1a.2x</span></td>
+          <td><span style="font-family:var(--mono);font-size:12px">216.86.160.172</span> <button class="tbl-icon-btn" onclick="event.stopPropagation();copySnippet(this,'216.86.160.172')" style="opacity:.5"><svg class="ico" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></td>
+          <td><span style="font-family:var(--mono);font-size:12px">172.27.37.95</span> <button class="tbl-icon-btn" onclick="event.stopPropagation();copySnippet(this,'172.27.37.95')" style="opacity:.5"><svg class="ico" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></td>
+          <td></td>
+          <td style="color:var(--muted);font-size:12px">22 hr. ago</td>
+          <td style="color:var(--muted);font-size:12px">22 hr. ago</td>
           <td><span class="pill-green">Running</span></td>
-          <td><span class="tbl-mono">l40s-48gb.4x</span></td>
-          <td>us-east1-a</td>
-          <td>—</td>
-          <td>05/25, 11:08 am</td>
-          <td><div class="tbl-actions"><button class="tbl-icon-btn" onclick="event.stopPropagation()"><svg class="ico" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg></button></div></td>
-        </tr>
-        <tr onclick="navigate('vm-detail')" style="cursor:pointer">
-          <td><span class="tbl-link">dev-sandbox</span></td>
-          <td><span class="badge-outline" style="background:var(--gray-50);color:var(--gray-600);border-color:var(--gray-300)">Stopped</span></td>
-          <td><span class="tbl-mono">a100-80gb.1x</span></td>
-          <td>us-northcentral1-a</td>
-          <td>—</td>
-          <td>05/22, 9:30 am</td>
-          <td><div class="tbl-actions"><button class="tbl-icon-btn" onclick="event.stopPropagation()"><svg class="ico" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg></button></div></td>
-        </tr>
-        <tr onclick="navigate('vm-detail')" style="cursor:pointer">
-          <td><span class="tbl-link">training-run-47</span></td>
-          <td><span class="pill-green">Running</span></td>
-          <td><span class="tbl-mono">h200-141gb.8x</span></td>
-          <td>us-northcentral1-a</td>
-          <td><span style="text-decoration:underline;cursor:pointer">mega-train</span></td>
-          <td>05/24, 2:15 pm</td>
-          <td><div class="tbl-actions"><button class="tbl-icon-btn" onclick="event.stopPropagation()"><svg class="ico" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg></button></div></td>
+          <td><button class="tbl-icon-btn" onclick="event.stopPropagation()"><svg class="ico" width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="5" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="12" cy="19" r="1.5"/></svg></button></td>
         </tr>
       </tbody>
     </table>
+  </div>
+  <!-- Pagination -->
+  <div style="display:flex;align-items:center;justify-content:flex-end;gap:8px;padding:14px 4px 4px;font-size:12px;color:var(--muted);font-family:var(--font-body)">
+    <span id="inst-page-count">1-2</span>
+    <button class="tbl-icon-btn" disabled style="opacity:.3"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15,18 9,12 15,6"/></svg></button>
+    <button class="tbl-icon-btn" disabled style="opacity:.3"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9,18 15,12 9,6"/></svg></button>
+    <div style="border:1px solid var(--border);border-radius:6px;padding:4px 10px;display:flex;align-items:center;gap:6px;background:var(--white);cursor:pointer">20 per page <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6,9 12,15 18,9"/></svg></div>
   </div>
 </div><!-- /instances-filled -->
 
@@ -3226,6 +3175,61 @@ function switchDetailTab(el, panelId) {
 function toggleSidebar() {
   document.querySelector('.sidebar').classList.toggle('collapsed');
 }
+function createInstanceFromRes(type, btn) {
+  // Button loading state
+  if (btn) {
+    btn.textContent = 'Creating…';
+    btn.classList.add('btn-creating');
+  }
+  // Short delay to show "Creating…" then switch to filled with row animation
+  setTimeout(() => {
+    // Inject a new "provisioning" row at the top matching the GPU type
+    const typeMap = {
+      h100: { name: 'new-instance-01', type: 'h100-80gb-sxm-ib.8x', loc: 'us-southcentral1-a' },
+      h200: { name: 'new-instance-01', type: 'h200-141gb.8x',       loc: 'us-northcentral1-a' },
+      l40s: { name: 'new-instance-01', type: 'l40s-48gb.4x',        loc: 'us-east1-a'         },
+    };
+    const info = typeMap[type] || typeMap.h100;
+    // Switch to filled state
+    toggleInstanceState('filled');
+    // Animate table rows in staggered
+    requestAnimationFrame(() => {
+      const tbody = document.querySelector('#instances-filled .tbl tbody');
+      if (!tbody) return;
+      // Prepend a provisioning row
+      const newRow = document.createElement('tr');
+      newRow.className = 'tbl-row-enter tbl-creating';
+      newRow.style.cursor = 'pointer';
+      newRow.innerHTML = `
+        <td><span class="tbl-link">${info.name}</span></td>
+        <td><span class="badge-outline" style="background:#fefce8;color:#854d0e;border-color:#fde68a">Provisioning</span></td>
+        <td><span class="tbl-mono">${info.type}</span></td>
+        <td>${info.loc}</td>
+        <td>—</td>
+        <td>Just now</td>
+        <td><div class="tbl-actions"><button class="tbl-icon-btn" onclick="event.stopPropagation()"><svg class="ico" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg></button></div></td>`;
+      tbody.insertBefore(newRow, tbody.firstChild);
+      // Animate all rows in staggered
+      const rows = [...tbody.querySelectorAll('tr:not(.tbl-row-enter), .tbl-row-enter')];
+      rows.forEach(row => row.classList.add('tbl-row-enter'));
+      void tbody.getBoundingClientRect();
+      rows.forEach((row, i) => {
+        setTimeout(() => row.classList.add('tbl-row-visible'), i * 60);
+      });
+      // After 1.5s transition new row to "Running"
+      setTimeout(() => {
+        const badge = newRow.querySelector('.badge-outline');
+        if (badge) {
+          badge.className = 'pill-green';
+          badge.style = '';
+          badge.textContent = 'Running';
+        }
+        newRow.classList.remove('tbl-creating');
+      }, 1800);
+    });
+  }, 600);
+}
+
 function toggleInstanceState(state) {
   ['mild','medium','spicy','filled','edge'].forEach(s => {
     const el = document.getElementById('instances-' + s);
@@ -3750,6 +3754,9 @@ function initClusterWaves() {
     '.apikey-spicy-reveal{opacity:0;transform:translateY(14px);transition:opacity .55s ease,transform .55s ease}.apikey-spicy-reveal.is-visible{opacity:1;transform:none}',
     '.sshkey-spicy-reveal{opacity:0;transform:translateY(14px);transition:opacity .55s ease,transform .55s ease}.sshkey-spicy-reveal.is-visible{opacity:1;transform:none}',
     '.logs-spicy-reveal{opacity:0;transform:translateY(14px);transition:opacity .55s ease,transform .55s ease}.logs-spicy-reveal.is-visible{opacity:1;transform:none}',
+    '.tbl-row-enter{opacity:0;transform:translateY(8px)}.tbl-row-enter.tbl-row-visible{opacity:1;transform:none;transition:opacity .35s ease,transform .35s cubic-bezier(.4,0,.2,1)}',
+    '.tbl-creating td{background:rgba(0,0,0,.018)}',
+    '.btn-creating{opacity:.7;cursor:default;pointer-events:none}',
   ].join('');
   document.head.appendChild(style);
 })();
