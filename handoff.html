@@ -138,6 +138,8 @@ html,body{height:100%;background:var(--white);color:var(--black);font-family:'Su
 [data-theme="dark"] #cluster-node-ripples,
 [data-theme="dark"] #slurm-orch-svg,
 [data-theme="dark"] #slurm-node-ripples,
+[data-theme="dark"] #np-orch-svg,
+[data-theme="dark"] #np-node-ripples,
 [data-theme="dark"] #logs-wave-svg,
 [data-theme="dark"] #disk-spicy-svg,
 [data-theme="dark"] #bucket-spicy-svg,
@@ -2743,14 +2745,17 @@ img.ico{display:block;flex:0 0 auto}
       </div>
     </div>
     <div class="sec-empty">
-      <div class="sec-empty-illust">
-        <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-          <rect x="6" y="8" width="36" height="12" rx="3.5" stroke="currentColor" stroke-width="1.4"/>
-          <circle cx="13" cy="14" r="2" fill="currentColor" opacity=".45"/>
-          <line x1="18" y1="14" x2="32" y2="14" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" opacity=".4"/>
-          <rect x="6" y="26" width="36" height="12" rx="3.5" stroke="currentColor" stroke-width="1.4" stroke-dasharray="3.5 2.5" opacity=".35"/>
-          <circle cx="13" cy="32" r="2" fill="currentColor" opacity=".18"/>
-          <line x1="18" y1="32" x2="28" y2="32" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" opacity=".18"/>
+      <div class="sec-empty-illust" style="position:relative;width:120px;height:119px;flex-shrink:0;margin-bottom:8px">
+        <svg id="np-node-ripples" width="240" height="240" viewBox="0 0 153.881 152.019" fill="none" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);pointer-events:none;z-index:2;overflow:visible"></svg>
+        <svg id="np-orch-svg" width="120" height="119" viewBox="0 0 153.881 152.019" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:relative;z-index:1">
+          <path id="np-sq-tr"  d="M147.57 5.34863H39.6802V112.759H147.57V5.34863Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+          <path id="np-sq-mid" d="M130.63 22.2891H22.7402V129.699H130.63V22.2891Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+          <path id="np-sq-bl"  d="M113.7 39.2188H5.81006V146.629H113.7V39.2188Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+          <path id="np-center" d="M87.2031 65.5249H66.1768V86.4529H87.2031V65.5249Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+          <path id="np-diag-1" d="M66.5181 66.0903L87.167 86.019" stroke="black"/>
+          <path id="np-diag-2" d="M86.8652 66.1665L66.2163 86.0952" stroke="black"/>
+          <path id="np-dot-bl" d="M11.67 140.399H0.5V151.519H11.67V140.399Z" fill="black" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+          <path id="np-dot-tr" d="M153.381 0.5H142.211V11.62H153.381V0.5Z" fill="black" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
       </div>
       <div class="sec-empty-title">No node pools yet</div>
@@ -3240,13 +3245,7 @@ function showView(viewId, sbKey) {
     setTimeout(initSpicyMagic, 60);
   } else if (viewId === 'kubernetes') {
     window._clusterWavesStarted = false; window._clusterRipplesStarted = false;
-    setTimeout(() => {
-      document.querySelectorAll('#clusters-spicy .cluster-spicy-reveal').forEach(el => { el.classList.remove('is-visible'); });
-      setTimeout(() => {
-        document.querySelectorAll('#clusters-spicy .cluster-spicy-reveal').forEach(el => { el.classList.add('is-visible'); });
-      }, 800);
-      initClusterSpicyMagic();
-    }, 60);
+    setTimeout(initClusterSpicyMagic, 60);
   } else if (viewId === 'slurm') {
     window._slurmWavesStarted = false; window._slurmRipplesStarted = false;
     setTimeout(initSlurmSpicyMagic, 60);
@@ -3260,6 +3259,9 @@ function showView(viewId, sbKey) {
     setTimeout(() => initKeysSpicyMagic('sshkey-spicy-svg','sshkey-outer-ring','sshkey-inner-ring','sshkey-wave-canvas','sshkey-spicy-reveal'), 60);
   } else if (viewId === 'managed-logs') {
     setTimeout(initLogsIllusAnimation, 60);
+  } else if (viewId === 'k8s-detail') {
+    window._npRipplesStarted = false;
+    setTimeout(initNodePoolAnimation, 60);
   }
 }
 
@@ -3595,7 +3597,6 @@ function toggleClusterEdgeState(n) {
   window.toggleClusterState = function(state) {
     origToggle(state);
     if (state === 'spicy') {
-      requestAnimationFrame(initClusterSpicyReveal);
       requestAnimationFrame(initClusterScrollHint);
       setTimeout(initClusterSpicyMagic, 60);
     }
@@ -3607,54 +3608,16 @@ function initClusterSpicyMagic() {
   const svg = document.getElementById('cluster-orch-svg');
   if (!svg) return;
 
-  const pathIds = ['co-sq-tr','co-sq-mid','co-sq-bl','co-center','co-diag-1','co-diag-2'];
-  const dotIds  = ['co-dot-bl','co-dot-tr'];
-  const STAGGER  = 200;
-  const DUR_FWD  = 2100;
-  const DUR_BWD  = 1800;
-  const TOTAL_FWD = (pathIds.length - 1) * STAGGER + DUR_FWD;
-  const TOTAL_BWD = (pathIds.length - 1) * STAGGER + DUR_BWD;
-  const PAUSE    = 800;
-
-  clearTimeout(window._clusterDrawTimer);
-  window._clusterDrawFirstRun = true;
-
-  function doClusterDraw(dir) {
-    if (!document.getElementById('cluster-orch-svg')) return;
-    clearTimeout(window._clusterDrawTimer);
-    const paths = pathIds.map(id => document.getElementById(id)).filter(Boolean);
-    const dots  = dotIds.map(id  => document.getElementById(id)).filter(Boolean);
-
-    if (dir === 'fwd') {
-      if (window._clusterDrawFirstRun) {
-        window._clusterDrawFirstRun = false;
-        paths.forEach(p => {
-          try { const l = p.getTotalLength(); p.style.transition = 'none'; p.style.strokeDasharray = l; p.style.strokeDashoffset = l; } catch(e) {}
-        });
-        dots.forEach(d => { d.style.transition = 'none'; d.style.opacity = '0'; });
-        void svg.getBoundingClientRect();
-      }
-      requestAnimationFrame(() => {
-        paths.forEach((p, i) => {
-          try { p.style.transition = `stroke-dashoffset ${DUR_FWD}ms cubic-bezier(.4,0,0,1) ${i*STAGGER}ms`; p.style.strokeDashoffset = '0'; } catch(e) {}
-        });
-        const dotsStart = (pathIds.length - 1) * STAGGER + 600;
-        dots.forEach((d, i) => setTimeout(() => { d.style.transition = 'opacity 450ms ease'; d.style.opacity = '1'; }, dotsStart + i * 150));
-        window._clusterDrawTimer = setTimeout(() => doClusterDraw('bwd'), TOTAL_FWD + PAUSE);
-      });
-    } else {
-      paths.forEach((p, i) => {
-        try { const l = p.getTotalLength(); const rd = (paths.length-1-i)*STAGGER; p.style.transition = `stroke-dashoffset ${DUR_BWD}ms cubic-bezier(.55,0,1,.45) ${rd}ms`; p.style.strokeDashoffset = l; } catch(e) {}
-      });
-      // Dots disappear LAST — after all paths have finished erasing
-      const dotsHideDelay = TOTAL_BWD;
-      dots.forEach((d, i) => { d.style.transition = `opacity 320ms ease ${dotsHideDelay + i*80}ms`; d.style.opacity = '0'; });
-      window._clusterDrawTimer = setTimeout(() => doClusterDraw('fwd'), TOTAL_BWD + PAUSE);
-    }
-  }
-
-  doClusterDraw('fwd');
-
+  // Show all paths and dots immediately — no draw-in animation
+  ['co-sq-tr','co-sq-mid','co-sq-bl','co-center','co-diag-1','co-diag-2'].forEach(id => {
+    const p = document.getElementById(id);
+    if (!p) return;
+    p.style.transition = 'none'; p.style.strokeDasharray = ''; p.style.strokeDashoffset = '';
+  });
+  ['co-dot-bl','co-dot-tr'].forEach(id => {
+    const d = document.getElementById(id);
+    if (d) { d.style.transition = 'none'; d.style.opacity = '1'; }
+  });
 
   if (!window._clusterRipplesStarted) {
     window._clusterRipplesStarted = true;
@@ -3687,8 +3650,8 @@ function initClusterSpicyMagic() {
 (function(){
   const style = document.createElement('style');
   style.textContent = [
-    '.cluster-spicy-reveal{opacity:0;transform:translateY(14px);transition:opacity .55s ease,transform .55s ease}.cluster-spicy-reveal.is-visible{opacity:1;transform:none}',
-    '.slurm-spicy-reveal{opacity:0;transform:translateY(14px);transition:opacity .55s ease,transform .55s ease}.slurm-spicy-reveal.is-visible{opacity:1;transform:none}',
+    '.cluster-spicy-reveal{opacity:1;transform:none}',
+    '.slurm-spicy-reveal{opacity:1;transform:none}',
     '.disk-spicy-reveal{opacity:0;transform:translateY(14px);transition:opacity .55s ease,transform .55s ease}.disk-spicy-reveal.is-visible{opacity:1;transform:none}',
     '.bucket-spicy-reveal{opacity:0;transform:translateY(14px);transition:opacity .55s ease,transform .55s ease}.bucket-spicy-reveal.is-visible{opacity:1;transform:none}',
     '.apikey-spicy-reveal{opacity:0;transform:translateY(14px);transition:opacity .55s ease,transform .55s ease}.apikey-spicy-reveal.is-visible{opacity:1;transform:none}',
@@ -3701,71 +3664,29 @@ function initClusterSpicyMagic() {
   document.head.appendChild(style);
 })();
 
-// ── Slurm spicy: draw-in + typewriter + waves + ripples ──
+// ── Slurm spicy: static illustration + ripples ──
 function initSlurmSpicyMagic() {
   const svg = document.getElementById('slurm-orch-svg');
   if (!svg) return;
 
-  const pathIds = ['sl-sq-tr','sl-sq-mid','sl-sq-bl','sl-center','sl-diag-1','sl-diag-2'];
-  const dotIds  = ['sl-dot-bl','sl-dot-tr'];
-  const STAGGER  = 130;
-  const DUR_FWD  = 1400;
-  const DUR_BWD  = 1100;
-  const TOTAL_FWD = (pathIds.length - 1) * STAGGER + DUR_FWD;
-  const TOTAL_BWD = (pathIds.length - 1) * STAGGER + DUR_BWD;
-  const PAUSE    = 160;
+  // Show all paths and dots immediately — no draw-in animation
+  ['sl-sq-tr','sl-sq-mid','sl-sq-bl','sl-center','sl-diag-1','sl-diag-2'].forEach(id => {
+    const p = document.getElementById(id);
+    if (!p) return;
+    p.style.transition = 'none'; p.style.strokeDasharray = ''; p.style.strokeDashoffset = '';
+  });
+  ['sl-dot-bl','sl-dot-tr'].forEach(id => {
+    const d = document.getElementById(id);
+    if (d) { d.style.transition = 'none'; d.style.opacity = '1'; }
+  });
 
-  clearTimeout(window._slurmDrawTimer);
-  window._slurmDrawFirstRun = true;
-
-  function doSlurmDraw(dir) {
-    if (!document.getElementById('slurm-orch-svg')) return;
-    clearTimeout(window._slurmDrawTimer);
-    const paths = pathIds.map(id => document.getElementById(id)).filter(Boolean);
-    const dots  = dotIds.map(id  => document.getElementById(id)).filter(Boolean);
-
-    if (dir === 'fwd') {
-      if (window._slurmDrawFirstRun) {
-        window._slurmDrawFirstRun = false;
-        paths.forEach(p => {
-          try { const l = p.getTotalLength(); p.style.transition = 'none'; p.style.strokeDasharray = l; p.style.strokeDashoffset = l; } catch(e) {}
-        });
-        dots.forEach(d => { d.style.transition = 'none'; d.style.opacity = '0'; });
-        void svg.getBoundingClientRect();
-      }
-      requestAnimationFrame(() => {
-        paths.forEach((p, i) => {
-          try { p.style.transition = `stroke-dashoffset ${DUR_FWD}ms cubic-bezier(.4,0,0,1) ${i*STAGGER}ms`; p.style.strokeDashoffset = '0'; } catch(e) {}
-        });
-        const dotsStart = (pathIds.length - 1) * STAGGER + 500;
-        dots.forEach((d, i) => setTimeout(() => { d.style.transition = 'opacity 400ms ease'; d.style.opacity = '1'; }, dotsStart + i * 120));
-        window._slurmDrawTimer = setTimeout(() => doSlurmDraw('bwd'), TOTAL_FWD + PAUSE);
-      });
-    } else {
-      paths.forEach((p, i) => {
-        try { const l = p.getTotalLength(); const rd = (paths.length-1-i)*STAGGER; p.style.transition = `stroke-dashoffset ${DUR_BWD}ms cubic-bezier(.55,0,1,.45) ${rd}ms`; p.style.strokeDashoffset = l; } catch(e) {}
-      });
-      dots.forEach((d, i) => { d.style.transition = `opacity 280ms ease ${i*60}ms`; d.style.opacity = '0'; });
-      window._slurmDrawTimer = setTimeout(() => doSlurmDraw('fwd'), TOTAL_BWD + PAUSE);
-    }
-  }
-
-  doSlurmDraw('fwd');
-
-  // Reveal cards
-  setTimeout(() => {
-    document.querySelectorAll('.slurm-spicy-reveal').forEach((el,i) => {
-      setTimeout(() => el.classList.add('is-visible'), i * 80);
-    });
-  }, 200);
-  // Wave canvas — start once only
   // Node ripples — start once only
   if (!window._slurmRipplesStarted) {
     window._slurmRipplesStarted = true;
     const rippleSvg = document.getElementById('slurm-node-ripples');
     const dotPositions = [{cx:6.085,cy:145.96},{cx:147.80,cy:6.06}];
     if (rippleSvg) {
-      function makeRipple(cx, cy, delay) {
+      function makeSlurmRipple(cx, cy, delay) {
         setTimeout(() => {
           if (!rippleSvg.isConnected) return;
           const c = document.createElementNS('http://www.w3.org/2000/svg','circle');
@@ -3776,17 +3697,97 @@ function initSlurmSpicyMagic() {
           setTimeout(() => c.remove(), 1200);
         }, delay);
       }
-      function rippleLoop() {
+      function slurmRippleLoop() {
         if (!document.getElementById('slurm-orch-svg') ||
             !document.getElementById('slurm-spicy') ||
             document.getElementById('slurm-spicy').style.display === 'none') return;
-        dotPositions.forEach((pos, i) => makeRipple(pos.cx, pos.cy, i * 420));
-        setTimeout(rippleLoop, 2400);
+        dotPositions.forEach((pos, i) => makeSlurmRipple(pos.cx, pos.cy, i * 420));
+        setTimeout(slurmRippleLoop, 2400);
       }
-      setTimeout(rippleLoop, DRAW_DONE + 100);
+      setTimeout(slurmRippleLoop, 400);
     }
   }
 }
+
+// ── Node Pools empty-state: draw-in/erase loop ──
+function initNodePoolAnimation() {
+  const svg = document.getElementById('np-orch-svg');
+  if (!svg) return;
+
+  const pathIds = ['np-sq-tr','np-sq-mid','np-sq-bl','np-center','np-diag-1','np-diag-2'];
+  const dotIds  = ['np-dot-bl','np-dot-tr'];
+  const STAGGER  = 200;
+  const DUR_FWD  = 2100;
+  const DUR_BWD  = 1800;
+  const TOTAL_FWD = (pathIds.length - 1) * STAGGER + DUR_FWD;
+  const TOTAL_BWD = (pathIds.length - 1) * STAGGER + DUR_BWD;
+  const PAUSE    = 800;
+
+  clearTimeout(window._npDrawTimer);
+  window._npDrawFirstRun = true;
+
+  function doNpDraw(dir) {
+    if (!document.getElementById('np-orch-svg')) return;
+    clearTimeout(window._npDrawTimer);
+    const paths = pathIds.map(id => document.getElementById(id)).filter(Boolean);
+    const dots  = dotIds.map(id  => document.getElementById(id)).filter(Boolean);
+
+    if (dir === 'fwd') {
+      if (window._npDrawFirstRun) {
+        window._npDrawFirstRun = false;
+        paths.forEach(p => {
+          try { const l = p.getTotalLength(); p.style.transition = 'none'; p.style.strokeDasharray = l; p.style.strokeDashoffset = l; } catch(e) {}
+        });
+        dots.forEach(d => { d.style.transition = 'none'; d.style.opacity = '0'; });
+        void svg.getBoundingClientRect();
+      }
+      requestAnimationFrame(() => {
+        paths.forEach((p, i) => {
+          try { p.style.transition = `stroke-dashoffset ${DUR_FWD}ms cubic-bezier(.4,0,0,1) ${i*STAGGER}ms`; p.style.strokeDashoffset = '0'; } catch(e) {}
+        });
+        const dotsStart = (pathIds.length - 1) * STAGGER + 600;
+        dots.forEach((d, i) => setTimeout(() => { d.style.transition = 'opacity 450ms ease'; d.style.opacity = '1'; }, dotsStart + i * 150));
+        window._npDrawTimer = setTimeout(() => doNpDraw('bwd'), TOTAL_FWD + PAUSE);
+      });
+    } else {
+      paths.forEach((p, i) => {
+        try { const l = p.getTotalLength(); const rd = (paths.length-1-i)*STAGGER; p.style.transition = `stroke-dashoffset ${DUR_BWD}ms cubic-bezier(.55,0,1,.45) ${rd}ms`; p.style.strokeDashoffset = l; } catch(e) {}
+      });
+      const dotsHideDelay = TOTAL_BWD;
+      dots.forEach((d, i) => { d.style.transition = `opacity 320ms ease ${dotsHideDelay + i*80}ms`; d.style.opacity = '0'; });
+      window._npDrawTimer = setTimeout(() => doNpDraw('fwd'), TOTAL_BWD + PAUSE);
+    }
+  }
+
+  doNpDraw('fwd');
+
+  // Ripples
+  if (!window._npRipplesStarted) {
+    window._npRipplesStarted = true;
+    const rippleSvg = document.getElementById('np-node-ripples');
+    const dotPositions = [{cx:6.085,cy:145.96},{cx:147.80,cy:6.06}];
+    if (rippleSvg) {
+      function makeNpRipple(cx, cy, delay) {
+        setTimeout(() => {
+          if (!rippleSvg.isConnected) return;
+          const c = document.createElementNS('http://www.w3.org/2000/svg','circle');
+          c.setAttribute('cx', cx); c.setAttribute('cy', cy); c.setAttribute('r','3');
+          c.setAttribute('fill','none'); c.setAttribute('stroke','black'); c.setAttribute('stroke-width','1');
+          c.style.animation = 'node-ripple 1.1s ease-out forwards';
+          rippleSvg.appendChild(c);
+          setTimeout(() => c.remove(), 1200);
+        }, delay);
+      }
+      function npRippleLoop() {
+        if (!document.getElementById('np-orch-svg')) return;
+        dotPositions.forEach((pos, i) => makeNpRipple(pos.cx, pos.cy, i * 420));
+        setTimeout(npRippleLoop, 2400);
+      }
+      setTimeout(npRippleLoop, 1200);
+    }
+  }
+}
+
 // ── Disk spicy: spring physics loop — ellipses fall in and bounce back ──
 function initDiskSpicyMagic() {
   const svg = document.getElementById('disk-spicy-svg');
