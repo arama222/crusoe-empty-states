@@ -3400,9 +3400,9 @@ function mainNav(activeGrp, activeItem) {
     grp('orchestration','orchestration','Orchestration', activeGrp==='orchestration'?activeItem:null, activeGrp==='orchestration'),
     grp('storage','storage','Storage', activeGrp==='storage'?activeItem:null, activeGrp==='storage'),
     grp('networking','networking','Networking', activeGrp==='networking'?activeItem:null, activeGrp==='networking'),
-    {id:'managed-logs',icon:'logs',label:'Managed Logs',solo:true},
-    {id:'registry',icon:'registry',label:'Container Registry',solo:true},
-    {id:'dropdown-states',icon:'dropdown',label:'Dropdown States',solo:true},
+    {id:'managed-logs',icon:'logs',label:'Managed Logs',solo:true,active:activeItem==='managed-logs'},
+    {id:'registry',icon:'registry',label:'Container Registry',solo:true,active:activeItem==='registry'},
+    {id:'dropdown-states',icon:'dropdown',label:'Dropdown States',solo:true,active:activeItem==='dropdown-states'},
   ];
 }
 function settingsNav(activeKey) {
@@ -3444,7 +3444,7 @@ const SIDEBARS = {
   buckets:     {type:'main', topbar:{org:'ManagedOrchestration',proj:'abhatti'}, nav:mainNav('storage','buckets')},
   apikeys:     settingsNav('cloud-api-keys'),
   sshkeys:     settingsNav('ssh-keys'),
-  'dropdown-states': {type:'main', topbar:{org:'ManagedOrchestration',proj:'abhatti'}, nav:mainNav(null,'dropdown-states')},
+  'dropdown-states': {type:'main', topbar:{org:'ManagedOrchestration',proj:'abhatti'}, back:'Back to Console', backTarget:'instances', nav:mainNav(null,'dropdown-states')},
   infra: {
     type:'cc', topbar:{org:'ManagedOrchestration',proj:'abhatti'}, notif:true,
     nav:[
@@ -3464,7 +3464,7 @@ const ROUTES = {
   kubernetes:'kubernetes', slurm:'slurm',
   'k8s-list':'kubernetes', 'k8s-detail':'k8s-detail', 'vm-detail':'vm-detail',
   disks:'disks', buckets:'buckets',
-  vpc:'instances', subnets:'instances', firewall:'instances', infiniband:'instances', 'load-balancers':'instances',
+  vpc:null, subnets:null, firewall:null, infiniband:null, 'load-balancers':null,
   'cloud-api-keys':'apikeys', 'ssh-keys':'sshkeys',
   'infra-overview':'infra', 'managed-logs':'managed-logs',
   'dropdown-states':'dropdown-states',
@@ -3536,6 +3536,9 @@ function buildSidebar(key) {
     });
   } else {
     // main
+    if (cfg.back) {
+      html += `<div class="sback" onclick="navigate('${cfg.backTarget||'instances'}')">${ICONS.arrowLeft} ${cfg.back}</div>`;
+    }
     cfg.nav.forEach(item => {
       if (!item.icon && item.label) {
         html += `<div class="snav-label">${item.label}</div>`;
@@ -3572,6 +3575,7 @@ function buildSidebar(key) {
 }
 
 function navigate(id) {
+  if (id in ROUTES && ROUTES[id] === null) return; // disabled nav item
   localStorage.setItem('lastNav', id);
   const viewId = ROUTES[id] || id;
 
