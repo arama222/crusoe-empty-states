@@ -256,6 +256,15 @@ html,body{height:100%;background:var(--white);color:var(--black);font-family:'Su
 .state-toggle{display:inline-flex;background:var(--gray-100);border-radius:6px;padding:2px;gap:1px;margin-left:16px;vertical-align:middle}
 .state-toggle-btn{padding:3px 10px;font-size:11px;font-weight:500;font-family:var(--font-body);color:var(--muted);border-radius:4px;cursor:pointer;border:none;background:none;line-height:130%}
 .state-toggle-btn.active{background:var(--white);color:var(--text);box-shadow:0 1px 3px rgba(0,0,0,.1)}
+/* API key modals */
+.ak-overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:2000;display:flex;align-items:center;justify-content:center;padding:24px;animation:akFade .12s ease}
+.ak-modal{width:100%;max-width:520px;background:var(--white);border:1px solid var(--border);border-radius:14px;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.28);animation:akPop .14s ease}
+.ak-modal-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:18px 24px;border-bottom:1px solid var(--border)}
+.ak-modal-foot{display:flex;align-items:center;justify-content:flex-end;gap:8px;padding:14px 24px;border-top:1px solid var(--border);background:var(--gray-50)}
+.ak-x{background:none;border:none;cursor:pointer;color:var(--muted);padding:2px;line-height:0;border-radius:6px}
+.ak-x:hover{color:var(--text)}
+@keyframes akFade{from{opacity:0}to{opacity:1}}
+@keyframes akPop{from{opacity:0;transform:translateY(6px) scale(.98)}to{opacity:1;transform:none}}
 /* SVG animation helpers */
 .illus-spin{animation:illus-spin 10s linear infinite;transform-box:fill-box;transform-origin:center}
 .illus-spin-reverse{animation:illus-spin 14s linear infinite reverse;transform-box:fill-box;transform-origin:center}
@@ -2702,24 +2711,12 @@ img.ico{display:block;flex:0 0 auto}
       <div class="ph-title">Cloud API Keys</div>
       <div class="ph-sub">Keys for programmatic access to the Crusoe Cloud API.</div>
     </div>
-    <div class="ph-r"><button class="btn btn-p"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.99967 3.33337V12.6667M3.33301 8.00004H12.6663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Create Cloud API Key</button></div>
+    <div class="ph-r"><button class="btn btn-p" onclick="openApiKeyCreate()"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.99967 3.33337V12.6667M3.33301 8.00004H12.6663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Create Cloud API Key</button></div>
   </div>
   <div class="divider"></div>
   <div class="ca">
-    <!-- State toggle (handoff aid) -->
-    <div style="display:flex;align-items:center;gap:10px;margin-bottom:24px;flex-wrap:wrap">
-      <span style="font-size:12px;font-weight:500;color:var(--muted);font-family:var(--font-body)">State:</span>
-      <div class="state-toggle" style="margin-left:0">
-        <button class="state-toggle-btn active" onclick="toggleApikeyState(0)">Empty</button>
-        <button class="state-toggle-btn" onclick="toggleApikeyState(1)">Key created</button>
-        <button class="state-toggle-btn" onclick="toggleApikeyState(2)">1 key + setup</button>
-        <button class="state-toggle-btn" onclick="toggleApikeyState(3)">Returning</button>
-        <button class="state-toggle-btn" onclick="toggleApikeyState(4)">Lost / rotate</button>
-      </div>
-    </div>
-
-    <!-- ── STATE 0 · Empty (no keys) ── -->
-    <div id="apikey-state-0">
+    <!-- ── Empty state · shown when no keys exist ── -->
+    <div id="apikey-empty">
     <!-- Side-by-side hero: animation left, text right -->
     <div id="apikey-spicy-hero" style="display:flex;flex-direction:row;align-items:center;justify-content:flex-start;gap:48px;padding:32px 40px 28px 72px;text-align:left;position:relative;overflow:hidden;background:var(--white)">
       <!-- Animated illustration -->
@@ -2740,9 +2737,9 @@ img.ico{display:block;flex:0 0 auto}
       <div style="position:relative;z-index:1;max-width:380px">
         <h1 style="font-size:40px;font-weight:400;font-family:var(--font-heading);color:var(--text);letter-spacing:-1.2px;line-height:110%;margin:0 0 10px;white-space:nowrap">No API keys yet.</h1>
         <p style="font-size:14px;color:var(--muted);font-family:var(--font-body);line-height:160%;margin:0 0 16px">Required for programmatic access to the Crusoe Cloud API. The secret key is shown once — save it before leaving the page.</p>
-        <div style="display:flex;align-items:center;gap:16px">
-          <a href="https://docs.crusoecloud.com/identity-and-security/managing-api-keys/" target="_blank" style="display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:500;font-family:var(--font-body);color:var(--white);background:var(--black);padding:6px 14px;border-radius:8px;text-decoration:none;letter-spacing:.01em;transition:opacity .15s ease" onmouseenter="this.style.opacity='.8'" onmouseleave="this.style.opacity='1'">View docs →</a>
-          <button onclick="toggleApikeyState(2)" style="background:none;border:none;cursor:pointer;font-size:12px;font-weight:500;font-family:var(--font-body);color:var(--muted);text-decoration:underline;text-underline-offset:2px;padding:0">Already have a key? Skip to CLI setup →</button>
+        <div style="display:flex;align-items:center;gap:10px">
+          <button class="btn btn-p btn-sm" onclick="openApiKeyCreate()"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M7.99967 3.33337V12.6667M3.33301 8.00004H12.6663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Create API Key</button>
+          <a href="https://docs.crusoecloud.com/identity-and-security/managing-api-keys/" target="_blank" style="display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:500;font-family:var(--font-body);color:var(--muted);text-decoration:underline;text-underline-offset:2px;padding:6px 0">View docs →</a>
         </div>
       </div>
     </div>
@@ -2758,7 +2755,7 @@ img.ico{display:block;flex:0 0 auto}
           <div class="pop-card-tags" style="margin-bottom:0;padding-top:2px"><span class="pop-tag-sub">Step 1 · Security</span></div>
           <div class="res-card-body"><div class="res-card-body-inner">
             <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">The secret is shown once — save it before leaving the page. You can optionally set an alias and expiration date.</div>
-            <div class="res-card-actions"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create API Key</button></div>
+            <div class="res-card-actions"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="openApiKeyCreate()">Create API Key</button></div>
           </div></div>
         </div>
         <div class="pop-card res-card apikey-spicy-reveal" style="transition-delay:.14s">
@@ -2788,51 +2785,18 @@ img.ico{display:block;flex:0 0 auto}
         </div>
       </div>
     </div>
-    </div><!-- /apikey-state-0 -->
+    </div><!-- /apikey-empty -->
 
-    <!-- ── STATE 1 · Key created · one-time secret reveal ── -->
-    <div id="apikey-state-1" style="display:none">
-      <div style="max-width:560px;margin:8px auto 0;border:1px solid var(--border);border-radius:12px;overflow:hidden;background:var(--white)">
-        <div style="display:flex;align-items:center;gap:10px;padding:18px 24px;border-bottom:1px solid var(--border)">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-          <div>
-            <div style="font-size:16px;font-weight:600;font-family:var(--font-heading);color:var(--text)">API key created</div>
-            <div style="font-size:12px;color:var(--muted);font-family:var(--font-body)">my-api-key · Created just now</div>
-          </div>
-        </div>
-        <!-- One-time warning -->
-        <div style="display:flex;align-items:flex-start;gap:8px;margin:0;padding:12px 24px;background:#fff7ed;border-bottom:1px solid var(--border)">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#c2410c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:1px"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-          <div style="font-size:12px;color:#9a3412;font-family:var(--font-body);line-height:150%">Copy your secret now — this is the only time it's shown. We can't display or recover it after you leave this screen.</div>
-        </div>
-        <div style="padding:20px 24px">
-          <!-- Key ID -->
-          <div style="margin-bottom:16px">
-            <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);font-family:var(--font-body);margin-bottom:5px">Key ID</div>
-            <div class="action-card-cli" style="display:flex;align-items:center;justify-content:space-between;font-size:12px"><code style="font-size:12px">ak_7f3a2b19c4d8e6f10a2b</code><button class="cli-snippet-copy" onclick="copySnippet(this,'ak_7f3a2b19c4d8e6f10a2b')" style="font-size:10px">Copy</button></div>
-          </div>
-          <!-- Secret -->
-          <div>
-            <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);font-family:var(--font-body);margin-bottom:5px">Secret</div>
-            <div class="action-card-cli" style="display:flex;align-items:center;justify-content:space-between;font-size:12px"><code style="font-size:12px">cs_live_8Kd2pQ7mWf4xZ1nR9vAe3sLb</code><button class="cli-snippet-copy" onclick="copySnippet(this,'cs_live_8Kd2pQ7mWf4xZ1nR9vAe3sLb')" style="font-size:10px">Copy</button></div>
-          </div>
-        </div>
-        <div style="display:flex;justify-content:flex-end;gap:8px;padding:0 24px 20px">
-          <button class="btn btn-p btn-sm" onclick="toggleApikeyState(2)">I've saved my secret</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- ── STATE 2 · First key exists · dismissible CLI setup banner + table ── -->
-    <div id="apikey-state-2" style="display:none">
-      <!-- Dismissible setup banner (steps 2 & 3 — step 1 is done) -->
-      <div id="apikey-setup-banner" style="border:1px solid var(--border);border-radius:12px;background:var(--gray-50);padding:16px 20px;margin-bottom:20px">
+    <!-- ── Populated state · shown when ≥1 key exists ── -->
+    <div id="apikey-list" style="display:none">
+      <!-- Dismissible CLI setup banner -->
+      <div id="apikey-setup-banner" style="border:1px solid var(--border);border-radius:12px;background:var(--gray-50);padding:16px 20px;margin-bottom:18px">
         <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:14px">
           <div>
             <div style="font-size:14px;font-weight:600;font-family:var(--font-heading);color:var(--text)">Finish setting up the CLI</div>
             <div style="font-size:12px;color:var(--muted);font-family:var(--font-body);margin-top:2px">Your key is ready. Two steps left to connect your terminal.</div>
           </div>
-          <button onclick="toggleApikeyState(3)" title="I've already set up the CLI" style="background:none;border:none;cursor:pointer;color:var(--muted);padding:2px;line-height:0;flex-shrink:0" onmouseenter="this.style.color='var(--text)'" onmouseleave="this.style.color='var(--muted)'">
+          <button onclick="dismissApiSetupBanner()" title="I've already set up the CLI" style="background:none;border:none;cursor:pointer;color:var(--muted);padding:2px;line-height:0;flex-shrink:0" onmouseenter="this.style.color='var(--text)'" onmouseleave="this.style.color='var(--muted)'">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
           </button>
         </div>
@@ -2847,39 +2811,12 @@ img.ico{display:block;flex:0 0 auto}
           </div>
         </div>
       </div>
-      <!-- Keys table (one row) -->
-      <div class="tbl-wrap">
-        <div class="tbl-filter">
-          <div class="tbl-search-wrap">
-            <svg class="ico" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-            <input type="text" placeholder="Search keys by alias"/>
-          </div>
-          <div class="tbl-add-filter">+ Add filter option</div>
-        </div>
-        <table class="tbl">
-          <thead>
-            <tr><th>Alias</th><th>Key ID</th><th>Secret</th><th>Created</th><th>Last used</th><th>Actions</th></tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td style="font-weight:500">my-api-key</td>
-              <td><code style="font-size:12px;color:var(--text2)">ak_7f3a…0a2b</code></td>
-              <td><span style="display:inline-flex;align-items:center;gap:5px;font-size:12px;color:var(--muted)"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>Hidden</span></td>
-              <td style="color:var(--muted)">Jun 3, 2026</td>
-              <td style="color:var(--muted)">—</td>
-              <td><button onclick="toggleApikeyState(4)" style="background:none;border:none;cursor:pointer;font-size:12px;color:var(--muted);font-family:var(--font-body);text-decoration:underline;text-underline-offset:2px;padding:0">Regenerate</button></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-    <!-- ── STATE 3 · Returning · banner dismissed, secrets masked ── -->
-    <div id="apikey-state-3" style="display:none">
+      <!-- Secret-recovery notice -->
       <div style="display:flex;align-items:center;gap:7px;font-size:12px;color:var(--muted);font-family:var(--font-body);margin-bottom:14px">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
-        Secrets are shown only once, at creation, and can't be recovered. If you've lost a secret, regenerate the key or create a new one.
+        Secrets are shown only once, at creation, and can't be recovered. Lost a secret? Regenerate the key or create a new one.
       </div>
+      <!-- Keys table -->
       <div class="tbl-wrap">
         <div class="tbl-filter">
           <div class="tbl-search-wrap">
@@ -2892,55 +2829,78 @@ img.ico{display:block;flex:0 0 auto}
           <thead>
             <tr><th>Alias</th><th>Key ID</th><th>Secret</th><th>Created</th><th>Last used</th><th>Actions</th></tr>
           </thead>
-          <tbody>
-            <tr>
-              <td style="font-weight:500">my-api-key</td>
-              <td><code style="font-size:12px;color:var(--text2)">ak_7f3a…0a2b</code></td>
-              <td><span style="display:inline-flex;align-items:center;gap:5px;font-size:12px;color:var(--muted)"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>Hidden</span></td>
-              <td style="color:var(--muted)">Jun 3, 2026</td>
-              <td style="color:var(--muted)">2 hours ago</td>
-              <td><button onclick="toggleApikeyState(4)" style="background:none;border:none;cursor:pointer;font-size:12px;color:var(--muted);font-family:var(--font-body);text-decoration:underline;text-underline-offset:2px;padding:0">Regenerate</button></td>
-            </tr>
-            <tr>
-              <td style="font-weight:500">ci-deploy</td>
-              <td><code style="font-size:12px;color:var(--text2)">ak_3c91…f74e</code></td>
-              <td><span style="display:inline-flex;align-items:center;gap:5px;font-size:12px;color:var(--muted)"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>Hidden</span></td>
-              <td style="color:var(--muted)">May 28, 2026</td>
-              <td style="color:var(--muted)">6 days ago</td>
-              <td><button onclick="toggleApikeyState(4)" style="background:none;border:none;cursor:pointer;font-size:12px;color:var(--muted);font-family:var(--font-body);text-decoration:underline;text-underline-offset:2px;padding:0">Regenerate</button></td>
-            </tr>
-          </tbody>
+          <tbody id="apikey-tbody"></tbody>
         </table>
       </div>
     </div>
+  </div>
 
-    <!-- ── STATE 4 · Lost secret / rotate ── -->
-    <div id="apikey-state-4" style="display:none">
-      <div style="max-width:560px;margin:8px auto 0;border:1px solid var(--border);border-radius:12px;overflow:hidden;background:var(--white)">
-        <div style="display:flex;align-items:flex-start;gap:10px;padding:18px 24px;border-bottom:1px solid var(--border)">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--text)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:1px"><path d="M23 4v6h-6"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
-          <div>
-            <div style="font-size:16px;font-weight:600;font-family:var(--font-heading);color:var(--text)">Lost your secret?</div>
-            <div style="font-size:12px;color:var(--muted);font-family:var(--font-body);line-height:150%;margin-top:3px">Secrets can't be recovered. Regenerate this key to get a new secret, or create a brand-new key. Regenerating invalidates the old secret immediately — anything using it will stop working until updated.</div>
-          </div>
+  <!-- ════════ API key modals ════════ -->
+  <!-- Create -->
+  <div id="apikey-create-modal" class="ak-overlay" style="display:none" onclick="if(event.target===this)closeApiKeyModals()">
+    <div class="ak-modal">
+      <div class="ak-modal-head">
+        <div style="font-size:16px;font-weight:600;font-family:var(--font-heading);color:var(--text)">Create Cloud API key</div>
+        <button class="ak-x" onclick="closeApiKeyModals()"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+      </div>
+      <div style="padding:20px 24px">
+        <label style="display:block;font-size:12px;font-weight:600;color:var(--text);font-family:var(--font-body);margin-bottom:6px">Alias <span style="font-weight:400;color:var(--muted)">(optional)</span></label>
+        <input id="ak-alias" type="text" placeholder="e.g. ci-deploy" style="width:100%;box-sizing:border-box;font-size:13px;font-family:var(--font-body);color:var(--text);background:var(--white);border:1px solid var(--border);border-radius:8px;padding:9px 12px;margin-bottom:18px;outline:none" onkeydown="if(event.key==='Enter')submitApiKey()"/>
+        <label style="display:block;font-size:12px;font-weight:600;color:var(--text);font-family:var(--font-body);margin-bottom:6px">Expiration</label>
+        <select id="ak-exp" style="width:100%;box-sizing:border-box;font-size:13px;font-family:var(--font-body);color:var(--text);background:var(--white);border:1px solid var(--border);border-radius:8px;padding:9px 12px;outline:none">
+          <option value="Never">Never expires</option>
+          <option value="30 days">30 days</option>
+          <option value="90 days">90 days</option>
+          <option value="1 year">1 year</option>
+        </select>
+      </div>
+      <div class="ak-modal-foot">
+        <button class="btn btn-o btn-sm" onclick="closeApiKeyModals()">Cancel</button>
+        <button class="btn btn-p btn-sm" onclick="submitApiKey()">Create key</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- One-time secret reveal -->
+  <div id="apikey-reveal-modal" class="ak-overlay" style="display:none">
+    <div class="ak-modal">
+      <div style="display:flex;align-items:center;gap:10px;padding:18px 24px;border-bottom:1px solid var(--border)">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        <div>
+          <div id="ak-reveal-title" style="font-size:16px;font-weight:600;font-family:var(--font-heading);color:var(--text)">API key created</div>
+          <div id="ak-reveal-sub" style="font-size:12px;color:var(--muted);font-family:var(--font-body)"></div>
         </div>
-        <div style="padding:18px 24px;background:var(--gray-50);border-bottom:1px solid var(--border)">
-          <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);font-family:var(--font-body);margin-bottom:8px">Key to regenerate</div>
-          <div style="display:flex;align-items:center;justify-content:space-between;gap:12px">
-            <div style="display:flex;flex-direction:column;gap:2px">
-              <span style="font-size:13px;font-weight:500;color:var(--text);font-family:var(--font-body)">my-api-key</span>
-              <code style="font-size:12px;color:var(--text2)">ak_7f3a…0a2b</code>
-            </div>
-            <span style="display:inline-flex;align-items:center;gap:5px;font-size:12px;color:var(--muted)"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>Secret hidden</span>
-          </div>
+      </div>
+      <div style="display:flex;align-items:flex-start;gap:8px;padding:12px 24px;background:#fff7ed;border-bottom:1px solid var(--border)">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#c2410c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:1px"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        <div style="font-size:12px;color:#9a3412;font-family:var(--font-body);line-height:150%">Copy your secret now — this is the only time it's shown. We can't display or recover it after you close this dialog.</div>
+      </div>
+      <div style="padding:20px 24px">
+        <div style="margin-bottom:16px">
+          <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);font-family:var(--font-body);margin-bottom:5px">Key ID</div>
+          <div class="action-card-cli" style="display:flex;align-items:center;justify-content:space-between;font-size:12px"><code id="ak-reveal-id" style="font-size:12px;word-break:break-all"></code><button id="ak-reveal-id-copy" class="cli-snippet-copy" onclick="akCopy(this)" style="font-size:10px;flex-shrink:0">Copy</button></div>
         </div>
-        <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;padding:16px 24px">
-          <button class="btn btn-o btn-sm" onclick="toggleApikeyState(3)">Cancel</button>
-          <div style="display:flex;gap:8px">
-            <button class="btn btn-o btn-sm" onclick="toggleApikeyState(0)">Create new key instead</button>
-            <button class="btn btn-p btn-sm" onclick="toggleApikeyState(1)">Regenerate secret</button>
-          </div>
+        <div>
+          <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);font-family:var(--font-body);margin-bottom:5px">Secret</div>
+          <div class="action-card-cli" style="display:flex;align-items:center;justify-content:space-between;font-size:12px"><code id="ak-reveal-secret" style="font-size:12px;word-break:break-all"></code><button id="ak-reveal-secret-copy" class="cli-snippet-copy" onclick="akCopy(this)" style="font-size:10px;flex-shrink:0">Copy</button></div>
         </div>
+      </div>
+      <div class="ak-modal-foot">
+        <button class="btn btn-p btn-sm" onclick="closeApiKeyModals()">I've saved my secret</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Confirm (regenerate / delete) -->
+  <div id="apikey-confirm-modal" class="ak-overlay" style="display:none" onclick="if(event.target===this)closeApiKeyModals()">
+    <div class="ak-modal" style="max-width:440px">
+      <div style="padding:20px 24px 8px">
+        <div id="ak-confirm-title" style="font-size:16px;font-weight:600;font-family:var(--font-heading);color:var(--text);margin-bottom:8px"></div>
+        <div id="ak-confirm-body" style="font-size:13px;color:var(--muted);font-family:var(--font-body);line-height:158%"></div>
+      </div>
+      <div class="ak-modal-foot">
+        <button class="btn btn-o btn-sm" onclick="closeApiKeyModals()">Cancel</button>
+        <button id="ak-confirm-btn" class="btn btn-p btn-sm" onclick="runConfirm()">Confirm</button>
       </div>
     </div>
   </div>
@@ -3772,16 +3732,112 @@ function toggleInstanceState(state) {
   btns.forEach((b, i) => b.classList.toggle('active', ['medium','mild','spicy','filled','edge'][i] === state));
   document.querySelector('.main').scrollTop = 0;
 }
-function toggleApikeyState(n) {
-  [0,1,2,3,4].forEach(i => {
-    const el = document.getElementById('apikey-state-' + i);
-    if (el) el.style.display = i === n ? '' : 'none';
-  });
-  const btns = document.querySelectorAll('#view-apikeys .state-toggle-btn');
-  btns.forEach((b, i) => b.classList.toggle('active', i === n));
-  const m = document.querySelector('.main');
-  if (m) m.scrollTop = 0;
-}
+// ── Cloud API Keys · fully interactive flow ──
+(function(){
+  var keys = [];
+  var bannerDismissed = false;
+  var pending = null; // { type:'regen'|'delete', id }
+  var HEX = '0123456789abcdef';
+  function rand(n){ var o=''; for(var i=0;i<n;i++) o += HEX[Math.floor(Math.random()*16)]; return o; }
+  function genId(){ return 'ak_' + rand(20); }
+  function genSecret(){ return 'cs_live_' + rand(28); }
+  function shortId(id){ return id.slice(0,7) + '…' + id.slice(-4); }
+  function fmtDate(d){ return d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}); }
+  function find(id){ for(var i=0;i<keys.length;i++) if(keys[i].id===id) return keys[i]; return null; }
+  function esc(s){ return (''+s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
+  function show(id){ var e=document.getElementById(id); if(e) e.style.display='flex'; }
+  function hide(id){ var e=document.getElementById(id); if(e) e.style.display='none'; }
+
+  window.openApiKeyCreate = function(){
+    var a=document.getElementById('ak-alias'); if(a) a.value='';
+    var x=document.getElementById('ak-exp'); if(x) x.value='Never';
+    show('apikey-create-modal');
+    setTimeout(function(){ if(a) a.focus(); }, 40);
+  };
+  window.closeApiKeyModals = function(){
+    hide('apikey-create-modal'); hide('apikey-reveal-modal'); hide('apikey-confirm-modal');
+  };
+  window.submitApiKey = function(){
+    var alias = (document.getElementById('ak-alias').value||'').trim() || 'untitled-key';
+    var exp = document.getElementById('ak-exp').value;
+    var k = { id:genId(), secret:genSecret(), alias:alias, created:new Date(), lastUsed:null, exp:exp };
+    keys.unshift(k);
+    bannerDismissed = false;
+    render();
+    reveal(k, false);
+  };
+  function reveal(k, isRegen){
+    document.getElementById('ak-reveal-title').textContent = isRegen ? 'Secret regenerated' : 'API key created';
+    document.getElementById('ak-reveal-sub').textContent = k.alias + ' · Created just now';
+    document.getElementById('ak-reveal-id').textContent = k.id;
+    document.getElementById('ak-reveal-id-copy').setAttribute('data-copy', k.id);
+    document.getElementById('ak-reveal-secret').textContent = k.secret;
+    document.getElementById('ak-reveal-secret-copy').setAttribute('data-copy', k.secret);
+    closeApiKeyModals();
+    show('apikey-reveal-modal');
+  }
+  window.akCopy = function(btn){
+    var t = btn.getAttribute('data-copy');
+    if(navigator.clipboard) navigator.clipboard.writeText(t);
+    var o = btn.textContent; btn.textContent = 'Copied';
+    setTimeout(function(){ btn.textContent = o; }, 1200);
+  };
+  window.confirmRegen = function(id){
+    var k = find(id); if(!k) return; pending = { type:'regen', id:id };
+    setConfirm('Regenerate secret?', 'A new secret will be generated for <b>'+esc(k.alias)+'</b>. The current secret stops working immediately — update anything using it before you regenerate.', 'Regenerate', false);
+  };
+  window.confirmDelete = function(id){
+    var k = find(id); if(!k) return; pending = { type:'delete', id:id };
+    setConfirm('Delete this key?', '<b>'+esc(k.alias)+'</b> will be permanently deleted and any application using it loses access immediately. This can’t be undone.', 'Delete', true);
+  };
+  function setConfirm(title, body, cta, danger){
+    document.getElementById('ak-confirm-title').textContent = title;
+    document.getElementById('ak-confirm-body').innerHTML = body;
+    var btn = document.getElementById('ak-confirm-btn');
+    btn.textContent = cta;
+    btn.className = 'btn btn-sm' + (danger ? '' : ' btn-p');
+    btn.style.cssText = danger ? 'background:#dc2626;color:#fff;border:1px solid #dc2626' : '';
+    closeApiKeyModals();
+    show('apikey-confirm-modal');
+  }
+  window.runConfirm = function(){
+    if(!pending) return;
+    var k = find(pending.id);
+    if(pending.type==='regen' && k){ k.secret = genSecret(); k.created = new Date(); k.lastUsed = null; render(); reveal(k, true); }
+    else if(pending.type==='delete'){ keys = keys.filter(function(x){ return x.id !== pending.id; }); closeApiKeyModals(); render(); }
+    pending = null;
+  };
+  window.dismissApiSetupBanner = function(){
+    bannerDismissed = true;
+    var b = document.getElementById('apikey-setup-banner');
+    if(b) b.style.display = 'none';
+  };
+  function render(){
+    var empty = document.getElementById('apikey-empty');
+    var list = document.getElementById('apikey-list');
+    if(!empty || !list) return;
+    if(keys.length === 0){ empty.style.display=''; list.style.display='none'; return; }
+    empty.style.display='none'; list.style.display='';
+    var banner = document.getElementById('apikey-setup-banner');
+    if(banner) banner.style.display = bannerDismissed ? 'none' : '';
+    var lock = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>';
+    var aBtn = 'background:none;border:none;cursor:pointer;font-size:12px;color:var(--muted);font-family:var(--font-body);text-decoration:underline;text-underline-offset:2px;padding:0';
+    var html = keys.map(function(k){
+      return '<tr>'
+        + '<td style="font-weight:500">'+esc(k.alias)+'</td>'
+        + '<td><code style="font-size:12px;color:var(--text2)">'+shortId(k.id)+'</code></td>'
+        + '<td><span style="display:inline-flex;align-items:center;gap:5px;font-size:12px;color:var(--muted)">'+lock+'Hidden</span></td>'
+        + '<td style="color:var(--muted)">'+fmtDate(k.created)+'</td>'
+        + '<td style="color:var(--muted)">'+(k.lastUsed||'—')+'</td>'
+        + '<td><div style="display:flex;gap:14px"><button style="'+aBtn+'" onclick="confirmRegen(\''+k.id+'\')">Regenerate</button><button style="'+aBtn+'" onclick="confirmDelete(\''+k.id+'\')">Delete</button></div></td>'
+        + '</tr>';
+    }).join('');
+    document.getElementById('apikey-tbody').innerHTML = html;
+  }
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeApiKeyModals(); });
+  if(document.readyState!=='loading') render();
+  else document.addEventListener('DOMContentLoaded', render);
+})();
 function toggleEdgeState(n) {
   [0,1,2,3,4,5,6].forEach(i => {
     const el = document.getElementById('edge-' + i);
