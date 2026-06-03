@@ -2792,21 +2792,19 @@ img.ico{display:block;flex:0 0 auto}
     <!-- ── Populated state · shown when ≥1 key exists ── -->
     <div id="apikey-list" style="display:none">
       <!-- Collapsible CLI setup banner -->
-      <div id="apikey-setup-banner" style="border:1px solid var(--border);border-radius:12px;background:var(--gray-50);padding:16px 20px;margin-bottom:18px">
-        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px">
-          <button id="apikey-setup-toggle" onclick="toggleApiSetupBanner()" aria-expanded="true" style="display:flex;align-items:flex-start;gap:10px;background:none;border:none;cursor:pointer;text-align:left;padding:0;flex:1;min-width:0">
-            <svg id="apikey-setup-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--muted);flex-shrink:0;margin-top:3px;transition:transform .15s ease"><polyline points="6 9 12 15 18 9"/></svg>
-            <div>
-              <div style="font-size:14px;font-weight:600;font-family:var(--font-heading);color:var(--text)">Finish setting up the CLI</div>
-              <div style="font-size:12px;color:var(--muted);font-family:var(--font-body);margin-top:2px">Your key is ready. Two steps left to connect your terminal.</div>
-            </div>
+      <div id="apikey-setup-banner" style="border:1px solid var(--border);border-radius:10px;background:var(--gray-50);padding:10px 14px;margin-bottom:18px">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:12px">
+          <button id="apikey-setup-toggle" onclick="toggleApiSetupBanner()" aria-expanded="true" style="display:flex;align-items:center;gap:8px;background:none;border:none;cursor:pointer;text-align:left;padding:0;flex:1;min-width:0">
+            <svg id="apikey-setup-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--muted);flex-shrink:0;transition:transform .15s ease"><polyline points="6 9 12 15 18 9"/></svg>
+            <span style="font-size:13px;font-weight:600;font-family:var(--font-heading);color:var(--text)">Finish setting up the CLI</span>
+            <span style="font-size:12px;color:var(--muted);font-family:var(--font-body);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">· Two steps left to connect your terminal</span>
           </button>
-          <a href="https://docs.crusoecloud.com/identity-and-security/managing-api-keys/" target="_blank" rel="noopener" class="btn btn-s btn-sm" style="flex-shrink:0;text-decoration:none;display:inline-flex;align-items:center;gap:6px">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          <a href="https://docs.crusoecloud.com/identity-and-security/managing-api-keys/" target="_blank" rel="noopener" style="flex-shrink:0;text-decoration:none;display:inline-flex;align-items:center;gap:5px;font-size:12px;color:var(--text2);font-family:var(--font-body)">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
             View docs
           </a>
         </div>
-        <div id="apikey-setup-body" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px">
+        <div id="apikey-setup-body" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px">
           <div style="border:1px solid var(--border);border-radius:8px;background:var(--white);padding:12px 14px">
             <div style="font-size:11px;font-weight:600;color:var(--muted);font-family:var(--font-body);margin-bottom:6px">Step 2 · Install the CLI</div>
             <div class="action-card-cli" style="display:flex;align-items:center;justify-content:space-between;font-size:11px"><code style="font-size:11px">pip install crusoe</code><button class="cli-snippet-copy" onclick="copySnippet(this,'pip install crusoe')" style="font-size:10px">Copy</button></div>
