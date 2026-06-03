@@ -3466,15 +3466,7 @@ function buildSidebar(key) {
   }
 
   html += '</nav>';
-  html += `<div class="sfoot"><div class="sfoot-logo">`
-    + `<div class="lp" style="inset:0.67% 0.03% 1.01% 76.17%"><img src="https://www.figma.com/api/mcp/asset/b8963513-8f34-49bf-8984-eae44c97f8c1"/></div>`
-    + `<div class="lp" style="inset:9.98% 84.84% 22.27% 0.24%"><img src="https://www.figma.com/api/mcp/asset/1a956290-61d8-47b7-ae76-1ee730f7b793"/></div>`
-    + `<div class="lp" style="inset:26.89% 54.18% 22.28% 35.74%"><img src="https://www.figma.com/api/mcp/asset/28b38690-9d72-486f-b946-cd0015061905"/></div>`
-    + `<div class="lp" style="inset:26.9% 41.94% 22.28% 46.47%"><img src="https://www.figma.com/api/mcp/asset/86aab3ac-54d1-4a50-93f2-77bd22693b66"/></div>`
-    + `<div class="lp" style="inset:26.9% 29.77% 22.28% 58.8%"><img src="https://www.figma.com/api/mcp/asset/6d1dfc56-fbc2-4626-9cbc-07e881cf6e5e"/></div>`
-    + `<div class="lp" style="inset:27.98% 76.64% 23.46% 16.65%"><img src="https://www.figma.com/api/mcp/asset/8e6ccbe7-e506-48c4-8687-f2c1c30bbf40"/></div>`
-    + `<div class="lp" style="inset:27.99% 65.4% 22.28% 24.53%"><img src="https://www.figma.com/api/mcp/asset/23e4f874-918a-4f13-a4ab-9e1ccd8cd99e"/></div>`
-    + `</div><div class="sfoot-panel" onclick="toggleSidebar()">${ICONS.panel}</div></div>`;
+  html += `<div class="sfoot"><div class="sfoot-logo" style="display:flex;align-items:center;gap:8px;padding:0 4px"><span style="font-size:13px;font-weight:600;font-family:var(--font-body);color:var(--text);letter-spacing:-.2px">Crusoe</span></div><div class="sfoot-panel" onclick="toggleSidebar()">${ICONS.panel}</div></div>`;
   sb.innerHTML = html;
 }
 
