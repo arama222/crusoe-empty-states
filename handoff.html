@@ -556,7 +556,7 @@ img.ico{display:block;flex:0 0 auto}
 .pop-card-desc{font-size:13px;color:var(--muted);font-family:var(--font-body);line-height:150%;margin-bottom:10px}
 .pop-card-tags{display:flex;flex-direction:column;gap:2px}
 /* ── Medium reservation cards — expand on hover, no layout shift ── */
-.med-res-card{position:relative;display:flex;flex-direction:column;gap:0}
+.med-res-card{position:relative;display:flex;flex-direction:column;gap:0;min-height:164px;box-sizing:border-box}
 .med-res-card:hover{border-color:var(--gray-300)!important;box-shadow:0 2px 12px rgba(0,0,0,.08)!important;border-radius:10px 10px 0 0!important;z-index:20}
 .med-res-expand{position:absolute;top:calc(100% - 1px);left:-1px;right:-1px;background:var(--white);border:1px solid var(--gray-300);border-top:none;border-radius:0 0 10px 10px;padding:10px 20px 14px;opacity:0;pointer-events:none;transition:opacity .18s ease;z-index:19;font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:150%}
 .med-res-card:hover .med-res-expand{opacity:1;pointer-events:auto}
@@ -565,6 +565,16 @@ img.ico{display:block;flex:0 0 auto}
 .np-hover-hint svg{transition:transform .2s ease}
 .med-res-card:hover .np-hover-hint{color:var(--text)}
 .med-res-card:hover .np-hover-hint svg{transform:rotate(180deg)}
+/* Bottom-anchored cards with upward hover expansion — instances & templates */
+#view-instances.active,
+#view-instance-templates.active{display:flex;flex-direction:column;flex:1;min-height:0}
+#view-instances.active > .ca,
+#view-instance-templates.active > .ca{flex:1;display:flex;flex-direction:column;min-height:0}
+#instances-spicy{display:flex;flex-direction:column;flex:1;min-height:0}
+#instances-spicy .med-res-expand,
+#view-instance-templates .med-res-expand{top:auto;bottom:calc(100% - 1px);border-top:1px solid var(--gray-300);border-bottom:none;border-radius:10px 10px 0 0}
+#instances-spicy .med-res-card:hover,
+#view-instance-templates .med-res-card:hover{border-radius:0 0 10px 10px!important}
 .pop-tag-title{font-size:13px;font-weight:600;font-family:var(--font-body);color:var(--text)}
 .pop-tag-sub{font-size:12px;font-family:var(--font-body);color:var(--muted)}
 /* legacy pill style kept for non-reservation uses */
@@ -1157,7 +1167,7 @@ img.ico{display:block;flex:0 0 auto}
     </div>
   </div>
   <!-- Reservations -->
-  <div class="pop-section spicy-reveal" style="margin-top:36px;padding-bottom:16px">
+  <div class="pop-section spicy-reveal" style="margin-top:auto;padding-bottom:16px">
     <div class="pop-title">Create from your reservations</div>
     <div class="pop-grid">
       <div class="pop-card med-res-card spicy-reveal" style="display:flex;flex-direction:column;gap:0;transition-delay:.08s">
@@ -1306,7 +1316,7 @@ img.ico{display:block;flex:0 0 auto}
       </div>
     </div>
     <!-- Popular templates -->
-    <div class="pop-section" style="margin-top:36px;padding-bottom:16px">
+    <div class="pop-section" style="margin-top:auto;padding-bottom:16px">
       <div class="pop-title">Start with a popular template</div>
       <div class="pop-grid">
         <div class="pop-card med-res-card">
