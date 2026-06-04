@@ -558,7 +558,7 @@ img.ico{display:block;flex:0 0 auto}
 /* ── Medium reservation cards — expand on hover, no layout shift ── */
 .med-res-card{position:relative;display:flex;flex-direction:column;gap:0;min-height:164px;box-sizing:border-box}
 .med-res-card:hover{border-color:var(--gray-300)!important;box-shadow:0 2px 12px rgba(0,0,0,.08)!important;border-radius:10px 10px 0 0!important;z-index:20}
-.med-res-expand{position:absolute;top:calc(100% - 1px);left:-1px;right:-1px;background:var(--white);border:1px solid var(--gray-300);border-top:none;border-radius:0 0 10px 10px;padding:10px 20px 14px;opacity:0;pointer-events:none;display:none;transition:opacity .18s ease,display .18s ease allow-discrete;z-index:19;font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:150%}
+.med-res-expand{position:absolute;top:calc(100% - 1px);left:-1px;right:-1px;background:var(--white);border:1px solid var(--gray-300);border-top:none;border-radius:0 0 10px 10px;padding:8px 18px 10px;opacity:0;pointer-events:none;display:none;transition:opacity .18s ease,display .18s ease allow-discrete;z-index:19;font-size:11.5px;color:var(--text2);font-family:var(--font-body);line-height:140%}
 .med-res-card:hover .med-res-expand{opacity:1;pointer-events:auto;display:block}
 @starting-style{.med-res-card:hover .med-res-expand{opacity:0}}
 /* "Hover for more" affordance on med-res cards */
@@ -616,7 +616,7 @@ img.ico{display:block;flex:0 0 auto}
 #view-buckets.active > .ca::after,
 #view-managed-logs.active > .ca::after,
 #view-sshkeys.active > .ca::after,
-#instances-spicy::after,#clusters-spicy::after,#slurm-spicy::after,#disks-spicy::after,#apikey-empty::after{content:'';flex:1 1 0;min-height:44px}
+#instances-spicy::after,#clusters-spicy::after,#slurm-spicy::after,#disks-spicy::after,#apikey-empty::after{content:'';flex:2.6 1 0;min-height:54px}
 /* middle spacer (inserted in markup before each pop-section) */
 .es-gap{flex:1 1 0;min-height:0}
 #instances-medium,#instances-mild{margin:auto 0}
@@ -636,18 +636,18 @@ img.ico{display:block;flex:0 0 auto}
   #view-instance-templates.active > .ca::after,#view-instance-groups.active > .ca::after,#view-custom-images.active > .ca::after,#view-buckets.active > .ca::after,#view-managed-logs.active > .ca::after,#view-sshkeys.active > .ca::after,#instances-spicy::after,#clusters-spicy::after,#slurm-spicy::after,#disks-spicy::after,#apikey-empty::after{min-height:30px}
 }
 @media (max-height: 690px){
-  #spicy-cube,#tmpl-cube,#groups-cube,#images-cube,#logs-wave-svg,#disk-spicy-svg,#bucket-spicy-svg,#apikey-spicy-svg,#sshkey-spicy-svg,#cluster-orch-svg,#slurm-orch-svg,#cluster-node-ripples,#slurm-node-ripples{zoom:.83}
-  #view-instances .ca,#view-kubernetes .ca,#view-slurm .ca,#view-disks .ca,#view-apikeys .ca,#view-instance-templates .ca,#view-instance-groups .ca,#view-custom-images .ca,#view-buckets .ca,#view-managed-logs .ca,#view-sshkeys .ca{padding-top:12px;padding-bottom:14px}
-  #instances-spicy .pop-section,#clusters-spicy .pop-section,#slurm-spicy .pop-section,#disks-spicy .pop-section,#apikey-empty .pop-section,#view-instance-templates.active > .ca .pop-section,#view-instance-groups.active > .ca .pop-section,#view-custom-images.active > .ca .pop-section,#view-buckets.active > .ca .pop-section,#view-managed-logs.active > .ca .pop-section,#view-sshkeys.active > .ca .pop-section{margin-top:18px !important}
-  #instances-spicy h1,#clusters-spicy h1,#slurm-spicy h1,#disks-spicy h1,#apikey-empty h1,#view-instance-templates.active > .ca h1,#view-instance-groups.active > .ca h1,#view-custom-images.active > .ca h1,#view-buckets.active > .ca h1,#view-managed-logs.active > .ca h1,#view-sshkeys.active > .ca h1{font-size:37px !important}
+  #spicy-cube,#tmpl-cube,#groups-cube,#images-cube,#logs-wave-svg,#disk-spicy-svg,#bucket-spicy-svg,#apikey-spicy-svg,#sshkey-spicy-svg,#cluster-orch-svg,#slurm-orch-svg,#cluster-node-ripples,#slurm-node-ripples{zoom:.76}
+  #view-instances .ca,#view-kubernetes .ca,#view-slurm .ca,#view-disks .ca,#view-apikeys .ca,#view-instance-templates .ca,#view-instance-groups .ca,#view-custom-images .ca,#view-buckets .ca,#view-managed-logs .ca,#view-sshkeys .ca{padding-top:10px;padding-bottom:10px}
+  #instances-spicy .pop-section,#clusters-spicy .pop-section,#slurm-spicy .pop-section,#disks-spicy .pop-section,#apikey-empty .pop-section,#view-instance-templates.active > .ca .pop-section,#view-instance-groups.active > .ca .pop-section,#view-custom-images.active > .ca .pop-section,#view-buckets.active > .ca .pop-section,#view-managed-logs.active > .ca .pop-section,#view-sshkeys.active > .ca .pop-section{margin-top:14px !important}
+  #instances-spicy h1,#clusters-spicy h1,#slurm-spicy h1,#disks-spicy h1,#apikey-empty h1,#view-instance-templates.active > .ca h1,#view-instance-groups.active > .ca h1,#view-custom-images.active > .ca h1,#view-buckets.active > .ca h1,#view-managed-logs.active > .ca h1,#view-sshkeys.active > .ca h1{font-size:33px !important}
   #view-instance-templates.active > .ca::after,#view-instance-groups.active > .ca::after,#view-custom-images.active > .ca::after,#view-buckets.active > .ca::after,#view-managed-logs.active > .ca::after,#view-sshkeys.active > .ca::after,#instances-spicy::after,#clusters-spicy::after,#slurm-spicy::after,#disks-spicy::after,#apikey-empty::after{min-height:22px}
 }
 @media (max-height: 620px){
-  #spicy-cube,#tmpl-cube,#groups-cube,#images-cube,#logs-wave-svg,#disk-spicy-svg,#bucket-spicy-svg,#apikey-spicy-svg,#sshkey-spicy-svg,#cluster-orch-svg,#slurm-orch-svg,#cluster-node-ripples,#slurm-node-ripples{zoom:.72}
+  #spicy-cube,#tmpl-cube,#groups-cube,#images-cube,#logs-wave-svg,#disk-spicy-svg,#bucket-spicy-svg,#apikey-spicy-svg,#sshkey-spicy-svg,#cluster-orch-svg,#slurm-orch-svg,#cluster-node-ripples,#slurm-node-ripples{zoom:.7}
   #view-instances .ca,#view-kubernetes .ca,#view-slurm .ca,#view-disks .ca,#view-apikeys .ca,#view-instance-templates .ca,#view-instance-groups .ca,#view-custom-images .ca,#view-buckets .ca,#view-managed-logs .ca,#view-sshkeys .ca{padding-top:9px;padding-bottom:10px}
   #instances-spicy .pop-section,#clusters-spicy .pop-section,#slurm-spicy .pop-section,#disks-spicy .pop-section,#apikey-empty .pop-section,#view-instance-templates.active > .ca .pop-section,#view-instance-groups.active > .ca .pop-section,#view-custom-images.active > .ca .pop-section,#view-buckets.active > .ca .pop-section,#view-managed-logs.active > .ca .pop-section,#view-sshkeys.active > .ca .pop-section{margin-top:14px !important}
   #instances-spicy h1,#clusters-spicy h1,#slurm-spicy h1,#disks-spicy h1,#apikey-empty h1,#view-instance-templates.active > .ca h1,#view-instance-groups.active > .ca h1,#view-custom-images.active > .ca h1,#view-buckets.active > .ca h1,#view-managed-logs.active > .ca h1,#view-sshkeys.active > .ca h1{font-size:33px !important}
-  #view-instance-templates.active > .ca::after,#view-instance-groups.active > .ca::after,#view-custom-images.active > .ca::after,#view-buckets.active > .ca::after,#view-managed-logs.active > .ca::after,#view-sshkeys.active > .ca::after,#instances-spicy::after,#clusters-spicy::after,#slurm-spicy::after,#disks-spicy::after,#apikey-empty::after{min-height:14px}
+  #view-instance-templates.active > .ca::after,#view-instance-groups.active > .ca::after,#view-custom-images.active > .ca::after,#view-buckets.active > .ca::after,#view-managed-logs.active > .ca::after,#view-sshkeys.active > .ca::after,#instances-spicy::after,#clusters-spicy::after,#slurm-spicy::after,#disks-spicy::after,#apikey-empty::after{min-height:20px}
 }
 @media (max-height: 580px){
   #spicy-cube,#tmpl-cube,#groups-cube,#images-cube,#logs-wave-svg,#disk-spicy-svg,#bucket-spicy-svg,#apikey-spicy-svg,#sshkey-spicy-svg,#cluster-orch-svg,#slurm-orch-svg,#cluster-node-ripples,#slurm-node-ripples{zoom:.62}
