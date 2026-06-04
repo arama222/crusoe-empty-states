@@ -623,6 +623,29 @@ img.ico{display:block;flex:0 0 auto}
 /* The three spacers above stay equal at every height, so the layout is
    evenly distributed when there's room and compresses to fit (never scrolls)
    when the window is short. */
+/* ── Responsive height scaling ──────────────────────────────────────────
+   On shorter (non-fullscreen) windows the hero illustration, headline and
+   vertical rhythm scale down so every empty state fits without scrolling.
+   `zoom` is used on the illustrations because it shrinks the actual layout
+   footprint (unlike transform) while leaving the SVG animations intact. */
+@media (max-height: 760px){
+  #spicy-cube,#tmpl-cube,#groups-cube,#images-cube,#logs-wave-svg,#disk-spicy-svg,#bucket-spicy-svg,#apikey-spicy-svg,#sshkey-spicy-svg,#cluster-orch-svg,#slurm-orch-svg,#cluster-node-ripples,#slurm-node-ripples{zoom:.9}
+  #view-instances .ca,#view-kubernetes .ca,#view-slurm .ca,#view-disks .ca,#view-apikeys .ca,#view-instance-templates .ca,#view-instance-groups .ca,#view-custom-images .ca,#view-buckets .ca,#view-managed-logs .ca,#view-sshkeys .ca{padding-top:14px;padding-bottom:16px}
+  #instances-spicy .pop-section,#clusters-spicy .pop-section,#slurm-spicy .pop-section,#disks-spicy .pop-section,#apikey-empty .pop-section,#view-instance-templates.active > .ca .pop-section,#view-instance-groups.active > .ca .pop-section,#view-custom-images.active > .ca .pop-section,#view-buckets.active > .ca .pop-section,#view-managed-logs.active > .ca .pop-section,#view-sshkeys.active > .ca .pop-section{margin-top:22px !important}
+  #instances-spicy h1,#clusters-spicy h1,#slurm-spicy h1,#disks-spicy h1,#apikey-empty h1,#view-instance-templates.active > .ca h1,#view-instance-groups.active > .ca h1,#view-custom-images.active > .ca h1,#view-buckets.active > .ca h1,#view-managed-logs.active > .ca h1,#view-sshkeys.active > .ca h1{font-size:40px !important}
+}
+@media (max-height: 640px){
+  #spicy-cube,#tmpl-cube,#groups-cube,#images-cube,#logs-wave-svg,#disk-spicy-svg,#bucket-spicy-svg,#apikey-spicy-svg,#sshkey-spicy-svg,#cluster-orch-svg,#slurm-orch-svg,#cluster-node-ripples,#slurm-node-ripples{zoom:.78}
+  #view-instances .ca,#view-kubernetes .ca,#view-slurm .ca,#view-disks .ca,#view-apikeys .ca,#view-instance-templates .ca,#view-instance-groups .ca,#view-custom-images .ca,#view-buckets .ca,#view-managed-logs .ca,#view-sshkeys .ca{padding-top:10px;padding-bottom:12px}
+  #instances-spicy .pop-section,#clusters-spicy .pop-section,#slurm-spicy .pop-section,#disks-spicy .pop-section,#apikey-empty .pop-section,#view-instance-templates.active > .ca .pop-section,#view-instance-groups.active > .ca .pop-section,#view-custom-images.active > .ca .pop-section,#view-buckets.active > .ca .pop-section,#view-managed-logs.active > .ca .pop-section,#view-sshkeys.active > .ca .pop-section{margin-top:16px !important}
+  #instances-spicy h1,#clusters-spicy h1,#slurm-spicy h1,#disks-spicy h1,#apikey-empty h1,#view-instance-templates.active > .ca h1,#view-instance-groups.active > .ca h1,#view-custom-images.active > .ca h1,#view-buckets.active > .ca h1,#view-managed-logs.active > .ca h1,#view-sshkeys.active > .ca h1{font-size:34px !important}
+}
+@media (max-height: 580px){
+  #spicy-cube,#tmpl-cube,#groups-cube,#images-cube,#logs-wave-svg,#disk-spicy-svg,#bucket-spicy-svg,#apikey-spicy-svg,#sshkey-spicy-svg,#cluster-orch-svg,#slurm-orch-svg,#cluster-node-ripples,#slurm-node-ripples{zoom:.66}
+  #view-instances .ca,#view-kubernetes .ca,#view-slurm .ca,#view-disks .ca,#view-apikeys .ca,#view-instance-templates .ca,#view-instance-groups .ca,#view-custom-images .ca,#view-buckets .ca,#view-managed-logs .ca,#view-sshkeys .ca{padding-top:6px;padding-bottom:8px}
+  #instances-spicy .pop-section,#clusters-spicy .pop-section,#slurm-spicy .pop-section,#disks-spicy .pop-section,#apikey-empty .pop-section,#view-instance-templates.active > .ca .pop-section,#view-instance-groups.active > .ca .pop-section,#view-custom-images.active > .ca .pop-section,#view-buckets.active > .ca .pop-section,#view-managed-logs.active > .ca .pop-section,#view-sshkeys.active > .ca .pop-section{margin-top:10px !important;zoom:.9}
+  #instances-spicy h1,#clusters-spicy h1,#slurm-spicy h1,#disks-spicy h1,#apikey-empty h1,#view-instance-templates.active > .ca h1,#view-instance-groups.active > .ca h1,#view-custom-images.active > .ca h1,#view-buckets.active > .ca h1,#view-managed-logs.active > .ca h1,#view-sshkeys.active > .ca h1{font-size:30px !important}
+}
 .pop-tag-title{font-size:13px;font-weight:600;font-family:var(--font-body);color:var(--text)}
 .pop-tag-sub{font-size:12px;font-family:var(--font-body);color:var(--muted)}
 /* legacy pill style kept for non-reservation uses */
