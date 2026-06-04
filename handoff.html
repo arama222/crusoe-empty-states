@@ -565,17 +565,11 @@ img.ico{display:block;flex:0 0 auto}
 .np-hover-hint svg{transition:transform .2s ease}
 .med-res-card:hover .np-hover-hint{color:var(--text)}
 .med-res-card:hover .np-hover-hint svg{transform:rotate(180deg)}
-/* Bottom-anchored cards with upward hover expansion — instances & templates */
+/* Vertically center the empty-state content so whitespace is balanced top & bottom — instances & templates */
 #view-instances.active,
 #view-instance-templates.active{display:flex;flex-direction:column;flex:1;min-height:0}
 #view-instances.active > .ca,
-#view-instance-templates.active > .ca{flex:1;display:flex;flex-direction:column;min-height:0}
-#instances-spicy{display:flex;flex-direction:column;flex:1;min-height:0}
-/* On hover, slide the whole card row up so the downward detail panel lands at the fixed bottom */
-#instances-spicy .pop-grid,
-#view-instance-templates .pop-grid{transition:transform .18s ease}
-#instances-spicy .pop-grid:has(.med-res-card:hover),
-#view-instance-templates .pop-grid:has(.med-res-card:hover){transform:translateY(-110px)}
+#view-instance-templates.active > .ca{flex:1;display:flex;flex-direction:column;justify-content:center;min-height:0}
 .pop-tag-title{font-size:13px;font-weight:600;font-family:var(--font-body);color:var(--text)}
 .pop-tag-sub{font-size:12px;font-family:var(--font-body);color:var(--muted)}
 /* legacy pill style kept for non-reservation uses */
@@ -1168,7 +1162,7 @@ img.ico{display:block;flex:0 0 auto}
     </div>
   </div>
   <!-- Reservations -->
-  <div class="pop-section spicy-reveal" style="margin-top:auto;padding-bottom:16px">
+  <div class="pop-section spicy-reveal" style="margin-top:36px;padding-bottom:16px">
     <div class="pop-title">Create from your reservations</div>
     <div class="pop-grid">
       <div class="pop-card med-res-card spicy-reveal" style="display:flex;flex-direction:column;gap:0;transition-delay:.08s">
@@ -1317,7 +1311,7 @@ img.ico{display:block;flex:0 0 auto}
       </div>
     </div>
     <!-- Popular templates -->
-    <div class="pop-section" style="margin-top:auto;padding-bottom:16px">
+    <div class="pop-section" style="margin-top:36px;padding-bottom:16px">
       <div class="pop-title">Start with a popular template</div>
       <div class="pop-grid">
         <div class="pop-card med-res-card">
