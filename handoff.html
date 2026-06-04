@@ -3169,26 +3169,26 @@ img.ico{display:block;flex:0 0 auto}
     </div>
     <!-- CLI helper + tip -->
     <!-- Get started cards (match other empty states) -->
-    <div class="pop-section" style="padding:0 40px 24px 72px">
-      <div class="pop-title">Get started</div>
+    <div class="pop-section" style="padding:0 0 24px 0">
+      <div class="pop-title" style="text-align:left">Get started</div>
       <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px;align-items:start">
         <!-- Card 1: Create via CLI (primary action at rest, details on hover) -->
-        <div class="pop-card med-res-card" style="display:flex;flex-direction:column;gap:0">
-          <div class="pop-card-top" style="margin-bottom:10px">
+        <div class="pop-card med-res-card" style="display:flex;flex-direction:column;gap:0;min-height:0;padding:14px 18px">
+          <div class="pop-card-top" style="margin-bottom:8px">
             <div class="pop-card-info"><div class="pop-card-name">Create via CLI</div><div class="pop-card-price">Run one command</div></div>
             <span class="np-hover-hint">Details<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
           </div>
-          <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Option · CLI</span></div>
+          <div class="pop-card-tags" style="margin-bottom:8px"><span class="pop-tag-sub">Option · CLI</span></div>
           <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center;gap:5px" onclick="copySnippet(this,'crusoe kubernetes nodepools create --name my-pool --cluster-id <cluster-id> --type h100-80gb-sxm-ib.8x --count 4')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy command</button></div>
           <div class="med-res-expand"><code style="display:block;font-family:var(--mono);font-size:11px;color:var(--text2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">crusoe kubernetes nodepools create --name my-pool --type h100-80gb-sxm-ib.8x</code><div style="margin-top:6px">Nodes join the control plane automatically within minutes. <a href="https://docs.crusoecloud.com/orchestration/cmk/managing-nodepools/" target="_blank" style="color:var(--muted);text-decoration:underline;text-underline-offset:2px">Docs</a></div></div>
         </div>
         <!-- Card 2: Recommended start (primary action at rest, details on hover) -->
-        <div class="pop-card med-res-card" style="display:flex;flex-direction:column;gap:0">
-          <div class="pop-card-top" style="margin-bottom:10px">
+        <div class="pop-card med-res-card" style="display:flex;flex-direction:column;gap:0;min-height:0;padding:14px 18px">
+          <div class="pop-card-top" style="margin-bottom:8px">
             <div class="pop-card-info"><div class="pop-card-name">Recommended start</div><div class="pop-card-price">Validate before scaling</div></div>
             <span class="np-hover-hint">Details<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
           </div>
-          <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Tip · Best practice</span></div>
+          <div class="pop-card-tags" style="margin-bottom:8px"><span class="pop-tag-sub">Tip · Best practice</span></div>
           <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M7.99967 3.33337V12.6667M3.33301 8.00004H12.6663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Create Node Pool</button></div>
           <div class="med-res-expand">Start with a single H100 or A100 node pool to validate GPU operator and networking before scaling out to a larger fleet. <a href="https://docs.crusoecloud.com/orchestration/cmk/managing-nodepools/" target="_blank" style="color:var(--muted);text-decoration:underline;text-underline-offset:2px">Docs</a></div>
         </div>
