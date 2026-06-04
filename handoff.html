@@ -556,7 +556,7 @@ img.ico{display:block;flex:0 0 auto}
 .pop-card-desc{font-size:13px;color:var(--muted);font-family:var(--font-body);line-height:150%;margin-bottom:10px}
 .pop-card-tags{display:flex;flex-direction:column;gap:2px}
 /* ── Medium reservation cards — expand on hover, no layout shift ── */
-.med-res-card{position:relative}
+.med-res-card{position:relative;display:flex;flex-direction:column;gap:0}
 .med-res-card:hover{border-color:var(--gray-300)!important;box-shadow:0 2px 12px rgba(0,0,0,.08)!important;border-radius:10px 10px 0 0!important;z-index:20}
 .med-res-expand{position:absolute;top:calc(100% - 1px);left:-1px;right:-1px;background:var(--white);border:1px solid var(--gray-300);border-top:none;border-radius:0 0 10px 10px;padding:10px 20px 14px;opacity:0;pointer-events:none;transition:opacity .18s ease;z-index:19;font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:150%}
 .med-res-card:hover .med-res-expand{opacity:1;pointer-events:auto}
@@ -718,6 +718,7 @@ img.ico{display:block;flex:0 0 auto}
         <div class="pop-card-top" style="margin-bottom:10px">
           
           <div class="pop-card-info"><div class="pop-card-name">H100 80GB SXM</div><div class="pop-card-price">6 of 32 GPUs available</div></div>
+          <span class="np-hover-hint">Details<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
         </div>
         <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Training · Multi-node</span></div>
         <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createInstanceFromRes('h100',this)">Create instance</button><button class="btn btn-o btn-sm" onclick="copyResCli('h100')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
@@ -728,6 +729,7 @@ img.ico{display:block;flex:0 0 auto}
         <div class="pop-card-top" style="margin-bottom:10px">
           
           <div class="pop-card-info"><div class="pop-card-name">H200 141GB</div><div class="pop-card-price">16 of 16 GPUs available</div></div>
+          <span class="np-hover-hint">Details<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
         </div>
         <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Inference · Large models</span></div>
         <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createInstanceFromRes('h200',this)">Create instance</button><button class="btn btn-o btn-sm" onclick="copyResCli('h200')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
@@ -738,6 +740,7 @@ img.ico{display:block;flex:0 0 auto}
         <div class="pop-card-top" style="margin-bottom:10px">
           
           <div class="pop-card-info"><div class="pop-card-name">L40S 48GB</div><div class="pop-card-price">4 of 8 GPUs available</div></div>
+          <span class="np-hover-hint">Details<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
         </div>
         <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Inference · Fine-tuning</span></div>
         <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createInstanceFromRes('l40s',this)">Create instance</button><button class="btn btn-o btn-sm" onclick="copyResCli('l40s')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
@@ -1299,36 +1302,36 @@ img.ico{display:block;flex:0 0 auto}
       <div style="position:relative;z-index:1;max-width:380px">
         <h1 style="font-size:40px;font-weight:400;font-family:var(--font-heading);color:var(--text);letter-spacing:-1.2px;line-height:110%;margin:0 0 10px;white-space:nowrap">No templates yet.</h1>
         <p style="font-size:14px;color:var(--muted);font-family:var(--font-body);line-height:160%;margin:0 0 16px">Templates save your VM configuration — instance type, image, disks, SSH keys, and network — so you can atomically launch multiple identically configured VMs in one command.</p>
-        <a href="https://docs.crusoecloud.com/compute/templates/" target="_blank" style="display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:500;font-family:var(--font-body);color:var(--white);background:var(--black);padding:6px 14px;border-radius:8px;text-decoration:none;letter-spacing:.01em;transition:opacity .15s ease" onmouseenter="this.style.opacity='.8'" onmouseleave="this.style.opacity='1'">View docs →</a>
+        <a href="https://docs.crusoecloud.com/compute/templates/" target="_blank" style="display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:500;font-family:var(--font-body);color:var(--muted);text-decoration:none;transition:color .15s ease" onmouseenter="this.style.color='var(--text)'" onmouseleave="this.style.color='var(--muted)'">View docs →</a>
       </div>
     </div>
     <!-- Popular templates -->
     <div class="pop-section" style="margin-top:60px;padding-bottom:20px">
       <div class="pop-title">Start with a popular template</div>
       <div class="pop-grid">
-        <div class="pop-card res-card">
-          <div class="pop-card-top" style="margin-bottom:8px"><div class="pop-card-info"><div class="pop-card-name">H100 Training</div><div class="pop-card-price">h100-80gb-sxm-ib.8x · us-east1-a</div></div></div>
-          <div class="pop-card-tags" style="margin-bottom:0;padding-top:2px"><span class="pop-tag-sub">Training · Multi-node</span></div>
-          <div class="res-card-body"><div class="res-card-body-inner">
-            <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">ubuntu22.04-nvidia-sxm-docker with IB enabled. Bulk-create up to N identical nodes — names auto-inherit from the template (e.g. training-1, training-2).</div>
-            <div class="res-card-actions"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Use template</button></div>
-          </div></div>
+        <div class="pop-card med-res-card">
+
+          <div class="pop-card-top" style="margin-bottom:10px"><div class="pop-card-info"><div class="pop-card-name">H100 Training</div><div class="pop-card-price">h100-80gb-sxm-ib.8x · us-east1-a</div></div><span class="np-hover-hint">Details<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span></div>
+          <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Training · Multi-node</span></div>
+          
+        <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Use template</button></div>
+        <div class="med-res-expand"><div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">ubuntu22.04-nvidia-sxm-docker with IB enabled. Bulk-create up to N identical nodes — names auto-inherit from the template (e.g. training-1, training-2).</div></div>
         </div>
-        <div class="pop-card res-card">
-          <div class="pop-card-top" style="margin-bottom:8px"><div class="pop-card-info"><div class="pop-card-name">H200 Inference</div><div class="pop-card-price">h200-141gb-sxm.8x · us-east1-a</div></div></div>
-          <div class="pop-card-tags" style="margin-bottom:0;padding-top:2px"><span class="pop-tag-sub">Inference · Large models</span></div>
-          <div class="res-card-body"><div class="res-card-body-inner">
-            <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">ubuntu22.04-nvidia-sxm-docker with 2 TB NVMe disk. Launch a fleet of inference nodes atomically — with automatic rollback if any instance fails to provision.</div>
-            <div class="res-card-actions"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Use template</button></div>
-          </div></div>
+        <div class="pop-card med-res-card">
+
+          <div class="pop-card-top" style="margin-bottom:10px"><div class="pop-card-info"><div class="pop-card-name">H200 Inference</div><div class="pop-card-price">h200-141gb-sxm.8x · us-east1-a</div></div><span class="np-hover-hint">Details<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span></div>
+          <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Inference · Large models</span></div>
+          
+        <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Use template</button></div>
+        <div class="med-res-expand"><div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">ubuntu22.04-nvidia-sxm-docker with 2 TB NVMe disk. Launch a fleet of inference nodes atomically — with automatic rollback if any instance fails to provision.</div></div>
         </div>
-        <div class="pop-card res-card">
-          <div class="pop-card-top" style="margin-bottom:8px"><div class="pop-card-info"><div class="pop-card-name">L40S Fine-tuning</div><div class="pop-card-price">l40s-48gb.10x · us-east1-a</div></div></div>
-          <div class="pop-card-tags" style="margin-bottom:0;padding-top:2px"><span class="pop-tag-sub">Fine-tuning · Cost-efficient</span></div>
-          <div class="res-card-body"><div class="res-card-body-inner">
-            <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">ubuntu22.04-nvidia-pcie-docker with startup script to mount datasets. Global template option lets you reuse across regions.</div>
-            <div class="res-card-actions"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Use template</button></div>
-          </div></div>
+        <div class="pop-card med-res-card">
+
+          <div class="pop-card-top" style="margin-bottom:10px"><div class="pop-card-info"><div class="pop-card-name">L40S Fine-tuning</div><div class="pop-card-price">l40s-48gb.10x · us-east1-a</div></div><span class="np-hover-hint">Details<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span></div>
+          <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Fine-tuning · Cost-efficient</span></div>
+          
+        <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Use template</button></div>
+        <div class="med-res-expand"><div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">ubuntu22.04-nvidia-pcie-docker with startup script to mount datasets. Global template option lets you reuse across regions.</div></div>
         </div>
       </div>
     </div>
@@ -1365,33 +1368,35 @@ img.ico{display:block;flex:0 0 auto}
       <div style="position:relative;z-index:1;max-width:380px">
         <h1 style="font-size:40px;font-weight:400;font-family:var(--font-heading);color:var(--text);letter-spacing:-1.2px;line-height:110%;margin:0 0 10px;white-space:nowrap">No groups yet.</h1>
         <p style="font-size:14px;color:var(--muted);font-family:var(--font-body);line-height:160%;margin:0 0 16px">Group related instances so you can start, stop, and scale them together and apply the same template across the whole set — ideal for managing a fleet of identical training or inference nodes.</p>
-        <a href="https://docs.crusoecloud.com/compute/instance-groups" target="_blank" style="display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:500;font-family:var(--font-body);color:var(--white);background:var(--black);padding:6px 14px;border-radius:8px;text-decoration:none;letter-spacing:.01em;transition:opacity .15s ease" onmouseenter="this.style.opacity='.8'" onmouseleave="this.style.opacity='1'">View docs →</a>
+        <a href="https://docs.crusoecloud.com/compute/instance-groups" target="_blank" style="display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:500;font-family:var(--font-body);color:var(--muted);text-decoration:none;transition:color .15s ease" onmouseenter="this.style.color='var(--text)'" onmouseleave="this.style.color='var(--muted)'">View docs →</a>
       </div>
     </div>
     <div class="pop-section" style="margin-top:80px;padding-bottom:20px">
       <div class="pop-title">Get started in two steps</div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;overflow:visible;align-items:start">
-        <div class="pop-card res-card">
-          <div class="pop-card-top" style="margin-bottom:8px">
+        <div class="pop-card med-res-card">
+
+          <div class="pop-card-top" style="margin-bottom:10px">
             <div class="pop-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="13" fill="#111"/><text x="14" y="18.5" text-anchor="middle" fill="white" font-size="13" font-weight="700" font-family="sans-serif">1</text></svg></div>
             <div class="pop-card-info"><div class="pop-card-name">Create a group</div><div class="pop-card-price">Name and configure</div></div>
+          <span class="np-hover-hint">Details<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
           </div>
-          <div class="pop-card-tags" style="margin-bottom:0;padding-top:2px"><span class="pop-tag-sub">Step 1 · Setup</span></div>
-          <div class="res-card-body"><div class="res-card-body-inner">
-            <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">Define your group with a name, optional template, and desired instance count for your fleet.</div>
-            <div class="res-card-actions"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create Group</button></div>
-          </div></div>
+          <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Step 1 · Setup</span></div>
+          
+        <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create Group</button></div>
+        <div class="med-res-expand"><div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">Define your group with a name, optional template, and desired instance count for your fleet.</div></div>
         </div>
-        <div class="pop-card res-card">
-          <div class="pop-card-top" style="margin-bottom:8px">
+        <div class="pop-card med-res-card">
+
+          <div class="pop-card-top" style="margin-bottom:10px">
             <div class="pop-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="13" fill="#111"/><text x="14" y="18.5" text-anchor="middle" fill="white" font-size="13" font-weight="700" font-family="sans-serif">2</text></svg></div>
             <div class="pop-card-info"><div class="pop-card-name">Add instances</div><div class="pop-card-price">Bulk or individual</div></div>
+          <span class="np-hover-hint">Details<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
           </div>
-          <div class="pop-card-tags" style="margin-bottom:0;padding-top:2px"><span class="pop-tag-sub">Step 2 · Deploy</span></div>
-          <div class="res-card-body"><div class="res-card-body-inner">
-            <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">Attach existing instances or launch new ones directly into the group for unified lifecycle management.</div>
-            <div class="res-card-actions"><a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/compute/instance-groups" target="_blank" style="flex:1;justify-content:center;text-decoration:none">View docs →</a></div>
-          </div></div>
+          <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Step 2 · Deploy</span></div>
+          
+        <div style="display:flex;gap:10px"><a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/compute/instance-groups" target="_blank" style="flex:1;justify-content:center;text-decoration:none">View docs →</a></div>
+        <div class="med-res-expand"><div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">Attach existing instances or launch new ones directly into the group for unified lifecycle management.</div></div>
         </div>
       </div>
     </div>
@@ -1428,33 +1433,35 @@ img.ico{display:block;flex:0 0 auto}
       <div style="position:relative;z-index:1;max-width:380px">
         <h1 style="font-size:40px;font-weight:400;font-family:var(--font-heading);color:var(--text);letter-spacing:-1.2px;line-height:110%;margin:0 0 10px;white-space:nowrap">No custom images yet.</h1>
         <p style="font-size:14px;color:var(--muted);font-family:var(--font-body);line-height:160%;margin:0 0 16px">Capture the boot disk of a stopped VM as a reusable base image. Custom images are project and region-specific and can be used to launch identically configured instances.</p>
-        <a href="https://docs.crusoecloud.com/compute/images/overview/" target="_blank" style="display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:500;font-family:var(--font-body);color:var(--white);background:var(--black);padding:6px 14px;border-radius:8px;text-decoration:none;letter-spacing:.01em;transition:opacity .15s ease" onmouseenter="this.style.opacity='.8'" onmouseleave="this.style.opacity='1'">View docs →</a>
+        <a href="https://docs.crusoecloud.com/compute/images/overview/" target="_blank" style="display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:500;font-family:var(--font-body);color:var(--muted);text-decoration:none;transition:color .15s ease" onmouseenter="this.style.color='var(--text)'" onmouseleave="this.style.color='var(--muted)'">View docs →</a>
       </div>
     </div>
     <div class="pop-section" style="margin-top:60px;padding-bottom:20px">
       <div class="pop-title">Get started in two steps</div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;overflow:visible;align-items:start">
-        <div class="pop-card res-card">
-          <div class="pop-card-top" style="margin-bottom:8px">
+        <div class="pop-card med-res-card">
+
+          <div class="pop-card-top" style="margin-bottom:10px">
             <div class="pop-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="13" fill="#111"/><text x="14" y="18.5" text-anchor="middle" fill="white" font-size="13" font-weight="700" font-family="sans-serif">1</text></svg></div>
             <div class="pop-card-info"><div class="pop-card-name">Customize a VM</div><div class="pop-card-price">Install software &amp; configure</div></div>
+          <span class="np-hover-hint">Details<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
           </div>
-          <div class="pop-card-tags" style="margin-bottom:0;padding-top:2px"><span class="pop-tag-sub">Step 1 · Prep</span></div>
-          <div class="res-card-body"><div class="res-card-body-inner">
-            <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">Start from a curated image — Ubuntu 22.04 with NVIDIA drivers, Docker, or Slurm. SSH in and install your libraries, tools, and config.</div>
-            <div class="res-card-actions"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="navigate('instances')">Create Instance</button></div>
-          </div></div>
+          <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Step 1 · Prep</span></div>
+          
+        <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="navigate('instances')">Create Instance</button></div>
+        <div class="med-res-expand"><div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">Start from a curated image — Ubuntu 22.04 with NVIDIA drivers, Docker, or Slurm. SSH in and install your libraries, tools, and config.</div></div>
         </div>
-        <div class="pop-card res-card">
-          <div class="pop-card-top" style="margin-bottom:8px">
+        <div class="pop-card med-res-card">
+
+          <div class="pop-card-top" style="margin-bottom:10px">
             <div class="pop-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="13" fill="#111"/><text x="14" y="18.5" text-anchor="middle" fill="white" font-size="13" font-weight="700" font-family="sans-serif">2</text></svg></div>
             <div class="pop-card-info"><div class="pop-card-name">Capture from boot disk</div><div class="pop-card-price">Stop VM first, then create</div></div>
+          <span class="np-hover-hint">Details<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
           </div>
-          <div class="pop-card-tags" style="margin-bottom:0;padding-top:2px"><span class="pop-tag-sub">Step 2 · Capture</span></div>
-          <div class="res-card-body"><div class="res-card-body-inner">
-            <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">Shut down your VM, then create a custom image from its boot disk. Images are scoped to this project and region.</div>
-            <div class="res-card-actions"><a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/compute/images/overview/" target="_blank" style="flex:1;justify-content:center;text-decoration:none">View docs →</a></div>
-          </div></div>
+          <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Step 2 · Capture</span></div>
+          
+        <div style="display:flex;gap:10px"><a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/compute/images/overview/" target="_blank" style="flex:1;justify-content:center;text-decoration:none">View docs →</a></div>
+        <div class="med-res-expand"><div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">Shut down your VM, then create a custom image from its boot disk. Images are scoped to this project and region.</div></div>
         </div>
       </div>
     </div>
@@ -1498,27 +1505,30 @@ img.ico{display:block;flex:0 0 auto}
     <div class="pop-title">Start with a popular cluster template</div>
     <div class="pop-grid">
       <div class="pop-card med-res-card" style="display:flex;flex-direction:column;gap:0">
-        <div class="pop-card-top" style="margin-bottom:8px">
+        <div class="pop-card-top" style="margin-bottom:10px">
           
           <div class="pop-card-info"><div class="pop-card-name">GPU Training Cluster</div><div class="pop-card-price">H100 8x node pool</div></div>
+          <span class="np-hover-hint">Details<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
         </div>
         <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Training · Multi-node</span></div>
         <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createClusterFromTemplate('k8s','gpu-training',this)">Create cluster</button><a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/orchestration/cmk/" target="_blank" style="text-decoration:none;gap:5px">View docs</a></div>
         <div class="med-res-expand">Pre-configured with GPU operator, network operator, and CSI. Optimized for distributed training with NVLink + InfiniBand across H100 nodes.</div>
       </div>
       <div class="pop-card med-res-card" style="display:flex;flex-direction:column;gap:0">
-        <div class="pop-card-top" style="margin-bottom:8px">
+        <div class="pop-card-top" style="margin-bottom:10px">
           
           <div class="pop-card-info"><div class="pop-card-name">Inference Cluster</div><div class="pop-card-price">L40S autoscaling pool</div></div>
+          <span class="np-hover-hint">Details<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
         </div>
         <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Inference · Autoscale</span></div>
         <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createClusterFromTemplate('k8s','inference',this)">Create cluster</button><a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/orchestration/cmk/" target="_blank" style="text-decoration:none;gap:5px">View docs</a></div>
         <div class="med-res-expand">Cost-efficient serving with autoscaling node pools. Ideal for vLLM, TGI, or Triton inference endpoints on L40S GPUs.</div>
       </div>
       <div class="pop-card med-res-card" style="display:flex;flex-direction:column;gap:0">
-        <div class="pop-card-top" style="margin-bottom:8px">
+        <div class="pop-card-top" style="margin-bottom:10px">
           
           <div class="pop-card-info"><div class="pop-card-name">CPU-only Cluster</div><div class="pop-card-price">General-purpose nodes</div></div>
+          <span class="np-hover-hint">Details<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
         </div>
         <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">CPU · APIs · Pipelines</span></div>
         <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createClusterFromTemplate('k8s','cpu',this)">Create cluster</button><a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/orchestration/cmk/" target="_blank" style="text-decoration:none;gap:5px">View docs</a></div>
@@ -1618,45 +1628,48 @@ img.ico{display:block;flex:0 0 auto}
     <div style="position:relative;z-index:1;max-width:380px">
       <h1 style="font-size:40px;font-weight:400;font-family:var(--font-heading);color:var(--text);letter-spacing:-1.2px;line-height:110%;margin:0 0 10px;white-space:nowrap"><span id="cluster-typed">No clusters yet.</span><span id="cluster-cursor" style="display:none;font-style:normal">|</span></h1>
       <p style="font-size:14px;color:var(--muted);font-family:var(--font-body);line-height:160%;margin:0 0 16px">Launch a fully-managed Kubernetes cluster with GPU operators pre-installed. Ready in minutes.</p>
-      <a href="https://docs.crusoecloud.com/orchestration/cmk/" target="_blank" style="display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:500;font-family:var(--font-body);color:var(--white);background:var(--black);padding:6px 14px;border-radius:8px;text-decoration:none;letter-spacing:.01em;transition:opacity .15s ease" onmouseenter="this.style.opacity='.8'" onmouseleave="this.style.opacity='1'">View docs →</a>
+      <a href="https://docs.crusoecloud.com/orchestration/cmk/" target="_blank" style="display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:500;font-family:var(--font-body);color:var(--muted);text-decoration:none;transition:color .15s ease" onmouseenter="this.style.color='var(--text)'" onmouseleave="this.style.color='var(--muted)'">View docs →</a>
     </div>
   </div>
   <!-- Template cards -->
   <div class="pop-section cluster-spicy-reveal" style="margin-top:60px;padding-bottom:20px">
     <div class="pop-title">Start with a popular cluster template</div>
     <div class="pop-grid">
-      <div class="pop-card res-card cluster-spicy-reveal" style="transition-delay:.08s">
-        <div class="pop-card-top" style="margin-bottom:8px">
+      <div class="pop-card med-res-card cluster-spicy-reveal" style="transition-delay:.08s">
+
+        <div class="pop-card-top" style="margin-bottom:10px">
           
           <div class="pop-card-info"><div class="pop-card-name">GPU Training Cluster</div><div class="pop-card-price">H100 8x node pool</div></div>
+          <span class="np-hover-hint">Details<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
         </div>
-        <div class="pop-card-tags" style="margin-bottom:0;padding-top:2px"><span class="pop-tag-sub">Training · Multi-node</span></div>
-        <div class="res-card-body"><div class="res-card-body-inner">
-          <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">Pre-configured with GPU operator, network operator, and CSI. Optimized for distributed training with NVLink + InfiniBand.</div>
-          <div class="res-card-actions"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createClusterFromTemplate('k8s','gpu-training',this)">Create cluster</button><a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/orchestration/cmk/" target="_blank" style="text-decoration:none">View docs</a></div>
-        </div></div>
+        <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Training · Multi-node</span></div>
+        
+        <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createClusterFromTemplate('k8s','gpu-training',this)">Create cluster</button><a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/orchestration/cmk/" target="_blank" style="text-decoration:none">View docs</a></div>
+        <div class="med-res-expand"><div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">Pre-configured with GPU operator, network operator, and CSI. Optimized for distributed training with NVLink + InfiniBand.</div></div>
       </div>
-      <div class="pop-card res-card cluster-spicy-reveal" style="transition-delay:.14s">
-        <div class="pop-card-top" style="margin-bottom:8px">
+      <div class="pop-card med-res-card cluster-spicy-reveal" style="transition-delay:.14s">
+
+        <div class="pop-card-top" style="margin-bottom:10px">
           
           <div class="pop-card-info"><div class="pop-card-name">Inference Cluster</div><div class="pop-card-price">L40S autoscaling pool</div></div>
+          <span class="np-hover-hint">Details<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
         </div>
-        <div class="pop-card-tags" style="margin-bottom:0;padding-top:2px"><span class="pop-tag-sub">Inference · Autoscale</span></div>
-        <div class="res-card-body"><div class="res-card-body-inner">
-          <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">Cost-efficient serving with autoscaling node pools. Ideal for vLLM, TGI, or Triton inference endpoints on L40S GPUs.</div>
-          <div class="res-card-actions"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createClusterFromTemplate('k8s','inference',this)">Create cluster</button><a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/orchestration/cmk/" target="_blank" style="text-decoration:none">View docs</a></div>
-        </div></div>
+        <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Inference · Autoscale</span></div>
+        
+        <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createClusterFromTemplate('k8s','inference',this)">Create cluster</button><a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/orchestration/cmk/" target="_blank" style="text-decoration:none">View docs</a></div>
+        <div class="med-res-expand"><div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">Cost-efficient serving with autoscaling node pools. Ideal for vLLM, TGI, or Triton inference endpoints on L40S GPUs.</div></div>
       </div>
-      <div class="pop-card res-card cluster-spicy-reveal" style="transition-delay:.2s">
-        <div class="pop-card-top" style="margin-bottom:8px">
+      <div class="pop-card med-res-card cluster-spicy-reveal" style="transition-delay:.2s">
+
+        <div class="pop-card-top" style="margin-bottom:10px">
           
           <div class="pop-card-info"><div class="pop-card-name">CPU-only Cluster</div><div class="pop-card-price">General-purpose nodes</div></div>
+          <span class="np-hover-hint">Details<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
         </div>
-        <div class="pop-card-tags" style="margin-bottom:0;padding-top:2px"><span class="pop-tag-sub">CPU · APIs · Pipelines</span></div>
-        <div class="res-card-body"><div class="res-card-body-inner">
-          <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">Standard Kubernetes cluster for APIs, data pipelines, and services that don't require GPU acceleration.</div>
-          <div class="res-card-actions"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createClusterFromTemplate('k8s','cpu',this)">Create cluster</button><a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/orchestration/cmk/" target="_blank" style="text-decoration:none">View docs</a></div>
-        </div></div>
+        <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">CPU · APIs · Pipelines</span></div>
+        
+        <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createClusterFromTemplate('k8s','cpu',this)">Create cluster</button><a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/orchestration/cmk/" target="_blank" style="text-decoration:none">View docs</a></div>
+        <div class="med-res-expand"><div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">Standard Kubernetes cluster for APIs, data pipelines, and services that don't require GPU acceleration.</div></div>
       </div>
     </div>
   </div>
@@ -2156,45 +2169,48 @@ img.ico{display:block;flex:0 0 auto}
     <div style="position:relative;z-index:1;max-width:380px">
       <h1 style="font-size:40px;font-weight:400;font-family:var(--font-heading);color:var(--text);letter-spacing:-1.2px;line-height:110%;margin:0 0 10px;white-space:nowrap"><span id="slurm-typed">No clusters yet.</span><span id="slurm-cursor" style="display:none;font-style:normal">|</span></h1>
       <p style="font-size:14px;color:var(--muted);font-family:var(--font-body);line-height:160%;margin:0 0 16px">Provision a complete HPC Slurm cluster with GPU-optimized nodes, shared storage, and topology-aware scheduling.</p>
-      <a href="https://docs.crusoecloud.com/orchestration/slurm/" target="_blank" style="display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:500;font-family:var(--font-body);color:var(--white);background:var(--black);padding:6px 14px;border-radius:8px;text-decoration:none;letter-spacing:.01em;transition:opacity .15s ease" onmouseenter="this.style.opacity='.8'" onmouseleave="this.style.opacity='1'">View docs →</a>
+      <a href="https://docs.crusoecloud.com/orchestration/slurm/" target="_blank" style="display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:500;font-family:var(--font-body);color:var(--muted);text-decoration:none;transition:color .15s ease" onmouseenter="this.style.color='var(--text)'" onmouseleave="this.style.color='var(--muted)'">View docs →</a>
     </div>
   </div>
   <!-- Template cards -->
   <div class="pop-section slurm-spicy-reveal" style="margin-top:60px;padding-bottom:20px">
     <div class="pop-title">Start with a popular cluster template</div>
     <div class="pop-grid">
-      <div class="pop-card res-card slurm-spicy-reveal" style="transition-delay:.08s">
-        <div class="pop-card-top" style="margin-bottom:8px">
+      <div class="pop-card med-res-card slurm-spicy-reveal" style="transition-delay:.08s">
+
+        <div class="pop-card-top" style="margin-bottom:10px">
           
           <div class="pop-card-info"><div class="pop-card-name">GPU HPC Cluster</div><div class="pop-card-price">H100 multi-node</div></div>
+          <span class="np-hover-hint">Details<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
         </div>
-        <div class="pop-card-tags" style="margin-bottom:0;padding-top:2px"><span class="pop-tag-sub">Training · HPC</span></div>
-        <div class="res-card-body"><div class="res-card-body-inner">
-          <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">Pre-configured with Pyxis, PMIx, and RDMA. Optimized for distributed training workloads with InfiniBand fabric.</div>
-          <div class="res-card-actions"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createClusterFromTemplate('slurm','gpu-hpc',this)">Create cluster</button><a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/orchestration/slurm/" target="_blank" style="text-decoration:none">View docs</a></div>
-        </div></div>
+        <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Training · HPC</span></div>
+        
+        <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createClusterFromTemplate('slurm','gpu-hpc',this)">Create cluster</button><a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/orchestration/slurm/" target="_blank" style="text-decoration:none">View docs</a></div>
+        <div class="med-res-expand"><div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">Pre-configured with Pyxis, PMIx, and RDMA. Optimized for distributed training workloads with InfiniBand fabric.</div></div>
       </div>
-      <div class="pop-card res-card slurm-spicy-reveal" style="transition-delay:.14s">
-        <div class="pop-card-top" style="margin-bottom:8px">
+      <div class="pop-card med-res-card slurm-spicy-reveal" style="transition-delay:.14s">
+
+        <div class="pop-card-top" style="margin-bottom:10px">
           
           <div class="pop-card-info"><div class="pop-card-name">Multi-GPU Fine-tuning</div><div class="pop-card-price">A100 node pool</div></div>
+          <span class="np-hover-hint">Details<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
         </div>
-        <div class="pop-card-tags" style="margin-bottom:0;padding-top:2px"><span class="pop-tag-sub">Fine-tuning · Multi-node</span></div>
-        <div class="res-card-body"><div class="res-card-body-inner">
-          <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">Shared storage with Lustre, topology-aware scheduling, and multi-user access for team fine-tuning workflows.</div>
-          <div class="res-card-actions"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createClusterFromTemplate('slurm','fine-tune',this)">Create cluster</button><a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/orchestration/slurm/" target="_blank" style="text-decoration:none">View docs</a></div>
-        </div></div>
+        <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Fine-tuning · Multi-node</span></div>
+        
+        <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createClusterFromTemplate('slurm','fine-tune',this)">Create cluster</button><a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/orchestration/slurm/" target="_blank" style="text-decoration:none">View docs</a></div>
+        <div class="med-res-expand"><div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">Shared storage with Lustre, topology-aware scheduling, and multi-user access for team fine-tuning workflows.</div></div>
       </div>
-      <div class="pop-card res-card slurm-spicy-reveal" style="transition-delay:.2s">
-        <div class="pop-card-top" style="margin-bottom:8px">
+      <div class="pop-card med-res-card slurm-spicy-reveal" style="transition-delay:.2s">
+
+        <div class="pop-card-top" style="margin-bottom:10px">
           
           <div class="pop-card-info"><div class="pop-card-name">LLM Pre-training</div><div class="pop-card-price">H200 multi-node</div></div>
+          <span class="np-hover-hint">Details<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
         </div>
-        <div class="pop-card-tags" style="margin-bottom:0;padding-top:2px"><span class="pop-tag-sub">Pre-training · Large scale</span></div>
-        <div class="res-card-body"><div class="res-card-body-inner">
-          <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">Frontier-scale pre-training on H200 nodes with InfiniBand fabric, Pyxis container runtime, and checkpoint storage.</div>
-          <div class="res-card-actions"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createClusterFromTemplate('slurm','llm-pretrain',this)">Create cluster</button><a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/orchestration/slurm/" target="_blank" style="text-decoration:none">View docs</a></div>
-        </div></div>
+        <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Pre-training · Large scale</span></div>
+        
+        <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createClusterFromTemplate('slurm','llm-pretrain',this)">Create cluster</button><a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/orchestration/slurm/" target="_blank" style="text-decoration:none">View docs</a></div>
+        <div class="med-res-expand"><div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">Frontier-scale pre-training on H200 nodes with InfiniBand fabric, Pyxis container runtime, and checkpoint storage.</div></div>
       </div>
     </div>
   </div>
@@ -2324,34 +2340,36 @@ img.ico{display:block;flex:0 0 auto}
         <div style="position:relative;z-index:1;max-width:380px">
           <h1 style="font-size:40px;font-weight:400;font-family:var(--font-heading);color:var(--text);letter-spacing:-1.2px;line-height:110%;margin:0 0 10px;white-space:nowrap"><span id="disk-typed">No disks yet.</span><span id="disk-cursor" style="display:none;font-style:normal">|</span></h1>
           <p style="font-size:14px;color:var(--muted);font-family:var(--font-body);line-height:160%;margin:0 0 16px">Crusoe Cloud offers three types of disks: Ephemeral Disks, Persistent Disks and Shared Disks.</p>
-          <a href="https://docs.crusoecloud.com/storage/disks/" target="_blank" style="display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:500;font-family:var(--font-body);color:var(--white);background:var(--black);padding:6px 14px;border-radius:8px;text-decoration:none;letter-spacing:.01em;transition:opacity .15s ease" onmouseenter="this.style.opacity='.8'" onmouseleave="this.style.opacity='1'">View docs →</a>
+          <a href="https://docs.crusoecloud.com/storage/disks/" target="_blank" style="display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:500;font-family:var(--font-body);color:var(--muted);text-decoration:none;transition:color .15s ease" onmouseenter="this.style.color='var(--text)'" onmouseleave="this.style.color='var(--muted)'">View docs →</a>
         </div>
       </div>
       <!-- Disk type cards -->
       <div class="pop-section disk-spicy-reveal" style="margin-top:60px;padding-bottom:20px">
         <div class="pop-title">Choose your disk type</div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;overflow:visible;align-items:start">
-          <div class="pop-card res-card disk-spicy-reveal" style="transition-delay:.08s">
-            <div class="pop-card-top" style="margin-bottom:8px">
+          <div class="pop-card med-res-card disk-spicy-reveal" style="transition-delay:.08s">
+
+            <div class="pop-card-top" style="margin-bottom:10px">
               <div class="pop-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="13" fill="#111"/><text x="14" y="18.5" text-anchor="middle" fill="white" font-size="13" font-weight="700" font-family="sans-serif">1</text></svg></div>
               <div class="pop-card-info"><div class="pop-card-name">Persistent disk</div><div class="pop-card-price">1 GiB – 10 TiB · $0.08/GiB/mo</div></div>
+          <span class="np-hover-hint">Details<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
             </div>
-            <div class="pop-card-tags" style="margin-bottom:0;padding-top:2px"><span class="pop-tag-sub">Single VM · Block storage</span></div>
-            <div class="res-card-body"><div class="res-card-body-inner">
-              <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">Attach to one VM in read-write mode, or multiple VMs read-only. Up to 16 per instance. Attach and detach while running or stopped — unmount before detaching.</div>
-              <div class="res-card-actions"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create persistent disk</button></div>
-            </div></div>
+            <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Single VM · Block storage</span></div>
+            
+        <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create persistent disk</button></div>
+        <div class="med-res-expand"><div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">Attach to one VM in read-write mode, or multiple VMs read-only. Up to 16 per instance. Attach and detach while running or stopped — unmount before detaching.</div></div>
           </div>
-          <div class="pop-card res-card disk-spicy-reveal" style="transition-delay:.14s">
-            <div class="pop-card-top" style="margin-bottom:8px">
+          <div class="pop-card med-res-card disk-spicy-reveal" style="transition-delay:.14s">
+
+            <div class="pop-card-top" style="margin-bottom:10px">
               <div class="pop-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="13" fill="#111"/><text x="14" y="18.5" text-anchor="middle" fill="white" font-size="13" font-weight="700" font-family="sans-serif">2</text></svg></div>
               <div class="pop-card-info"><div class="pop-card-name">Shared disk</div><div class="pop-card-price">1 TiB – 1000 TiB · $0.07/GiB/mo</div></div>
+          <span class="np-hover-hint">Details<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
             </div>
-            <div class="pop-card-tags" style="margin-bottom:0;padding-top:2px"><span class="pop-tag-sub">Multi-VM · NFS</span></div>
-            <div class="res-card-body"><div class="res-card-body-inner">
-              <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">Concurrent NFS access from many VMs at once. Up to 8 per instance, in 1 TiB increments. Max 36-character name. Data preserved until explicitly deleted.</div>
-              <div class="res-card-actions"><button class="btn btn-o btn-sm" style="flex:1;justify-content:center">Create shared disk</button></div>
-            </div></div>
+            <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Multi-VM · NFS</span></div>
+            
+        <div style="display:flex;gap:10px"><button class="btn btn-o btn-sm" style="flex:1;justify-content:center">Create shared disk</button></div>
+        <div class="med-res-expand"><div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">Concurrent NFS access from many VMs at once. Up to 8 per instance, in 1 TiB increments. Max 36-character name. Data preserved until explicitly deleted.</div></div>
           </div>
         </div>
       </div>
@@ -2424,34 +2442,36 @@ img.ico{display:block;flex:0 0 auto}
       <div style="position:relative;z-index:1;max-width:380px">
         <h1 style="font-size:40px;font-weight:400;font-family:var(--font-heading);color:var(--text);letter-spacing:-1.2px;line-height:110%;margin:0 0 10px;white-space:nowrap">No buckets yet.</h1>
         <p style="font-size:14px;color:var(--muted);font-family:var(--font-body);line-height:160%;margin:0 0 16px">Region-scoped S3-compatible storage for datasets, checkpoints, and artifacts. Create buckets here or via CLI, then access them with any S3 client using an Object Storage key.</p>
-        <a href="https://docs.crusoecloud.com/storage/object-storage/managing-buckets/" target="_blank" style="display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:500;font-family:var(--font-body);color:var(--white);background:var(--black);padding:6px 14px;border-radius:8px;text-decoration:none;letter-spacing:.01em;transition:opacity .15s ease" onmouseenter="this.style.opacity='.8'" onmouseleave="this.style.opacity='1'">View docs →</a>
+        <a href="https://docs.crusoecloud.com/storage/object-storage/managing-buckets/" target="_blank" style="display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:500;font-family:var(--font-body);color:var(--muted);text-decoration:none;transition:color .15s ease" onmouseenter="this.style.color='var(--text)'" onmouseleave="this.style.color='var(--muted)'">View docs →</a>
       </div>
     </div>
     <!-- Step cards side by side -->
     <div class="pop-section bucket-spicy-reveal" style="margin-top:60px;padding-bottom:20px">
       <div class="pop-title">Get started in two steps</div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;overflow:visible;align-items:start">
-        <div class="pop-card res-card bucket-spicy-reveal" style="transition-delay:.08s">
-          <div class="pop-card-top" style="margin-bottom:8px">
+        <div class="pop-card med-res-card bucket-spicy-reveal" style="transition-delay:.08s">
+
+          <div class="pop-card-top" style="margin-bottom:10px">
             <div class="pop-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="13" fill="#111"/><text x="14" y="18.5" text-anchor="middle" fill="white" font-size="13" font-weight="700" font-family="sans-serif">1</text></svg></div>
             <div class="pop-card-info"><div class="pop-card-name">Create a bucket</div><div class="pop-card-price">Name · location · versioning</div></div>
+          <span class="np-hover-hint">Details<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
           </div>
-          <div class="pop-card-tags" style="margin-bottom:0;padding-top:2px"><span class="pop-tag-sub">Step 1 · Console or CLI</span></div>
-          <div class="res-card-body"><div class="res-card-body-inner">
-            <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">Names must be 3–63 characters, lowercase letters, numbers, and hyphens only — globally unique within the region. Co-locate with your compute for lowest latency.</div>
-            <div class="res-card-actions"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create bucket</button></div>
-          </div></div>
+          <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Step 1 · Console or CLI</span></div>
+          
+        <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create bucket</button></div>
+        <div class="med-res-expand"><div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">Names must be 3–63 characters, lowercase letters, numbers, and hyphens only — globally unique within the region. Co-locate with your compute for lowest latency.</div></div>
         </div>
-        <div class="pop-card res-card bucket-spicy-reveal" style="transition-delay:.14s">
-          <div class="pop-card-top" style="margin-bottom:8px">
+        <div class="pop-card med-res-card bucket-spicy-reveal" style="transition-delay:.14s">
+
+          <div class="pop-card-top" style="margin-bottom:10px">
             <div class="pop-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="13" fill="#111"/><text x="14" y="18.5" text-anchor="middle" fill="white" font-size="13" font-weight="700" font-family="sans-serif">2</text></svg></div>
             <div class="pop-card-info"><div class="pop-card-name">Connect with an Object Storage key</div><div class="pop-card-price">S3-compatible access</div></div>
+          <span class="np-hover-hint">Details<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
           </div>
-          <div class="pop-card-tags" style="margin-bottom:0;padding-top:2px"><span class="pop-tag-sub">Step 2 · API key</span></div>
-          <div class="res-card-body"><div class="res-card-body-inner">
-            <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">Generate an Object Storage API key (up to 2 per owner) to access your bucket via any S3-compatible client. Note: buckets can only be created or deleted via Console or CLI.</div>
-            <div class="res-card-actions"><button class="btn btn-o btn-sm" style="flex:1;justify-content:center">Create storage key</button></div>
-          </div></div>
+          <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Step 2 · API key</span></div>
+          
+        <div style="display:flex;gap:10px"><button class="btn btn-o btn-sm" style="flex:1;justify-content:center">Create storage key</button></div>
+        <div class="med-res-expand"><div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">Generate an Object Storage API key (up to 2 per owner) to access your bucket via any S3-compatible client. Note: buckets can only be created or deleted via Console or CLI.</div></div>
         </div>
       </div>
     </div>
@@ -2757,41 +2777,44 @@ img.ico{display:block;flex:0 0 auto}
     <div class="pop-section apikey-spicy-reveal" style="margin-top:60px;padding-bottom:20px">
       <div class="pop-title">Get started in three steps</div>
       <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;overflow:visible;align-items:start">
-        <div class="pop-card res-card apikey-spicy-reveal" style="transition-delay:.08s">
-          <div class="pop-card-top" style="margin-bottom:8px">
+        <div class="pop-card med-res-card apikey-spicy-reveal" style="transition-delay:.08s">
+
+          <div class="pop-card-top" style="margin-bottom:10px">
             <div class="pop-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="13" fill="#111"/><text x="14" y="18.5" text-anchor="middle" fill="white" font-size="13" font-weight="700" font-family="sans-serif">1</text></svg></div>
             <div class="pop-card-info"><div class="pop-card-name">Generate an API key</div><div class="pop-card-price">Programmatic access</div></div>
+          <span class="np-hover-hint">Details<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
           </div>
-          <div class="pop-card-tags" style="margin-bottom:0;padding-top:2px"><span class="pop-tag-sub">Step 1 · Security</span></div>
-          <div class="res-card-body"><div class="res-card-body-inner">
-            <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">The secret is shown once — save it before leaving the page. You can optionally set an alias and expiration date.</div>
-            <div class="res-card-actions"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="openApiKeyCreate()">Create API Key</button></div>
-          </div></div>
+          <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Step 1 · Security</span></div>
+          
+        <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="openApiKeyCreate()">Create API Key</button></div>
+        <div class="med-res-expand"><div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">The secret is shown once — save it before leaving the page. You can optionally set an alias and expiration date.</div></div>
         </div>
-        <div class="pop-card res-card apikey-spicy-reveal" style="transition-delay:.14s">
-          <div class="pop-card-top" style="margin-bottom:8px">
+        <div class="pop-card med-res-card apikey-spicy-reveal" style="transition-delay:.14s">
+
+          <div class="pop-card-top" style="margin-bottom:10px">
             <div class="pop-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="13" fill="#111"/><text x="14" y="18.5" text-anchor="middle" fill="white" font-size="13" font-weight="700" font-family="sans-serif">2</text></svg></div>
             <div class="pop-card-info"><div class="pop-card-name">Install the Crusoe CLI</div><div class="pop-card-price">Manage from your terminal</div></div>
+          <span class="np-hover-hint">Details<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
           </div>
-          <div class="pop-card-tags" style="margin-bottom:0;padding-top:2px"><span class="pop-tag-sub">Step 2 · Setup</span></div>
-          <div class="res-card-body"><div class="res-card-body-inner">
-            <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">Install the CLI to manage VMs, storage, and reservations from your terminal.</div>
+          <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Step 2 · Setup</span></div>
+          
+        <div class="med-res-expand"><div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">Install the CLI to manage VMs, storage, and reservations from your terminal.</div>
             <div style="display:flex;gap:4px;margin-bottom:8px"><button class="pkg-btn active" onclick="setPkg('pip')" style="font-size:11px">pip</button><button class="pkg-btn" onclick="setPkg('brew')" style="font-size:11px">brew</button></div>
             <div id="pkg-pip2" class="action-card-cli" style="display:flex;align-items:center;justify-content:space-between;font-size:11px"><code style="font-size:11px">pip install crusoe</code><button class="cli-snippet-copy" onclick="copySnippet(this,'pip install crusoe')" style="font-size:10px">Copy</button></div>
-            <div id="pkg-brew2" class="action-card-cli" style="display:none;align-items:center;justify-content:space-between;font-size:11px"><code style="font-size:11px">brew install crusoe-cloud/tap/crusoe</code><button class="cli-snippet-copy" onclick="copySnippet(this,'brew install crusoe-cloud/tap/crusoe')" style="font-size:10px">Copy</button></div>
-          </div></div>
+            <div id="pkg-brew2" class="action-card-cli" style="display:none;align-items:center;justify-content:space-between;font-size:11px"><code style="font-size:11px">brew install crusoe-cloud/tap/crusoe</code><button class="cli-snippet-copy" onclick="copySnippet(this,'brew install crusoe-cloud/tap/crusoe')" style="font-size:10px">Copy</button></div></div>
         </div>
-        <div class="pop-card res-card apikey-spicy-reveal" style="transition-delay:.20s">
-          <div class="pop-card-top" style="margin-bottom:8px">
+        <div class="pop-card med-res-card apikey-spicy-reveal" style="transition-delay:.20s">
+
+          <div class="pop-card-top" style="margin-bottom:10px">
             <div class="pop-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="13" fill="#111"/><text x="14" y="18.5" text-anchor="middle" fill="white" font-size="13" font-weight="700" font-family="sans-serif">3</text></svg></div>
             <div class="pop-card-info"><div class="pop-card-name">Configure the CLI</div><div class="pop-card-price">Connect to your account</div></div>
+          <span class="np-hover-hint">Details<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
           </div>
-          <div class="pop-card-tags" style="margin-bottom:0;padding-top:2px"><span class="pop-tag-sub">Step 3 · Setup</span></div>
-          <div class="res-card-body"><div class="res-card-body-inner">
-            <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">Run <code style="font-size:11px;background:var(--gray-100);padding:1px 4px;border-radius:3px;font-family:var(--mono)">crusoe init</code> and paste your API key ID and secret when prompted.</div>
-            <div class="action-card-cli" style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;font-size:11px"><code style="font-size:11px">crusoe init</code><button class="cli-snippet-copy" onclick="copySnippet(this,'crusoe init')" style="font-size:10px">Copy</button></div>
-            <div class="res-card-actions"><a href="https://docs.crusoecloud.com/identity-and-security/managing-api-keys/" target="_blank" style="font-size:11px;color:var(--muted);font-family:var(--font-body)">API key docs →</a></div>
-          </div></div>
+          <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Step 3 · Setup</span></div>
+          
+        <div style="display:flex;gap:10px"><a href="https://docs.crusoecloud.com/identity-and-security/managing-api-keys/" target="_blank" style="font-size:11px;color:var(--muted);font-family:var(--font-body)">API key docs →</a></div>
+        <div class="med-res-expand"><div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">Run <code style="font-size:11px;background:var(--gray-100);padding:1px 4px;border-radius:3px;font-family:var(--mono)">crusoe init</code> and paste your API key ID and secret when prompted.</div>
+            <div class="action-card-cli" style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;font-size:11px"><code style="font-size:11px">crusoe init</code><button class="cli-snippet-copy" onclick="copySnippet(this,'crusoe init')" style="font-size:10px">Copy</button></div></div>
         </div>
       </div>
     </div>
@@ -2946,7 +2969,7 @@ img.ico{display:block;flex:0 0 auto}
       <div style="max-width:380px">
         <h1 style="font-size:40px;font-weight:400;font-family:var(--font-heading);color:var(--text);letter-spacing:-1.2px;line-height:110%;margin:0 0 10px;white-space:nowrap">No log data yet.</h1>
         <p style="font-size:14px;color:var(--muted);font-family:var(--font-body);line-height:160%;margin:0 0 16px">Centralized log collection and monitoring for your Crusoe Cloud resources. Install the telemetry agent to start streaming.</p>
-        <a href="https://docs.crusoecloud.com/command-center/logs/" target="_blank" style="display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:500;font-family:var(--font-body);color:var(--white);background:var(--black);padding:6px 14px;border-radius:8px;text-decoration:none;letter-spacing:.01em;transition:opacity .15s ease" onmouseenter="this.style.opacity='.8'" onmouseleave="this.style.opacity='1'">View docs →</a>
+        <a href="https://docs.crusoecloud.com/command-center/logs/" target="_blank" style="display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:500;font-family:var(--font-body);color:var(--muted);text-decoration:none;transition:color .15s ease" onmouseenter="this.style.color='var(--text)'" onmouseleave="this.style.color='var(--muted)'">View docs →</a>
       </div>
     </div>
 
@@ -2954,38 +2977,41 @@ img.ico{display:block;flex:0 0 auto}
     <div class="pop-section" style="margin-top:60px;padding-bottom:20px">
       <div class="pop-title">Get started in three steps</div>
       <div class="pop-grid">
-        <div class="pop-card res-card" style="transition-delay:.08s">
-          <div class="pop-card-top" style="margin-bottom:8px">
+        <div class="pop-card med-res-card" style="transition-delay:.08s">
+
+          <div class="pop-card-top" style="margin-bottom:10px">
             <div class="pop-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="13" fill="#111"/><text x="14" y="18.5" text-anchor="middle" fill="white" font-size="13" font-weight="700" font-family="sans-serif">1</text></svg></div>
             <div class="pop-card-info"><div class="pop-card-name">Install the telemetry agent</div><div class="pop-card-price">Log collection &amp; metrics</div></div>
+          <span class="np-hover-hint">Details<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
           </div>
-          <div class="pop-card-tags" style="margin-bottom:0;padding-top:2px"><span class="pop-tag-sub">Step 1 · Agent</span></div>
-          <div class="res-card-body"><div class="res-card-body-inner">
-            <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">Deploy the Crusoe telemetry agent on your instances to enable log collection, metrics, and alerting.</div>
-            <div class="res-card-actions"><a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/command-center/logs/" target="_blank" style="flex:1;justify-content:center;text-decoration:none">View agent docs →</a></div>
-          </div></div>
+          <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Step 1 · Agent</span></div>
+          
+        <div style="display:flex;gap:10px"><a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/command-center/logs/" target="_blank" style="flex:1;justify-content:center;text-decoration:none">View agent docs →</a></div>
+        <div class="med-res-expand"><div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">Deploy the Crusoe telemetry agent on your instances to enable log collection, metrics, and alerting.</div></div>
         </div>
-        <div class="pop-card res-card" style="transition-delay:.14s">
-          <div class="pop-card-top" style="margin-bottom:8px">
+        <div class="pop-card med-res-card" style="transition-delay:.14s">
+
+          <div class="pop-card-top" style="margin-bottom:10px">
             <div class="pop-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="13" fill="#111"/><text x="14" y="18.5" text-anchor="middle" fill="white" font-size="13" font-weight="700" font-family="sans-serif">2</text></svg></div>
             <div class="pop-card-info"><div class="pop-card-name">Configure log sources</div><div class="pop-card-price">Syslog, journald &amp; custom paths</div></div>
+          <span class="np-hover-hint">Details<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
           </div>
-          <div class="pop-card-tags" style="margin-bottom:0;padding-top:2px"><span class="pop-tag-sub">Step 2 · Config</span></div>
-          <div class="res-card-body"><div class="res-card-body-inner">
-            <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">Point your application logs, system logs, and GPU metrics at Managed Logs. Supports syslog, journald, and custom paths.</div>
-            <div class="res-card-actions"><a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/command-center/logs/" target="_blank" style="flex:1;justify-content:center;text-decoration:none">View configuration →</a></div>
-          </div></div>
+          <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Step 2 · Config</span></div>
+          
+        <div style="display:flex;gap:10px"><a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/command-center/logs/" target="_blank" style="flex:1;justify-content:center;text-decoration:none">View configuration →</a></div>
+        <div class="med-res-expand"><div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">Point your application logs, system logs, and GPU metrics at Managed Logs. Supports syslog, journald, and custom paths.</div></div>
         </div>
-        <div class="pop-card res-card" style="transition-delay:.2s">
-          <div class="pop-card-top" style="margin-bottom:8px">
+        <div class="pop-card med-res-card" style="transition-delay:.2s">
+
+          <div class="pop-card-top" style="margin-bottom:10px">
             <div class="pop-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="13" fill="#111"/><text x="14" y="18.5" text-anchor="middle" fill="white" font-size="13" font-weight="700" font-family="sans-serif">3</text></svg></div>
             <div class="pop-card-info"><div class="pop-card-name">Set up dashboards</div><div class="pop-card-price">Visualize &amp; monitor</div></div>
+          <span class="np-hover-hint">Details<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
           </div>
-          <div class="pop-card-tags" style="margin-bottom:0;padding-top:2px"><span class="pop-tag-sub">Step 3 · Observability</span></div>
-          <div class="res-card-body"><div class="res-card-body-inner">
-            <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">Create custom dashboards to visualize GPU utilization, memory pressure, training throughput, and more.</div>
-            <div class="res-card-actions"><a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/command-center/logs/" target="_blank" style="flex:1;justify-content:center;text-decoration:none">Browse templates →</a></div>
-          </div></div>
+          <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Step 3 · Observability</span></div>
+          
+        <div style="display:flex;gap:10px"><a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/command-center/logs/" target="_blank" style="flex:1;justify-content:center;text-decoration:none">Browse templates →</a></div>
+        <div class="med-res-expand"><div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">Create custom dashboards to visualize GPU utilization, memory pressure, training throughput, and more.</div></div>
         </div>
       </div>
     </div>
@@ -3320,36 +3346,38 @@ img.ico{display:block;flex:0 0 auto}
       <div style="position:relative;z-index:1;max-width:380px">
         <h1 style="font-size:40px;font-weight:400;font-family:var(--font-heading);color:var(--text);letter-spacing:-1.2px;line-height:110%;margin:0 0 10px;white-space:nowrap">No SSH keys yet.</h1>
         <p style="font-size:14px;color:var(--muted);font-family:var(--font-body);line-height:160%;margin:0 0 16px">Upload your public SSH key so it's available when creating VMs. Keys must be selected at VM creation to take effect — adding one here alone doesn't grant access.</p>
-        <a href="https://docs.crusoecloud.com/compute/virtual-machines/managing-ssh-keys/" target="_blank" style="display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:500;font-family:var(--font-body);color:var(--white);background:var(--black);padding:6px 14px;border-radius:8px;text-decoration:none;letter-spacing:.01em;transition:opacity .15s ease" onmouseenter="this.style.opacity='.8'" onmouseleave="this.style.opacity='1'">View docs →</a>
+        <a href="https://docs.crusoecloud.com/compute/virtual-machines/managing-ssh-keys/" target="_blank" style="display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:500;font-family:var(--font-body);color:var(--muted);text-decoration:none;transition:color .15s ease" onmouseenter="this.style.color='var(--text)'" onmouseleave="this.style.color='var(--muted)'">View docs →</a>
       </div>
     </div>
     <!-- 2 step cards -->
     <div class="pop-section sshkey-spicy-reveal" style="margin-top:60px;padding-bottom:20px">
       <div class="pop-title">Get started in two steps</div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;overflow:visible;align-items:start">
-        <div class="pop-card res-card sshkey-spicy-reveal" style="transition-delay:.08s">
-          <div class="pop-card-top" style="margin-bottom:8px">
+        <div class="pop-card med-res-card sshkey-spicy-reveal" style="transition-delay:.08s">
+
+          <div class="pop-card-top" style="margin-bottom:10px">
             <div class="pop-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="13" fill="#111"/><text x="14" y="18.5" text-anchor="middle" fill="white" font-size="13" font-weight="700" font-family="sans-serif">1</text></svg></div>
             <div class="pop-card-info"><div class="pop-card-name">Generate a key pair</div><div class="pop-card-price">Ed25519 recommended</div></div>
+          <span class="np-hover-hint">Details<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
           </div>
-          <div class="pop-card-tags" style="margin-bottom:0;padding-top:2px"><span class="pop-tag-sub">Step 1 · Security</span></div>
-          <div class="res-card-body"><div class="res-card-body-inner">
-            <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:8px">Run this in your terminal to generate an Ed25519 key pair, then add the public key here.</div>
-            <div class="action-card-cli" style="margin-bottom:8px"><code style="font-size:11px">ssh-keygen -t ed25519 -C "you@email.com"</code></div>
-            <div class="res-card-actions"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Add SSH Key</button></div>
-          </div></div>
+          <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Step 1 · Security</span></div>
+          
+        <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Add SSH Key</button></div>
+        <div class="med-res-expand"><div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:8px">Run this in your terminal to generate an Ed25519 key pair, then add the public key here.</div>
+            <div class="action-card-cli" style="margin-bottom:8px"><code style="font-size:11px">ssh-keygen -t ed25519 -C "you@email.com"</code></div></div>
         </div>
-        <div class="pop-card res-card sshkey-spicy-reveal" style="transition-delay:.14s">
-          <div class="pop-card-top" style="margin-bottom:8px">
+        <div class="pop-card med-res-card sshkey-spicy-reveal" style="transition-delay:.14s">
+
+          <div class="pop-card-top" style="margin-bottom:10px">
             <div class="pop-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="13" fill="#111"/><text x="14" y="18.5" text-anchor="middle" fill="white" font-size="13" font-weight="700" font-family="sans-serif">2</text></svg></div>
             <div class="pop-card-info"><div class="pop-card-name">Connect to a VM</div><div class="pop-card-price">SSH in directly</div></div>
+          <span class="np-hover-hint">Details<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
           </div>
-          <div class="pop-card-tags" style="margin-bottom:0;padding-top:2px"><span class="pop-tag-sub">Step 2 · Access</span></div>
-          <div class="res-card-body"><div class="res-card-body-inner">
-            <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:8px">Select your key when creating an instance — it won't grant access unless chosen at creation time. SSH in once the VM is running.</div>
-            <div class="action-card-cli" style="margin-bottom:8px"><code style="font-size:11px">ssh ubuntu@&lt;instance-ip&gt;</code></div>
-            <div class="res-card-actions"><button class="btn btn-o btn-sm" style="flex:1;justify-content:center">Create instance</button></div>
-          </div></div>
+          <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Step 2 · Access</span></div>
+          
+        <div style="display:flex;gap:10px"><button class="btn btn-o btn-sm" style="flex:1;justify-content:center">Create instance</button></div>
+        <div class="med-res-expand"><div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:8px">Select your key when creating an instance — it won't grant access unless chosen at creation time. SSH in once the VM is running.</div>
+            <div class="action-card-cli" style="margin-bottom:8px"><code style="font-size:11px">ssh ubuntu@&lt;instance-ip&gt;</code></div></div>
         </div>
       </div>
     </div>
