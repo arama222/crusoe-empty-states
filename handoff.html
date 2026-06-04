@@ -560,6 +560,11 @@ img.ico{display:block;flex:0 0 auto}
 .med-res-card:hover{border-color:var(--gray-300)!important;box-shadow:0 2px 12px rgba(0,0,0,.08)!important;border-radius:10px 10px 0 0!important;z-index:20}
 .med-res-expand{position:absolute;top:calc(100% - 1px);left:-1px;right:-1px;background:var(--white);border:1px solid var(--gray-300);border-top:none;border-radius:0 0 10px 10px;padding:10px 20px 14px;opacity:0;pointer-events:none;transition:opacity .18s ease;z-index:19;font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:150%}
 .med-res-card:hover .med-res-expand{opacity:1;pointer-events:auto}
+/* "Hover for more" affordance on med-res cards */
+.np-hover-hint{display:inline-flex;align-items:center;gap:3px;font-size:11px;color:var(--gray-400);flex-shrink:0;transition:color .2s ease;white-space:nowrap}
+.np-hover-hint svg{transition:transform .2s ease}
+.med-res-card:hover .np-hover-hint{color:var(--text2)}
+.med-res-card:hover .np-hover-hint svg{transform:rotate(180deg)}
 .pop-tag-title{font-size:13px;font-weight:600;font-family:var(--font-body);color:var(--text)}
 .pop-tag-sub{font-size:12px;font-family:var(--font-body);color:var(--muted)}
 /* legacy pill style kept for non-reservation uses */
@@ -3126,7 +3131,7 @@ img.ico{display:block;flex:0 0 auto}
         <p style="font-size:14px;color:var(--muted);font-family:var(--font-body);line-height:160%;margin:0 0 16px">Add a pool to assign GPU or CPU nodes to this cluster. Nodes join the control plane automatically within minutes.</p>
         <div style="display:flex;align-items:center;gap:10px">
           <button class="btn btn-p"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.99967 3.33337V12.6667M3.33301 8.00004H12.6663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Create Node Pool</button>
-          <a href="https://docs.crusoecloud.com/orchestration/cmk/managing-nodepools/" target="_blank" style="display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:500;font-family:var(--font-body);color:var(--text);text-decoration:none">View docs →</a>
+          <a href="https://docs.crusoecloud.com/orchestration/cmk/managing-nodepools/" target="_blank" style="display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:400;font-family:var(--font-body);color:var(--muted);text-decoration:none" onmouseenter="this.style.color='var(--text2)'" onmouseleave="this.style.color='var(--muted)'">View docs →</a>
         </div>
       </div>
     </div>
@@ -3134,26 +3139,26 @@ img.ico{display:block;flex:0 0 auto}
     <!-- Get started cards (match other empty states) -->
     <div class="pop-section" style="padding:0 40px 24px 72px">
       <div class="pop-title">Get started</div>
-      <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px;overflow:visible;align-items:start">
-        <div class="pop-card res-card">
-          <div class="pop-card-top" style="margin-bottom:8px">
+      <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px;align-items:start">
+        <!-- Card 1: Create via CLI (primary action at rest, details on hover) -->
+        <div class="pop-card med-res-card" style="display:flex;flex-direction:column;gap:0">
+          <div class="pop-card-top" style="margin-bottom:10px">
             <div class="pop-card-info"><div class="pop-card-name">Create via CLI</div><div class="pop-card-price">Run one command</div></div>
+            <span class="np-hover-hint">Details<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
           </div>
-          <div class="pop-card-tags" style="margin-bottom:0;padding-top:2px"><span class="pop-tag-sub">Option · CLI</span></div>
-          <div class="res-card-body"><div class="res-card-body-inner">
-            <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">Run the command below to add a pool to this cluster. Nodes join the control plane automatically within minutes.</div>
-            <div class="action-card-cli" style="display:flex;align-items:center;justify-content:space-between;font-size:11px;margin-bottom:10px"><code style="font-size:11px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">crusoe kubernetes nodepools create --name my-pool --type h100-80gb-sxm-ib.8x</code><button class="cli-snippet-copy" onclick="copySnippet(this,'crusoe kubernetes nodepools create --name my-pool --cluster-id <cluster-id> --type h100-80gb-sxm-ib.8x --count 4')" style="font-size:10px;flex-shrink:0">Copy</button></div>
-          </div></div>
+          <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Option · CLI</span></div>
+          <div style="display:flex;gap:6px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center;gap:5px" onclick="copySnippet(this,'crusoe kubernetes nodepools create --name my-pool --cluster-id <cluster-id> --type h100-80gb-sxm-ib.8x --count 4')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy command</button></div>
+          <div class="med-res-expand"><code style="display:block;font-family:var(--mono);font-size:11px;color:var(--text2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">crusoe kubernetes nodepools create --name my-pool --type h100-80gb-sxm-ib.8x</code><div style="margin-top:6px">Nodes join the control plane automatically within minutes. <a href="https://docs.crusoecloud.com/orchestration/cmk/managing-nodepools/" target="_blank" style="color:var(--muted);text-decoration:underline;text-underline-offset:2px">Docs</a></div></div>
         </div>
-        <div class="pop-card res-card">
-          <div class="pop-card-top" style="margin-bottom:8px">
+        <!-- Card 2: Recommended start (primary action at rest, details on hover) -->
+        <div class="pop-card med-res-card" style="display:flex;flex-direction:column;gap:0">
+          <div class="pop-card-top" style="margin-bottom:10px">
             <div class="pop-card-info"><div class="pop-card-name">Recommended start</div><div class="pop-card-price">Validate before scaling</div></div>
+            <span class="np-hover-hint">Details<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
           </div>
-          <div class="pop-card-tags" style="margin-bottom:0;padding-top:2px"><span class="pop-tag-sub">Tip · Best practice</span></div>
-          <div class="res-card-body"><div class="res-card-body-inner">
-            <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">Start with a single H100 or A100 node pool to validate GPU operator and networking before scaling out to a larger fleet.</div>
-            <div class="res-card-actions"><a href="https://docs.crusoecloud.com/orchestration/cmk/managing-nodepools/" target="_blank" class="btn btn-o btn-sm" style="flex:1;justify-content:center;text-decoration:none">Node pool docs →</a></div>
-          </div></div>
+          <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Tip · Best practice</span></div>
+          <div style="display:flex;gap:6px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M7.99967 3.33337V12.6667M3.33301 8.00004H12.6663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Create Node Pool</button></div>
+          <div class="med-res-expand">Start with a single H100 or A100 node pool to validate GPU operator and networking before scaling out to a larger fleet. <a href="https://docs.crusoecloud.com/orchestration/cmk/managing-nodepools/" target="_blank" style="color:var(--muted);text-decoration:underline;text-underline-offset:2px">Docs</a></div>
         </div>
       </div>
     </div>
