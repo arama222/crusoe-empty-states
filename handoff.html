@@ -565,11 +565,13 @@ img.ico{display:block;flex:0 0 auto}
 .np-hover-hint svg{transition:transform .2s ease}
 .med-res-card:hover .np-hover-hint{color:var(--text)}
 .med-res-card:hover .np-hover-hint svg{transform:rotate(180deg)}
-/* Vertically center the empty-state content so whitespace is balanced top & bottom — instances & templates */
+/* Fill the main height; center ONLY the empty states (filled/edge data states stay top-aligned) */
 #view-instances.active,
 #view-instance-templates.active{display:flex;flex-direction:column;flex:1;min-height:0}
 #view-instances.active > .ca,
-#view-instance-templates.active > .ca{flex:1;display:flex;flex-direction:column;justify-content:center;min-height:0}
+#view-instance-templates.active > .ca{flex:1;display:flex;flex-direction:column;min-height:0}
+#instances-medium,#instances-mild,#instances-spicy{margin:auto 0}
+#view-instance-templates.active > .ca{justify-content:center}
 .pop-tag-title{font-size:13px;font-weight:600;font-family:var(--font-body);color:var(--text)}
 .pop-tag-sub{font-size:12px;font-family:var(--font-body);color:var(--muted)}
 /* legacy pill style kept for non-reservation uses */
@@ -624,7 +626,7 @@ img.ico{display:block;flex:0 0 auto}
 /* ── Mini condensed reservation/template bar ── */
 .res-mini-bar{margin-bottom:18px}
 .res-mini-bar-label{font-size:11px;font-weight:500;color:var(--muted);font-family:var(--font-body);text-transform:uppercase;letter-spacing:.05em;margin-bottom:7px}
-.res-mini-grid{display:flex;flex-wrap:wrap;gap:8px}
+.res-mini-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
 .res-mini-item{display:flex;align-items:center;gap:10px;border:1px solid var(--border);border-radius:8px;padding:8px 12px;background:var(--white);cursor:default;transition:box-shadow .15s,border-color .15s;min-width:0}
 .res-mini-item:hover{box-shadow:0 2px 8px rgba(0,0,0,.07);border-color:#d1d5db}
 .res-mini-item-body{flex:1;min-width:0}
