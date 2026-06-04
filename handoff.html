@@ -301,7 +301,7 @@ html,body{height:100%;background:var(--white);color:var(--black);font-family:'Su
 .res-card:hover .res-card-body{max-height:200px}
 .res-card-body-inner{padding-top:10px;padding-bottom:10px}
 /* Buttons always visible inside body */
-.res-card-actions{display:flex;gap:6px}
+.res-card-actions{display:flex;gap:10px}
 .step-card{border:1px solid var(--border);border-radius:12px;padding:20px 24px;display:flex;flex-direction:column;gap:10px;background:var(--white)}
 .step-num{width:30px;height:30px;border-radius:50%;background:#111;color:#fff;font-size:13px;font-weight:700;font-family:var(--font-body);display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .step-title{font-size:15px;font-weight:600;font-family:var(--font-body);color:var(--text);margin:0}
@@ -720,7 +720,7 @@ img.ico{display:block;flex:0 0 auto}
           <div class="pop-card-info"><div class="pop-card-name">H100 80GB SXM</div><div class="pop-card-price">6 of 32 GPUs available</div></div>
         </div>
         <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Training · Multi-node</span></div>
-        <div style="display:flex;gap:6px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createInstanceFromRes('h100',this)">Create instance</button><button class="btn btn-o btn-sm" onclick="copyResCli('h100')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
+        <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createInstanceFromRes('h100',this)">Create instance</button><button class="btn btn-o btn-sm" onclick="copyResCli('h100')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
         <div class="med-res-expand">State-of-the-art training &amp; inference. 80 GB HBM3 with NVLink + InfiniBand for multi-node runs. Best for LLM training, RLHF, and fine-tuning.</div>
       </div>
       <!-- H200 card -->
@@ -730,7 +730,7 @@ img.ico{display:block;flex:0 0 auto}
           <div class="pop-card-info"><div class="pop-card-name">H200 141GB</div><div class="pop-card-price">16 of 16 GPUs available</div></div>
         </div>
         <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Inference · Large models</span></div>
-        <div style="display:flex;gap:6px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createInstanceFromRes('h200',this)">Create instance</button><button class="btn btn-o btn-sm" onclick="copyResCli('h200')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
+        <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createInstanceFromRes('h200',this)">Create instance</button><button class="btn btn-o btn-sm" onclick="copyResCli('h200')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
         <div class="med-res-expand">Largest memory for massive models. 141 GB HBM3e — ideal for 70B+ parameter inference, long-context workloads, and MoE architectures.</div>
       </div>
       <!-- L40S card -->
@@ -740,7 +740,7 @@ img.ico{display:block;flex:0 0 auto}
           <div class="pop-card-info"><div class="pop-card-name">L40S 48GB</div><div class="pop-card-price">4 of 8 GPUs available</div></div>
         </div>
         <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Inference · Fine-tuning</span></div>
-        <div style="display:flex;gap:6px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createInstanceFromRes('l40s',this)">Create instance</button><button class="btn btn-o btn-sm" onclick="copyResCli('l40s')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
+        <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createInstanceFromRes('l40s',this)">Create instance</button><button class="btn btn-o btn-sm" onclick="copyResCli('l40s')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
         <div class="med-res-expand">Cost-efficient inference &amp; fine-tuning. 48 GB GDDR6, great for model serving, small-scale training, and multi-modal workloads.</div>
       </div>
     </div>
@@ -829,7 +829,7 @@ img.ico{display:block;flex:0 0 auto}
           </div>
           <div class="pop-card-tags" style="margin-bottom:6px"><span class="pop-tag-sub">Training · Multi-node</span></div>
           <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:150%;margin-bottom:12px">State-of-the-art training &amp; inference. 80 GB HBM3 with NVLink + InfiniBand for multi-node runs.</div>
-          <div style="display:flex;gap:6px;margin-top:auto"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create instance</button><button class="btn btn-o btn-sm" onclick="copyResCli('h100')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
+          <div style="display:flex;gap:10px;margin-top:auto"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create instance</button><button class="btn btn-o btn-sm" onclick="copyResCli('h100')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
         </div>
       </div>
       <div style="margin-top:12px;font-size:12px;color:var(--muted);font-family:var(--font-body)">1 reservation active — <a href="#" style="color:var(--text);text-decoration:underline">view all reservations →</a></div>
@@ -852,7 +852,7 @@ img.ico{display:block;flex:0 0 auto}
           </div>
           <div class="pop-card-tags" style="margin-bottom:6px"><span class="pop-tag-sub">Training · Multi-node</span></div>
           <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:150%;margin-bottom:12px">State-of-the-art training &amp; inference. 80 GB HBM3 with NVLink + InfiniBand for multi-node runs.</div>
-          <div style="display:flex;gap:6px;margin-top:auto"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create instance</button><button class="btn btn-o btn-sm" onclick="copyResCli('h100')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
+          <div style="display:flex;gap:10px;margin-top:auto"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create instance</button><button class="btn btn-o btn-sm" onclick="copyResCli('h100')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
         </div>
         <div class="pop-card" style="cursor:default;display:flex;flex-direction:column;gap:0">
           <div class="pop-card-top" style="margin-bottom:10px">
@@ -861,7 +861,7 @@ img.ico{display:block;flex:0 0 auto}
           </div>
           <div class="pop-card-tags" style="margin-bottom:6px"><span class="pop-tag-sub">Inference · Large models</span></div>
           <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:150%;margin-bottom:12px">Largest memory for massive models. 141 GB HBM3e — ideal for 70B+ parameter inference and MoE architectures.</div>
-          <div style="display:flex;gap:6px;margin-top:auto"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create instance</button><button class="btn btn-o btn-sm" onclick="copyResCli('h200')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
+          <div style="display:flex;gap:10px;margin-top:auto"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create instance</button><button class="btn btn-o btn-sm" onclick="copyResCli('h200')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
         </div>
       </div>
       <div style="margin-top:12px;font-size:12px;color:var(--muted);font-family:var(--font-body)">2 reservations active — <a href="#" style="color:var(--text);text-decoration:underline">view all reservations →</a></div>
@@ -884,7 +884,7 @@ img.ico{display:block;flex:0 0 auto}
           </div>
           <div class="pop-card-tags" style="margin-bottom:6px"><span class="pop-tag-sub">Training · Multi-node</span></div>
           <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:150%;margin-bottom:12px">State-of-the-art training &amp; inference. 80 GB HBM3 with NVLink + InfiniBand for multi-node runs.</div>
-          <div style="display:flex;gap:6px;margin-top:auto"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create instance</button><button class="btn btn-o btn-sm" onclick="copyResCli('h100')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
+          <div style="display:flex;gap:10px;margin-top:auto"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create instance</button><button class="btn btn-o btn-sm" onclick="copyResCli('h100')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
         </div>
         <div class="pop-card" style="cursor:default;display:flex;flex-direction:column;gap:0">
           <div class="pop-card-top" style="margin-bottom:10px">
@@ -893,7 +893,7 @@ img.ico{display:block;flex:0 0 auto}
           </div>
           <div class="pop-card-tags" style="margin-bottom:6px"><span class="pop-tag-sub">Inference · Large models</span></div>
           <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:150%;margin-bottom:12px">Largest memory for massive models. 141 GB HBM3e — ideal for 70B+ parameter inference and MoE architectures.</div>
-          <div style="display:flex;gap:6px;margin-top:auto"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create instance</button><button class="btn btn-o btn-sm" onclick="copyResCli('h200')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
+          <div style="display:flex;gap:10px;margin-top:auto"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create instance</button><button class="btn btn-o btn-sm" onclick="copyResCli('h200')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
         </div>
         <div class="pop-card" style="cursor:default;display:flex;flex-direction:column;gap:0">
           <div class="pop-card-top" style="margin-bottom:10px">
@@ -902,7 +902,7 @@ img.ico{display:block;flex:0 0 auto}
           </div>
           <div class="pop-card-tags" style="margin-bottom:6px"><span class="pop-tag-sub">Inference · Fine-tuning</span></div>
           <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:150%;margin-bottom:12px">Cost-efficient inference &amp; fine-tuning. 48 GB GDDR6, great for model serving and small-scale training.</div>
-          <div style="display:flex;gap:6px;margin-top:auto"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create instance</button><button class="btn btn-o btn-sm" onclick="copyResCli('l40s')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
+          <div style="display:flex;gap:10px;margin-top:auto"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create instance</button><button class="btn btn-o btn-sm" onclick="copyResCli('l40s')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
         </div>
       </div>
       <div style="margin-top:12px;font-size:12px;color:var(--muted);font-family:var(--font-body)">3 reservations active — <a href="#" style="color:var(--text);text-decoration:underline">view all reservations →</a></div>
@@ -925,7 +925,7 @@ img.ico{display:block;flex:0 0 auto}
           </div>
           <div class="pop-card-tags" style="margin-bottom:6px"><span class="pop-tag-sub">Training · Multi-node</span></div>
           <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:150%;margin-bottom:12px">State-of-the-art training &amp; inference. 80 GB HBM3 with NVLink + InfiniBand for multi-node runs.</div>
-          <div style="display:flex;gap:6px;margin-top:auto"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create instance</button><button class="btn btn-o btn-sm" onclick="copyResCli('h100')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
+          <div style="display:flex;gap:10px;margin-top:auto"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create instance</button><button class="btn btn-o btn-sm" onclick="copyResCli('h100')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
         </div>
         <!-- Sold-out card -->
         <div class="pop-card" style="cursor:default;display:flex;flex-direction:column;gap:0;opacity:.5;pointer-events:none">
@@ -938,7 +938,7 @@ img.ico{display:block;flex:0 0 auto}
           </div>
           <div class="pop-card-tags" style="margin-bottom:6px"><span class="pop-tag-sub">Inference · Large models</span></div>
           <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:150%;margin-bottom:12px">Largest memory for massive models. 141 GB HBM3e — ideal for 70B+ parameter inference and MoE architectures.</div>
-          <div style="display:flex;gap:6px;margin-top:auto"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" disabled>All in use</button><button class="btn btn-o btn-sm" style="gap:5px" disabled>Copy CLI</button></div>
+          <div style="display:flex;gap:10px;margin-top:auto"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" disabled>All in use</button><button class="btn btn-o btn-sm" style="gap:5px" disabled>Copy CLI</button></div>
         </div>
         <!-- Available card -->
         <div class="pop-card" style="cursor:default;display:flex;flex-direction:column;gap:0">
@@ -948,7 +948,7 @@ img.ico{display:block;flex:0 0 auto}
           </div>
           <div class="pop-card-tags" style="margin-bottom:6px"><span class="pop-tag-sub">Inference · Fine-tuning</span></div>
           <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:150%;margin-bottom:12px">Cost-efficient inference &amp; fine-tuning. 48 GB GDDR6, great for model serving and small-scale training.</div>
-          <div style="display:flex;gap:6px;margin-top:auto"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create instance</button><button class="btn btn-o btn-sm" onclick="copyResCli('l40s')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
+          <div style="display:flex;gap:10px;margin-top:auto"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create instance</button><button class="btn btn-o btn-sm" onclick="copyResCli('l40s')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
         </div>
       </div>
       <div style="margin-top:12px;font-size:12px;color:var(--muted);font-family:var(--font-body)">1 of 3 reservations sold out — GPUs return to available when running instances are stopped.</div>
@@ -997,19 +997,19 @@ img.ico{display:block;flex:0 0 auto}
           <div class="pop-card-top" style="margin-bottom:10px"><div class="pop-card-info"><div class="pop-card-name">H100 80GB SXM</div><div class="pop-card-price">6 of 32 GPUs available</div></div></div>
           <div class="pop-card-tags" style="margin-bottom:6px"><span class="pop-tag-sub">Training · Multi-node</span></div>
           <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:150%;margin-bottom:12px">State-of-the-art training &amp; inference. NVLink + InfiniBand for multi-node runs.</div>
-          <div style="display:flex;gap:6px;margin-top:auto"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create instance</button><button class="btn btn-o btn-sm" onclick="copyResCli('h100')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
+          <div style="display:flex;gap:10px;margin-top:auto"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create instance</button><button class="btn btn-o btn-sm" onclick="copyResCli('h100')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
         </div>
         <div class="pop-card" style="cursor:default;display:flex;flex-direction:column;gap:0">
           <div class="pop-card-top" style="margin-bottom:10px"><div class="pop-card-info"><div class="pop-card-name">H200 141GB</div><div class="pop-card-price">16 of 16 GPUs available</div></div></div>
           <div class="pop-card-tags" style="margin-bottom:6px"><span class="pop-tag-sub">Inference · Large models</span></div>
           <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:150%;margin-bottom:12px">141 GB HBM3e — ideal for 70B+ parameter inference and MoE architectures.</div>
-          <div style="display:flex;gap:6px;margin-top:auto"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create instance</button><button class="btn btn-o btn-sm" onclick="copyResCli('h200')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
+          <div style="display:flex;gap:10px;margin-top:auto"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create instance</button><button class="btn btn-o btn-sm" onclick="copyResCli('h200')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
         </div>
         <div class="pop-card" style="cursor:default;display:flex;flex-direction:column;gap:0">
           <div class="pop-card-top" style="margin-bottom:10px"><div class="pop-card-info"><div class="pop-card-name">L40S 48GB</div><div class="pop-card-price">4 of 8 GPUs available</div></div></div>
           <div class="pop-card-tags" style="margin-bottom:6px"><span class="pop-tag-sub">Inference · Fine-tuning</span></div>
           <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:150%;margin-bottom:12px">48 GB GDDR6 — cost-efficient inference and fine-tuning.</div>
-          <div style="display:flex;gap:6px;margin-top:auto"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create instance</button><button class="btn btn-o btn-sm" onclick="copyResCli('l40s')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
+          <div style="display:flex;gap:10px;margin-top:auto"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create instance</button><button class="btn btn-o btn-sm" onclick="copyResCli('l40s')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
         </div>
       </div>
     </div>
@@ -1029,32 +1029,32 @@ img.ico{display:block;flex:0 0 auto}
           <div class="pop-card-top" style="margin-bottom:10px"><div class="pop-card-info"><div class="pop-card-name">H100 80GB SXM</div><div class="pop-card-price">6 of 32 GPUs available</div></div></div>
           <div class="pop-card-tags" style="margin-bottom:6px"><span class="pop-tag-sub">Training · Multi-node</span></div>
           <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:150%;margin-bottom:12px">State-of-the-art training &amp; inference. 80 GB HBM3 with NVLink + InfiniBand for multi-node runs.</div>
-          <div style="display:flex;gap:6px;margin-top:auto"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create instance</button><button class="btn btn-o btn-sm" onclick="copyResCli('h100')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
+          <div style="display:flex;gap:10px;margin-top:auto"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create instance</button><button class="btn btn-o btn-sm" onclick="copyResCli('h100')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
         </div>
         <div class="pop-card" style="cursor:default;display:flex;flex-direction:column;gap:0;min-width:240px;max-width:240px;scroll-snap-align:start;flex-shrink:0">
           <div class="pop-card-top" style="margin-bottom:10px"><div class="pop-card-info"><div class="pop-card-name">H200 141GB</div><div class="pop-card-price">16 of 16 GPUs available</div></div></div>
           <div class="pop-card-tags" style="margin-bottom:6px"><span class="pop-tag-sub">Inference · Large models</span></div>
           <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:150%;margin-bottom:12px">Largest memory for massive models. 141 GB HBM3e — ideal for 70B+ parameter inference and MoE architectures.</div>
-          <div style="display:flex;gap:6px;margin-top:auto"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create instance</button><button class="btn btn-o btn-sm" onclick="copyResCli('h200')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
+          <div style="display:flex;gap:10px;margin-top:auto"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create instance</button><button class="btn btn-o btn-sm" onclick="copyResCli('h200')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
         </div>
         <div class="pop-card" style="cursor:default;display:flex;flex-direction:column;gap:0;min-width:240px;max-width:240px;scroll-snap-align:start;flex-shrink:0">
           <div class="pop-card-top" style="margin-bottom:10px"><div class="pop-card-info"><div class="pop-card-name">L40S 48GB</div><div class="pop-card-price">4 of 8 GPUs available</div></div></div>
           <div class="pop-card-tags" style="margin-bottom:6px"><span class="pop-tag-sub">Inference · Fine-tuning</span></div>
           <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:150%;margin-bottom:12px">Cost-efficient inference &amp; fine-tuning. 48 GB GDDR6, great for model serving and small-scale training.</div>
-          <div style="display:flex;gap:6px;margin-top:auto"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create instance</button><button class="btn btn-o btn-sm" onclick="copyResCli('l40s')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
+          <div style="display:flex;gap:10px;margin-top:auto"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create instance</button><button class="btn btn-o btn-sm" onclick="copyResCli('l40s')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
         </div>
         <div class="pop-card" style="cursor:default;display:flex;flex-direction:column;gap:0;min-width:240px;max-width:240px;scroll-snap-align:start;flex-shrink:0">
           <div class="pop-card-top" style="margin-bottom:10px"><div class="pop-card-info"><div class="pop-card-name">H100 80GB PCIe</div><div class="pop-card-price">8 of 8 GPUs available</div></div></div>
           <div class="pop-card-tags" style="margin-bottom:6px"><span class="pop-tag-sub">Training · Single-node</span></div>
           <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:150%;margin-bottom:12px">PCIe variant — lower cost for single-node training and experimentation. No InfiniBand.</div>
-          <div style="display:flex;gap:6px;margin-top:auto"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create instance</button><button class="btn btn-o btn-sm" onclick="copyResCli('h100')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
+          <div style="display:flex;gap:10px;margin-top:auto"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create instance</button><button class="btn btn-o btn-sm" onclick="copyResCli('h100')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
         </div>
         <!-- 5th card — peek to signal scroll -->
         <div class="pop-card" style="cursor:default;display:flex;flex-direction:column;gap:0;min-width:240px;max-width:240px;scroll-snap-align:start;flex-shrink:0">
           <div class="pop-card-top" style="margin-bottom:10px"><div class="pop-card-info"><div class="pop-card-name">A100 80GB SXM</div><div class="pop-card-price">12 of 16 GPUs available</div></div></div>
           <div class="pop-card-tags" style="margin-bottom:6px"><span class="pop-tag-sub">Training · Fine-tuning</span></div>
           <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:150%;margin-bottom:12px">Previous-gen workhorse. 80 GB HBM2e — solid for fine-tuning and smaller training runs at lower cost.</div>
-          <div style="display:flex;gap:6px;margin-top:auto"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create instance</button><button class="btn btn-o btn-sm" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
+          <div style="display:flex;gap:10px;margin-top:auto"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create instance</button><button class="btn btn-o btn-sm" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
         </div>
       </div>
       <div style="margin-top:4px;font-size:12px;color:var(--muted);font-family:var(--font-body)">Showing 5 of 6 reservations — <a href="#" style="color:var(--text);text-decoration:underline">view all →</a></div>
@@ -1107,19 +1107,19 @@ img.ico{display:block;flex:0 0 auto}
       <div class="pop-card-top" style="margin-bottom:10px"><div class="pop-card-info"><div class="pop-card-name">H100 80GB SXM</div><div class="pop-card-price">6 of 32 GPUs available</div></div></div>
       <div class="pop-card-tags" style="margin-bottom:6px"><span class="pop-tag-sub">Training · Multi-node</span></div>
       <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:150%;margin-bottom:12px">State-of-the-art training &amp; inference. 80 GB HBM3 with NVLink + InfiniBand for multi-node runs.</div>
-      <div style="display:flex;gap:6px;margin-top:auto"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create instance</button><button class="btn btn-o btn-sm" onclick="copyResCli('h100')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
+      <div style="display:flex;gap:10px;margin-top:auto"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create instance</button><button class="btn btn-o btn-sm" onclick="copyResCli('h100')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
     </div>
     <div class="pop-card" style="cursor:default;display:flex;flex-direction:column;gap:0">
       <div class="pop-card-top" style="margin-bottom:10px"><div class="pop-card-info"><div class="pop-card-name">H200 141GB</div><div class="pop-card-price">16 of 16 GPUs available</div></div></div>
       <div class="pop-card-tags" style="margin-bottom:6px"><span class="pop-tag-sub">Inference · Large models</span></div>
       <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:150%;margin-bottom:12px">Largest memory for massive models. 141 GB HBM3e — ideal for 70B+ inference and long-context workloads.</div>
-      <div style="display:flex;gap:6px;margin-top:auto"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create instance</button><button class="btn btn-o btn-sm" onclick="copyResCli('h200')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
+      <div style="display:flex;gap:10px;margin-top:auto"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create instance</button><button class="btn btn-o btn-sm" onclick="copyResCli('h200')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
     </div>
     <div class="pop-card" style="cursor:default;display:flex;flex-direction:column;gap:0">
       <div class="pop-card-top" style="margin-bottom:10px"><div class="pop-card-info"><div class="pop-card-name">L40S 48GB</div><div class="pop-card-price">4 of 8 GPUs available</div></div></div>
       <div class="pop-card-tags" style="margin-bottom:6px"><span class="pop-tag-sub">Inference · Fine-tuning</span></div>
       <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:150%;margin-bottom:12px">Cost-efficient inference &amp; fine-tuning. 48 GB GDDR6, great for serving and small-scale training.</div>
-      <div style="display:flex;gap:6px;margin-top:auto"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create instance</button><button class="btn btn-o btn-sm" onclick="copyResCli('l40s')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
+      <div style="display:flex;gap:10px;margin-top:auto"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create instance</button><button class="btn btn-o btn-sm" onclick="copyResCli('l40s')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
     </div>
   </div>
 </div><!-- /instances-mild -->
@@ -1500,7 +1500,7 @@ img.ico{display:block;flex:0 0 auto}
           <div class="pop-card-info"><div class="pop-card-name">GPU Training Cluster</div><div class="pop-card-price">H100 8x node pool</div></div>
         </div>
         <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Training · Multi-node</span></div>
-        <div style="display:flex;gap:6px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createClusterFromTemplate('k8s','gpu-training',this)">Create cluster</button><a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/orchestration/cmk/" target="_blank" style="text-decoration:none;gap:5px">View docs</a></div>
+        <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createClusterFromTemplate('k8s','gpu-training',this)">Create cluster</button><a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/orchestration/cmk/" target="_blank" style="text-decoration:none;gap:5px">View docs</a></div>
         <div class="med-res-expand">Pre-configured with GPU operator, network operator, and CSI. Optimized for distributed training with NVLink + InfiniBand across H100 nodes.</div>
       </div>
       <div class="pop-card med-res-card" style="display:flex;flex-direction:column;gap:0">
@@ -1509,7 +1509,7 @@ img.ico{display:block;flex:0 0 auto}
           <div class="pop-card-info"><div class="pop-card-name">Inference Cluster</div><div class="pop-card-price">L40S autoscaling pool</div></div>
         </div>
         <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Inference · Autoscale</span></div>
-        <div style="display:flex;gap:6px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createClusterFromTemplate('k8s','inference',this)">Create cluster</button><a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/orchestration/cmk/" target="_blank" style="text-decoration:none;gap:5px">View docs</a></div>
+        <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createClusterFromTemplate('k8s','inference',this)">Create cluster</button><a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/orchestration/cmk/" target="_blank" style="text-decoration:none;gap:5px">View docs</a></div>
         <div class="med-res-expand">Cost-efficient serving with autoscaling node pools. Ideal for vLLM, TGI, or Triton inference endpoints on L40S GPUs.</div>
       </div>
       <div class="pop-card med-res-card" style="display:flex;flex-direction:column;gap:0">
@@ -1518,7 +1518,7 @@ img.ico{display:block;flex:0 0 auto}
           <div class="pop-card-info"><div class="pop-card-name">CPU-only Cluster</div><div class="pop-card-price">General-purpose nodes</div></div>
         </div>
         <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">CPU · APIs · Pipelines</span></div>
-        <div style="display:flex;gap:6px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createClusterFromTemplate('k8s','cpu',this)">Create cluster</button><a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/orchestration/cmk/" target="_blank" style="text-decoration:none;gap:5px">View docs</a></div>
+        <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createClusterFromTemplate('k8s','cpu',this)">Create cluster</button><a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/orchestration/cmk/" target="_blank" style="text-decoration:none;gap:5px">View docs</a></div>
         <div class="med-res-expand">Standard Kubernetes cluster for APIs, data pipelines, and services that don't require GPU acceleration.</div>
       </div>
     </div>
@@ -1570,7 +1570,7 @@ img.ico{display:block;flex:0 0 auto}
       </div>
       <div class="pop-card-tags" style="margin-bottom:6px"><span class="pop-tag-sub">Training · Multi-node</span></div>
       <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:150%;margin-bottom:12px">Pre-configured with GPU operator, network operator, and CSI. Optimized for distributed training workloads.</div>
-      <div style="display:flex;gap:6px;margin-top:auto"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createClusterFromTemplate('k8s','gpu-training',this)">Create cluster</button><a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/orchestration/cmk/" target="_blank" style="text-decoration:none">View docs</a></div>
+      <div style="display:flex;gap:10px;margin-top:auto"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createClusterFromTemplate('k8s','gpu-training',this)">Create cluster</button><a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/orchestration/cmk/" target="_blank" style="text-decoration:none">View docs</a></div>
     </div>
     <div class="pop-card" style="cursor:default;display:flex;flex-direction:column;gap:0">
       <div class="pop-card-top" style="margin-bottom:10px">
@@ -1579,7 +1579,7 @@ img.ico{display:block;flex:0 0 auto}
       </div>
       <div class="pop-card-tags" style="margin-bottom:6px"><span class="pop-tag-sub">Inference · Autoscale</span></div>
       <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:150%;margin-bottom:12px">Cost-efficient serving with autoscaling node pools. Ideal for vLLM, TGI, or Triton inference endpoints.</div>
-      <div style="display:flex;gap:6px;margin-top:auto"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createClusterFromTemplate('k8s','inference',this)">Create cluster</button><a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/orchestration/cmk/" target="_blank" style="text-decoration:none">View docs</a></div>
+      <div style="display:flex;gap:10px;margin-top:auto"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createClusterFromTemplate('k8s','inference',this)">Create cluster</button><a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/orchestration/cmk/" target="_blank" style="text-decoration:none">View docs</a></div>
     </div>
     <div class="pop-card" style="cursor:default;display:flex;flex-direction:column;gap:0">
       <div class="pop-card-top" style="margin-bottom:10px">
@@ -1588,7 +1588,7 @@ img.ico{display:block;flex:0 0 auto}
       </div>
       <div class="pop-card-tags" style="margin-bottom:6px"><span class="pop-tag-sub">CPU · APIs · Pipelines</span></div>
       <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:150%;margin-bottom:12px">Standard Kubernetes cluster for APIs, data pipelines, and services that don't require GPU acceleration.</div>
-      <div style="display:flex;gap:6px;margin-top:auto"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createClusterFromTemplate('k8s','cpu',this)">Create cluster</button><a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/orchestration/cmk/" target="_blank" style="text-decoration:none">View docs</a></div>
+      <div style="display:flex;gap:10px;margin-top:auto"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createClusterFromTemplate('k8s','cpu',this)">Create cluster</button><a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/orchestration/cmk/" target="_blank" style="text-decoration:none">View docs</a></div>
     </div>
   </div>
 </div><!-- /clusters-mild -->
@@ -1772,19 +1772,19 @@ img.ico{display:block;flex:0 0 auto}
           <div class="pop-card-top" style="margin-bottom:10px"><div class="pop-card-info"><div class="pop-card-name">GPU Training Cluster</div><div class="pop-card-price">H100 8x node pool</div></div></div>
           <div class="pop-card-tags" style="margin-bottom:6px"><span class="pop-tag-sub">Training · Multi-node</span></div>
           <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:150%;margin-bottom:12px">Pre-configured with GPU operator and CSI. NVLink + InfiniBand for multi-node runs.</div>
-          <div style="display:flex;gap:6px;margin-top:auto"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" disabled>Create cluster</button><button class="btn btn-o btn-sm" disabled>View docs</button></div>
+          <div style="display:flex;gap:10px;margin-top:auto"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" disabled>Create cluster</button><button class="btn btn-o btn-sm" disabled>View docs</button></div>
         </div>
         <div class="pop-card" style="cursor:default;display:flex;flex-direction:column;gap:0">
           <div class="pop-card-top" style="margin-bottom:10px"><div class="pop-card-info"><div class="pop-card-name">Inference Cluster</div><div class="pop-card-price">L40S autoscaling pool</div></div></div>
           <div class="pop-card-tags" style="margin-bottom:6px"><span class="pop-tag-sub">Inference · Autoscale</span></div>
           <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:150%;margin-bottom:12px">Autoscaling for vLLM, TGI, or Triton inference on L40S GPUs.</div>
-          <div style="display:flex;gap:6px;margin-top:auto"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" disabled>Create cluster</button><button class="btn btn-o btn-sm" disabled>View docs</button></div>
+          <div style="display:flex;gap:10px;margin-top:auto"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" disabled>Create cluster</button><button class="btn btn-o btn-sm" disabled>View docs</button></div>
         </div>
         <div class="pop-card" style="cursor:default;display:flex;flex-direction:column;gap:0">
           <div class="pop-card-top" style="margin-bottom:10px"><div class="pop-card-info"><div class="pop-card-name">CPU-only Cluster</div><div class="pop-card-price">General-purpose nodes</div></div></div>
           <div class="pop-card-tags" style="margin-bottom:6px"><span class="pop-tag-sub">CPU · APIs · Pipelines</span></div>
           <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:150%;margin-bottom:12px">Standard Kubernetes for APIs and services without GPU.</div>
-          <div style="display:flex;gap:6px;margin-top:auto"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" disabled>Create cluster</button><button class="btn btn-o btn-sm" disabled>View docs</button></div>
+          <div style="display:flex;gap:10px;margin-top:auto"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" disabled>Create cluster</button><button class="btn btn-o btn-sm" disabled>View docs</button></div>
         </div>
       </div>
     </div>
@@ -1839,19 +1839,19 @@ img.ico{display:block;flex:0 0 auto}
           <div class="pop-card-top" style="margin-bottom:10px"><div class="pop-card-info"><div class="pop-card-name">GPU Training Cluster</div><div class="pop-card-price">H100 8x node pool</div></div></div>
           <div class="pop-card-tags" style="margin-bottom:6px"><span class="pop-tag-sub">Training · Multi-node</span></div>
           <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:150%;margin-bottom:12px">Pre-configured with GPU operator and CSI. NVLink + InfiniBand for multi-node runs.</div>
-          <div style="display:flex;gap:6px;margin-top:auto"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create cluster</button><a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/orchestration/cmk/" target="_blank" style="text-decoration:none;gap:5px">View docs</a></div>
+          <div style="display:flex;gap:10px;margin-top:auto"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create cluster</button><a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/orchestration/cmk/" target="_blank" style="text-decoration:none;gap:5px">View docs</a></div>
         </div>
         <div class="pop-card" style="cursor:default;display:flex;flex-direction:column;gap:0">
           <div class="pop-card-top" style="margin-bottom:10px"><div class="pop-card-info"><div class="pop-card-name">Inference Cluster</div><div class="pop-card-price">L40S autoscaling pool</div></div></div>
           <div class="pop-card-tags" style="margin-bottom:6px"><span class="pop-tag-sub">Inference · Autoscale</span></div>
           <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:150%;margin-bottom:12px">Autoscaling for vLLM, TGI, or Triton inference on L40S GPUs.</div>
-          <div style="display:flex;gap:6px;margin-top:auto"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create cluster</button><a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/orchestration/cmk/" target="_blank" style="text-decoration:none;gap:5px">View docs</a></div>
+          <div style="display:flex;gap:10px;margin-top:auto"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create cluster</button><a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/orchestration/cmk/" target="_blank" style="text-decoration:none;gap:5px">View docs</a></div>
         </div>
         <div class="pop-card" style="cursor:default;display:flex;flex-direction:column;gap:0">
           <div class="pop-card-top" style="margin-bottom:10px"><div class="pop-card-info"><div class="pop-card-name">CPU-only Cluster</div><div class="pop-card-price">General-purpose nodes</div></div></div>
           <div class="pop-card-tags" style="margin-bottom:6px"><span class="pop-tag-sub">CPU · APIs · Pipelines</span></div>
           <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:150%;margin-bottom:12px">Standard Kubernetes for APIs and services without GPU.</div>
-          <div style="display:flex;gap:6px;margin-top:auto"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create cluster</button><a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/orchestration/cmk/" target="_blank" style="text-decoration:none;gap:5px">View docs</a></div>
+          <div style="display:flex;gap:10px;margin-top:auto"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create cluster</button><a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/orchestration/cmk/" target="_blank" style="text-decoration:none;gap:5px">View docs</a></div>
         </div>
       </div>
     </div>
@@ -1878,19 +1878,19 @@ img.ico{display:block;flex:0 0 auto}
           <div class="pop-card-top" style="margin-bottom:10px"><div class="pop-card-info"><div class="pop-card-name">GPU Training Cluster</div><div class="pop-card-price">H100 8x node pool</div></div></div>
           <div class="pop-card-tags" style="margin-bottom:6px"><span class="pop-tag-sub">Training · Multi-node</span></div>
           <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:150%;margin-bottom:12px">Pre-configured with GPU operator and CSI. NVLink + InfiniBand for multi-node runs.</div>
-          <div style="display:flex;gap:6px;margin-top:auto"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" disabled>Create cluster</button><button class="btn btn-o btn-sm" disabled>View docs</button></div>
+          <div style="display:flex;gap:10px;margin-top:auto"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" disabled>Create cluster</button><button class="btn btn-o btn-sm" disabled>View docs</button></div>
         </div>
         <div class="pop-card" style="cursor:default;display:flex;flex-direction:column;gap:0">
           <div class="pop-card-top" style="margin-bottom:10px"><div class="pop-card-info"><div class="pop-card-name">Inference Cluster</div><div class="pop-card-price">L40S autoscaling pool</div></div></div>
           <div class="pop-card-tags" style="margin-bottom:6px"><span class="pop-tag-sub">Inference · Autoscale</span></div>
           <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:150%;margin-bottom:12px">Autoscaling for vLLM, TGI, or Triton inference on L40S GPUs.</div>
-          <div style="display:flex;gap:6px;margin-top:auto"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" disabled>Create cluster</button><button class="btn btn-o btn-sm" disabled>View docs</button></div>
+          <div style="display:flex;gap:10px;margin-top:auto"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" disabled>Create cluster</button><button class="btn btn-o btn-sm" disabled>View docs</button></div>
         </div>
         <div class="pop-card" style="cursor:default;display:flex;flex-direction:column;gap:0">
           <div class="pop-card-top" style="margin-bottom:10px"><div class="pop-card-info"><div class="pop-card-name">CPU-only Cluster</div><div class="pop-card-price">General-purpose nodes</div></div></div>
           <div class="pop-card-tags" style="margin-bottom:6px"><span class="pop-tag-sub">CPU · APIs · Pipelines</span></div>
           <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:150%;margin-bottom:12px">Standard Kubernetes for APIs and services without GPU.</div>
-          <div style="display:flex;gap:6px;margin-top:auto"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" disabled>Create cluster</button><button class="btn btn-o btn-sm" disabled>View docs</button></div>
+          <div style="display:flex;gap:10px;margin-top:auto"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" disabled>Create cluster</button><button class="btn btn-o btn-sm" disabled>View docs</button></div>
         </div>
       </div>
     </div>
@@ -1945,19 +1945,19 @@ img.ico{display:block;flex:0 0 auto}
           <div class="pop-card-top" style="margin-bottom:10px"><div class="pop-card-info"><div class="pop-card-name">GPU Training Cluster</div><div class="pop-card-price">H100 8x node pool</div></div></div>
           <div class="pop-card-tags" style="margin-bottom:6px"><span class="pop-tag-sub">Training · Multi-node</span></div>
           <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:150%;margin-bottom:12px">Pre-configured with GPU operator and CSI. NVLink + InfiniBand for multi-node runs.</div>
-          <div style="display:flex;gap:6px;margin-top:auto"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" disabled>Create cluster</button><button class="btn btn-o btn-sm" disabled>View docs</button></div>
+          <div style="display:flex;gap:10px;margin-top:auto"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" disabled>Create cluster</button><button class="btn btn-o btn-sm" disabled>View docs</button></div>
         </div>
         <div class="pop-card" style="cursor:default;display:flex;flex-direction:column;gap:0">
           <div class="pop-card-top" style="margin-bottom:10px"><div class="pop-card-info"><div class="pop-card-name">Inference Cluster</div><div class="pop-card-price">L40S autoscaling pool</div></div></div>
           <div class="pop-card-tags" style="margin-bottom:6px"><span class="pop-tag-sub">Inference · Autoscale</span></div>
           <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:150%;margin-bottom:12px">Autoscaling node pools for vLLM, TGI, or Triton inference on L40S GPUs.</div>
-          <div style="display:flex;gap:6px;margin-top:auto"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" disabled>Create cluster</button><button class="btn btn-o btn-sm" disabled>View docs</button></div>
+          <div style="display:flex;gap:10px;margin-top:auto"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" disabled>Create cluster</button><button class="btn btn-o btn-sm" disabled>View docs</button></div>
         </div>
         <div class="pop-card" style="cursor:default;display:flex;flex-direction:column;gap:0">
           <div class="pop-card-top" style="margin-bottom:10px"><div class="pop-card-info"><div class="pop-card-name">CPU-only Cluster</div><div class="pop-card-price">General-purpose nodes</div></div></div>
           <div class="pop-card-tags" style="margin-bottom:6px"><span class="pop-tag-sub">CPU · APIs · Pipelines</span></div>
           <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:150%;margin-bottom:12px">Standard Kubernetes for APIs and services without GPU.</div>
-          <div style="display:flex;gap:6px;margin-top:auto"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" disabled>Create cluster</button><button class="btn btn-o btn-sm" disabled>View docs</button></div>
+          <div style="display:flex;gap:10px;margin-top:auto"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" disabled>Create cluster</button><button class="btn btn-o btn-sm" disabled>View docs</button></div>
         </div>
       </div>
     </div>
@@ -2012,19 +2012,19 @@ img.ico{display:block;flex:0 0 auto}
           <div class="pop-card-top" style="margin-bottom:10px"><div class="pop-card-info"><div class="pop-card-name">GPU Training Cluster</div><div class="pop-card-price">H100 8x node pool</div></div></div>
           <div class="pop-card-tags" style="margin-bottom:6px"><span class="pop-tag-sub">Training · Multi-node</span></div>
           <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:150%;margin-bottom:12px">Pre-configured with GPU operator and CSI. NVLink + InfiniBand for multi-node runs.</div>
-          <div style="display:flex;gap:6px;margin-top:auto"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create cluster</button><a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/orchestration/cmk/" target="_blank" style="text-decoration:none;gap:5px">View docs</a></div>
+          <div style="display:flex;gap:10px;margin-top:auto"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create cluster</button><a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/orchestration/cmk/" target="_blank" style="text-decoration:none;gap:5px">View docs</a></div>
         </div>
         <div class="pop-card" style="cursor:default;display:flex;flex-direction:column;gap:0">
           <div class="pop-card-top" style="margin-bottom:10px"><div class="pop-card-info"><div class="pop-card-name">Inference Cluster</div><div class="pop-card-price">L40S autoscaling pool</div></div></div>
           <div class="pop-card-tags" style="margin-bottom:6px"><span class="pop-tag-sub">Inference · Autoscale</span></div>
           <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:150%;margin-bottom:12px">Autoscaling for vLLM, TGI, or Triton inference on L40S GPUs.</div>
-          <div style="display:flex;gap:6px;margin-top:auto"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create cluster</button><a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/orchestration/cmk/" target="_blank" style="text-decoration:none;gap:5px">View docs</a></div>
+          <div style="display:flex;gap:10px;margin-top:auto"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create cluster</button><a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/orchestration/cmk/" target="_blank" style="text-decoration:none;gap:5px">View docs</a></div>
         </div>
         <div class="pop-card" style="cursor:default;display:flex;flex-direction:column;gap:0">
           <div class="pop-card-top" style="margin-bottom:10px"><div class="pop-card-info"><div class="pop-card-name">CPU-only Cluster</div><div class="pop-card-price">General-purpose nodes</div></div></div>
           <div class="pop-card-tags" style="margin-bottom:6px"><span class="pop-tag-sub">CPU · APIs · Pipelines</span></div>
           <div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:150%;margin-bottom:12px">Standard Kubernetes for APIs and services without GPU.</div>
-          <div style="display:flex;gap:6px;margin-top:auto"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create cluster</button><a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/orchestration/cmk/" target="_blank" style="text-decoration:none;gap:5px">View docs</a></div>
+          <div style="display:flex;gap:10px;margin-top:auto"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create cluster</button><a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/orchestration/cmk/" target="_blank" style="text-decoration:none;gap:5px">View docs</a></div>
         </div>
       </div>
     </div>
@@ -2120,13 +2120,13 @@ img.ico{display:block;flex:0 0 auto}
       <div class="action-card-title">GPU HPC Cluster</div>
       <div style="font-size:12px;color:var(--muted);font-family:var(--font-body);margin-bottom:4px">H100 multi-node</div>
       <div class="action-card-desc">Pre-configured with Pyxis, PMIx, and RDMA. Optimized for distributed training with NVLink + InfiniBand across H100 nodes.</div>
-      <div style="display:flex;gap:6px;margin-top:auto"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createClusterFromTemplate('slurm','gpu-hpc',this)">Create cluster</button><a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/orchestration/slurm/" target="_blank" style="text-decoration:none">View docs</a></div>
+      <div style="display:flex;gap:10px;margin-top:auto"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createClusterFromTemplate('slurm','gpu-hpc',this)">Create cluster</button><a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/orchestration/slurm/" target="_blank" style="text-decoration:none">View docs</a></div>
     </div>
     <div class="action-card" style="cursor:default">
       <div class="action-card-title">CPU Login Node</div>
       <div style="font-size:12px;color:var(--muted);font-family:var(--font-body);margin-bottom:4px">General-purpose</div>
       <div class="action-card-desc">Start with a CPU-only login node to validate your workflow before attaching GPU compute nodes.</div>
-      <div style="display:flex;gap:6px;margin-top:auto"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createClusterFromTemplate('slurm','cpu-login',this)">Create cluster</button><a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/orchestration/slurm/" target="_blank" style="text-decoration:none">View docs</a></div>
+      <div style="display:flex;gap:10px;margin-top:auto"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createClusterFromTemplate('slurm','cpu-login',this)">Create cluster</button><a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/orchestration/slurm/" target="_blank" style="text-decoration:none">View docs</a></div>
     </div>
   </div>
 </div><!-- /slurm-mild -->
@@ -3147,7 +3147,7 @@ img.ico{display:block;flex:0 0 auto}
             <span class="np-hover-hint">Details<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
           </div>
           <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Option · CLI</span></div>
-          <div style="display:flex;gap:6px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center;gap:5px" onclick="copySnippet(this,'crusoe kubernetes nodepools create --name my-pool --cluster-id <cluster-id> --type h100-80gb-sxm-ib.8x --count 4')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy command</button></div>
+          <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center;gap:5px" onclick="copySnippet(this,'crusoe kubernetes nodepools create --name my-pool --cluster-id <cluster-id> --type h100-80gb-sxm-ib.8x --count 4')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy command</button></div>
           <div class="med-res-expand"><code style="display:block;font-family:var(--mono);font-size:11px;color:var(--text2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">crusoe kubernetes nodepools create --name my-pool --type h100-80gb-sxm-ib.8x</code><div style="margin-top:6px">Nodes join the control plane automatically within minutes. <a href="https://docs.crusoecloud.com/orchestration/cmk/managing-nodepools/" target="_blank" style="color:var(--muted);text-decoration:underline;text-underline-offset:2px">Docs</a></div></div>
         </div>
         <!-- Card 2: Recommended start (primary action at rest, details on hover) -->
@@ -3157,7 +3157,7 @@ img.ico{display:block;flex:0 0 auto}
             <span class="np-hover-hint">Details<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
           </div>
           <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Tip · Best practice</span></div>
-          <div style="display:flex;gap:6px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M7.99967 3.33337V12.6667M3.33301 8.00004H12.6663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Create Node Pool</button></div>
+          <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M7.99967 3.33337V12.6667M3.33301 8.00004H12.6663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Create Node Pool</button></div>
           <div class="med-res-expand">Start with a single H100 or A100 node pool to validate GPU operator and networking before scaling out to a larger fleet. <a href="https://docs.crusoecloud.com/orchestration/cmk/managing-nodepools/" target="_blank" style="color:var(--muted);text-decoration:underline;text-underline-offset:2px">Docs</a></div>
         </div>
       </div>
