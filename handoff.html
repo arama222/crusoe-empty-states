@@ -565,13 +565,39 @@ img.ico{display:block;flex:0 0 auto}
 .np-hover-hint svg{transition:transform .2s ease}
 .med-res-card:hover .np-hover-hint{color:var(--text)}
 .med-res-card:hover .np-hover-hint svg{transform:rotate(180deg)}
-/* Fill the main height; center ONLY the empty states (filled/edge data states stay top-aligned) */
+/* Empty-state views fill the main height and distribute content evenly (matches "No templates yet"). Data/list states stay top-aligned. */
 #view-instances.active,
-#view-instance-templates.active{display:flex;flex-direction:column;flex:1;min-height:0}
+#view-instance-templates.active,
+#view-instance-groups.active,
+#view-custom-images.active,
+#view-kubernetes.active,
+#view-slurm.active,
+#view-disks.active,
+#view-buckets.active,
+#view-apikeys.active,
+#view-managed-logs.active,
+#view-sshkeys.active{display:flex;flex-direction:column;flex:1;min-height:0}
 #view-instances.active > .ca,
-#view-instance-templates.active > .ca{flex:1;display:flex;flex-direction:column;min-height:0}
+#view-instance-templates.active > .ca,
+#view-instance-groups.active > .ca,
+#view-custom-images.active > .ca,
+#view-kubernetes.active > .ca,
+#view-slurm.active > .ca,
+#view-disks.active > .ca,
+#view-buckets.active > .ca,
+#view-apikeys.active > .ca,
+#view-managed-logs.active > .ca,
+#view-sshkeys.active > .ca{flex:1;display:flex;flex-direction:column;min-height:0;padding-bottom:24px}
+/* Views whose .ca directly holds the empty state */
+#view-instance-templates.active > .ca,
+#view-instance-groups.active > .ca,
+#view-custom-images.active > .ca,
+#view-buckets.active > .ca,
+#view-managed-logs.active > .ca,
+#view-sshkeys.active > .ca{justify-content:space-evenly}
+/* Views whose empty state is a wrapper element inside .ca */
+#instances-spicy,#clusters-spicy,#slurm-spicy,#disks-spicy,#apikey-empty{flex:1;display:flex;flex-direction:column;justify-content:space-evenly}
 #instances-medium,#instances-mild{margin:auto 0}
-#instances-spicy{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;padding-bottom:24px}
 #view-instance-templates.active > .ca{justify-content:space-evenly;padding-bottom:24px}
 .pop-tag-title{font-size:13px;font-weight:600;font-family:var(--font-body);color:var(--text)}
 .pop-tag-sub{font-size:12px;font-family:var(--font-body);color:var(--muted)}
