@@ -588,17 +588,49 @@ img.ico{display:block;flex:0 0 auto}
 #view-apikeys.active > .ca,
 #view-managed-logs.active > .ca,
 #view-sshkeys.active > .ca{flex:1;display:flex;flex-direction:column;min-height:0;padding-bottom:24px}
-/* Views whose .ca directly holds the empty state */
+/* ── Empty-state vertical distribution ──
+   Three flexible gaps (top / middle / bottom). On tall windows the gaps grow
+   equally (the even "perfect" spread); the bottom gap is floored (min-height)
+   so the hover detail panel always keeps room on shorter windows — instead of
+   the card getting jammed against the bottom edge. */
 #view-instance-templates.active > .ca,
 #view-instance-groups.active > .ca,
 #view-custom-images.active > .ca,
 #view-buckets.active > .ca,
 #view-managed-logs.active > .ca,
-#view-sshkeys.active > .ca{justify-content:space-evenly}
-/* Views whose empty state is a wrapper element inside .ca */
-#instances-spicy,#clusters-spicy,#slurm-spicy,#disks-spicy,#apikey-empty{flex:1;display:flex;flex-direction:column;justify-content:space-evenly}
+#view-sshkeys.active > .ca,
+#instances-spicy,#clusters-spicy,#slurm-spicy,#disks-spicy,#apikey-empty{flex:1;display:flex;flex-direction:column;justify-content:flex-start}
+/* top spacer (flexible) */
+#view-instance-templates.active > .ca::before,
+#view-instance-groups.active > .ca::before,
+#view-custom-images.active > .ca::before,
+#view-buckets.active > .ca::before,
+#view-managed-logs.active > .ca::before,
+#view-sshkeys.active > .ca::before,
+#instances-spicy::before,#clusters-spicy::before,#slurm-spicy::before,#disks-spicy::before,#apikey-empty::before{content:'';flex:1 1 0;min-height:0}
+/* bottom spacer (flexible, but floored so the hover panel always fits) */
+#view-instance-templates.active > .ca::after,
+#view-instance-groups.active > .ca::after,
+#view-custom-images.active > .ca::after,
+#view-buckets.active > .ca::after,
+#view-managed-logs.active > .ca::after,
+#view-sshkeys.active > .ca::after,
+#instances-spicy::after,#clusters-spicy::after,#slurm-spicy::after,#disks-spicy::after,#apikey-empty::after{content:'';flex:1 1 0;min-height:0}
+/* middle spacer (inserted in markup before each pop-section) */
+.es-gap{flex:1 1 0;min-height:0}
 #instances-medium,#instances-mild{margin:auto 0}
-#view-instance-templates.active > .ca{justify-content:space-evenly;padding-bottom:24px}
+/* On tall / fullscreen windows the three spacers above stay equal (top = middle = bottom),
+   giving the perfectly even distribution. On shorter windows we floor the BOTTOM spacer so
+   the absolute hover detail panel always keeps breathing room beneath the card. */
+@media (max-height: 850px){
+  #view-instance-templates.active > .ca::after,
+  #view-instance-groups.active > .ca::after,
+  #view-custom-images.active > .ca::after,
+  #view-buckets.active > .ca::after,
+  #view-managed-logs.active > .ca::after,
+  #view-sshkeys.active > .ca::after,
+  #instances-spicy::after,#clusters-spicy::after,#slurm-spicy::after,#disks-spicy::after,#apikey-empty::after{min-height:136px}
+}
 .pop-tag-title{font-size:13px;font-weight:600;font-family:var(--font-body);color:var(--text)}
 .pop-tag-sub{font-size:12px;font-family:var(--font-body);color:var(--muted)}
 /* legacy pill style kept for non-reservation uses */
@@ -1191,6 +1223,7 @@ img.ico{display:block;flex:0 0 auto}
     </div>
   </div>
   <!-- Reservations -->
+  <div class="es-gap"></div>
   <div class="pop-section spicy-reveal" style="margin-top:36px;padding-bottom:16px">
     <div class="pop-title">Create from your reservations</div>
     <div class="pop-grid">
@@ -1340,6 +1373,7 @@ img.ico{display:block;flex:0 0 auto}
       </div>
     </div>
     <!-- Popular templates -->
+    <div class="es-gap"></div>
     <div class="pop-section" style="margin-top:36px;padding-bottom:16px">
       <div class="pop-title">Start with a popular template</div>
       <div class="pop-grid">
@@ -1405,6 +1439,7 @@ img.ico{display:block;flex:0 0 auto}
         <a href="https://docs.crusoecloud.com/compute/instance-groups" target="_blank" style="display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:500;font-family:var(--font-body);color:var(--muted);text-decoration:none;transition:color .15s ease" onmouseenter="this.style.color='var(--text)'" onmouseleave="this.style.color='var(--muted)'">View docs →</a>
       </div>
     </div>
+    <div class="es-gap"></div>
     <div class="pop-section" style="margin-top:36px;padding-bottom:16px">
       <div class="pop-title">Get started in two steps</div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;overflow:visible;align-items:start">
@@ -1470,6 +1505,7 @@ img.ico{display:block;flex:0 0 auto}
         <a href="https://docs.crusoecloud.com/compute/images/overview/" target="_blank" style="display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:500;font-family:var(--font-body);color:var(--muted);text-decoration:none;transition:color .15s ease" onmouseenter="this.style.color='var(--text)'" onmouseleave="this.style.color='var(--muted)'">View docs →</a>
       </div>
     </div>
+    <div class="es-gap"></div>
     <div class="pop-section" style="margin-top:36px;padding-bottom:16px">
       <div class="pop-title">Get started in two steps</div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;overflow:visible;align-items:start">
@@ -1666,6 +1702,7 @@ img.ico{display:block;flex:0 0 auto}
     </div>
   </div>
   <!-- Template cards -->
+  <div class="es-gap"></div>
   <div class="pop-section cluster-spicy-reveal" style="margin-top:36px;padding-bottom:16px">
     <div class="pop-title">Start with a popular cluster template</div>
     <div class="pop-grid">
@@ -2207,6 +2244,7 @@ img.ico{display:block;flex:0 0 auto}
     </div>
   </div>
   <!-- Template cards -->
+  <div class="es-gap"></div>
   <div class="pop-section slurm-spicy-reveal" style="margin-top:36px;padding-bottom:16px">
     <div class="pop-title">Start with a popular cluster template</div>
     <div class="pop-grid">
@@ -2378,6 +2416,7 @@ img.ico{display:block;flex:0 0 auto}
         </div>
       </div>
       <!-- Disk type cards -->
+      <div class="es-gap"></div>
       <div class="pop-section disk-spicy-reveal" style="margin-top:36px;padding-bottom:16px">
         <div class="pop-title">Choose your disk type</div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;overflow:visible;align-items:start">
@@ -2480,6 +2519,7 @@ img.ico{display:block;flex:0 0 auto}
       </div>
     </div>
     <!-- Step cards side by side -->
+    <div class="es-gap"></div>
     <div class="pop-section bucket-spicy-reveal" style="margin-top:36px;padding-bottom:16px">
       <div class="pop-title">Get started in two steps</div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;overflow:visible;align-items:start">
@@ -2804,6 +2844,7 @@ img.ico{display:block;flex:0 0 auto}
       </div>
     </div>
     <!-- 3 step cards -->
+    <div class="es-gap"></div>
     <div class="pop-section apikey-spicy-reveal" style="margin-top:36px;padding-bottom:16px">
       <div class="pop-title">Get started in three steps</div>
       <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;overflow:visible;align-items:start">
@@ -3004,6 +3045,7 @@ img.ico{display:block;flex:0 0 auto}
     </div>
 
     <!-- Step cards -->
+    <div class="es-gap"></div>
     <div class="pop-section" style="margin-top:36px;padding-bottom:16px">
       <div class="pop-title">Get started in three steps</div>
       <div class="pop-grid">
@@ -3377,6 +3419,7 @@ img.ico{display:block;flex:0 0 auto}
       </div>
     </div>
     <!-- 2 step cards -->
+    <div class="es-gap"></div>
     <div class="pop-section sshkey-spicy-reveal" style="margin-top:36px;padding-bottom:16px">
       <div class="pop-title">Get started in two steps</div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;overflow:visible;align-items:start">
