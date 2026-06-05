@@ -803,6 +803,7 @@ img.ico{display:block;flex:0 0 auto}
     <div id="inst-tabs">
       <button class="inst-tab active" data-tab="current" onclick="setInstancesTab('current')">Current</button>
       <button class="inst-tab" data-tab="redesign" onclick="setInstancesTab('redesign')">Redesign</button>
+      <button class="inst-tab" data-tab="edge" onclick="setInstancesTab('edge')">Edge cases</button>
     </div>
     <button id="rev-toggle" onclick="toggleReviewNotes(this)">Show review notes</button>
     <!-- ── MEDIUM (Informational) ── -->
@@ -4292,6 +4293,8 @@ function createInstanceFromRes(gpuType, btn) {
     if (spicy) { spicy.style.display = 'none'; spicy.style.opacity = ''; spicy.style.transition = ''; }
     // Redesign tab + tab bar are part of the empty state — drop them once filled.
     const rdz = document.getElementById('instances-redesign'); if (rdz) rdz.style.display = 'none';
+    const edg = document.getElementById('instances-edge'); if (edg) edg.style.display = 'none';
+    const rtg = document.getElementById('rev-toggle'); if (rtg) rtg.style.display = 'none';
     const itabs = document.getElementById('inst-tabs'); if (itabs) itabs.style.display = 'none';
 
     const tbody = document.getElementById('instances-tbl-body');
@@ -4342,11 +4345,15 @@ function createInstanceFromRes(gpuType, btn) {
 function setInstancesTab(tab) {
   const spicy = document.getElementById('instances-spicy');
   const redesign = document.getElementById('instances-redesign');
-  if (spicy) spicy.style.display = tab === 'redesign' ? 'none' : '';
+  const edge = document.getElementById('instances-edge');
+  if (spicy) spicy.style.display = tab === 'current' ? '' : 'none';
   if (redesign) redesign.style.display = tab === 'redesign' ? '' : 'none';
+  if (edge) edge.style.display = tab === 'edge' ? '' : 'none';
   document.querySelectorAll('#inst-tabs .inst-tab').forEach(b => b.classList.toggle('active', b.dataset.tab === tab));
   const revToggle = document.getElementById('rev-toggle');
   if (revToggle) revToggle.style.display = tab === 'redesign' ? 'block' : 'none';
+  // Reset edge sub-toggle to the first state whenever the tab is opened
+  if (tab === 'edge' && typeof toggleEdgeState === 'function') toggleEdgeState(0);
 }
 
 function toggleReviewNotes(btn) {
