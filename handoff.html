@@ -883,7 +883,7 @@ img.ico{display:block;flex:0 0 auto}
       <button class="state-toggle-btn active" onclick="toggleEdgeState(0)">Quota only</button>
       <button class="state-toggle-btn" onclick="toggleEdgeState(1)">Reserved</button>
       <button class="state-toggle-btn" onclick="toggleEdgeState(2)">Reserved + quota</button>
-      <button class="state-toggle-btn" onclick="toggleEdgeState(3)">No access yet</button>
+      <button class="state-toggle-btn" onclick="toggleEdgeState(3)">No payment method</button>
       <button class="state-toggle-btn" onclick="toggleEdgeState(4)">Quota used up</button>
       <button class="state-toggle-btn" onclick="toggleEdgeState(5)">Region capacity</button>
     </div>
@@ -993,7 +993,7 @@ img.ico{display:block;flex:0 0 auto}
     </div>
   </div>
 
-  <!-- ══ STATE 3 · No access yet (own hero, no launchable capacity) ══ -->
+  <!-- ══ STATE 3 · New account, no payment method (regular page → payment methods) ══ -->
   <div id="edge-3" style="display:none">
     <div style="display:flex;flex-direction:row;align-items:center;justify-content:flex-start;gap:48px;padding:24px 40px 20px 72px;min-height:200px;box-sizing:border-box;text-align:left;position:relative;overflow:hidden;background:var(--white)">
       <div style="display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:1;position:relative">
@@ -1014,19 +1014,24 @@ img.ico{display:block;flex:0 0 auto}
       </div>
       <div style="position:relative;z-index:1;max-width:430px">
         <h1 style="font-size:44px;font-weight:400;font-family:var(--font-heading);color:var(--text);letter-spacing:-1.2px;line-height:110%;margin:0 0 10px;white-space:nowrap">No instances yet.</h1>
-        <p style="font-size:14px;color:var(--muted);font-family:var(--font-body);line-height:160%;margin:0 0 18px">Your account doesn't have any reservations or GPU quota yet — request a quota to start launching instances.</p>
+        <p style="font-size:14px;color:var(--muted);font-family:var(--font-body);line-height:160%;margin:0 0 18px">Spin up a GPU or CPU VM in under a minute — SSH in directly and start building.</p>
         <div style="display:flex;align-items:center;gap:18px">
-          <button class="btn btn-p" onclick="copySnippet(this,'crusoe quota request --resource gpu')"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.99967 3.33337V12.6667M3.33301 8.00004H12.6663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Request quota</button>
-          <a href="https://crusoe.ai/cloud/contact/" target="_blank" style="font-size:13px;color:var(--muted);text-decoration:underline;text-underline-offset:3px;font-family:var(--font-body);transition:color .15s ease" onmouseenter="this.style.color='var(--text)'" onmouseleave="this.style.color='var(--muted)'">Talk to sales →</a>
+          <button class="btn btn-p" onclick="goToPaymentMethods(this)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.99967 3.33337V12.6667M3.33301 8.00004H12.6663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Create Instance</button>
+          <a href="https://docs.crusoecloud.com/compute/virtual-machines/overview/" target="_blank" style="font-size:13px;color:var(--muted);text-decoration:underline;text-underline-offset:3px;font-family:var(--font-body);transition:color .15s ease" onmouseenter="this.style.color='var(--text)'" onmouseleave="this.style.color='var(--muted)'">View docs →</a>
         </div>
       </div>
     </div>
-    <div class="pop-section" style="margin-top:16px">
-      <div style="border:1px dashed var(--border);border-radius:12px;padding:28px 24px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px;background:var(--gray-50)">
-        <div style="width:40px;height:40px;border-radius:10px;background:var(--white);border:1px solid var(--border);display:flex;align-items:center;justify-content:center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gray-400)" stroke-width="1.5"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
-        <div style="font-size:14px;font-weight:600;font-family:var(--font-body);color:var(--text)">No GPU capacity allocated yet</div>
-        <div style="font-size:12.5px;color:var(--muted);font-family:var(--font-body);line-height:155%;max-width:420px">Reservations and quota are granted by your account team. Once you have either, your launchable GPU types appear here automatically.</div>
-        <div style="display:flex;gap:8px;margin-top:6px"><button class="btn btn-p btn-sm" onclick="copySnippet(this,'crusoe quota request --resource gpu')">Request quota</button><a class="btn btn-o btn-sm" href="https://crusoe.ai/cloud/contact/" target="_blank" style="text-decoration:none">Contact sales →</a></div>
+    <!-- Clicking Create on a new account with no billing routes to payment methods first -->
+    <div id="edge-pay-panel" class="pop-section" style="margin-top:16px;display:none">
+      <div style="border:1px solid var(--border);border-radius:12px;padding:24px;background:var(--gray-50);max-width:560px;margin:0 auto">
+        <div style="display:flex;align-items:flex-start;gap:14px">
+          <div style="width:40px;height:40px;border-radius:10px;background:var(--white);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--text2)" stroke-width="1.5"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg></div>
+          <div style="flex:1">
+            <div style="font-size:14px;font-weight:600;font-family:var(--font-body);color:var(--text);margin-bottom:4px">Add a payment method to continue</div>
+            <div style="font-size:12.5px;color:var(--muted);font-family:var(--font-body);line-height:155%;margin-bottom:14px">Your account doesn't have a payment method on file yet. Add one to launch your first instance — you're only billed for what you run, per second.</div>
+            <div style="display:flex;gap:8px"><button class="btn btn-p btn-sm" onclick="addPaymentMethod(this)">Add payment method</button><a class="btn btn-o btn-sm" href="https://crusoe.ai/cloud/contact/" target="_blank" style="text-decoration:none">Talk to sales →</a></div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -1093,7 +1098,7 @@ img.ico{display:block;flex:0 0 auto}
     <div class="rev-legend-row"><span class="n">1</span><span><b>"POC users have quotas, not reservations — account for every case"</b> — these scenarios map the real ways capacity access varies (quota-only, reserved, mixed, none yet, quota exhausted, region out of stock), instead of assuming everyone starts with a reservation.</span></div>
     <div class="rev-legend-row"><span class="n">2</span><span><b>"What does Copy CLI copy?" (Nishant)</b> — the exact <code>crusoe compute vms create</code> command is now shown inline on every launchable card, so the CLI is visible before you copy it — full configuration still happens in the create form.</span></div>
     <div class="rev-legend-row"><span class="n">3</span><span><b>"Not everyone has reservations; usually 1–2 SKUs"</b> — every starting point is tagged by its real source (Reserved / Quota / On-demand) so it's never ambiguous where the capacity comes from.</span></div>
-    <div class="rev-legend-row"><span class="n">4</span><span><b>Dead-ends are handled gracefully</b> — at-limit shows a request-increase path, region-out-of-stock offers notify-me, and a no-access account is guided to request quota rather than hitting an empty screen.</span></div>
+    <div class="rev-legend-row"><span class="n">4</span><span><b>Dead-ends are handled gracefully</b> — at-limit shows a request-increase path, region-out-of-stock offers notify-me, and a brand-new account with no payment method gets the regular page that routes to billing on Create (not a request-access dead-end).</span></div>
   </div>
 </div><!-- /instances-edge -->
 
@@ -4013,7 +4018,7 @@ const EDGE_CAPTIONS = [
   'POC default — the account has quota but no reservations. This is the most common starting point, and the case the original design missed.',
   'Reserved capacity only — committed GPUs, no separate on-demand quota. Every starting point is tagged "Reserved".',
   'Enterprise mix — some SKUs are reserved, the rest draw from quota or on-demand. Each card is tagged by its real source.',
-  'Brand-new account — no reservations and no quota yet, so there is nothing to launch. The page guides the user to request access instead.',
+  'Brand-new account with no payment method — the page looks exactly like the regular empty state. Clicking Create Instance routes the user to add a payment method before they can launch.',
   'Quota fully consumed — running instances have used the H100 allocation. The type is shown at its limit with a request-increase path, while other capacity stays launchable.',
   'Capacity constrained — quota is fine, but H100 is temporarily out of stock in every region. The user can get notified and still launch other types.'
 ];
@@ -4024,13 +4029,31 @@ function toggleEdgeState(n) {
   });
   const btns = document.querySelectorAll('#instances-edge .state-toggle-btn');
   btns.forEach((b, i) => b.classList.toggle('active', i === n));
-  // Hide shared hero for state 3 "No access" (has its own hero + zero-state)
+  // Hide shared hero for state 3 "No payment method" (has its own regular-looking hero)
   const sharedHero = document.getElementById('edge-shared-hero');
   if (sharedHero) sharedHero.style.display = n === 3 ? 'none' : 'flex';
+  // Always reset state 3 back to the plain empty page (payment panel collapsed)
+  const payPanel = document.getElementById('edge-pay-panel');
+  if (payPanel) payPanel.style.display = 'none';
   const cap = document.getElementById('edge-caption');
   if (cap) cap.textContent = EDGE_CAPTIONS[n] || '';
   // March the dotted lines on whichever hero cube is showing
   animateEdgeCube(n === 3 ? 'edge-cube-3' : 'edge-cube');
+}
+// State 3: a no-billing account sees the regular page; Create routes to payment methods
+function goToPaymentMethods(btn) {
+  const panel = document.getElementById('edge-pay-panel');
+  if (panel) {
+    panel.style.display = '';
+    panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+}
+function addPaymentMethod(btn) {
+  if (!btn) return;
+  const orig = btn.textContent;
+  btn.textContent = 'Opening Billing…';
+  btn.disabled = true;
+  setTimeout(() => { btn.textContent = orig; btn.disabled = false; }, 1600);
 }
 function animateEdgeCube(svgId) {
   const svg = document.getElementById(svgId);
