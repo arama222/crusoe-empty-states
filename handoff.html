@@ -1780,7 +1780,7 @@ img.ico{display:block;flex:0 0 auto}
         </div>
         <div class="res-mini-item-actions">
           <button class="btn btn-p btn-sm" onclick="createClusterFromTemplate('k8s','gpu-training',this)">Create</button>
-          <a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/orchestration/cmk/" target="_blank" style="text-decoration:none">Docs</a>
+          <button class="btn btn-o btn-sm" onclick="copySnippet(this,'crusoe kubernetes cluster create --name gpu-training --node-pool-type h100-80gb-sxm-ib.8x')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button>
         </div>
       </div>
       <div class="res-mini-item">
@@ -1790,7 +1790,7 @@ img.ico{display:block;flex:0 0 auto}
         </div>
         <div class="res-mini-item-actions">
           <button class="btn btn-p btn-sm" onclick="createClusterFromTemplate('k8s','inference',this)">Create</button>
-          <a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/orchestration/cmk/" target="_blank" style="text-decoration:none">Docs</a>
+          <button class="btn btn-o btn-sm" onclick="copySnippet(this,'crusoe kubernetes cluster create --name inference --node-pool-type l40s-48gb.8x --autoscale')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button>
         </div>
       </div>
       <div class="res-mini-item">
@@ -1800,7 +1800,7 @@ img.ico{display:block;flex:0 0 auto}
         </div>
         <div class="res-mini-item-actions">
           <button class="btn btn-p btn-sm" onclick="createClusterFromTemplate('k8s','cpu',this)">Create</button>
-          <a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/orchestration/cmk/" target="_blank" style="text-decoration:none">Docs</a>
+          <button class="btn btn-o btn-sm" onclick="copySnippet(this,'crusoe kubernetes cluster create --name cpu-cluster --node-pool-type cpu.32x')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button>
         </div>
       </div>
     </div>
@@ -2322,7 +2322,7 @@ img.ico{display:block;flex:0 0 auto}
         </div>
         <div class="res-mini-item-actions">
           <button class="btn btn-p btn-sm" onclick="createClusterFromTemplate('slurm','gpu-hpc',this)">Create</button>
-          <a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/orchestration/slurm/" target="_blank" style="text-decoration:none">Docs</a>
+          <button class="btn btn-o btn-sm" onclick="copySnippet(this,'crusoe slurm cluster create --name gpu-hpc --partition h100-80gb-sxm-ib.8x')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button>
         </div>
       </div>
       <div class="res-mini-item">
@@ -2332,7 +2332,7 @@ img.ico{display:block;flex:0 0 auto}
         </div>
         <div class="res-mini-item-actions">
           <button class="btn btn-p btn-sm" onclick="createClusterFromTemplate('slurm','fine-tune',this)">Create</button>
-          <a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/orchestration/slurm/" target="_blank" style="text-decoration:none">Docs</a>
+          <button class="btn btn-o btn-sm" onclick="copySnippet(this,'crusoe slurm cluster create --name fine-tune --partition a100-80gb-sxm.8x')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button>
         </div>
       </div>
     </div>
