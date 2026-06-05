@@ -621,7 +621,7 @@ img.ico{display:block;flex:0 0 auto}
 .es-gap{flex:1 1 0;min-height:0}
 #instances-medium,#instances-mild{margin:auto 0}
 /* ── Instances "Redesign" tab ── */
-#inst-tabs{flex-shrink:0;display:flex;gap:4px;padding:2px;margin:0 auto 4px;background:var(--gray-50);border:1px solid var(--border);border-radius:9px;width:fit-content}
+#inst-tabs{flex-shrink:0;display:flex;gap:4px;padding:2px;margin:0;align-self:center;background:var(--gray-50);border:1px solid var(--border);border-radius:9px;width:fit-content}
 #inst-tabs .inst-tab{font-size:12.5px;font-weight:500;font-family:var(--font-body);color:var(--muted);background:transparent;border:none;border-radius:7px;padding:6px 16px;cursor:pointer;transition:color .15s ease,background .15s ease}
 #inst-tabs .inst-tab:hover{color:var(--text)}
 #inst-tabs .inst-tab.active{color:var(--text);background:var(--white);box-shadow:0 1px 2px rgba(0,0,0,.25)}
@@ -795,16 +795,16 @@ img.ico{display:block;flex:0 0 auto}
     <div class="ph-l">
       <div class="ph-title-sans">Instances</div>
     </div>
-    <div class="ph-r"><button class="btn btn-p"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.99967 3.33337V12.6667M3.33301 8.00004H12.6663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Create Instance</button></div>
-  </div>
-  <div class="divider"></div>
-  <div class="ca">
-    <!-- Empty-state design tabs (Current vs Redesign) -->
+    <!-- Empty-state design tabs (Current vs Redesign vs Edge cases) -->
     <div id="inst-tabs">
       <button class="inst-tab active" data-tab="current" onclick="setInstancesTab('current')">Current</button>
       <button class="inst-tab" data-tab="redesign" onclick="setInstancesTab('redesign')">Redesign</button>
       <button class="inst-tab" data-tab="edge" onclick="setInstancesTab('edge')">Edge cases</button>
     </div>
+    <div class="ph-r"><button class="btn btn-p"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.99967 3.33337V12.6667M3.33301 8.00004H12.6663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Create Instance</button></div>
+  </div>
+  <div class="divider"></div>
+  <div class="ca">
     <button id="rev-toggle" onclick="toggleReviewNotes(this)">Show review notes</button>
     <!-- ── MEDIUM (Informational) ── -->
 <div id="instances-medium" style="display:none">
