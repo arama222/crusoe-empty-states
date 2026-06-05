@@ -620,6 +620,25 @@ img.ico{display:block;flex:0 0 auto}
 /* middle spacer (inserted in markup before each pop-section) */
 .es-gap{flex:1 1 0;min-height:0}
 #instances-medium,#instances-mild{margin:auto 0}
+/* ── Instances "Redesign" tab ── */
+#inst-tabs{flex-shrink:0;display:flex;gap:4px;padding:2px;margin:0 auto 4px;background:var(--gray-50);border:1px solid var(--border);border-radius:9px;width:fit-content}
+#inst-tabs .inst-tab{font-size:12.5px;font-weight:500;font-family:var(--font-body);color:var(--muted);background:transparent;border:none;border-radius:7px;padding:6px 16px;cursor:pointer;transition:color .15s ease,background .15s ease}
+#inst-tabs .inst-tab:hover{color:var(--text)}
+#inst-tabs .inst-tab.active{color:var(--text);background:var(--white);box-shadow:0 1px 2px rgba(0,0,0,.25)}
+#instances-redesign{flex:1;display:flex;flex-direction:column;justify-content:flex-start}
+#instances-redesign::before{content:'';flex:1 1 0;min-height:0}
+#instances-redesign::after{content:'';flex:2.6 1 0;min-height:24px}
+.src-pill{display:inline-flex;align-items:center;font-size:10px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;padding:2px 7px;border-radius:5px;font-family:var(--font-body)}
+.src-reserved{background:rgba(34,197,94,.12);color:#4ade80;border:1px solid rgba(34,197,94,.28)}
+.src-quota{background:rgba(96,165,250,.12);color:#60a5fa;border:1px solid rgba(96,165,250,.28)}
+.src-ondemand{background:var(--gray-50);color:var(--muted);border:1px solid var(--border)}
+.cli-reveal{margin-top:10px;border-top:1px dashed var(--border);padding-top:9px}
+.cli-reveal code{display:block;font-family:var(--mono);font-size:10.5px;color:var(--text2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cli-reveal .cli-note{font-size:10.5px;color:var(--muted);font-family:var(--font-body);margin-top:5px;line-height:140%}
+.quota-strip{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:6px 14px;font-size:11.5px;font-family:var(--font-body);color:var(--muted);margin:-4px 0 14px}
+.quota-strip b{color:var(--text2);font-weight:600}
+.quota-strip a{color:var(--muted);text-decoration:underline;text-underline-offset:2px}
+.quota-strip a:hover{color:var(--text)}
 /* The three spacers above stay equal at every height, so the layout is
    evenly distributed when there's room and compresses to fit (never scrolls)
    when the window is short. */
@@ -769,6 +788,11 @@ img.ico{display:block;flex:0 0 auto}
   </div>
   <div class="divider"></div>
   <div class="ca">
+    <!-- Empty-state design tabs (Current vs Redesign) -->
+    <div id="inst-tabs">
+      <button class="inst-tab active" data-tab="current" onclick="setInstancesTab('current')">Current</button>
+      <button class="inst-tab" data-tab="redesign" onclick="setInstancesTab('redesign')">Redesign</button>
+    </div>
     <!-- ── MEDIUM (Informational) ── -->
 <div id="instances-medium" style="display:none">
   <!-- Empty state hero -->
@@ -1278,6 +1302,75 @@ img.ico{display:block;flex:0 0 auto}
     </div>
   </div>
 </div><!-- /instances-spicy -->
+
+<!-- ── REDESIGN (empty-state concept addressing UX feedback) ── -->
+<div id="instances-redesign" style="display:none">
+  <!-- Hero -->
+  <div style="display:flex;flex-direction:row;align-items:center;justify-content:flex-start;gap:48px;padding:24px 40px 20px 72px;min-height:200px;box-sizing:border-box;text-align:left;position:relative;overflow:hidden;background:var(--white)">
+    <div style="display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:1;position:relative">
+      <svg id="redesign-cube" width="204" height="158" viewBox="0 0 166.55 128.97" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:relative;z-index:1;overflow:hidden">
+        <path d="M143.43 96.41H161.12C161.92 96.41 162.75 96.53 163.52 96.18C164.12 95.91 164.75 96.04 165.14 96.42C165.56 96.82 165.14 97.2 164.88 97.6C163.91 99.07 162.88 100.53 161.86 101.98C159.15 105.81 156.46 109.64 153.75 113.47C150.75 117.74 147.81 122.03 144.72 126.26C143.76 127.57 142.3 128.49 139.84 128.48C94.52 128.4 49.22 128.42 3.9 128.42C3.02 128.42 1.85 128.68 1.41 127.93C1.04 127.29 0.49 126.61 0.6 125.82C0.62 125.66 0.6 125.51 0.6 125.35V35.11C0.6 33.55 1.07 32.15 2.03 30.69C4.53 26.89 7.11 23.13 9.59 19.34C13.54 13.32 17.69 7.38 21.6 1.34C21.82 1.01 22.11 0.64 22.66 0.5C22.97 0.61 23.27 0.74 23.24 1.09C22.9 4.52 23.12 7.97 23.1 11.4C23.05 18.55 23.1 89.24 23.1 96.4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M23.05 1.24C38.06 16.83 121.42 106.9 136.61 122.41C138.09 123.92 140.21 126.05 142.39 127.37" stroke="currentColor" stroke-miterlimit="10" stroke-dasharray="3 3"/>
+        <path d="M23.88 96.63C24.35 97.15 44.33 96.41 45.01 96.41H142.77" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M142.45 33.7C141.97 33.25 121.93 33.66 121.24 33.66C99.36 33.66 1.19 33.9 1.19 33.9" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M0.11 34.56C1.24 34.31 2.27 34.69 3.15 35.07C10.55 38.22 18.32 40.8 25.86 43.72C49.63 52.88 73.52 61.82 97.31 70.95C116.7 78.38 136.24 85.57 155.53 93.2C157.82 94.1 160.81 94.27 161.99 96.54" stroke="currentColor" stroke-miterlimit="10" stroke-dasharray="3 3"/>
+        <path d="M143.28 33.57V127.37" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M1.55 128.11L25 95.59L83.7 65.46L84.54 65.03L165.97 1.13L144.1 33.5L83.93 66.34L1.55 128.11Z" stroke="currentColor" stroke-linejoin="round" stroke-dasharray="3 3"/>
+        <path d="M12.58 81.75L153.13 49.83" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M165.45 1.63C166.19 2.1 166.05 2.76 166.05 3.39V94.43C166.05 94.95 166.07 95.47 165.45 95.83" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M22.35 0.58H165.77" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="12.58" cy="81.75" r="2.8" fill="currentColor"/>
+        <circle cx="153.13" cy="49.83" r="2.8" fill="currentColor"/>
+      </svg>
+    </div>
+    <div style="position:relative;z-index:1;max-width:400px">
+      <h1 style="font-size:44px;font-weight:400;font-family:var(--font-heading);color:var(--text);letter-spacing:-1.2px;line-height:110%;margin:0 0 10px;white-space:nowrap">No instances yet.</h1>
+      <p style="font-size:14px;color:var(--muted);font-family:var(--font-body);line-height:160%;margin:0 0 18px">Spin up a GPU or CPU VM in under a minute — SSH in directly and start building.</p>
+      <div style="display:flex;align-items:center;gap:18px">
+        <button class="btn btn-p" onclick="createInstanceFromRes('h100',this)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.99967 3.33337V12.6667M3.33301 8.00004H12.6663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Create Instance</button>
+        <a href="https://docs.crusoecloud.com/compute/virtual-machines/overview/" target="_blank" style="font-size:13px;color:var(--muted);text-decoration:underline;text-underline-offset:3px;font-family:var(--font-body);transition:color .15s ease" onmouseenter="this.style.color='var(--text)'" onmouseleave="this.style.color='var(--muted)'">View docs →</a>
+      </div>
+    </div>
+  </div>
+  <div class="es-gap"></div>
+  <!-- Capacity section: quota-aware, source-tagged -->
+  <div class="pop-section" style="margin-top:36px;padding-bottom:16px">
+    <div class="pop-title">Launch from your available capacity</div>
+    <div class="quota-strip">Your quota — <b>H100 16</b> · <b>L40S 16</b> · <b>vCPU 320</b> &nbsp;<a href="javascript:void(0)">View usage &amp; limits →</a>&nbsp;·&nbsp;<a href="javascript:void(0)">Request increase →</a></div>
+    <div class="pop-grid">
+      <!-- Reserved -->
+      <div class="pop-card" style="display:flex;flex-direction:column;gap:0;min-width:0">
+        <div class="pop-card-top" style="margin-bottom:8px;align-items:center">
+          <div class="pop-card-info"><div class="pop-card-name">H100 80GB SXM</div><div class="pop-card-price">6 of 32 reserved GPUs free</div></div>
+          <span class="src-pill src-reserved">Reserved</span>
+        </div>
+        <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Training · Multi-node</span></div>
+        <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createInstanceFromRes('h100',this)">Create instance</button><button class="btn btn-o btn-sm" onclick="copySnippet(this,'crusoe compute vms create --name my-vm --type h100-80gb-sxm-ib.1x --ssh-key ~/.ssh/id_rsa.pub')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
+        <div class="cli-reveal"><code>crusoe compute vms create --type h100-80gb-sxm-ib.1x …</code><div class="cli-note">Copies a ready-to-run command — 1× GPU, account defaults. Adjust count, region &amp; disks in the create form.</div></div>
+      </div>
+      <!-- On-demand -->
+      <div class="pop-card" style="display:flex;flex-direction:column;gap:0;min-width:0">
+        <div class="pop-card-top" style="margin-bottom:8px;align-items:center">
+          <div class="pop-card-info"><div class="pop-card-name">H200 141GB</div><div class="pop-card-price">Available now · per-second billing</div></div>
+          <span class="src-pill src-ondemand">On-demand</span>
+        </div>
+        <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Inference · Large models</span></div>
+        <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createInstanceFromRes('h200',this)">Create instance</button><button class="btn btn-o btn-sm" onclick="copySnippet(this,'crusoe compute vms create --name my-vm --type h200-141gb.1x --ssh-key ~/.ssh/id_rsa.pub')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
+        <div class="cli-reveal"><code>crusoe compute vms create --type h200-141gb.1x …</code><div class="cli-note">Copies a ready-to-run command — 1× GPU, account defaults. Adjust count, region &amp; disks in the create form.</div></div>
+      </div>
+      <!-- Quota -->
+      <div class="pop-card" style="display:flex;flex-direction:column;gap:0;min-width:0">
+        <div class="pop-card-top" style="margin-bottom:8px;align-items:center">
+          <div class="pop-card-info"><div class="pop-card-name">L40S 48GB</div><div class="pop-card-price">8 of 16 in your quota</div></div>
+          <span class="src-pill src-quota">Quota</span>
+        </div>
+        <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Inference · Fine-tuning</span></div>
+        <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createInstanceFromRes('l40s',this)">Create instance</button><button class="btn btn-o btn-sm" onclick="copySnippet(this,'crusoe compute vms create --name my-vm --type l40s-48gb.1x --ssh-key ~/.ssh/id_rsa.pub')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
+        <div class="cli-reveal"><code>crusoe compute vms create --type l40s-48gb.1x …</code><div class="cli-note">Copies a ready-to-run command — 1× GPU, account defaults. Adjust count, region &amp; disks in the create form.</div></div>
+      </div>
+    </div>
+  </div>
+</div><!-- /instances-redesign -->
 
 <!-- ── FILLED STATE ── -->
 <div id="instances-filled" style="display:none">
@@ -4178,6 +4271,9 @@ function createInstanceFromRes(gpuType, btn) {
 
   setTimeout(() => {
     if (spicy) { spicy.style.display = 'none'; spicy.style.opacity = ''; spicy.style.transition = ''; }
+    // Redesign tab + tab bar are part of the empty state — drop them once filled.
+    const rdz = document.getElementById('instances-redesign'); if (rdz) rdz.style.display = 'none';
+    const itabs = document.getElementById('inst-tabs'); if (itabs) itabs.style.display = 'none';
 
     const tbody = document.getElementById('instances-tbl-body');
     const cpBtn = `<button class="tbl-icon-btn" onclick="event.stopPropagation()" style="opacity:.5;margin-left:4px;background:none;border:none;cursor:pointer;color:var(--muted)"><svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="5" width="9" height="9" rx="1.5"/><path d="M3 11V3a1 1 0 0 1 1-1h8"/></svg></button>`;
@@ -4221,6 +4317,15 @@ function createInstanceFromRes(gpuType, btn) {
       if (cells[4]) cells[4].innerHTML = `<span style="font-family:var(--mono);font-size:12px">${privIp}</span>${cpBtn}`;
     }, 2800);
   }, alreadyFilled ? 0 : 350);
+}
+
+// ── Instances empty-state design tabs (Current vs Redesign) ──
+function setInstancesTab(tab) {
+  const spicy = document.getElementById('instances-spicy');
+  const redesign = document.getElementById('instances-redesign');
+  if (spicy) spicy.style.display = tab === 'redesign' ? 'none' : '';
+  if (redesign) redesign.style.display = tab === 'redesign' ? '' : 'none';
+  document.querySelectorAll('#inst-tabs .inst-tab').forEach(b => b.classList.toggle('active', b.dataset.tab === tab));
 }
 
 function copyResCli(gpu) {
