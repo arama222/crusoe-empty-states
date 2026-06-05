@@ -1040,11 +1040,11 @@ img.ico{display:block;flex:0 0 auto}
   <div id="edge-4" style="display:none">
     <div class="pop-section" style="margin-top:16px">
       <div class="pop-title">Launch from your available capacity</div>
-      <div class="quota-strip"><span style="color:#f87171;font-weight:600">H100 0 of 8 free</span> · <b>L40S 4 of 16 free</b> &nbsp;<a href="javascript:void(0)">View usage &amp; limits →</a>&nbsp;·&nbsp;<a href="javascript:void(0)">Request increase →</a></div>
-      <div style="border:1px solid rgba(248,113,113,.28);background:rgba(248,113,113,.08);border-radius:10px;padding:12px 16px;display:flex;align-items:center;gap:12px;margin-bottom:16px">
+      <div id="edge4-banner" style="border:1px solid rgba(248,113,113,.28);background:rgba(248,113,113,.08);border-radius:10px;padding:12px 16px;display:flex;align-items:center;gap:12px;margin-bottom:16px">
         <svg width="16" height="16" viewBox="0 0 20 20" fill="none" style="flex-shrink:0" stroke="#f87171" stroke-width="1.6"><circle cx="10" cy="10" r="8"/><line x1="10" y1="6" x2="10" y2="10.5"/><circle cx="10" cy="13.5" r=".6" fill="#f87171" stroke="none"/></svg>
         <div style="flex:1;font-size:12.5px;color:var(--text2);font-family:var(--font-body);line-height:150%">You've used all of your <b style="color:var(--text)">H100</b> quota. Stop unused instances to free capacity, or request an increase to launch more.<span class="rev-note">4</span></div>
         <button class="btn btn-o btn-sm" onclick="copySnippet(this,'crusoe quota request --resource h100 --increase 8')" style="flex-shrink:0;white-space:nowrap">Request increase →</button>
+        <button onclick="document.getElementById('edge4-banner').style.display='none'" aria-label="Dismiss" style="flex-shrink:0;background:none;border:none;cursor:pointer;color:var(--muted);display:flex;align-items:center;justify-content:center;padding:4px;border-radius:6px;transition:color .15s ease,background .15s ease" onmouseenter="this.style.color='var(--text)';this.style.background='rgba(248,113,113,.12)'" onmouseleave="this.style.color='var(--muted)';this.style.background='none'"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 3l8 8M11 3l-8 8"/></svg></button>
       </div>
       <div class="pop-grid">
         <div class="pop-card" style="display:flex;flex-direction:column;gap:0;min-width:0;opacity:.55">
@@ -4035,6 +4035,9 @@ function toggleEdgeState(n) {
   // Always reset state 3 back to the plain empty page (payment panel collapsed)
   const payPanel = document.getElementById('edge-pay-panel');
   if (payPanel) payPanel.style.display = 'none';
+  // Restore the dismissible state-4 banner each time the scenario is opened
+  const b4 = document.getElementById('edge4-banner');
+  if (b4) b4.style.display = 'flex';
   const cap = document.getElementById('edge-caption');
   if (cap) cap.textContent = EDGE_CAPTIONS[n] || '';
   // March the dotted lines on whichever hero cube is showing
