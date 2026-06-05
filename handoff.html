@@ -632,13 +632,24 @@ img.ico{display:block;flex:0 0 auto}
 .src-reserved{background:rgba(34,197,94,.12);color:#4ade80;border:1px solid rgba(34,197,94,.28)}
 .src-quota{background:rgba(96,165,250,.12);color:#60a5fa;border:1px solid rgba(96,165,250,.28)}
 .src-ondemand{background:var(--gray-50);color:var(--muted);border:1px solid var(--border)}
-.cli-reveal{margin-top:10px;border-top:1px dashed var(--border);padding-top:9px}
+.cli-reveal{margin-top:9px;border-top:1px dashed var(--border);padding-top:8px}
 .cli-reveal code{display:block;font-family:var(--mono);font-size:10.5px;color:var(--text2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .cli-reveal .cli-note{font-size:10.5px;color:var(--muted);font-family:var(--font-body);margin-top:5px;line-height:140%}
 .quota-strip{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:6px 14px;font-size:11.5px;font-family:var(--font-body);color:var(--muted);margin:-4px 0 14px}
 .quota-strip b{color:var(--text2);font-weight:600}
 .quota-strip a{color:var(--muted);text-decoration:underline;text-underline-offset:2px}
 .quota-strip a:hover{color:var(--text)}
+/* Review-notes overlay (maps each change to the UX feedback) */
+#rev-toggle{display:none;flex-shrink:0;margin:0 auto 8px;font-size:11.5px;font-family:var(--font-body);color:var(--muted);background:transparent;border:1px solid var(--border);border-radius:7px;padding:4px 12px;cursor:pointer;transition:color .15s ease,border-color .15s ease}
+#rev-toggle:hover{color:var(--text);border-color:var(--gray-400)}
+#rev-toggle.on{color:#111;background:#f59e0b;border-color:#f59e0b}
+.rev-note{display:none;align-items:center;justify-content:center;width:16px;height:16px;border-radius:50%;background:#f59e0b;color:#111;font-size:10px;font-weight:700;font-family:var(--font-body);vertical-align:middle;margin-left:6px;flex-shrink:0}
+#instances-redesign.show-notes .rev-note{display:inline-flex}
+.rev-legend{display:none;margin:16px auto 0;max-width:780px;border:1px solid var(--border);border-radius:10px;background:var(--gray-50);padding:12px 18px;text-align:left}
+#instances-redesign.show-notes .rev-legend{display:block}
+.rev-legend-row{display:flex;gap:10px;align-items:flex-start;font-size:11.5px;font-family:var(--font-body);color:var(--muted);line-height:148%;padding:4px 0}
+.rev-legend-row .n{flex-shrink:0;width:16px;height:16px;border-radius:50%;background:#f59e0b;color:#111;font-size:10px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;margin-top:1px}
+.rev-legend-row b{color:var(--text2);font-weight:600}
 /* The three spacers above stay equal at every height, so the layout is
    evenly distributed when there's room and compresses to fit (never scrolls)
    when the window is short. */
@@ -793,6 +804,7 @@ img.ico{display:block;flex:0 0 auto}
       <button class="inst-tab active" data-tab="current" onclick="setInstancesTab('current')">Current</button>
       <button class="inst-tab" data-tab="redesign" onclick="setInstancesTab('redesign')">Redesign</button>
     </div>
+    <button id="rev-toggle" onclick="toggleReviewNotes(this)">Show review notes</button>
     <!-- ── MEDIUM (Informational) ── -->
 <div id="instances-medium" style="display:none">
   <!-- Empty state hero -->
@@ -1329,6 +1341,7 @@ img.ico{display:block;flex:0 0 auto}
       <div style="display:flex;align-items:center;gap:18px">
         <button class="btn btn-p" onclick="createInstanceFromRes('h100',this)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.99967 3.33337V12.6667M3.33301 8.00004H12.6663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Create Instance</button>
         <a href="https://docs.crusoecloud.com/compute/virtual-machines/overview/" target="_blank" style="font-size:13px;color:var(--muted);text-decoration:underline;text-underline-offset:3px;font-family:var(--font-body);transition:color .15s ease" onmouseenter="this.style.color='var(--text)'" onmouseleave="this.style.color='var(--muted)'">View docs →</a>
+        <span class="rev-note">1</span>
       </div>
     </div>
   </div>
@@ -1336,17 +1349,17 @@ img.ico{display:block;flex:0 0 auto}
   <!-- Capacity section: quota-aware, source-tagged -->
   <div class="pop-section" style="margin-top:36px;padding-bottom:16px">
     <div class="pop-title">Launch from your available capacity</div>
-    <div class="quota-strip">Your quota — <b>H100 16</b> · <b>L40S 16</b> · <b>vCPU 320</b> &nbsp;<a href="javascript:void(0)">View usage &amp; limits →</a>&nbsp;·&nbsp;<a href="javascript:void(0)">Request increase →</a></div>
+    <div class="quota-strip">Your quota — <b>H100 16</b> · <b>L40S 16</b> · <b>vCPU 320</b> &nbsp;<a href="javascript:void(0)">View usage &amp; limits →</a>&nbsp;·&nbsp;<a href="javascript:void(0)">Request increase →</a><span class="rev-note">2</span></div>
     <div class="pop-grid">
       <!-- Reserved -->
       <div class="pop-card" style="display:flex;flex-direction:column;gap:0;min-width:0">
         <div class="pop-card-top" style="margin-bottom:8px;align-items:center">
           <div class="pop-card-info"><div class="pop-card-name">H100 80GB SXM</div><div class="pop-card-price">6 of 32 reserved GPUs free</div></div>
-          <span class="src-pill src-reserved">Reserved</span>
+          <span class="src-pill src-reserved">Reserved</span><span class="rev-note">3</span>
         </div>
         <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Training · Multi-node</span></div>
         <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createInstanceFromRes('h100',this)">Create instance</button><button class="btn btn-o btn-sm" onclick="copySnippet(this,'crusoe compute vms create --name my-vm --type h100-80gb-sxm-ib.1x --ssh-key ~/.ssh/id_rsa.pub')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
-        <div class="cli-reveal"><code>crusoe compute vms create --type h100-80gb-sxm-ib.1x …</code><div class="cli-note">Copies a ready-to-run command — 1× GPU, account defaults. Adjust count, region &amp; disks in the create form.</div></div>
+        <div class="cli-reveal"><code>crusoe compute vms create --type h100-80gb-sxm-ib.1x …</code><div class="cli-note">Ready-to-run with defaults — set count, region &amp; disks in the create form.<span class="rev-note">4</span></div></div>
       </div>
       <!-- On-demand -->
       <div class="pop-card" style="display:flex;flex-direction:column;gap:0;min-width:0">
@@ -1356,7 +1369,7 @@ img.ico{display:block;flex:0 0 auto}
         </div>
         <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Inference · Large models</span></div>
         <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createInstanceFromRes('h200',this)">Create instance</button><button class="btn btn-o btn-sm" onclick="copySnippet(this,'crusoe compute vms create --name my-vm --type h200-141gb.1x --ssh-key ~/.ssh/id_rsa.pub')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
-        <div class="cli-reveal"><code>crusoe compute vms create --type h200-141gb.1x …</code><div class="cli-note">Copies a ready-to-run command — 1× GPU, account defaults. Adjust count, region &amp; disks in the create form.</div></div>
+        <div class="cli-reveal"><code>crusoe compute vms create --type h200-141gb.1x …</code><div class="cli-note">Ready-to-run with defaults — set count, region &amp; disks in the create form.</div></div>
       </div>
       <!-- Quota -->
       <div class="pop-card" style="display:flex;flex-direction:column;gap:0;min-width:0">
@@ -1366,8 +1379,14 @@ img.ico{display:block;flex:0 0 auto}
         </div>
         <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Inference · Fine-tuning</span></div>
         <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createInstanceFromRes('l40s',this)">Create instance</button><button class="btn btn-o btn-sm" onclick="copySnippet(this,'crusoe compute vms create --name my-vm --type l40s-48gb.1x --ssh-key ~/.ssh/id_rsa.pub')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
-        <div class="cli-reveal"><code>crusoe compute vms create --type l40s-48gb.1x …</code><div class="cli-note">Copies a ready-to-run command — 1× GPU, account defaults. Adjust count, region &amp; disks in the create form.</div></div>
+        <div class="cli-reveal"><code>crusoe compute vms create --type l40s-48gb.1x …</code><div class="cli-note">Ready-to-run with defaults — set count, region &amp; disks in the create form.</div></div>
       </div>
+    </div>
+    <div class="rev-legend">
+      <div class="rev-legend-row"><span class="n">1</span><span><b>"View docs felt misplaced"</b> — demoted from a button to a quiet text link, so the hero keeps one primary action (Create) aligned with the speed message.</span></div>
+      <div class="rev-legend-row"><span class="n">2</span><span><b>"POC users have quotas, not reservations"</b> — added a quota strip with live limits and a request-increase path, so the page is useful even with zero reservations.</span></div>
+      <div class="rev-legend-row"><span class="n">3</span><span><b>"Not everyone has reservations; usually 1–2 SKUs"</b> — each starting point is now tagged by source (Reserved / On-demand / Quota) instead of assuming reserved capacity.</span></div>
+      <div class="rev-legend-row"><span class="n">4</span><span><b>"What does Copy CLI copy?"</b> — the exact command is shown on each card, noting it's a ready-to-run default and that full configuration still happens in the create form.</span></div>
     </div>
   </div>
 </div><!-- /instances-redesign -->
@@ -4326,6 +4345,16 @@ function setInstancesTab(tab) {
   if (spicy) spicy.style.display = tab === 'redesign' ? 'none' : '';
   if (redesign) redesign.style.display = tab === 'redesign' ? '' : 'none';
   document.querySelectorAll('#inst-tabs .inst-tab').forEach(b => b.classList.toggle('active', b.dataset.tab === tab));
+  const revToggle = document.getElementById('rev-toggle');
+  if (revToggle) revToggle.style.display = tab === 'redesign' ? 'block' : 'none';
+}
+
+function toggleReviewNotes(btn) {
+  const redesign = document.getElementById('instances-redesign');
+  if (!redesign) return;
+  const on = redesign.classList.toggle('show-notes');
+  btn.classList.toggle('on', on);
+  btn.textContent = on ? 'Hide review notes' : 'Show review notes';
 }
 
 function copyResCli(gpu) {
