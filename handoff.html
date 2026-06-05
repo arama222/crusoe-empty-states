@@ -644,9 +644,9 @@ img.ico{display:block;flex:0 0 auto}
 #rev-toggle:hover{color:var(--text);border-color:var(--gray-400)}
 #rev-toggle.on{color:#111;background:#f59e0b;border-color:#f59e0b}
 .rev-note{display:none;align-items:center;justify-content:center;width:16px;height:16px;border-radius:50%;background:#f59e0b;color:#111;font-size:10px;font-weight:700;font-family:var(--font-body);vertical-align:middle;margin-left:6px;flex-shrink:0}
-#instances-redesign.show-notes .rev-note{display:inline-flex}
+#instances-redesign.show-notes .rev-note,#instances-edge.show-notes .rev-note{display:inline-flex}
 .rev-legend{display:none;margin:16px auto 0;max-width:780px;border:1px solid var(--border);border-radius:10px;background:var(--gray-50);padding:12px 18px;text-align:left}
-#instances-redesign.show-notes .rev-legend{display:block}
+#instances-redesign.show-notes .rev-legend,#instances-edge.show-notes .rev-legend{display:block}
 .rev-legend-row{display:flex;gap:10px;align-items:flex-start;font-size:11.5px;font-family:var(--font-body);color:var(--muted);line-height:148%;padding:4px 0}
 .rev-legend-row .n{flex-shrink:0;width:16px;height:16px;border-radius:50%;background:#f59e0b;color:#111;font-size:10px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;margin-top:1px}
 .rev-legend-row b{color:var(--text2);font-weight:600}
@@ -878,7 +878,7 @@ img.ico{display:block;flex:0 0 auto}
 <div id="instances-edge" style="display:none">
   <!-- Sub-toggle: capacity scenarios (driven by the reviewer's feedback) -->
   <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap">
-    <span style="font-size:12px;font-weight:500;color:var(--muted);font-family:var(--font-body)">Capacity scenario:</span>
+    <span style="font-size:12px;font-weight:500;color:var(--muted);font-family:var(--font-body)">Capacity scenario:<span class="rev-note">1</span></span>
     <div class="state-toggle" style="margin-left:0">
       <button class="state-toggle-btn active" onclick="toggleEdgeState(0)">Quota only</button>
       <button class="state-toggle-btn" onclick="toggleEdgeState(1)">Reserved</button>
@@ -925,19 +925,19 @@ img.ico{display:block;flex:0 0 auto}
       <div class="quota-strip">Your quota — <b>H100 8</b> · <b>H200 8</b> · <b>L40S 16</b> &nbsp;<a href="javascript:void(0)">View usage &amp; limits →</a>&nbsp;·&nbsp;<a href="javascript:void(0)">Request increase →</a></div>
       <div class="pop-grid">
         <div class="pop-card" style="display:flex;flex-direction:column;gap:0;min-width:0">
-          <div class="pop-card-top" style="margin-bottom:8px;align-items:center"><div class="pop-card-info"><div class="pop-card-name">H100 80GB SXM</div><div class="pop-card-price">8 of 8 in your quota</div></div><span class="src-pill src-quota">Quota</span></div>
+          <div class="pop-card-top" style="margin-bottom:8px;align-items:center"><div class="pop-card-info"><div class="pop-card-name">H100 80GB SXM</div><div class="pop-card-price">8 of 8 in your quota</div></div><span class="src-pill src-quota">Quota</span><span class="rev-note">3</span></div>
           <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Training · Multi-node</span></div>
-          <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createInstanceFromRes('h100',this)">Create instance</button><button class="btn btn-o btn-sm" onclick="copySnippet(this,'crusoe compute vms create --name my-vm --type h100-80gb-sxm-ib.1x')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
+          <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createInstanceFromRes('h100',this)">Create instance</button><button class="btn btn-o btn-sm" onclick="copySnippet(this,'crusoe compute vms create --name my-vm --type h100-80gb-sxm-ib.1x')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div><div class="cli-reveal"><code>crusoe compute vms create --type h100-80gb-sxm-ib.1x …</code><div class="cli-note">Ready-to-run with defaults — set count, region &amp; disks in the create form.<span class="rev-note">2</span></div></div>
         </div>
         <div class="pop-card" style="display:flex;flex-direction:column;gap:0;min-width:0">
           <div class="pop-card-top" style="margin-bottom:8px;align-items:center"><div class="pop-card-info"><div class="pop-card-name">H200 141GB</div><div class="pop-card-price">Available now · per-second billing</div></div><span class="src-pill src-ondemand">On-demand</span></div>
           <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Inference · Large models</span></div>
-          <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createInstanceFromRes('h200',this)">Create instance</button><button class="btn btn-o btn-sm" onclick="copySnippet(this,'crusoe compute vms create --name my-vm --type h200-141gb.1x')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
+          <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createInstanceFromRes('h200',this)">Create instance</button><button class="btn btn-o btn-sm" onclick="copySnippet(this,'crusoe compute vms create --name my-vm --type h200-141gb.1x')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div><div class="cli-reveal"><code>crusoe compute vms create --type h200-141gb.1x …</code><div class="cli-note">Ready-to-run with defaults — set count, region &amp; disks in the create form.</div></div>
         </div>
         <div class="pop-card" style="display:flex;flex-direction:column;gap:0;min-width:0">
           <div class="pop-card-top" style="margin-bottom:8px;align-items:center"><div class="pop-card-info"><div class="pop-card-name">L40S 48GB</div><div class="pop-card-price">16 of 16 in your quota</div></div><span class="src-pill src-quota">Quota</span></div>
           <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Inference · Fine-tuning</span></div>
-          <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createInstanceFromRes('l40s',this)">Create instance</button><button class="btn btn-o btn-sm" onclick="copySnippet(this,'crusoe compute vms create --name my-vm --type l40s-48gb.1x')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
+          <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createInstanceFromRes('l40s',this)">Create instance</button><button class="btn btn-o btn-sm" onclick="copySnippet(this,'crusoe compute vms create --name my-vm --type l40s-48gb.1x')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div><div class="cli-reveal"><code>crusoe compute vms create --type l40s-48gb.1x …</code><div class="cli-note">Ready-to-run with defaults — set count, region &amp; disks in the create form.</div></div>
         </div>
       </div>
     </div>
@@ -952,17 +952,17 @@ img.ico{display:block;flex:0 0 auto}
         <div class="pop-card" style="display:flex;flex-direction:column;gap:0;min-width:0">
           <div class="pop-card-top" style="margin-bottom:8px;align-items:center"><div class="pop-card-info"><div class="pop-card-name">H100 80GB SXM</div><div class="pop-card-price">6 of 32 reserved GPUs free</div></div><span class="src-pill src-reserved">Reserved</span></div>
           <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Training · Multi-node</span></div>
-          <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createInstanceFromRes('h100',this)">Create instance</button><button class="btn btn-o btn-sm" onclick="copySnippet(this,'crusoe compute vms create --name my-vm --type h100-80gb-sxm-ib.1x')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
+          <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createInstanceFromRes('h100',this)">Create instance</button><button class="btn btn-o btn-sm" onclick="copySnippet(this,'crusoe compute vms create --name my-vm --type h100-80gb-sxm-ib.1x')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div><div class="cli-reveal"><code>crusoe compute vms create --type h100-80gb-sxm-ib.1x …</code><div class="cli-note">Ready-to-run with defaults — set count, region &amp; disks in the create form.</div></div>
         </div>
         <div class="pop-card" style="display:flex;flex-direction:column;gap:0;min-width:0">
           <div class="pop-card-top" style="margin-bottom:8px;align-items:center"><div class="pop-card-info"><div class="pop-card-name">H200 141GB</div><div class="pop-card-price">16 of 16 reserved GPUs free</div></div><span class="src-pill src-reserved">Reserved</span></div>
           <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Inference · Large models</span></div>
-          <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createInstanceFromRes('h200',this)">Create instance</button><button class="btn btn-o btn-sm" onclick="copySnippet(this,'crusoe compute vms create --name my-vm --type h200-141gb.1x')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
+          <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createInstanceFromRes('h200',this)">Create instance</button><button class="btn btn-o btn-sm" onclick="copySnippet(this,'crusoe compute vms create --name my-vm --type h200-141gb.1x')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div><div class="cli-reveal"><code>crusoe compute vms create --type h200-141gb.1x …</code><div class="cli-note">Ready-to-run with defaults — set count, region &amp; disks in the create form.</div></div>
         </div>
         <div class="pop-card" style="display:flex;flex-direction:column;gap:0;min-width:0">
           <div class="pop-card-top" style="margin-bottom:8px;align-items:center"><div class="pop-card-info"><div class="pop-card-name">L40S 48GB</div><div class="pop-card-price">4 of 8 reserved GPUs free</div></div><span class="src-pill src-reserved">Reserved</span></div>
           <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Inference · Fine-tuning</span></div>
-          <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createInstanceFromRes('l40s',this)">Create instance</button><button class="btn btn-o btn-sm" onclick="copySnippet(this,'crusoe compute vms create --name my-vm --type l40s-48gb.1x')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
+          <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createInstanceFromRes('l40s',this)">Create instance</button><button class="btn btn-o btn-sm" onclick="copySnippet(this,'crusoe compute vms create --name my-vm --type l40s-48gb.1x')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div><div class="cli-reveal"><code>crusoe compute vms create --type l40s-48gb.1x …</code><div class="cli-note">Ready-to-run with defaults — set count, region &amp; disks in the create form.</div></div>
         </div>
       </div>
     </div>
@@ -977,17 +977,17 @@ img.ico{display:block;flex:0 0 auto}
         <div class="pop-card" style="display:flex;flex-direction:column;gap:0;min-width:0">
           <div class="pop-card-top" style="margin-bottom:8px;align-items:center"><div class="pop-card-info"><div class="pop-card-name">H100 80GB SXM</div><div class="pop-card-price">6 of 32 reserved GPUs free</div></div><span class="src-pill src-reserved">Reserved</span></div>
           <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Training · Multi-node</span></div>
-          <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createInstanceFromRes('h100',this)">Create instance</button><button class="btn btn-o btn-sm" onclick="copySnippet(this,'crusoe compute vms create --name my-vm --type h100-80gb-sxm-ib.1x')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
+          <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createInstanceFromRes('h100',this)">Create instance</button><button class="btn btn-o btn-sm" onclick="copySnippet(this,'crusoe compute vms create --name my-vm --type h100-80gb-sxm-ib.1x')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div><div class="cli-reveal"><code>crusoe compute vms create --type h100-80gb-sxm-ib.1x …</code><div class="cli-note">Ready-to-run with defaults — set count, region &amp; disks in the create form.</div></div>
         </div>
         <div class="pop-card" style="display:flex;flex-direction:column;gap:0;min-width:0">
           <div class="pop-card-top" style="margin-bottom:8px;align-items:center"><div class="pop-card-info"><div class="pop-card-name">L40S 48GB</div><div class="pop-card-price">12 of 16 in your quota</div></div><span class="src-pill src-quota">Quota</span></div>
           <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Inference · Fine-tuning</span></div>
-          <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createInstanceFromRes('l40s',this)">Create instance</button><button class="btn btn-o btn-sm" onclick="copySnippet(this,'crusoe compute vms create --name my-vm --type l40s-48gb.1x')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
+          <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createInstanceFromRes('l40s',this)">Create instance</button><button class="btn btn-o btn-sm" onclick="copySnippet(this,'crusoe compute vms create --name my-vm --type l40s-48gb.1x')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div><div class="cli-reveal"><code>crusoe compute vms create --type l40s-48gb.1x …</code><div class="cli-note">Ready-to-run with defaults — set count, region &amp; disks in the create form.</div></div>
         </div>
         <div class="pop-card" style="display:flex;flex-direction:column;gap:0;min-width:0">
           <div class="pop-card-top" style="margin-bottom:8px;align-items:center"><div class="pop-card-info"><div class="pop-card-name">H200 141GB</div><div class="pop-card-price">Available now · per-second billing</div></div><span class="src-pill src-ondemand">On-demand</span></div>
           <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Inference · Large models</span></div>
-          <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createInstanceFromRes('h200',this)">Create instance</button><button class="btn btn-o btn-sm" onclick="copySnippet(this,'crusoe compute vms create --name my-vm --type h200-141gb.1x')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
+          <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createInstanceFromRes('h200',this)">Create instance</button><button class="btn btn-o btn-sm" onclick="copySnippet(this,'crusoe compute vms create --name my-vm --type h200-141gb.1x')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div><div class="cli-reveal"><code>crusoe compute vms create --type h200-141gb.1x …</code><div class="cli-note">Ready-to-run with defaults — set count, region &amp; disks in the create form.</div></div>
         </div>
       </div>
     </div>
@@ -1038,7 +1038,7 @@ img.ico{display:block;flex:0 0 auto}
       <div class="quota-strip"><span style="color:#f87171;font-weight:600">H100 0 of 8 free</span> · <b>L40S 4 of 16 free</b> &nbsp;<a href="javascript:void(0)">View usage &amp; limits →</a>&nbsp;·&nbsp;<a href="javascript:void(0)">Request increase →</a></div>
       <div style="border:1px solid rgba(248,113,113,.28);background:rgba(248,113,113,.08);border-radius:10px;padding:12px 16px;display:flex;align-items:center;gap:12px;margin-bottom:16px">
         <svg width="16" height="16" viewBox="0 0 20 20" fill="none" style="flex-shrink:0" stroke="#f87171" stroke-width="1.6"><circle cx="10" cy="10" r="8"/><line x1="10" y1="6" x2="10" y2="10.5"/><circle cx="10" cy="13.5" r=".6" fill="#f87171" stroke="none"/></svg>
-        <div style="flex:1;font-size:12.5px;color:var(--text2);font-family:var(--font-body);line-height:150%">You've used all of your <b style="color:var(--text)">H100</b> quota. Stop unused instances to free capacity, or request an increase to launch more.</div>
+        <div style="flex:1;font-size:12.5px;color:var(--text2);font-family:var(--font-body);line-height:150%">You've used all of your <b style="color:var(--text)">H100</b> quota. Stop unused instances to free capacity, or request an increase to launch more.<span class="rev-note">4</span></div>
         <button class="btn btn-o btn-sm" onclick="copySnippet(this,'crusoe quota request --resource h100 --increase 8')" style="flex-shrink:0;white-space:nowrap">Request increase →</button>
       </div>
       <div class="pop-grid">
@@ -1050,12 +1050,12 @@ img.ico{display:block;flex:0 0 auto}
         <div class="pop-card" style="display:flex;flex-direction:column;gap:0;min-width:0">
           <div class="pop-card-top" style="margin-bottom:8px;align-items:center"><div class="pop-card-info"><div class="pop-card-name">L40S 48GB</div><div class="pop-card-price">4 of 16 in your quota</div></div><span class="src-pill src-quota">Quota</span></div>
           <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Inference · Fine-tuning</span></div>
-          <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createInstanceFromRes('l40s',this)">Create instance</button><button class="btn btn-o btn-sm" onclick="copySnippet(this,'crusoe compute vms create --name my-vm --type l40s-48gb.1x')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
+          <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createInstanceFromRes('l40s',this)">Create instance</button><button class="btn btn-o btn-sm" onclick="copySnippet(this,'crusoe compute vms create --name my-vm --type l40s-48gb.1x')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div><div class="cli-reveal"><code>crusoe compute vms create --type l40s-48gb.1x …</code><div class="cli-note">Ready-to-run with defaults — set count, region &amp; disks in the create form.</div></div>
         </div>
         <div class="pop-card" style="display:flex;flex-direction:column;gap:0;min-width:0">
           <div class="pop-card-top" style="margin-bottom:8px;align-items:center"><div class="pop-card-info"><div class="pop-card-name">H200 141GB</div><div class="pop-card-price">Available now · per-second billing</div></div><span class="src-pill src-ondemand">On-demand</span></div>
           <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Inference · Large models</span></div>
-          <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createInstanceFromRes('h200',this)">Create instance</button><button class="btn btn-o btn-sm" onclick="copySnippet(this,'crusoe compute vms create --name my-vm --type h200-141gb.1x')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
+          <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createInstanceFromRes('h200',this)">Create instance</button><button class="btn btn-o btn-sm" onclick="copySnippet(this,'crusoe compute vms create --name my-vm --type h200-141gb.1x')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div><div class="cli-reveal"><code>crusoe compute vms create --type h200-141gb.1x …</code><div class="cli-note">Ready-to-run with defaults — set count, region &amp; disks in the create form.</div></div>
         </div>
       </div>
     </div>
@@ -1079,15 +1079,21 @@ img.ico{display:block;flex:0 0 auto}
         <div class="pop-card" style="display:flex;flex-direction:column;gap:0;min-width:0">
           <div class="pop-card-top" style="margin-bottom:8px;align-items:center"><div class="pop-card-info"><div class="pop-card-name">L40S 48GB</div><div class="pop-card-price">16 of 16 in your quota</div></div><span class="src-pill src-quota">Quota</span></div>
           <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Inference · Fine-tuning</span></div>
-          <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createInstanceFromRes('l40s',this)">Create instance</button><button class="btn btn-o btn-sm" onclick="copySnippet(this,'crusoe compute vms create --name my-vm --type l40s-48gb.1x')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
+          <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createInstanceFromRes('l40s',this)">Create instance</button><button class="btn btn-o btn-sm" onclick="copySnippet(this,'crusoe compute vms create --name my-vm --type l40s-48gb.1x')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div><div class="cli-reveal"><code>crusoe compute vms create --type l40s-48gb.1x …</code><div class="cli-note">Ready-to-run with defaults — set count, region &amp; disks in the create form.</div></div>
         </div>
         <div class="pop-card" style="display:flex;flex-direction:column;gap:0;min-width:0">
           <div class="pop-card-top" style="margin-bottom:8px;align-items:center"><div class="pop-card-info"><div class="pop-card-name">H200 141GB</div><div class="pop-card-price">Available now · per-second billing</div></div><span class="src-pill src-ondemand">On-demand</span></div>
           <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Inference · Large models</span></div>
-          <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createInstanceFromRes('h200',this)">Create instance</button><button class="btn btn-o btn-sm" onclick="copySnippet(this,'crusoe compute vms create --name my-vm --type h200-141gb.1x')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
+          <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createInstanceFromRes('h200',this)">Create instance</button><button class="btn btn-o btn-sm" onclick="copySnippet(this,'crusoe compute vms create --name my-vm --type h200-141gb.1x')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div><div class="cli-reveal"><code>crusoe compute vms create --type h200-141gb.1x …</code><div class="cli-note">Ready-to-run with defaults — set count, region &amp; disks in the create form.</div></div>
         </div>
       </div>
     </div>
+  </div>
+  <div class="rev-legend">
+    <div class="rev-legend-row"><span class="n">1</span><span><b>"POC users have quotas, not reservations — account for every case"</b> — these scenarios map the real ways capacity access varies (quota-only, reserved, mixed, none yet, quota exhausted, region out of stock), instead of assuming everyone starts with a reservation.</span></div>
+    <div class="rev-legend-row"><span class="n">2</span><span><b>"What does Copy CLI copy?" (Nishant)</b> — the exact <code>crusoe compute vms create</code> command is now shown inline on every launchable card, so the CLI is visible before you copy it — full configuration still happens in the create form.</span></div>
+    <div class="rev-legend-row"><span class="n">3</span><span><b>"Not everyone has reservations; usually 1–2 SKUs"</b> — every starting point is tagged by its real source (Reserved / Quota / On-demand) so it's never ambiguous where the capacity comes from.</span></div>
+    <div class="rev-legend-row"><span class="n">4</span><span><b>Dead-ends are handled gracefully</b> — at-limit shows a request-increase path, region-out-of-stock offers notify-me, and a no-access account is guided to request quota rather than hitting an empty screen.</span></div>
   </div>
 </div><!-- /instances-edge -->
 
@@ -4270,15 +4276,27 @@ function setInstancesTab(tab) {
   if (edge) edge.style.display = tab === 'edge' ? '' : 'none';
   document.querySelectorAll('#inst-tabs .inst-tab').forEach(b => b.classList.toggle('active', b.dataset.tab === tab));
   const revToggle = document.getElementById('rev-toggle');
-  if (revToggle) revToggle.style.display = tab === 'redesign' ? 'block' : 'none';
+  if (revToggle) {
+    // Review notes are available on both the Redesign and Edge cases tabs
+    revToggle.style.display = (tab === 'redesign' || tab === 'edge') ? 'block' : 'none';
+    revToggle.classList.remove('on');
+    revToggle.textContent = 'Show review notes';
+  }
+  // Clear any open notes when switching tabs
+  if (redesign) redesign.classList.remove('show-notes');
+  if (edge) edge.classList.remove('show-notes');
   // Reset edge sub-toggle to the first state whenever the tab is opened
   if (tab === 'edge' && typeof toggleEdgeState === 'function') toggleEdgeState(0);
 }
 
 function toggleReviewNotes(btn) {
   const redesign = document.getElementById('instances-redesign');
-  if (!redesign) return;
-  const on = redesign.classList.toggle('show-notes');
+  const edge = document.getElementById('instances-edge');
+  // Toggle notes on whichever tab is currently visible
+  const target = (redesign && redesign.style.display !== 'none') ? redesign
+               : (edge && edge.style.display !== 'none') ? edge : null;
+  if (!target) return;
+  const on = target.classList.toggle('show-notes');
   btn.classList.toggle('on', on);
   btn.textContent = on ? 'Hide review notes' : 'Show review notes';
 }
