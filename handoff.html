@@ -2517,7 +2517,7 @@ img.ico{display:block;flex:0 0 auto}
         </div>
         <div style="position:relative;z-index:1;max-width:400px">
           <h1 style="font-size:44px;font-weight:400;font-family:var(--font-heading);color:var(--text);letter-spacing:-1.2px;line-height:110%;margin:0 0 10px;white-space:nowrap">No disks yet.</h1>
-          <p style="font-size:14px;color:var(--muted);font-family:var(--font-body);line-height:160%;margin:0 0 16px">Crusoe Cloud offers two types of disks: Persistent Disks and Shared Disks.<span class="rev-note">1</span></p>
+          <p style="font-size:14px;color:var(--muted);font-family:var(--font-body);line-height:160%;margin:0 0 16px">Add storage that lives independently of your instances. Choose a <b style="color:var(--text2);font-weight:600">Persistent Disk</b> for fast single-VM block storage, or a <b style="color:var(--text2);font-weight:600">Shared Disk</b> for concurrent NFS access across many VMs.<span class="rev-note">1</span></p>
           <a href="https://docs.crusoecloud.com/storage/disks/overview" target="_blank" style="display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:500;font-family:var(--font-body);color:var(--muted);text-decoration:none;border:1px solid var(--border);border-radius:8px;padding:7px 13px;background:transparent;transition:color .15s ease,border-color .15s ease,background .15s ease" onmouseenter="this.style.color='var(--text)';this.style.borderColor='var(--gray-400)';this.style.background='var(--gray-50)'" onmouseleave="this.style.color='var(--muted)';this.style.borderColor='var(--border)';this.style.background='transparent'">View docs →<span class="rev-note">2</span></a>
         </div>
       </div>
@@ -2546,7 +2546,7 @@ img.ico{display:block;flex:0 0 auto}
           </div>
         </div>
         <div class="rev-legend">
-          <div class="rev-legend-row"><span class="n">1</span><span><b>Dropped "Ephemeral Disks" from the intro</b> — ephemeral storage ships with the instance itself, so it doesn't belong in the create-a-disk story. Now reads "two types: Persistent and Shared".</span></div>
+          <div class="rev-legend-row"><span class="n">1</span><span><b>Rewrote the intro to be accurate and useful</b> — "two types of disks" was wrong (ephemeral disks also exist, they just ship with the instance). Instead of counting types, the line now frames what these disks are for and helps the user pick between Persistent (single-VM block) and Shared (multi-VM NFS).</span></div>
           <div class="rev-legend-row"><span class="n">2</span><span><b>Docs link points straight to the overview</b> — <code>/storage/disks/overview</code> instead of <code>/storage/disks/</code>, saving the extra click to the landing page.</span></div>
           <div class="rev-legend-row"><span class="n">3</span><span><b>Persistent disk copy corrected</b> — the UI doesn't allow multi-attach read-only (per the docs limitations), so "or multiple VMs read-only" is removed and "including OS Disk" is added to the 16-per-instance limit.</span></div>
           <div class="rev-legend-row"><span class="n">4</span><span><b>Disk-type names capitalized</b> — "Persistent Disks" / "Shared Disks" in titles and actions for consistent product naming.</span></div>
