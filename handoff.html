@@ -621,10 +621,10 @@ img.ico{display:block;flex:0 0 auto}
 .es-gap{flex:1 1 0;min-height:0}
 #instances-medium,#instances-mild{margin:auto 0}
 /* ── Instances "Redesign" tab ── */
-#inst-tabs{flex-shrink:0;display:flex;gap:4px;padding:2px;margin:0;align-self:center;background:var(--gray-50);border:1px solid var(--border);border-radius:9px;width:fit-content}
-#inst-tabs .inst-tab{font-size:12.5px;font-weight:500;font-family:var(--font-body);color:var(--muted);background:transparent;border:none;border-radius:7px;padding:6px 16px;cursor:pointer;transition:color .15s ease,background .15s ease}
-#inst-tabs .inst-tab:hover{color:var(--text)}
-#inst-tabs .inst-tab.active{color:var(--text);background:var(--white);box-shadow:0 1px 2px rgba(0,0,0,.25)}
+#inst-tabs,#disks-tabs{flex-shrink:0;display:flex;gap:4px;padding:2px;margin:0;align-self:center;background:var(--gray-50);border:1px solid var(--border);border-radius:9px;width:fit-content}
+#inst-tabs .inst-tab,#disks-tabs .inst-tab{font-size:12.5px;font-weight:500;font-family:var(--font-body);color:var(--muted);background:transparent;border:none;border-radius:7px;padding:6px 16px;cursor:pointer;transition:color .15s ease,background .15s ease}
+#inst-tabs .inst-tab:hover,#disks-tabs .inst-tab:hover{color:var(--text)}
+#inst-tabs .inst-tab.active,#disks-tabs .inst-tab.active{color:var(--text);background:var(--white);box-shadow:0 1px 2px rgba(0,0,0,.25)}
 #instances-redesign{flex:1;display:flex;flex-direction:column;justify-content:flex-start}
 #instances-redesign::before{content:'';flex:1 1 0;min-height:0}
 #instances-redesign::after{content:'';flex:2.6 1 0;min-height:24px}
@@ -640,13 +640,13 @@ img.ico{display:block;flex:0 0 auto}
 .quota-strip a{color:var(--muted);text-decoration:underline;text-underline-offset:2px}
 .quota-strip a:hover{color:var(--text)}
 /* Review-notes overlay (maps each change to the UX feedback) */
-#rev-toggle{display:none;flex-shrink:0;margin:0 auto 8px;font-size:11.5px;font-family:var(--font-body);color:var(--muted);background:transparent;border:1px solid var(--border);border-radius:7px;padding:4px 12px;cursor:pointer;transition:color .15s ease,border-color .15s ease}
-#rev-toggle:hover{color:var(--text);border-color:var(--gray-400)}
-#rev-toggle.on{color:#111;background:#f59e0b;border-color:#f59e0b}
+#rev-toggle,#disks-rev-toggle{display:none;flex-shrink:0;margin:0 auto 8px;font-size:11.5px;font-family:var(--font-body);color:var(--muted);background:transparent;border:1px solid var(--border);border-radius:7px;padding:4px 12px;cursor:pointer;transition:color .15s ease,border-color .15s ease}
+#rev-toggle:hover,#disks-rev-toggle:hover{color:var(--text);border-color:var(--gray-400)}
+#rev-toggle.on,#disks-rev-toggle.on{color:#111;background:#f59e0b;border-color:#f59e0b}
 .rev-note{display:none;align-items:center;justify-content:center;width:16px;height:16px;border-radius:50%;background:#f59e0b;color:#111;font-size:10px;font-weight:700;font-family:var(--font-body);vertical-align:middle;margin-left:6px;flex-shrink:0}
-#instances-redesign.show-notes .rev-note,#instances-edge.show-notes .rev-note{display:inline-flex}
+#instances-redesign.show-notes .rev-note,#instances-edge.show-notes .rev-note,#disks-redesign.show-notes .rev-note{display:inline-flex}
 .rev-legend{display:none;margin:16px auto 0;max-width:780px;border:1px solid var(--border);border-radius:10px;background:var(--gray-50);padding:12px 18px;text-align:left}
-#instances-redesign.show-notes .rev-legend,#instances-edge.show-notes .rev-legend{display:block}
+#instances-redesign.show-notes .rev-legend,#instances-edge.show-notes .rev-legend,#disks-redesign.show-notes .rev-legend{display:block}
 .rev-legend-row{display:flex;gap:10px;align-items:flex-start;font-size:11.5px;font-family:var(--font-body);color:var(--muted);line-height:148%;padding:4px 0}
 .rev-legend-row .n{flex-shrink:0;width:16px;height:16px;border-radius:50%;background:#f59e0b;color:#111;font-size:10px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;margin-top:1px}
 .rev-legend-row b{color:var(--text2);font-weight:600}
@@ -2391,12 +2391,18 @@ img.ico{display:block;flex:0 0 auto}
     <div class="ph-l">
       <div class="ph-title">Disks</div>
     </div>
+    <!-- Empty-state design tabs (Current vs Redesign) -->
+    <div id="disks-tabs">
+      <button class="inst-tab active" data-tab="current" onclick="setDisksTab('current')">Current</button>
+      <button class="inst-tab" data-tab="redesign" onclick="setDisksTab('redesign')">Redesign</button>
+    </div>
     <div class="ph-r">
       <button class="btn btn-p"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.99967 3.33337V12.6667M3.33301 8.00004H12.6663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Create Disk</button>
     </div>
   </div>
   <div class="divider"></div>
   <div class="ca">
+    <button id="disks-rev-toggle" onclick="toggleDisksNotes(this)" style="display:none">Show review notes</button>
     <!-- Empty state -->
     <div id="disks-empty" style="display:none">
       <div class="ecard">
@@ -2495,6 +2501,59 @@ img.ico{display:block;flex:0 0 auto}
         </div>
       </div>
     </div><!-- /disks-spicy -->
+
+    <!-- Redesign state (feedback-driven copy changes) -->
+    <div id="disks-redesign" style="display:none">
+      <!-- Side-by-side hero: animation left, text right -->
+      <div style="display:flex;flex-direction:row;align-items:center;justify-content:flex-start;gap:48px;padding:24px 40px 20px 72px;min-height:200px;box-sizing:border-box;text-align:left;position:relative;overflow:hidden;background:var(--white)">
+        <div style="display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:1;position:relative">
+          <svg id="disk-rdz-svg" width="165" height="165" viewBox="0 0 150.588 150.588" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:relative;z-index:1;overflow:visible">
+            <path d="M75.2938 150.088C116.601 150.088 150.088 116.601 150.088 75.2938C150.088 33.9863 116.601 0.5 75.2938 0.5C33.9863 0.5 0.5 33.9863 0.5 75.2938C0.5 116.601 33.9863 150.088 75.2938 150.088Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+            <path transform="translate(0,16.149)" d="M75.2938 117.79C116.601 117.79 150.088 91.5341 150.088 59.1452C150.088 26.7564 116.601 0.5 75.2938 0.5C33.9863 0.5 0.5 26.7564 0.5 59.1452C0.5 91.5341 33.9863 117.79 75.2938 117.79Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+            <path transform="translate(0,32.307)" d="M75.2938 85.4742C116.601 85.4742 150.088 66.4521 150.088 42.9871C150.088 19.5221 116.601 0.5 75.2938 0.5C33.9863 0.5 0.5 19.5221 0.5 42.9871C0.5 66.4521 33.9863 85.4742 75.2938 85.4742Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+            <path transform="translate(0,48.455)" d="M75.2938 53.1771C116.601 53.1771 150.088 41.3849 150.088 26.8385C150.088 12.2922 116.601 0.5 75.2938 0.5C33.9863 0.5 0.5 12.2922 0.5 26.8385C0.5 41.3849 33.9863 53.1771 75.2938 53.1771Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+            <path transform="translate(0,64.604)" d="M75.2938 20.88C116.601 20.88 150.088 16.3178 150.088 10.69C150.088 5.06222 116.601 0.5 75.2938 0.5C33.9863 0.5 0.5 5.06222 0.5 10.69C0.5 16.3178 33.9863 20.88 75.2938 20.88Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div style="position:relative;z-index:1;max-width:400px">
+          <h1 style="font-size:44px;font-weight:400;font-family:var(--font-heading);color:var(--text);letter-spacing:-1.2px;line-height:110%;margin:0 0 10px;white-space:nowrap">No disks yet.</h1>
+          <p style="font-size:14px;color:var(--muted);font-family:var(--font-body);line-height:160%;margin:0 0 16px">Crusoe Cloud offers two types of disks: Persistent Disks and Shared Disks.<span class="rev-note">1</span></p>
+          <a href="https://docs.crusoecloud.com/storage/disks/overview" target="_blank" style="display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:500;font-family:var(--font-body);color:var(--muted);text-decoration:none;border:1px solid var(--border);border-radius:8px;padding:7px 13px;background:transparent;transition:color .15s ease,border-color .15s ease,background .15s ease" onmouseenter="this.style.color='var(--text)';this.style.borderColor='var(--gray-400)';this.style.background='var(--gray-50)'" onmouseleave="this.style.color='var(--muted)';this.style.borderColor='var(--border)';this.style.background='transparent'">View docs →<span class="rev-note">2</span></a>
+        </div>
+      </div>
+      <!-- Disk type cards -->
+      <div class="es-gap"></div>
+      <div class="pop-section" style="margin-top:36px;padding-bottom:16px">
+        <div class="pop-title">Choose your disk type</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:stretch">
+          <div class="pop-card" style="display:flex;flex-direction:column;gap:0;min-width:0">
+            <div class="pop-card-top" style="margin-bottom:10px;align-items:center">
+              <div class="pop-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="13" fill="#111"/><text x="14" y="18.5" text-anchor="middle" fill="white" font-size="13" font-weight="700" font-family="sans-serif">1</text></svg></div>
+              <div class="pop-card-info"><div class="pop-card-name">Persistent Disks</div><div class="pop-card-price">1 GiB – 10 TiB · $0.08/GiB/mo</div></div>
+            </div>
+            <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Single VM · Block storage</span></div>
+            <div style="font-size:12.5px;color:var(--text2);font-family:var(--font-body);line-height:150%;margin-bottom:12px;flex:1">Attach to one VM in read-write mode. Up to 16 per instance including OS Disk. Attach and detach while running or stopped — unmount before detaching.<span class="rev-note">3</span></div>
+            <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create Persistent Disk<span class="rev-note">4</span></button></div>
+          </div>
+          <div class="pop-card" style="display:flex;flex-direction:column;gap:0;min-width:0">
+            <div class="pop-card-top" style="margin-bottom:10px;align-items:center">
+              <div class="pop-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="13" fill="#111"/><text x="14" y="18.5" text-anchor="middle" fill="white" font-size="13" font-weight="700" font-family="sans-serif">2</text></svg></div>
+              <div class="pop-card-info"><div class="pop-card-name">Shared Disks</div><div class="pop-card-price">1 TiB – 1000 TiB · $0.07/GiB/mo</div></div>
+            </div>
+            <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Multi-VM · NFS</span></div>
+            <div style="font-size:12.5px;color:var(--text2);font-family:var(--font-body);line-height:150%;margin-bottom:12px;flex:1">Concurrent NFS access from many VMs at once. Up to 8 per instance, in 1 TiB increments. Max 36-character name.<span class="rev-note">5</span></div>
+            <div style="display:flex;gap:10px"><button class="btn btn-o btn-sm" style="flex:1;justify-content:center">Create Shared Disk</button></div>
+          </div>
+        </div>
+        <div class="rev-legend">
+          <div class="rev-legend-row"><span class="n">1</span><span><b>Dropped "Ephemeral Disks" from the intro</b> — ephemeral storage ships with the instance itself, so it doesn't belong in the create-a-disk story. Now reads "two types: Persistent and Shared".</span></div>
+          <div class="rev-legend-row"><span class="n">2</span><span><b>Docs link points straight to the overview</b> — <code>/storage/disks/overview</code> instead of <code>/storage/disks/</code>, saving the extra click to the landing page.</span></div>
+          <div class="rev-legend-row"><span class="n">3</span><span><b>Persistent disk copy corrected</b> — the UI doesn't allow multi-attach read-only (per the docs limitations), so "or multiple VMs read-only" is removed and "including OS Disk" is added to the 16-per-instance limit.</span></div>
+          <div class="rev-legend-row"><span class="n">4</span><span><b>Disk-type names capitalized</b> — "Persistent Disks" / "Shared Disks" in titles and actions for consistent product naming.</span></div>
+          <div class="rev-legend-row"><span class="n">5</span><span><b>Trimmed the redundant line</b> — "Data preserved until explicitly deleted" is obvious and was dropped from the Shared disk description (kept off Persistent too, for parity).</span></div>
+        </div>
+      </div>
+    </div><!-- /disks-redesign -->
 
     <!-- Filled state (disks exist but keep empty state UI) -->
     <div id="disks-filled" style="display:none">
@@ -4314,6 +4373,31 @@ function setInstancesTab(tab) {
   if (edge) edge.classList.remove('show-notes');
   // Reset edge sub-toggle to the first state whenever the tab is opened
   if (tab === 'edge' && typeof toggleEdgeState === 'function') toggleEdgeState(0);
+}
+
+function setDisksTab(tab) {
+  const cur = document.getElementById('disks-spicy');
+  const rdz = document.getElementById('disks-redesign');
+  if (cur) cur.style.display = tab === 'current' ? '' : 'none';
+  if (rdz) rdz.style.display = tab === 'redesign' ? '' : 'none';
+  document.querySelectorAll('#disks-tabs .inst-tab').forEach(b => b.classList.toggle('active', b.dataset.tab === tab));
+  const tg = document.getElementById('disks-rev-toggle');
+  if (tg) {
+    tg.style.display = tab === 'redesign' ? 'block' : 'none';
+    tg.classList.remove('on');
+    tg.textContent = 'Show review notes';
+  }
+  if (rdz) rdz.classList.remove('show-notes');
+  // Re-run the typing/draw animation when returning to the Current tab
+  if (tab === 'current' && typeof initDiskSpicyMagic === 'function') setTimeout(initDiskSpicyMagic, 60);
+}
+
+function toggleDisksNotes(btn) {
+  const rdz = document.getElementById('disks-redesign');
+  if (!rdz) return;
+  const on = rdz.classList.toggle('show-notes');
+  btn.classList.toggle('on', on);
+  btn.textContent = on ? 'Hide review notes' : 'Show review notes';
 }
 
 function toggleReviewNotes(btn) {
