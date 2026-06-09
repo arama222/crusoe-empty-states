@@ -563,6 +563,10 @@ img.ico{display:block;flex:0 0 auto}
 @starting-style{.act-card:hover .act-reveal{opacity:0}}
 /* Reserve room below the grid so the hover panel drops into existing space — the page never grows */
 .pop-section:has(.act-card){padding-bottom:64px}
+/* Quiet "browse all types" escape hatch under the card grid */
+.browse-all-wrap{text-align:center;margin-top:14px}
+.browse-all{display:inline-block;font-size:12.5px;font-weight:500;font-family:var(--font-body);color:var(--muted);text-decoration:none;border-bottom:1px solid transparent;padding-bottom:1px;transition:color .15s ease,border-color .15s ease}
+.browse-all:hover{color:var(--text);border-color:var(--gray-400)}
 /* "View CLI" icon button + command popover (overlay — no layout/scroll impact) */
 .cli-icon{flex-shrink:0;white-space:nowrap}
 .cli-pop{position:fixed;z-index:200;width:340px;max-width:92vw;background:var(--white);border:1px solid var(--border);border-radius:11px;box-shadow:0 10px 34px rgba(0,0,0,.3);padding:13px 14px;opacity:0;transform:translateY(4px);transition:opacity .16s ease,transform .16s ease;pointer-events:none}
@@ -949,6 +953,7 @@ img.ico{display:block;flex:0 0 auto}
           <div class="act-reveal"><div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createInstanceFromRes('l40s',this)">Create instance</button><button class="btn btn-o btn-sm cli-icon" onclick="showCliPopover(this,'crusoe compute vms create --name my-vm --type l40s-48gb.1x --location us-southcentral1-a --image ubuntu22.04:latest --keyfile ~/.ssh/id_ed25519.pub')" aria-label="View CLI command" title="View the CLI command"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg> View CLI</button></div></div>
         </div>
       </div>
+      <div class="browse-all-wrap"><a href="javascript:void(0)" class="browse-all">Browse all instance types →</a></div>
     </div>
   </div>
 
@@ -973,6 +978,7 @@ img.ico{display:block;flex:0 0 auto}
           <div class="act-reveal"><div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createInstanceFromRes('l40s',this)">Create instance</button><button class="btn btn-o btn-sm cli-icon" onclick="showCliPopover(this,'crusoe compute vms create --name my-vm --type l40s-48gb.1x --location us-southcentral1-a --image ubuntu22.04:latest --keyfile ~/.ssh/id_ed25519.pub')" aria-label="View CLI command" title="View the CLI command"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg> View CLI</button></div></div>
         </div>
       </div>
+      <div class="browse-all-wrap"><a href="javascript:void(0)" class="browse-all">Browse all instance types →</a></div>
     </div>
   </div>
 
@@ -997,6 +1003,7 @@ img.ico{display:block;flex:0 0 auto}
           <div class="act-reveal"><div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createInstanceFromRes('h200',this)">Create instance</button><button class="btn btn-o btn-sm cli-icon" onclick="showCliPopover(this,'crusoe compute vms create --name my-vm --type h200-141gb-sxm-ib.8x --location us-southcentral1-a --image ubuntu22.04:latest --keyfile ~/.ssh/id_ed25519.pub')" aria-label="View CLI command" title="View the CLI command"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg> View CLI</button></div></div>
         </div>
       </div>
+      <div class="browse-all-wrap"><a href="javascript:void(0)" class="browse-all">Browse all instance types →</a></div>
     </div>
   </div>
 
@@ -1230,6 +1237,7 @@ img.ico{display:block;flex:0 0 auto}
           <div class="act-reveal"><div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createInstanceFromRes('l40s',this)">Create instance</button><button class="btn btn-o btn-sm cli-icon" onclick="showCliPopover(this,'crusoe compute vms create --name my-vm --type l40s-48gb.1x --location us-southcentral1-a --image ubuntu22.04:latest --keyfile ~/.ssh/id_ed25519.pub')" aria-label="View CLI command" title="View the CLI command"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg> View CLI</button></div></div>
         </div>
       </div>
+      <div class="browse-all-wrap"><a href="javascript:void(0)" class="browse-all">Browse all instance types →</a></div>
     <div class="rev-legend">
       <div class="rev-legend-row"><span class="n">1</span><span><b>"View docs felt misplaced"</b> — demoted from a button to a quiet text link, so the hero keeps one primary action (Create) aligned with the speed message.</span></div>
       <div class="rev-legend-row"><span class="n">2</span><span><b>Quota numbers hidden until they're exhausted</b> (Jun 5) — during normal use the page just shows "On demand"; we don't surface quota counts. The number only appears if a quota is fully used (see the Edge cases tab).</span></div>
