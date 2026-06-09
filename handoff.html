@@ -3827,6 +3827,11 @@ function showView(viewId, sbKey) {
   document.querySelector('.main').scrollTop = 0;
   // trigger spicy animations on navigation
   if (viewId === 'instances') {
+    // Restore the last-used sub-tab (Current / Redesign / Edge cases) and edge scenario
+    const savedTab = (function(){ try { return localStorage.getItem('lastInstTab'); } catch(e){ return null; } })() || 'current';
+    const savedEdge = (function(){ try { return parseInt(localStorage.getItem('lastEdgeState') || '0', 10); } catch(e){ return 0; } })();
+    if (typeof setInstancesTab === 'function') setInstancesTab(savedTab);
+    if (savedTab === 'edge' && typeof toggleEdgeState === 'function') toggleEdgeState(isNaN(savedEdge) ? 0 : savedEdge);
     setTimeout(initSpicyMagic, 60);
   } else if (viewId === 'instance-templates') {
     setTimeout(initTemplSpicyMagic, 60);
@@ -3841,6 +3846,8 @@ function showView(viewId, sbKey) {
     window._slurmWavesStarted = false; window._slurmRipplesStarted = false;
     setTimeout(initSlurmSpicyMagic, 60);
   } else if (viewId === 'disks') {
+    const savedDisksTab = (function(){ try { return localStorage.getItem('lastDisksTab'); } catch(e){ return null; } })() || 'current';
+    if (typeof setDisksTab === 'function') setDisksTab(savedDisksTab);
     setTimeout(initDiskSpicyMagic, 60);
   } else if (viewId === 'buckets') {
     setTimeout(initBucketSpicyMagic, 60);
@@ -4023,6 +4030,7 @@ const EDGE_CAPTIONS = [
   'Brand-new account with no payment method — the page looks exactly like the regular empty state. Clicking Create Instance routes the user to add a payment method before they can launch.'
 ];
 function toggleEdgeState(n) {
+  try { localStorage.setItem('lastEdgeState', n); } catch (e) {}
   [0,1,2,3].forEach(i => {
     const el = document.getElementById('edge-' + i);
     if (el) el.style.display = i === n ? '' : 'none';
@@ -4294,6 +4302,7 @@ function createInstanceFromRes(gpuType, btn) {
 
 // ── Instances empty-state design tabs (Current vs Redesign) ──
 function setInstancesTab(tab) {
+  try { localStorage.setItem('lastInstTab', tab); } catch (e) {}
   const spicy = document.getElementById('instances-spicy');
   const redesign = document.getElementById('instances-redesign');
   const edge = document.getElementById('instances-edge');
@@ -4316,6 +4325,7 @@ function setInstancesTab(tab) {
 }
 
 function setDisksTab(tab) {
+  try { localStorage.setItem('lastDisksTab', tab); } catch (e) {}
   const cur = document.getElementById('disks-spicy');
   const rdz = document.getElementById('disks-redesign');
   if (cur) cur.style.display = tab === 'current' ? '' : 'none';
