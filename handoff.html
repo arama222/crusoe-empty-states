@@ -651,13 +651,6 @@ img.ico{display:block;flex:0 0 auto}
 .cli-reveal{margin-top:9px;border-top:1px dashed var(--border);padding-top:8px}
 .cli-reveal code{display:block;font-family:var(--mono);font-size:10.5px;color:var(--text2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .cli-reveal .cli-note{font-size:10.5px;color:var(--muted);font-family:var(--font-body);margin-top:5px;line-height:140%}
-.cap-head{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:10px 16px;margin-bottom:16px}
-.cap-head .pop-title{margin-bottom:0}
-.cap-head .quota-strip{margin:0}
-.quota-strip{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:8px 12px;width:fit-content;max-width:100%;margin:0 auto 18px;padding:7px 8px 7px 15px;background:var(--gray-50);border:1px solid var(--border);border-radius:10px;font-size:12px;font-family:var(--font-body);color:var(--muted)}
-.quota-strip b{color:var(--text2);font-weight:600}
-.quota-strip a{display:inline-flex;align-items:center;gap:5px;color:var(--text2);text-decoration:none;font-weight:500;background:var(--white);border:1px solid var(--border);border-radius:7px;padding:4px 11px;transition:color .15s ease,border-color .15s ease,background .15s ease}
-.quota-strip a:hover{color:var(--text);border-color:var(--gray-400)}
 /* Review-notes overlay (maps each change to the UX feedback) */
 #rev-toggle,#disks-rev-toggle{display:none;flex-shrink:0;margin:0 auto 8px;font-size:11.5px;font-family:var(--font-body);color:var(--muted);background:transparent;border:1px solid var(--border);border-radius:7px;padding:4px 12px;cursor:pointer;transition:color .15s ease,border-color .15s ease}
 #rev-toggle:hover,#disks-rev-toggle:hover{color:var(--text);border-color:var(--gray-400)}
@@ -938,7 +931,7 @@ img.ico{display:block;flex:0 0 auto}
   <!-- ══ STATE 0 · On demand (has quota, none used up — quota numbers hidden) ══ -->
   <div id="edge-0">
     <div class="pop-section" style="margin-top:16px">
-      <div class="cap-head"><div class="pop-title">Launch from your available capacity</div><div class="quota-strip">Billed per second while running &nbsp;<a href="javascript:void(0)">View usage &amp; limits →</a></div></div>
+      <div class="pop-title">Launch from your available capacity</div>
       <div class="pop-grid">
         <div class="pop-card act-card" style="display:flex;flex-direction:column;gap:0;min-width:0">
           <div class="pop-card-top" style="margin-bottom:8px;align-items:center"><div class="pop-card-info"><div class="pop-card-name">Training · Multi-node<span class="rev-note">5</span></div><div class="pop-card-price">H100 80GB SXM</div></div><span class="src-pill src-ondemand">On demand</span><span class="rev-note">3</span></div>
@@ -962,7 +955,7 @@ img.ico{display:block;flex:0 0 auto}
   <!-- ══ STATE 1 · Reservation only ══ -->
   <div id="edge-1" style="display:none">
     <div class="pop-section" style="margin-top:16px">
-      <div class="cap-head"><div class="pop-title">Launch from your reserved capacity</div><div class="quota-strip">Reserved — <b>H100 ×32</b> · <b>H200 ×16</b> · <b>L40S ×8</b> &nbsp;<a href="javascript:void(0)">View reservations →</a></div></div>
+      <div class="pop-title">Launch from your reserved capacity</div>
       <div class="pop-grid">
         <div class="pop-card act-card" style="display:flex;flex-direction:column;gap:0;min-width:0">
           <div class="pop-card-top" style="margin-bottom:8px;align-items:center"><div class="pop-card-info"><div class="pop-card-name">Training · Multi-node</div><div class="pop-card-price">H100 80GB SXM · 6 of 32 free</div></div><span class="src-pill src-reserved">Reservation</span></div>
@@ -986,7 +979,7 @@ img.ico{display:block;flex:0 0 auto}
   <!-- ══ STATE 2 · Reservation + on-demand (enterprise mix) ══ -->
   <div id="edge-2" style="display:none">
     <div class="pop-section" style="margin-top:16px">
-      <div class="cap-head"><div class="pop-title">Launch from your available capacity</div><div class="quota-strip">Reserved — <b>H100 ×32</b> &nbsp;·&nbsp; the rest is on-demand, billed per second &nbsp;<a href="javascript:void(0)">View reservations →</a></div></div>
+      <div class="pop-title">Launch from your available capacity</div>
       <div class="pop-grid">
         <div class="pop-card act-card" style="display:flex;flex-direction:column;gap:0;min-width:0">
           <div class="pop-card-top" style="margin-bottom:8px;align-items:center"><div class="pop-card-info"><div class="pop-card-name">Training · Multi-node</div><div class="pop-card-price">H100 80GB SXM · 6 of 32 free</div></div><span class="src-pill src-reserved">Reservation</span></div>
@@ -1219,7 +1212,7 @@ img.ico{display:block;flex:0 0 auto}
   <div class="es-gap"></div>
   <!-- Capacity section: source-tagged, quota hidden until exhausted -->
   <div class="pop-section" style="margin-top:36px;padding-bottom:16px">
-    <div class="cap-head"><div class="pop-title">Launch from your available capacity</div><div class="quota-strip">Reserved — <b>H100 ×32</b> &nbsp;·&nbsp; the rest is on-demand, billed per second &nbsp;<a href="javascript:void(0)">View reservations →</a><span class="rev-note">2</span></div></div>
+    <div class="pop-title">Launch from your available capacity<span class="rev-note">2</span></div>
       <div class="pop-grid">
         <div class="pop-card act-card" style="display:flex;flex-direction:column;gap:0;min-width:0">
           <div class="pop-card-top" style="margin-bottom:8px;align-items:center"><div class="pop-card-info"><div class="pop-card-name">Training · Multi-node<span class="rev-note">5</span></div><div class="pop-card-price">H100 80GB SXM · 6 of 32 free</div></div><span class="src-pill src-reserved">Reservation</span><span class="rev-note">3</span></div>
