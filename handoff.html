@@ -628,7 +628,7 @@ img.ico{display:block;flex:0 0 auto}
 #instances-redesign{flex:1;display:flex;flex-direction:column;justify-content:flex-start}
 #instances-redesign::before{content:'';flex:1 1 0;min-height:0}
 #instances-redesign::after{content:'';flex:2.6 1 0;min-height:24px}
-.src-pill{display:inline-flex;align-items:center;font-size:10px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;padding:2px 7px;border-radius:5px;font-family:var(--font-body)}
+.src-pill{display:inline-flex;align-items:center;font-size:10px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;padding:2px 7px;border-radius:5px;font-family:var(--font-body);flex-shrink:0;white-space:nowrap}
 .src-reserved{background:rgba(34,197,94,.12);color:#4ade80;border:1px solid rgba(34,197,94,.28)}
 .src-quota{background:rgba(96,165,250,.12);color:#60a5fa;border:1px solid rgba(96,165,250,.28)}
 .src-ondemand{background:var(--gray-50);color:var(--muted);border:1px solid var(--border)}
@@ -881,9 +881,9 @@ img.ico{display:block;flex:0 0 auto}
   <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap">
     <span style="font-size:12px;font-weight:500;color:var(--muted);font-family:var(--font-body)">Capacity scenario:<span class="rev-note">1</span></span>
     <div class="state-toggle" style="margin-left:0">
-      <button class="state-toggle-btn active" onclick="toggleEdgeState(0)">Quota only</button>
-      <button class="state-toggle-btn" onclick="toggleEdgeState(1)">Reserved</button>
-      <button class="state-toggle-btn" onclick="toggleEdgeState(2)">Reserved + quota</button>
+      <button class="state-toggle-btn active" onclick="toggleEdgeState(0)">On demand</button>
+      <button class="state-toggle-btn" onclick="toggleEdgeState(1)">Reservation</button>
+      <button class="state-toggle-btn" onclick="toggleEdgeState(2)">Reservation + on-demand</button>
       <button class="state-toggle-btn" onclick="toggleEdgeState(3)">No payment method</button>
       <button class="state-toggle-btn" onclick="toggleEdgeState(4)">Quota used up</button>
       <button class="state-toggle-btn" onclick="toggleEdgeState(5)">Region capacity</button>
@@ -919,75 +919,75 @@ img.ico{display:block;flex:0 0 auto}
     </div>
   </div>
 
-  <!-- ══ STATE 0 · Quota only (POC default) ══ -->
+  <!-- ══ STATE 0 · On demand (has quota, none used up — quota numbers hidden) ══ -->
   <div id="edge-0">
     <div class="pop-section" style="margin-top:16px">
       <div class="pop-title">Launch from your available capacity</div>
-      <div class="quota-strip">Your quota — <b>H100 8</b> · <b>H200 8</b> · <b>L40S 16</b> &nbsp;<a href="javascript:void(0)">View usage &amp; limits →</a>&nbsp;·&nbsp;<a href="javascript:void(0)">Request increase →</a></div>
+      <div class="quota-strip">Billed per second while running &nbsp;<a href="javascript:void(0)">View usage &amp; limits →</a></div>
       <div class="pop-grid">
         <div class="pop-card" style="display:flex;flex-direction:column;gap:0;min-width:0">
-          <div class="pop-card-top" style="margin-bottom:8px;align-items:center"><div class="pop-card-info"><div class="pop-card-name">H100 80GB SXM</div><div class="pop-card-price">8 of 8 in your quota</div></div><span class="src-pill src-quota">Quota</span><span class="rev-note">3</span></div>
-          <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Training · Multi-node</span></div>
+          <div class="pop-card-top" style="margin-bottom:8px;align-items:center"><div class="pop-card-info"><div class="pop-card-name">Training · Multi-node<span class="rev-note">5</span></div><div class="pop-card-price">H100 80GB SXM</div></div><span class="src-pill src-ondemand">On demand</span><span class="rev-note">3</span></div>
+          <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Available now · per-second billing</span></div>
           <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createInstanceFromRes('h100',this)">Create instance</button><button class="btn btn-o btn-sm" onclick="copySnippet(this,'crusoe compute vms create --name my-vm --type h100-80gb-sxm-ib.1x')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div><div class="cli-reveal"><code>crusoe compute vms create --type h100-80gb-sxm-ib.1x …</code><div class="cli-note">Ready-to-run with defaults — set count, region &amp; disks in the create form.<span class="rev-note">2</span></div></div>
         </div>
         <div class="pop-card" style="display:flex;flex-direction:column;gap:0;min-width:0">
-          <div class="pop-card-top" style="margin-bottom:8px;align-items:center"><div class="pop-card-info"><div class="pop-card-name">H200 141GB</div><div class="pop-card-price">Available now · per-second billing</div></div><span class="src-pill src-ondemand">On-demand</span></div>
-          <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Inference · Large models</span></div>
+          <div class="pop-card-top" style="margin-bottom:8px;align-items:center"><div class="pop-card-info"><div class="pop-card-name">Inference · Large models</div><div class="pop-card-price">H200 141GB</div></div><span class="src-pill src-ondemand">On demand</span></div>
+          <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Available now · per-second billing</span></div>
           <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createInstanceFromRes('h200',this)">Create instance</button><button class="btn btn-o btn-sm" onclick="copySnippet(this,'crusoe compute vms create --name my-vm --type h200-141gb.1x')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div><div class="cli-reveal"><code>crusoe compute vms create --type h200-141gb.1x …</code><div class="cli-note">Ready-to-run with defaults — set count, region &amp; disks in the create form.</div></div>
         </div>
         <div class="pop-card" style="display:flex;flex-direction:column;gap:0;min-width:0">
-          <div class="pop-card-top" style="margin-bottom:8px;align-items:center"><div class="pop-card-info"><div class="pop-card-name">L40S 48GB</div><div class="pop-card-price">16 of 16 in your quota</div></div><span class="src-pill src-quota">Quota</span></div>
-          <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Inference · Fine-tuning</span></div>
+          <div class="pop-card-top" style="margin-bottom:8px;align-items:center"><div class="pop-card-info"><div class="pop-card-name">Inference · Fine-tuning</div><div class="pop-card-price">L40S 48GB</div></div><span class="src-pill src-ondemand">On demand</span></div>
+          <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Available now · per-second billing</span></div>
           <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createInstanceFromRes('l40s',this)">Create instance</button><button class="btn btn-o btn-sm" onclick="copySnippet(this,'crusoe compute vms create --name my-vm --type l40s-48gb.1x')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div><div class="cli-reveal"><code>crusoe compute vms create --type l40s-48gb.1x …</code><div class="cli-note">Ready-to-run with defaults — set count, region &amp; disks in the create form.</div></div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- ══ STATE 1 · Reserved only ══ -->
+  <!-- ══ STATE 1 · Reservation only ══ -->
   <div id="edge-1" style="display:none">
     <div class="pop-section" style="margin-top:16px">
       <div class="pop-title">Launch from your reserved capacity</div>
       <div class="quota-strip">Reserved — <b>H100 ×32</b> · <b>H200 ×16</b> · <b>L40S ×8</b> &nbsp;<a href="javascript:void(0)">View reservations →</a></div>
       <div class="pop-grid">
         <div class="pop-card" style="display:flex;flex-direction:column;gap:0;min-width:0">
-          <div class="pop-card-top" style="margin-bottom:8px;align-items:center"><div class="pop-card-info"><div class="pop-card-name">H100 80GB SXM</div><div class="pop-card-price">6 of 32 reserved GPUs free</div></div><span class="src-pill src-reserved">Reserved</span></div>
-          <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Training · Multi-node</span></div>
+          <div class="pop-card-top" style="margin-bottom:8px;align-items:center"><div class="pop-card-info"><div class="pop-card-name">Training · Multi-node</div><div class="pop-card-price">H100 80GB SXM</div></div><span class="src-pill src-reserved">Reservation</span></div>
+          <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">6 of 32 reserved GPUs free</span></div>
           <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createInstanceFromRes('h100',this)">Create instance</button><button class="btn btn-o btn-sm" onclick="copySnippet(this,'crusoe compute vms create --name my-vm --type h100-80gb-sxm-ib.1x')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div><div class="cli-reveal"><code>crusoe compute vms create --type h100-80gb-sxm-ib.1x …</code><div class="cli-note">Ready-to-run with defaults — set count, region &amp; disks in the create form.</div></div>
         </div>
         <div class="pop-card" style="display:flex;flex-direction:column;gap:0;min-width:0">
-          <div class="pop-card-top" style="margin-bottom:8px;align-items:center"><div class="pop-card-info"><div class="pop-card-name">H200 141GB</div><div class="pop-card-price">16 of 16 reserved GPUs free</div></div><span class="src-pill src-reserved">Reserved</span></div>
-          <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Inference · Large models</span></div>
+          <div class="pop-card-top" style="margin-bottom:8px;align-items:center"><div class="pop-card-info"><div class="pop-card-name">Inference · Large models</div><div class="pop-card-price">H200 141GB</div></div><span class="src-pill src-reserved">Reservation</span></div>
+          <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">16 of 16 reserved GPUs free</span></div>
           <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createInstanceFromRes('h200',this)">Create instance</button><button class="btn btn-o btn-sm" onclick="copySnippet(this,'crusoe compute vms create --name my-vm --type h200-141gb.1x')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div><div class="cli-reveal"><code>crusoe compute vms create --type h200-141gb.1x …</code><div class="cli-note">Ready-to-run with defaults — set count, region &amp; disks in the create form.</div></div>
         </div>
         <div class="pop-card" style="display:flex;flex-direction:column;gap:0;min-width:0">
-          <div class="pop-card-top" style="margin-bottom:8px;align-items:center"><div class="pop-card-info"><div class="pop-card-name">L40S 48GB</div><div class="pop-card-price">4 of 8 reserved GPUs free</div></div><span class="src-pill src-reserved">Reserved</span></div>
-          <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Inference · Fine-tuning</span></div>
+          <div class="pop-card-top" style="margin-bottom:8px;align-items:center"><div class="pop-card-info"><div class="pop-card-name">Inference · Fine-tuning</div><div class="pop-card-price">L40S 48GB</div></div><span class="src-pill src-reserved">Reservation</span></div>
+          <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">4 of 8 reserved GPUs free</span></div>
           <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createInstanceFromRes('l40s',this)">Create instance</button><button class="btn btn-o btn-sm" onclick="copySnippet(this,'crusoe compute vms create --name my-vm --type l40s-48gb.1x')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div><div class="cli-reveal"><code>crusoe compute vms create --type l40s-48gb.1x …</code><div class="cli-note">Ready-to-run with defaults — set count, region &amp; disks in the create form.</div></div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- ══ STATE 2 · Reserved + quota (enterprise mix) ══ -->
+  <!-- ══ STATE 2 · Reservation + on-demand (enterprise mix) ══ -->
   <div id="edge-2" style="display:none">
     <div class="pop-section" style="margin-top:16px">
       <div class="pop-title">Launch from your available capacity</div>
-      <div class="quota-strip">Reserved — <b>H100 ×32</b> &nbsp;·&nbsp; Quota — <b>L40S 16</b> · <b>vCPU 320</b> &nbsp;<a href="javascript:void(0)">View usage &amp; limits →</a></div>
+      <div class="quota-strip">Reserved — <b>H100 ×32</b> &nbsp;·&nbsp; the rest is on-demand, billed per second &nbsp;<a href="javascript:void(0)">View reservations →</a></div>
       <div class="pop-grid">
         <div class="pop-card" style="display:flex;flex-direction:column;gap:0;min-width:0">
-          <div class="pop-card-top" style="margin-bottom:8px;align-items:center"><div class="pop-card-info"><div class="pop-card-name">H100 80GB SXM</div><div class="pop-card-price">6 of 32 reserved GPUs free</div></div><span class="src-pill src-reserved">Reserved</span></div>
-          <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Training · Multi-node</span></div>
+          <div class="pop-card-top" style="margin-bottom:8px;align-items:center"><div class="pop-card-info"><div class="pop-card-name">Training · Multi-node</div><div class="pop-card-price">H100 80GB SXM</div></div><span class="src-pill src-reserved">Reservation</span></div>
+          <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">6 of 32 reserved GPUs free</span></div>
           <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createInstanceFromRes('h100',this)">Create instance</button><button class="btn btn-o btn-sm" onclick="copySnippet(this,'crusoe compute vms create --name my-vm --type h100-80gb-sxm-ib.1x')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div><div class="cli-reveal"><code>crusoe compute vms create --type h100-80gb-sxm-ib.1x …</code><div class="cli-note">Ready-to-run with defaults — set count, region &amp; disks in the create form.</div></div>
         </div>
         <div class="pop-card" style="display:flex;flex-direction:column;gap:0;min-width:0">
-          <div class="pop-card-top" style="margin-bottom:8px;align-items:center"><div class="pop-card-info"><div class="pop-card-name">L40S 48GB</div><div class="pop-card-price">12 of 16 in your quota</div></div><span class="src-pill src-quota">Quota</span></div>
-          <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Inference · Fine-tuning</span></div>
+          <div class="pop-card-top" style="margin-bottom:8px;align-items:center"><div class="pop-card-info"><div class="pop-card-name">Inference · Fine-tuning</div><div class="pop-card-price">L40S 48GB</div></div><span class="src-pill src-ondemand">On demand</span></div>
+          <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Available now · per-second billing</span></div>
           <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createInstanceFromRes('l40s',this)">Create instance</button><button class="btn btn-o btn-sm" onclick="copySnippet(this,'crusoe compute vms create --name my-vm --type l40s-48gb.1x')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div><div class="cli-reveal"><code>crusoe compute vms create --type l40s-48gb.1x …</code><div class="cli-note">Ready-to-run with defaults — set count, region &amp; disks in the create form.</div></div>
         </div>
         <div class="pop-card" style="display:flex;flex-direction:column;gap:0;min-width:0">
-          <div class="pop-card-top" style="margin-bottom:8px;align-items:center"><div class="pop-card-info"><div class="pop-card-name">H200 141GB</div><div class="pop-card-price">Available now · per-second billing</div></div><span class="src-pill src-ondemand">On-demand</span></div>
-          <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Inference · Large models</span></div>
+          <div class="pop-card-top" style="margin-bottom:8px;align-items:center"><div class="pop-card-info"><div class="pop-card-name">Inference · Large models</div><div class="pop-card-price">H200 141GB</div></div><span class="src-pill src-ondemand">On demand</span></div>
+          <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Available now · per-second billing</span></div>
           <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createInstanceFromRes('h200',this)">Create instance</button><button class="btn btn-o btn-sm" onclick="copySnippet(this,'crusoe compute vms create --name my-vm --type h200-141gb.1x')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div><div class="cli-reveal"><code>crusoe compute vms create --type h200-141gb.1x …</code><div class="cli-note">Ready-to-run with defaults — set count, region &amp; disks in the create form.</div></div>
         </div>
       </div>
@@ -1037,7 +1037,7 @@ img.ico{display:block;flex:0 0 auto}
     </div>
   </div>
 
-  <!-- ══ STATE 4 · Quota used up (at limit) ══ -->
+  <!-- ══ STATE 4 · Quota used up (at limit — quota surfaced only now) ══ -->
   <div id="edge-4" style="display:none">
     <div class="pop-section" style="margin-top:16px">
       <div class="pop-title">Launch from your available capacity</div>
@@ -1049,18 +1049,18 @@ img.ico{display:block;flex:0 0 auto}
       </div>
       <div class="pop-grid">
         <div class="pop-card" style="display:flex;flex-direction:column;gap:0;min-width:0;opacity:.55">
-          <div class="pop-card-top" style="margin-bottom:8px;align-items:center"><div class="pop-card-info"><div class="pop-card-name">H100 80GB SXM</div><div class="pop-card-price" style="color:#f87171">0 of 8 — quota reached</div></div><span class="src-pill src-quota">Quota</span></div>
-          <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Training · Multi-node</span></div>
+          <div class="pop-card-top" style="margin-bottom:8px;align-items:center"><div class="pop-card-info"><div class="pop-card-name">Training · Multi-node</div><div class="pop-card-price">H100 80GB SXM</div></div><span class="src-pill src-ondemand">On demand</span></div>
+          <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub" style="color:#f87171">0 of 8 — quota reached</span></div>
           <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" disabled>At limit</button><button class="btn btn-o btn-sm" onclick="copySnippet(this,'crusoe quota request --resource h100 --increase 8')">Request increase</button></div>
         </div>
         <div class="pop-card" style="display:flex;flex-direction:column;gap:0;min-width:0">
-          <div class="pop-card-top" style="margin-bottom:8px;align-items:center"><div class="pop-card-info"><div class="pop-card-name">L40S 48GB</div><div class="pop-card-price">4 of 16 in your quota</div></div><span class="src-pill src-quota">Quota</span></div>
-          <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Inference · Fine-tuning</span></div>
+          <div class="pop-card-top" style="margin-bottom:8px;align-items:center"><div class="pop-card-info"><div class="pop-card-name">Inference · Fine-tuning</div><div class="pop-card-price">L40S 48GB</div></div><span class="src-pill src-ondemand">On demand</span></div>
+          <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Available now · per-second billing</span></div>
           <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createInstanceFromRes('l40s',this)">Create instance</button><button class="btn btn-o btn-sm" onclick="copySnippet(this,'crusoe compute vms create --name my-vm --type l40s-48gb.1x')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div><div class="cli-reveal"><code>crusoe compute vms create --type l40s-48gb.1x …</code><div class="cli-note">Ready-to-run with defaults — set count, region &amp; disks in the create form.</div></div>
         </div>
         <div class="pop-card" style="display:flex;flex-direction:column;gap:0;min-width:0">
-          <div class="pop-card-top" style="margin-bottom:8px;align-items:center"><div class="pop-card-info"><div class="pop-card-name">H200 141GB</div><div class="pop-card-price">Available now · per-second billing</div></div><span class="src-pill src-ondemand">On-demand</span></div>
-          <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Inference · Large models</span></div>
+          <div class="pop-card-top" style="margin-bottom:8px;align-items:center"><div class="pop-card-info"><div class="pop-card-name">Inference · Large models</div><div class="pop-card-price">H200 141GB</div></div><span class="src-pill src-ondemand">On demand</span></div>
+          <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Available now · per-second billing</span></div>
           <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createInstanceFromRes('h200',this)">Create instance</button><button class="btn btn-o btn-sm" onclick="copySnippet(this,'crusoe compute vms create --name my-vm --type h200-141gb.1x')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div><div class="cli-reveal"><code>crusoe compute vms create --type h200-141gb.1x …</code><div class="cli-note">Ready-to-run with defaults — set count, region &amp; disks in the create form.</div></div>
         </div>
       </div>
@@ -1071,35 +1071,35 @@ img.ico{display:block;flex:0 0 auto}
   <div id="edge-5" style="display:none">
     <div class="pop-section" style="margin-top:16px">
       <div class="pop-title">Launch from your available capacity</div>
-      <div class="quota-strip">Your quota — <b>H100 8</b> · <b>L40S 16</b> &nbsp;<a href="javascript:void(0)">View usage &amp; limits →</a></div>
       <div style="border:1px solid rgba(96,165,250,.28);background:rgba(96,165,250,.08);border-radius:10px;padding:12px 16px;display:flex;align-items:center;gap:12px;margin-bottom:16px">
         <svg width="16" height="16" viewBox="0 0 20 20" fill="none" style="flex-shrink:0" stroke="#60a5fa" stroke-width="1.6"><circle cx="10" cy="10" r="8"/><line x1="10" y1="9" x2="10" y2="13.5"/><circle cx="10" cy="6.5" r=".6" fill="#60a5fa" stroke="none"/></svg>
-        <div style="flex:1;font-size:12.5px;color:var(--text2);font-family:var(--font-body);line-height:150%"><b style="color:var(--text)">H100</b> is temporarily out of stock in every region. Your quota is unaffected — we'll notify you the moment capacity frees up.</div>
+        <div style="flex:1;font-size:12.5px;color:var(--text2);font-family:var(--font-body);line-height:150%"><b style="color:var(--text)">H100</b> is temporarily out of stock in every region. We'll notify you the moment capacity frees up — other types are still launchable.</div>
       </div>
       <div class="pop-grid">
         <div class="pop-card" style="display:flex;flex-direction:column;gap:0;min-width:0;opacity:.55">
-          <div class="pop-card-top" style="margin-bottom:8px;align-items:center"><div class="pop-card-info"><div class="pop-card-name">H100 80GB SXM</div><div class="pop-card-price">Temporarily unavailable</div></div><span class="src-pill src-quota">Quota</span></div>
-          <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Training · Multi-node</span></div>
+          <div class="pop-card-top" style="margin-bottom:8px;align-items:center"><div class="pop-card-info"><div class="pop-card-name">Training · Multi-node</div><div class="pop-card-price">H100 80GB SXM</div></div><span class="src-pill src-ondemand">On demand</span></div>
+          <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Temporarily unavailable</span></div>
           <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" disabled>Out of stock</button><button class="btn btn-o btn-sm" onclick="copySnippet(this,'crusoe capacity notify --type h100-80gb-sxm-ib.1x')">Notify me</button></div>
         </div>
         <div class="pop-card" style="display:flex;flex-direction:column;gap:0;min-width:0">
-          <div class="pop-card-top" style="margin-bottom:8px;align-items:center"><div class="pop-card-info"><div class="pop-card-name">L40S 48GB</div><div class="pop-card-price">16 of 16 in your quota</div></div><span class="src-pill src-quota">Quota</span></div>
-          <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Inference · Fine-tuning</span></div>
+          <div class="pop-card-top" style="margin-bottom:8px;align-items:center"><div class="pop-card-info"><div class="pop-card-name">Inference · Fine-tuning</div><div class="pop-card-price">L40S 48GB</div></div><span class="src-pill src-ondemand">On demand</span></div>
+          <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Available now · per-second billing</span></div>
           <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createInstanceFromRes('l40s',this)">Create instance</button><button class="btn btn-o btn-sm" onclick="copySnippet(this,'crusoe compute vms create --name my-vm --type l40s-48gb.1x')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div><div class="cli-reveal"><code>crusoe compute vms create --type l40s-48gb.1x …</code><div class="cli-note">Ready-to-run with defaults — set count, region &amp; disks in the create form.</div></div>
         </div>
         <div class="pop-card" style="display:flex;flex-direction:column;gap:0;min-width:0">
-          <div class="pop-card-top" style="margin-bottom:8px;align-items:center"><div class="pop-card-info"><div class="pop-card-name">H200 141GB</div><div class="pop-card-price">Available now · per-second billing</div></div><span class="src-pill src-ondemand">On-demand</span></div>
-          <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Inference · Large models</span></div>
+          <div class="pop-card-top" style="margin-bottom:8px;align-items:center"><div class="pop-card-info"><div class="pop-card-name">Inference · Large models</div><div class="pop-card-price">H200 141GB</div></div><span class="src-pill src-ondemand">On demand</span></div>
+          <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Available now · per-second billing</span></div>
           <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createInstanceFromRes('h200',this)">Create instance</button><button class="btn btn-o btn-sm" onclick="copySnippet(this,'crusoe compute vms create --name my-vm --type h200-141gb.1x')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div><div class="cli-reveal"><code>crusoe compute vms create --type h200-141gb.1x …</code><div class="cli-note">Ready-to-run with defaults — set count, region &amp; disks in the create form.</div></div>
         </div>
       </div>
     </div>
   </div>
   <div class="rev-legend">
-    <div class="rev-legend-row"><span class="n">1</span><span><b>"POC users have quotas, not reservations — account for every case"</b> — these scenarios map the real ways capacity access varies (quota-only, reserved, mixed, none yet, quota exhausted, region out of stock), instead of assuming everyone starts with a reservation.</span></div>
-    <div class="rev-legend-row"><span class="n">2</span><span><b>"What does Copy CLI copy?" (Nishant)</b> — the exact <code>crusoe compute vms create</code> command is now shown inline on every launchable card, so the CLI is visible before you copy it — full configuration still happens in the create form.</span></div>
-    <div class="rev-legend-row"><span class="n">3</span><span><b>"Not everyone has reservations; usually 1–2 SKUs"</b> — every starting point is tagged by its real source (Reserved / Quota / On-demand) so it's never ambiguous where the capacity comes from.</span></div>
-    <div class="rev-legend-row"><span class="n">4</span><span><b>Dead-ends are handled gracefully</b> — at-limit shows a request-increase path, region-out-of-stock offers notify-me, and a brand-new account with no payment method gets the regular page that routes to billing on Create (not a request-access dead-end).</span></div>
+    <div class="rev-legend-row"><span class="n">1</span><span><b>Every capacity case is covered</b> — these scenarios map the real ways access varies (on-demand, reservation, mixed, no payment method, quota exhausted, region out of stock), instead of assuming everyone starts with a reservation.</span></div>
+    <div class="rev-legend-row"><span class="n">2</span><span><b>"What does Copy CLI copy?" (Nishant)</b> — the exact <code>crusoe compute vms create</code> command is shown inline on every launchable card, so the CLI is visible before you copy it — full configuration still happens in the create form.</span></div>
+    <div class="rev-legend-row"><span class="n">3</span><span><b>Badges limited to "On demand" or "Reservation"</b> (Jun 5) — "Quota" is no longer a badge. Reservation users see "Reservation" with their usage (e.g. 6 of 32); everyone else just sees "On demand".</span></div>
+    <div class="rev-legend-row"><span class="n">4</span><span><b>Quota numbers hidden until exhausted</b> (Jun 5) — during normal use no quota counts are shown. Quota is surfaced only in "Quota used up", where the at-limit type shows an error and a request-increase path while other capacity stays launchable. Dead-ends (no payment method, region out of stock) are also handled gracefully.</span></div>
+    <div class="rev-legend-row"><span class="n">5</span><span><b>GPU tiles lead with purpose</b> (Jun 5) — the usage purpose (training, inference) is the prominent title and the GPU type is secondary, so newer users can pick by what they're doing rather than by hardware spec.</span></div>
   </div>
 </div><!-- /instances-edge -->
 
@@ -1261,47 +1261,48 @@ img.ico{display:block;flex:0 0 auto}
     </div>
   </div>
   <div class="es-gap"></div>
-  <!-- Capacity section: quota-aware, source-tagged -->
+  <!-- Capacity section: source-tagged, quota hidden until exhausted -->
   <div class="pop-section" style="margin-top:36px;padding-bottom:16px">
     <div class="pop-title">Launch from your available capacity</div>
-    <div class="quota-strip">Your quota — <b>H100 16</b> · <b>L40S 16</b> · <b>vCPU 320</b> &nbsp;<a href="javascript:void(0)">View usage &amp; limits →</a>&nbsp;·&nbsp;<a href="javascript:void(0)">Request increase →</a><span class="rev-note">2</span></div>
+    <div class="quota-strip">Billed per second while running &nbsp;<a href="javascript:void(0)">View usage &amp; limits →</a><span class="rev-note">2</span></div>
     <div class="pop-grid">
-      <!-- Reserved -->
+      <!-- Reservation -->
       <div class="pop-card" style="display:flex;flex-direction:column;gap:0;min-width:0">
         <div class="pop-card-top" style="margin-bottom:8px;align-items:center">
-          <div class="pop-card-info"><div class="pop-card-name">H100 80GB SXM</div><div class="pop-card-price">6 of 32 reserved GPUs free</div></div>
-          <span class="src-pill src-reserved">Reserved</span><span class="rev-note">3</span>
+          <div class="pop-card-info"><div class="pop-card-name">Training · Multi-node<span class="rev-note">5</span></div><div class="pop-card-price">H100 80GB SXM</div></div>
+          <span class="src-pill src-reserved">Reservation</span><span class="rev-note">3</span>
         </div>
-        <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Training · Multi-node</span></div>
+        <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">6 of 32 reserved GPUs free</span></div>
         <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createInstanceFromRes('h100',this)">Create instance</button><button class="btn btn-o btn-sm" onclick="copySnippet(this,'crusoe compute vms create --name my-vm --type h100-80gb-sxm-ib.1x --ssh-key ~/.ssh/id_rsa.pub')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
         <div class="cli-reveal"><code>crusoe compute vms create --type h100-80gb-sxm-ib.1x …</code><div class="cli-note">Ready-to-run with defaults — set count, region &amp; disks in the create form.<span class="rev-note">4</span></div></div>
       </div>
-      <!-- On-demand -->
+      <!-- On demand -->
       <div class="pop-card" style="display:flex;flex-direction:column;gap:0;min-width:0">
         <div class="pop-card-top" style="margin-bottom:8px;align-items:center">
-          <div class="pop-card-info"><div class="pop-card-name">H200 141GB</div><div class="pop-card-price">Available now · per-second billing</div></div>
-          <span class="src-pill src-ondemand">On-demand</span>
+          <div class="pop-card-info"><div class="pop-card-name">Inference · Large models</div><div class="pop-card-price">H200 141GB</div></div>
+          <span class="src-pill src-ondemand">On demand</span>
         </div>
-        <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Inference · Large models</span></div>
+        <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Available now · per-second billing</span></div>
         <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createInstanceFromRes('h200',this)">Create instance</button><button class="btn btn-o btn-sm" onclick="copySnippet(this,'crusoe compute vms create --name my-vm --type h200-141gb.1x --ssh-key ~/.ssh/id_rsa.pub')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
         <div class="cli-reveal"><code>crusoe compute vms create --type h200-141gb.1x …</code><div class="cli-note">Ready-to-run with defaults — set count, region &amp; disks in the create form.</div></div>
       </div>
-      <!-- Quota -->
+      <!-- On demand (quota-backed, numbers hidden) -->
       <div class="pop-card" style="display:flex;flex-direction:column;gap:0;min-width:0">
         <div class="pop-card-top" style="margin-bottom:8px;align-items:center">
-          <div class="pop-card-info"><div class="pop-card-name">L40S 48GB</div><div class="pop-card-price">8 of 16 in your quota</div></div>
-          <span class="src-pill src-quota">Quota</span>
+          <div class="pop-card-info"><div class="pop-card-name">Inference · Fine-tuning</div><div class="pop-card-price">L40S 48GB</div></div>
+          <span class="src-pill src-ondemand">On demand</span>
         </div>
-        <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Inference · Fine-tuning</span></div>
+        <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Available now · per-second billing</span></div>
         <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createInstanceFromRes('l40s',this)">Create instance</button><button class="btn btn-o btn-sm" onclick="copySnippet(this,'crusoe compute vms create --name my-vm --type l40s-48gb.1x --ssh-key ~/.ssh/id_rsa.pub')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
         <div class="cli-reveal"><code>crusoe compute vms create --type l40s-48gb.1x …</code><div class="cli-note">Ready-to-run with defaults — set count, region &amp; disks in the create form.</div></div>
       </div>
     </div>
     <div class="rev-legend">
       <div class="rev-legend-row"><span class="n">1</span><span><b>"View docs felt misplaced"</b> — demoted from a button to a quiet text link, so the hero keeps one primary action (Create) aligned with the speed message.</span></div>
-      <div class="rev-legend-row"><span class="n">2</span><span><b>"POC users have quotas, not reservations"</b> — added a quota strip with live limits and a request-increase path, so the page is useful even with zero reservations.</span></div>
-      <div class="rev-legend-row"><span class="n">3</span><span><b>"Not everyone has reservations; usually 1–2 SKUs"</b> — each starting point is now tagged by source (Reserved / On-demand / Quota) instead of assuming reserved capacity.</span></div>
+      <div class="rev-legend-row"><span class="n">2</span><span><b>Quota numbers hidden until they're exhausted</b> (Jun 5) — during normal use the page just shows "On demand"; we don't surface quota counts. The number only appears if a quota is fully used (see the Edge cases tab).</span></div>
+      <div class="rev-legend-row"><span class="n">3</span><span><b>Badges limited to "On demand" or "Reservation"</b> (Jun 5) — "Quota" is no longer a badge. Reservation users see "Reservation" with their usage (e.g. 6 of 32); everyone else sees "On demand".</span></div>
       <div class="rev-legend-row"><span class="n">4</span><span><b>"What does Copy CLI copy?"</b> — the exact command is shown on each card, noting it's a ready-to-run default and that full configuration still happens in the create form.</span></div>
+      <div class="rev-legend-row"><span class="n">5</span><span><b>GPU tiles lead with purpose</b> (Jun 5) — the usage purpose (training, inference) is now the prominent title and the GPU type is secondary, so newer users can pick by what they're doing rather than by hardware spec.</span></div>
     </div>
   </div>
 </div><!-- /instances-redesign -->
@@ -4075,12 +4076,12 @@ function toggleInstanceState(state) {
   else document.addEventListener('DOMContentLoaded', render);
 })();
 const EDGE_CAPTIONS = [
-  'POC default — the account has quota but no reservations. This is the most common starting point, and the case the original design missed.',
-  'Reserved capacity only — committed GPUs, no separate on-demand quota. Every starting point is tagged "Reserved".',
-  'Enterprise mix — some SKUs are reserved, the rest draw from quota or on-demand. Each card is tagged by its real source.',
+  'POC default — the account has quota but hasn\'t hit any limits, so nothing quota-related is shown. Every card simply reads "On demand", billed per second. (Quota only surfaces once it\'s used up — see "Quota used up".)',
+  'Reservation — committed capacity. The badge reads "Reservation" alongside the usage stats (e.g. 6 of 32 free). No quota numbers, since reservations aren\'t drawn from quota.',
+  'Enterprise mix — H100 runs on a reservation, the rest is on-demand. Reserved cards show "Reservation" + usage; on-demand cards show "On demand" with no quota numbers.',
   'Brand-new account with no payment method — the page looks exactly like the regular empty state. Clicking Create Instance routes the user to add a payment method before they can launch.',
-  'Quota fully consumed — running instances have used the H100 allocation. The type is shown at its limit with a request-increase path, while other capacity stays launchable.',
-  'Capacity constrained — quota is fine, but H100 is temporarily out of stock in every region. The user can get notified and still launch other types.'
+  'Quota fully consumed — this is the ONE case where quota is surfaced. H100 shows "0 of 8 — quota reached" with an error banner and a request-increase path; everything else stays launchable on demand.',
+  'Capacity constrained — H100 is temporarily out of stock in every region. The user can get notified and still launch other types on demand.'
 ];
 function toggleEdgeState(n) {
   [0,1,2,3,4,5].forEach(i => {
