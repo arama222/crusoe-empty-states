@@ -565,7 +565,8 @@ img.ico{display:block;flex:0 0 auto}
 .pop-section:has(.act-card){padding-bottom:64px}
 /* "View CLI" icon button + command popover (overlay — no layout/scroll impact) */
 .cli-icon{flex-shrink:0;white-space:nowrap}
-.cli-pop{position:fixed;z-index:200;width:340px;max-width:92vw;background:var(--white);border:1px solid var(--border);border-radius:11px;box-shadow:0 10px 34px rgba(0,0,0,.3);padding:13px 14px}
+.cli-pop{position:fixed;z-index:200;width:340px;max-width:92vw;background:var(--white);border:1px solid var(--border);border-radius:11px;box-shadow:0 10px 34px rgba(0,0,0,.3);padding:13px 14px;opacity:0;transform:translateY(4px);transition:opacity .16s ease,transform .16s ease;pointer-events:none}
+.cli-pop.show{opacity:1;transform:none;pointer-events:auto}
 .cli-pop-label{font-size:11px;font-weight:600;font-family:var(--font-body);color:var(--muted);text-transform:uppercase;letter-spacing:.04em;margin-bottom:7px}
 .cli-pop-cmd{background:var(--gray-50);border:1px solid var(--border);border-radius:8px;padding:10px 12px;font-family:var(--mono);font-size:11.5px;color:var(--text2);line-height:155%;word-break:break-all;margin-bottom:11px}
 .cli-pop-foot{display:flex;align-items:center;justify-content:space-between;gap:10px}
@@ -5143,29 +5144,39 @@ function copySnippet(btn, text) {
 }
 
 // ── "View CLI" command popover ──
+let _cliHideTimer = null, _cliAutoTimer = null;
 function ensureCliPop() {
   let pop = document.getElementById('cli-pop');
   if (pop) return pop;
   pop = document.createElement('div');
   pop.id = 'cli-pop';
   pop.className = 'cli-pop';
-  pop.style.display = 'none';
   pop.innerHTML =
     '<div class="cli-pop-label">Run in your terminal</div>' +
     '<div class="cli-pop-cmd" id="cli-pop-code"></div>' +
     '<div class="cli-pop-foot"><span class="cli-pop-note">Creates the instance with defaults — tweak count, region &amp; disks in the create form.</span>' +
     '<button class="btn btn-p btn-sm" style="flex-shrink:0" onclick="copyCliPop(this)">Copy</button></div>';
   document.body.appendChild(pop);
+  // Keep it open while the pointer is over it; fade out shortly after leaving
+  pop.addEventListener('mouseenter', () => { clearTimeout(_cliAutoTimer); clearTimeout(_cliHideTimer); });
+  pop.addEventListener('mouseleave', () => { _cliAutoTimer = setTimeout(hideCliPop, 600); });
   return pop;
+}
+function hideCliPop() {
+  const pop = document.getElementById('cli-pop');
+  if (!pop || !pop.classList.contains('show')) return;
+  clearTimeout(_cliAutoTimer);
+  pop.classList.remove('show');            // fade out via CSS transition
+  clearTimeout(_cliHideTimer);
+  _cliHideTimer = setTimeout(() => { pop.style.left = '-9999px'; }, 200);
 }
 function showCliPopover(btn, cmd) {
   if (window.event) window.event.stopPropagation();
+  clearTimeout(_cliHideTimer); clearTimeout(_cliAutoTimer);
   const pop = ensureCliPop();
   pop._cmd = cmd;
   document.getElementById('cli-pop-code').textContent = cmd;
-  pop.style.display = 'block';
-  pop.style.visibility = 'hidden';
-  // measure then position above the button, clamped to the viewport
+  // measure (it's rendered but transparent) then position above the button, clamped to viewport
   const r = btn.getBoundingClientRect();
   const pw = pop.offsetWidth, ph = pop.offsetHeight, m = 10;
   let left = r.left + r.width / 2 - pw / 2;
@@ -5174,26 +5185,30 @@ function showCliPopover(btn, cmd) {
   if (top < m) top = r.bottom + 8; // flip below if no room above
   pop.style.left = left + 'px';
   pop.style.top = top + 'px';
-  pop.style.visibility = '';
+  void pop.offsetWidth;          // force reflow so the opacity transition runs (rAF is unreliable headless)
+  pop.classList.add('show');     // fade in
+  // Auto-dismiss if it's left open and untouched
+  _cliAutoTimer = setTimeout(hideCliPop, 6000);
 }
 function copyCliPop(btn) {
   const pop = document.getElementById('cli-pop');
   if (!pop) return;
+  clearTimeout(_cliAutoTimer);
   navigator.clipboard.writeText(pop._cmd || '').then(() => {
     const orig = btn.textContent;
     btn.textContent = '✓ Copied';
-    setTimeout(() => { btn.textContent = orig; }, 1400);
+    setTimeout(() => { btn.textContent = orig; hideCliPop(); }, 1100); // confirm, then fade out
   }).catch(() => {});
 }
-// Close the popover on outside click, scroll, or Escape
+// Dismiss on outside click, scroll, or Escape (all fade out)
 document.addEventListener('click', function (e) {
   const pop = document.getElementById('cli-pop');
-  if (pop && pop.style.display !== 'none' && !pop.contains(e.target) && !(e.target.closest && e.target.closest('.cli-icon'))) {
-    pop.style.display = 'none';
+  if (pop && pop.classList.contains('show') && !pop.contains(e.target) && !(e.target.closest && e.target.closest('.cli-icon'))) {
+    hideCliPop();
   }
 });
-document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { const p = document.getElementById('cli-pop'); if (p) p.style.display = 'none'; } });
-window.addEventListener('scroll', function () { const p = document.getElementById('cli-pop'); if (p) p.style.display = 'none'; }, true);
+document.addEventListener('keydown', function (e) { if (e.key === 'Escape') hideCliPop(); });
+window.addEventListener('scroll', function () { hideCliPop(); }, true);
 
 // ── Dark mode ──
 function setTheme(mode) {
