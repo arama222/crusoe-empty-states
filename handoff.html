@@ -565,7 +565,8 @@ img.ico{display:block;flex:0 0 auto}
 .pop-section:has(.act-card){padding-bottom:64px}
 /* Tooltip clarifying what "Copy CLI" copies (absolute overlay — no layout/scroll impact) */
 .cli-tip{position:relative;overflow:visible}
-.cli-tip::after{content:"Copies a ready-to-run command — paste it into your terminal";position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);white-space:nowrap;background:var(--gray-900,#111);color:#fff;font-size:11px;font-weight:500;font-family:var(--font-body);padding:5px 9px;border-radius:6px;box-shadow:0 4px 14px rgba(0,0,0,.25);opacity:0;pointer-events:none;transition:opacity .15s ease;z-index:60}
+.cli-tip::after{content:"Copies a ready-to-run command — paste it into your terminal";position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);white-space:nowrap;background:#1d1f24;color:#fff;font-size:11px;font-weight:500;font-family:var(--font-body);padding:5px 9px;border-radius:6px;box-shadow:0 4px 14px rgba(0,0,0,.25);opacity:0;pointer-events:none;transition:opacity .15s ease;z-index:60}
+[data-theme="dark"] .cli-tip::after{background:#f0f0f2;color:#111}
 .cli-tip:hover::after{opacity:1}
 /* ── Medium reservation cards — expand on hover, no layout shift ── */
 .med-res-card{position:relative;display:flex;flex-direction:column;gap:0;min-height:164px;box-sizing:border-box}
