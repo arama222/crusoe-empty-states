@@ -651,10 +651,10 @@ img.ico{display:block;flex:0 0 auto}
 .cli-reveal{margin-top:9px;border-top:1px dashed var(--border);padding-top:8px}
 .cli-reveal code{display:block;font-family:var(--mono);font-size:10.5px;color:var(--text2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .cli-reveal .cli-note{font-size:10.5px;color:var(--muted);font-family:var(--font-body);margin-top:5px;line-height:140%}
-.quota-strip{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:6px 14px;font-size:11.5px;font-family:var(--font-body);color:var(--muted);margin:-4px 0 14px}
+.quota-strip{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:8px 12px;width:fit-content;max-width:100%;margin:0 auto 18px;padding:7px 8px 7px 15px;background:var(--gray-50);border:1px solid var(--border);border-radius:10px;font-size:12px;font-family:var(--font-body);color:var(--muted)}
 .quota-strip b{color:var(--text2);font-weight:600}
-.quota-strip a{color:var(--muted);text-decoration:underline;text-underline-offset:2px}
-.quota-strip a:hover{color:var(--text)}
+.quota-strip a{display:inline-flex;align-items:center;gap:5px;color:var(--text2);text-decoration:none;font-weight:500;background:var(--white);border:1px solid var(--border);border-radius:7px;padding:4px 11px;transition:color .15s ease,border-color .15s ease,background .15s ease}
+.quota-strip a:hover{color:var(--text);border-color:var(--gray-400)}
 /* Review-notes overlay (maps each change to the UX feedback) */
 #rev-toggle,#disks-rev-toggle{display:none;flex-shrink:0;margin:0 auto 8px;font-size:11.5px;font-family:var(--font-body);color:var(--muted);background:transparent;border:1px solid var(--border);border-radius:7px;padding:4px 12px;cursor:pointer;transition:color .15s ease,border-color .15s ease}
 #rev-toggle:hover,#disks-rev-toggle:hover{color:var(--text);border-color:var(--gray-400)}
