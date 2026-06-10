@@ -1693,44 +1693,23 @@ img.ico{display:block;flex:0 0 auto}
   </div>
   <!-- Template cards -->
   <div class="es-gap"></div>
-  <div class="pop-section cluster-spicy-reveal" style="margin-top:36px;padding-bottom:16px">
+  <div class="pop-section cluster-spicy-reveal" style="margin-top:36px;padding-bottom:64px">
     <div class="pop-title">Start with a popular cluster template</div>
     <div class="pop-grid">
-      <div class="pop-card med-res-card cluster-spicy-reveal" style="transition-delay:.08s">
-
-        <div class="pop-card-top" style="margin-bottom:10px">
-          
-          <div class="pop-card-info"><div class="pop-card-name">GPU Training Cluster</div><div class="pop-card-price">H100 8x node pool</div></div>
-          <span class="np-hover-hint">Details<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
-        </div>
-        <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Training · Multi-node</span></div>
-        
-        <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createClusterFromTemplate('k8s','gpu-training',this)">Create cluster</button><button class="btn btn-o btn-sm" onclick="copySnippet(this,&#39;crusoe kubernetes cluster create --name gpu-training --node-pool-type h100-80gb-sxm-ib.8x&#39;)" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
-        <div class="med-res-expand"><div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">Pre-configured with GPU operator, network operator, and CSI. Optimized for distributed training with NVLink + InfiniBand.</div></div>
+      <div class="pop-card act-card cluster-spicy-reveal" style="display:flex;flex-direction:column;gap:0;min-width:0;transition-delay:.08s">
+        <div class="pop-card-top" style="margin-bottom:8px;align-items:center"><div class="pop-card-info"><div class="pop-card-name">GPU Training Cluster</div><div class="pop-card-price">H100 8x node pool</div></div></div>
+        <div class="pop-card-desc">Pre-configured with GPU operator, network operator, and CSI. Optimized for distributed training with NVLink + InfiniBand.</div>
+        <div class="act-reveal"><div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createClusterFromTemplate('k8s','gpu-training',this)">Create cluster</button><button class="btn btn-o btn-sm cli-icon" onclick="showCliPopover(this,&#39;crusoe kubernetes cluster create --name gpu-training --node-pool-type h100-80gb-sxm-ib.8x&#39;)" aria-label="View CLI command" title="View the CLI command"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg> View CLI</button></div></div>
       </div>
-      <div class="pop-card med-res-card cluster-spicy-reveal" style="transition-delay:.14s">
-
-        <div class="pop-card-top" style="margin-bottom:10px">
-          
-          <div class="pop-card-info"><div class="pop-card-name">Inference Cluster</div><div class="pop-card-price">L40S autoscaling pool</div></div>
-          <span class="np-hover-hint">Details<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
-        </div>
-        <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Inference · Autoscale</span></div>
-        
-        <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createClusterFromTemplate('k8s','inference',this)">Create cluster</button><button class="btn btn-o btn-sm" onclick="copySnippet(this,&#39;crusoe kubernetes cluster create --name inference --node-pool-type l40s-48gb.8x --autoscale&#39;)" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
-        <div class="med-res-expand"><div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">Cost-efficient serving with autoscaling node pools. Ideal for vLLM, TGI, or Triton inference endpoints on L40S GPUs.</div></div>
+      <div class="pop-card act-card cluster-spicy-reveal" style="display:flex;flex-direction:column;gap:0;min-width:0;transition-delay:.14s">
+        <div class="pop-card-top" style="margin-bottom:8px;align-items:center"><div class="pop-card-info"><div class="pop-card-name">Inference Cluster</div><div class="pop-card-price">L40S autoscaling pool</div></div></div>
+        <div class="pop-card-desc">Cost-efficient serving with autoscaling node pools. Ideal for vLLM, TGI, or Triton inference endpoints on L40S GPUs.</div>
+        <div class="act-reveal"><div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createClusterFromTemplate('k8s','inference',this)">Create cluster</button><button class="btn btn-o btn-sm cli-icon" onclick="showCliPopover(this,&#39;crusoe kubernetes cluster create --name inference --node-pool-type l40s-48gb.8x --autoscale&#39;)" aria-label="View CLI command" title="View the CLI command"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg> View CLI</button></div></div>
       </div>
-      <div class="pop-card med-res-card cluster-spicy-reveal" style="transition-delay:.2s">
-
-        <div class="pop-card-top" style="margin-bottom:10px">
-          
-          <div class="pop-card-info"><div class="pop-card-name">CPU-only Cluster</div><div class="pop-card-price">General-purpose nodes</div></div>
-          <span class="np-hover-hint">Details<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
-        </div>
-        <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">CPU · APIs · Pipelines</span></div>
-        
-        <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createClusterFromTemplate('k8s','cpu',this)">Create cluster</button><button class="btn btn-o btn-sm" onclick="copySnippet(this,&#39;crusoe kubernetes cluster create --name cpu-cluster --node-pool-type cpu.32x&#39;)" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
-        <div class="med-res-expand"><div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">Standard Kubernetes cluster for APIs, data pipelines, and services that don't require GPU acceleration.</div></div>
+      <div class="pop-card act-card cluster-spicy-reveal" style="display:flex;flex-direction:column;gap:0;min-width:0;transition-delay:.2s">
+        <div class="pop-card-top" style="margin-bottom:8px;align-items:center"><div class="pop-card-info"><div class="pop-card-name">CPU-only Cluster</div><div class="pop-card-price">General-purpose nodes</div></div></div>
+        <div class="pop-card-desc">Standard Kubernetes cluster for APIs, data pipelines, and services that don't require GPU acceleration.</div>
+        <div class="act-reveal"><div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createClusterFromTemplate('k8s','cpu',this)">Create cluster</button><button class="btn btn-o btn-sm cli-icon" onclick="showCliPopover(this,&#39;crusoe kubernetes cluster create --name cpu-cluster --node-pool-type cpu.32x&#39;)" aria-label="View CLI command" title="View the CLI command"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg> View CLI</button></div></div>
       </div>
     </div>
   </div>
@@ -2235,44 +2214,23 @@ img.ico{display:block;flex:0 0 auto}
   </div>
   <!-- Template cards -->
   <div class="es-gap"></div>
-  <div class="pop-section slurm-spicy-reveal" style="margin-top:36px;padding-bottom:16px">
+  <div class="pop-section slurm-spicy-reveal" style="margin-top:36px;padding-bottom:64px">
     <div class="pop-title">Start with a popular cluster template</div>
     <div class="pop-grid">
-      <div class="pop-card med-res-card slurm-spicy-reveal" style="transition-delay:.08s">
-
-        <div class="pop-card-top" style="margin-bottom:10px">
-          
-          <div class="pop-card-info"><div class="pop-card-name">GPU HPC Cluster</div><div class="pop-card-price">H100 multi-node</div></div>
-          <span class="np-hover-hint">Details<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
-        </div>
-        <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Training · HPC</span></div>
-        
-        <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createClusterFromTemplate('slurm','gpu-hpc',this)">Create cluster</button><button class="btn btn-o btn-sm" onclick="copySnippet(this,&#39;crusoe slurm cluster create --name gpu-hpc --partition h100-80gb-sxm-ib.8x&#39;)" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
-        <div class="med-res-expand"><div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">Pre-configured with Pyxis, PMIx, and RDMA. Optimized for distributed training workloads with InfiniBand fabric.</div></div>
+      <div class="pop-card act-card slurm-spicy-reveal" style="display:flex;flex-direction:column;gap:0;min-width:0;transition-delay:.08s">
+        <div class="pop-card-top" style="margin-bottom:8px;align-items:center"><div class="pop-card-info"><div class="pop-card-name">GPU HPC Cluster</div><div class="pop-card-price">H100 multi-node</div></div></div>
+        <div class="pop-card-desc">Pre-configured with Pyxis, PMIx, and RDMA. Optimized for distributed training workloads with InfiniBand fabric.</div>
+        <div class="act-reveal"><div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createClusterFromTemplate('slurm','gpu-hpc',this)">Create cluster</button><button class="btn btn-o btn-sm cli-icon" onclick="showCliPopover(this,&#39;crusoe slurm cluster create --name gpu-hpc --partition h100-80gb-sxm-ib.8x&#39;)" aria-label="View CLI command" title="View the CLI command"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg> View CLI</button></div></div>
       </div>
-      <div class="pop-card med-res-card slurm-spicy-reveal" style="transition-delay:.14s">
-
-        <div class="pop-card-top" style="margin-bottom:10px">
-          
-          <div class="pop-card-info"><div class="pop-card-name">Multi-GPU Fine-tuning</div><div class="pop-card-price">A100 node pool</div></div>
-          <span class="np-hover-hint">Details<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
-        </div>
-        <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Fine-tuning · Multi-node</span></div>
-        
-        <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createClusterFromTemplate('slurm','fine-tune',this)">Create cluster</button><button class="btn btn-o btn-sm" onclick="copySnippet(this,&#39;crusoe slurm cluster create --name fine-tune --partition a100-80gb-sxm.8x&#39;)" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
-        <div class="med-res-expand"><div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">Shared storage with Lustre, topology-aware scheduling, and multi-user access for team fine-tuning workflows.</div></div>
+      <div class="pop-card act-card slurm-spicy-reveal" style="display:flex;flex-direction:column;gap:0;min-width:0;transition-delay:.14s">
+        <div class="pop-card-top" style="margin-bottom:8px;align-items:center"><div class="pop-card-info"><div class="pop-card-name">Multi-GPU Fine-tuning</div><div class="pop-card-price">A100 node pool</div></div></div>
+        <div class="pop-card-desc">Shared storage with Lustre, topology-aware scheduling, and multi-user access for team fine-tuning workflows.</div>
+        <div class="act-reveal"><div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createClusterFromTemplate('slurm','fine-tune',this)">Create cluster</button><button class="btn btn-o btn-sm cli-icon" onclick="showCliPopover(this,&#39;crusoe slurm cluster create --name fine-tune --partition a100-80gb-sxm.8x&#39;)" aria-label="View CLI command" title="View the CLI command"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg> View CLI</button></div></div>
       </div>
-      <div class="pop-card med-res-card slurm-spicy-reveal" style="transition-delay:.2s">
-
-        <div class="pop-card-top" style="margin-bottom:10px">
-          
-          <div class="pop-card-info"><div class="pop-card-name">LLM Pre-training</div><div class="pop-card-price">H200 multi-node</div></div>
-          <span class="np-hover-hint">Details<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
-        </div>
-        <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Pre-training · Large scale</span></div>
-        
-        <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createClusterFromTemplate('slurm','llm-pretrain',this)">Create cluster</button><button class="btn btn-o btn-sm" onclick="copySnippet(this,&#39;crusoe slurm cluster create --name llm-pretrain --partition h200-141gb-sxm.8x&#39;)" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
-        <div class="med-res-expand"><div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">Frontier-scale pre-training on H200 nodes with InfiniBand fabric, Pyxis container runtime, and checkpoint storage.</div></div>
+      <div class="pop-card act-card slurm-spicy-reveal" style="display:flex;flex-direction:column;gap:0;min-width:0;transition-delay:.2s">
+        <div class="pop-card-top" style="margin-bottom:8px;align-items:center"><div class="pop-card-info"><div class="pop-card-name">LLM Pre-training</div><div class="pop-card-price">H200 multi-node</div></div></div>
+        <div class="pop-card-desc">Frontier-scale pre-training on H200 nodes with InfiniBand fabric, Pyxis container runtime, and checkpoint storage.</div>
+        <div class="act-reveal"><div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createClusterFromTemplate('slurm','llm-pretrain',this)">Create cluster</button><button class="btn btn-o btn-sm cli-icon" onclick="showCliPopover(this,&#39;crusoe slurm cluster create --name llm-pretrain --partition h200-141gb-sxm.8x&#39;)" aria-label="View CLI command" title="View the CLI command"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg> View CLI</button></div></div>
       </div>
     </div>
   </div>
@@ -2561,7 +2519,7 @@ img.ico{display:block;flex:0 0 auto}
         </svg>
       </div>
       <!-- Text block -->
-      <div style="position:relative;z-index:1;max-width:380px">
+      <div style="position:relative;z-index:1;max-width:560px">
         <h1 style="font-size:44px;font-weight:400;font-family:var(--font-heading);color:var(--text);letter-spacing:-1.2px;line-height:110%;margin:0 0 10px;white-space:nowrap">No Buckets Yet.</h1>
         <p style="font-size:14px;color:var(--muted);font-family:var(--font-body);line-height:160%;margin:0 0 16px">Region-scoped, S3-compatible storage for datasets, checkpoints, and artifacts. Create here or via CLI, then connect any S3 client.</p>
         <a href="https://docs.crusoecloud.com/storage/object-storage/managing-buckets/" target="_blank" style="display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:500;font-family:var(--font-body);color:var(--muted);text-decoration:none;border:1px solid var(--border);border-radius:8px;padding:7px 13px;background:transparent;transition:color .15s ease,border-color .15s ease,background .15s ease" onmouseenter="this.style.color='var(--text)';this.style.borderColor='var(--gray-400)';this.style.background='var(--gray-50)'" onmouseleave="this.style.color='var(--muted)';this.style.borderColor='var(--border)';this.style.background='transparent'">View docs →</a>
@@ -5164,7 +5122,7 @@ function ensureCliPop() {
   pop.innerHTML =
     '<div class="cli-pop-label">Run in your terminal</div>' +
     '<div class="cli-pop-cmd" id="cli-pop-code"></div>' +
-    '<div class="cli-pop-foot"><span class="cli-pop-note">Complete example using common defaults — edit any flag before running. Run <code>crusoe compute vms types</code> for all instance types.</span>' +
+    '<div class="cli-pop-foot"><span class="cli-pop-note">Complete example using common defaults — edit any flag before running.</span>' +
     '<button class="btn btn-p btn-sm" style="flex-shrink:0" onclick="copyCliPop(this)">Copy</button></div>';
   document.body.appendChild(pop);
   // Stay open while the pointer is over the popover; only fade once it leaves.
