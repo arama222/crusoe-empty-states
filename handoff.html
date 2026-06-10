@@ -555,14 +555,23 @@ img.ico{display:block;flex:0 0 auto}
 .pop-card:hover .pop-card-reveal{max-height:120px;opacity:1;margin-top:12px}
 .pop-card-desc{font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:150%;margin-bottom:0}
 .pop-card-tags{display:flex;flex-direction:column;gap:2px}
-/* ── Action cards: description always visible, Create/Copy buttons drop in on hover (no layout shift) ── */
+/* ── Action cards: description shows by default; on hover it's swapped in place for the CTAs.
+   The card never changes height (default == hover) and the page never moves. ── */
 .act-card{position:relative;min-height:138px;box-sizing:border-box}
-.act-reveal{position:absolute;top:calc(100% - 1px);left:-1px;right:-1px;background:var(--white);border:1px solid var(--gray-300);border-top:none;border-radius:0 0 10px 10px;padding:12px 18px 14px;opacity:0;pointer-events:none;display:none;transition:opacity .18s ease,display .18s ease allow-discrete;z-index:19}
-.act-card:hover{border-color:var(--gray-300)!important;box-shadow:0 2px 12px rgba(0,0,0,.08)!important;border-radius:10px 10px 0 0!important;z-index:20}
-.act-card:hover .act-reveal{opacity:1;pointer-events:auto;display:block}
-@starting-style{.act-card:hover .act-reveal{opacity:0}}
-/* Reserve room below the grid so the hover panel drops into existing space — the page never grows */
-.pop-section:has(.act-card){padding-bottom:64px}
+.act-swap{position:relative;flex:1;display:flex;flex-direction:column;justify-content:center}
+.act-swap > .pop-card-desc,
+.act-swap > div:first-child{transition:opacity .14s ease}
+.act-reveal{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);opacity:0;pointer-events:none;transition:opacity .14s ease}
+.act-reveal > div{width:100%}
+.act-card:hover{border-color:var(--gray-300)!important;box-shadow:0 2px 12px rgba(0,0,0,.08)!important}
+.act-card:hover .act-swap > .pop-card-desc,
+.act-card:hover .act-swap > div:first-child{opacity:0}
+.act-card:hover .act-reveal{opacity:1;pointer-events:auto}
+/* API Keys setup steps: keep the details expanded by default (no hover needed) */
+#apikey-empty .med-res-card{min-height:0}
+#apikey-empty .np-hover-hint{display:none}
+#apikey-empty .med-res-expand{position:static;display:block;opacity:1;pointer-events:auto;background:transparent;border:none;border-radius:0;padding:0;margin-top:6px}
+#apikey-empty .med-res-card:hover{border-color:var(--border)!important;box-shadow:none!important;border-radius:10px!important;z-index:auto}
 /* Quiet "browse all types" escape hatch under the card grid */
 .browse-all-wrap{text-align:center;margin-top:14px}
 .browse-all{display:inline-block;font-size:12.5px;font-weight:500;font-family:var(--font-body);color:var(--muted);text-decoration:none;border-bottom:1px solid transparent;padding-bottom:1px;transition:color .15s ease,border-color .15s ease}
@@ -818,7 +827,7 @@ img.ico{display:block;flex:0 0 auto}
       <button class="inst-tab" data-tab="redesign" onclick="setInstancesTab('redesign')">Redesign</button>
       <button class="inst-tab" data-tab="edge" onclick="setInstancesTab('edge')">Edge cases</button>
     </div>
-    <div class="ph-r"><button class="btn btn-p"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.99967 3.33337V12.6667M3.33301 8.00004H12.6663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Create Instance</button></div>
+    <div class="ph-r"></div>
   </div>
   <div class="divider"></div>
   <div class="ca">
@@ -845,7 +854,7 @@ img.ico{display:block;flex:0 0 auto}
     </div>
     <div class="etxt">
       <div class="ecat">Compute</div>
-      <div class="etitle">No Instances Yet.</div>
+      <div class="etitle">No Instances Yet</div>
       <div class="edesc">A Linux VM — GPU or CPU — that you SSH into directly. Billed per second while running.</div>
       <a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/compute/virtual-machines/overview/" target="_blank" style="text-decoration:none;margin-top:12px;align-self:flex-start">View docs →</a>
     </div>
@@ -923,7 +932,7 @@ img.ico{display:block;flex:0 0 auto}
       </svg>
     </div>
     <div style="position:relative;z-index:1;max-width:400px">
-      <h1 style="font-size:44px;font-weight:400;font-family:var(--font-heading);color:var(--text);letter-spacing:-1.2px;line-height:110%;margin:0 0 10px;white-space:nowrap">No Instances Yet.</h1>
+      <h1 style="font-size:44px;font-weight:400;font-family:var(--font-heading);color:var(--text);letter-spacing:-1.2px;line-height:110%;margin:0 0 10px;white-space:nowrap">No Instances Yet</h1>
       <p style="font-size:14px;color:var(--muted);font-family:var(--font-body);line-height:160%;margin:0 0 18px">Spin up a GPU or CPU VM in under a minute — SSH in directly and start building.</p>
       <div style="display:flex;align-items:center;gap:18px">
         <button class="btn btn-p" onclick="createInstanceFromRes('h100',this)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.99967 3.33337V12.6667M3.33301 8.00004H12.6663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Create Instance</button>
@@ -939,21 +948,18 @@ img.ico{display:block;flex:0 0 auto}
       <div class="pop-grid">
         <div class="pop-card act-card" style="display:flex;flex-direction:column;gap:0;min-width:0">
           <div class="pop-card-top" style="margin-bottom:8px;align-items:center"><div class="pop-card-info"><div class="pop-card-name">Training · Multi-node<span class="rev-note">5</span></div><div class="pop-card-price">H100 80GB SXM</div></div><span class="src-pill src-ondemand">On demand</span><span class="rev-note">3</span></div>
-          <div class="pop-card-desc">Top-tier training and multi-node jobs — the fastest GPU interconnect for LLM pretraining, RLHF, and large fine-tunes.</div>
-          <div class="act-reveal"><div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createInstanceFromRes('h100',this)">Create instance</button><button class="btn btn-o btn-sm cli-icon" onclick="showCliPopover(this,'crusoe compute vms create --name my-vm --type h100-80gb-sxm-ib.8x --location us-southcentral1-a --image ubuntu22.04:latest --keyfile ~/.ssh/id_ed25519.pub')" aria-label="View CLI command" title="View the CLI command"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg> View CLI</button><span class="rev-note">2</span></div></div>
+          <div class="act-swap"><div class="pop-card-desc">Top-tier training and multi-node jobs — the fastest GPU interconnect for LLM pretraining, RLHF, and large fine-tunes.</div><div class="act-reveal"><div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createInstanceFromRes('h100',this)">Create instance</button><button class="btn btn-o btn-sm cli-icon" onclick="showCliPopover(this,'crusoe compute vms create --name my-vm --type h100-80gb-sxm-ib.8x --location us-southcentral1-a --image ubuntu22.04:latest --keyfile ~/.ssh/id_ed25519.pub')" aria-label="View CLI command" title="View the CLI command"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg> View CLI</button><span class="rev-note">2</span></div></div></div>
         </div>
         <div class="pop-card act-card" style="display:flex;flex-direction:column;gap:0;min-width:0">
           <div class="pop-card-top" style="margin-bottom:8px;align-items:center"><div class="pop-card-info"><div class="pop-card-name">Inference · Large models</div><div class="pop-card-price">H200 141GB</div></div><span class="src-pill src-ondemand">On demand</span></div>
-          <div class="pop-card-desc">Most memory per GPU — run 70B+ models and long-context inference without splitting across nodes.</div>
-          <div class="act-reveal"><div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createInstanceFromRes('h200',this)">Create instance</button><button class="btn btn-o btn-sm cli-icon" onclick="showCliPopover(this,'crusoe compute vms create --name my-vm --type h200-141gb-sxm-ib.8x --location us-southcentral1-a --image ubuntu22.04:latest --keyfile ~/.ssh/id_ed25519.pub')" aria-label="View CLI command" title="View the CLI command"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg> View CLI</button></div></div>
+          <div class="act-swap"><div class="pop-card-desc">Most memory per GPU — run 70B+ models and long-context inference without splitting across nodes.</div><div class="act-reveal"><div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createInstanceFromRes('h200',this)">Create instance</button><button class="btn btn-o btn-sm cli-icon" onclick="showCliPopover(this,'crusoe compute vms create --name my-vm --type h200-141gb-sxm-ib.8x --location us-southcentral1-a --image ubuntu22.04:latest --keyfile ~/.ssh/id_ed25519.pub')" aria-label="View CLI command" title="View the CLI command"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg> View CLI</button></div></div></div>
         </div>
         <div class="pop-card act-card" style="display:flex;flex-direction:column;gap:0;min-width:0">
           <div class="pop-card-top" style="margin-bottom:8px;align-items:center"><div class="pop-card-info"><div class="pop-card-name">Inference · Fine-tuning</div><div class="pop-card-price">L40S 48GB</div></div><span class="src-pill src-ondemand">On demand</span></div>
-          <div class="pop-card-desc">Cost-efficient inference and light fine-tuning — great for serving smaller models and multi-modal work.</div>
-          <div class="act-reveal"><div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createInstanceFromRes('l40s',this)">Create instance</button><button class="btn btn-o btn-sm cli-icon" onclick="showCliPopover(this,'crusoe compute vms create --name my-vm --type l40s-48gb.1x --location us-southcentral1-a --image ubuntu22.04:latest --keyfile ~/.ssh/id_ed25519.pub')" aria-label="View CLI command" title="View the CLI command"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg> View CLI</button></div></div>
+          <div class="act-swap"><div class="pop-card-desc">Cost-efficient inference and light fine-tuning — great for serving smaller models and multi-modal work.</div><div class="act-reveal"><div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createInstanceFromRes('l40s',this)">Create instance</button><button class="btn btn-o btn-sm cli-icon" onclick="showCliPopover(this,'crusoe compute vms create --name my-vm --type l40s-48gb.1x --location us-southcentral1-a --image ubuntu22.04:latest --keyfile ~/.ssh/id_ed25519.pub')" aria-label="View CLI command" title="View the CLI command"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg> View CLI</button></div></div></div>
         </div>
       </div>
-      <div class="browse-all-wrap"><a href="javascript:void(0)" class="browse-all">Browse all instance types →</a></div>
+      <div class="browse-all-wrap"><a href="javascript:void(0)" class="browse-all">Create instance from blank →</a></div>
     </div>
   </div>
 
@@ -964,21 +970,18 @@ img.ico{display:block;flex:0 0 auto}
       <div class="pop-grid">
         <div class="pop-card act-card" style="display:flex;flex-direction:column;gap:0;min-width:0">
           <div class="pop-card-top" style="margin-bottom:8px;align-items:center"><div class="pop-card-info"><div class="pop-card-name">Training · Multi-node</div><div class="pop-card-price">H100 80GB SXM · 6 of 32 free</div></div><span class="src-pill src-reserved">Reservation</span></div>
-          <div class="pop-card-desc">Top-tier training and multi-node jobs — the fastest GPU interconnect for LLM pretraining, RLHF, and large fine-tunes.</div>
-          <div class="act-reveal"><div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createInstanceFromRes('h100',this)">Create instance</button><button class="btn btn-o btn-sm cli-icon" onclick="showCliPopover(this,'crusoe compute vms create --name my-vm --type h100-80gb-sxm-ib.8x --location us-southcentral1-a --image ubuntu22.04:latest --keyfile ~/.ssh/id_ed25519.pub')" aria-label="View CLI command" title="View the CLI command"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg> View CLI</button></div></div>
+          <div class="act-swap"><div class="pop-card-desc">Top-tier training and multi-node jobs — the fastest GPU interconnect for LLM pretraining, RLHF, and large fine-tunes.</div><div class="act-reveal"><div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createInstanceFromRes('h100',this)">Create instance</button><button class="btn btn-o btn-sm cli-icon" onclick="showCliPopover(this,'crusoe compute vms create --name my-vm --type h100-80gb-sxm-ib.8x --location us-southcentral1-a --image ubuntu22.04:latest --keyfile ~/.ssh/id_ed25519.pub')" aria-label="View CLI command" title="View the CLI command"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg> View CLI</button></div></div></div>
         </div>
         <div class="pop-card act-card" style="display:flex;flex-direction:column;gap:0;min-width:0">
           <div class="pop-card-top" style="margin-bottom:8px;align-items:center"><div class="pop-card-info"><div class="pop-card-name">Inference · Large models</div><div class="pop-card-price">H200 141GB · 16 of 16 free</div></div><span class="src-pill src-reserved">Reservation</span></div>
-          <div class="pop-card-desc">Most memory per GPU — run 70B+ models and long-context inference without splitting across nodes.</div>
-          <div class="act-reveal"><div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createInstanceFromRes('h200',this)">Create instance</button><button class="btn btn-o btn-sm cli-icon" onclick="showCliPopover(this,'crusoe compute vms create --name my-vm --type h200-141gb-sxm-ib.8x --location us-southcentral1-a --image ubuntu22.04:latest --keyfile ~/.ssh/id_ed25519.pub')" aria-label="View CLI command" title="View the CLI command"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg> View CLI</button></div></div>
+          <div class="act-swap"><div class="pop-card-desc">Most memory per GPU — run 70B+ models and long-context inference without splitting across nodes.</div><div class="act-reveal"><div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createInstanceFromRes('h200',this)">Create instance</button><button class="btn btn-o btn-sm cli-icon" onclick="showCliPopover(this,'crusoe compute vms create --name my-vm --type h200-141gb-sxm-ib.8x --location us-southcentral1-a --image ubuntu22.04:latest --keyfile ~/.ssh/id_ed25519.pub')" aria-label="View CLI command" title="View the CLI command"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg> View CLI</button></div></div></div>
         </div>
         <div class="pop-card act-card" style="display:flex;flex-direction:column;gap:0;min-width:0">
           <div class="pop-card-top" style="margin-bottom:8px;align-items:center"><div class="pop-card-info"><div class="pop-card-name">Inference · Fine-tuning</div><div class="pop-card-price">L40S 48GB · 4 of 8 free</div></div><span class="src-pill src-reserved">Reservation</span></div>
-          <div class="pop-card-desc">Cost-efficient inference and light fine-tuning — great for serving smaller models and multi-modal work.</div>
-          <div class="act-reveal"><div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createInstanceFromRes('l40s',this)">Create instance</button><button class="btn btn-o btn-sm cli-icon" onclick="showCliPopover(this,'crusoe compute vms create --name my-vm --type l40s-48gb.1x --location us-southcentral1-a --image ubuntu22.04:latest --keyfile ~/.ssh/id_ed25519.pub')" aria-label="View CLI command" title="View the CLI command"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg> View CLI</button></div></div>
+          <div class="act-swap"><div class="pop-card-desc">Cost-efficient inference and light fine-tuning — great for serving smaller models and multi-modal work.</div><div class="act-reveal"><div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createInstanceFromRes('l40s',this)">Create instance</button><button class="btn btn-o btn-sm cli-icon" onclick="showCliPopover(this,'crusoe compute vms create --name my-vm --type l40s-48gb.1x --location us-southcentral1-a --image ubuntu22.04:latest --keyfile ~/.ssh/id_ed25519.pub')" aria-label="View CLI command" title="View the CLI command"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg> View CLI</button></div></div></div>
         </div>
       </div>
-      <div class="browse-all-wrap"><a href="javascript:void(0)" class="browse-all">Browse all instance types →</a></div>
+      <div class="browse-all-wrap"><a href="javascript:void(0)" class="browse-all">Create instance from blank →</a></div>
     </div>
   </div>
 
@@ -989,21 +992,18 @@ img.ico{display:block;flex:0 0 auto}
       <div class="pop-grid">
         <div class="pop-card act-card" style="display:flex;flex-direction:column;gap:0;min-width:0">
           <div class="pop-card-top" style="margin-bottom:8px;align-items:center"><div class="pop-card-info"><div class="pop-card-name">Training · Multi-node</div><div class="pop-card-price">H100 80GB SXM · 6 of 32 free</div></div><span class="src-pill src-reserved">Reservation</span></div>
-          <div class="pop-card-desc">Top-tier training and multi-node jobs — the fastest GPU interconnect for LLM pretraining, RLHF, and large fine-tunes.</div>
-          <div class="act-reveal"><div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createInstanceFromRes('h100',this)">Create instance</button><button class="btn btn-o btn-sm cli-icon" onclick="showCliPopover(this,'crusoe compute vms create --name my-vm --type h100-80gb-sxm-ib.8x --location us-southcentral1-a --image ubuntu22.04:latest --keyfile ~/.ssh/id_ed25519.pub')" aria-label="View CLI command" title="View the CLI command"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg> View CLI</button></div></div>
+          <div class="act-swap"><div class="pop-card-desc">Top-tier training and multi-node jobs — the fastest GPU interconnect for LLM pretraining, RLHF, and large fine-tunes.</div><div class="act-reveal"><div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createInstanceFromRes('h100',this)">Create instance</button><button class="btn btn-o btn-sm cli-icon" onclick="showCliPopover(this,'crusoe compute vms create --name my-vm --type h100-80gb-sxm-ib.8x --location us-southcentral1-a --image ubuntu22.04:latest --keyfile ~/.ssh/id_ed25519.pub')" aria-label="View CLI command" title="View the CLI command"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg> View CLI</button></div></div></div>
         </div>
         <div class="pop-card act-card" style="display:flex;flex-direction:column;gap:0;min-width:0">
           <div class="pop-card-top" style="margin-bottom:8px;align-items:center"><div class="pop-card-info"><div class="pop-card-name">Inference · Fine-tuning</div><div class="pop-card-price">L40S 48GB</div></div><span class="src-pill src-ondemand">On demand</span></div>
-          <div class="pop-card-desc">Cost-efficient inference and light fine-tuning — great for serving smaller models and multi-modal work.</div>
-          <div class="act-reveal"><div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createInstanceFromRes('l40s',this)">Create instance</button><button class="btn btn-o btn-sm cli-icon" onclick="showCliPopover(this,'crusoe compute vms create --name my-vm --type l40s-48gb.1x --location us-southcentral1-a --image ubuntu22.04:latest --keyfile ~/.ssh/id_ed25519.pub')" aria-label="View CLI command" title="View the CLI command"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg> View CLI</button></div></div>
+          <div class="act-swap"><div class="pop-card-desc">Cost-efficient inference and light fine-tuning — great for serving smaller models and multi-modal work.</div><div class="act-reveal"><div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createInstanceFromRes('l40s',this)">Create instance</button><button class="btn btn-o btn-sm cli-icon" onclick="showCliPopover(this,'crusoe compute vms create --name my-vm --type l40s-48gb.1x --location us-southcentral1-a --image ubuntu22.04:latest --keyfile ~/.ssh/id_ed25519.pub')" aria-label="View CLI command" title="View the CLI command"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg> View CLI</button></div></div></div>
         </div>
         <div class="pop-card act-card" style="display:flex;flex-direction:column;gap:0;min-width:0">
           <div class="pop-card-top" style="margin-bottom:8px;align-items:center"><div class="pop-card-info"><div class="pop-card-name">Inference · Large models</div><div class="pop-card-price">H200 141GB</div></div><span class="src-pill src-ondemand">On demand</span></div>
-          <div class="pop-card-desc">Most memory per GPU — run 70B+ models and long-context inference without splitting across nodes.</div>
-          <div class="act-reveal"><div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createInstanceFromRes('h200',this)">Create instance</button><button class="btn btn-o btn-sm cli-icon" onclick="showCliPopover(this,'crusoe compute vms create --name my-vm --type h200-141gb-sxm-ib.8x --location us-southcentral1-a --image ubuntu22.04:latest --keyfile ~/.ssh/id_ed25519.pub')" aria-label="View CLI command" title="View the CLI command"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg> View CLI</button></div></div>
+          <div class="act-swap"><div class="pop-card-desc">Most memory per GPU — run 70B+ models and long-context inference without splitting across nodes.</div><div class="act-reveal"><div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createInstanceFromRes('h200',this)">Create instance</button><button class="btn btn-o btn-sm cli-icon" onclick="showCliPopover(this,'crusoe compute vms create --name my-vm --type h200-141gb-sxm-ib.8x --location us-southcentral1-a --image ubuntu22.04:latest --keyfile ~/.ssh/id_ed25519.pub')" aria-label="View CLI command" title="View the CLI command"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg> View CLI</button></div></div></div>
         </div>
       </div>
-      <div class="browse-all-wrap"><a href="javascript:void(0)" class="browse-all">Browse all instance types →</a></div>
+      <div class="browse-all-wrap"><a href="javascript:void(0)" class="browse-all">Create instance from blank →</a></div>
     </div>
   </div>
 
@@ -1027,7 +1027,7 @@ img.ico{display:block;flex:0 0 auto}
         </svg>
       </div>
       <div style="position:relative;z-index:1;max-width:430px">
-        <h1 style="font-size:44px;font-weight:400;font-family:var(--font-heading);color:var(--text);letter-spacing:-1.2px;line-height:110%;margin:0 0 10px;white-space:nowrap">No Instances Yet.</h1>
+        <h1 style="font-size:44px;font-weight:400;font-family:var(--font-heading);color:var(--text);letter-spacing:-1.2px;line-height:110%;margin:0 0 10px;white-space:nowrap">No Instances Yet</h1>
         <p style="font-size:14px;color:var(--muted);font-family:var(--font-body);line-height:160%;margin:0 0 18px">Spin up a GPU or CPU VM in under a minute — SSH in directly and start building.</p>
         <div style="display:flex;align-items:center;gap:18px">
           <button class="btn btn-p" onclick="goToPaymentMethods(this)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.99967 3.33337V12.6667M3.33301 8.00004H12.6663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Create Instance</button>
@@ -1080,13 +1080,13 @@ img.ico{display:block;flex:0 0 auto}
       </svg>
     </div>
     <!-- Headline -->
-    <h1 style="font-size:48px;font-weight:400;font-family:var(--font-heading);color:var(--text);letter-spacing:-1.4px;line-height:104%;margin:0 0 32px;position:relative;z-index:1">No Instances Yet.</h1>
+    <h1 style="font-size:48px;font-weight:400;font-family:var(--font-heading);color:var(--text);letter-spacing:-1.4px;line-height:104%;margin:0 0 32px;position:relative;z-index:1">No Instances Yet</h1>
   </div>
   <!-- Compute ecard -->
   <div class="ecard">
     <div class="etxt">
       <div class="ecat">Compute</div>
-      <div class="etitle">No Instances Yet.</div>
+      <div class="etitle">No Instances Yet</div>
       <div class="edesc">A Linux VM — GPU or CPU — that you SSH into directly. Billed per second while running.</div>
       <div style="margin-top:12px">
         <a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/compute/virtual-machines/overview/" target="_blank" style="text-decoration:none">View docs →</a>
@@ -1145,7 +1145,7 @@ img.ico{display:block;flex:0 0 auto}
     </div>
     <!-- Text block -->
     <div style="position:relative;z-index:1;max-width:380px">
-      <h1 style="font-size:44px;font-weight:400;font-family:var(--font-heading);color:var(--text);letter-spacing:-1.2px;line-height:110%;margin:0 0 10px;white-space:nowrap"><span id="spicy-typed">No Instances Yet.</span><span id="spicy-cursor" style="display:none;font-style:normal">|</span></h1>
+      <h1 style="font-size:44px;font-weight:400;font-family:var(--font-heading);color:var(--text);letter-spacing:-1.2px;line-height:110%;margin:0 0 10px;white-space:nowrap"><span id="spicy-typed">No Instances Yet</span><span id="spicy-cursor" style="display:none;font-style:normal">|</span></h1>
       <p style="font-size:14px;color:var(--muted);font-family:var(--font-body);line-height:160%;margin:0 0 16px">Spin up a GPU or CPU VM in under a minute. SSH in directly and start building.</p>
       <a href="https://docs.crusoecloud.com/compute/virtual-machines/overview/" target="_blank" style="display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:500;font-family:var(--font-body);color:var(--muted);text-decoration:none;border:1px solid var(--border);border-radius:8px;padding:7px 13px;background:transparent;transition:color .15s ease,border-color .15s ease,background .15s ease" onmouseenter="this.style.color='var(--text)';this.style.borderColor='var(--gray-400)';this.style.background='var(--gray-50)'" onmouseleave="this.style.color='var(--muted)';this.style.borderColor='var(--border)';this.style.background='transparent'">View docs →</a>
     </div>
@@ -1207,7 +1207,7 @@ img.ico{display:block;flex:0 0 auto}
       </svg>
     </div>
     <div style="position:relative;z-index:1;max-width:400px">
-      <h1 style="font-size:44px;font-weight:400;font-family:var(--font-heading);color:var(--text);letter-spacing:-1.2px;line-height:110%;margin:0 0 10px;white-space:nowrap">No Instances Yet.</h1>
+      <h1 style="font-size:44px;font-weight:400;font-family:var(--font-heading);color:var(--text);letter-spacing:-1.2px;line-height:110%;margin:0 0 10px;white-space:nowrap">No Instances Yet</h1>
       <p style="font-size:14px;color:var(--muted);font-family:var(--font-body);line-height:160%;margin:0 0 18px">Spin up a GPU or CPU VM in under a minute — SSH in directly and start building.</p>
       <div style="display:flex;align-items:center;gap:18px">
         <button class="btn btn-p" onclick="createInstanceFromRes('h100',this)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.99967 3.33337V12.6667M3.33301 8.00004H12.6663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Create Instance</button>
@@ -1223,21 +1223,18 @@ img.ico{display:block;flex:0 0 auto}
       <div class="pop-grid">
         <div class="pop-card act-card" style="display:flex;flex-direction:column;gap:0;min-width:0">
           <div class="pop-card-top" style="margin-bottom:8px;align-items:center"><div class="pop-card-info"><div class="pop-card-name">Training · Multi-node<span class="rev-note">5</span></div><div class="pop-card-price">H100 80GB SXM · 6 of 32 free</div></div><span class="src-pill src-reserved">Reservation</span><span class="rev-note">3</span></div>
-          <div class="pop-card-desc">Top-tier training and multi-node jobs — the fastest GPU interconnect for LLM pretraining, RLHF, and large fine-tunes.</div>
-          <div class="act-reveal"><div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createInstanceFromRes('h100',this)">Create instance</button><button class="btn btn-o btn-sm cli-icon" onclick="showCliPopover(this,'crusoe compute vms create --name my-vm --type h100-80gb-sxm-ib.8x --location us-southcentral1-a --image ubuntu22.04:latest --keyfile ~/.ssh/id_ed25519.pub')" aria-label="View CLI command" title="View the CLI command"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg> View CLI</button><span class="rev-note">4</span></div></div>
+          <div class="act-swap"><div class="pop-card-desc">Top-tier training and multi-node jobs — the fastest GPU interconnect for LLM pretraining, RLHF, and large fine-tunes.</div><div class="act-reveal"><div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createInstanceFromRes('h100',this)">Create instance</button><button class="btn btn-o btn-sm cli-icon" onclick="showCliPopover(this,'crusoe compute vms create --name my-vm --type h100-80gb-sxm-ib.8x --location us-southcentral1-a --image ubuntu22.04:latest --keyfile ~/.ssh/id_ed25519.pub')" aria-label="View CLI command" title="View the CLI command"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg> View CLI</button><span class="rev-note">4</span></div></div></div>
         </div>
         <div class="pop-card act-card" style="display:flex;flex-direction:column;gap:0;min-width:0">
           <div class="pop-card-top" style="margin-bottom:8px;align-items:center"><div class="pop-card-info"><div class="pop-card-name">Inference · Large models</div><div class="pop-card-price">H200 141GB</div></div><span class="src-pill src-ondemand">On demand</span></div>
-          <div class="pop-card-desc">Most memory per GPU — run 70B+ models and long-context inference without splitting across nodes.</div>
-          <div class="act-reveal"><div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createInstanceFromRes('h200',this)">Create instance</button><button class="btn btn-o btn-sm cli-icon" onclick="showCliPopover(this,'crusoe compute vms create --name my-vm --type h200-141gb-sxm-ib.8x --location us-southcentral1-a --image ubuntu22.04:latest --keyfile ~/.ssh/id_ed25519.pub')" aria-label="View CLI command" title="View the CLI command"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg> View CLI</button></div></div>
+          <div class="act-swap"><div class="pop-card-desc">Most memory per GPU — run 70B+ models and long-context inference without splitting across nodes.</div><div class="act-reveal"><div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createInstanceFromRes('h200',this)">Create instance</button><button class="btn btn-o btn-sm cli-icon" onclick="showCliPopover(this,'crusoe compute vms create --name my-vm --type h200-141gb-sxm-ib.8x --location us-southcentral1-a --image ubuntu22.04:latest --keyfile ~/.ssh/id_ed25519.pub')" aria-label="View CLI command" title="View the CLI command"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg> View CLI</button></div></div></div>
         </div>
         <div class="pop-card act-card" style="display:flex;flex-direction:column;gap:0;min-width:0">
           <div class="pop-card-top" style="margin-bottom:8px;align-items:center"><div class="pop-card-info"><div class="pop-card-name">Inference · Fine-tuning</div><div class="pop-card-price">L40S 48GB</div></div><span class="src-pill src-ondemand">On demand</span></div>
-          <div class="pop-card-desc">Cost-efficient inference and light fine-tuning — great for serving smaller models and multi-modal work.</div>
-          <div class="act-reveal"><div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createInstanceFromRes('l40s',this)">Create instance</button><button class="btn btn-o btn-sm cli-icon" onclick="showCliPopover(this,'crusoe compute vms create --name my-vm --type l40s-48gb.1x --location us-southcentral1-a --image ubuntu22.04:latest --keyfile ~/.ssh/id_ed25519.pub')" aria-label="View CLI command" title="View the CLI command"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg> View CLI</button></div></div>
+          <div class="act-swap"><div class="pop-card-desc">Cost-efficient inference and light fine-tuning — great for serving smaller models and multi-modal work.</div><div class="act-reveal"><div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createInstanceFromRes('l40s',this)">Create instance</button><button class="btn btn-o btn-sm cli-icon" onclick="showCliPopover(this,'crusoe compute vms create --name my-vm --type l40s-48gb.1x --location us-southcentral1-a --image ubuntu22.04:latest --keyfile ~/.ssh/id_ed25519.pub')" aria-label="View CLI command" title="View the CLI command"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg> View CLI</button></div></div></div>
         </div>
       </div>
-      <div class="browse-all-wrap"><a href="javascript:void(0)" class="browse-all">Browse all instance types →</a></div>
+      <div class="browse-all-wrap"><a href="javascript:void(0)" class="browse-all">Create instance from blank →</a></div>
     <div class="rev-legend">
       <div class="rev-legend-row"><span class="n">1</span><span><b>"View docs felt misplaced"</b> — demoted from a button to a quiet text link, so the hero keeps one primary action (Create) aligned with the speed message.</span></div>
       <div class="rev-legend-row"><span class="n">2</span><span><b>Quota numbers hidden until they're exhausted</b> (Jun 5) — during normal use the page just shows "On demand"; we don't surface quota counts. The number only appears if a quota is fully used (see the Edge cases tab).</span></div>
@@ -1357,7 +1354,7 @@ img.ico{display:block;flex:0 0 auto}
       </div>
       <!-- Text block -->
       <div style="position:relative;z-index:1;max-width:520px">
-        <h1 style="font-size:44px;font-weight:400;font-family:var(--font-heading);color:var(--text);letter-spacing:-1.2px;line-height:110%;margin:0 0 10px;white-space:nowrap">No Templates Yet.</h1>
+        <h1 style="font-size:44px;font-weight:400;font-family:var(--font-heading);color:var(--text);letter-spacing:-1.2px;line-height:110%;margin:0 0 10px;white-space:nowrap">No Templates Yet</h1>
         <p style="font-size:14px;color:var(--muted);font-family:var(--font-body);line-height:160%;margin:0 0 16px">Save a full VM configuration — instance type, image, disks, SSH keys, and network — then launch identical VMs in one command.</p>
         <a href="https://docs.crusoecloud.com/compute/templates/" target="_blank" style="display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:500;font-family:var(--font-body);color:var(--muted);text-decoration:none;border:1px solid var(--border);border-radius:8px;padding:7px 13px;background:transparent;transition:color .15s ease,border-color .15s ease,background .15s ease" onmouseenter="this.style.color='var(--text)';this.style.borderColor='var(--gray-400)';this.style.background='var(--gray-50)'" onmouseleave="this.style.color='var(--muted)';this.style.borderColor='var(--border)';this.style.background='transparent'">View docs →</a>
       </div>
@@ -1424,7 +1421,7 @@ img.ico{display:block;flex:0 0 auto}
         </svg>
       </div>
       <div style="position:relative;z-index:1;max-width:380px">
-        <h1 style="font-size:44px;font-weight:400;font-family:var(--font-heading);color:var(--text);letter-spacing:-1.2px;line-height:110%;margin:0 0 10px;white-space:nowrap">No Groups Yet.</h1>
+        <h1 style="font-size:44px;font-weight:400;font-family:var(--font-heading);color:var(--text);letter-spacing:-1.2px;line-height:110%;margin:0 0 10px;white-space:nowrap">No Groups Yet</h1>
         <p style="font-size:14px;color:var(--muted);font-family:var(--font-body);line-height:160%;margin:0 0 16px">Start, stop, and scale related instances together and apply one template across the whole set — ideal for fleets of identical nodes.</p>
         <a href="https://docs.crusoecloud.com/compute/instance-groups" target="_blank" style="display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:500;font-family:var(--font-body);color:var(--muted);text-decoration:none;border:1px solid var(--border);border-radius:8px;padding:7px 13px;background:transparent;transition:color .15s ease,border-color .15s ease,background .15s ease" onmouseenter="this.style.color='var(--text)';this.style.borderColor='var(--gray-400)';this.style.background='var(--gray-50)'" onmouseleave="this.style.color='var(--muted)';this.style.borderColor='var(--border)';this.style.background='transparent'">View docs →</a>
       </div>
@@ -1490,7 +1487,7 @@ img.ico{display:block;flex:0 0 auto}
         </svg>
       </div>
       <div style="position:relative;z-index:1;max-width:380px">
-        <h1 style="font-size:44px;font-weight:400;font-family:var(--font-heading);color:var(--text);letter-spacing:-1.2px;line-height:110%;margin:0 0 10px;white-space:nowrap">No Custom Images Yet.</h1>
+        <h1 style="font-size:44px;font-weight:400;font-family:var(--font-heading);color:var(--text);letter-spacing:-1.2px;line-height:110%;margin:0 0 10px;white-space:nowrap">No Custom Images Yet</h1>
         <p style="font-size:14px;color:var(--muted);font-family:var(--font-body);line-height:160%;margin:0 0 16px">Capture the boot disk of a stopped VM as a reusable base image — project- and region-specific, for launching identical instances.</p>
         <a href="https://docs.crusoecloud.com/compute/images/overview/" target="_blank" style="display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:500;font-family:var(--font-body);color:var(--muted);text-decoration:none;border:1px solid var(--border);border-radius:8px;padding:7px 13px;background:transparent;transition:color .15s ease,border-color .15s ease,background .15s ease" onmouseenter="this.style.color='var(--text)';this.style.borderColor='var(--gray-400)';this.style.background='var(--gray-50)'" onmouseleave="this.style.color='var(--muted)';this.style.borderColor='var(--border)';this.style.background='transparent'">View docs →</a>
       </div>
@@ -1556,7 +1553,7 @@ img.ico{display:block;flex:0 0 auto}
     </div>
     <div class="etxt">
       <div class="ecat">Orchestration</div>
-      <div class="etitle">No Clusters Yet.</div>
+      <div class="etitle">No Clusters Yet</div>
       <div class="edesc">Crusoe Managed Kubernetes (CMK) gives you fully-managed control planes with pre-installed GPU and network drivers. Spin up a training or inference cluster in minutes.</div>
       <a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/orchestration/cmk/" target="_blank" style="text-decoration:none;margin-top:12px;align-self:flex-start">View docs →</a>
     </div>
@@ -1615,13 +1612,13 @@ img.ico{display:block;flex:0 0 auto}
       </svg>
     </div>
     <!-- Headline -->
-    <h1 style="font-size:48px;font-weight:400;font-family:var(--font-heading);color:var(--text);letter-spacing:-1.4px;line-height:104%;margin:0 0 32px;position:relative;z-index:1">No Clusters Yet.</h1>
+    <h1 style="font-size:48px;font-weight:400;font-family:var(--font-heading);color:var(--text);letter-spacing:-1.4px;line-height:104%;margin:0 0 32px;position:relative;z-index:1">No Clusters Yet</h1>
   </div>
   <!-- Orchestration ecard -->
   <div class="ecard">
     <div class="etxt">
       <div class="ecat">Orchestration</div>
-      <div class="etitle">No Clusters Yet.</div>
+      <div class="etitle">No Clusters Yet</div>
       <div class="edesc">Crusoe Managed Kubernetes (CMK) gives you fully-managed control planes with GPU and network drivers pre-installed. Spin up a training or inference cluster in minutes.</div>
       <div style="margin-top:12px">
         <a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/orchestration/cmk/" target="_blank" style="text-decoration:none">View docs →</a>
@@ -1686,30 +1683,27 @@ img.ico{display:block;flex:0 0 auto}
     </div>
     <!-- Text block -->
     <div style="position:relative;z-index:1;max-width:380px">
-      <h1 style="font-size:44px;font-weight:400;font-family:var(--font-heading);color:var(--text);letter-spacing:-1.2px;line-height:110%;margin:0 0 10px;white-space:nowrap"><span id="cluster-typed">No Clusters Yet.</span><span id="cluster-cursor" style="display:none;font-style:normal">|</span></h1>
+      <h1 style="font-size:44px;font-weight:400;font-family:var(--font-heading);color:var(--text);letter-spacing:-1.2px;line-height:110%;margin:0 0 10px;white-space:nowrap"><span id="cluster-typed">No Clusters Yet</span><span id="cluster-cursor" style="display:none;font-style:normal">|</span></h1>
       <p style="font-size:14px;color:var(--muted);font-family:var(--font-body);line-height:160%;margin:0 0 16px">Launch a fully-managed Kubernetes cluster with GPU operators pre-installed. Ready in minutes.</p>
       <div style="display:flex;align-items:center;gap:18px"><button class="btn btn-p" onclick="createClusterFromTemplate('k8s','gpu-training',this)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.99967 3.33337V12.6667M3.33301 8.00004H12.6663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Create Cluster</button><a href="https://docs.crusoecloud.com/orchestration/cmk/" target="_blank" style="font-size:13px;color:var(--muted);text-decoration:underline;text-underline-offset:3px;font-family:var(--font-body);transition:color .15s ease" onmouseenter="this.style.color='var(--text)'" onmouseleave="this.style.color='var(--muted)'">View docs →</a></div>
     </div>
   </div>
   <!-- Template cards -->
   <div class="es-gap"></div>
-  <div class="pop-section cluster-spicy-reveal" style="margin-top:36px;padding-bottom:64px">
+  <div class="pop-section cluster-spicy-reveal" style="margin-top:36px;padding-bottom:16px">
     <div class="pop-title">Start with a popular cluster template</div>
     <div class="pop-grid">
       <div class="pop-card act-card cluster-spicy-reveal" style="display:flex;flex-direction:column;gap:0;min-width:0;transition-delay:.08s">
         <div class="pop-card-top" style="margin-bottom:8px;align-items:center"><div class="pop-card-info"><div class="pop-card-name">GPU Training Cluster</div><div class="pop-card-price">H100 8x node pool</div></div></div>
-        <div class="pop-card-desc">Pre-configured with GPU operator, network operator, and CSI. Optimized for distributed training with NVLink + InfiniBand.</div>
-        <div class="act-reveal"><div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createClusterFromTemplate('k8s','gpu-training',this)">Create cluster</button><button class="btn btn-o btn-sm cli-icon" onclick="showCliPopover(this,&#39;crusoe kubernetes cluster create --name gpu-training --node-pool-type h100-80gb-sxm-ib.8x&#39;)" aria-label="View CLI command" title="View the CLI command"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg> View CLI</button></div></div>
+        <div class="act-swap"><div class="pop-card-desc">Pre-configured with GPU operator, network operator, and CSI. Optimized for distributed training with NVLink + InfiniBand.</div><div class="act-reveal"><div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createClusterFromTemplate('k8s','gpu-training',this)">Create cluster</button><button class="btn btn-o btn-sm cli-icon" onclick="showCliPopover(this,&#39;crusoe kubernetes cluster create --name gpu-training --node-pool-type h100-80gb-sxm-ib.8x&#39;)" aria-label="View CLI command" title="View the CLI command"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg> View CLI</button></div></div></div>
       </div>
       <div class="pop-card act-card cluster-spicy-reveal" style="display:flex;flex-direction:column;gap:0;min-width:0;transition-delay:.14s">
         <div class="pop-card-top" style="margin-bottom:8px;align-items:center"><div class="pop-card-info"><div class="pop-card-name">Inference Cluster</div><div class="pop-card-price">L40S autoscaling pool</div></div></div>
-        <div class="pop-card-desc">Cost-efficient serving with autoscaling node pools. Ideal for vLLM, TGI, or Triton inference endpoints on L40S GPUs.</div>
-        <div class="act-reveal"><div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createClusterFromTemplate('k8s','inference',this)">Create cluster</button><button class="btn btn-o btn-sm cli-icon" onclick="showCliPopover(this,&#39;crusoe kubernetes cluster create --name inference --node-pool-type l40s-48gb.8x --autoscale&#39;)" aria-label="View CLI command" title="View the CLI command"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg> View CLI</button></div></div>
+        <div class="act-swap"><div class="pop-card-desc">Cost-efficient serving with autoscaling node pools. Ideal for vLLM, TGI, or Triton inference endpoints on L40S GPUs.</div><div class="act-reveal"><div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createClusterFromTemplate('k8s','inference',this)">Create cluster</button><button class="btn btn-o btn-sm cli-icon" onclick="showCliPopover(this,&#39;crusoe kubernetes cluster create --name inference --node-pool-type l40s-48gb.8x --autoscale&#39;)" aria-label="View CLI command" title="View the CLI command"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg> View CLI</button></div></div></div>
       </div>
       <div class="pop-card act-card cluster-spicy-reveal" style="display:flex;flex-direction:column;gap:0;min-width:0;transition-delay:.2s">
         <div class="pop-card-top" style="margin-bottom:8px;align-items:center"><div class="pop-card-info"><div class="pop-card-name">CPU-only Cluster</div><div class="pop-card-price">General-purpose nodes</div></div></div>
-        <div class="pop-card-desc">Standard Kubernetes cluster for APIs, data pipelines, and services that don't require GPU acceleration.</div>
-        <div class="act-reveal"><div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createClusterFromTemplate('k8s','cpu',this)">Create cluster</button><button class="btn btn-o btn-sm cli-icon" onclick="showCliPopover(this,&#39;crusoe kubernetes cluster create --name cpu-cluster --node-pool-type cpu.32x&#39;)" aria-label="View CLI command" title="View the CLI command"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg> View CLI</button></div></div>
+        <div class="act-swap"><div class="pop-card-desc">Standard Kubernetes cluster for APIs, data pipelines, and services that don't require GPU acceleration.</div><div class="act-reveal"><div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createClusterFromTemplate('k8s','cpu',this)">Create cluster</button><button class="btn btn-o btn-sm cli-icon" onclick="showCliPopover(this,&#39;crusoe kubernetes cluster create --name cpu-cluster --node-pool-type cpu.32x&#39;)" aria-label="View CLI command" title="View the CLI command"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg> View CLI</button></div></div></div>
       </div>
     </div>
   </div>
@@ -1801,7 +1795,7 @@ img.ico{display:block;flex:0 0 auto}
     </div>
     <div class="etxt">
       <div class="ecat">Orchestration</div>
-      <div class="etitle">No Clusters Yet.</div>
+      <div class="etitle">No Clusters Yet</div>
       <div class="edesc">Crusoe Managed Kubernetes (CMK) gives you fully-managed control planes with pre-installed GPU and network drivers. Spin up a training or inference cluster in minutes.</div>
       <a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/orchestration/cmk/" target="_blank" style="text-decoration:none;margin-top:12px;align-self:flex-start">View docs →</a>
     </div>
@@ -1864,7 +1858,7 @@ img.ico{display:block;flex:0 0 auto}
         </div>
         <div class="etxt">
           <div class="ecat">Orchestration</div>
-          <div class="etitle">No Clusters Yet.</div>
+          <div class="etitle">No Clusters Yet</div>
           <div class="edesc">Crusoe Managed Kubernetes (CMK) gives you fully-managed control planes with pre-installed GPU and network drivers.</div>
           <div style="margin-top:12px;display:flex;gap:8px;align-items:center;flex-wrap:wrap">
             <button class="btn btn-p btn-sm">
@@ -1970,7 +1964,7 @@ img.ico{display:block;flex:0 0 auto}
         </div>
         <div class="etxt">
           <div class="ecat">Orchestration</div>
-          <div class="etitle">No Clusters Yet.</div>
+          <div class="etitle">No Clusters Yet</div>
           <div class="edesc">Crusoe Managed Kubernetes (CMK) gives you fully-managed control planes with pre-installed GPU and network drivers.</div>
           <div style="margin-top:12px;display:flex;gap:8px;align-items:center;flex-wrap:wrap">
             <button class="btn btn-p btn-sm" style="opacity:.4;cursor:not-allowed" disabled>
@@ -2037,7 +2031,7 @@ img.ico{display:block;flex:0 0 auto}
         </div>
         <div class="etxt">
           <div class="ecat">Orchestration</div>
-          <div class="etitle">No Clusters Yet.</div>
+          <div class="etitle">No Clusters Yet</div>
           <div class="edesc">Crusoe Managed Kubernetes (CMK) gives you fully-managed control planes with pre-installed GPU and network drivers.</div>
           <div style="margin-top:12px;display:flex;gap:8px;align-items:center;flex-wrap:wrap">
             <button class="btn btn-p btn-sm" style="opacity:.4;cursor:not-allowed" disabled>
@@ -2119,7 +2113,7 @@ img.ico{display:block;flex:0 0 auto}
     </div>
     <div class="etxt">
       <div class="ecat">Orchestration</div>
-      <div class="etitle">No Slurm Clusters Yet.</div>
+      <div class="etitle">No Slurm Clusters Yet</div>
       <div class="edesc">Crusoe Managed Slurm provides managed HPC cluster orchestration on Crusoe Cloud. Provision a complete Slurm cluster backed by GPU-optimized infrastructure with a single command. Use Managed Kubernetes instead if you're deploying containerized inference or services.</div>
       <a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/orchestration/slurm/" target="_blank" style="text-decoration:none;margin-top:12px;align-self:flex-start">View docs →</a>
     </div>
@@ -2154,12 +2148,12 @@ img.ico{display:block;flex:0 0 auto}
         <path d="M86.8652 66.1665L66.2163 86.0952" stroke="black"/>
       </svg>
     </div>
-    <h1 style="font-size:48px;font-weight:400;font-family:var(--font-heading);color:var(--text);letter-spacing:-1.4px;line-height:104%;margin:0 0 32px;position:relative;z-index:1">No Clusters Yet.</h1>
+    <h1 style="font-size:48px;font-weight:400;font-family:var(--font-heading);color:var(--text);letter-spacing:-1.4px;line-height:104%;margin:0 0 32px;position:relative;z-index:1">No Clusters Yet</h1>
   </div>
   <div class="ecard">
     <div class="etxt">
       <div class="ecat">Orchestration</div>
-      <div class="etitle">No Slurm Clusters Yet.</div>
+      <div class="etitle">No Slurm Clusters Yet</div>
       <div class="edesc">Crusoe Managed Slurm provides managed HPC cluster orchestration with topology-aware scheduling, shared storage, and multi-user access. Provision a complete Slurm cluster with a single command. Use Managed Kubernetes instead if you're deploying containerized inference or services.</div>
       <div style="margin-top:12px">
         <a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/orchestration/slurm/" target="_blank" style="text-decoration:none">View docs →</a>
@@ -2207,30 +2201,27 @@ img.ico{display:block;flex:0 0 auto}
     </div>
     <!-- Text block -->
     <div style="position:relative;z-index:1;max-width:380px">
-      <h1 style="font-size:44px;font-weight:400;font-family:var(--font-heading);color:var(--text);letter-spacing:-1.2px;line-height:110%;margin:0 0 10px;white-space:nowrap"><span id="slurm-typed">No Clusters Yet.</span><span id="slurm-cursor" style="display:none;font-style:normal">|</span></h1>
+      <h1 style="font-size:44px;font-weight:400;font-family:var(--font-heading);color:var(--text);letter-spacing:-1.2px;line-height:110%;margin:0 0 10px;white-space:nowrap"><span id="slurm-typed">No Clusters Yet</span><span id="slurm-cursor" style="display:none;font-style:normal">|</span></h1>
       <p style="font-size:14px;color:var(--muted);font-family:var(--font-body);line-height:160%;margin:0 0 16px">Provision a complete HPC Slurm cluster with GPU-optimized nodes, shared storage, and topology-aware scheduling.</p>
       <div style="display:flex;align-items:center;gap:18px"><button class="btn btn-p" onclick="createClusterFromTemplate('slurm','gpu-hpc',this)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.99967 3.33337V12.6667M3.33301 8.00004H12.6663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Create Cluster</button><a href="https://docs.crusoecloud.com/orchestration/slurm/" target="_blank" style="font-size:13px;color:var(--muted);text-decoration:underline;text-underline-offset:3px;font-family:var(--font-body);transition:color .15s ease" onmouseenter="this.style.color='var(--text)'" onmouseleave="this.style.color='var(--muted)'">View docs →</a></div>
     </div>
   </div>
   <!-- Template cards -->
   <div class="es-gap"></div>
-  <div class="pop-section slurm-spicy-reveal" style="margin-top:36px;padding-bottom:64px">
+  <div class="pop-section slurm-spicy-reveal" style="margin-top:36px;padding-bottom:16px">
     <div class="pop-title">Start with a popular cluster template</div>
     <div class="pop-grid">
       <div class="pop-card act-card slurm-spicy-reveal" style="display:flex;flex-direction:column;gap:0;min-width:0;transition-delay:.08s">
         <div class="pop-card-top" style="margin-bottom:8px;align-items:center"><div class="pop-card-info"><div class="pop-card-name">GPU HPC Cluster</div><div class="pop-card-price">H100 multi-node</div></div></div>
-        <div class="pop-card-desc">Pre-configured with Pyxis, PMIx, and RDMA. Optimized for distributed training workloads with InfiniBand fabric.</div>
-        <div class="act-reveal"><div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createClusterFromTemplate('slurm','gpu-hpc',this)">Create cluster</button><button class="btn btn-o btn-sm cli-icon" onclick="showCliPopover(this,&#39;crusoe slurm cluster create --name gpu-hpc --partition h100-80gb-sxm-ib.8x&#39;)" aria-label="View CLI command" title="View the CLI command"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg> View CLI</button></div></div>
+        <div class="act-swap"><div class="pop-card-desc">Pre-configured with Pyxis, PMIx, and RDMA. Optimized for distributed training workloads with InfiniBand fabric.</div><div class="act-reveal"><div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createClusterFromTemplate('slurm','gpu-hpc',this)">Create cluster</button><button class="btn btn-o btn-sm cli-icon" onclick="showCliPopover(this,&#39;crusoe slurm cluster create --name gpu-hpc --partition h100-80gb-sxm-ib.8x&#39;)" aria-label="View CLI command" title="View the CLI command"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg> View CLI</button></div></div></div>
       </div>
       <div class="pop-card act-card slurm-spicy-reveal" style="display:flex;flex-direction:column;gap:0;min-width:0;transition-delay:.14s">
         <div class="pop-card-top" style="margin-bottom:8px;align-items:center"><div class="pop-card-info"><div class="pop-card-name">Multi-GPU Fine-tuning</div><div class="pop-card-price">A100 node pool</div></div></div>
-        <div class="pop-card-desc">Shared storage with Lustre, topology-aware scheduling, and multi-user access for team fine-tuning workflows.</div>
-        <div class="act-reveal"><div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createClusterFromTemplate('slurm','fine-tune',this)">Create cluster</button><button class="btn btn-o btn-sm cli-icon" onclick="showCliPopover(this,&#39;crusoe slurm cluster create --name fine-tune --partition a100-80gb-sxm.8x&#39;)" aria-label="View CLI command" title="View the CLI command"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg> View CLI</button></div></div>
+        <div class="act-swap"><div class="pop-card-desc">Shared storage with Lustre, topology-aware scheduling, and multi-user access for team fine-tuning workflows.</div><div class="act-reveal"><div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createClusterFromTemplate('slurm','fine-tune',this)">Create cluster</button><button class="btn btn-o btn-sm cli-icon" onclick="showCliPopover(this,&#39;crusoe slurm cluster create --name fine-tune --partition a100-80gb-sxm.8x&#39;)" aria-label="View CLI command" title="View the CLI command"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg> View CLI</button></div></div></div>
       </div>
       <div class="pop-card act-card slurm-spicy-reveal" style="display:flex;flex-direction:column;gap:0;min-width:0;transition-delay:.2s">
         <div class="pop-card-top" style="margin-bottom:8px;align-items:center"><div class="pop-card-info"><div class="pop-card-name">LLM Pre-training</div><div class="pop-card-price">H200 multi-node</div></div></div>
-        <div class="pop-card-desc">Frontier-scale pre-training on H200 nodes with InfiniBand fabric, Pyxis container runtime, and checkpoint storage.</div>
-        <div class="act-reveal"><div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createClusterFromTemplate('slurm','llm-pretrain',this)">Create cluster</button><button class="btn btn-o btn-sm cli-icon" onclick="showCliPopover(this,&#39;crusoe slurm cluster create --name llm-pretrain --partition h200-141gb-sxm.8x&#39;)" aria-label="View CLI command" title="View the CLI command"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg> View CLI</button></div></div>
+        <div class="act-swap"><div class="pop-card-desc">Frontier-scale pre-training on H200 nodes with InfiniBand fabric, Pyxis container runtime, and checkpoint storage.</div><div class="act-reveal"><div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createClusterFromTemplate('slurm','llm-pretrain',this)">Create cluster</button><button class="btn btn-o btn-sm cli-icon" onclick="showCliPopover(this,&#39;crusoe slurm cluster create --name llm-pretrain --partition h200-141gb-sxm.8x&#39;)" aria-label="View CLI command" title="View the CLI command"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg> View CLI</button></div></div></div>
       </div>
     </div>
   </div>
@@ -2317,7 +2308,7 @@ img.ico{display:block;flex:0 0 auto}
         </div>
         <div class="etxt">
           <div class="ecat">Storage</div>
-          <div class="etitle">No Disks Yet.</div>
+          <div class="etitle">No Disks Yet</div>
           <div class="edesc">Persistent block storage for your virtual machines. Attach and detach across instances — data persists independently of VM lifecycle. Supports snapshots and resizing up to 10 TiB.</div>
           <div style="margin-top:16px;display:flex;gap:8px">
             <a href="https://docs.crusoecloud.com/storage/disks/" target="_blank" style="display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:500;font-family:var(--font-body);color:var(--muted);text-decoration:none;border:1px solid var(--border);border-radius:8px;padding:7px 13px;background:transparent;transition:color .15s ease,border-color .15s ease,background .15s ease" onmouseenter="this.style.color='var(--text)';this.style.borderColor='var(--gray-400)';this.style.background='var(--gray-50)'" onmouseleave="this.style.color='var(--muted)';this.style.borderColor='var(--border)';this.style.background='transparent'">View docs →</a>
@@ -2364,7 +2355,7 @@ img.ico{display:block;flex:0 0 auto}
         </div>
         <!-- Text block -->
         <div style="position:relative;z-index:1;max-width:380px">
-          <h1 style="font-size:44px;font-weight:400;font-family:var(--font-heading);color:var(--text);letter-spacing:-1.2px;line-height:110%;margin:0 0 10px;white-space:nowrap"><span id="disk-typed">No Disks Yet.</span><span id="disk-cursor" style="display:none;font-style:normal">|</span></h1>
+          <h1 style="font-size:44px;font-weight:400;font-family:var(--font-heading);color:var(--text);letter-spacing:-1.2px;line-height:110%;margin:0 0 10px;white-space:nowrap"><span id="disk-typed">No Disks Yet</span><span id="disk-cursor" style="display:none;font-style:normal">|</span></h1>
           <p style="font-size:14px;color:var(--muted);font-family:var(--font-body);line-height:160%;margin:0 0 16px">Crusoe Cloud offers three types of disks: Ephemeral Disks, Persistent Disks and Shared Disks.</p>
           <div style="display:flex;align-items:center;gap:18px"><button class="btn btn-p"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.99967 3.33337V12.6667M3.33301 8.00004H12.6663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Create Disk</button><a href="https://docs.crusoecloud.com/storage/disks/" target="_blank" style="font-size:13px;color:var(--muted);text-decoration:underline;text-underline-offset:3px;font-family:var(--font-body);transition:color .15s ease" onmouseenter="this.style.color='var(--text)'" onmouseleave="this.style.color='var(--muted)'">View docs →</a></div>
         </div>
@@ -2416,14 +2407,14 @@ img.ico{display:block;flex:0 0 auto}
           </svg>
         </div>
         <div style="position:relative;z-index:1;max-width:560px">
-          <h1 style="font-size:44px;font-weight:400;font-family:var(--font-heading);color:var(--text);letter-spacing:-1.2px;line-height:110%;margin:0 0 10px;white-space:nowrap">No Disks Yet.</h1>
+          <h1 style="font-size:44px;font-weight:400;font-family:var(--font-heading);color:var(--text);letter-spacing:-1.2px;line-height:110%;margin:0 0 10px;white-space:nowrap">No Disks Yet</h1>
           <p style="font-size:14px;color:var(--muted);font-family:var(--font-body);line-height:160%;margin:0 0 16px">Add storage that lives independently of your instances. Choose a <b style="color:var(--text2);font-weight:600">Persistent Disk</b> for fast single-VM block storage, or a <b style="color:var(--text2);font-weight:600">Shared Disk</b> for concurrent NFS access across many VMs.<span class="rev-note">1</span></p>
           <div style="display:flex;align-items:center;gap:18px"><button class="btn btn-p"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.99967 3.33337V12.6667M3.33301 8.00004H12.6663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Create Disk</button><a href="https://docs.crusoecloud.com/storage/disks/overview" target="_blank" style="font-size:13px;color:var(--muted);text-decoration:underline;text-underline-offset:3px;font-family:var(--font-body);transition:color .15s ease" onmouseenter="this.style.color='var(--text)'" onmouseleave="this.style.color='var(--muted)'">View docs →</a><span class="rev-note">2</span></div>
         </div>
       </div>
       <!-- Disk type cards -->
       <div class="es-gap"></div>
-      <div class="pop-section" style="margin-top:36px;padding-bottom:64px">
+      <div class="pop-section" style="margin-top:36px;padding-bottom:16px">
         <div class="pop-title">Choose your disk type</div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:stretch">
           <div class="pop-card act-card" style="display:flex;flex-direction:column;gap:0;min-width:0">
@@ -2432,8 +2423,7 @@ img.ico{display:block;flex:0 0 auto}
               <div class="pop-card-info"><div class="pop-card-name">Persistent Disks</div><div class="pop-card-price">1 GiB – 10 TiB · $0.08/GiB/mo</div></div>
             </div>
             <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Single VM · Block storage</span></div>
-            <div style="font-size:12.5px;color:var(--text2);font-family:var(--font-body);line-height:150%">Attach to one VM in read-write mode. Up to 16 per instance including OS Disk. Attach and detach while running or stopped — unmount before detaching.<span class="rev-note">3</span></div>
-            <div class="act-reveal"><div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create Persistent Disks<span class="rev-note">4</span></button></div></div>
+            <div class="act-swap"><div style="font-size:12.5px;color:var(--text2);font-family:var(--font-body);line-height:150%">Attach to one VM in read-write mode. Up to 16 per instance including OS Disk. Attach and detach while running or stopped — unmount before detaching.<span class="rev-note">3</span></div><div class="act-reveal"><div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create Persistent Disks<span class="rev-note">4</span></button></div></div></div>
           </div>
           <div class="pop-card act-card" style="display:flex;flex-direction:column;gap:0;min-width:0">
             <div class="pop-card-top" style="margin-bottom:10px;align-items:center">
@@ -2441,8 +2431,7 @@ img.ico{display:block;flex:0 0 auto}
               <div class="pop-card-info"><div class="pop-card-name">Shared Disks</div><div class="pop-card-price">1 TiB – 1000 TiB · $0.07/GiB/mo</div></div>
             </div>
             <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Multi-VM · NFS</span></div>
-            <div style="font-size:12.5px;color:var(--text2);font-family:var(--font-body);line-height:150%">Concurrent NFS access from many VMs at once. Up to 8 per instance, in 1 TiB increments. Max 36-character name.<span class="rev-note">5</span></div>
-            <div class="act-reveal"><div style="display:flex;gap:10px"><button class="btn btn-o btn-sm" style="flex:1;justify-content:center">Create Shared Disks</button></div></div>
+            <div class="act-swap"><div style="font-size:12.5px;color:var(--text2);font-family:var(--font-body);line-height:150%">Concurrent NFS access from many VMs at once. Up to 8 per instance, in 1 TiB increments. Max 36-character name.<span class="rev-note">5</span></div><div class="act-reveal"><div style="display:flex;gap:10px"><button class="btn btn-o btn-sm" style="flex:1;justify-content:center">Create Shared Disks</button></div></div></div>
           </div>
         </div>
         <div class="rev-legend">
@@ -2520,7 +2509,7 @@ img.ico{display:block;flex:0 0 auto}
       </div>
       <!-- Text block -->
       <div style="position:relative;z-index:1;max-width:560px">
-        <h1 style="font-size:44px;font-weight:400;font-family:var(--font-heading);color:var(--text);letter-spacing:-1.2px;line-height:110%;margin:0 0 10px;white-space:nowrap">No Buckets Yet.</h1>
+        <h1 style="font-size:44px;font-weight:400;font-family:var(--font-heading);color:var(--text);letter-spacing:-1.2px;line-height:110%;margin:0 0 10px;white-space:nowrap">No Buckets Yet</h1>
         <p style="font-size:14px;color:var(--muted);font-family:var(--font-body);line-height:160%;margin:0 0 16px">Region-scoped, S3-compatible storage for datasets, checkpoints, and artifacts. Create here or via CLI, then connect any S3 client.</p>
         <div style="display:flex;align-items:center;gap:18px"><button class="btn btn-p"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.99967 3.33337V12.6667M3.33301 8.00004H12.6663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Create Bucket</button><a href="https://docs.crusoecloud.com/storage/object-storage/managing-buckets/" target="_blank" style="font-size:13px;color:var(--muted);text-decoration:underline;text-underline-offset:3px;font-family:var(--font-body);transition:color .15s ease" onmouseenter="this.style.color='var(--text)'" onmouseleave="this.style.color='var(--muted)'">View docs →</a></div>
       </div>
@@ -2677,7 +2666,7 @@ img.ico{display:block;flex:0 0 auto}
           <circle id="vm-dot-2" r="4.82" fill="black" cx="-20" cy="-20"/>
         </svg>
       </div>
-      <div class="metrics-empty-title">No Metrics Data Yet.</div>
+      <div class="metrics-empty-title">No Metrics Data Yet</div>
       <div class="metrics-empty-desc">Install the Crusoe Telemetry Agent to start collecting GPU utilization, memory, and network metrics for this instance.</div>
       <a class="btn btn-p btn-sm" href="https://github.com/crusoecloud/crusoe-watch-agent" target="_blank" style="text-decoration:none">Install Crusoe Watch Agent →</a>
     </div>
@@ -2845,7 +2834,7 @@ img.ico{display:block;flex:0 0 auto}
       </div>
       <!-- Text block -->
       <div style="position:relative;z-index:1;max-width:380px">
-        <h1 style="font-size:44px;font-weight:400;font-family:var(--font-heading);color:var(--text);letter-spacing:-1.2px;line-height:110%;margin:0 0 10px;white-space:nowrap">No API Keys Yet.</h1>
+        <h1 style="font-size:44px;font-weight:400;font-family:var(--font-heading);color:var(--text);letter-spacing:-1.2px;line-height:110%;margin:0 0 10px;white-space:nowrap">No API Keys Yet</h1>
         <p style="font-size:14px;color:var(--muted);font-family:var(--font-body);line-height:160%;margin:0 0 16px">Required for programmatic access to the Crusoe Cloud API. The secret key is shown once — save it before leaving the page.</p>
         <a href="https://docs.crusoecloud.com/identity-and-security/managing-api-keys/" target="_blank" style="display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:500;font-family:var(--font-body);color:var(--muted);text-decoration:none;border:1px solid var(--border);border-radius:8px;padding:7px 13px;background:transparent;transition:color .15s ease,border-color .15s ease,background .15s ease" onmouseenter="this.style.color='var(--text)';this.style.borderColor='var(--gray-400)';this.style.background='var(--gray-50)'" onmouseleave="this.style.color='var(--muted)';this.style.borderColor='var(--border)';this.style.background='transparent'">View docs →</a>
       </div>
@@ -3045,8 +3034,8 @@ img.ico{display:block;flex:0 0 auto}
       </div>
       <!-- Text block -->
       <div style="max-width:380px">
-        <h1 style="font-size:44px;font-weight:400;font-family:var(--font-heading);color:var(--text);letter-spacing:-1.2px;line-height:110%;margin:0 0 10px;white-space:nowrap">No Log Data Yet.</h1>
-        <p style="font-size:14px;color:var(--muted);font-family:var(--font-body);line-height:160%;margin:0 0 16px">Centralized log collection and monitoring for your Crusoe Cloud resources. Install the telemetry agent to start streaming.</p>
+        <h1 style="font-size:44px;font-weight:400;font-family:var(--font-heading);color:var(--text);letter-spacing:-1.2px;line-height:110%;margin:0 0 10px;white-space:nowrap">No Log Data Yet</h1>
+        <p style="font-size:14px;color:var(--muted);font-family:var(--font-body);line-height:160%;margin:0 0 16px">Centralized log collection and monitoring for your Crusoe Cloud resources. Install Observability agent to start streaming.</p>
         <a href="https://docs.crusoecloud.com/command-center/logs/" target="_blank" style="display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:500;font-family:var(--font-body);color:var(--muted);text-decoration:none;border:1px solid var(--border);border-radius:8px;padding:7px 13px;background:transparent;transition:color .15s ease,border-color .15s ease,background .15s ease" onmouseenter="this.style.color='var(--text)';this.style.borderColor='var(--gray-400)';this.style.background='var(--gray-50)'" onmouseleave="this.style.color='var(--muted)';this.style.borderColor='var(--border)';this.style.background='transparent'">View docs →</a>
       </div>
     </div>
@@ -3060,13 +3049,13 @@ img.ico{display:block;flex:0 0 auto}
 
           <div class="pop-card-top" style="margin-bottom:10px">
             <div class="pop-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="13" fill="#111"/><text x="14" y="18.5" text-anchor="middle" fill="white" font-size="13" font-weight="700" font-family="sans-serif">1</text></svg></div>
-            <div class="pop-card-info"><div class="pop-card-name">Install the telemetry agent</div><div class="pop-card-price">Log collection &amp; metrics</div></div>
+            <div class="pop-card-info"><div class="pop-card-name">Install Observability agent</div><div class="pop-card-price">Log collection &amp; metrics</div></div>
           <span class="np-hover-hint">Details<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
           </div>
           <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Step 1 · Agent</span></div>
           
         <div style="display:flex;gap:10px"><a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/command-center/logs/" target="_blank" style="flex:1;justify-content:center;text-decoration:none">View agent docs →</a></div>
-        <div class="med-res-expand"><div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">Deploy the Crusoe telemetry agent on your instances to enable log collection, metrics, and alerting.</div></div>
+        <div class="med-res-expand"><div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">Deploy the Crusoe Observability agent on your instances to enable log collection, metrics, and alerting.</div></div>
         </div>
         <div class="pop-card med-res-card" style="transition-delay:.14s">
 
@@ -3122,7 +3111,7 @@ img.ico{display:block;flex:0 0 auto}
       <div class="illus">Illustration</div>
       <div class="etxt">
         <div class="ecat">Compute</div>
-        <div class="etitle">No Compute Yet.</div>
+        <div class="etitle">No Compute Yet</div>
         <div class="edesc">Crusoe Cloud provides a high-performance, sustainable cloud platform with the latest hardware. Monitor, diagnose, and optimize your AI infrastructure from the Command Center once you create your first instance.</div>
       </div>
     </div>
@@ -3235,7 +3224,7 @@ img.ico{display:block;flex:0 0 auto}
       </div>
       <!-- Text block -->
       <div style="position:relative;z-index:1;max-width:420px">
-        <h1 style="font-size:44px;font-weight:400;font-family:var(--font-heading);color:var(--text);letter-spacing:-1.2px;line-height:110%;margin:0 0 10px;white-space:nowrap">No Node Pools Yet.</h1>
+        <h1 style="font-size:44px;font-weight:400;font-family:var(--font-heading);color:var(--text);letter-spacing:-1.2px;line-height:110%;margin:0 0 10px;white-space:nowrap">No Node Pools Yet</h1>
         <p style="font-size:14px;color:var(--muted);font-family:var(--font-body);line-height:160%;margin:0 0 16px">Add a pool to assign GPU or CPU nodes to this cluster. Nodes join the control plane automatically within minutes.</p>
         <div style="display:flex;align-items:center;gap:10px">
           <button class="btn btn-p"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.99967 3.33337V12.6667M3.33301 8.00004H12.6663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Create Node Pool</button>
@@ -3298,7 +3287,7 @@ img.ico{display:block;flex:0 0 auto}
           <circle id="met-dot-2" r="4.82" fill="black" cx="-20" cy="-20"/>
         </svg>
       </div>
-      <div class="metrics-empty-title">No Metrics Data Yet.</div>
+      <div class="metrics-empty-title">No Metrics Data Yet</div>
       <div class="metrics-empty-desc">Add a node pool with GPU or CPU nodes to start collecting metrics. Utilization, VRAM, network, and disk I/O are reported automatically once nodes are running.</div>
     </div>
   </div>
@@ -3315,7 +3304,7 @@ img.ico{display:block;flex:0 0 auto}
           <line x1="24" y1="15" x2="38" y2="29" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
         </svg>
       </div>
-      <div class="sec-empty-title">No Topology Data Yet.</div>
+      <div class="sec-empty-title">No Topology Data Yet</div>
       <div class="sec-empty-copy">Add a node pool to see cluster topology — node groups, availability zones, and GPU interconnect fabric.</div>
     </div>
   </div>
@@ -3331,7 +3320,7 @@ img.ico{display:block;flex:0 0 auto}
           <line x1="14" y1="28" x2="24" y2="28" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" opacity=".2"/>
         </svg>
       </div>
-      <div class="sec-empty-title">No Logs Yet.</div>
+      <div class="sec-empty-title">No Logs Yet</div>
       <div class="sec-empty-copy">Control plane logs will appear here once the cluster is running and has active workloads.</div>
     </div>
   </div>
@@ -3420,7 +3409,7 @@ img.ico{display:block;flex:0 0 auto}
       </div>
       <!-- Text block -->
       <div style="position:relative;z-index:1;max-width:380px">
-        <h1 style="font-size:44px;font-weight:400;font-family:var(--font-heading);color:var(--text);letter-spacing:-1.2px;line-height:110%;margin:0 0 10px;white-space:nowrap">No SSH Keys Yet.</h1>
+        <h1 style="font-size:44px;font-weight:400;font-family:var(--font-heading);color:var(--text);letter-spacing:-1.2px;line-height:110%;margin:0 0 10px;white-space:nowrap">No SSH Keys Yet</h1>
         <p style="font-size:14px;color:var(--muted);font-family:var(--font-body);line-height:160%;margin:0 0 16px">Upload your public SSH key so it's available when creating VMs. It must be selected at creation to grant access.</p>
         <a href="https://docs.crusoecloud.com/compute/virtual-machines/managing-ssh-keys/" target="_blank" style="display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:500;font-family:var(--font-body);color:var(--muted);text-decoration:none;border:1px solid var(--border);border-radius:8px;padding:7px 13px;background:transparent;transition:color .15s ease,border-color .15s ease,background .15s ease" onmouseenter="this.style.color='var(--text)';this.style.borderColor='var(--gray-400)';this.style.background='var(--gray-50)'" onmouseleave="this.style.color='var(--muted)';this.style.borderColor='var(--border)';this.style.background='transparent'">View docs →</a>
       </div>
@@ -4902,7 +4891,7 @@ function initLogsMagic() {
     const typed = document.getElementById('logs-typed');
     const cursor = document.getElementById('logs-cursor');
     if (typed && cursor) {
-      const fullText = 'No Logs Yet.';
+      const fullText = 'No Logs Yet';
       typed.textContent = '';
       cursor.style.display = 'inline';
       cursor.style.animation = 'cursor-blink .9s step-start infinite';
