@@ -4280,6 +4280,11 @@ function setInstancesTab(tab) {
   if (edge) edge.classList.remove('show-notes');
   // Reset edge sub-toggle to the first state whenever the tab is opened
   if (tab === 'edge' && typeof toggleEdgeState === 'function') toggleEdgeState(0);
+  // Animate the Redesign hero cube (marching dashed lines, like the Current hero)
+  if (tab === 'redesign') {
+    const rc = document.getElementById('redesign-cube');
+    if (rc) rc.querySelectorAll('path[stroke-dasharray="3 3"]').forEach(p => p.classList.add('dash-march'));
+  }
 }
 
 function setDisksTab(tab) {
@@ -4298,6 +4303,11 @@ function setDisksTab(tab) {
   if (rdz) rdz.classList.remove('show-notes');
   // Re-run the typing/draw animation when returning to the Current tab
   if (tab === 'current' && typeof initDiskSpicyMagic === 'function') setTimeout(initDiskSpicyMagic, 60);
+  // Animate the Redesign hero (marching dashed lines, like the Current hero)
+  if (tab === 'redesign') {
+    const rc = document.getElementById('disk-rdz-svg');
+    if (rc) rc.querySelectorAll('path[stroke-dasharray="3 3"]').forEach(p => p.classList.add('dash-march'));
+  }
 }
 
 function toggleDisksNotes(btn) {
