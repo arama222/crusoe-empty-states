@@ -1081,6 +1081,26 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
         </div>
       </div>
     </div>
+    <div class="pop-section" style="margin-top:16px;padding-bottom:16px">
+      <div class="pop-title">Launch from your available capacity</div>
+      <div class="pop-grid">
+        <div class="pop-card act-card" style="display:flex;flex-direction:column;gap:0;min-width:0">
+          <div class="pop-card-top" style="margin-bottom:6px;align-items:center"><div class="pop-card-info"><div class="pop-card-name">H100 80GB SXM</div><div class="pop-card-price">8 of 8 available</div></div></div>
+          <div class="pop-card-tags" style="margin-bottom:8px"><span class="pop-tag-sub">Training · Multi-node</span></div>
+          <div class="act-swap"><div class="pop-card-desc">Top-tier training and multi-node jobs — the fastest GPU interconnect for LLM pretraining, RLHF, and large fine-tunes.</div><div class="act-reveal"><div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="goToPaymentMethods(this)">Create instance</button><button class="btn btn-o btn-sm cli-icon" onclick="showCliPopover(this,'crusoe compute vms create --name my-vm --type h100-80gb-sxm-ib.8x --location us-southcentral1-a --image ubuntu22.04:latest --keyfile ~/.ssh/id_ed25519.pub')" aria-label="View code" title="View the command"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg> View code</button></div></div></div>
+        </div>
+        <div class="pop-card act-card" style="display:flex;flex-direction:column;gap:0;min-width:0">
+          <div class="pop-card-top" style="margin-bottom:6px;align-items:center"><div class="pop-card-info"><div class="pop-card-name">H200 141GB</div><div class="pop-card-price">8 of 8 available</div></div></div>
+          <div class="pop-card-tags" style="margin-bottom:8px"><span class="pop-tag-sub">Inference · Large models</span></div>
+          <div class="act-swap"><div class="pop-card-desc">Most memory per GPU — run 70B+ models and long-context inference without splitting across nodes.</div><div class="act-reveal"><div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="goToPaymentMethods(this)">Create instance</button><button class="btn btn-o btn-sm cli-icon" onclick="showCliPopover(this,'crusoe compute vms create --name my-vm --type h200-141gb-sxm-ib.8x --location us-southcentral1-a --image ubuntu22.04:latest --keyfile ~/.ssh/id_ed25519.pub')" aria-label="View code" title="View the command"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg> View code</button></div></div></div>
+        </div>
+        <div class="pop-card act-card" style="display:flex;flex-direction:column;gap:0;min-width:0">
+          <div class="pop-card-top" style="margin-bottom:6px;align-items:center"><div class="pop-card-info"><div class="pop-card-name">L40S 48GB</div><div class="pop-card-price">16 of 16 available</div></div></div>
+          <div class="pop-card-tags" style="margin-bottom:8px"><span class="pop-tag-sub">Inference · Fine-tuning</span></div>
+          <div class="act-swap"><div class="pop-card-desc">Cost-efficient inference and light fine-tuning — great for serving smaller models and multi-modal work.</div><div class="act-reveal"><div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="goToPaymentMethods(this)">Create instance</button><button class="btn btn-o btn-sm cli-icon" onclick="showCliPopover(this,'crusoe compute vms create --name my-vm --type l40s-48gb.1x --location us-southcentral1-a --image ubuntu22.04:latest --keyfile ~/.ssh/id_ed25519.pub')" aria-label="View code" title="View the command"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg> View code</button></div></div></div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- Billing popup: 2-step "Finish account setup" — opens when a no-payment-method account clicks Create -->
@@ -1130,7 +1150,7 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
   <div class="rev-legend">
     <div class="rev-legend-row"><span class="n">1</span><span><b>Capacity scenarios</b> — the real ways access varies: on-demand, reservation, a mix, and a brand-new account with no payment method.</span></div>
     <div class="rev-legend-row"><span class="n">2</span><span><b>Lead with the GPU</b> — name first, availability second, the use case smaller underneath (matches the live layout).</span></div>
-    <div class="rev-legend-row"><span class="n">3</span><span><b>Availability shown for every GPU</b> — e.g. "8 of 8 available".</span></div>
+    <div class="rev-legend-row"><span class="n">3</span><span><b>Availability shown for every GPU you have quota for</b> — e.g. "8 of 8 available". Out-of-capacity (sold-out) SKUs are hidden since they aren't actionable.</span></div>
     <div class="rev-legend-row"><span class="n">4</span><span><b>Reservation pill on reserved capacity</b> — uses the existing pill; on-demand shows no pill.</span></div>
     <div class="rev-legend-row"><span class="n">5</span><span><b>View code</b> — opens the exact <code>crusoe compute vms create</code> command to copy.</span></div>
   </div>
@@ -1317,7 +1337,7 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
       <div class="browse-all-wrap"><a href="javascript:void(0)" class="browse-all">Create instance from blank →</a></div>
     <div class="rev-legend">
       <div class="rev-legend-row"><span class="n">1</span><span><b>Lead with the GPU</b> — name first, availability second, the use case smaller underneath (matches the Current layout).</span></div>
-      <div class="rev-legend-row"><span class="n">2</span><span><b>Availability shown for every GPU</b> — e.g. "6 of 32 available".</span></div>
+      <div class="rev-legend-row"><span class="n">2</span><span><b>Availability shown for every GPU you have quota for</b> — e.g. "6 of 32 available". Out-of-capacity SKUs are hidden.</span></div>
       <div class="rev-legend-row"><span class="n">3</span><span><b>Reservation pill on reserved capacity</b> — uses the existing pill; on-demand shows no pill.</span></div>
       <div class="rev-legend-row"><span class="n">4</span><span><b>View code</b> — opens the exact <code>crusoe compute vms create</code> command to copy.</span></div>
       <div class="rev-legend-row"><span class="n">5</span><span><b>"View docs felt misplaced"</b> — demoted to a quiet text link so the hero keeps one primary action.</span></div>
@@ -4037,7 +4057,7 @@ function toggleInstanceState(state) {
 })();
 const EDGE_CAPTIONS = [
   'POC default — the account has quota but hasn\'t hit any limits, so nothing quota-related is shown. Every card simply reads "On demand", billed per second.',
-  'Reservation — committed capacity. The badge reads "Reservation" alongside the usage stats (e.g. 6 of 32 free). No quota numbers, since reservations aren\'t drawn from quota.',
+  'Reservation — committed capacity. The badge reads "Reservation" alongside the usage stats (e.g. 6 of 32 available). No quota numbers, since reservations aren\'t drawn from quota.',
   'Enterprise mix — H100 runs on a reservation, the rest is on-demand. Reserved cards show "Reservation" + usage; on-demand cards show "On demand" with no quota numbers.',
   'Brand-new account with no payment method — the page looks exactly like the regular empty state. Clicking Create Instance routes the user to add a payment method before they can launch.'
 ];
