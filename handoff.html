@@ -1208,7 +1208,7 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
           </div>
         </div>
 
-        <button class="btn btn-p" style="width:100%;justify-content:center;margin-top:22px;padding:13px" onclick="createInstanceFromRes('h100',this)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/></svg> Create Instance</button>
+        <button class="btn btn-p" style="width:100%;justify-content:center;margin-top:22px;padding:13px" onclick="createInstanceFromRes(document.getElementById('ci-type').value,this)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/></svg> Create Instance</button>
       </div>
 
       <aside class="ci-summary">
@@ -1438,7 +1438,7 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
       <h1 style="font-size:44px;font-weight:400;font-family:var(--font-heading);color:var(--text);letter-spacing:-1.2px;line-height:110%;margin:0 0 10px;white-space:nowrap">No Instances Yet</h1>
       <p style="font-size:14px;color:var(--muted);font-family:var(--font-body);line-height:160%;margin:0 0 18px">Spin up a GPU or CPU VM in under a minute — SSH in directly and start building.</p>
       <div style="display:flex;align-items:center;gap:18px">
-        <button class="btn btn-p" onclick="createInstanceFromRes('h100',this)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.99967 3.33337V12.6667M3.33301 8.00004H12.6663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Create Instance</button>
+        <button class="btn btn-p" onclick="openCreateInstance('h100')"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.99967 3.33337V12.6667M3.33301 8.00004H12.6663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Create Instance</button>
         <a href="https://docs.crusoecloud.com/compute/virtual-machines/overview/" target="_blank" style="font-size:13px;color:var(--muted);text-decoration:underline;text-underline-offset:3px;font-family:var(--font-body);transition:color .15s ease" onmouseenter="this.style.color='var(--text)'" onmouseleave="this.style.color='var(--muted)'">View docs →</a>
         <span class="rev-note">1</span>
       </div>
@@ -1452,17 +1452,17 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
         <div class="pop-card act-card" style="display:flex;flex-direction:column;gap:0;min-width:0">
           <div class="pop-card-top" style="margin-bottom:6px;align-items:center"><div class="pop-card-info"><div class="pop-card-name">H100 80GB SXM</div><div class="pop-card-price">6 of 32 available</div></div><span class="src-pill src-reserved">Reservation</span></div>
           <div class="pop-card-tags" style="margin-bottom:8px"><span class="pop-tag-sub">Training · Multi-node</span></div>
-          <div class="act-swap"><div class="pop-card-desc">Top-tier training and multi-node jobs — the fastest GPU interconnect for LLM pretraining, RLHF, and large fine-tunes.</div><div class="act-reveal"><div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createInstanceFromRes('h100',this)">Create instance</button><button class="btn btn-o btn-sm cli-icon" onclick="showCliPopover(this,'crusoe compute vms create --name my-vm --type h100-80gb-sxm-ib.8x --location us-southcentral1-a --image ubuntu22.04:latest --keyfile ~/.ssh/id_ed25519.pub')" aria-label="View code" title="View the command"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg> View code</button></div></div></div>
+          <div class="act-swap"><div class="pop-card-desc">Top-tier training and multi-node jobs — the fastest GPU interconnect for LLM pretraining, RLHF, and large fine-tunes.</div><div class="act-reveal"><div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="openCreateInstance('h100')">Create instance</button><button class="btn btn-o btn-sm cli-icon" onclick="showCliPopover(this,'crusoe compute vms create --name my-vm --type h100-80gb-sxm-ib.8x --location us-southcentral1-a --image ubuntu22.04:latest --keyfile ~/.ssh/id_ed25519.pub')" aria-label="View code" title="View the command"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg> View code</button></div></div></div>
         </div>
         <div class="pop-card act-card" style="display:flex;flex-direction:column;gap:0;min-width:0">
           <div class="pop-card-top" style="margin-bottom:6px;align-items:center"><div class="pop-card-info"><div class="pop-card-name">H200 141GB</div><div class="pop-card-price">8 of 8 available</div></div></div>
           <div class="pop-card-tags" style="margin-bottom:8px"><span class="pop-tag-sub">Inference · Large models</span></div>
-          <div class="act-swap"><div class="pop-card-desc">Most memory per GPU — run 70B+ models and long-context inference without splitting across nodes.</div><div class="act-reveal"><div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createInstanceFromRes('h200',this)">Create instance</button><button class="btn btn-o btn-sm cli-icon" onclick="showCliPopover(this,'crusoe compute vms create --name my-vm --type h200-141gb-sxm-ib.8x --location us-southcentral1-a --image ubuntu22.04:latest --keyfile ~/.ssh/id_ed25519.pub')" aria-label="View code" title="View the command"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg> View code</button></div></div></div>
+          <div class="act-swap"><div class="pop-card-desc">Most memory per GPU — run 70B+ models and long-context inference without splitting across nodes.</div><div class="act-reveal"><div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="openCreateInstance('h200')">Create instance</button><button class="btn btn-o btn-sm cli-icon" onclick="showCliPopover(this,'crusoe compute vms create --name my-vm --type h200-141gb-sxm-ib.8x --location us-southcentral1-a --image ubuntu22.04:latest --keyfile ~/.ssh/id_ed25519.pub')" aria-label="View code" title="View the command"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg> View code</button></div></div></div>
         </div>
         <div class="pop-card act-card" style="display:flex;flex-direction:column;gap:0;min-width:0">
           <div class="pop-card-top" style="margin-bottom:6px;align-items:center"><div class="pop-card-info"><div class="pop-card-name">L40S 48GB</div><div class="pop-card-price">16 of 16 available</div></div></div>
           <div class="pop-card-tags" style="margin-bottom:8px"><span class="pop-tag-sub">Inference · Fine-tuning</span></div>
-          <div class="act-swap"><div class="pop-card-desc">Cost-efficient inference and light fine-tuning — great for serving smaller models and multi-modal work.</div><div class="act-reveal"><div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createInstanceFromRes('l40s',this)">Create instance</button><button class="btn btn-o btn-sm cli-icon" onclick="showCliPopover(this,'crusoe compute vms create --name my-vm --type l40s-48gb.1x --location us-southcentral1-a --image ubuntu22.04:latest --keyfile ~/.ssh/id_ed25519.pub')" aria-label="View code" title="View the command"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg> View code</button></div></div></div>
+          <div class="act-swap"><div class="pop-card-desc">Cost-efficient inference and light fine-tuning — great for serving smaller models and multi-modal work.</div><div class="act-reveal"><div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="openCreateInstance('l40s')">Create instance</button><button class="btn btn-o btn-sm cli-icon" onclick="showCliPopover(this,'crusoe compute vms create --name my-vm --type l40s-48gb.1x --location us-southcentral1-a --image ubuntu22.04:latest --keyfile ~/.ssh/id_ed25519.pub')" aria-label="View code" title="View the command"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg> View code</button></div></div></div>
         </div>
       </div>
       <div class="browse-all-wrap"><a href="javascript:void(0)" class="browse-all" onclick="setInstancesTab('edge');toggleEdgeState(4)">Create instance from blank →</a></div>
@@ -4253,7 +4253,23 @@ function pickGpuCount(btn){
   const count=parseInt(btn.dataset.count||'1',10);
   const g=document.getElementById('sum-gpus'); if(g) g.textContent=count;
   const sel=document.getElementById('ci-type'); const sku=sel?sel.value:'a100';
-  const p=document.getElementById('sum-price'); if(p) p.textContent='$'+((_GPU_PER[sku]||3.90)*count).toFixed(2)+'/hr';
+  const p=document.getElementById('sum-price'); if(p) p.textContent=getCreatePrice(sku,count);
+}
+function getCreatePrice(sku, count){
+  if (sku === 'h100') return 'Included · Reservation';
+  const per = ({a100:3.90,h100:4.49,h200:6.50,l40s:1.45})[sku] || 3.90;
+  return '$' + (per*count).toFixed(2) + '/hr';
+}
+function currentGpuCount(){ const a=document.querySelector('.ci-seg button.active'); return a?parseInt(a.dataset.count||'1',10):1; }
+// Open the one-click Create page pre-filled from a card's SKU (reservation or on-demand)
+function openCreateInstance(sku){
+  setInstancesTab('edge');
+  toggleEdgeState(4);
+  const sel=document.getElementById('ci-type');
+  if (sel && ['a100','h100','h200','l40s'].includes(sku)) sel.value=sku;
+  const one=document.querySelector('.ci-seg button[data-count="1"]'); if (one) pickGpuCount(one);
+  if (typeof updateCreateFlow==='function') updateCreateFlow();
+  const main=document.querySelector('.main'); if (main) main.scrollTop=0;
 }
 function updateCreateFlow() {
   const sel = document.getElementById('ci-type'); if (!sel) return;
@@ -4265,7 +4281,7 @@ function updateCreateFlow() {
   };
   const d = data[sel.value] || data.a100;
   const t = document.getElementById('sum-type');  if (t) t.textContent = d.type;
-  const p = document.getElementById('sum-price'); if (p) p.textContent = d.price;
+  const p = document.getElementById('sum-price'); if (p) p.textContent = getCreatePrice(sel.value, currentGpuCount());
 }
 // State 3: a no-billing account sees the regular page; Create routes to payment methods
 function goToPaymentMethods(btn) {
