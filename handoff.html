@@ -606,6 +606,10 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
 .bm-radio input{accent-color:#16a34a}
 .bm-legal{font-size:11px;color:var(--muted);line-height:150%;font-family:var(--font-body);margin:4px 0 16px}
 .bm-foot{display:flex;justify-content:flex-end;gap:8px;margin-top:4px}
+/* Create-instance flow (edge case) */
+.cf-card{border:1px solid var(--border);border-radius:12px;background:var(--white);padding:20px 22px;max-width:640px;margin:0 auto}
+.cf-callout{display:flex;align-items:center;gap:10px;background:var(--gray-50);border:1px solid var(--border);border-radius:8px;padding:9px 12px;font-size:12.5px;color:var(--text2);font-family:var(--font-body);margin-bottom:14px}
+.cf-callout b{color:var(--text);font-weight:600}
 .bm-close{position:absolute;top:12px;right:12px;background:none;border:none;cursor:pointer;color:var(--muted);display:flex;align-items:center;justify-content:center;padding:6px;border-radius:7px;transition:color .15s ease,background .15s ease}
 .bm-close:hover{color:var(--text);background:var(--gray-50)}
 /* "View CLI" icon button + command popover (overlay — no layout/scroll impact) */
@@ -950,6 +954,7 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
       <button class="state-toggle-btn" onclick="toggleEdgeState(1)">Reservation</button>
       <button class="state-toggle-btn" onclick="toggleEdgeState(2)">Reservation + on-demand</button>
       <button class="state-toggle-btn" onclick="toggleEdgeState(3)">No payment method</button>
+      <button class="state-toggle-btn" onclick="toggleEdgeState(4)">Create flow</button>
     </div>
   </div>
 
@@ -1002,7 +1007,7 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
           <div class="act-swap"><div class="pop-card-desc">Cost-efficient inference and light fine-tuning — great for serving smaller models and multi-modal work.</div><div class="act-reveal"><div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createInstanceFromRes('l40s',this)">Create instance</button><button class="btn btn-o btn-sm cli-icon" onclick="showCliPopover(this,'crusoe compute vms create --name my-vm --type l40s-48gb.1x --location us-southcentral1-a --image ubuntu22.04:latest --keyfile ~/.ssh/id_ed25519.pub')" aria-label="View code" title="View the command"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg> View code</button></div></div></div>
         </div>
       </div>
-      <div class="browse-all-wrap"><a href="javascript:void(0)" class="browse-all">Create instance from blank →</a></div>
+      <div class="browse-all-wrap"><a href="javascript:void(0)" class="browse-all" onclick="setInstancesTab('edge');toggleEdgeState(4)">Create instance from blank →</a></div>
     </div>
   </div>
 
@@ -1027,7 +1032,7 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
           <div class="act-swap"><div class="pop-card-desc">Cost-efficient inference and light fine-tuning — great for serving smaller models and multi-modal work.</div><div class="act-reveal"><div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createInstanceFromRes('l40s',this)">Create instance</button><button class="btn btn-o btn-sm cli-icon" onclick="showCliPopover(this,'crusoe compute vms create --name my-vm --type l40s-48gb.1x --location us-southcentral1-a --image ubuntu22.04:latest --keyfile ~/.ssh/id_ed25519.pub')" aria-label="View code" title="View the command"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg> View code</button></div></div></div>
         </div>
       </div>
-      <div class="browse-all-wrap"><a href="javascript:void(0)" class="browse-all">Create instance from blank →</a></div>
+      <div class="browse-all-wrap"><a href="javascript:void(0)" class="browse-all" onclick="setInstancesTab('edge');toggleEdgeState(4)">Create instance from blank →</a></div>
     </div>
   </div>
 
@@ -1052,7 +1057,7 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
           <div class="act-swap"><div class="pop-card-desc">Most memory per GPU — run 70B+ models and long-context inference without splitting across nodes.</div><div class="act-reveal"><div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createInstanceFromRes('h200',this)">Create instance</button><button class="btn btn-o btn-sm cli-icon" onclick="showCliPopover(this,'crusoe compute vms create --name my-vm --type h200-141gb-sxm-ib.8x --location us-southcentral1-a --image ubuntu22.04:latest --keyfile ~/.ssh/id_ed25519.pub')" aria-label="View code" title="View the command"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg> View code</button></div></div></div>
         </div>
       </div>
-      <div class="browse-all-wrap"><a href="javascript:void(0)" class="browse-all">Create instance from blank →</a></div>
+      <div class="browse-all-wrap"><a href="javascript:void(0)" class="browse-all" onclick="setInstancesTab('edge');toggleEdgeState(4)">Create instance from blank →</a></div>
     </div>
   </div>
 
@@ -1102,6 +1107,28 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
           <div class="pop-card-tags" style="margin-bottom:8px"><span class="pop-tag-sub">Inference · Fine-tuning</span></div>
           <div class="act-swap"><div class="pop-card-desc">Cost-efficient inference and light fine-tuning — great for serving smaller models and multi-modal work.</div><div class="act-reveal"><div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="goToPaymentMethods(this)">Create instance</button><button class="btn btn-o btn-sm cli-icon" onclick="showCliPopover(this,'crusoe compute vms create --name my-vm --type l40s-48gb.1x --location us-southcentral1-a --image ubuntu22.04:latest --keyfile ~/.ssh/id_ed25519.pub')" aria-label="View code" title="View the command"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg> View code</button></div></div></div>
         </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ STATE 4 · Create instance flow (reservation details surfaced in the create step) ══ -->
+  <div id="edge-4" style="display:none">
+    <div class="pop-section" style="margin-top:16px;padding-bottom:16px">
+      <div class="pop-title">Create instance</div>
+      <div class="cf-card">
+        <div class="bm-row">
+          <div class="bm-field"><label class="bm-label">Instance type <span class="bm-req">*</span></label>
+            <select class="bm-input" id="cf-sku" onchange="updateCreateFlow()"><option value="h100">H100 80GB SXM</option><option value="h200">H200 141GB</option><option value="l40s">L40S 48GB</option></select></div>
+          <div class="bm-field"><label class="bm-label">Region <span class="bm-req">*</span></label>
+            <select class="bm-input"><option>us-southcentral1-a</option><option>us-northcentral1-a</option><option>us-east1-a</option></select></div>
+        </div>
+        <div class="cf-callout" id="cf-callout"><span class="src-pill src-reserved">Reservation</span><span id="cf-callout-text">Covered by your reservation — <b>6 of 32 available</b></span></div>
+        <div class="bm-field"><label class="bm-label">Name <span class="bm-req">*</span></label><input class="bm-input" placeholder="my-vm"></div>
+        <div class="bm-row">
+          <div class="bm-field"><label class="bm-label">Image <span class="bm-req">*</span></label><select class="bm-input"><option>ubuntu22.04:latest</option><option>ubuntu24.04:latest</option></select></div>
+          <div class="bm-field"><label class="bm-label">SSH key <span class="bm-req">*</span></label><select class="bm-input"><option>id_ed25519.pub</option><option>+ Add new key…</option></select></div>
+        </div>
+        <div class="bm-foot" style="margin-top:8px"><button class="btn btn-o btn-sm" onclick="toggleEdgeState(0)">Cancel</button><button class="btn btn-p btn-sm" onclick="createInstanceFromRes(document.getElementById('cf-sku').value,this)">Create instance</button></div>
       </div>
     </div>
   </div>
@@ -1337,7 +1364,7 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
           <div class="act-swap"><div class="pop-card-desc">Cost-efficient inference and light fine-tuning — great for serving smaller models and multi-modal work.</div><div class="act-reveal"><div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createInstanceFromRes('l40s',this)">Create instance</button><button class="btn btn-o btn-sm cli-icon" onclick="showCliPopover(this,'crusoe compute vms create --name my-vm --type l40s-48gb.1x --location us-southcentral1-a --image ubuntu22.04:latest --keyfile ~/.ssh/id_ed25519.pub')" aria-label="View code" title="View the command"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg> View code</button></div></div></div>
         </div>
       </div>
-      <div class="browse-all-wrap"><a href="javascript:void(0)" class="browse-all">Create instance from blank →</a></div>
+      <div class="browse-all-wrap"><a href="javascript:void(0)" class="browse-all" onclick="setInstancesTab('edge');toggleEdgeState(4)">Create instance from blank →</a></div>
     <div class="rev-legend">
       <div class="rev-legend-row"><span class="n">1</span><span><b>Lead with the GPU</b> — name first, availability second, the use case smaller underneath (matches the Current layout).</span></div>
       <div class="rev-legend-row"><span class="n">2</span><span><b>Availability shown for every GPU you have quota for</b> — e.g. "6 of 32 available". Out-of-capacity SKUs are hidden.</span></div>
@@ -4066,15 +4093,15 @@ const EDGE_CAPTIONS = [
 ];
 function toggleEdgeState(n) {
   try { localStorage.setItem('lastEdgeState', n); } catch (e) {}
-  [0,1,2,3].forEach(i => {
+  [0,1,2,3,4].forEach(i => {
     const el = document.getElementById('edge-' + i);
     if (el) el.style.display = i === n ? '' : 'none';
   });
   const btns = document.querySelectorAll('#instances-edge .state-toggle-btn');
   btns.forEach((b, i) => b.classList.toggle('active', i === n));
-  // Hide shared hero for state 3 "No payment method" (has its own regular-looking hero)
+  // Hide shared hero for state 3 "No payment method" and state 4 "Create flow" (each has its own layout)
   const sharedHero = document.getElementById('edge-shared-hero');
-  if (sharedHero) sharedHero.style.display = n === 3 ? 'none' : 'flex';
+  if (sharedHero) sharedHero.style.display = (n === 3 || n === 4) ? 'none' : 'flex';
   // Always close the billing popup when switching scenarios
   if (typeof closeBillingModal === 'function') closeBillingModal();
   // Restore the dismissible state-4 banner each time the scenario is opened
@@ -4082,8 +4109,24 @@ function toggleEdgeState(n) {
   if (b4) b4.style.display = 'flex';
   const cap = document.getElementById('edge-caption');
   if (cap) cap.textContent = EDGE_CAPTIONS[n] || '';
+  // Surface reservation/quota detail in the Create flow scenario
+  if (n === 4 && typeof updateCreateFlow === 'function') updateCreateFlow();
   // March the dotted lines on whichever hero cube is showing
-  animateEdgeCube(n === 3 ? 'edge-cube-3' : 'edge-cube');
+  if (n < 4) animateEdgeCube(n === 3 ? 'edge-cube-3' : 'edge-cube');
+}
+function updateCreateFlow() {
+  const sku = document.getElementById('cf-sku'); if (!sku) return;
+  const co = document.getElementById('cf-callout'); if (!co) return;
+  const pill = co.querySelector('.src-pill');
+  const txt = document.getElementById('cf-callout-text');
+  const data = {
+    h100: { res: true,  text: 'Covered by your reservation — <b>6 of 32 available</b>' },
+    h200: { res: false, text: 'Drawn from your quota — <b>8 of 8 available</b>' },
+    l40s: { res: false, text: 'Drawn from your quota — <b>16 of 16 available</b>' }
+  };
+  const d = data[sku.value] || data.h100;
+  if (pill) pill.style.display = d.res ? '' : 'none';
+  if (txt) txt.innerHTML = d.text;
 }
 // State 3: a no-billing account sees the regular page; Create routes to payment methods
 function goToPaymentMethods(btn) {
