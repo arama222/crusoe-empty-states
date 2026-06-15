@@ -658,6 +658,9 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
 .sum-row .k{color:var(--muted)}
 .sum-row b{font-weight:600;color:var(--text)}
 .sum-price{color:var(--text2);font-weight:600;white-space:nowrap}
+.sum-res{position:relative;cursor:default}
+.sum-res-tip{display:none;position:absolute;bottom:calc(100% + 8px);right:0;width:236px;background:#1d1f24;color:#fff;font-size:11px;font-weight:500;line-height:150%;padding:9px 11px;border-radius:8px;box-shadow:0 8px 22px rgba(0,0,0,.35);z-index:60;white-space:normal;text-transform:none;letter-spacing:0}
+.sum-res:hover .sum-res-tip{display:block}
 /* Create Instance popup */
 .cm-overlay{position:fixed;inset:0;z-index:300;background:rgba(0,0,0,.45);display:flex;align-items:flex-start;justify-content:center;padding:32px 24px;overflow-y:auto}
 .cm-card{position:relative;width:1040px;max-width:96vw;margin:auto;background:var(--white);border:1px solid var(--border);border-radius:14px;box-shadow:0 20px 60px rgba(0,0,0,.42);padding:24px 28px}
@@ -2766,7 +2769,7 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
       <aside class="ci-summary">
         <div class="sum-title">Summary</div>
         <div class="sum-h">Compute</div>
-        <div class="sum-row"><span><span class="k">Type:</span> <b id="sum-type">NVIDIA A100 80GB SXM IB</b></span></div>
+        <div class="sum-row"><span><span class="k">Type:</span> <b id="sum-type">NVIDIA A100 80GB SXM IB</b> <span id="sum-res-pill" class="src-pill src-reserved sum-res" style="display:none;margin-left:2px">Reservation<span class="sum-res-tip">This SKU is included in your reservation. You'll not incur any charges if the provisioned GPUs stay within the reserved limit. Otherwise, you'll be charged the on-demand rate.</span></span></span></div>
         <div class="sum-row"><span><span class="k">GPUs:</span> <b id="sum-gpus">1</b></span><span class="sum-price" id="sum-price">$3.90/hr</span></div>
         <div class="sum-row"><span><span class="k">Location:</span> <b>us-east1-a</b></span></div>
         <div class="sum-row"><span><span class="k">Image:</span> <b>ubuntu22.04</b></span></div>
@@ -4281,13 +4284,10 @@ function hideGpuTip(){ if(_gpuTip){ _gpuTip.classList.remove('show'); _gpuTip.st
 function requestQuota(){ const b=document.querySelector('#gpu-tip .gpu-tip-btn'); if(b){ b.textContent='Requested ✓'; setTimeout(hideGpuTip,900); } }
 function pickGpuCount(btn){
   document.querySelectorAll('.ci-seg button').forEach(b=>b.classList.toggle('active', b===btn));
-  const count=parseInt(btn.dataset.count||'1',10);
-  const g=document.getElementById('sum-gpus'); if(g) g.textContent=count;
-  const sel=document.getElementById('ci-type'); const sku=sel?sel.value:'a100';
-  const p=document.getElementById('sum-price'); if(p) p.textContent=getCreatePrice(sku,count);
+  const g=document.getElementById('sum-gpus'); if(g) g.textContent=parseInt(btn.dataset.count||'1',10);
+  updateCreateFlow();
 }
 function getCreatePrice(sku, count){
-  if (sku === 'h100') return 'Included · Reservation';
   const per = ({a100:3.90,h100:4.49,h200:6.50,l40s:1.45})[sku] || 3.90;
   return '$' + (per*count).toFixed(2) + '/hr';
 }
@@ -4315,7 +4315,12 @@ function updateCreateFlow() {
   };
   const d = data[sel.value] || data.a100;
   const t = document.getElementById('sum-type');  if (t) t.textContent = d.type;
-  const p = document.getElementById('sum-price'); if (p) p.textContent = getCreatePrice(sel.value, currentGpuCount());
+  const reserved = (sel.value === 'h100');
+  // Reserved → show the Reservation pill, hide the price (it's included).
+  // On-demand → hide the pill, show the hourly price.
+  const pill = document.getElementById('sum-res-pill'); if (pill) pill.style.display = reserved ? 'inline-flex' : 'none';
+  const p = document.getElementById('sum-price');
+  if (p) { if (reserved) { p.style.display = 'none'; } else { p.style.display = ''; p.textContent = getCreatePrice(sel.value, currentGpuCount()); } }
 }
 // State 3: a no-billing account sees the regular page; Create routes to payment methods
 function goToPaymentMethods(btn) {
