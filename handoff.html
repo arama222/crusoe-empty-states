@@ -4402,6 +4402,8 @@ function setInstancesTab(tab) {
   if (spicy) spicy.style.display = tab === 'current' ? '' : 'none';
   if (redesign) redesign.style.display = tab === 'redesign' ? '' : 'none';
   if (edge) edge.style.display = tab === 'edge' ? '' : 'none';
+  // Empty-state tabs never show the filled list view (usage belongs to the list only)
+  ['instances-filled','instances-medium','instances-mild'].forEach(id => { const el = document.getElementById(id); if (el) el.style.display = 'none'; });
   document.querySelectorAll('#inst-tabs .inst-tab').forEach(b => b.classList.toggle('active', b.dataset.tab === tab));
   const revToggle = document.getElementById('rev-toggle');
   if (revToggle) {
