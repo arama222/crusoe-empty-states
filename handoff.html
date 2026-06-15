@@ -4012,12 +4012,21 @@ function showView(viewId, sbKey) {
   document.querySelector('.main').scrollTop = 0;
   // trigger spicy animations on navigation
   if (viewId === 'instances') {
-    // Restore the last-used sub-tab (Current / Redesign / Edge cases) and edge scenario
-    const savedTab = (function(){ try { return localStorage.getItem('lastInstTab'); } catch(e){ return null; } })() || 'current';
-    const savedEdge = (function(){ try { return parseInt(localStorage.getItem('lastEdgeState') || '0', 10); } catch(e){ return 0; } })();
-    if (typeof setInstancesTab === 'function') setInstancesTab(savedTab);
-    if (savedTab === 'edge' && typeof toggleEdgeState === 'function') toggleEdgeState(isNaN(savedEdge) ? 0 : savedEdge);
-    setTimeout(initSpicyMagic, 60);
+    // If instances already exist (e.g., navigating back from a VM detail), show the list — never the empty state.
+    const tbody = document.getElementById('instances-tbl-body');
+    if (window._hasInstances || (tbody && tbody.children.length)) {
+      ['instances-spicy','instances-redesign','instances-edge','instances-medium','instances-mild'].forEach(id => { const el = document.getElementById(id); if (el) el.style.display = 'none'; });
+      const itabs = document.getElementById('inst-tabs'); if (itabs) itabs.style.display = 'none';
+      const rtg = document.getElementById('rev-toggle'); if (rtg) rtg.style.display = 'none';
+      const filled = document.getElementById('instances-filled'); if (filled) filled.style.display = '';
+    } else {
+      // Restore the last-used sub-tab (Current / Redesign / Edge cases) and edge scenario
+      const savedTab = (function(){ try { return localStorage.getItem('lastInstTab'); } catch(e){ return null; } })() || 'current';
+      const savedEdge = (function(){ try { return parseInt(localStorage.getItem('lastEdgeState') || '0', 10); } catch(e){ return 0; } })();
+      if (typeof setInstancesTab === 'function') setInstancesTab(savedTab);
+      if (savedTab === 'edge' && typeof toggleEdgeState === 'function') toggleEdgeState(isNaN(savedEdge) ? 0 : savedEdge);
+      setTimeout(initSpicyMagic, 60);
+    }
   } else if (viewId === 'instance-templates') {
     setTimeout(initTemplSpicyMagic, 60);
   } else if (viewId === 'instance-groups') {
@@ -4502,6 +4511,7 @@ const RES_CLI = {
 })();
 
 function createInstanceFromRes(gpuType, btn) {
+  window._hasInstances = true;
   const typeMap = { h100:'h100-sxm.8x', h200:'h200.8x', l40s:'l40s.4x' };
   const locMap  = { h100:'us-southcentral1-a', h200:'us-northcentral1-a', l40s:'us-east1-a' };
   const instType = typeMap[gpuType] || 'h100-sxm.8x';
