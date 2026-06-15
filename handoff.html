@@ -1224,89 +1224,6 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
     </div>
 </div><!-- /instances-edge -->
 
-  <!-- Create Instance popup — opens pre-filled when Create is clicked from a card -->
-  <div id="create-modal" class="cm-overlay" style="display:none" onclick="if(event.target===this)closeCreateModal()">
-    <div class="cm-card">
-      <button class="cm-close" onclick="closeCreateModal()" aria-label="Close"><svg width="15" height="15" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 3l8 8M11 3l-8 8"/></svg></button>
-
-    <div class="ci-head">
-      <div class="ci-head-l">
-        <div class="ci-title">Create Instance</div>
-      </div>
-      <button class="btn btn-o btn-sm">View project quotas and reservations</button>
-    </div>
-    <div class="ci-grid">
-      <div class="ci-form">
-        <div class="bm-field"><label class="bm-label">Instance Name <span class="bm-req">*</span></label>
-          <div class="bm-input-wrap"><input class="bm-input" value="orgname-projectname-instance1"><span class="bm-cvv-icon" style="pointer-events:auto;cursor:pointer"><svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M3 3l8 8M11 3l-8 8"/></svg></span></div></div>
-        <div class="ci-tabs"><button class="ci-tab active">NVIDIA</button><button class="ci-tab">AMD</button><button class="ci-tab">CPU Only</button></div>
-        <div class="bm-row">
-          <div class="bm-field" style="flex:2"><label class="bm-label">Instance Type <span class="bm-req">*</span></label>
-            <select class="bm-input" id="ci-type" onchange="updateCreateFlow()"><option value="a100">A100 80GB</option><option value="h100">H100 80GB SXM</option><option value="h200">H200 141GB</option><option value="l40s">L40S 48GB</option></select></div>
-          <div class="bm-field" style="flex:1.4"><label class="bm-label">GPU Count <span class="bm-req">*</span></label>
-            <div class="ci-seg"><button data-count="1" class="active" onclick="pickGpuCount(this)" onmouseenter="showGpuTip(this)" onmouseleave="scheduleHideGpuTip()">1x</button><button data-count="2" onclick="pickGpuCount(this)" onmouseenter="showGpuTip(this)" onmouseleave="scheduleHideGpuTip()">2x</button><button data-count="4" onclick="pickGpuCount(this)" onmouseenter="showGpuTip(this)" onmouseleave="scheduleHideGpuTip()">4x</button><button data-count="8" class="out" onmouseenter="showGpuTip(this)" onmouseleave="scheduleHideGpuTip()">8x</button></div></div>
-        </div>
-        <div class="bm-field"><label class="bm-label">Location <span class="bm-req">*</span></label>
-          <select class="bm-input"><option>us-east1-a</option><option>us-southcentral1-a</option><option>us-northcentral1-a</option></select></div>
-        <div class="bm-field"><label class="bm-label">Image <span class="bm-req">*</span></label>
-          <div style="display:flex;align-items:center;gap:14px"><select class="bm-input" style="flex:1"><option>ubuntu22.04</option><option>ubuntu24.04</option></select><label class="ci-toggle"><input type="checkbox"><span class="ci-toggle-track"></span><span class="ci-toggle-lbl">Show old images</span></label></div></div>
-
-        <div class="ci-sec-title">Access and Security</div>
-        <div class="bm-row">
-          <div class="bm-field" style="flex:1"><label class="bm-label">Name <span class="bm-req">*</span></label><input class="bm-input" value="my-default key"></div>
-          <div class="bm-field" style="flex:1.5"><label class="bm-label">Public SSH Key <span class="bm-req">*</span></label><textarea class="bm-input" rows="3" style="resize:none" placeholder="Must begin with 'ssh-rsa', 'ssh-ed25519', 'ecdsa-sha2-nistp256', 'ecdsa-sha2-nistp384' or 'ecdsa-sha2-nistp521'"></textarea></div>
-        </div>
-
-        <div class="ci-acc">
-          <div class="ci-acc-head"><span class="ci-acc-title">Storage</span><span class="ci-acc-add">+</span></div>
-          <div class="ci-kv"><div><div class="ci-kv-label">Boot Disk</div><div class="ci-kv-val">1 TiB</div></div></div>
-        </div>
-        <div class="ci-acc">
-          <div class="ci-acc-head"><span class="ci-acc-title">Networking</span><span class="ci-acc-add">+</span></div>
-          <div class="ci-kv">
-            <div><div class="ci-kv-label">VPC Network</div><div class="ci-kv-val">default-vpc-network</div></div>
-            <div><div class="ci-kv-label">VPC Subnet</div><div class="ci-kv-val">default-subnet</div></div>
-            <div><div class="ci-kv-label">Public IP Address Type</div><div class="ci-kv-val">Dynamic</div></div>
-            <div><div class="ci-kv-label">IB Network</div><div class="ci-kv-val">us-east1…Network 0</div></div>
-            <div><div class="ci-kv-label">IB Partition</div><div class="ci-kv-val">partition1-i…-east1-a</div></div>
-          </div>
-        </div>
-        <div class="ci-acc">
-          <div class="ci-acc-head"><span class="ci-acc-title">Additional Options</span><span class="ci-acc-add">+</span></div>
-          <div class="ci-kv">
-            <div><div class="ci-kv-label">Observability</div><div class="ci-kv-val">Enabled</div></div>
-            <div><div class="ci-kv-label">Lifecycle scripts</div><div class="ci-kv-val">-</div></div>
-          </div>
-        </div>
-
-        <button class="btn btn-p" style="width:100%;justify-content:center;margin-top:22px;padding:13px" onclick="finishCreateInstance(this)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/></svg> Create Instance</button>
-      </div>
-
-      <aside class="ci-summary">
-        <div class="sum-title">Summary</div>
-        <div class="sum-h">Compute</div>
-        <div class="sum-row"><span><span class="k">Type:</span> <b id="sum-type">NVIDIA A100 80GB SXM IB</b></span></div>
-        <div class="sum-row"><span><span class="k">GPUs:</span> <b id="sum-gpus">1</b></span><span class="sum-price" id="sum-price">$3.90/hr</span></div>
-        <div class="sum-row"><span><span class="k">Location:</span> <b>us-east1-a</b></span></div>
-        <div class="sum-row"><span><span class="k">Image:</span> <b>ubuntu22.04</b></span></div>
-        <div class="sum-h">Access and Security</div>
-        <div class="sum-row"><span><span class="k">SSH Key:</span> <b>my-default-key</b></span></div>
-        <div class="sum-h">Storage</div>
-        <div class="sum-row"><span><span class="k">Boot Disk:</span> <b>128 GiB</b></span></div>
-        <div class="sum-h">Networking</div>
-        <div class="sum-row"><span><span class="k">VPC Network:</span> <b>default-vpc-network</b></span></div>
-        <div class="sum-row"><span><span class="k">VPC Subnet:</span> <b>default-subnet</b></span></div>
-        <div class="sum-row"><span><span class="k">Public IP address:</span> <b>Dynamic</b></span></div>
-        <div class="sum-row"><span><span class="k">IB Network:</span> <b>us-east1-…-Network 0</b></span></div>
-        <div class="sum-row"><span><span class="k">IB Partition:</span> <b>partition1-…-east1-a</b></span></div>
-        <div class="sum-h">Additional Options</div>
-        <div class="sum-row"><span><span class="k">Observability:</span> <b>Enabled</b></span></div>
-      </aside>
-    </div>
-      </div>
-  </div>
-
-
 <!-- ── MILD (Delightful) ── -->
 <div id="instances-mild" style="display:none" style="display:none">
   <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:64px 40px 56px;text-align:center;position:relative;">
@@ -2787,6 +2704,88 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
 </div>
 
 <!-- ─── VIEW: VM Detail ─── -->
+<!-- ── VIEW: Create Instance (full page) ── -->
+<div class="view" id="view-create-instance">
+  <div class="ca">
+
+<div class="ci-head">
+      <div class="ci-head-l">
+        <button class="ci-back" onclick="navigate('instances')" aria-label="Back"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></button>
+        <div class="ci-title">Create Instance</div>
+      </div>
+      <button class="btn btn-o btn-sm">View project quotas and reservations</button>
+    </div>
+    <div class="ci-grid">
+      <div class="ci-form">
+        <div class="bm-field"><label class="bm-label">Instance Name <span class="bm-req">*</span></label>
+          <div class="bm-input-wrap"><input class="bm-input" value="orgname-projectname-instance1"><span class="bm-cvv-icon" style="pointer-events:auto;cursor:pointer"><svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M3 3l8 8M11 3l-8 8"/></svg></span></div></div>
+        <div class="ci-tabs"><button class="ci-tab active">NVIDIA</button><button class="ci-tab">AMD</button><button class="ci-tab">CPU Only</button></div>
+        <div class="bm-row">
+          <div class="bm-field" style="flex:2"><label class="bm-label">Instance Type <span class="bm-req">*</span></label>
+            <select class="bm-input" id="ci-type" onchange="updateCreateFlow()"><option value="a100">A100 80GB</option><option value="h100">H100 80GB SXM</option><option value="h200">H200 141GB</option><option value="l40s">L40S 48GB</option></select></div>
+          <div class="bm-field" style="flex:1.4"><label class="bm-label">GPU Count <span class="bm-req">*</span></label>
+            <div class="ci-seg"><button data-count="1" class="active" onclick="pickGpuCount(this)" onmouseenter="showGpuTip(this)" onmouseleave="scheduleHideGpuTip()">1x</button><button data-count="2" onclick="pickGpuCount(this)" onmouseenter="showGpuTip(this)" onmouseleave="scheduleHideGpuTip()">2x</button><button data-count="4" onclick="pickGpuCount(this)" onmouseenter="showGpuTip(this)" onmouseleave="scheduleHideGpuTip()">4x</button><button data-count="8" class="out" onmouseenter="showGpuTip(this)" onmouseleave="scheduleHideGpuTip()">8x</button></div></div>
+        </div>
+        <div class="bm-field"><label class="bm-label">Location <span class="bm-req">*</span></label>
+          <select class="bm-input"><option>us-east1-a</option><option>us-southcentral1-a</option><option>us-northcentral1-a</option></select></div>
+        <div class="bm-field"><label class="bm-label">Image <span class="bm-req">*</span></label>
+          <div style="display:flex;align-items:center;gap:14px"><select class="bm-input" style="flex:1"><option>ubuntu22.04</option><option>ubuntu24.04</option></select><label class="ci-toggle"><input type="checkbox"><span class="ci-toggle-track"></span><span class="ci-toggle-lbl">Show old images</span></label></div></div>
+
+        <div class="ci-sec-title">Access and Security</div>
+        <div class="bm-row">
+          <div class="bm-field" style="flex:1"><label class="bm-label">Name <span class="bm-req">*</span></label><input class="bm-input" value="my-default key"></div>
+          <div class="bm-field" style="flex:1.5"><label class="bm-label">Public SSH Key <span class="bm-req">*</span></label><textarea class="bm-input" rows="3" style="resize:none" placeholder="Must begin with 'ssh-rsa', 'ssh-ed25519', 'ecdsa-sha2-nistp256', 'ecdsa-sha2-nistp384' or 'ecdsa-sha2-nistp521'"></textarea></div>
+        </div>
+
+        <div class="ci-acc">
+          <div class="ci-acc-head"><span class="ci-acc-title">Storage</span><span class="ci-acc-add">+</span></div>
+          <div class="ci-kv"><div><div class="ci-kv-label">Boot Disk</div><div class="ci-kv-val">1 TiB</div></div></div>
+        </div>
+        <div class="ci-acc">
+          <div class="ci-acc-head"><span class="ci-acc-title">Networking</span><span class="ci-acc-add">+</span></div>
+          <div class="ci-kv">
+            <div><div class="ci-kv-label">VPC Network</div><div class="ci-kv-val">default-vpc-network</div></div>
+            <div><div class="ci-kv-label">VPC Subnet</div><div class="ci-kv-val">default-subnet</div></div>
+            <div><div class="ci-kv-label">Public IP Address Type</div><div class="ci-kv-val">Dynamic</div></div>
+            <div><div class="ci-kv-label">IB Network</div><div class="ci-kv-val">us-east1…Network 0</div></div>
+            <div><div class="ci-kv-label">IB Partition</div><div class="ci-kv-val">partition1-i…-east1-a</div></div>
+          </div>
+        </div>
+        <div class="ci-acc">
+          <div class="ci-acc-head"><span class="ci-acc-title">Additional Options</span><span class="ci-acc-add">+</span></div>
+          <div class="ci-kv">
+            <div><div class="ci-kv-label">Observability</div><div class="ci-kv-val">Enabled</div></div>
+            <div><div class="ci-kv-label">Lifecycle scripts</div><div class="ci-kv-val">-</div></div>
+          </div>
+        </div>
+
+        <button class="btn btn-p" style="width:100%;justify-content:center;margin-top:22px;padding:13px" onclick="finishCreateInstance(this)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/></svg> Create Instance</button>
+      </div>
+
+      <aside class="ci-summary">
+        <div class="sum-title">Summary</div>
+        <div class="sum-h">Compute</div>
+        <div class="sum-row"><span><span class="k">Type:</span> <b id="sum-type">NVIDIA A100 80GB SXM IB</b></span></div>
+        <div class="sum-row"><span><span class="k">GPUs:</span> <b id="sum-gpus">1</b></span><span class="sum-price" id="sum-price">$3.90/hr</span></div>
+        <div class="sum-row"><span><span class="k">Location:</span> <b>us-east1-a</b></span></div>
+        <div class="sum-row"><span><span class="k">Image:</span> <b>ubuntu22.04</b></span></div>
+        <div class="sum-h">Access and Security</div>
+        <div class="sum-row"><span><span class="k">SSH Key:</span> <b>my-default-key</b></span></div>
+        <div class="sum-h">Storage</div>
+        <div class="sum-row"><span><span class="k">Boot Disk:</span> <b>128 GiB</b></span></div>
+        <div class="sum-h">Networking</div>
+        <div class="sum-row"><span><span class="k">VPC Network:</span> <b>default-vpc-network</b></span></div>
+        <div class="sum-row"><span><span class="k">VPC Subnet:</span> <b>default-subnet</b></span></div>
+        <div class="sum-row"><span><span class="k">Public IP address:</span> <b>Dynamic</b></span></div>
+        <div class="sum-row"><span><span class="k">IB Network:</span> <b>us-east1-…-Network 0</b></span></div>
+        <div class="sum-row"><span><span class="k">IB Partition:</span> <b>partition1-…-east1-a</b></span></div>
+        <div class="sum-h">Additional Options</div>
+        <div class="sum-row"><span><span class="k">Observability:</span> <b>Enabled</b></span></div>
+      </aside>
+    </div>
+  </div>
+</div>
+
 <div class="view" id="view-vm-detail">
   <div class="dph">
     <div class="dph-back" onclick="navigate('instances')">
@@ -3836,6 +3835,7 @@ const SIDEBARS = {
   'k8s-list':  {type:'main', topbar:{org:'ManagedOrchestration',proj:'abhatti'}, nav:mainNav('orchestration','kubernetes')},
   'k8s-detail':{type:'main', topbar:{org:'ManagedOrchestration',proj:'abhatti'}, nav:mainNav('orchestration','kubernetes')},
   'vm-detail': {type:'main', topbar:{org:'ManagedOrchestration',proj:'abhatti'}, nav:mainNav('compute','instances')},
+  'create-instance': {type:'main', topbar:{org:'ManagedOrchestration',proj:'abhatti'}, nav:mainNav('compute','instances')},
   slurm:       {type:'main', topbar:{org:'ManagedOrchestration',proj:'abhatti'}, nav:mainNav('orchestration','slurm')},
   disks:       {type:'main', topbar:{org:'ManagedOrchestration',proj:'abhatti'}, nav:mainNav('storage','disks')},
   buckets:     {type:'main', topbar:{org:'ManagedOrchestration',proj:'abhatti'}, nav:mainNav('storage','buckets')},
@@ -3858,7 +3858,7 @@ const SIDEBARS = {
 const ROUTES = {
   instances:'instances', 'instance-templates':'instance-templates', 'instance-groups':'instance-groups', 'custom-images':'custom-images',
   kubernetes:'kubernetes', slurm:'slurm',
-  'k8s-list':'kubernetes', 'k8s-detail':'k8s-detail', 'vm-detail':'vm-detail',
+  'k8s-list':'kubernetes', 'k8s-detail':'k8s-detail', 'vm-detail':'vm-detail', 'create-instance':'create-instance',
   disks:'disks', buckets:'buckets',
   vpc:null, subnets:null, firewall:null, infiniband:null, 'load-balancers':null,
   'cloud-api-keys':'apikeys', 'ssh-keys':'sshkeys',
@@ -4293,19 +4293,16 @@ function getCreatePrice(sku, count){
 function currentGpuCount(){ const a=document.querySelector('.ci-seg button.active'); return a?parseInt(a.dataset.count||'1',10):1; }
 // Open the one-click Create page pre-filled from a card's SKU (reservation or on-demand)
 function openCreateInstance(sku){
-  const m=document.getElementById('create-modal'); if(!m) return;
   const sel=document.getElementById('ci-type');
   if (sel && ['a100','h100','h200','l40s'].includes(sku)) sel.value=sku;
   const one=document.querySelector('.ci-seg button[data-count="1"]'); if (one) pickGpuCount(one);
   if (typeof updateCreateFlow==='function') updateCreateFlow();
-  m.style.display='flex';
-  const card=m.querySelector('.cm-card'); if (card) card.scrollTop=0;
+  navigate('create-instance');
 }
-function closeCreateModal(){ const m=document.getElementById('create-modal'); if (m) m.style.display='none'; }
 function finishCreateInstance(btn){
   const sku=(document.getElementById('ci-type')||{}).value||'h100';
-  closeCreateModal();
   createInstanceFromRes(sku, null);
+  navigate('instances');
 }
 function updateCreateFlow() {
   const sel = document.getElementById('ci-type'); if (!sel) return;
