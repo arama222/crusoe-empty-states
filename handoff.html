@@ -578,7 +578,31 @@ img.ico{display:block;flex:0 0 auto}
 .browse-all:hover{color:var(--text);border-color:var(--gray-400)}
 /* Billing popup (no-payment-method scenario) */
 .bm-overlay{position:fixed;inset:0;z-index:300;background:rgba(0,0,0,.45);display:flex;align-items:center;justify-content:center;padding:24px}
-.bm-card{position:relative;width:480px;max-width:92vw;background:var(--white);border:1px solid var(--border);border-radius:14px;box-shadow:0 18px 50px rgba(0,0,0,.4);padding:24px}
+.bm-card{position:relative;width:500px;max-width:94vw;max-height:92vh;overflow-y:auto;background:var(--white);border:1px solid var(--border);border-radius:14px;box-shadow:0 18px 50px rgba(0,0,0,.4);padding:20px 22px}
+.bm-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.bm-title{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:600;font-family:var(--font-body);color:var(--text)}
+.bm-steps{display:flex;align-items:center;gap:10px;margin-bottom:18px}
+.bm-step-lbl{font-size:11.5px;font-weight:500;font-family:var(--font-body);color:var(--muted);white-space:nowrap}
+.bm-steptrack{flex:1;height:3px;border-radius:3px;background:var(--gray-50);border:1px solid var(--border);overflow:hidden}
+.bm-stepfill{height:100%;background:var(--text);border-radius:3px;transition:width .25s ease}
+.bm-sec-title{font-size:13px;font-weight:600;font-family:var(--font-body);color:var(--text);margin-bottom:12px}
+.bm-field{margin-bottom:13px}
+.bm-label{display:block;font-size:12px;font-weight:500;font-family:var(--font-body);color:var(--text);margin-bottom:5px}
+.bm-req{color:var(--muted)}
+.bm-input{width:100%;box-sizing:border-box;font-size:13px;font-family:var(--font-body);color:var(--text);background:var(--white);border:1px solid var(--border);border-radius:8px;padding:9px 11px;outline:none;transition:border-color .15s ease}
+.bm-input::placeholder{color:var(--muted)}
+.bm-input:focus{border-color:var(--gray-400)}
+select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23999' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 11px center;padding-right:30px}
+.bm-input-wrap{position:relative;display:flex;align-items:center}
+.bm-brands{position:absolute;right:10px;display:flex;gap:4px}
+.bm-brand{font-size:8px;font-weight:700;font-family:var(--font-body);color:var(--muted);background:var(--gray-50);border:1px solid var(--border);border-radius:3px;padding:2px 4px;letter-spacing:.02em}
+.bm-row{display:flex;gap:12px}
+.bm-row>.bm-field{flex:1;min-width:0}
+.bm-radios{display:flex;gap:18px;align-items:center}
+.bm-radio{display:flex;align-items:center;gap:6px;font-size:13px;font-family:var(--font-body);color:var(--text);cursor:pointer}
+.bm-radio input{accent-color:#16a34a}
+.bm-legal{font-size:11px;color:var(--muted);line-height:150%;font-family:var(--font-body);margin:4px 0 16px}
+.bm-foot{display:flex;justify-content:flex-end;gap:8px;margin-top:4px}
 .bm-close{position:absolute;top:12px;right:12px;background:none;border:none;cursor:pointer;color:var(--muted);display:flex;align-items:center;justify-content:center;padding:6px;border-radius:7px;transition:color .15s ease,background .15s ease}
 .bm-close:hover{color:var(--text);background:var(--gray-50)}
 /* "View CLI" icon button + command popover (overlay — no layout/scroll impact) */
@@ -1059,17 +1083,46 @@ img.ico{display:block;flex:0 0 auto}
     </div>
   </div>
 
-  <!-- Billing popup: opens directly when a new account (no payment method) clicks Create Instance -->
+  <!-- Billing popup: 2-step "Finish account setup" — opens when a no-payment-method account clicks Create -->
   <div id="billing-modal" class="bm-overlay" style="display:none" onclick="if(event.target===this)closeBillingModal()">
-    <div class="bm-card" role="dialog" aria-modal="true" aria-label="Add a payment method">
-      <button class="bm-close" onclick="closeBillingModal()" aria-label="Close"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 3l8 8M11 3l-8 8"/></svg></button>
-      <div style="display:flex;align-items:flex-start;gap:14px">
-        <div style="width:40px;height:40px;border-radius:10px;background:var(--gray-50);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--text2)" stroke-width="1.5"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg></div>
-        <div style="flex:1">
-          <div style="font-size:15px;font-weight:600;font-family:var(--font-body);color:var(--text);margin-bottom:5px">Add a payment method to continue</div>
-          <div style="font-size:12.5px;color:var(--muted);font-family:var(--font-body);line-height:155%;margin-bottom:16px">Your account doesn't have a payment method on file yet. Add one to launch your first instance — you're only billed for what you run, per second.</div>
-          <div style="display:flex;gap:8px"><button class="btn btn-p btn-sm" onclick="addPaymentMethod(this)">Add payment method</button><a class="btn btn-o btn-sm" href="https://crusoe.ai/cloud/contact/" target="_blank" style="text-decoration:none">Talk to sales →</a></div>
+    <div class="bm-card" role="dialog" aria-modal="true" aria-label="Finish account setup">
+      <div class="bm-top">
+        <div class="bm-title"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg> Finish account setup</div>
+        <button class="bm-close" onclick="closeBillingModal()" aria-label="Close"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 3l8 8M11 3l-8 8"/></svg></button>
+      </div>
+      <div class="bm-steps"><span class="bm-step-lbl" id="bm-lbl1">Step 1</span><div class="bm-steptrack"><div class="bm-stepfill" id="bm-stepfill" style="width:6%"></div></div><span class="bm-step-lbl" id="bm-lbl2">Step 2</span></div>
+
+      <!-- Step 1: Card details -->
+      <div id="bm-step1">
+        <div class="bm-sec-title">Card details</div>
+        <div class="bm-field"><label class="bm-label">Card number <span class="bm-req">*</span></label>
+          <div class="bm-input-wrap"><input class="bm-input" placeholder="1234 1234 1234 1234"><span class="bm-brands"><span class="bm-brand">VISA</span><span class="bm-brand">MC</span><span class="bm-brand">AMEX</span></span></div></div>
+        <div class="bm-row">
+          <div class="bm-field"><label class="bm-label">Expiration date <span class="bm-req">*</span></label><input class="bm-input" placeholder="MM/YY"></div>
+          <div class="bm-field"><label class="bm-label">Security code <span class="bm-req">*</span></label><input class="bm-input" placeholder="CVV"></div>
         </div>
+        <div class="bm-row">
+          <div class="bm-field"><label class="bm-label">Country <span class="bm-req">*</span></label><select class="bm-input"><option>United States</option><option>Canada</option><option>United Kingdom</option></select></div>
+          <div class="bm-field"><label class="bm-label">Zip code <span class="bm-req">*</span></label><input class="bm-input" placeholder="12345"></div>
+        </div>
+        <div class="bm-field"><label class="bm-label">Cardholder name <span class="bm-req">*</span></label><input class="bm-input" placeholder="Full name on card"></div>
+        <div class="bm-legal">By providing your card information, you allow Crusoe Energy Systems, LLC to charge your card for future payments in accordance with their terms.</div>
+        <div class="bm-foot"><button class="btn btn-o btn-sm" onclick="closeBillingModal()">Cancel</button><button class="btn btn-p btn-sm" onclick="billingStep(2)">Continue</button></div>
+      </div>
+
+      <!-- Step 2: Account details -->
+      <div id="bm-step2" style="display:none">
+        <div class="bm-sec-title">Account details</div>
+        <div class="bm-field"><label class="bm-label">Account Type</label>
+          <div class="bm-radios"><label class="bm-radio"><input type="radio" name="bm-acct"><span>Personal</span></label><label class="bm-radio"><input type="radio" name="bm-acct" checked><span>Business</span></label></div></div>
+        <div class="bm-field"><label class="bm-label">Country <span class="bm-req">*</span></label><select class="bm-input"><option>United States</option><option>Canada</option><option>United Kingdom</option></select></div>
+        <div class="bm-field"><label class="bm-label">Address <span class="bm-req">*</span></label><input class="bm-input" placeholder=""></div>
+        <div class="bm-field"><label class="bm-label">Company name <span class="bm-req">*</span></label><input class="bm-input" placeholder="Enter company name"></div>
+        <div class="bm-row">
+          <div class="bm-field"><label class="bm-label">Tax ID type</label><select class="bm-input"><option>🇺🇸 United States - EIN</option><option>🇺🇸 United States - SSN</option></select></div>
+          <div class="bm-field"><label class="bm-label">Tax ID number</label><input class="bm-input" placeholder=""></div>
+        </div>
+        <div class="bm-foot"><button class="btn btn-o btn-sm" onclick="closeBillingModal()">Cancel</button><button class="btn btn-p btn-sm" onclick="finishBilling(this)">Save</button></div>
       </div>
     </div>
   </div>
@@ -4011,13 +4064,27 @@ function toggleEdgeState(n) {
 }
 // State 3: a no-billing account sees the regular page; Create routes to payment methods
 function goToPaymentMethods(btn) {
-  // New account with no payment method → open the Billing popup directly
+  // New account with no payment method → open the "Finish account setup" popup
   const m = document.getElementById('billing-modal');
-  if (m) m.style.display = 'flex';
+  if (m) { m.style.display = 'flex'; billingStep(1); }
 }
 function closeBillingModal() {
   const m = document.getElementById('billing-modal');
   if (m) m.style.display = 'none';
+}
+function billingStep(n) {
+  const s1 = document.getElementById('bm-step1'), s2 = document.getElementById('bm-step2');
+  const fill = document.getElementById('bm-stepfill');
+  if (s1) s1.style.display = n === 1 ? '' : 'none';
+  if (s2) s2.style.display = n === 2 ? '' : 'none';
+  if (fill) fill.style.width = n === 1 ? '6%' : '52%';
+  const card = document.querySelector('#billing-modal .bm-card'); if (card) card.scrollTop = 0;
+}
+function finishBilling(btn) {
+  if (!btn) return;
+  const orig = btn.textContent;
+  btn.textContent = 'Saving…'; btn.disabled = true;
+  setTimeout(() => { btn.textContent = orig; btn.disabled = false; closeBillingModal(); }, 1200);
 }
 function addPaymentMethod(btn) {
   if (!btn) return;
