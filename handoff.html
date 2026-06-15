@@ -2843,7 +2843,7 @@ img.ico{display:block;flex:0 0 auto}
     <div class="es-gap"></div>
     <div class="pop-section apikey-spicy-reveal" style="margin-top:36px;padding-bottom:16px">
       <div class="pop-title">Get started in three steps</div>
-      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;overflow:visible;align-items:start">
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;overflow:visible;align-items:stretch">
         <div class="pop-card med-res-card apikey-spicy-reveal" style="transition-delay:.08s">
 
           <div class="pop-card-top" style="margin-bottom:10px">
@@ -4292,11 +4292,32 @@ function setDisksTab(tab) {
   if (rdz) rdz.classList.remove('show-notes');
   // Re-run the typing/draw animation when returning to the Current tab
   if (tab === 'current' && typeof initDiskSpicyMagic === 'function') setTimeout(initDiskSpicyMagic, 60);
-  // Animate the Redesign hero (marching dashed lines, like the Current hero)
-  if (tab === 'redesign') {
-    const rc = document.getElementById('disk-rdz-svg');
-    if (rc) rc.querySelectorAll('path[stroke-dasharray="3 3"]').forEach(p => p.classList.add('dash-march'));
+  // Animate the Redesign hero illustration (same oscillating-rings effect as Current)
+  if (tab === 'redesign' && typeof animateDiskRings === 'function') setTimeout(() => animateDiskRings('disk-rdz-svg'), 60);
+}
+// Oscillating concentric-disk animation, reusable across the disk illustrations
+function animateDiskRings(svgId) {
+  const svg = document.getElementById(svgId);
+  if (!svg) return;
+  const paths = [...svg.querySelectorAll('path')];
+  const baseY = [0, 16.149, 32.307, 48.455, 64.604];
+  const amps  = [5, 10, 14, 10, 5];
+  const PERIOD = 2400;
+  const spring = t => { const x = t * Math.PI * 2; return Math.sin(x) + 0.18 * Math.sin(x * 2); };
+  if (svg._ringRaf) cancelAnimationFrame(svg._ringRaf);
+  svg._ringT0 = null;
+  function loop(ts) {
+    if (!svg.isConnected) { cancelAnimationFrame(svg._ringRaf); return; }
+    if (svg._ringT0 === null) svg._ringT0 = ts;
+    const elapsed = ts - svg._ringT0;
+    paths.forEach((el, i) => {
+      if (i >= baseY.length) return;
+      const phase = (elapsed / PERIOD + i * 0.13) % 1;
+      el.setAttribute('transform', `translate(0,${(baseY[i] + spring(phase) * amps[i]).toFixed(3)})`);
+    });
+    svg._ringRaf = requestAnimationFrame(loop);
   }
+  svg._ringRaf = requestAnimationFrame(loop);
 }
 
 function toggleDisksNotes(btn) {
