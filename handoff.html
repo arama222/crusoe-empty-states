@@ -773,6 +773,14 @@ img.ico{display:block;flex:0 0 auto}
 .res-mini-item-body{flex:1;min-width:0}
 .res-mini-item-name{font-size:13px;font-weight:600;font-family:var(--font-body);color:var(--text);white-space:nowrap}
 .res-mini-item-sub{font-size:11px;color:var(--muted);font-family:var(--font-body);margin-top:1px;white-space:nowrap}
+/* Usage bars (filled instances list — used vs. left over) */
+.usage-item{border:1px solid var(--border);border-radius:8px;padding:10px 13px;background:var(--white);min-width:0}
+.usage-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px}
+.usage-name{font-size:13px;font-weight:600;font-family:var(--font-body);color:var(--text);white-space:nowrap}
+.usage-count{font-size:11px;color:var(--muted);font-family:var(--font-body);white-space:nowrap}
+.usage-track{height:6px;border-radius:4px;background:var(--gray-50);border:1px solid var(--border);overflow:hidden;margin-bottom:7px}
+.usage-fill{height:100%;background:var(--text2);border-radius:4px}
+.usage-sub{font-size:11px;color:var(--muted);font-family:var(--font-body)}
 .res-mini-item-actions{display:flex;gap:5px;align-items:center;flex-shrink:0;opacity:0;transform:translateX(6px);transition:opacity .18s ease,transform .18s ease;pointer-events:none}
 .res-mini-item:hover .res-mini-item-actions{opacity:1;transform:none;pointer-events:auto}
 </style>
@@ -1268,37 +1276,22 @@ img.ico{display:block;flex:0 0 auto}
 <div id="instances-filled" style="display:none">
   <!-- Condensed reservation mini-bar -->
   <div class="res-mini-bar">
-    <div class="res-mini-bar-label">Reservations</div>
+    <div class="res-mini-bar-label">Usage</div>
     <div class="res-mini-grid">
-      <div class="res-mini-item">
-        <div class="res-mini-item-body">
-          <div class="res-mini-item-name">H100 SXM 8×</div>
-          <div class="res-mini-item-sub">4 available</div>
-        </div>
-        <div class="res-mini-item-actions">
-          <button class="btn btn-p btn-sm" onclick="createInstanceFromRes('h100',this)">Create</button>
-          <button class="btn btn-o btn-sm" onclick="copyResCli('h100')" style="gap:4px"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> CLI</button>
-        </div>
+      <div class="usage-item">
+        <div class="usage-head"><span class="usage-name">H100 SXM 8×</span><span class="usage-count">4 of 8 in use</span></div>
+        <div class="usage-track"><div class="usage-fill" style="width:50%"></div></div>
+        <div class="usage-sub">4 available</div>
       </div>
-      <div class="res-mini-item">
-        <div class="res-mini-item-body">
-          <div class="res-mini-item-name">H200 141GB 8×</div>
-          <div class="res-mini-item-sub">2 available</div>
-        </div>
-        <div class="res-mini-item-actions">
-          <button class="btn btn-p btn-sm" onclick="createInstanceFromRes('h200',this)">Create</button>
-          <button class="btn btn-o btn-sm" onclick="copyResCli('h200')" style="gap:4px"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> CLI</button>
-        </div>
+      <div class="usage-item">
+        <div class="usage-head"><span class="usage-name">H200 141GB 8×</span><span class="usage-count">6 of 8 in use</span></div>
+        <div class="usage-track"><div class="usage-fill" style="width:75%"></div></div>
+        <div class="usage-sub">2 available</div>
       </div>
-      <div class="res-mini-item">
-        <div class="res-mini-item-body">
-          <div class="res-mini-item-name">L40S 48GB 4×</div>
-          <div class="res-mini-item-sub">6 available</div>
-        </div>
-        <div class="res-mini-item-actions">
-          <button class="btn btn-p btn-sm" onclick="createInstanceFromRes('l40s',this)">Create</button>
-          <button class="btn btn-o btn-sm" onclick="copyResCli('l40s')" style="gap:4px"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> CLI</button>
-        </div>
+      <div class="usage-item">
+        <div class="usage-head"><span class="usage-name">L40S 48GB 4×</span><span class="usage-count">4 of 10 in use</span></div>
+        <div class="usage-track"><div class="usage-fill" style="width:40%"></div></div>
+        <div class="usage-sub">6 available</div>
       </div>
     </div>
   </div>
