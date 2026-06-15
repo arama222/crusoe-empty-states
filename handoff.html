@@ -625,6 +625,13 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
 .ci-seg button{font-size:12.5px;font-weight:600;font-family:var(--font-body);border:1px solid var(--border);background:var(--white);color:var(--text);border-radius:8px;padding:0 16px;height:40px;min-width:46px;cursor:pointer}
 .ci-seg button.active{background:#46603a;color:#fff;border-color:#46603a}
 .ci-seg button:disabled{color:var(--muted);background:var(--gray-50);cursor:not-allowed}
+.ci-seg button:not(.active):not(.out):hover{background:#eef4ea;border-color:#a9c79a;color:#2f3e28}
+.ci-seg button.out{color:var(--muted);background:var(--gray-50);border-style:dashed}
+.gpu-tip{position:fixed;z-index:320;background:#1d1f24;color:#fff;font-size:11.5px;font-weight:600;font-family:var(--font-body);padding:6px 10px;border-radius:7px;box-shadow:0 6px 20px rgba(0,0,0,.32);white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .12s ease;transform:translateY(3px)}
+.gpu-tip.show{opacity:1;transform:none;pointer-events:auto}
+.gpu-tip.quota{padding:9px 10px;font-weight:600}
+.gpu-tip-btn{display:block;margin-top:7px;width:100%;background:#fff;color:#111;border:none;border-radius:6px;padding:5px 10px;font-size:11px;font-weight:600;font-family:var(--font-body);cursor:pointer}
+.gpu-tip-btn:hover{background:#f0f0f2}
 .ci-sec-title{font-size:15px;font-weight:600;font-family:var(--font-body);color:var(--text);margin:24px 0 12px}
 .ci-toggle{display:inline-flex;align-items:center;gap:8px;cursor:pointer;white-space:nowrap}
 .ci-toggle input{display:none}
@@ -1166,7 +1173,7 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
           <div class="bm-field" style="flex:2"><label class="bm-label">Instance Type <span class="bm-req">*</span></label>
             <select class="bm-input" id="ci-type" onchange="updateCreateFlow()"><option value="a100">A100 80GB</option><option value="h100">H100 80GB SXM</option><option value="h200">H200 141GB</option><option value="l40s">L40S 48GB</option></select></div>
           <div class="bm-field" style="flex:1.4"><label class="bm-label">GPU Count <span class="bm-req">*</span></label>
-            <div class="ci-seg"><button class="active">1x</button><button>2x</button><button>4x</button><button disabled>8x</button></div></div>
+            <div class="ci-seg"><button data-count="1" class="active" onclick="pickGpuCount(this)" onmouseenter="showGpuTip(this)" onmouseleave="scheduleHideGpuTip()">1x</button><button data-count="2" onclick="pickGpuCount(this)" onmouseenter="showGpuTip(this)" onmouseleave="scheduleHideGpuTip()">2x</button><button data-count="4" onclick="pickGpuCount(this)" onmouseenter="showGpuTip(this)" onmouseleave="scheduleHideGpuTip()">4x</button><button data-count="8" class="out" onmouseenter="showGpuTip(this)" onmouseleave="scheduleHideGpuTip()">8x</button></div></div>
         </div>
         <div class="bm-field"><label class="bm-label">Location <span class="bm-req">*</span></label>
           <select class="bm-input"><option>us-east1-a</option><option>us-southcentral1-a</option><option>us-northcentral1-a</option></select></div>
@@ -1208,7 +1215,7 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
         <div class="sum-title">Summary</div>
         <div class="sum-h">Compute</div>
         <div class="sum-row"><span><span class="k">Type:</span> <b id="sum-type">NVIDIA A100 80GB SXM IB</b></span></div>
-        <div class="sum-row"><span><span class="k">GPUs:</span> <b>1</b></span><span class="sum-price" id="sum-price">$3.90/hr</span></div>
+        <div class="sum-row"><span><span class="k">GPUs:</span> <b id="sum-gpus">1</b></span><span class="sum-price" id="sum-price">$3.90/hr</span></div>
         <div class="sum-row"><span><span class="k">Location:</span> <b>us-east1-a</b></span></div>
         <div class="sum-row"><span><span class="k">Image:</span> <b>ubuntu22.04</b></span></div>
         <div class="sum-h">Access and Security</div>
@@ -4207,6 +4214,46 @@ function toggleEdgeState(n) {
   if (n === 4 && typeof updateCreateFlow === 'function') updateCreateFlow();
   // March the dotted lines on whichever hero cube is showing
   if (n < 4) animateEdgeCube(n === 3 ? 'edge-cube-3' : 'edge-cube');
+}
+let _gpuTip=null,_gpuTipT=null;
+function _gpuTipEl(){
+  if(_gpuTip) return _gpuTip;
+  const d=document.createElement('div'); d.id='gpu-tip'; d.className='gpu-tip';
+  d.addEventListener('mouseenter',()=>clearTimeout(_gpuTipT));
+  d.addEventListener('mouseleave',()=>scheduleHideGpuTip());
+  document.body.appendChild(d); _gpuTip=d; return d;
+}
+const _GPU_PER={a100:3.90,h100:4.49,h200:6.50,l40s:1.45};
+function showGpuTip(btn){
+  clearTimeout(_gpuTipT);
+  const tip=_gpuTipEl();
+  const sel=document.getElementById('ci-type');
+  const sku=sel?sel.value:'a100';
+  const reserved=(sku==='h100');            // H100 is the reserved SKU in this demo
+  if(btn.classList.contains('out')){
+    tip.classList.add('quota');
+    tip.innerHTML='Out of quota<button class="gpu-tip-btn" onclick="requestQuota()">Request quota</button>';
+  } else {
+    tip.classList.remove('quota');
+    if(reserved){ hideGpuTip(); return; }   // reserved SKU → no pricing tooltip (it's covered)
+    const count=parseInt(btn.dataset.count||'1',10);
+    tip.textContent='$'+((_GPU_PER[sku]||3.90)*count).toFixed(2)+'/hr';
+  }
+  tip.style.left='-9999px'; tip.classList.add('show');
+  const r=btn.getBoundingClientRect();
+  const pw=tip.offsetWidth, ph=tip.offsetHeight, m=8;
+  let left=r.left+r.width/2-pw/2; left=Math.max(m,Math.min(left,window.innerWidth-pw-m));
+  tip.style.left=left+'px'; tip.style.top=(r.top-ph-8)+'px';
+}
+function scheduleHideGpuTip(){ _gpuTipT=setTimeout(hideGpuTip,180); }
+function hideGpuTip(){ if(_gpuTip){ _gpuTip.classList.remove('show'); _gpuTip.style.left='-9999px'; } }
+function requestQuota(){ const b=document.querySelector('#gpu-tip .gpu-tip-btn'); if(b){ b.textContent='Requested ✓'; setTimeout(hideGpuTip,900); } }
+function pickGpuCount(btn){
+  document.querySelectorAll('.ci-seg button').forEach(b=>b.classList.toggle('active', b===btn));
+  const count=parseInt(btn.dataset.count||'1',10);
+  const g=document.getElementById('sum-gpus'); if(g) g.textContent=count;
+  const sel=document.getElementById('ci-type'); const sku=sel?sel.value:'a100';
+  const p=document.getElementById('sum-price'); if(p) p.textContent='$'+((_GPU_PER[sku]||3.90)*count).toFixed(2)+'/hr';
 }
 function updateCreateFlow() {
   const sel = document.getElementById('ci-type'); if (!sel) return;
