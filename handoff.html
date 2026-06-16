@@ -687,6 +687,8 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
 .cli-pop-note{font-size:11px;color:var(--muted);font-family:var(--font-body);line-height:140%}
 /* ── Medium reservation cards — expand on hover, no layout shift ── */
 .med-res-card{position:relative;display:flex;flex-direction:column;gap:0;min-height:164px;box-sizing:border-box}
+/* Pin each card's action row to the bottom so the hover description drops in right beneath it (no mid-card gap) */
+.med-res-card > div[style*="gap:10px"]{margin-top:auto}
 .med-res-card:hover{border-color:var(--gray-300)!important;box-shadow:0 2px 12px rgba(0,0,0,.08)!important;border-radius:10px 10px 0 0!important;z-index:20}
 .med-res-expand{position:absolute;top:calc(100% - 1px);left:-1px;right:-1px;background:var(--white);border:1px solid var(--gray-300);border-top:none;border-radius:0 0 10px 10px;padding:8px 18px 10px;opacity:0;pointer-events:none;display:none;transition:opacity .18s ease,display .18s ease allow-discrete;z-index:19;font-size:11.5px;color:var(--text2);font-family:var(--font-body);line-height:140%}
 .med-res-card:hover .med-res-expand{opacity:1;pointer-events:auto;display:block}
