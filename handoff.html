@@ -573,8 +573,10 @@ img.ico{display:block;flex:0 0 auto}
 /* API Keys setup steps: keep the details expanded by default (no hover needed) */
 #apikey-empty .med-res-card{min-height:0}
 #apikey-empty .np-hover-hint{display:none}
-#apikey-empty .med-res-expand{position:static;display:block;opacity:1;pointer-events:auto;background:transparent;border:none;border-radius:0;padding:0;margin-top:6px}
+#apikey-empty .med-res-expand{position:static;display:flex;flex-direction:column;flex:1 1 auto;opacity:1;pointer-events:auto;background:transparent;border:none;border-radius:0;padding:0;margin-top:6px}
 #apikey-empty .med-res-card:hover{border-color:var(--border)!important;box-shadow:none!important;border-radius:10px!important;z-index:auto}
+#apikey-empty .pop-card{display:flex;flex-direction:column}
+#apikey-empty .apikey-bottom{margin-top:auto}
 /* Quiet "browse all types" escape hatch under the card grid */
 .browse-all-wrap{text-align:center;margin-top:14px}
 .browse-all{display:inline-block;font-size:12.5px;font-weight:500;font-family:var(--font-body);color:var(--muted);text-decoration:none;border-bottom:1px solid transparent;padding-bottom:1px;transition:color .15s ease,border-color .15s ease}
@@ -3133,8 +3135,8 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
           </div>
           <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Step 1 · Security</span></div>
           
-        <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="openApiKeyCreate()">Create API Key</button></div>
         <div class="med-res-expand"><div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">The secret is shown once — save it before leaving the page. You can optionally set an alias and expiration date.</div></div>
+        <div class="apikey-bottom" style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="openApiKeyCreate()">Create API Key</button></div>
         </div>
         <div class="pop-card med-res-card apikey-spicy-reveal" style="transition-delay:.14s">
 
@@ -3146,7 +3148,7 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
           <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Step 2 · Setup</span></div>
           
         <div class="med-res-expand"><div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">Install the CLI to manage VMs, storage, and reservations from your terminal.</div>
-            <div style="display:flex;gap:4px;margin-bottom:8px"><button class="pkg-btn active" onclick="setPkg('pip')" style="font-size:11px">pip</button><button class="pkg-btn" onclick="setPkg('brew')" style="font-size:11px">brew</button></div>
+            <div class="apikey-bottom" style="display:flex;gap:4px;margin-bottom:8px"><button class="pkg-btn active" onclick="setPkg('pip')" style="font-size:11px">pip</button><button class="pkg-btn" onclick="setPkg('brew')" style="font-size:11px">brew</button></div>
             <div id="pkg-pip2" class="action-card-cli" style="display:flex;align-items:center;justify-content:space-between;font-size:11px"><code style="font-size:11px">pip install crusoe</code><button class="cli-snippet-copy" onclick="copySnippet(this,'pip install crusoe')" style="font-size:10px">Copy</button></div>
             <div id="pkg-brew2" class="action-card-cli" style="display:none;align-items:center;justify-content:space-between;font-size:11px"><code style="font-size:11px">brew install crusoe-cloud/tap/crusoe</code><button class="cli-snippet-copy" onclick="copySnippet(this,'brew install crusoe-cloud/tap/crusoe')" style="font-size:10px">Copy</button></div></div>
         </div>
@@ -3161,7 +3163,7 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
           
         <div style="display:flex;gap:10px"><a href="https://docs.crusoecloud.com/identity-and-security/managing-api-keys/" target="_blank" style="font-size:11px;color:var(--muted);font-family:var(--font-body)">API key docs →</a></div>
         <div class="med-res-expand"><div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">Run <code style="font-size:11px;background:var(--gray-100);padding:1px 4px;border-radius:3px;font-family:var(--mono)">crusoe init</code> and paste your API key ID and secret when prompted.</div>
-            <div class="action-card-cli" style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;font-size:11px"><code style="font-size:11px">crusoe init</code><button class="cli-snippet-copy" onclick="copySnippet(this,'crusoe init')" style="font-size:10px">Copy</button></div></div>
+            <div class="action-card-cli apikey-bottom" style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;font-size:11px"><code style="font-size:11px">crusoe init</code><button class="cli-snippet-copy" onclick="copySnippet(this,'crusoe init')" style="font-size:10px">Copy</button></div></div>
         </div>
       </div>
     </div>
