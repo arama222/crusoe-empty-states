@@ -5,9 +5,9 @@
   <path d="M152.223 63.5597C148.492 72.6374 139.714 102.966 135.817 107.709C133.46 110.579 130.973 110.224 128.768 106.961" stroke="#111" stroke-linecap="round" stroke-linejoin="round"/>
   <path d="M152.235 63.2414C153.459 61.3986 154.305 59.3294 155.664 57.532C157.839 54.632 160.558 55.2512 162.189 57.3205C164.908 60.7643 166.237 64.8726 167.732 68.9206C168.034 69.7513 168.11 70.6877 168.88 71.2919" stroke="#111" stroke-linecap="round" stroke-linejoin="round"/>
   <circle r="4.4" fill="#111">
-    <animateMotion dur="6s" repeatCount="indefinite" rotate="auto"><mpath xlink:href="#wave-a"/></animateMotion>
+    <animateMotion dur="6s" repeatCount="indefinite" rotate="auto" keyPoints="1;0" keyTimes="0;1" calcMode="linear"><mpath xlink:href="#wave-a"/></animateMotion>
   </circle>
   <circle r="4.4" fill="#111">
-    <animateMotion dur="6s" begin="-3s" repeatCount="indefinite" rotate="auto"><mpath xlink:href="#wave-a"/></animateMotion>
+    <animateMotion dur="6s" begin="-3s" repeatCount="indefinite" rotate="auto" keyPoints="1;0" keyTimes="0;1" calcMode="linear"><mpath xlink:href="#wave-a"/></animateMotion>
   </circle>
 </svg>
