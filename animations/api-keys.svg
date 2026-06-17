@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="220" height="220" viewBox="-2 -2 155 155" fill="none">
+  <style>
+    .outer{animation:spin 28s linear infinite;transform-box:fill-box;transform-origin:center}
+    .inner{animation:spin 22s linear infinite reverse;transform-box:fill-box;transform-origin:center}
+    @keyframes spin{to{transform:rotate(360deg)}}
+  </style>
+  <g class="outer">
+    <circle cx="75.5" cy="75.5" r="75" stroke="#111" stroke-miterlimit="10"/>
+    <line x1="75.5" y1="0.5" x2="75.5" y2="150.5" stroke="#111" stroke-miterlimit="10" stroke-dasharray="3 3"/>
+    <line x1="0.5" y1="75.5" x2="150.5" y2="75.5" stroke="#111" stroke-miterlimit="10" stroke-dasharray="3 3"/>
+  </g>
+  <g class="inner">
+    <circle cx="75.5" cy="75.5" r="49.333" stroke="#111" stroke-miterlimit="10" stroke-dasharray="3 3"/>
+    <rect x="54.85" y="54.85" width="41.3" height="41.3" stroke="#111" stroke-miterlimit="10" transform="rotate(45 75.5 75.5)"/>
+  </g>
+</svg>

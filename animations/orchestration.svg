@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="215" height="212" viewBox="0 0 153.881 152.019" fill="none">
+  <style>
+    .pulse{animation:pulse 2.6s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+    @keyframes pulse{0%,100%{transform:scale(1);opacity:.85}50%{transform:scale(1.02);opacity:1}}
+  </style>
+  <g class="pulse">
+    <path d="M147.57 5.34863H39.6802V112.759H147.57V5.34863Z" stroke="#111" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M130.63 22.2891H22.7402V129.699H130.63V22.2891Z" stroke="#111" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M113.7 39.2188H5.81006V146.629H113.7V39.2188Z" stroke="#111" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M87.2031 65.5249H66.1768V86.4529H87.2031V65.5249Z" stroke="#111" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M66.5181 66.0903L87.167 86.019" stroke="#111"/>
+    <path d="M86.8652 66.1665L66.2163 86.0952" stroke="#111"/>
+  </g>
+  <path d="M11.67 140.399H0.5V151.519H11.67V140.399Z" fill="#111" stroke="#111" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M153.381 0.5H142.211V11.62H153.381V0.5Z" fill="#111" stroke="#111" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
