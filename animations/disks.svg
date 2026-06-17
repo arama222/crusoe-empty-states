@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="205" height="225" viewBox="0 0 150.588 166" fill="none">
+<svg xmlns="http://www.w3.org/2000/svg" width="300" height="320" viewBox="-40 -40 230.588 246" fill="none">
   <style>
     .osc{animation-name:osc;animation-duration:2.4s;animation-timing-function:ease-in-out;animation-iteration-count:infinite}
     @keyframes osc{0%,100%{transform:translateY(0)}50%{transform:translateY(var(--a,6px))}}

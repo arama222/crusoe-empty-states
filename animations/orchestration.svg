@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="215" height="212" viewBox="0 0 153.881 152.019" fill="none">
+<svg xmlns="http://www.w3.org/2000/svg" width="340" height="337" viewBox="-40 -40 233.881 232.019" fill="none">
   <path pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" d="M147.57 5.34863H39.6802V112.759H147.57V5.34863Z" stroke="#111" stroke-linecap="round" stroke-linejoin="round">
     <animate attributeName="stroke-dashoffset" values="1;0;0;1" keyTimes="0;0.28;0.64;1" dur="5.5s" begin="0s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.2 1;0 0 1 1;0.4 0 0.2 1"/>
   </path>
