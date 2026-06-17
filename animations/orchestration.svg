@@ -19,12 +19,4 @@
   </path>
   <path d="M11.67 140.399H0.5V151.519H11.67V140.399Z" fill="#111" stroke="#111" stroke-linecap="round" stroke-linejoin="round"/>
   <path d="M153.381 0.5H142.211V11.62H153.381V0.5Z" fill="#111" stroke="#111" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="6.085" cy="145.96" r="3" fill="none" stroke="#111" stroke-width="1">
-    <animate attributeName="r" values="3;18" dur="2.6s" begin="0s" repeatCount="indefinite"/>
-    <animate attributeName="opacity" values="0.7;0" dur="2.6s" begin="0s" repeatCount="indefinite"/>
-  </circle>
-  <circle cx="147.8" cy="6.06" r="3" fill="none" stroke="#111" stroke-width="1">
-    <animate attributeName="r" values="3;18" dur="2.6s" begin="1.3s" repeatCount="indefinite"/>
-    <animate attributeName="opacity" values="0.7;0" dur="2.6s" begin="1.3s" repeatCount="indefinite"/>
-  </circle>
 </svg>
