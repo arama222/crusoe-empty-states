@@ -11,8 +11,8 @@ instances-cube.svg   ANIMATED — marching dashed lines (used on Instances,
                      Instance Templates, Instance Groups, Custom Images)
 api-keys.svg         ANIMATED — two counter-rotating rings (Cloud API Keys, SSH Keys)
 disks.svg            ANIMATED — oscillating concentric rings (Disks, Buckets)
-orchestration.svg    ANIMATED — gentle pulse on nested squares (Kubernetes, Slurm)
-managed-logs.svg     STATIC — waveform (Managed Logs, Infrastructure Overview)
+orchestration.svg    ANIMATED — ripples emanating from nodes (Kubernetes, Slurm)
+managed-logs.svg     ANIMATED — flowing signal along the waveform (Managed Logs, Infra Overview)
 
 Notes
 -----
