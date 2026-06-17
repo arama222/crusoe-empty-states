@@ -55,6 +55,37 @@ FRAGMENTS = [
     ("custom-images",                      "Custom Images — Empty",                "Custom Images",                        "navigate('custom-images');"),
 ]
 
+# Card-based pages that have hover-revealed descriptions worth capturing as a
+# separate "hover" frame for Figma. (Edge/hero-only states have no cards.)
+HOVER_VARIANTS = {
+    "instances-redesign",
+    "instances-edge-on-demand",
+    "instances-edge-reservation",
+    "instances-edge-reservation-ondemand",
+    "disks-redesign",
+    "kubernetes",
+    "slurm",
+    "buckets",
+    "managed-logs",
+    "ssh-keys",
+    "instance-templates",
+    "instance-groups",
+    "custom-images",
+}
+
+# Injected into <head> for the "-hover" build: forces every card's hover
+# description to render inline (always visible) so an HTML->Figma import
+# captures the hover state as a static frame.
+EXPAND_CSS = """
+<style id="fragment-hover-expand">
+  .med-res-card{min-height:0!important;border-radius:10px!important}
+  .med-res-card .med-res-expand{position:static!important;left:auto!important;right:auto!important;top:auto!important;
+    display:block!important;opacity:1!important;pointer-events:auto!important;border:none!important;border-top:none!important;
+    background:transparent!important;border-radius:0!important;box-shadow:none!important;padding:8px 2px 0!important}
+  .med-res-card .np-hover-hint{display:none!important}
+</style>
+"""
+
 INJECT_TEMPLATE = """
 <!-- ===== FRAGMENT: {label} ===== -->
 <script>
@@ -86,7 +117,9 @@ def main():
 
     os.makedirs(OUT_DIR, exist_ok=True)
 
-    for filename, title, label, init_js in FRAGMENTS:
+    outputs = []  # (filename, label) for the index, in generation order
+
+    def write_fragment(filename, title, label, init_js, hover=False):
         doc = html
 
         # Set a clear <title> so the browser tab / export names the fragment
@@ -94,6 +127,10 @@ def main():
             doc = re.sub(r"<title>.*?</title>", f"<title>{title}</title>", doc, count=1, flags=re.S)
         else:
             doc = doc.replace("</head>", f"  <title>{title}</title>\n</head>", 1)
+
+        # Hover build: force card descriptions to render inline (always visible)
+        if hover:
+            doc = doc.replace("</head>", EXPAND_CSS + "</head>", 1)
 
         inject = INJECT_TEMPLATE.format(label=label, init_js=init_js)
         if "</body>" in doc:
@@ -104,12 +141,26 @@ def main():
         out_path = os.path.join(OUT_DIR, filename + ".html")
         with open(out_path, "w", encoding="utf-8") as out:
             out.write(doc)
+        outputs.append((filename, label))
         print(f"  wrote {out_path}")
+
+    for filename, title, label, init_js in FRAGMENTS:
+        # Default frame
+        write_fragment(filename, title, label, init_js, hover=False)
+        # Hover frame (only for card-based pages)
+        if filename in HOVER_VARIANTS:
+            write_fragment(
+                filename + "-hover",
+                title + " (hover)",
+                label + " · hover",
+                init_js,
+                hover=True,
+            )
 
     # Build an index page for convenient handoff browsing
     links = "\n".join(
         f'    <li><a href="{fn}.html">{label}</a> <span class="f">{fn}.html</span></li>'
-        for fn, _title, label, _js in FRAGMENTS
+        for fn, label in outputs
     )
     index = f"""<!doctype html>
 <html><head><meta charset="utf-8"><title>Empty States — Fragments</title>
