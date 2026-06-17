@@ -12,7 +12,7 @@ instances-cube.svg   ANIMATED — marching dashed lines (used on Instances,
 api-keys.svg         ANIMATED — two counter-rotating rings (Cloud API Keys, SSH Keys)
 disks.svg            ANIMATED — oscillating concentric rings (Disks, Buckets)
 orchestration.svg    ANIMATED — nested squares draw in sequentially + node ripples (Kubernetes, Slurm)
-managed-logs.svg     ANIMATED — box, diamond & waveform draw in sequentially (Managed Logs, Infra Overview)
+managed-logs.svg     ANIMATED — two dots travel along the waveform (matches prototype) (Managed Logs, Infra Overview)
 
 Notes
 -----

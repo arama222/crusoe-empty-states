@@ -1,22 +1,30 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="215" height="212" viewBox="0 0 153.881 152.019" fill="none">
-  <style>
-    .d{stroke-dasharray:1;animation:draw 3.6s ease-in-out infinite}
-    @keyframes draw{0%{stroke-dashoffset:1}35%{stroke-dashoffset:0}68%{stroke-dashoffset:0}100%{stroke-dashoffset:1}}
-  </style>
-  <path class="d" style="animation-delay:0s"    pathLength="1" d="M147.57 5.34863H39.6802V112.759H147.57V5.34863Z" stroke="#111" stroke-linecap="round" stroke-linejoin="round"/>
-  <path class="d" style="animation-delay:.18s"  pathLength="1" d="M130.63 22.2891H22.7402V129.699H130.63V22.2891Z" stroke="#111" stroke-linecap="round" stroke-linejoin="round"/>
-  <path class="d" style="animation-delay:.36s"  pathLength="1" d="M113.7 39.2188H5.81006V146.629H113.7V39.2188Z" stroke="#111" stroke-linecap="round" stroke-linejoin="round"/>
-  <path class="d" style="animation-delay:.54s"  pathLength="1" d="M87.2031 65.5249H66.1768V86.4529H87.2031V65.5249Z" stroke="#111" stroke-linecap="round" stroke-linejoin="round"/>
-  <path class="d" style="animation-delay:.66s"  pathLength="1" d="M66.5181 66.0903L87.167 86.019" stroke="#111"/>
-  <path class="d" style="animation-delay:.72s"  pathLength="1" d="M86.8652 66.1665L66.2163 86.0952" stroke="#111"/>
+  <path pathLength="1" stroke-dasharray="1" d="M147.57 5.34863H39.6802V112.759H147.57V5.34863Z" stroke="#111" stroke-linecap="round" stroke-linejoin="round">
+    <animate attributeName="stroke-dashoffset" values="1;0;0;1" keyTimes="0;0.35;0.7;1" dur="3.8s" begin="0s" repeatCount="indefinite"/>
+  </path>
+  <path pathLength="1" stroke-dasharray="1" d="M130.63 22.2891H22.7402V129.699H130.63V22.2891Z" stroke="#111" stroke-linecap="round" stroke-linejoin="round">
+    <animate attributeName="stroke-dashoffset" values="1;0;0;1" keyTimes="0;0.35;0.7;1" dur="3.8s" begin="0.2s" repeatCount="indefinite"/>
+  </path>
+  <path pathLength="1" stroke-dasharray="1" d="M113.7 39.2188H5.81006V146.629H113.7V39.2188Z" stroke="#111" stroke-linecap="round" stroke-linejoin="round">
+    <animate attributeName="stroke-dashoffset" values="1;0;0;1" keyTimes="0;0.35;0.7;1" dur="3.8s" begin="0.4s" repeatCount="indefinite"/>
+  </path>
+  <path pathLength="1" stroke-dasharray="1" d="M87.2031 65.5249H66.1768V86.4529H87.2031V65.5249Z" stroke="#111" stroke-linecap="round" stroke-linejoin="round">
+    <animate attributeName="stroke-dashoffset" values="1;0;0;1" keyTimes="0;0.35;0.7;1" dur="3.8s" begin="0.6s" repeatCount="indefinite"/>
+  </path>
+  <path pathLength="1" stroke-dasharray="1" d="M66.5181 66.0903L87.167 86.019" stroke="#111">
+    <animate attributeName="stroke-dashoffset" values="1;0;0;1" keyTimes="0;0.35;0.7;1" dur="3.8s" begin="0.7s" repeatCount="indefinite"/>
+  </path>
+  <path pathLength="1" stroke-dasharray="1" d="M86.8652 66.1665L66.2163 86.0952" stroke="#111">
+    <animate attributeName="stroke-dashoffset" values="1;0;0;1" keyTimes="0;0.35;0.7;1" dur="3.8s" begin="0.8s" repeatCount="indefinite"/>
+  </path>
   <path d="M11.67 140.399H0.5V151.519H11.67V140.399Z" fill="#111" stroke="#111" stroke-linecap="round" stroke-linejoin="round"/>
   <path d="M153.381 0.5H142.211V11.62H153.381V0.5Z" fill="#111" stroke="#111" stroke-linecap="round" stroke-linejoin="round"/>
   <circle cx="6.085" cy="145.96" r="3" fill="none" stroke="#111" stroke-width="1">
-    <animate attributeName="r" values="3;18" dur="1.1s" begin="0s;rl.end+1.3s" id="rl" fill="freeze"/>
-    <animate attributeName="opacity" values="0.7;0" dur="1.1s" begin="0s;rl.end+1.3s"/>
+    <animate attributeName="r" values="3;18" dur="2.4s" begin="0s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.7;0" dur="2.4s" begin="0s" repeatCount="indefinite"/>
   </circle>
   <circle cx="147.8" cy="6.06" r="3" fill="none" stroke="#111" stroke-width="1">
-    <animate attributeName="r" values="3;18" dur="1.1s" begin="0.42s;r2.end+1.3s" id="r2"/>
-    <animate attributeName="opacity" values="0.7;0" dur="1.1s" begin="0.42s;r2.end+1.3s"/>
+    <animate attributeName="r" values="3;18" dur="2.4s" begin="1.2s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.7;0" dur="2.4s" begin="1.2s" repeatCount="indefinite"/>
   </circle>
 </svg>
