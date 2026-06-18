@@ -1,22 +1,28 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="340" height="337" viewBox="-40 -40 233.881 232.019" fill="none">
+  <!-- nested squares + diagonals: draw in (staggered outer→inner), hold, erase, then a full empty pause before redrawing -->
   <path pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" d="M147.57 5.34863H39.6802V112.759H147.57V5.34863Z" stroke="#111" stroke-linecap="round" stroke-linejoin="round">
-    <animate attributeName="stroke-dashoffset" values="1;0;0;1" keyTimes="0;0.28;0.64;1" dur="5.5s" begin="0s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.2 1;0 0 1 1;0.4 0 0.2 1"/>
+    <animate attributeName="stroke-dashoffset" values="1;1;0;0;1;1" keyTimes="0;0;0.20;0.50;0.80;1" dur="7s" repeatCount="indefinite"/>
   </path>
   <path pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" d="M130.63 22.2891H22.7402V129.699H130.63V22.2891Z" stroke="#111" stroke-linecap="round" stroke-linejoin="round">
-    <animate attributeName="stroke-dashoffset" values="1;0;0;1" keyTimes="0;0.28;0.64;1" dur="5.5s" begin="0.2s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.2 1;0 0 1 1;0.4 0 0.2 1"/>
+    <animate attributeName="stroke-dashoffset" values="1;1;0;0;1;1" keyTimes="0;0.05;0.25;0.50;0.82;1" dur="7s" repeatCount="indefinite"/>
   </path>
   <path pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" d="M113.7 39.2188H5.81006V146.629H113.7V39.2188Z" stroke="#111" stroke-linecap="round" stroke-linejoin="round">
-    <animate attributeName="stroke-dashoffset" values="1;0;0;1" keyTimes="0;0.28;0.64;1" dur="5.5s" begin="0.4s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.2 1;0 0 1 1;0.4 0 0.2 1"/>
+    <animate attributeName="stroke-dashoffset" values="1;1;0;0;1;1" keyTimes="0;0.10;0.30;0.50;0.84;1" dur="7s" repeatCount="indefinite"/>
   </path>
   <path pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" d="M87.2031 65.5249H66.1768V86.4529H87.2031V65.5249Z" stroke="#111" stroke-linecap="round" stroke-linejoin="round">
-    <animate attributeName="stroke-dashoffset" values="1;0;0;1" keyTimes="0;0.28;0.64;1" dur="5.5s" begin="0.58s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.2 1;0 0 1 1;0.4 0 0.2 1"/>
+    <animate attributeName="stroke-dashoffset" values="1;1;0;0;1;1" keyTimes="0;0.15;0.34;0.50;0.86;1" dur="7s" repeatCount="indefinite"/>
   </path>
   <path pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" d="M66.5181 66.0903L87.167 86.019" stroke="#111">
-    <animate attributeName="stroke-dashoffset" values="1;0;0;1" keyTimes="0;0.28;0.64;1" dur="5.5s" begin="0.72s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.2 1;0 0 1 1;0.4 0 0.2 1"/>
+    <animate attributeName="stroke-dashoffset" values="1;1;0;0;1;1" keyTimes="0;0.18;0.37;0.50;0.87;1" dur="7s" repeatCount="indefinite"/>
   </path>
   <path pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" d="M86.8652 66.1665L66.2163 86.0952" stroke="#111">
-    <animate attributeName="stroke-dashoffset" values="1;0;0;1" keyTimes="0;0.28;0.64;1" dur="5.5s" begin="0.8s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.2 1;0 0 1 1;0.4 0 0.2 1"/>
+    <animate attributeName="stroke-dashoffset" values="1;1;0;0;1;1" keyTimes="0;0.20;0.39;0.50;0.88;1" dur="7s" repeatCount="indefinite"/>
   </path>
-  <path d="M11.67 140.399H0.5V151.519H11.67V140.399Z" fill="#111" stroke="#111" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M153.381 0.5H142.211V11.62H153.381V0.5Z" fill="#111" stroke="#111" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- corner nodes: appear LAST (after squares draw), leave FIRST (before erase) -->
+  <path d="M11.67 140.399H0.5V151.519H11.67V140.399Z" fill="#111" stroke="#111" stroke-linecap="round" stroke-linejoin="round" opacity="0">
+    <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.40;0.45;0.50;0.54;1" dur="7s" repeatCount="indefinite"/>
+  </path>
+  <path d="M153.381 0.5H142.211V11.62H153.381V0.5Z" fill="#111" stroke="#111" stroke-linecap="round" stroke-linejoin="round" opacity="0">
+    <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.42;0.47;0.50;0.54;1" dur="7s" repeatCount="indefinite"/>
+  </path>
 </svg>
