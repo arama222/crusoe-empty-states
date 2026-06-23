@@ -932,10 +932,9 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
     <div class="ph-l">
       <div class="ph-title-sans">Instances</div>
     </div>
-    <!-- Empty-state design tabs (Current vs Redesign vs Edge cases) -->
+    <!-- Empty-state design tabs (Redesign vs Edge cases) -->
     <div id="inst-tabs">
-      <button class="inst-tab active" data-tab="current" onclick="setInstancesTab('current')">Current</button>
-      <button class="inst-tab" data-tab="redesign" onclick="setInstancesTab('redesign')">Redesign</button>
+      <button class="inst-tab active" data-tab="redesign" onclick="setInstancesTab('redesign')">Redesign</button>
       <button class="inst-tab" data-tab="edge" onclick="setInstancesTab('edge')">Edge cases</button>
     </div>
     <div class="ph-r"></div>
@@ -1334,69 +1333,6 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
 </div><!-- /instances-mild -->
 
 <!-- ── SPICY (Motion-forward) ── -->
-<div id="instances-spicy">
-  <!-- Side-by-side hero: illustration left, text right -->
-  <div id="spicy-hero" style="display:flex;flex-direction:row;align-items:center;justify-content:flex-start;gap:48px;padding:24px 40px 20px 72px;min-height:200px;box-sizing:border-box;text-align:left;position:relative;overflow:hidden;background:var(--white)">
-    <!-- Illustration -->
-    <div id="spicy-cube-wrap" style="display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:1;position:relative;align-self:center">
-      <svg id="spicy-cube" width="204" height="158" viewBox="0 0 166.55 128.97" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:relative;z-index:1;overflow:hidden">
-        <path d="M143.43 96.41H161.12C161.92 96.41 162.75 96.53 163.52 96.18C164.12 95.91 164.75 96.04 165.14 96.42C165.56 96.82 165.14 97.2 164.88 97.6C163.91 99.07 162.88 100.53 161.86 101.98C159.15 105.81 156.46 109.64 153.75 113.47C150.75 117.74 147.81 122.03 144.72 126.26C143.76 127.57 142.3 128.49 139.84 128.48C94.52 128.4 49.22 128.42 3.9 128.42C3.02 128.42 1.85 128.68 1.41 127.93C1.04 127.29 0.49 126.61 0.6 125.82C0.62 125.66 0.6 125.51 0.6 125.35V35.11C0.6 33.55 1.07 32.15 2.03 30.69C4.53 26.89 7.11 23.13 9.59 19.34C13.54 13.32 17.69 7.38 21.6 1.34C21.82 1.01 22.11 0.64 22.66 0.5C22.97 0.61 23.27 0.74 23.24 1.09C22.9 4.52 23.12 7.97 23.1 11.4C23.05 18.55 23.1 89.24 23.1 96.4" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M23.05 1.24C38.06 16.83 121.42 106.9 136.61 122.41C138.09 123.92 140.21 126.05 142.39 127.37" stroke="black" stroke-miterlimit="10" stroke-dasharray="3 3"/>
-        <path d="M23.88 96.63C24.35 97.15 44.33 96.41 45.01 96.41H142.77" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M142.45 33.7C141.97 33.25 121.93 33.66 121.24 33.66C99.36 33.66 1.19 33.9 1.19 33.9" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M0.11 34.56C1.24 34.31 2.27 34.69 3.15 35.07C10.55 38.22 18.32 40.8 25.86 43.72C49.63 52.88 73.52 61.82 97.31 70.95C116.7 78.38 136.24 85.57 155.53 93.2C157.82 94.1 160.81 94.27 161.99 96.54" stroke="black" stroke-miterlimit="10" stroke-dasharray="3 3"/>
-        <path d="M143.28 33.57V127.37" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M1.55 128.11L25 95.59L83.7 65.46L84.54 65.03L165.97 1.13L144.1 33.5L83.93 66.34L1.55 128.11Z" stroke="black" stroke-linejoin="round" stroke-dasharray="3 3"/>
-        <path d="M12.58 81.75L153.13 49.83" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M165.45 1.63C166.19 2.1 166.05 2.76 166.05 3.39V94.43C166.05 94.95 166.07 95.47 165.45 95.83" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M22.35 0.58H165.77" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
-        <!-- Black dots at each end of the diagonal line -->
-        <circle cx="12.58" cy="81.75" r="2.8" fill="black"/>
-        <circle cx="153.13" cy="49.83" r="2.8" fill="black"/>
-      </svg>
-    </div>
-    <!-- Text block -->
-    <div style="position:relative;z-index:1;max-width:380px">
-      <h1 style="font-size:44px;font-weight:400;font-family:var(--font-heading);color:var(--text);letter-spacing:-1.2px;line-height:110%;margin:0 0 10px;white-space:nowrap"><span id="spicy-typed">No Instances Yet</span><span id="spicy-cursor" style="display:none;font-style:normal">|</span></h1>
-      <p style="font-size:14px;color:var(--muted);font-family:var(--font-body);line-height:160%;margin:0 0 16px">Spin up a GPU or CPU VM in under a minute. SSH in directly and start building.</p>
-      <a href="https://docs.crusoecloud.com/compute/virtual-machines/overview/" target="_blank" style="display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:500;font-family:var(--font-body);color:var(--muted);text-decoration:none;border:1px solid var(--border);border-radius:8px;padding:7px 13px;background:transparent;transition:color .15s ease,border-color .15s ease,background .15s ease" onmouseenter="this.style.color='var(--text)';this.style.borderColor='var(--gray-400)';this.style.background='var(--gray-50)'" onmouseleave="this.style.color='var(--muted)';this.style.borderColor='var(--border)';this.style.background='transparent'">View docs →</a>
-    </div>
-  </div>
-  <!-- Reservations -->
-  <div class="es-gap"></div>
-  <div class="pop-section spicy-reveal" style="margin-top:36px;padding-bottom:16px">
-    <div class="pop-title">Create from your reservations</div>
-    <div class="pop-grid">
-      <div class="pop-card med-res-card spicy-reveal" style="display:flex;flex-direction:column;gap:0;transition-delay:.08s">
-        <div class="pop-card-top" style="margin-bottom:10px">
-          <div class="pop-card-info"><div class="pop-card-name">H100 80GB SXM</div><div class="pop-card-price">6 of 32 GPUs in quota</div></div>
-          <span class="np-hover-hint">Details<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
-        </div>
-        <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Training · Multi-node</span></div>
-        <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createInstanceFromRes('h100',this)">Create instance</button><button class="btn btn-o btn-sm" onclick="copyResCli('h100')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
-        <div class="med-res-expand">State-of-the-art training &amp; inference. 80 GB HBM3 with NVLink + InfiniBand for multi-node runs. Best for LLM training, RLHF, and fine-tuning.</div>
-      </div>
-      <div class="pop-card med-res-card spicy-reveal" style="display:flex;flex-direction:column;gap:0;transition-delay:.14s">
-        <div class="pop-card-top" style="margin-bottom:10px">
-          <div class="pop-card-info"><div class="pop-card-name">H200 141GB</div><div class="pop-card-price">16 of 16 GPUs in quota</div></div>
-          <span class="np-hover-hint">Details<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
-        </div>
-        <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Inference · Large models</span></div>
-        <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createInstanceFromRes('h200',this)">Create instance</button><button class="btn btn-o btn-sm" onclick="copyResCli('h200')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
-        <div class="med-res-expand">Largest memory for massive models. 141 GB HBM3e — ideal for 70B+ parameter inference, long-context workloads, and MoE architectures.</div>
-      </div>
-      <div class="pop-card med-res-card spicy-reveal" style="display:flex;flex-direction:column;gap:0;transition-delay:.2s">
-        <div class="pop-card-top" style="margin-bottom:10px">
-          <div class="pop-card-info"><div class="pop-card-name">L40S 48GB</div><div class="pop-card-price">4 of 8 GPUs in quota</div></div>
-          <span class="np-hover-hint">Details<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
-        </div>
-        <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Inference · Fine-tuning</span></div>
-        <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createInstanceFromRes('l40s',this)">Create instance</button><button class="btn btn-o btn-sm" onclick="copyResCli('l40s')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
-        <div class="med-res-expand">Cost-efficient inference &amp; fine-tuning. 48 GB GDDR6, great for model serving, small-scale training, and multi-modal workloads.</div>
-      </div>
-    </div>
-  </div>
-</div><!-- /instances-spicy -->
 
 <!-- ── REDESIGN (empty-state concept addressing UX feedback) ── -->
 <div id="instances-redesign" style="display:none">
@@ -4061,7 +3997,8 @@ function showView(viewId, sbKey) {
       const filled = document.getElementById('instances-filled'); if (filled) filled.style.display = '';
     } else {
       // Restore the last-used sub-tab (Current / Redesign / Edge cases) and edge scenario
-      const savedTab = (function(){ try { return localStorage.getItem('lastInstTab'); } catch(e){ return null; } })() || 'current';
+      let savedTab = (function(){ try { return localStorage.getItem('lastInstTab'); } catch(e){ return null; } })() || 'redesign';
+      if (savedTab === 'current') savedTab = 'redesign';
       const savedEdge = (function(){ try { return parseInt(localStorage.getItem('lastEdgeState') || '0', 10); } catch(e){ return 0; } })();
       if (typeof setInstancesTab === 'function') setInstancesTab(savedTab);
       if (savedTab === 'edge' && typeof toggleEdgeState === 'function') toggleEdgeState(isNaN(savedEdge) ? 0 : savedEdge);
@@ -4626,6 +4563,7 @@ function createInstanceFromRes(gpuType, btn) {
 
 // ── Instances empty-state design tabs (Current vs Redesign) ──
 function setInstancesTab(tab) {
+  if (tab === 'current') tab = 'redesign';
   try { localStorage.setItem('lastInstTab', tab); } catch (e) {}
   const spicy = document.getElementById('instances-spicy');
   const redesign = document.getElementById('instances-redesign');
