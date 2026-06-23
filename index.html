@@ -932,16 +932,14 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
     <div class="ph-l">
       <div class="ph-title-sans">Instances</div>
     </div>
-    <!-- Empty-state design tabs (Redesign vs Edge cases) -->
+    <!-- Edge-cases toggle (Redesign is the default view) -->
     <div id="inst-tabs">
-      <button class="inst-tab active" data-tab="redesign" onclick="setInstancesTab('redesign')">Redesign</button>
-      <button class="inst-tab" data-tab="edge" onclick="setInstancesTab('edge')">Edge cases</button>
+      <button class="inst-tab" data-tab="edge" onclick="setInstancesTab(this.classList.contains('active')?'redesign':'edge')">Edge cases</button>
     </div>
     <div class="ph-r"></div>
   </div>
   <div class="divider"></div>
   <div class="ca">
-    <button id="rev-toggle" onclick="toggleReviewNotes(this)">Show review notes</button>
     <!-- ── MEDIUM (Informational) ── -->
 <div id="instances-medium" style="display:none">
   <!-- Empty state hero -->
@@ -2420,17 +2418,14 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
     <div class="ph-l">
       <div class="ph-title">Disks</div>
     </div>
-    <!-- Empty-state design tab (Redesign) -->
-    <div id="disks-tabs">
-      <button class="inst-tab active" data-tab="redesign" onclick="setDisksTab('redesign')">Redesign</button>
-    </div>
+    <!-- (Redesign tab removed — redesign is the only Disks view) -->
+    <div id="disks-tabs" style="display:none"></div>
     <div class="ph-r">
       <button class="btn btn-p"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.99967 3.33337V12.6667M3.33301 8.00004H12.6663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Create Disk</button>
     </div>
   </div>
   <div class="divider"></div>
   <div class="ca">
-    <button id="disks-rev-toggle" onclick="toggleDisksNotes(this)" style="display:none">Show review notes</button>
     <!-- Empty state -->
     <div id="disks-empty" style="display:none">
       <div class="ecard">
