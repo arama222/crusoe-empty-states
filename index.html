@@ -750,8 +750,10 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
 #view-sshkeys.active > .ca::after,
 #instances-spicy::after,#clusters-spicy::after,#slurm-spicy::after,#disks-spicy::after,#apikey-empty::after{content:'';flex:2.6 1 0;min-height:54px}
 /* middle spacer (inserted in markup before each pop-section) */
-.es-gap{flex:1 1 0;min-height:0}
+.es-gap{flex:0 0 32px;min-height:32px}
 #instances-medium,#instances-mild{margin:auto 0}
+/* Scale the redesign empty state down slightly so the 3 cards fit comfortably */
+#instances-redesign{zoom:.9}
 /* ── Instances "Redesign" tab ── */
 #inst-tabs,#disks-tabs{flex-shrink:0;display:flex;gap:4px;padding:2px;margin:0;align-self:center;background:var(--gray-50);border:1px solid var(--border);border-radius:9px;width:fit-content}
 #inst-tabs .inst-tab,#disks-tabs .inst-tab{font-size:12.5px;font-weight:500;font-family:var(--font-body);color:var(--muted);background:transparent;border:none;border-radius:7px;padding:6px 16px;cursor:pointer;transition:color .15s ease,background .15s ease}
