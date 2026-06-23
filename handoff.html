@@ -2420,10 +2420,9 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
     <div class="ph-l">
       <div class="ph-title">Disks</div>
     </div>
-    <!-- Empty-state design tabs (Current vs Redesign) -->
+    <!-- Empty-state design tab (Redesign) -->
     <div id="disks-tabs">
-      <button class="inst-tab active" data-tab="current" onclick="setDisksTab('current')">Current</button>
-      <button class="inst-tab" data-tab="redesign" onclick="setDisksTab('redesign')">Redesign</button>
+      <button class="inst-tab active" data-tab="redesign" onclick="setDisksTab('redesign')">Redesign</button>
     </div>
     <div class="ph-r">
       <button class="btn btn-p"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.99967 3.33337V12.6667M3.33301 8.00004H12.6663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Create Disk</button>
@@ -2478,58 +2477,6 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
     </div><!-- /disks-empty -->
 
     <!-- Spicy state -->
-    <div id="disks-spicy">
-      <!-- Side-by-side hero: animation left, text right -->
-      <div id="disk-spicy-hero" style="display:flex;flex-direction:row;align-items:center;justify-content:flex-start;gap:48px;padding:24px 40px 20px 72px;min-height:200px;box-sizing:border-box;text-align:left;position:relative;overflow:hidden;background:var(--white)">
-        <!-- Illustration -->
-        <div id="disk-illus-wrap" style="display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:1;position:relative">
-          <svg id="disk-spicy-svg" width="165" height="165" viewBox="0 0 150.588 150.588" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:relative;z-index:1;overflow:visible">
-            <path id="disk-e0" d="M75.2938 150.088C116.601 150.088 150.088 116.601 150.088 75.2938C150.088 33.9863 116.601 0.5 75.2938 0.5C33.9863 0.5 0.5 33.9863 0.5 75.2938C0.5 116.601 33.9863 150.088 75.2938 150.088Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
-            <path id="disk-e1" transform="translate(0,16.149)" d="M75.2938 117.79C116.601 117.79 150.088 91.5341 150.088 59.1452C150.088 26.7564 116.601 0.5 75.2938 0.5C33.9863 0.5 0.5 26.7564 0.5 59.1452C0.5 91.5341 33.9863 117.79 75.2938 117.79Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
-            <path id="disk-e2" transform="translate(0,32.307)" d="M75.2938 85.4742C116.601 85.4742 150.088 66.4521 150.088 42.9871C150.088 19.5221 116.601 0.5 75.2938 0.5C33.9863 0.5 0.5 19.5221 0.5 42.9871C0.5 66.4521 33.9863 85.4742 75.2938 85.4742Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
-            <path id="disk-e3" transform="translate(0,48.455)" d="M75.2938 53.1771C116.601 53.1771 150.088 41.3849 150.088 26.8385C150.088 12.2922 116.601 0.5 75.2938 0.5C33.9863 0.5 0.5 12.2922 0.5 26.8385C0.5 41.3849 33.9863 53.1771 75.2938 53.1771Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
-            <path id="disk-e4" transform="translate(0,64.604)" d="M75.2938 20.88C116.601 20.88 150.088 16.3178 150.088 10.69C150.088 5.06222 116.601 0.5 75.2938 0.5C33.9863 0.5 0.5 5.06222 0.5 10.69C0.5 16.3178 33.9863 20.88 75.2938 20.88Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </div>
-        <!-- Text block -->
-        <div style="position:relative;z-index:1;max-width:380px">
-          <h1 style="font-size:44px;font-weight:400;font-family:var(--font-heading);color:var(--text);letter-spacing:-1.2px;line-height:110%;margin:0 0 10px;white-space:nowrap"><span id="disk-typed">No Disks Yet</span><span id="disk-cursor" style="display:none;font-style:normal">|</span></h1>
-          <p style="font-size:14px;color:var(--muted);font-family:var(--font-body);line-height:160%;margin:0 0 16px">Crusoe Cloud offers three types of disks: Ephemeral Disks, Persistent Disks and Shared Disks.</p>
-          <div style="display:flex;align-items:center;gap:18px"><button class="btn btn-p"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.99967 3.33337V12.6667M3.33301 8.00004H12.6663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Create Disk</button><a href="https://docs.crusoecloud.com/storage/disks/" target="_blank" style="font-size:13px;color:var(--muted);text-decoration:underline;text-underline-offset:3px;font-family:var(--font-body);transition:color .15s ease" onmouseenter="this.style.color='var(--text)'" onmouseleave="this.style.color='var(--muted)'">View docs →</a></div>
-        </div>
-      </div>
-      <!-- Disk type cards -->
-      <div class="es-gap"></div>
-      <div class="pop-section disk-spicy-reveal" style="margin-top:36px;padding-bottom:16px">
-        <div class="pop-title">Choose your disk type</div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;overflow:visible;align-items:start">
-          <div class="pop-card med-res-card disk-spicy-reveal" style="transition-delay:.08s">
-
-            <div class="pop-card-top" style="margin-bottom:10px">
-              <div class="pop-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="13" fill="#111"/><text x="14" y="18.5" text-anchor="middle" fill="white" font-size="13" font-weight="700" font-family="sans-serif">1</text></svg></div>
-              <div class="pop-card-info"><div class="pop-card-name">Persistent disk</div><div class="pop-card-price">1 GiB – 10 TiB · $0.08/GiB/mo</div></div>
-          <span class="np-hover-hint">Details<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
-            </div>
-            <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Single VM · Block storage</span></div>
-            
-        <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create persistent disk</button></div>
-        <div class="med-res-expand"><div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">Attach to one VM in read-write mode, or multiple VMs read-only. Up to 16 per instance. Attach and detach while running or stopped — unmount before detaching.</div></div>
-          </div>
-          <div class="pop-card med-res-card disk-spicy-reveal" style="transition-delay:.14s">
-
-            <div class="pop-card-top" style="margin-bottom:10px">
-              <div class="pop-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="13" fill="#111"/><text x="14" y="18.5" text-anchor="middle" fill="white" font-size="13" font-weight="700" font-family="sans-serif">2</text></svg></div>
-              <div class="pop-card-info"><div class="pop-card-name">Shared disk</div><div class="pop-card-price">1 TiB – 1000 TiB · $0.07/GiB/mo</div></div>
-          <span class="np-hover-hint">Details<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
-            </div>
-            <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Multi-VM · NFS</span></div>
-            
-        <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create shared disk</button></div>
-        <div class="med-res-expand"><div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">Concurrent NFS access from many VMs at once. Up to 8 per instance, in 1 TiB increments. Max 36-character name. Data preserved until explicitly deleted.</div></div>
-          </div>
-        </div>
-      </div>
-    </div><!-- /disks-spicy -->
 
     <!-- Redesign state (feedback-driven copy changes) -->
     <div id="disks-redesign" style="display:none">
@@ -2554,8 +2501,8 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
       <div class="es-gap"></div>
       <div class="pop-section" style="margin-top:36px;padding-bottom:16px">
         <div class="pop-title">Choose your disk type</div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:stretch;max-width:760px;margin:0 auto">
-          <div class="pop-card med-res-card" style="display:flex;flex-direction:column;gap:0;min-width:0">
+        <div class="pop-grid">
+          <div class="pop-card med-res-card" style="display:flex;flex-direction:column;gap:0">
             <div class="pop-card-top" style="margin-bottom:10px;align-items:center">
               <div class="pop-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="13" fill="#111"/><text x="14" y="18.5" text-anchor="middle" fill="white" font-size="13" font-weight="700" font-family="sans-serif">1</text></svg></div>
               <div class="pop-card-info"><div class="pop-card-name">Persistent Disks</div><div class="pop-card-price">1 GiB – 10 TiB · $0.08/GiB/mo</div></div>
@@ -2563,7 +2510,7 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
             <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Single VM · Block storage</span></div>
             <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create Persistent Disks<span class="rev-note">4</span></button></div><div class="med-res-expand"><div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">Attach to one VM in read-write mode. Up to 16 per instance including OS Disk. Attach and detach while running or stopped — unmount before detaching.<span class="rev-note">3</span></div></div>
           </div>
-          <div class="pop-card med-res-card" style="display:flex;flex-direction:column;gap:0;min-width:0">
+          <div class="pop-card med-res-card" style="display:flex;flex-direction:column;gap:0">
             <div class="pop-card-top" style="margin-bottom:10px;align-items:center">
               <div class="pop-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="13" fill="#111"/><text x="14" y="18.5" text-anchor="middle" fill="white" font-size="13" font-weight="700" font-family="sans-serif">2</text></svg></div>
               <div class="pop-card-info"><div class="pop-card-name">Shared Disks</div><div class="pop-card-price">1 TiB – 1000 TiB · $0.07/GiB/mo</div></div>
@@ -3041,15 +2988,15 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
       <!-- Animated illustration -->
       <div id="apikey-illus-wrap" style="display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:1;position:relative">
         <svg id="apikey-spicy-svg" width="165" height="165" viewBox="-2 -2 155 155" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:relative;z-index:1">
-          <g id="apikey-outer-ring" class="keys-outer-spin">
+          <!-- One rigid rotation: outer circle, inner dashed circle, and both cross lines spin together -->
+          <g id="apikey-ring" class="keys-outer-spin">
             <circle cx="75.5" cy="75.5" r="75" stroke="black" stroke-miterlimit="10"/>
+            <circle cx="75.5" cy="75.5" r="49.333" stroke="black" stroke-miterlimit="10" stroke-dasharray="3 3"/>
             <line x1="75.5" y1="0.5" x2="75.5" y2="150.5" stroke="black" stroke-miterlimit="10" stroke-dasharray="3 3"/>
             <line x1="0.5" y1="75.5" x2="150.5" y2="75.5" stroke="black" stroke-miterlimit="10" stroke-dasharray="3 3"/>
           </g>
-          <g id="apikey-inner-ring" class="keys-inner-spin">
-            <circle cx="75.5" cy="75.5" r="49.333" stroke="black" stroke-miterlimit="10" stroke-dasharray="3 3"/>
-            <rect x="54.85" y="54.85" width="41.3" height="41.3" stroke="black" stroke-miterlimit="10" transform="rotate(45 75.5 75.5)"/>
-          </g>
+          <!-- Static diamond in the middle — stays still -->
+          <rect x="54.85" y="54.85" width="41.3" height="41.3" stroke="black" stroke-miterlimit="10" transform="rotate(45 75.5 75.5)"/>
         </svg>
       </div>
       <!-- Text block -->
@@ -4017,7 +3964,7 @@ function showView(viewId, sbKey) {
     window._slurmWavesStarted = false; window._slurmRipplesStarted = false;
     setTimeout(initSlurmSpicyMagic, 60);
   } else if (viewId === 'disks') {
-    const savedDisksTab = (function(){ try { return localStorage.getItem('lastDisksTab'); } catch(e){ return null; } })() || 'current';
+    const savedDisksTab = 'redesign';
     if (typeof setDisksTab === 'function') setDisksTab(savedDisksTab);
     setTimeout(initDiskSpicyMagic, 60);
   } else if (viewId === 'buckets') {
@@ -4594,6 +4541,7 @@ function setInstancesTab(tab) {
 }
 
 function setDisksTab(tab) {
+  if (tab === 'current') tab = 'redesign';
   try { localStorage.setItem('lastDisksTab', tab); } catch (e) {}
   const cur = document.getElementById('disks-spicy');
   const rdz = document.getElementById('disks-redesign');
