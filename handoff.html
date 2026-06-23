@@ -1494,7 +1494,10 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
       <div style="position:relative;z-index:1;max-width:520px">
         <h1 style="font-size:44px;font-weight:400;font-family:var(--font-heading);color:var(--text);letter-spacing:-1.2px;line-height:110%;margin:0 0 10px;white-space:nowrap">No Templates Yet</h1>
         <p style="font-size:14px;color:var(--muted);font-family:var(--font-body);line-height:160%;margin:0 0 16px">Save a full VM configuration — instance type, image, disks, SSH keys, and network — then launch identical VMs in one command.</p>
-        <a href="https://docs.crusoecloud.com/compute/templates/" target="_blank" style="display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:500;font-family:var(--font-body);color:var(--muted);text-decoration:none;border:1px solid var(--border);border-radius:8px;padding:7px 13px;background:transparent;transition:color .15s ease,border-color .15s ease,background .15s ease" onmouseenter="this.style.color='var(--text)';this.style.borderColor='var(--gray-400)';this.style.background='var(--gray-50)'" onmouseleave="this.style.color='var(--muted)';this.style.borderColor='var(--border)';this.style.background='transparent'">View docs →</a>
+        <div style="display:flex;align-items:center;gap:16px">
+          <button class="btn btn-p"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.99967 3.33337V12.6667M3.33301 8.00004H12.6663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Create Template</button>
+          <a href="https://docs.crusoecloud.com/compute/templates/" target="_blank" style="font-size:13px;color:var(--muted);text-decoration:underline;text-underline-offset:3px;font-family:var(--font-body);transition:color .15s ease" onmouseenter="this.style.color='var(--text)'" onmouseleave="this.style.color='var(--muted)'">View docs →</a>
+        </div>
       </div>
     </div>
     <!-- Popular templates -->
@@ -1561,7 +1564,10 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
       <div style="position:relative;z-index:1;max-width:380px">
         <h1 style="font-size:44px;font-weight:400;font-family:var(--font-heading);color:var(--text);letter-spacing:-1.2px;line-height:110%;margin:0 0 10px;white-space:nowrap">No Groups Yet</h1>
         <p style="font-size:14px;color:var(--muted);font-family:var(--font-body);line-height:160%;margin:0 0 16px">Start, stop, and scale related instances together and apply one template across the whole set — ideal for fleets of identical nodes.</p>
-        <a href="https://docs.crusoecloud.com/compute/instance-groups" target="_blank" style="display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:500;font-family:var(--font-body);color:var(--muted);text-decoration:none;border:1px solid var(--border);border-radius:8px;padding:7px 13px;background:transparent;transition:color .15s ease,border-color .15s ease,background .15s ease" onmouseenter="this.style.color='var(--text)';this.style.borderColor='var(--gray-400)';this.style.background='var(--gray-50)'" onmouseleave="this.style.color='var(--muted)';this.style.borderColor='var(--border)';this.style.background='transparent'">View docs →</a>
+        <div style="display:flex;align-items:center;gap:16px">
+          <button class="btn btn-p"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.99967 3.33337V12.6667M3.33301 8.00004H12.6663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Create Group</button>
+          <a href="https://docs.crusoecloud.com/compute/instance-groups" target="_blank" style="font-size:13px;color:var(--muted);text-decoration:underline;text-underline-offset:3px;font-family:var(--font-body);transition:color .15s ease" onmouseenter="this.style.color='var(--text)'" onmouseleave="this.style.color='var(--muted)'">View docs →</a>
+        </div>
       </div>
     </div>
     <div class="es-gap"></div>
@@ -1627,7 +1633,10 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
       <div style="position:relative;z-index:1;max-width:380px">
         <h1 style="font-size:44px;font-weight:400;font-family:var(--font-heading);color:var(--text);letter-spacing:-1.2px;line-height:110%;margin:0 0 10px;white-space:nowrap">No Custom Images Yet</h1>
         <p style="font-size:14px;color:var(--muted);font-family:var(--font-body);line-height:160%;margin:0 0 16px">Capture the boot disk of a stopped VM as a reusable base image — project- and region-specific, for launching identical instances.</p>
-        <a href="https://docs.crusoecloud.com/compute/images/overview/" target="_blank" style="display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:500;font-family:var(--font-body);color:var(--muted);text-decoration:none;border:1px solid var(--border);border-radius:8px;padding:7px 13px;background:transparent;transition:color .15s ease,border-color .15s ease,background .15s ease" onmouseenter="this.style.color='var(--text)';this.style.borderColor='var(--gray-400)';this.style.background='var(--gray-50)'" onmouseleave="this.style.color='var(--muted)';this.style.borderColor='var(--border)';this.style.background='transparent'">View docs →</a>
+        <div style="display:flex;align-items:center;gap:16px">
+          <button class="btn btn-p"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.99967 3.33337V12.6667M3.33301 8.00004H12.6663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Create Image</button>
+          <a href="https://docs.crusoecloud.com/compute/images/overview/" target="_blank" style="font-size:13px;color:var(--muted);text-decoration:underline;text-underline-offset:3px;font-family:var(--font-body);transition:color .15s ease" onmouseenter="this.style.color='var(--text)'" onmouseleave="this.style.color='var(--muted)'">View docs →</a>
+        </div>
       </div>
     </div>
     <div class="es-gap"></div>
