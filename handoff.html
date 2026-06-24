@@ -213,7 +213,7 @@ html,body{height:100%;background:var(--white);color:var(--black);font-family:'Su
 .main{flex:1;overflow-y:auto;background:var(--white);display:flex;flex-direction:column}
 
 /* ── Page header ── */
-.ph{padding:20px 12px 12px;display:flex;align-items:flex-start;justify-content:space-between;gap:16px}
+.ph{padding:20px 12px 12px;display:flex;align-items:center;justify-content:space-between;gap:16px}
 .ph-l{display:flex;flex-direction:column;gap:2px}
 /* Page titles: CDS h4 — ABC Diatype Mono, 24px, 400, 115%, ls -0.48px */
 .ph-title{font-family:var(--font-heading);font-size:24px;font-weight:400;line-height:125%;letter-spacing:-0.96px;color:var(--text);text-transform:capitalize}
@@ -934,9 +934,20 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
     <div class="ph-l">
       <div class="ph-title-sans">Instances</div>
     </div>
-    <!-- Edge-cases toggle (Redesign is the default view) -->
-    <div id="inst-tabs">
-      <button class="inst-tab" data-tab="edge" onclick="setInstancesTab(this.classList.contains('active')?'redesign':'edge')">Edge cases</button>
+    <!-- Edge-cases toggle + capacity-scenario sub-toggle (shown only on Edge cases) -->
+    <div style="display:flex;align-items:center;gap:14px">
+      <div id="inst-tabs">
+        <button class="inst-tab" data-tab="edge" onclick="setInstancesTab(this.classList.contains('active')?'redesign':'edge')">Edge cases</button>
+      </div>
+      <div id="inst-cap-toggle" style="display:none;align-items:center;gap:10px">
+        <div class="state-toggle">
+          <button class="state-toggle-btn active" onclick="toggleEdgeState(0)">On demand</button>
+          <button class="state-toggle-btn" onclick="toggleEdgeState(1)">Reservation</button>
+          <button class="state-toggle-btn" onclick="toggleEdgeState(2)">Reservation + on-demand</button>
+          <button class="state-toggle-btn" onclick="toggleEdgeState(3)">No payment method</button>
+          <button class="state-toggle-btn" onclick="toggleEdgeState(4)">Simple state</button>
+        </div>
+      </div>
     </div>
     <div class="ph-r"></div>
   </div>
@@ -1012,20 +1023,8 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
 
 <!-- ── EDGE CASES ── -->
 <div id="instances-edge" style="display:none">
-  <!-- Sub-toggle: capacity scenarios (driven by the reviewer's feedback) -->
-  <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap">
-    <span style="font-size:12px;font-weight:500;color:var(--muted);font-family:var(--font-body)">Capacity scenario:<span class="rev-note">1</span></span>
-    <div class="state-toggle" style="margin-left:0">
-      <button class="state-toggle-btn active" onclick="toggleEdgeState(0)">On demand</button>
-      <button class="state-toggle-btn" onclick="toggleEdgeState(1)">Reservation</button>
-      <button class="state-toggle-btn" onclick="toggleEdgeState(2)">Reservation + on-demand</button>
-      <button class="state-toggle-btn" onclick="toggleEdgeState(3)">No payment method</button>
-      <button class="state-toggle-btn" onclick="toggleEdgeState(4)">Simple state</button>
-    </div>
-  </div>
-
   <!-- Shared hero (hidden for state 3 "No access", which has its own) -->
-  <div id="edge-shared-hero" style="display:flex;flex-direction:row;align-items:center;justify-content:flex-start;gap:48px;padding:24px 40px 20px 72px;min-height:200px;box-sizing:border-box;text-align:left;position:relative;overflow:hidden;background:var(--white)">
+  <div id="edge-shared-hero" style="display:flex;flex-direction:row;align-items:center;justify-content:center;gap:48px;padding:24px 40px 20px 40px;min-height:200px;box-sizing:border-box;text-align:left;position:relative;overflow:hidden;background:var(--white)">
     <div style="display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:1;position:relative">
       <svg id="edge-cube" width="204" height="158" viewBox="0 0 166.55 128.97" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:relative;z-index:1;overflow:hidden">
         <path d="M143.43 96.41H161.12C161.92 96.41 162.75 96.53 163.52 96.18C164.12 95.91 164.75 96.04 165.14 96.42C165.56 96.82 165.14 97.2 164.88 97.6C163.91 99.07 162.88 100.53 161.86 101.98C159.15 105.81 156.46 109.64 153.75 113.47C150.75 117.74 147.81 122.03 144.72 126.26C143.76 127.57 142.3 128.49 139.84 128.48C94.52 128.4 49.22 128.42 3.9 128.42C3.02 128.42 1.85 128.68 1.41 127.93C1.04 127.29 0.49 126.61 0.6 125.82C0.62 125.66 0.6 125.51 0.6 125.35V35.11C0.6 33.55 1.07 32.15 2.03 30.69C4.53 26.89 7.11 23.13 9.59 19.34C13.54 13.32 17.69 7.38 21.6 1.34C21.82 1.01 22.11 0.64 22.66 0.5C22.97 0.61 23.27 0.74 23.24 1.09C22.9 4.52 23.12 7.97 23.1 11.4C23.05 18.55 23.1 89.24 23.1 96.4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
@@ -1135,7 +1134,7 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
 
   <!-- ══ STATE 3 · New account, no payment method (regular page → payment methods) ══ -->
   <div id="edge-3" style="display:none">
-    <div style="display:flex;flex-direction:row;align-items:center;justify-content:flex-start;gap:48px;padding:24px 40px 20px 72px;min-height:200px;box-sizing:border-box;text-align:left;position:relative;overflow:hidden;background:var(--white)">
+    <div style="display:flex;flex-direction:row;align-items:center;justify-content:center;gap:48px;padding:24px 40px 20px 40px;min-height:200px;box-sizing:border-box;text-align:left;position:relative;overflow:hidden;background:var(--white)">
       <div style="display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:1;position:relative">
         <svg id="edge-cube-3" width="204" height="158" viewBox="0 0 166.55 128.97" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:relative;z-index:1;overflow:hidden">
           <path d="M143.43 96.41H161.12C161.92 96.41 162.75 96.53 163.52 96.18C164.12 95.91 164.75 96.04 165.14 96.42C165.56 96.82 165.14 97.2 164.88 97.6C163.91 99.07 162.88 100.53 161.86 101.98C159.15 105.81 156.46 109.64 153.75 113.47C150.75 117.74 147.81 122.03 144.72 126.26C143.76 127.57 142.3 128.49 139.84 128.48C94.52 128.4 49.22 128.42 3.9 128.42C3.02 128.42 1.85 128.68 1.41 127.93C1.04 127.29 0.49 126.61 0.6 125.82C0.62 125.66 0.6 125.51 0.6 125.35V35.11C0.6 33.55 1.07 32.15 2.03 30.69C4.53 26.89 7.11 23.13 9.59 19.34C13.54 13.32 17.69 7.38 21.6 1.34C21.82 1.01 22.11 0.64 22.66 0.5C22.97 0.61 23.27 0.74 23.24 1.09C22.9 4.52 23.12 7.97 23.1 11.4C23.05 18.55 23.1 89.24 23.1 96.4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
@@ -1189,7 +1188,7 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
 
   <!-- ══ STATE 4 · Simple state (hero + CTA only, no capacity cards) ══ -->
   <div id="edge-4" style="display:none">
-    <div style="display:flex;flex-direction:row;align-items:center;justify-content:flex-start;gap:48px;padding:24px 40px 20px 72px;min-height:200px;box-sizing:border-box;text-align:left;position:relative;overflow:hidden;background:var(--white)">
+    <div style="display:flex;flex-direction:row;align-items:center;justify-content:center;gap:48px;padding:24px 40px 20px 40px;min-height:200px;box-sizing:border-box;text-align:left;position:relative;overflow:hidden;background:var(--white)">
       <div style="display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:1;position:relative">
         <svg id="edge-cube-4" width="204" height="158" viewBox="0 0 166.55 128.97" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:relative;z-index:1;overflow:hidden">
           <path d="M143.43 96.41H161.12C161.92 96.41 162.75 96.53 163.52 96.18C164.12 95.91 164.75 96.04 165.14 96.42C165.56 96.82 165.14 97.2 164.88 97.6C163.91 99.07 162.88 100.53 161.86 101.98C159.15 105.81 156.46 109.64 153.75 113.47C150.75 117.74 147.81 122.03 144.72 126.26C143.76 127.57 142.3 128.49 139.84 128.48C94.52 128.4 49.22 128.42 3.9 128.42C3.02 128.42 1.85 128.68 1.41 127.93C1.04 127.29 0.49 126.61 0.6 125.82C0.62 125.66 0.6 125.51 0.6 125.35V35.11C0.6 33.55 1.07 32.15 2.03 30.69C4.53 26.89 7.11 23.13 9.59 19.34C13.54 13.32 17.69 7.38 21.6 1.34C21.82 1.01 22.11 0.64 22.66 0.5C22.97 0.61 23.27 0.74 23.24 1.09C22.9 4.52 23.12 7.97 23.1 11.4C23.05 18.55 23.1 89.24 23.1 96.4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
@@ -1337,7 +1336,7 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
 <!-- ── REDESIGN (empty-state concept addressing UX feedback) ── -->
 <div id="instances-redesign" style="display:none">
   <!-- Hero -->
-  <div style="display:flex;flex-direction:row;align-items:center;justify-content:flex-start;gap:48px;padding:24px 40px 20px 72px;min-height:200px;box-sizing:border-box;text-align:left;position:relative;overflow:hidden;background:var(--white)">
+  <div style="display:flex;flex-direction:row;align-items:center;justify-content:center;gap:48px;padding:24px 40px 20px 40px;min-height:200px;box-sizing:border-box;text-align:left;position:relative;overflow:hidden;background:var(--white)">
     <div style="display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:1;position:relative">
       <svg id="redesign-cube" width="204" height="158" viewBox="0 0 166.55 128.97" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:relative;z-index:1;overflow:hidden">
         <path d="M143.43 96.41H161.12C161.92 96.41 162.75 96.53 163.52 96.18C164.12 95.91 164.75 96.04 165.14 96.42C165.56 96.82 165.14 97.2 164.88 97.6C163.91 99.07 162.88 100.53 161.86 101.98C159.15 105.81 156.46 109.64 153.75 113.47C150.75 117.74 147.81 122.03 144.72 126.26C143.76 127.57 142.3 128.49 139.84 128.48C94.52 128.4 49.22 128.42 3.9 128.42C3.02 128.42 1.85 128.68 1.41 127.93C1.04 127.29 0.49 126.61 0.6 125.82C0.62 125.66 0.6 125.51 0.6 125.35V35.11C0.6 33.55 1.07 32.15 2.03 30.69C4.53 26.89 7.11 23.13 9.59 19.34C13.54 13.32 17.69 7.38 21.6 1.34C21.82 1.01 22.11 0.64 22.66 0.5C22.97 0.61 23.27 0.74 23.24 1.09C22.9 4.52 23.12 7.97 23.1 11.4C23.05 18.55 23.1 89.24 23.1 96.4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
@@ -1472,7 +1471,7 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
   <div class="divider"></div>
   <div class="ca">
     <!-- Side-by-side hero: same cube animation as instances -->
-    <div style="display:flex;flex-direction:row;align-items:center;justify-content:flex-start;gap:48px;padding:24px 40px 20px 72px;min-height:200px;box-sizing:border-box;text-align:left;position:relative;overflow:hidden;background:var(--white)">
+    <div style="display:flex;flex-direction:row;align-items:center;justify-content:center;gap:48px;padding:24px 40px 20px 40px;min-height:200px;box-sizing:border-box;text-align:left;position:relative;overflow:hidden;background:var(--white)">
       <!-- Illustration — same cube SVG, different IDs -->
       <div style="display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:1;position:relative;align-self:center">
         <svg id="tmpl-cube" width="204" height="158" viewBox="0 0 166.55 128.97" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:relative;z-index:1;overflow:hidden">
@@ -1544,7 +1543,7 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
   </div>
   <div class="divider"></div>
   <div class="ca">
-    <div style="display:flex;flex-direction:row;align-items:center;justify-content:flex-start;gap:48px;padding:24px 40px 20px 72px;min-height:200px;box-sizing:border-box;text-align:left;position:relative;overflow:hidden;background:var(--white)">
+    <div style="display:flex;flex-direction:row;align-items:center;justify-content:center;gap:48px;padding:24px 40px 20px 40px;min-height:200px;box-sizing:border-box;text-align:left;position:relative;overflow:hidden;background:var(--white)">
       <div style="display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:1;position:relative;align-self:center">
         <svg id="groups-cube" width="204" height="158" viewBox="0 0 166.55 128.97" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:relative;z-index:1;overflow:hidden">
           <path d="M143.43 96.41H161.12C161.92 96.41 162.75 96.53 163.52 96.18C164.12 95.91 164.75 96.04 165.14 96.42C165.56 96.82 165.14 97.2 164.88 97.6C163.91 99.07 162.88 100.53 161.86 101.98C159.15 105.81 156.46 109.64 153.75 113.47C150.75 117.74 147.81 122.03 144.72 126.26C143.76 127.57 142.3 128.49 139.84 128.48C94.52 128.4 49.22 128.42 3.9 128.42C3.02 128.42 1.85 128.68 1.41 127.93C1.04 127.29 0.49 126.61 0.6 125.82C0.62 125.66 0.6 125.51 0.6 125.35V35.11C0.6 33.55 1.07 32.15 2.03 30.69C4.53 26.89 7.11 23.13 9.59 19.34C13.54 13.32 17.69 7.38 21.6 1.34C21.82 1.01 22.11 0.64 22.66 0.5C22.97 0.61 23.27 0.74 23.24 1.09C22.9 4.52 23.12 7.97 23.1 11.4C23.05 18.55 23.1 89.24 23.1 96.4" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
@@ -1613,7 +1612,7 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
   </div>
   <div class="divider"></div>
   <div class="ca">
-    <div style="display:flex;flex-direction:row;align-items:center;justify-content:flex-start;gap:48px;padding:24px 40px 20px 72px;min-height:200px;box-sizing:border-box;text-align:left;position:relative;overflow:hidden;background:var(--white)">
+    <div style="display:flex;flex-direction:row;align-items:center;justify-content:center;gap:48px;padding:24px 40px 20px 40px;min-height:200px;box-sizing:border-box;text-align:left;position:relative;overflow:hidden;background:var(--white)">
       <div style="display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:1;position:relative;align-self:center">
         <svg id="images-cube" width="204" height="158" viewBox="0 0 166.55 128.97" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:relative;z-index:1;overflow:hidden">
           <path d="M143.43 96.41H161.12C161.92 96.41 162.75 96.53 163.52 96.18C164.12 95.91 164.75 96.04 165.14 96.42C165.56 96.82 165.14 97.2 164.88 97.6C163.91 99.07 162.88 100.53 161.86 101.98C159.15 105.81 156.46 109.64 153.75 113.47C150.75 117.74 147.81 122.03 144.72 126.26C143.76 127.57 142.3 128.49 139.84 128.48C94.52 128.4 49.22 128.42 3.9 128.42C3.02 128.42 1.85 128.68 1.41 127.93C1.04 127.29 0.49 126.61 0.6 125.82C0.62 125.66 0.6 125.51 0.6 125.35V35.11C0.6 33.55 1.07 32.15 2.03 30.69C4.53 26.89 7.11 23.13 9.59 19.34C13.54 13.32 17.69 7.38 21.6 1.34C21.82 1.01 22.11 0.64 22.66 0.5C22.97 0.61 23.27 0.74 23.24 1.09C22.9 4.52 23.12 7.97 23.1 11.4C23.05 18.55 23.1 89.24 23.1 96.4" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
@@ -1813,7 +1812,7 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
 <!-- ── SPICY (motion-forward) ── -->
 <div id="clusters-spicy">
   <!-- Side-by-side hero: illustration left, text right -->
-  <div id="cluster-spicy-hero" style="display:flex;flex-direction:row;align-items:center;justify-content:flex-start;gap:48px;padding:24px 40px 20px 72px;min-height:200px;box-sizing:border-box;text-align:left;position:relative;overflow:hidden;background:var(--white)">
+  <div id="cluster-spicy-hero" style="display:flex;flex-direction:row;align-items:center;justify-content:center;gap:48px;padding:24px 40px 20px 40px;min-height:200px;box-sizing:border-box;text-align:left;position:relative;overflow:hidden;background:var(--white)">
     <!-- Illustration -->
     <div id="cluster-illus-wrap" style="display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:1;position:relative;height:158px;overflow:visible">
       <svg id="cluster-node-ripples" width="480" height="480" viewBox="0 0 153.881 152.019" fill="none" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);pointer-events:none;z-index:2;overflow:visible"></svg>
@@ -2331,7 +2330,7 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
 <!-- ── SPICY (motion-forward) ── -->
 <div id="slurm-spicy">
   <!-- Side-by-side hero: illustration left, text right -->
-  <div id="slurm-spicy-hero" style="display:flex;flex-direction:row;align-items:center;justify-content:flex-start;gap:48px;padding:24px 40px 20px 72px;min-height:200px;box-sizing:border-box;text-align:left;position:relative;overflow:hidden;background:var(--white)">
+  <div id="slurm-spicy-hero" style="display:flex;flex-direction:row;align-items:center;justify-content:center;gap:48px;padding:24px 40px 20px 40px;min-height:200px;box-sizing:border-box;text-align:left;position:relative;overflow:hidden;background:var(--white)">
     <!-- Illustration -->
     <div id="slurm-illus-wrap" style="display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:1;position:relative;height:158px;overflow:visible">
       <svg id="slurm-node-ripples" width="480" height="480" viewBox="0 0 153.881 152.019" fill="none" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);pointer-events:none;z-index:2;overflow:visible"></svg>
@@ -2487,7 +2486,7 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
     <!-- Redesign state (feedback-driven copy changes) -->
     <div id="disks-redesign" style="display:none">
       <!-- Side-by-side hero: animation left, text right -->
-      <div style="display:flex;flex-direction:row;align-items:center;justify-content:flex-start;gap:48px;padding:24px 40px 20px 72px;min-height:200px;box-sizing:border-box;text-align:left;position:relative;overflow:hidden;background:var(--white)">
+      <div style="display:flex;flex-direction:row;align-items:center;justify-content:center;gap:48px;padding:24px 40px 20px 40px;min-height:200px;box-sizing:border-box;text-align:left;position:relative;overflow:hidden;background:var(--white)">
         <div style="display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:1;position:relative">
           <svg id="disk-rdz-svg" width="165" height="165" viewBox="0 0 150.588 150.588" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:relative;z-index:1;overflow:visible">
             <path d="M75.2938 150.088C116.601 150.088 150.088 116.601 150.088 75.2938C150.088 33.9863 116.601 0.5 75.2938 0.5C33.9863 0.5 0.5 33.9863 0.5 75.2938C0.5 116.601 33.9863 150.088 75.2938 150.088Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
@@ -2587,7 +2586,7 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
   <div class="divider"></div>
   <div class="ca">
     <!-- Side-by-side hero: animation left, text right -->
-    <div id="bucket-spicy-hero" style="display:flex;flex-direction:row;align-items:center;justify-content:flex-start;gap:48px;padding:24px 40px 20px 72px;min-height:200px;box-sizing:border-box;text-align:left;position:relative;overflow:hidden;background:var(--white)">
+    <div id="bucket-spicy-hero" style="display:flex;flex-direction:row;align-items:center;justify-content:center;gap:48px;padding:24px 40px 20px 40px;min-height:200px;box-sizing:border-box;text-align:left;position:relative;overflow:hidden;background:var(--white)">
       <!-- Illustration -->
       <div id="bucket-illus-wrap" style="display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:1;position:relative">
         <svg id="bucket-spicy-svg" width="165" height="165" viewBox="0 0 150.588 150.588" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:relative;z-index:1;overflow:visible">
@@ -2990,7 +2989,7 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
     <!-- ── Empty state · shown when no keys exist ── -->
     <div id="apikey-empty">
     <!-- Side-by-side hero: animation left, text right -->
-    <div id="apikey-spicy-hero" style="display:flex;flex-direction:row;align-items:center;justify-content:flex-start;gap:48px;padding:24px 40px 20px 72px;min-height:200px;box-sizing:border-box;text-align:left;position:relative;overflow:hidden;background:var(--white)">
+    <div id="apikey-spicy-hero" style="display:flex;flex-direction:row;align-items:center;justify-content:center;gap:48px;padding:24px 40px 20px 40px;min-height:200px;box-sizing:border-box;text-align:left;position:relative;overflow:hidden;background:var(--white)">
       <!-- Animated illustration -->
       <div id="apikey-illus-wrap" style="display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:1;position:relative">
         <svg id="apikey-spicy-svg" width="165" height="165" viewBox="-2 -2 155 155" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:relative;z-index:1">
@@ -3188,7 +3187,7 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
   <div class="divider"></div>
   <div class="ca">
     <!-- Empty state hero — side-by-side like instances -->
-    <div style="display:flex;flex-direction:row;align-items:center;justify-content:flex-start;gap:48px;padding:24px 40px 20px 72px;min-height:200px;box-sizing:border-box;background:var(--white);overflow:hidden">
+    <div style="display:flex;flex-direction:row;align-items:center;justify-content:center;gap:48px;padding:24px 40px 20px 40px;min-height:200px;box-sizing:border-box;background:var(--white);overflow:hidden">
       <!-- Illustration -->
       <div style="display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:1">
         <svg id="logs-wave-svg" width="204" height="174" viewBox="0 0 176.387 150" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:block;overflow:hidden">
@@ -3374,7 +3373,7 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
       </div>
     </div>
     <!-- Side-by-side hero: animation left, text right -->
-    <div id="np-spicy-hero" style="display:flex;flex-direction:row;align-items:center;justify-content:flex-start;gap:48px;padding:24px 40px 20px 72px;min-height:200px;box-sizing:border-box;text-align:left;position:relative;overflow:hidden;background:var(--white)">
+    <div id="np-spicy-hero" style="display:flex;flex-direction:row;align-items:center;justify-content:center;gap:48px;padding:24px 40px 20px 40px;min-height:200px;box-sizing:border-box;text-align:left;position:relative;overflow:hidden;background:var(--white)">
       <!-- Illustration -->
       <div style="display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:1;position:relative">
         <svg id="np-orch-svg" width="150" height="148" viewBox="0 0 153.881 152.019" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:relative;z-index:1;overflow:visible">
@@ -3558,7 +3557,7 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
   <div class="divider"></div>
   <div class="ca">
     <!-- Side-by-side hero: animation left, text right -->
-    <div id="sshkey-spicy-hero" style="display:flex;flex-direction:row;align-items:center;justify-content:flex-start;gap:48px;padding:24px 40px 20px 72px;min-height:200px;box-sizing:border-box;text-align:left;position:relative;overflow:hidden;background:var(--white)">
+    <div id="sshkey-spicy-hero" style="display:flex;flex-direction:row;align-items:center;justify-content:center;gap:48px;padding:24px 40px 20px 40px;min-height:200px;box-sizing:border-box;text-align:left;position:relative;overflow:hidden;background:var(--white)">
       <!-- Animated illustration -->
       <div id="sshkey-illus-wrap" style="display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:1;position:relative">
         <svg id="sshkey-spicy-svg" width="165" height="165" viewBox="-2 -2 155 155" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:relative;z-index:1">
@@ -4160,7 +4159,7 @@ function toggleEdgeState(n) {
     const el = document.getElementById('edge-' + i);
     if (el) el.style.display = i === n ? '' : 'none';
   });
-  const btns = document.querySelectorAll('#instances-edge .state-toggle-btn');
+  const btns = document.querySelectorAll('#inst-cap-toggle .state-toggle-btn');
   btns.forEach((b, i) => b.classList.toggle('active', i === n));
   // Hide shared hero for state 3 "No payment method" and state 4 "Create flow" (each has its own layout)
   const sharedHero = document.getElementById('edge-shared-hero');
@@ -4527,6 +4526,9 @@ function setInstancesTab(tab) {
   // Empty-state tabs never show the filled list view (usage belongs to the list only)
   ['instances-filled','instances-medium','instances-mild'].forEach(id => { const el = document.getElementById(id); if (el) el.style.display = 'none'; });
   document.querySelectorAll('#inst-tabs .inst-tab').forEach(b => b.classList.toggle('active', b.dataset.tab === tab));
+  // Capacity-scenario sub-toggle lives in the header — only shown on the Edge cases tab
+  const capToggle = document.getElementById('inst-cap-toggle');
+  if (capToggle) capToggle.style.display = tab === 'edge' ? 'flex' : 'none';
   const revToggle = document.getElementById('rev-toggle');
   if (revToggle) {
     // Review notes are available on both the Redesign and Edge cases tabs
