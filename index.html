@@ -583,10 +583,12 @@ img.ico{display:block;flex:0 0 auto}
 .browse-all:hover{color:var(--text);border-color:var(--gray-400)}
 /* Simple state: center the hero vertically/horizontally in the page */
 #edge-4{display:flex;align-items:center;justify-content:center;gap:0;min-height:calc(100vh - 300px)}
-#edge-4 > div{gap:58px!important;padding:0!important;overflow:visible!important}
+#edge-4 > div{flex-direction:column!important;align-items:center!important;text-align:center!important;gap:28px!important;padding:0!important;overflow:visible!important}
 #edge-4 #edge-cube-4{width:276px!important;height:auto!important}
-#edge-4 h1{font-size:60px!important;letter-spacing:-1.6px!important;margin-bottom:16px!important;white-space:nowrap!important;line-height:110%!important}
-#edge-4 p{font-size:19px!important;max-width:480px!important;margin-bottom:28px!important}
+#edge-4 > div > div:last-child{max-width:none!important;display:flex!important;flex-direction:column!important;align-items:center!important;gap:16px!important}
+#edge-4 h1{font-size:60px!important;letter-spacing:-1.6px!important;margin:0!important;white-space:nowrap!important;line-height:110%!important}
+#edge-4 p{font-size:19px!important;max-width:520px!important;margin:0!important}
+#edge-4 > div > div:last-child > div{justify-content:center!important;margin-top:8px!important}
 #edge-4 .btn-p{padding:16px 28px!important;font-size:17px!important}
 /* Billing popup (no-payment-method scenario) */
 .bm-overlay{position:fixed;inset:0;z-index:300;background:rgba(0,0,0,.45);display:flex;align-items:center;justify-content:center;padding:24px}
