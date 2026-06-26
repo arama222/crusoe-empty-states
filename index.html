@@ -5530,6 +5530,16 @@ function toggleDarkMode() {
 // ── Init ──
 // Restore last visited page on reload; default to instances
 (function() {
+  // Deep-link: #ondemand (or #instances-ondemand) opens Instances → Edge cases → On demand
+  const hash = (location.hash || '').replace(/^#/, '').toLowerCase();
+  if (hash === 'ondemand' || hash === 'instances-ondemand') {
+    navigate('instances');
+    setTimeout(function() {
+      if (typeof setInstancesTab === 'function') setInstancesTab('edge');
+      if (typeof toggleEdgeState === 'function') toggleEdgeState(0);
+    }, 0);
+    return;
+  }
   const saved = localStorage.getItem('lastNav');
   const valid = saved && ROUTES[saved] !== null && (ROUTES[saved] !== undefined || Object.values(ROUTES).filter(Boolean).includes(saved));
   navigate(valid ? saved : 'instances');
