@@ -589,10 +589,6 @@ img.ico{display:block;flex:0 0 auto}
 #edge-4 h1{font-size:44px!important;letter-spacing:-1.2px!important;margin:0!important;white-space:nowrap!important;line-height:110%!important}
 #edge-4 p{font-size:14px!important;max-width:430px!important;margin:0!important;text-align:center!important}
 #edge-4 > div > div:nth-child(2) > div{justify-content:center!important;margin-top:6px!important}
-/* Simple state: reveal the numbered review-note badges + legend on hover */
-#edge-4 .rev-legend{position:absolute;left:50%;bottom:16px;transform:translateX(-50%);width:92%;max-width:780px;margin:0}
-#edge-4:hover .rev-note{display:inline-flex}
-#edge-4:hover .rev-legend{display:block}
 /* Billing popup (no-payment-method scenario) */
 .bm-overlay{position:fixed;inset:0;z-index:300;background:rgba(0,0,0,.45);display:flex;align-items:center;justify-content:center;padding:24px}
 .bm-card{position:relative;width:600px;max-width:94vw;max-height:92vh;overflow-y:auto;background:var(--white);border:1px solid var(--border);border-radius:14px;box-shadow:0 18px 50px rgba(0,0,0,.4);padding:20px 22px}
@@ -1270,14 +1266,6 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
       </div>
     </div>
   </div>
-
-  <div class="rev-legend">
-          <div class="rev-legend-row"><span class="n">1</span><span><b>Lead with the GPU SKU</b> — name first, availability in green, the use case smaller underneath.</span></div>
-      <div class="rev-legend-row"><span class="n">2</span><span><b>Availability shown for every GPU you have quota for</b>; out-of-capacity SKUs are hidden. No "on demand" pill — reserved capacity gets the Reservation pill.</span></div>
-      <div class="rev-legend-row"><span class="n">3</span><span><b>Hover a card</b> to see what the GPU is best for.</span></div>
-      <div class="rev-legend-row"><span class="n">4</span><span><b>Create instance</b> opens the one-click create popup, pre-filled from the card (reservation or on-demand).</span></div>
-      <div class="rev-legend-row"><span class="n">5</span><span><b>View code</b> shows the exact <code>crusoe compute vms create</code> command.</span></div>
-    </div>
 </div><!-- /instances-edge -->
 
 <!-- ── MILD (Delightful) ── -->
