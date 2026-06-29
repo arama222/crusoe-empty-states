@@ -752,6 +752,12 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
 #instances-edge::after,#clusters-spicy::after,#slurm-spicy::after,#disks-redesign::after,#apikey-empty::after{content:'';flex:2.6 1 0;min-height:54px}
 /* middle spacer (inserted in markup before each pop-section) */
 .es-gap{flex:0 0 32px;min-height:32px}
+/* ===== Simple-state surfaces (Templates, Groups, Custom Images, Kubernetes, Slurm): centered hero only, no cards ===== */
+#view-instance-templates .ca,#view-instance-groups .ca,#view-custom-images .ca{display:flex!important;flex-direction:column!important;justify-content:center!important;align-items:center!important}
+#view-instance-templates .pop-section,#view-instance-groups .pop-section,#view-custom-images .pop-section,#clusters-spicy .pop-section,#slurm-spicy .pop-section,#view-instance-templates .es-gap,#view-instance-groups .es-gap,#view-custom-images .es-gap,#clusters-spicy .es-gap,#slurm-spicy .es-gap{display:none!important}
+#view-instance-templates .ca>div,#view-instance-groups .ca>div,#view-custom-images .ca>div,#cluster-spicy-hero,#slurm-spicy-hero{flex-direction:column!important;align-items:center!important;justify-content:center!important;text-align:center!important;gap:24px!important;max-width:none!important}
+#view-instance-templates .ca>div>div:last-child,#view-instance-groups .ca>div>div:last-child,#view-custom-images .ca>div>div:last-child,#cluster-spicy-hero>div:last-child,#slurm-spicy-hero>div:last-child{max-width:560px!important;text-align:center!important}
+#view-instance-templates .ca>div>div:last-child>div,#view-instance-groups .ca>div>div:last-child>div,#view-custom-images .ca>div>div:last-child>div,#cluster-spicy-hero>div:last-child>div,#slurm-spicy-hero>div:last-child>div{justify-content:center!important}
 #instances-medium,#instances-mild{margin:auto 0}
 /* ── Instances "Redesign" tab ── */
 #inst-tabs,#disks-tabs{flex-shrink:0;display:flex;gap:4px;padding:2px;margin:0;align-self:center;background:var(--gray-50);border:1px solid var(--border);border-radius:9px;width:fit-content}
