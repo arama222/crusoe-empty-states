@@ -3960,9 +3960,9 @@ function showView(viewId, sbKey) {
       const rtg = document.getElementById('rev-toggle'); if (rtg) rtg.style.display = 'none';
       const filled = document.getElementById('instances-filled'); if (filled) filled.style.display = '';
     } else {
-      // Scenario tabs are always shown; restore the last-used scenario (default: On demand)
+      // Default to the redesign empty state (hero + capacity cards with the View-reservations link)
       const savedEdge = (function(){ try { return parseInt(localStorage.getItem('lastEdgeState') || '0', 10); } catch(e){ return 0; } })();
-      if (typeof setInstancesTab === 'function') setInstancesTab('edge');
+      if (typeof setInstancesTab === 'function') setInstancesTab('redesign');
       if (typeof toggleEdgeState === 'function') toggleEdgeState(isNaN(savedEdge) ? 0 : savedEdge);
       setTimeout(initSpicyMagic, 60);
     }
