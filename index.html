@@ -775,16 +775,6 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
 .cli-reveal code{display:block;font-family:var(--mono);font-size:10.5px;color:var(--text2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .cli-reveal .cli-note{font-size:10.5px;color:var(--muted);font-family:var(--font-body);margin-top:5px;line-height:140%}
 /* Review-notes overlay (maps each change to the UX feedback) */
-#rev-toggle,#disks-rev-toggle{display:none;flex-shrink:0;margin:0 auto 8px;font-size:11.5px;font-family:var(--font-body);color:var(--muted);background:transparent;border:1px solid var(--border);border-radius:7px;padding:4px 12px;cursor:pointer;transition:color .15s ease,border-color .15s ease}
-#rev-toggle:hover,#disks-rev-toggle:hover{color:var(--text);border-color:var(--gray-400)}
-#rev-toggle.on,#disks-rev-toggle.on{color:#111;background:#f59e0b;border-color:#f59e0b}
-.rev-note{display:none;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:#f59e0b;color:#111;font-size:11px;font-weight:700;font-family:var(--font-body);vertical-align:middle;margin-left:6px;flex-shrink:0;box-shadow:0 0 0 2px var(--white),0 1px 4px rgba(0,0,0,.3)}
-#instances-redesign.show-notes .rev-note,#instances-edge.show-notes .rev-note,#disks-redesign.show-notes .rev-note{display:inline-flex}
-.rev-legend{display:none;margin:16px auto 0;max-width:780px;border:1px solid var(--border);border-radius:10px;background:var(--gray-50);padding:12px 18px;text-align:left}
-#instances-redesign.show-notes .rev-legend,#instances-edge.show-notes .rev-legend,#disks-redesign.show-notes .rev-legend{display:block}
-.rev-legend-row{display:flex;gap:10px;align-items:flex-start;font-size:11.5px;font-family:var(--font-body);color:var(--muted);line-height:148%;padding:4px 0}
-.rev-legend-row .n{flex-shrink:0;width:16px;height:16px;border-radius:50%;background:#f59e0b;color:#111;font-size:10px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;margin-top:1px}
-.rev-legend-row b{color:var(--text2);font-weight:600}
 /* The three spacers above stay equal at every height, so the layout is
    evenly distributed when there's room and compresses to fit (never scrolls)
    when the window is short. */
@@ -1025,7 +1015,7 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
 <div id="instances-edge" style="display:none">
   <!-- Shared hero (hidden for state 3 "No access", which has its own) -->
   <div id="edge-shared-hero" style="display:flex;flex-direction:row;align-items:center;justify-content:flex-start;gap:48px;padding:24px 40px 20px 72px;min-height:200px;box-sizing:border-box;text-align:left;position:relative;overflow:hidden;background:var(--white)">
-    <div style="display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:1;position:relative"><span class="rev-note" style="position:absolute;top:0;right:-4px">1</span>
+    <div style="display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:1;position:relative">
       <svg id="edge-cube" width="206" height="160" viewBox="0 0 166.55 128.97" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:relative;z-index:1;overflow:hidden">
         <path d="M143.43 96.41H161.12C161.92 96.41 162.75 96.53 163.52 96.18C164.12 95.91 164.75 96.04 165.14 96.42C165.56 96.82 165.14 97.2 164.88 97.6C163.91 99.07 162.88 100.53 161.86 101.98C159.15 105.81 156.46 109.64 153.75 113.47C150.75 117.74 147.81 122.03 144.72 126.26C143.76 127.57 142.3 128.49 139.84 128.48C94.52 128.4 49.22 128.42 3.9 128.42C3.02 128.42 1.85 128.68 1.41 127.93C1.04 127.29 0.49 126.61 0.6 125.82C0.62 125.66 0.6 125.51 0.6 125.35V35.11C0.6 33.55 1.07 32.15 2.03 30.69C4.53 26.89 7.11 23.13 9.59 19.34C13.54 13.32 17.69 7.38 21.6 1.34C21.82 1.01 22.11 0.64 22.66 0.5C22.97 0.61 23.27 0.74 23.24 1.09C22.9 4.52 23.12 7.97 23.1 11.4C23.05 18.55 23.1 89.24 23.1 96.4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
         <path d="M23.05 1.24C38.06 16.83 121.42 106.9 136.61 122.41C138.09 123.92 140.21 126.05 142.39 127.37" stroke="currentColor" stroke-miterlimit="10" stroke-dasharray="3 3"/>
@@ -1042,11 +1032,11 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
       </svg>
     </div>
     <div style="position:relative;z-index:1;max-width:400px">
-      <h1 style="font-size:44px;font-weight:400;font-family:var(--font-heading);color:var(--text);letter-spacing:-1.2px;line-height:110%;margin:0 0 10px;white-space:nowrap">No Instances Yet<span class="rev-note">2</span></h1>
+      <h1 style="font-size:44px;font-weight:400;font-family:var(--font-heading);color:var(--text);letter-spacing:-1.2px;line-height:110%;margin:0 0 10px;white-space:nowrap">No Instances Yet</h1>
       <p style="font-size:14px;color:var(--muted);font-family:var(--font-body);line-height:160%;margin:0 0 18px">Spin up a GPU or CPU VM in under a minute — SSH in directly and start building.</p>
       <div style="display:flex;align-items:center;gap:18px">
-        <button class="btn btn-p" onclick="createInstanceFromRes('h100',this)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.99967 3.33337V12.6667M3.33301 8.00004H12.6663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Create Instance</button><span class="rev-note">3</span>
-        <a href="https://docs.crusoecloud.com/compute/virtual-machines/overview/" target="_blank" style="font-size:13px;color:var(--muted);text-decoration:underline;text-underline-offset:3px;font-family:var(--font-body);transition:color .15s ease" onmouseenter="this.style.color='var(--text)'" onmouseleave="this.style.color='var(--muted)'">View docs →</a><span class="rev-note">4</span>
+        <button class="btn btn-p" onclick="createInstanceFromRes('h100',this)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.99967 3.33337V12.6667M3.33301 8.00004H12.6663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Create Instance</button>
+        <a href="https://docs.crusoecloud.com/compute/virtual-machines/overview/" target="_blank" style="font-size:13px;color:var(--muted);text-decoration:underline;text-underline-offset:3px;font-family:var(--font-body);transition:color .15s ease" onmouseenter="this.style.color='var(--text)'" onmouseleave="this.style.color='var(--muted)'">View docs →</a>
       </div>
     </div>
   </div>
@@ -1054,12 +1044,12 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
   <!-- ══ STATE 0 · On demand (has quota, none used up — quota numbers hidden) ══ -->
   <div id="edge-0">
     <div class="pop-section" style="margin-top:68px">
-      <div class="pop-title">Launch from your available capacity<span class="rev-note">5</span></div>
+      <div class="pop-title">Launch from your available capacity</div>
       <div class="pop-grid">
         <div class="pop-card med-res-card" style="display:flex;flex-direction:column;gap:0">
           <div class="pop-card-top" style="margin-bottom:10px;align-items:center"><div class="pop-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--text2)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="6" width="12" height="12" rx="2"/><rect x="9.5" y="9.5" width="5" height="5" rx="1"/><path d="M9 2v2M15 2v2M9 20v2M15 20v2M2 9h2M2 15h2M20 9h2M20 15h2"/></svg></div><div class="pop-card-info"><div class="pop-card-name">H100 80GB SXM</div><div class="pop-card-avail">8 of 8 GPUs in quota</div></div></div>
           <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Training · Multi-node</span></div>
-          <div style="display:flex;gap:10px;align-items:center"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="openCreateInstance('h100')">Create instance</button><span class="rev-note">6</span><button class="btn btn-o btn-sm cli-icon" onclick="showCliPopover(this,'crusoe compute vms create --name my-vm --type h100-80gb-sxm-ib.8x --location us-southcentral1-a --image ubuntu22.04:latest --keyfile ~/.ssh/id_ed25519.pub')" aria-label="View code" title="View the command"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg> View code</button><span class="rev-note">7</span></div>
+          <div style="display:flex;gap:10px;align-items:center"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="openCreateInstance('h100')">Create instance</button><button class="btn btn-o btn-sm cli-icon" onclick="showCliPopover(this,'crusoe compute vms create --name my-vm --type h100-80gb-sxm-ib.8x --location us-southcentral1-a --image ubuntu22.04:latest --keyfile ~/.ssh/id_ed25519.pub')" aria-label="View code" title="View the command"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg> View code</button></div>
           <div class="med-res-expand"><div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">State-of-the-art training &amp; inference. 80 GB HBM3 with NVLink + InfiniBand for multi-node runs. Best for LLM training, RLHF, and fine-tuning.</div></div>
         </div>
         <div class="pop-card med-res-card" style="display:flex;flex-direction:column;gap:0">
@@ -1076,16 +1066,7 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
         </div>
       </div>
     </div>
-    <div class="rev-legend">
-      <div class="rev-legend-row"><span class="n">1</span><span><b>Illustration</b> — the resource glyph / animation.</span></div>
-      <div class="rev-legend-row"><span class="n">2</span><span><b>Hero</b> — headline + one supporting line.</span></div>
-      <div class="rev-legend-row"><span class="n">3</span><span><b>Top CTA</b> — primary action "Create Instance" (solid black button).</span></div>
-      <div class="rev-legend-row"><span class="n">4</span><span><b>Secondary CTA</b> — "View docs →" (low-emphasis link).</span></div>
-      <div class="rev-legend-row"><span class="n">5</span><span><b>Capacity cards</b> — a faster path in; one card per GPU SKU you have quota for.</span></div>
-      <div class="rev-legend-row"><span class="n">6</span><span><b>Card action</b> — "Create instance" pre-filled from that card.</span></div>
-      <div class="rev-legend-row"><span class="n">7</span><span><b>View code (CLI)</b> — the exact <code>crusoe compute vms create</code> command.</span></div>
-    </div>
-  </div>
+      </div>
 
   <!-- ══ STATE 1 · Reservation only ══ -->
   <div id="edge-1" style="display:none">
@@ -1222,10 +1203,7 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
           <a href="https://docs.crusoecloud.com/compute/virtual-machines/overview/" target="_blank" style="font-size:13px;color:var(--muted);text-decoration:underline;text-underline-offset:3px;font-family:var(--font-body);transition:color .15s ease" onmouseenter="this.style.color='var(--text)'" onmouseleave="this.style.color='var(--muted)'">View docs →</a>
         </div>
       </div>
-      <div class="rev-legend">
-        <div class="rev-legend-row"><span class="n" style="background:#111;color:#fff">★</span><span><b>Design decision — centered &amp; enlarged.</b> The simple state has no capacity cards, so a left-aligned hero (like the card version) would leave the page lopsided and empty on the right. Centering the hero and scaling it up fills the space, anchors the layout, and reads as intentional when there's nothing below it to balance against.</span></div>
-      </div>
-    </div>
+          </div>
   </div>
 
 <!-- Billing popup: 2-step "Finish account setup" — opens when a no-payment-method account clicks Create -->
@@ -1341,7 +1319,7 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
 <div id="instances-redesign" style="display:none">
   <!-- Hero -->
   <div style="display:flex;flex-direction:row;align-items:center;justify-content:flex-start;gap:48px;padding:24px 40px 20px 72px;min-height:200px;box-sizing:border-box;text-align:left;position:relative;overflow:hidden;background:var(--white)">
-    <div style="display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:1;position:relative"><span class="rev-note" style="position:absolute;top:0;right:-4px">1</span>
+    <div style="display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:1;position:relative">
       <svg id="redesign-cube" width="206" height="160" viewBox="0 0 166.55 128.97" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:relative;z-index:1;overflow:hidden">
         <path d="M143.43 96.41H161.12C161.92 96.41 162.75 96.53 163.52 96.18C164.12 95.91 164.75 96.04 165.14 96.42C165.56 96.82 165.14 97.2 164.88 97.6C163.91 99.07 162.88 100.53 161.86 101.98C159.15 105.81 156.46 109.64 153.75 113.47C150.75 117.74 147.81 122.03 144.72 126.26C143.76 127.57 142.3 128.49 139.84 128.48C94.52 128.4 49.22 128.42 3.9 128.42C3.02 128.42 1.85 128.68 1.41 127.93C1.04 127.29 0.49 126.61 0.6 125.82C0.62 125.66 0.6 125.51 0.6 125.35V35.11C0.6 33.55 1.07 32.15 2.03 30.69C4.53 26.89 7.11 23.13 9.59 19.34C13.54 13.32 17.69 7.38 21.6 1.34C21.82 1.01 22.11 0.64 22.66 0.5C22.97 0.61 23.27 0.74 23.24 1.09C22.9 4.52 23.12 7.97 23.1 11.4C23.05 18.55 23.1 89.24 23.1 96.4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
         <path d="M23.05 1.24C38.06 16.83 121.42 106.9 136.61 122.41C138.09 123.92 140.21 126.05 142.39 127.37" stroke="currentColor" stroke-miterlimit="10" stroke-dasharray="3 3"/>
@@ -1358,23 +1336,23 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
       </svg>
     </div>
     <div style="position:relative;z-index:1;max-width:400px">
-      <h1 style="font-size:44px;font-weight:400;font-family:var(--font-heading);color:var(--text);letter-spacing:-1.2px;line-height:110%;margin:0 0 10px;white-space:nowrap">No Instances Yet<span class="rev-note">2</span></h1>
-      <p style="font-size:14px;color:var(--muted);font-family:var(--font-body);line-height:160%;margin:0 0 18px">Spin up a GPU or CPU VM in under a minute — SSH in directly and start building.<span class="rev-note">3</span></p>
+      <h1 style="font-size:44px;font-weight:400;font-family:var(--font-heading);color:var(--text);letter-spacing:-1.2px;line-height:110%;margin:0 0 10px;white-space:nowrap">No Instances Yet</h1>
+      <p style="font-size:14px;color:var(--muted);font-family:var(--font-body);line-height:160%;margin:0 0 18px">Spin up a GPU or CPU VM in under a minute — SSH in directly and start building.</p>
       <div style="display:flex;align-items:center;gap:18px">
-        <button class="btn btn-p" onclick="openCreateInstance('h100')"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.99967 3.33337V12.6667M3.33301 8.00004H12.6663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Create Instance</button><span class="rev-note">4</span>
-        <a href="https://docs.crusoecloud.com/compute/virtual-machines/overview/" target="_blank" style="font-size:13px;color:var(--muted);text-decoration:underline;text-underline-offset:3px;font-family:var(--font-body);transition:color .15s ease" onmouseenter="this.style.color='var(--text)'" onmouseleave="this.style.color='var(--muted)'">View docs →</a><span class="rev-note">5</span>
+        <button class="btn btn-p" onclick="openCreateInstance('h100')"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.99967 3.33337V12.6667M3.33301 8.00004H12.6663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Create Instance</button>
+        <a href="https://docs.crusoecloud.com/compute/virtual-machines/overview/" target="_blank" style="font-size:13px;color:var(--muted);text-decoration:underline;text-underline-offset:3px;font-family:var(--font-body);transition:color .15s ease" onmouseenter="this.style.color='var(--text)'" onmouseleave="this.style.color='var(--muted)'">View docs →</a>
       </div>
     </div>
   </div>
   <div class="es-gap"></div>
   <!-- Capacity section: source-tagged, quota hidden until exhausted -->
   <div class="pop-section" style="margin-top:36px;padding-bottom:16px">
-    <div class="pop-title">Launch from your available capacity<span class="rev-note">6</span></div>
+    <div class="pop-title">Launch from your available capacity</div>
       <div class="pop-grid">
         <div class="pop-card med-res-card" style="display:flex;flex-direction:column;gap:0">
           <div class="pop-card-top" style="margin-bottom:10px;align-items:center"><div class="pop-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--text2)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="6" width="12" height="12" rx="2"/><rect x="9.5" y="9.5" width="5" height="5" rx="1"/><path d="M9 2v2M15 2v2M9 20v2M15 20v2M2 9h2M2 15h2M20 9h2M20 15h2"/></svg></div><div class="pop-card-info"><div class="pop-card-name">H100 80GB SXM</div><a href="#" onclick="event.preventDefault()" style="font-size:11.5px;font-weight:500;color:var(--muted);text-decoration:underline;text-underline-offset:2px;font-family:var(--font-body)">View reservations →</a></div><span class="src-pill src-reserved">Reservation</span></div>
           <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Training · Multi-node</span></div>
-          <div style="display:flex;gap:10px;align-items:center"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="openCreateInstance('h100')">Create instance</button><span class="rev-note">7</span><button class="btn btn-o btn-sm cli-icon" onclick="showCliPopover(this,'crusoe compute vms create --name my-vm --type h100-80gb-sxm-ib.8x --location us-southcentral1-a --image ubuntu22.04:latest --keyfile ~/.ssh/id_ed25519.pub')" aria-label="View code" title="View the command"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg> View code</button><span class="rev-note">8</span></div>
+          <div style="display:flex;gap:10px;align-items:center"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="openCreateInstance('h100')">Create instance</button><button class="btn btn-o btn-sm cli-icon" onclick="showCliPopover(this,'crusoe compute vms create --name my-vm --type h100-80gb-sxm-ib.8x --location us-southcentral1-a --image ubuntu22.04:latest --keyfile ~/.ssh/id_ed25519.pub')" aria-label="View code" title="View the command"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg> View code</button></div>
           <div class="med-res-expand"><div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">State-of-the-art training &amp; inference. 80 GB HBM3 with NVLink + InfiniBand for multi-node runs. Best for LLM training, RLHF, and fine-tuning.</div></div>
         </div>
         <div class="pop-card med-res-card" style="display:flex;flex-direction:column;gap:0">
@@ -1390,17 +1368,7 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
           <div class="med-res-expand"><div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">Cost-efficient inference &amp; fine-tuning. 48 GB GDDR6, great for model serving, small-scale training, and multi-modal workloads.</div></div>
         </div>
       </div>
-    <div class="rev-legend">
-      <div class="rev-legend-row"><span class="n">1</span><span><b>Illustration</b> — the resource glyph / animation for this empty state.</span></div>
-      <div class="rev-legend-row"><span class="n">2</span><span><b>Headline</b> — names the resource and its empty state ("No Instances Yet").</span></div>
-      <div class="rev-legend-row"><span class="n">3</span><span><b>Description</b> — one line on what the resource is and what you can do here.</span></div>
-      <div class="rev-legend-row"><span class="n">4</span><span><b>Primary CTA</b> — the main action ("Create Instance"), solid black button.</span></div>
-      <div class="rev-legend-row"><span class="n">5</span><span><b>Docs link</b> — secondary "View docs →" to the resource overview.</span></div>
-      <div class="rev-legend-row"><span class="n">6</span><span><b>Capacity cards</b> — optional faster path in; one card per GPU SKU you have quota for.</span></div>
-      <div class="rev-legend-row"><span class="n">7</span><span><b>Card action</b> — "Create instance" pre-filled from that card.</span></div>
-      <div class="rev-legend-row"><span class="n">8</span><span><b>View code (CLI)</b> — shows the exact <code>crusoe compute vms create</code> command.</span></div>
-    </div>
-  </div>
+      </div>
 </div><!-- /instances-redesign -->
 
 <!-- ── FILLED STATE ── -->
@@ -2504,8 +2472,8 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
         </div>
         <div style="position:relative;z-index:1;max-width:560px">
           <h1 style="font-size:44px;font-weight:400;font-family:var(--font-heading);color:var(--text);letter-spacing:-1.2px;line-height:110%;margin:0 0 10px;white-space:nowrap">No Disks Yet</h1>
-          <p style="font-size:14px;color:var(--muted);font-family:var(--font-body);line-height:160%;margin:0 0 16px">Add storage that lives independently of your instances. Choose a <b style="color:var(--text2);font-weight:600">Persistent Disk</b> for fast single-VM block storage, or a <b style="color:var(--text2);font-weight:600">Shared Disk</b> for concurrent NFS access across many VMs.<span class="rev-note">1</span></p>
-          <div style="display:flex;align-items:center;gap:18px"><button class="btn btn-p"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.99967 3.33337V12.6667M3.33301 8.00004H12.6663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Create Disk</button><a href="https://docs.crusoecloud.com/storage/disks/overview" target="_blank" style="font-size:13px;color:var(--muted);text-decoration:underline;text-underline-offset:3px;font-family:var(--font-body);transition:color .15s ease" onmouseenter="this.style.color='var(--text)'" onmouseleave="this.style.color='var(--muted)'">View docs →</a><span class="rev-note">2</span></div>
+          <p style="font-size:14px;color:var(--muted);font-family:var(--font-body);line-height:160%;margin:0 0 16px">Add storage that lives independently of your instances. Choose a <b style="color:var(--text2);font-weight:600">Persistent Disk</b> for fast single-VM block storage, or a <b style="color:var(--text2);font-weight:600">Shared Disk</b> for concurrent NFS access across many VMs.</p>
+          <div style="display:flex;align-items:center;gap:18px"><button class="btn btn-p"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.99967 3.33337V12.6667M3.33301 8.00004H12.6663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Create Disk</button><a href="https://docs.crusoecloud.com/storage/disks/overview" target="_blank" style="font-size:13px;color:var(--muted);text-decoration:underline;text-underline-offset:3px;font-family:var(--font-body);transition:color .15s ease" onmouseenter="this.style.color='var(--text)'" onmouseleave="this.style.color='var(--muted)'">View docs →</a></div>
         </div>
       </div>
       <!-- Disk type cards -->
@@ -2519,7 +2487,7 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
               <div class="pop-card-info"><div class="pop-card-name">Persistent Disks</div><div class="pop-card-price">1 GiB – 10 TiB · $0.08/GiB/mo</div></div>
             </div>
             <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Single VM · Block storage</span></div>
-            <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create Persistent Disks<span class="rev-note">4</span></button></div><div class="med-res-expand"><div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">Attach to one VM in read-write mode. Up to 16 per instance including OS Disk. Attach and detach while running or stopped — unmount before detaching.<span class="rev-note">3</span></div></div>
+            <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create Persistent Disks</button></div><div class="med-res-expand"><div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">Attach to one VM in read-write mode. Up to 16 per instance including OS Disk. Attach and detach while running or stopped — unmount before detaching.</div></div>
           </div>
           <div class="pop-card med-res-card" style="display:flex;flex-direction:column;gap:0">
             <div class="pop-card-top" style="margin-bottom:10px;align-items:center">
@@ -2527,17 +2495,10 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
               <div class="pop-card-info"><div class="pop-card-name">Shared Disks</div><div class="pop-card-price">1 TiB – 1000 TiB · $0.07/GiB/mo</div></div>
             </div>
             <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Multi-VM · NFS</span></div>
-            <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create Shared Disks</button></div><div class="med-res-expand"><div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">Concurrent NFS access from many VMs at once. Up to 8 per instance, in 1 TiB increments. Max 36-character name.<span class="rev-note">5</span></div></div>
+            <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create Shared Disks</button></div><div class="med-res-expand"><div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">Concurrent NFS access from many VMs at once. Up to 8 per instance, in 1 TiB increments. Max 36-character name.</div></div>
           </div>
         </div>
-        <div class="rev-legend">
-          <div class="rev-legend-row"><span class="n">1</span><span><b>Rewrote the intro to be accurate and useful</b> — "two types of disks" was wrong (ephemeral disks also exist, they just ship with the instance). Instead of counting types, the line now frames what these disks are for and helps the user pick between Persistent (single-VM block) and Shared (multi-VM NFS).</span></div>
-          <div class="rev-legend-row"><span class="n">2</span><span><b>Docs link points straight to the overview</b> — <code>/storage/disks/overview</code> instead of <code>/storage/disks/</code>, saving the extra click to the landing page.</span></div>
-          <div class="rev-legend-row"><span class="n">3</span><span><b>Persistent disk copy corrected</b> — the UI doesn't allow multi-attach read-only (per the docs limitations), so "or multiple VMs read-only" is removed and "including OS Disk" is added to the 16-per-instance limit.</span></div>
-          <div class="rev-legend-row"><span class="n">4</span><span><b>Disk-type names capitalized</b> — "Persistent Disks" / "Shared Disks" in titles and actions for consistent product naming.</span></div>
-          <div class="rev-legend-row"><span class="n">5</span><span><b>Trimmed the redundant line</b> — "Data preserved until explicitly deleted" is obvious and was dropped from the Shared disk description (kept off Persistent too, for parity).</span></div>
-        </div>
-      </div>
+              </div>
     </div><!-- /disks-redesign -->
 
     <!-- Filled state (disks exist but keep empty state UI) -->
