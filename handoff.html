@@ -758,6 +758,11 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
 #view-instance-templates .ca>div,#view-instance-groups .ca>div,#view-custom-images .ca>div,#cluster-spicy-hero,#slurm-spicy-hero{flex-direction:column!important;align-items:center!important;justify-content:center!important;text-align:center!important;gap:24px!important;max-width:none!important}
 #view-instance-templates .ca>div>div:last-child,#view-instance-groups .ca>div>div:last-child,#view-custom-images .ca>div>div:last-child,#cluster-spicy-hero>div:last-child,#slurm-spicy-hero>div:last-child{max-width:560px!important;text-align:center!important}
 #view-instance-templates .ca>div>div:last-child>div,#view-instance-groups .ca>div>div:last-child>div,#view-custom-images .ca>div>div:last-child>div,#cluster-spicy-hero>div:last-child>div,#slurm-spicy-hero>div:last-child>div{justify-content:center!important}
+/* Disks + Buckets: simple state (centered hero only, cards hidden) */
+#disks-redesign .pop-section,#disks-redesign .es-gap,#view-buckets .pop-section,#view-buckets .es-gap{display:none!important}
+#disks-redesign>div:first-child,#bucket-spicy-hero{flex-direction:column!important;align-items:center!important;justify-content:center!important;text-align:center!important;gap:24px!important;max-width:none!important}
+#disks-redesign>div:first-child>div:last-child,#bucket-spicy-hero>div:last-child{max-width:560px!important;text-align:center!important}
+#disks-redesign>div:first-child>div:last-child>div,#bucket-spicy-hero>div:last-child>div{justify-content:center!important}
 #instances-medium,#instances-mild{margin:auto 0}
 /* ── Instances "Redesign" tab ── */
 #inst-tabs,#disks-tabs{flex-shrink:0;display:flex;gap:4px;padding:2px;margin:0;align-self:center;background:var(--gray-50);border:1px solid var(--border);border-radius:9px;width:fit-content}
@@ -1789,7 +1794,6 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
   <div id="cluster-spicy-hero" style="display:flex;flex-direction:row;align-items:center;justify-content:flex-start;gap:48px;padding:24px 40px 20px 72px;min-height:200px;box-sizing:border-box;text-align:left;position:relative;overflow:hidden;background:var(--white)">
     <!-- Illustration -->
     <div id="cluster-illus-wrap" style="display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:1;position:relative;height:158px;overflow:visible">
-      <svg id="cluster-node-ripples" width="480" height="480" viewBox="0 0 153.881 152.019" fill="none" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);pointer-events:none;z-index:2;overflow:visible"></svg>
       <svg id="cluster-orch-svg" width="200" height="200" viewBox="0 0 153.881 152.019" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:relative;z-index:1">
         <path id="co-sq-tr" d="M147.57 5.34863H39.6802V112.759H147.57V5.34863Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" style="opacity:0"/>
         <path id="co-sq-mid" d="M130.63 22.2891H22.7402V129.699H130.63V22.2891Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" style="opacity:0"/>
@@ -2307,7 +2311,6 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
   <div id="slurm-spicy-hero" style="display:flex;flex-direction:row;align-items:center;justify-content:flex-start;gap:48px;padding:24px 40px 20px 72px;min-height:200px;box-sizing:border-box;text-align:left;position:relative;overflow:hidden;background:var(--white)">
     <!-- Illustration -->
     <div id="slurm-illus-wrap" style="display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:1;position:relative;height:158px;overflow:visible">
-      <svg id="slurm-node-ripples" width="480" height="480" viewBox="0 0 153.881 152.019" fill="none" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);pointer-events:none;z-index:2;overflow:visible"></svg>
       <svg id="slurm-orch-svg" width="200" height="200" viewBox="0 0 153.881 152.019" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:relative;z-index:1">
         <path id="sl-sq-tr"  d="M147.57 5.34863H39.6802V112.759H147.57V5.34863Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
         <path id="sl-sq-mid" d="M130.63 22.2891H22.7402V129.699H130.63V22.2891Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
