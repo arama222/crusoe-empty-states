@@ -763,6 +763,15 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
 #disks-redesign>div:first-child,#bucket-spicy-hero{flex-direction:column!important;align-items:center!important;justify-content:center!important;text-align:center!important;gap:24px!important;max-width:none!important}
 #disks-redesign>div:first-child>div:last-child,#bucket-spicy-hero>div:last-child{max-width:560px!important;text-align:center!important}
 #disks-redesign>div:first-child>div:last-child>div,#bucket-spicy-hero>div:last-child>div{justify-content:center!important}
+/* ── Phase 2 empty states (copy + CTAs; illustrations pending) ── */
+.p2-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:20px;min-height:calc(100vh - 180px);padding:24px;box-sizing:border-box}
+.p2-illus{width:180px;height:136px;border:1.5px dashed var(--gray-400);border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;color:var(--gray-500);flex-shrink:0}
+.p2-illus-lbl{font-size:10.5px;font-family:var(--font-body);color:var(--gray-500);letter-spacing:.02em}
+.p2-title{font-size:44px;font-weight:400;font-family:var(--font-heading);color:var(--text);letter-spacing:-1.2px;line-height:110%;margin:0;white-space:nowrap}
+.p2-desc{font-size:14px;color:var(--muted);font-family:var(--font-body);line-height:160%;margin:0;max-width:520px}
+.p2-ctas{display:flex;align-items:center;gap:18px;margin-top:6px}
+.p2-docs{font-size:13px;color:var(--muted);text-decoration:underline;text-underline-offset:3px;font-family:var(--font-body);transition:color .15s ease}
+.p2-docs:hover{color:var(--text)}
 #instances-medium,#instances-mild{margin:auto 0}
 /* ── Instances "Redesign" tab ── */
 #inst-tabs,#disks-tabs{flex-shrink:0;display:flex;gap:4px;padding:2px;margin:0;align-self:center;background:var(--gray-50);border:1px solid var(--border);border-radius:9px;width:fit-content}
@@ -3638,6 +3647,106 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
   </div>
 </div>
 
+<!-- ═══ PHASE 2 EMPTY STATES (copy + CTAs approved; illustrations pending) ═══ -->
+<!-- VPC Networks -->
+<div class="view" id="view-vpc">
+  <div class="ph"><div class="ph-l"><div class="ph-title-sans">VPC Networks</div></div><div class="ph-r"><button class="btn btn-p"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.99967 3.33337V12.6667M3.33301 8.00004H12.6663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Create Network</button></div></div>
+  <div class="divider"></div>
+  <div class="ca"><div class="p2-empty">
+    <div class="p2-illus"><svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="8.5" cy="9.5" r="1.5"/><path d="M21 15l-5-5L5 20"/></svg><div class="p2-illus-lbl">Illustration</div></div>
+    <h1 class="p2-title">No networks yet</h1>
+    <p class="p2-desc">A VPC network gives your instances a private, isolated space to communicate. Create one to define your address range and connect resources.</p>
+    <div class="p2-ctas"><button class="btn btn-p"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.99967 3.33337V12.6667M3.33301 8.00004H12.6663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Create Network</button><a class="p2-docs" href="https://docs.crusoecloud.com/networking/vpc-networks" target="_blank">View docs →</a></div>
+  </div></div>
+</div>
+<!-- VPC Subnets -->
+<div class="view" id="view-subnets">
+  <div class="ph"><div class="ph-l"><div class="ph-title-sans">VPC Subnets</div></div><div class="ph-r"><button class="btn btn-p"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.99967 3.33337V12.6667M3.33301 8.00004H12.6663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Create Subnet</button></div></div>
+  <div class="divider"></div>
+  <div class="ca"><div class="p2-empty">
+    <div class="p2-illus"><svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="8.5" cy="9.5" r="1.5"/><path d="M21 15l-5-5L5 20"/></svg><div class="p2-illus-lbl">Illustration</div></div>
+    <h1 class="p2-title">No subnets yet</h1>
+    <p class="p2-desc">Subnets split a VPC network into smaller address ranges so you can organize and isolate resources. Create one to start placing instances.</p>
+    <div class="p2-ctas"><button class="btn btn-p"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.99967 3.33337V12.6667M3.33301 8.00004H12.6663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Create Subnet</button><a class="p2-docs" href="https://docs.crusoecloud.com/networking/subnets" target="_blank">View docs →</a></div>
+  </div></div>
+</div>
+<!-- Load Balancers -->
+<div class="view" id="view-load-balancers">
+  <div class="ph"><div class="ph-l"><div class="ph-title-sans">Load Balancers</div></div><div class="ph-r"><button class="btn btn-p"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.99967 3.33337V12.6667M3.33301 8.00004H12.6663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Create Load Balancer</button></div></div>
+  <div class="divider"></div>
+  <div class="ca"><div class="p2-empty">
+    <div class="p2-illus"><svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="8.5" cy="9.5" r="1.5"/><path d="M21 15l-5-5L5 20"/></svg><div class="p2-illus-lbl">Illustration</div></div>
+    <h1 class="p2-title">No load balancers yet</h1>
+    <p class="p2-desc">Distribute traffic across instances for higher availability and throughput. Create a load balancer to route requests to your backends.</p>
+    <div class="p2-ctas"><button class="btn btn-p"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.99967 3.33337V12.6667M3.33301 8.00004H12.6663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Create Load Balancer</button><a class="p2-docs" href="https://docs.crusoecloud.com/networking/load-balancers" target="_blank">View docs →</a></div>
+  </div></div>
+</div>
+<!-- IAM / User Access -->
+<div class="view" id="view-user-access">
+  <div class="ph"><div class="ph-l"><div class="ph-title-sans">User Access</div></div><div class="ph-r"><button class="btn btn-p"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.99967 3.33337V12.6667M3.33301 8.00004H12.6663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Invite User</button></div></div>
+  <div class="divider"></div>
+  <div class="ca"><div class="p2-empty">
+    <div class="p2-illus"><svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="8.5" cy="9.5" r="1.5"/><path d="M21 15l-5-5L5 20"/></svg><div class="p2-illus-lbl">Illustration</div></div>
+    <h1 class="p2-title">No users or roles yet</h1>
+    <p class="p2-desc">Invite teammates and assign roles to control who can access this project and what they can do.</p>
+    <div class="p2-ctas"><button class="btn btn-p"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.99967 3.33337V12.6667M3.33301 8.00004H12.6663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Invite User</button><a class="p2-docs" href="https://docs.crusoecloud.com/iam" target="_blank">View docs →</a></div>
+  </div></div>
+</div>
+<!-- MFA Devices -->
+<div class="view" id="view-mfa">
+  <div class="ph"><div class="ph-l"><div class="ph-title-sans">MFA Devices</div></div><div class="ph-r"><button class="btn btn-p"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.99967 3.33337V12.6667M3.33301 8.00004H12.6663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Register Device</button></div></div>
+  <div class="divider"></div>
+  <div class="ca"><div class="p2-empty">
+    <div class="p2-illus"><svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="8.5" cy="9.5" r="1.5"/><path d="M21 15l-5-5L5 20"/></svg><div class="p2-illus-lbl">Illustration</div></div>
+    <h1 class="p2-title">No MFA devices registered</h1>
+    <p class="p2-desc">Add a second factor to protect your account. Register an authenticator app or security key to require MFA at sign-in.</p>
+    <div class="p2-ctas"><button class="btn btn-p"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.99967 3.33337V12.6667M3.33301 8.00004H12.6663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Register Device</button><a class="p2-docs" href="https://docs.crusoecloud.com/identity-and-security/mfa" target="_blank">View docs →</a></div>
+  </div></div>
+</div>
+<!-- Reservations -->
+<div class="view" id="view-reservations">
+  <div class="ph"><div class="ph-l"><div class="ph-title-sans">Reservations</div></div><div class="ph-r"><button class="btn btn-p"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.99967 3.33337V12.6667M3.33301 8.00004H12.6663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Request Reservation</button></div></div>
+  <div class="divider"></div>
+  <div class="ca"><div class="p2-empty">
+    <div class="p2-illus"><svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="8.5" cy="9.5" r="1.5"/><path d="M21 15l-5-5L5 20"/></svg><div class="p2-illus-lbl">Illustration</div></div>
+    <h1 class="p2-title">No reservations yet</h1>
+    <p class="p2-desc">Reserve GPU capacity at a committed rate for predictable, long-running workloads — guaranteed and ready when you need it.</p>
+    <div class="p2-ctas"><button class="btn btn-p"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.99967 3.33337V12.6667M3.33301 8.00004H12.6663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Request Reservation</button><a class="p2-docs" href="https://docs.crusoecloud.com/compute/reservations" target="_blank">View docs →</a></div>
+  </div></div>
+</div>
+<!-- Audit Logs (auto-populated: no create action) -->
+<div class="view" id="view-audit-logs">
+  <div class="ph"><div class="ph-l"><div class="ph-title-sans">Audit Logs</div></div><div class="ph-r"></div></div>
+  <div class="divider"></div>
+  <div class="ca"><div class="p2-empty">
+    <div class="p2-illus"><svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="8.5" cy="9.5" r="1.5"/><path d="M21 15l-5-5L5 20"/></svg><div class="p2-illus-lbl">Illustration</div></div>
+    <h1 class="p2-title">No audit logs yet</h1>
+    <p class="p2-desc">Audit logs record every create, update, and delete across your project — who did it and when. Entries appear here automatically as your team works.</p>
+    <div class="p2-ctas"><a class="p2-docs" href="https://docs.crusoecloud.com/security/audit-logs" target="_blank">View docs →</a></div>
+  </div></div>
+</div>
+<!-- Billing activity (auto-populated: no create action) -->
+<div class="view" id="view-billing">
+  <div class="ph"><div class="ph-l"><div class="ph-title-sans">Billing</div></div><div class="ph-r"></div></div>
+  <div class="divider"></div>
+  <div class="ca"><div class="p2-empty">
+    <div class="p2-illus"><svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="8.5" cy="9.5" r="1.5"/><path d="M21 15l-5-5L5 20"/></svg><div class="p2-illus-lbl">Illustration</div></div>
+    <h1 class="p2-title">No billing activity yet</h1>
+    <p class="p2-desc">Charges appear here as you use compute, storage, and networking. You won't be billed until you start running resources.</p>
+    <div class="p2-ctas"><a class="p2-docs" href="https://docs.crusoecloud.com/billing" target="_blank">View pricing →</a></div>
+  </div></div>
+</div>
+<!-- All Notifications (page; auto-populated) -->
+<div class="view" id="view-notifications">
+  <div class="ph"><div class="ph-l"><div class="ph-title-sans">All Notifications</div></div><div class="ph-r"></div></div>
+  <div class="divider"></div>
+  <div class="ca"><div class="p2-empty">
+    <div class="p2-illus"><svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="8.5" cy="9.5" r="1.5"/><path d="M21 15l-5-5L5 20"/></svg><div class="p2-illus-lbl">Illustration</div></div>
+    <h1 class="p2-title">You're all caught up</h1>
+    <p class="p2-desc">Alerts about your instances, clusters, billing, and capacity will show up here.</p>
+  </div></div>
+</div>
+
 </div><!-- /app -->
 
 <script>
@@ -3706,24 +3815,28 @@ function mainNav(activeGrp, activeItem) {
   ];
 }
 function settingsNav(activeKey) {
+  const A = id => id === activeKey;
   return {
     type:'settings', topbar:null, back:'Back to Project',
     sections:[
       {label:'Org Management', items:[
         {id:'usage',icon:'usage',label:'Usage',hasChev:true},
-        {id:'billing',icon:'billing',label:'Billing',hasChev:true},
+        {id:'billing',icon:'billing',label:'Billing',hasChev:true,active:A('billing')},
+        {id:'reservations',icon:'billing',label:'Reservations',active:A('reservations')},
+        {id:'user-access',icon:'security',label:'User Access',active:A('user-access')},
+        {id:'audit-logs',icon:'logs',label:'Audit Logs',active:A('audit-logs')},
         {id:'projects',icon:'projects',label:'Projects'},
-        {id:'notifications',icon:'logs',label:'All Notifications'}
+        {id:'notifications',icon:'logs',label:'All Notifications',active:A('notifications')}
       ]},
       {label:'Personal Settings', items:[
         {id:'security',icon:'security',label:'Security',hasChev:true,open:true,subItems:[
-          {id:'cloud-api-keys',label:'Cloud API Keys',active:activeKey==='cloud-api-keys'},
-          {id:'ssh-keys',label:'SSH Keys',active:activeKey==='ssh-keys'},
+          {id:'cloud-api-keys',label:'Cloud API Keys',active:A('cloud-api-keys')},
+          {id:'ssh-keys',label:'SSH Keys',active:A('ssh-keys')},
           {id:'obj-storage-keys',label:'Object Storage Keys'},
           {id:'container-reg-keys',label:'Container Registry ...'},
           {id:'mon-keys',label:'Monitoring Keys'},
           {id:'inf-api-keys',label:'Inference API Keys'},
-          {id:'mfa',label:'MFA'}
+          {id:'mfa',label:'MFA',active:A('mfa')}
         ]},
         {id:'settings-personal',icon:'gear',label:'Settings',hasChev:true}
       ]}
@@ -3745,6 +3858,17 @@ const SIDEBARS = {
   buckets:     {type:'main', topbar:{org:'ManagedOrchestration',proj:'abhatti'}, nav:mainNav('storage','buckets')},
   apikeys:     settingsNav('cloud-api-keys'),
   sshkeys:     settingsNav('ssh-keys'),
+  // Phase 2 — Networking (main nav)
+  vpc:              {type:'main', topbar:{org:'ManagedOrchestration',proj:'abhatti'}, nav:mainNav('networking','vpc')},
+  subnets:          {type:'main', topbar:{org:'ManagedOrchestration',proj:'abhatti'}, nav:mainNav('networking','subnets')},
+  'load-balancers': {type:'main', topbar:{org:'ManagedOrchestration',proj:'abhatti'}, nav:mainNav('networking','load-balancers')},
+  // Phase 2 — Settings surfaces
+  billing:       settingsNav('billing'),
+  reservations:  settingsNav('reservations'),
+  'user-access': settingsNav('user-access'),
+  'audit-logs':  settingsNav('audit-logs'),
+  mfa:           settingsNav('mfa'),
+  notifications: settingsNav('notifications'),
   infra: {
     type:'cc', topbar:{org:'ManagedOrchestration',proj:'abhatti'}, notif:true,
     nav:[
@@ -3764,9 +3888,11 @@ const ROUTES = {
   kubernetes:'kubernetes', slurm:'slurm',
   'k8s-list':'kubernetes', 'k8s-detail':'k8s-detail', 'vm-detail':'vm-detail', 'create-instance':'create-instance',
   disks:'disks', buckets:'buckets',
-  vpc:null, subnets:null, firewall:null, infiniband:null, 'load-balancers':null,
+  vpc:'vpc', subnets:'subnets', firewall:null, infiniband:null, 'load-balancers':'load-balancers',
   'cloud-api-keys':'apikeys', 'ssh-keys':'sshkeys',
   'infra-overview':'infra', 'managed-logs':'managed-logs',
+  // Phase 2 empty states
+  'audit-logs':'audit-logs', 'user-access':'user-access', mfa:'mfa', reservations:'reservations', billing:'billing', notifications:'notifications',
 };
 
 let currentView = 'instances';
