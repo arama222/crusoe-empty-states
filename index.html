@@ -165,6 +165,14 @@ html,body{height:100%;background:var(--white);color:var(--black);font-family:'Su
 .tb-icon{width:40px;height:40px;display:grid;place-content:center;border-radius:8px;cursor:pointer;color:var(--gray-700);position:relative}
 .tb-icon:hover{background:var(--sel)}
 .tb-notif-dot{position:absolute;top:6px;right:6px;width:6px;height:6px;background:#ef4444;border-radius:50%;border:1.5px solid var(--white)}
+.notif-dd{position:fixed;width:320px;background:var(--white);border:1px solid var(--border);border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,.16);z-index:500;overflow:hidden}
+.notif-dd-hd{padding:12px 16px;font-size:13px;font-weight:600;font-family:var(--font-body);color:var(--text);border-bottom:1px solid var(--border)}
+.notif-dd-empty{padding:30px 24px 26px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:9px}
+.notif-dd-title{font-size:14px;font-weight:600;color:var(--text);font-family:var(--font-body)}
+.notif-dd-desc{font-size:12.5px;color:var(--muted);font-family:var(--font-body);line-height:150%}
+.notif-dd-foot{padding:10px 16px;border-top:1px solid var(--border);text-align:center}
+.notif-dd-foot a{font-size:12.5px;color:var(--muted);cursor:pointer;font-family:var(--font-body);text-decoration:none;transition:color .15s ease}
+.notif-dd-foot a:hover{color:var(--text)}
 .tb-divider{width:1px;height:24px;background:var(--gray-400)}
 /* Avatar: CDS square gray per Figma */
 .tb-avatar{width:40px;aspect-ratio:1;background:var(--gray-200);color:var(--text);border-radius:12px;display:inline-flex;align-items:center;justify-content:center;line-height:40px;font-size:14px;font-weight:400;cursor:pointer;flex-shrink:0;font-family:var(--font-body)}
@@ -910,8 +918,18 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
   </div>
   <div class="tb-right">
     <!-- Notifications (Carbon: Notification) -->
-    <div class="tb-icon" id="tb-notif">
+    <div class="tb-icon" id="tb-notif" onclick="toggleNotifDropdown(event)" style="position:relative">
       <svg class="ico" width="20" height="20" viewBox="0 0 32 32" fill="currentColor"><path d="M28.7071,19.293,26,16.5859V13a10.0136,10.0136,0,0,0-9-9.9492V1H15V3.0508A10.0136,10.0136,0,0,0,6,13v3.5859L3.2929,19.293A1,1,0,0,0,3,20v3a1,1,0,0,0,1,1h7v.7768a5.152,5.152,0,0,0,4.5,5.1987A5.0057,5.0057,0,0,0,21,25V24h7a1,1,0,0,0,1-1V20A1,1,0,0,0,28.7071,19.293ZM19,25a3,3,0,0,1-6,0V24h6Zm8-3H5V20.4141L7.707,17.707A1,1,0,0,0,8,17V13a8,8,0,0,1,16,0v4a1,1,0,0,0,.293.707L27,20.4141Z"></path></svg>
+    </div>
+    <!-- Notification Center dropdown (empty state) -->
+    <div id="notif-dropdown" class="notif-dd" style="display:none">
+      <div class="notif-dd-hd">Notifications</div>
+      <div class="notif-dd-empty">
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="var(--gray-500)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+        <div class="notif-dd-title">You're all caught up</div>
+        <div class="notif-dd-desc">Alerts about your instances, clusters, billing, and capacity will show up here.</div>
+      </div>
+      <div class="notif-dd-foot"><a onclick="toggleNotifDropdown();navigate('notifications')">View all notifications →</a></div>
     </div>
     <!-- Help (Carbon: Help) -->
     <div class="tb-icon">
@@ -5621,6 +5639,27 @@ function toggleDarkMode() {
     setTheme(isDark ? 'dark' : 'light');
   });
 })();
+
+// ── Notification Center dropdown ──
+function toggleNotifDropdown(e) {
+  if (e) e.stopPropagation();
+  const dd = document.getElementById('notif-dropdown');
+  if (!dd) return;
+  const show = dd.style.display !== 'block';
+  if (show) {
+    const b = document.getElementById('tb-notif').getBoundingClientRect();
+    dd.style.top = (b.bottom + 8) + 'px';
+    dd.style.right = Math.max(12, window.innerWidth - b.right) + 'px';
+    dd.style.display = 'block';
+  } else {
+    dd.style.display = 'none';
+  }
+}
+document.addEventListener('click', function(e) {
+  const dd = document.getElementById('notif-dropdown');
+  const bell = document.getElementById('tb-notif');
+  if (dd && dd.style.display === 'block' && !dd.contains(e.target) && bell && !bell.contains(e.target)) dd.style.display = 'none';
+});
 
 // ── Init ──
 // Restore last visited page on reload; default to instances
