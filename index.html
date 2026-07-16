@@ -773,7 +773,7 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
 #disks-redesign>div:first-child>div:last-child>div,#bucket-spicy-hero>div:last-child>div{justify-content:center!important}
 /* ── Phase 2 empty states (copy + CTAs; illustrations pending) ── */
 .p2-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:20px;min-height:calc(100vh - 180px);padding:24px;box-sizing:border-box}
-.p2-glyph{color:var(--text);flex-shrink:0;display:flex;align-items:center;justify-content:center;height:150px;margin-bottom:2px}.p2-glyph svg{display:block;height:auto;overflow:visible;transform-box:fill-box;transform-origin:center center}@keyframes p2-spin{to{transform:rotate(360deg)}}@keyframes p2-dash{to{stroke-dashoffset:-8}}.p2-spin{animation:p2-spin 60s linear infinite}.p2-spin-rev{animation:p2-spin 72s linear infinite reverse}.p2-march .dm{animation:p2-dash 1.6s linear infinite}.p2-mesh .dm{animation:p2-dash 1.6s linear infinite}@keyframes p2-node-fill{0%,10%{fill:currentColor}16%,100%{fill:#fff}}.p2-mesh .p2-node{animation:p2-node-fill 4.5s linear infinite}@keyframes p2-blink{0%,42%{fill:currentColor}55%,88%{fill:#fff}100%{fill:currentColor}}.p2-mesh .p2-center{animation:p2-blink 2.4s linear infinite}.p2-diamond .dm{animation:p2-dash 1.6s linear infinite}.p2-spin-rev .dm{animation:p2-dash 1.6s linear infinite}@keyframes p2-ray{0%,100%{stroke-dashoffset:.5;opacity:.3}50%{stroke-dashoffset:0;opacity:1}}.p2-burst path{stroke-dasharray:1;animation:p2-ray 2.8s ease-in-out infinite}@keyframes p2-ring-glow{0%,100%{opacity:.4}50%{opacity:1}}.p2-diamond .p2-ring{stroke-dasharray:.975 .025}@keyframes p2-flow{to{stroke-dashoffset:-1}}@keyframes p2-flow-r{to{stroke-dashoffset:1}}.p2-diamond .p2-flow-a{animation:p2-ring-glow 4s ease-in-out infinite,p2-flow 7s linear infinite}.p2-diamond .p2-flow-b{animation:p2-ring-glow 4s ease-in-out infinite,p2-flow-r 8s linear infinite}.p2-glyph svg.p2-march{overflow:hidden}@keyframes p2-log-step{0%,58%{transform:translateY(0)}88%,100%{transform:translateY(32px)}}@keyframes p2-log-out{0%,58%{opacity:1}82%,100%{opacity:0}}@keyframes p2-log-in{0%,64%{opacity:0}88%,100%{opacity:1}}.p2-log-stack{animation:p2-log-step 2.2s ease-in-out infinite}.p2-log-out{animation:p2-log-out 2.2s linear infinite}.p2-log-in{opacity:0;animation:p2-log-in 2.2s linear infinite}
+.p2-glyph{color:var(--text);flex-shrink:0;display:flex;align-items:center;justify-content:center;height:150px;margin-bottom:2px}.p2-glyph svg{display:block;height:auto;overflow:visible;transform-box:fill-box;transform-origin:center center}@keyframes p2-spin{to{transform:rotate(360deg)}}@keyframes p2-dash{to{stroke-dashoffset:-8}}.p2-spin{animation:p2-spin 60s linear infinite}.p2-spin-rev{animation:p2-spin 72s linear infinite reverse}.p2-march .dm{animation:p2-dash 1.6s linear infinite}.p2-mesh .dm{animation:p2-dash 1.6s linear infinite}@keyframes p2-node-fill{0%,10%{fill:currentColor}16%,100%{fill:#fff}}.p2-mesh .p2-node{animation:p2-node-fill 4.5s linear infinite}@keyframes p2-blink{0%,60%{fill:currentColor}96%,100%{fill:#fff}}.p2-mesh .p2-center{animation:p2-blink 0.75s linear infinite}.p2-diamond .dm{animation:p2-dash 1.6s linear infinite}.p2-discs .dm{animation:p2-dash 1.6s linear infinite}@keyframes p2-disc-bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}.p2-discs .p2-disc{animation:p2-disc-bob 3.6s ease-in-out infinite}.p2-spin-rev .dm{animation:p2-dash 1.6s linear infinite}@keyframes p2-ray{0%,100%{stroke-dashoffset:.5;opacity:.3}50%{stroke-dashoffset:0;opacity:1}}.p2-burst path{stroke-dasharray:1;animation:p2-ray 2.8s ease-in-out infinite}@keyframes p2-ring-glow{0%,100%{opacity:.4}50%{opacity:1}}.p2-diamond .p2-ring{stroke-dasharray:.975 .025}@keyframes p2-flow{to{stroke-dashoffset:-1}}@keyframes p2-flow-r{to{stroke-dashoffset:1}}.p2-diamond .p2-flow-a{animation:p2-ring-glow 4s ease-in-out infinite,p2-flow 7s linear infinite}.p2-diamond .p2-flow-b{animation:p2-ring-glow 4s ease-in-out infinite,p2-flow-r 8s linear infinite}.p2-glyph svg.p2-march{overflow:hidden}@keyframes p2-log-step{0%,58%{transform:translateY(0)}88%,100%{transform:translateY(32px)}}@keyframes p2-log-out{0%,58%{opacity:1}82%,100%{opacity:0}}@keyframes p2-log-in{0%,64%{opacity:0}88%,100%{opacity:1}}.p2-log-stack{animation:p2-log-step 2.2s ease-in-out infinite}.p2-log-out{animation:p2-log-out 2.2s linear infinite}.p2-log-in{opacity:0;animation:p2-log-in 2.2s linear infinite}
 .p2-title{font-size:44px;font-weight:400;font-family:var(--font-heading);color:var(--text);letter-spacing:-1.2px;line-height:110%;margin:0;white-space:nowrap}
 .p2-desc{font-size:14px;color:var(--muted);font-family:var(--font-body);line-height:160%;margin:0;max-width:520px}
 .p2-ctas{display:flex;align-items:center;gap:18px;margin-top:6px}
@@ -955,6 +955,17 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
 <div class="main">
 <!-- ═══ PHASE 2 EMPTY STATES (copy + CTAs approved; illustrations pending) ═══ -->
 <!-- VPC Networks -->
+<!-- Container Registry -->
+<div class="view" id="view-registry">
+  <div class="ph"><div class="ph-l"><div class="ph-title-sans">Container Registry</div></div><div class="ph-r"><button class="btn btn-p"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.99967 3.33337V12.6667M3.33301 8.00004H12.6663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Create Repository</button></div></div>
+  <div class="divider"></div>
+  <div class="ca"><div class="p2-empty">
+    <div class="p2-glyph"><svg class="p2-discs" width="150" viewBox="0 0 151 114.892" fill="none" xmlns="http://www.w3.org/2000/svg"><ellipse class="p2-disc" style="animation-delay:0s" cx="75.5" cy="83.1677" rx="75" ry="31.2239" fill="#fff" stroke="currentColor" stroke-miterlimit="10"/><ellipse class="p2-disc" style="animation-delay:0.3s" cx="75.5" cy="66.0198" rx="75" ry="31.2239" fill="#fff" stroke="currentColor" stroke-miterlimit="10"/><ellipse class="p2-disc" style="animation-delay:0.6s" cx="75.5" cy="48.8718" rx="75" ry="31.2239" fill="#fff" stroke="currentColor" stroke-miterlimit="10"/><g class="p2-disc" style="animation-delay:0.9s"><ellipse cx="75.5" cy="31.7239" rx="75" ry="31.2239" fill="#fff" stroke="currentColor" stroke-miterlimit="10"/><ellipse class="dm" cx="75.5" cy="31.7239" rx="48.8758" ry="20.3479" stroke="currentColor" stroke-miterlimit="10" stroke-dasharray="2 2"/></g></svg></div>
+    <h1 class="p2-title">No repositories yet</h1>
+    <p class="p2-desc">Store and manage container images close to your compute. Create a repository to push your first image.</p>
+    <div class="p2-ctas"><button class="btn btn-p"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.99967 3.33337V12.6667M3.33301 8.00004H12.6663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Create Repository</button><a class="p2-docs" href="https://docs.crusoecloud.com/containers/registry" target="_blank">View docs →</a></div>
+  </div></div>
+</div>
 <div class="view" id="view-vpc">
   <div class="ph"><div class="ph-l"><div class="ph-title-sans">VPC Networks</div></div><div class="ph-r"><button class="btn btn-p"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.99967 3.33337V12.6667M3.33301 8.00004H12.6663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Create Network</button></div></div>
   <div class="divider"></div>
@@ -3992,6 +4003,7 @@ const SIDEBARS = {
   apikeys:     settingsNav('cloud-api-keys'),
   sshkeys:     settingsNav('ssh-keys'),
   // Phase 2 — Networking (main nav)
+  registry:          {type:'main', topbar:{org:'ManagedOrchestration',proj:'abhatti'}, nav:mainNav(null,'registry')},
   vpc:              {type:'main', topbar:{org:'ManagedOrchestration',proj:'abhatti'}, nav:mainNav('networking','vpc')},
   subnets:          {type:'main', topbar:{org:'ManagedOrchestration',proj:'abhatti'}, nav:mainNav('networking','subnets')},
   'load-balancers': {type:'main', topbar:{org:'ManagedOrchestration',proj:'abhatti'}, nav:mainNav('networking','load-balancers')},
@@ -4025,7 +4037,7 @@ const ROUTES = {
   'cloud-api-keys':'apikeys', 'ssh-keys':'sshkeys',
   'infra-overview':'infra', 'managed-logs':'managed-logs',
   // Phase 2 empty states
-  'audit-logs':'audit-logs', 'user-access':'user-access', mfa:'mfa', reservations:'reservations', billing:'billing', notifications:'notifications',
+  registry:'registry', 'audit-logs':'audit-logs', 'user-access':'user-access', mfa:'mfa', reservations:'reservations', billing:'billing', notifications:'notifications',
 };
 
 let currentView = 'instances';
