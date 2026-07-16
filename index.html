@@ -773,7 +773,7 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
 #disks-redesign>div:first-child>div:last-child>div,#bucket-spicy-hero>div:last-child>div{justify-content:center!important}
 /* ── Phase 2 empty states (copy + CTAs; illustrations pending) ── */
 .p2-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:20px;min-height:calc(100vh - 180px);padding:24px;box-sizing:border-box}
-.p2-glyph{color:var(--text);flex-shrink:0;display:flex;align-items:center;justify-content:center;height:150px;margin-bottom:2px}.p2-glyph svg{display:block;height:auto;overflow:visible;transform-box:fill-box;transform-origin:center center}@keyframes p2-spin{to{transform:rotate(360deg)}}@keyframes p2-breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.045)}}@keyframes p2-dash{to{stroke-dashoffset:-8}}.p2-spin{animation:p2-spin 60s linear infinite}.p2-spin-rev{animation:p2-spin 72s linear infinite reverse}.p2-breathe{animation:p2-breathe 4.5s ease-in-out infinite}.p2-march .dm{animation:p2-dash 1.6s linear infinite}.p2-glyph svg.p2-march{overflow:hidden}@keyframes p2-log-step{0%,58%{transform:translateY(0)}88%,100%{transform:translateY(32px)}}@keyframes p2-log-out{0%,58%{opacity:1}82%,100%{opacity:0}}@keyframes p2-log-in{0%,64%{opacity:0}88%,100%{opacity:1}}.p2-log-stack{animation:p2-log-step 3.2s ease-in-out infinite}.p2-log-out{animation:p2-log-out 3.2s linear infinite}.p2-log-in{opacity:0;animation:p2-log-in 3.2s linear infinite}
+.p2-glyph{color:var(--text);flex-shrink:0;display:flex;align-items:center;justify-content:center;height:150px;margin-bottom:2px}.p2-glyph svg{display:block;height:auto;overflow:visible;transform-box:fill-box;transform-origin:center center}@keyframes p2-spin{to{transform:rotate(360deg)}}@keyframes p2-dash{to{stroke-dashoffset:-8}}.p2-spin{animation:p2-spin 60s linear infinite}.p2-spin-rev{animation:p2-spin 72s linear infinite reverse}.p2-march .dm{animation:p2-dash 1.6s linear infinite}.p2-mesh .dm{animation:p2-dash 1.6s linear infinite}@keyframes p2-node-fill{0%,10%{fill:currentColor}16%,100%{fill:#fff}}.p2-mesh .p2-node{animation:p2-node-fill 4.5s linear infinite}.p2-glyph svg.p2-march{overflow:hidden}@keyframes p2-log-step{0%,58%{transform:translateY(0)}88%,100%{transform:translateY(32px)}}@keyframes p2-log-out{0%,58%{opacity:1}82%,100%{opacity:0}}@keyframes p2-log-in{0%,64%{opacity:0}88%,100%{opacity:1}}.p2-log-stack{animation:p2-log-step 3.2s ease-in-out infinite}.p2-log-out{animation:p2-log-out 3.2s linear infinite}.p2-log-in{opacity:0;animation:p2-log-in 3.2s linear infinite}
 .p2-title{font-size:44px;font-weight:400;font-family:var(--font-heading);color:var(--text);letter-spacing:-1.2px;line-height:110%;margin:0;white-space:nowrap}
 .p2-desc{font-size:14px;color:var(--muted);font-family:var(--font-body);line-height:160%;margin:0;max-width:520px}
 .p2-ctas{display:flex;align-items:center;gap:18px;margin-top:6px}
@@ -959,23 +959,23 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
   <div class="ph"><div class="ph-l"><div class="ph-title-sans">VPC Networks</div></div><div class="ph-r"><button class="btn btn-p"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.99967 3.33337V12.6667M3.33301 8.00004H12.6663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Create Network</button></div></div>
   <div class="divider"></div>
   <div class="ca"><div class="p2-empty">
-    <div class="p2-glyph"><svg class="p2-breathe" width="150" viewBox="0 0 151 135.806" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <div class="p2-glyph"><svg class="p2-mesh" width="150" viewBox="0 0 151 135.806" fill="none" xmlns="http://www.w3.org/2000/svg">
 <g id="Group 1597884915">
 <path id="Vector 13" d="M4.31178 26.2077L3.99086 26.5911L146.634 109.396L146.954 109.012L147.275 108.629L4.63269 25.8242L4.31178 26.2077Z" fill="currentColor"/>
 <path id="Vector 14" d="M146.954 26.2077L147.275 26.5911L4.63206 109.396L4.31114 109.012L3.99023 108.629L146.633 25.8242L146.954 26.2077Z" fill="currentColor"/>
 <path id="Vector 15" d="M75.7889 5.27115L75.7889 67.1711" stroke="currentColor" stroke-miterlimit="10"/>
 <path id="Vector 17" d="M75.7889 130.535L75.7889 68.6352" stroke="currentColor" stroke-miterlimit="10"/>
 <path id="Vector" d="M75.6327 70.9933C77.5226 70.9933 79.0547 69.4613 79.0547 67.5714C79.0547 65.6815 77.5226 64.1495 75.6327 64.1495C73.7429 64.1495 72.2108 65.6815 72.2108 67.5714C72.2108 69.4613 73.7429 70.9933 75.6327 70.9933Z" fill="currentColor"/>
-<path id="Vector 16" d="M4.72479 24.8213L75.5959 4.21816" stroke="currentColor" stroke-miterlimit="10" stroke-dasharray="2 2"/>
-<path id="Vector 18" d="M4.72479 110.985L75.5959 131.588" stroke="currentColor" stroke-miterlimit="10" stroke-dasharray="2 2"/>
-<path id="Vector_2" d="M3.92192 21.7268C5.8118 21.7268 7.34384 23.2588 7.34384 25.1487C7.34384 27.0386 5.8118 28.5706 3.92192 28.5706C2.03205 28.5706 0.5 27.0386 0.5 25.1487C0.5 23.2588 2.03205 21.7268 3.92192 21.7268Z" fill="#fff" stroke="currentColor" stroke-miterlimit="10"/>
-<path id="Vector_3" d="M3.92192 114.08C5.8118 114.08 7.34384 112.547 7.34384 110.658C7.34384 108.768 5.8118 107.236 3.92192 107.236C2.03205 107.236 0.5 108.768 0.5 110.658C0.5 112.547 2.03205 114.08 3.92192 114.08Z" fill="#fff" stroke="currentColor" stroke-miterlimit="10"/>
-<path id="Vector 16_2" d="M146.275 24.8213L75.4041 4.21816" stroke="currentColor" stroke-miterlimit="10" stroke-dasharray="2 2"/>
-<path id="Vector 19" d="M146.275 110.985L75.4041 131.588" stroke="currentColor" stroke-miterlimit="10" stroke-dasharray="2 2"/>
-<path id="Vector_4" d="M147.078 21.7268C145.188 21.7268 143.656 23.2588 143.656 25.1487C143.656 27.0386 145.188 28.5706 147.078 28.5706C148.968 28.5706 150.5 27.0386 150.5 25.1487C150.5 23.2588 148.968 21.7268 147.078 21.7268Z" fill="#fff" stroke="currentColor" stroke-miterlimit="10"/>
-<path id="Vector_5" d="M147.078 114.08C145.188 114.08 143.656 112.547 143.656 110.658C143.656 108.768 145.188 107.236 147.078 107.236C148.968 107.236 150.5 108.768 150.5 110.658C150.5 112.547 148.968 114.08 147.078 114.08Z" fill="#fff" stroke="currentColor" stroke-miterlimit="10"/>
-<path id="Vector_6" d="M75.6329 0.5C73.743 0.5 72.211 2.03205 72.211 3.92192C72.211 5.81179 73.743 7.34384 75.6329 7.34384C77.5228 7.34384 79.0548 5.81179 79.0548 3.92192C79.0548 2.03205 77.5228 0.5 75.6329 0.5Z" fill="#fff" stroke="currentColor" stroke-miterlimit="10"/>
-<path id="Vector_7" d="M75.6329 135.306C73.743 135.306 72.211 133.774 72.211 131.884C72.211 129.995 73.743 128.462 75.6329 128.462C77.5228 128.462 79.0548 129.995 79.0548 131.884C79.0548 133.774 77.5228 135.306 75.6329 135.306Z" fill="#fff" stroke="currentColor" stroke-miterlimit="10"/>
+<path class="dm" id="Vector 16" d="M4.72479 24.8213L75.5959 4.21816" stroke="currentColor" stroke-miterlimit="10" stroke-dasharray="2 2"/>
+<path class="dm" id="Vector 18" d="M4.72479 110.985L75.5959 131.588" stroke="currentColor" stroke-miterlimit="10" stroke-dasharray="2 2"/>
+<path class="p2-node" style="animation-delay:3.75s" id="Vector_2" d="M3.92192 21.7268C5.8118 21.7268 7.34384 23.2588 7.34384 25.1487C7.34384 27.0386 5.8118 28.5706 3.92192 28.5706C2.03205 28.5706 0.5 27.0386 0.5 25.1487C0.5 23.2588 2.03205 21.7268 3.92192 21.7268Z" fill="#fff" stroke="currentColor" stroke-miterlimit="10"/>
+<path class="p2-node" style="animation-delay:3.0s" id="Vector_3" d="M3.92192 114.08C5.8118 114.08 7.34384 112.547 7.34384 110.658C7.34384 108.768 5.8118 107.236 3.92192 107.236C2.03205 107.236 0.5 108.768 0.5 110.658C0.5 112.547 2.03205 114.08 3.92192 114.08Z" fill="#fff" stroke="currentColor" stroke-miterlimit="10"/>
+<path class="dm" id="Vector 16_2" d="M146.275 24.8213L75.4041 4.21816" stroke="currentColor" stroke-miterlimit="10" stroke-dasharray="2 2"/>
+<path class="dm" id="Vector 19" d="M146.275 110.985L75.4041 131.588" stroke="currentColor" stroke-miterlimit="10" stroke-dasharray="2 2"/>
+<path class="p2-node" style="animation-delay:0.75s" id="Vector_4" d="M147.078 21.7268C145.188 21.7268 143.656 23.2588 143.656 25.1487C143.656 27.0386 145.188 28.5706 147.078 28.5706C148.968 28.5706 150.5 27.0386 150.5 25.1487C150.5 23.2588 148.968 21.7268 147.078 21.7268Z" fill="#fff" stroke="currentColor" stroke-miterlimit="10"/>
+<path class="p2-node" style="animation-delay:1.5s" id="Vector_5" d="M147.078 114.08C145.188 114.08 143.656 112.547 143.656 110.658C143.656 108.768 145.188 107.236 147.078 107.236C148.968 107.236 150.5 108.768 150.5 110.658C150.5 112.547 148.968 114.08 147.078 114.08Z" fill="#fff" stroke="currentColor" stroke-miterlimit="10"/>
+<path class="p2-node" style="animation-delay:0s" id="Vector_6" d="M75.6329 0.5C73.743 0.5 72.211 2.03205 72.211 3.92192C72.211 5.81179 73.743 7.34384 75.6329 7.34384C77.5228 7.34384 79.0548 5.81179 79.0548 3.92192C79.0548 2.03205 77.5228 0.5 75.6329 0.5Z" fill="#fff" stroke="currentColor" stroke-miterlimit="10"/>
+<path class="p2-node" style="animation-delay:2.25s" id="Vector_7" d="M75.6329 135.306C73.743 135.306 72.211 133.774 72.211 131.884C72.211 129.995 73.743 128.462 75.6329 128.462C77.5228 128.462 79.0548 129.995 79.0548 131.884C79.0548 133.774 77.5228 135.306 75.6329 135.306Z" fill="#fff" stroke="currentColor" stroke-miterlimit="10"/>
 </g>
 </svg></div>
     <h1 class="p2-title">No networks yet</h1>
@@ -988,23 +988,23 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
   <div class="ph"><div class="ph-l"><div class="ph-title-sans">VPC Subnets</div></div><div class="ph-r"><button class="btn btn-p"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.99967 3.33337V12.6667M3.33301 8.00004H12.6663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Create Subnet</button></div></div>
   <div class="divider"></div>
   <div class="ca"><div class="p2-empty">
-    <div class="p2-glyph"><svg class="p2-breathe" width="150" viewBox="0 0 151 135.806" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <div class="p2-glyph"><svg class="p2-mesh" width="150" viewBox="0 0 151 135.806" fill="none" xmlns="http://www.w3.org/2000/svg">
 <g id="Group 1597884915">
 <path id="Vector 13" d="M4.31178 26.2077L3.99086 26.5911L146.634 109.396L146.954 109.012L147.275 108.629L4.63269 25.8242L4.31178 26.2077Z" fill="currentColor"/>
 <path id="Vector 14" d="M146.954 26.2077L147.275 26.5911L4.63206 109.396L4.31114 109.012L3.99023 108.629L146.633 25.8242L146.954 26.2077Z" fill="currentColor"/>
 <path id="Vector 15" d="M75.7889 5.27115L75.7889 67.1711" stroke="currentColor" stroke-miterlimit="10"/>
 <path id="Vector 17" d="M75.7889 130.535L75.7889 68.6352" stroke="currentColor" stroke-miterlimit="10"/>
 <path id="Vector" d="M75.6327 70.9933C77.5226 70.9933 79.0547 69.4613 79.0547 67.5714C79.0547 65.6815 77.5226 64.1495 75.6327 64.1495C73.7429 64.1495 72.2108 65.6815 72.2108 67.5714C72.2108 69.4613 73.7429 70.9933 75.6327 70.9933Z" fill="currentColor"/>
-<path id="Vector 16" d="M4.72479 24.8213L75.5959 4.21816" stroke="currentColor" stroke-miterlimit="10" stroke-dasharray="2 2"/>
-<path id="Vector 18" d="M4.72479 110.985L75.5959 131.588" stroke="currentColor" stroke-miterlimit="10" stroke-dasharray="2 2"/>
-<path id="Vector_2" d="M3.92192 21.7268C5.8118 21.7268 7.34384 23.2588 7.34384 25.1487C7.34384 27.0386 5.8118 28.5706 3.92192 28.5706C2.03205 28.5706 0.5 27.0386 0.5 25.1487C0.5 23.2588 2.03205 21.7268 3.92192 21.7268Z" fill="#fff" stroke="currentColor" stroke-miterlimit="10"/>
-<path id="Vector_3" d="M3.92192 114.08C5.8118 114.08 7.34384 112.547 7.34384 110.658C7.34384 108.768 5.8118 107.236 3.92192 107.236C2.03205 107.236 0.5 108.768 0.5 110.658C0.5 112.547 2.03205 114.08 3.92192 114.08Z" fill="#fff" stroke="currentColor" stroke-miterlimit="10"/>
-<path id="Vector 16_2" d="M146.275 24.8213L75.4041 4.21816" stroke="currentColor" stroke-miterlimit="10" stroke-dasharray="2 2"/>
-<path id="Vector 19" d="M146.275 110.985L75.4041 131.588" stroke="currentColor" stroke-miterlimit="10" stroke-dasharray="2 2"/>
-<path id="Vector_4" d="M147.078 21.7268C145.188 21.7268 143.656 23.2588 143.656 25.1487C143.656 27.0386 145.188 28.5706 147.078 28.5706C148.968 28.5706 150.5 27.0386 150.5 25.1487C150.5 23.2588 148.968 21.7268 147.078 21.7268Z" fill="#fff" stroke="currentColor" stroke-miterlimit="10"/>
-<path id="Vector_5" d="M147.078 114.08C145.188 114.08 143.656 112.547 143.656 110.658C143.656 108.768 145.188 107.236 147.078 107.236C148.968 107.236 150.5 108.768 150.5 110.658C150.5 112.547 148.968 114.08 147.078 114.08Z" fill="#fff" stroke="currentColor" stroke-miterlimit="10"/>
-<path id="Vector_6" d="M75.6329 0.5C73.743 0.5 72.211 2.03205 72.211 3.92192C72.211 5.81179 73.743 7.34384 75.6329 7.34384C77.5228 7.34384 79.0548 5.81179 79.0548 3.92192C79.0548 2.03205 77.5228 0.5 75.6329 0.5Z" fill="#fff" stroke="currentColor" stroke-miterlimit="10"/>
-<path id="Vector_7" d="M75.6329 135.306C73.743 135.306 72.211 133.774 72.211 131.884C72.211 129.995 73.743 128.462 75.6329 128.462C77.5228 128.462 79.0548 129.995 79.0548 131.884C79.0548 133.774 77.5228 135.306 75.6329 135.306Z" fill="#fff" stroke="currentColor" stroke-miterlimit="10"/>
+<path class="dm" id="Vector 16" d="M4.72479 24.8213L75.5959 4.21816" stroke="currentColor" stroke-miterlimit="10" stroke-dasharray="2 2"/>
+<path class="dm" id="Vector 18" d="M4.72479 110.985L75.5959 131.588" stroke="currentColor" stroke-miterlimit="10" stroke-dasharray="2 2"/>
+<path class="p2-node" style="animation-delay:3.75s" id="Vector_2" d="M3.92192 21.7268C5.8118 21.7268 7.34384 23.2588 7.34384 25.1487C7.34384 27.0386 5.8118 28.5706 3.92192 28.5706C2.03205 28.5706 0.5 27.0386 0.5 25.1487C0.5 23.2588 2.03205 21.7268 3.92192 21.7268Z" fill="#fff" stroke="currentColor" stroke-miterlimit="10"/>
+<path class="p2-node" style="animation-delay:3.0s" id="Vector_3" d="M3.92192 114.08C5.8118 114.08 7.34384 112.547 7.34384 110.658C7.34384 108.768 5.8118 107.236 3.92192 107.236C2.03205 107.236 0.5 108.768 0.5 110.658C0.5 112.547 2.03205 114.08 3.92192 114.08Z" fill="#fff" stroke="currentColor" stroke-miterlimit="10"/>
+<path class="dm" id="Vector 16_2" d="M146.275 24.8213L75.4041 4.21816" stroke="currentColor" stroke-miterlimit="10" stroke-dasharray="2 2"/>
+<path class="dm" id="Vector 19" d="M146.275 110.985L75.4041 131.588" stroke="currentColor" stroke-miterlimit="10" stroke-dasharray="2 2"/>
+<path class="p2-node" style="animation-delay:0.75s" id="Vector_4" d="M147.078 21.7268C145.188 21.7268 143.656 23.2588 143.656 25.1487C143.656 27.0386 145.188 28.5706 147.078 28.5706C148.968 28.5706 150.5 27.0386 150.5 25.1487C150.5 23.2588 148.968 21.7268 147.078 21.7268Z" fill="#fff" stroke="currentColor" stroke-miterlimit="10"/>
+<path class="p2-node" style="animation-delay:1.5s" id="Vector_5" d="M147.078 114.08C145.188 114.08 143.656 112.547 143.656 110.658C143.656 108.768 145.188 107.236 147.078 107.236C148.968 107.236 150.5 108.768 150.5 110.658C150.5 112.547 148.968 114.08 147.078 114.08Z" fill="#fff" stroke="currentColor" stroke-miterlimit="10"/>
+<path class="p2-node" style="animation-delay:0s" id="Vector_6" d="M75.6329 0.5C73.743 0.5 72.211 2.03205 72.211 3.92192C72.211 5.81179 73.743 7.34384 75.6329 7.34384C77.5228 7.34384 79.0548 5.81179 79.0548 3.92192C79.0548 2.03205 77.5228 0.5 75.6329 0.5Z" fill="#fff" stroke="currentColor" stroke-miterlimit="10"/>
+<path class="p2-node" style="animation-delay:2.25s" id="Vector_7" d="M75.6329 135.306C73.743 135.306 72.211 133.774 72.211 131.884C72.211 129.995 73.743 128.462 75.6329 128.462C77.5228 128.462 79.0548 129.995 79.0548 131.884C79.0548 133.774 77.5228 135.306 75.6329 135.306Z" fill="#fff" stroke="currentColor" stroke-miterlimit="10"/>
 </g>
 </svg></div>
     <h1 class="p2-title">No subnets yet</h1>
@@ -1017,23 +1017,23 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
   <div class="ph"><div class="ph-l"><div class="ph-title-sans">Load Balancers</div></div><div class="ph-r"><button class="btn btn-p"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.99967 3.33337V12.6667M3.33301 8.00004H12.6663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Create Load Balancer</button></div></div>
   <div class="divider"></div>
   <div class="ca"><div class="p2-empty">
-    <div class="p2-glyph"><svg class="p2-breathe" width="150" viewBox="0 0 151 135.806" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <div class="p2-glyph"><svg class="p2-mesh" width="150" viewBox="0 0 151 135.806" fill="none" xmlns="http://www.w3.org/2000/svg">
 <g id="Group 1597884915">
 <path id="Vector 13" d="M4.31178 26.2077L3.99086 26.5911L146.634 109.396L146.954 109.012L147.275 108.629L4.63269 25.8242L4.31178 26.2077Z" fill="currentColor"/>
 <path id="Vector 14" d="M146.954 26.2077L147.275 26.5911L4.63206 109.396L4.31114 109.012L3.99023 108.629L146.633 25.8242L146.954 26.2077Z" fill="currentColor"/>
 <path id="Vector 15" d="M75.7889 5.27115L75.7889 67.1711" stroke="currentColor" stroke-miterlimit="10"/>
 <path id="Vector 17" d="M75.7889 130.535L75.7889 68.6352" stroke="currentColor" stroke-miterlimit="10"/>
 <path id="Vector" d="M75.6327 70.9933C77.5226 70.9933 79.0547 69.4613 79.0547 67.5714C79.0547 65.6815 77.5226 64.1495 75.6327 64.1495C73.7429 64.1495 72.2108 65.6815 72.2108 67.5714C72.2108 69.4613 73.7429 70.9933 75.6327 70.9933Z" fill="currentColor"/>
-<path id="Vector 16" d="M4.72479 24.8213L75.5959 4.21816" stroke="currentColor" stroke-miterlimit="10" stroke-dasharray="2 2"/>
-<path id="Vector 18" d="M4.72479 110.985L75.5959 131.588" stroke="currentColor" stroke-miterlimit="10" stroke-dasharray="2 2"/>
-<path id="Vector_2" d="M3.92192 21.7268C5.8118 21.7268 7.34384 23.2588 7.34384 25.1487C7.34384 27.0386 5.8118 28.5706 3.92192 28.5706C2.03205 28.5706 0.5 27.0386 0.5 25.1487C0.5 23.2588 2.03205 21.7268 3.92192 21.7268Z" fill="#fff" stroke="currentColor" stroke-miterlimit="10"/>
-<path id="Vector_3" d="M3.92192 114.08C5.8118 114.08 7.34384 112.547 7.34384 110.658C7.34384 108.768 5.8118 107.236 3.92192 107.236C2.03205 107.236 0.5 108.768 0.5 110.658C0.5 112.547 2.03205 114.08 3.92192 114.08Z" fill="#fff" stroke="currentColor" stroke-miterlimit="10"/>
-<path id="Vector 16_2" d="M146.275 24.8213L75.4041 4.21816" stroke="currentColor" stroke-miterlimit="10" stroke-dasharray="2 2"/>
-<path id="Vector 19" d="M146.275 110.985L75.4041 131.588" stroke="currentColor" stroke-miterlimit="10" stroke-dasharray="2 2"/>
-<path id="Vector_4" d="M147.078 21.7268C145.188 21.7268 143.656 23.2588 143.656 25.1487C143.656 27.0386 145.188 28.5706 147.078 28.5706C148.968 28.5706 150.5 27.0386 150.5 25.1487C150.5 23.2588 148.968 21.7268 147.078 21.7268Z" fill="#fff" stroke="currentColor" stroke-miterlimit="10"/>
-<path id="Vector_5" d="M147.078 114.08C145.188 114.08 143.656 112.547 143.656 110.658C143.656 108.768 145.188 107.236 147.078 107.236C148.968 107.236 150.5 108.768 150.5 110.658C150.5 112.547 148.968 114.08 147.078 114.08Z" fill="#fff" stroke="currentColor" stroke-miterlimit="10"/>
-<path id="Vector_6" d="M75.6329 0.5C73.743 0.5 72.211 2.03205 72.211 3.92192C72.211 5.81179 73.743 7.34384 75.6329 7.34384C77.5228 7.34384 79.0548 5.81179 79.0548 3.92192C79.0548 2.03205 77.5228 0.5 75.6329 0.5Z" fill="#fff" stroke="currentColor" stroke-miterlimit="10"/>
-<path id="Vector_7" d="M75.6329 135.306C73.743 135.306 72.211 133.774 72.211 131.884C72.211 129.995 73.743 128.462 75.6329 128.462C77.5228 128.462 79.0548 129.995 79.0548 131.884C79.0548 133.774 77.5228 135.306 75.6329 135.306Z" fill="#fff" stroke="currentColor" stroke-miterlimit="10"/>
+<path class="dm" id="Vector 16" d="M4.72479 24.8213L75.5959 4.21816" stroke="currentColor" stroke-miterlimit="10" stroke-dasharray="2 2"/>
+<path class="dm" id="Vector 18" d="M4.72479 110.985L75.5959 131.588" stroke="currentColor" stroke-miterlimit="10" stroke-dasharray="2 2"/>
+<path class="p2-node" style="animation-delay:3.75s" id="Vector_2" d="M3.92192 21.7268C5.8118 21.7268 7.34384 23.2588 7.34384 25.1487C7.34384 27.0386 5.8118 28.5706 3.92192 28.5706C2.03205 28.5706 0.5 27.0386 0.5 25.1487C0.5 23.2588 2.03205 21.7268 3.92192 21.7268Z" fill="#fff" stroke="currentColor" stroke-miterlimit="10"/>
+<path class="p2-node" style="animation-delay:3.0s" id="Vector_3" d="M3.92192 114.08C5.8118 114.08 7.34384 112.547 7.34384 110.658C7.34384 108.768 5.8118 107.236 3.92192 107.236C2.03205 107.236 0.5 108.768 0.5 110.658C0.5 112.547 2.03205 114.08 3.92192 114.08Z" fill="#fff" stroke="currentColor" stroke-miterlimit="10"/>
+<path class="dm" id="Vector 16_2" d="M146.275 24.8213L75.4041 4.21816" stroke="currentColor" stroke-miterlimit="10" stroke-dasharray="2 2"/>
+<path class="dm" id="Vector 19" d="M146.275 110.985L75.4041 131.588" stroke="currentColor" stroke-miterlimit="10" stroke-dasharray="2 2"/>
+<path class="p2-node" style="animation-delay:0.75s" id="Vector_4" d="M147.078 21.7268C145.188 21.7268 143.656 23.2588 143.656 25.1487C143.656 27.0386 145.188 28.5706 147.078 28.5706C148.968 28.5706 150.5 27.0386 150.5 25.1487C150.5 23.2588 148.968 21.7268 147.078 21.7268Z" fill="#fff" stroke="currentColor" stroke-miterlimit="10"/>
+<path class="p2-node" style="animation-delay:1.5s" id="Vector_5" d="M147.078 114.08C145.188 114.08 143.656 112.547 143.656 110.658C143.656 108.768 145.188 107.236 147.078 107.236C148.968 107.236 150.5 108.768 150.5 110.658C150.5 112.547 148.968 114.08 147.078 114.08Z" fill="#fff" stroke="currentColor" stroke-miterlimit="10"/>
+<path class="p2-node" style="animation-delay:0s" id="Vector_6" d="M75.6329 0.5C73.743 0.5 72.211 2.03205 72.211 3.92192C72.211 5.81179 73.743 7.34384 75.6329 7.34384C77.5228 7.34384 79.0548 5.81179 79.0548 3.92192C79.0548 2.03205 77.5228 0.5 75.6329 0.5Z" fill="#fff" stroke="currentColor" stroke-miterlimit="10"/>
+<path class="p2-node" style="animation-delay:2.25s" id="Vector_7" d="M75.6329 135.306C73.743 135.306 72.211 133.774 72.211 131.884C72.211 129.995 73.743 128.462 75.6329 128.462C77.5228 128.462 79.0548 129.995 79.0548 131.884C79.0548 133.774 77.5228 135.306 75.6329 135.306Z" fill="#fff" stroke="currentColor" stroke-miterlimit="10"/>
 </g>
 </svg></div>
     <h1 class="p2-title">No load balancers yet</h1>
