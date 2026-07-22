@@ -53,6 +53,18 @@ FRAGMENTS = [
     ("instance-templates",                 "Instance Templates — Empty",           "Instance Templates",                   "navigate('instance-templates');"),
     ("instance-groups",                    "Instance Groups — Empty",              "Instance Groups",                      "navigate('instance-groups');"),
     ("custom-images",                      "Custom Images — Empty",                "Custom Images",                        "navigate('custom-images');"),
+
+    # Phase 2 empty states
+    ("vpc-networks",                       "VPC Networks — Empty",                 "VPC Networks",                         "navigate('vpc');"),
+    ("vpc-subnets",                        "VPC Subnets — Empty",                  "VPC Subnets",                          "navigate('subnets');"),
+    ("load-balancers",                     "Load Balancers — Empty",               "Load Balancers",                       "navigate('load-balancers');"),
+    ("user-access",                        "User Access — Empty",                  "User Access",                          "navigate('user-access');"),
+    ("mfa",                                "MFA Devices — Empty",                  "MFA Devices",                          "navigate('mfa');"),
+    ("reservations",                       "Reservations — Empty",                 "Reservations",                         "navigate('reservations');"),
+    ("billing",                            "Billing — Empty",                      "Billing",                              "navigate('billing');"),
+    ("audit-logs",                         "Audit Logs — Empty",                   "Audit Logs",                           "navigate('audit-logs');"),
+    ("notifications",                      "All Notifications — Empty",            "All Notifications",                    "navigate('notifications');"),
+    ("container-registry",                 "Container Registry — Empty",           "Container Registry",                   "navigate('registry');"),
 ]
 
 # Card-based pages that have hover-revealed descriptions worth capturing as a

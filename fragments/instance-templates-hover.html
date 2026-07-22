@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<meta name="color-scheme" content="only light">
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
@@ -10,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
-<style>
+<style>:root{color-scheme:only light}
   /* CDS font-face: ABC Diatype Mono (commercial) — Space Mono is the visual fallback */
   /* CDS font-face: Suisse Int'l (commercial) — Inter is the visual fallback */
 </style>
@@ -165,6 +166,14 @@ html,body{height:100%;background:var(--white);color:var(--black);font-family:'Su
 .tb-icon{width:40px;height:40px;display:grid;place-content:center;border-radius:8px;cursor:pointer;color:var(--gray-700);position:relative}
 .tb-icon:hover{background:var(--sel)}
 .tb-notif-dot{position:absolute;top:6px;right:6px;width:6px;height:6px;background:#ef4444;border-radius:50%;border:1.5px solid var(--white)}
+.notif-dd{position:fixed;width:320px;background:var(--white);border:1px solid var(--border);border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,.16);z-index:500;overflow:hidden}
+.notif-dd-hd{padding:12px 16px;font-size:13px;font-weight:600;font-family:var(--font-body);color:var(--text);border-bottom:1px solid var(--border)}
+.notif-dd-empty{padding:30px 24px 26px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:9px}
+.notif-dd-title{font-size:14px;font-weight:600;color:var(--text);font-family:var(--font-body)}
+.notif-dd-desc{font-size:12.5px;color:var(--muted);font-family:var(--font-body);line-height:150%}
+.notif-dd-foot{padding:10px 16px;border-top:1px solid var(--border);text-align:center}
+.notif-dd-foot a{font-size:12.5px;color:var(--muted);cursor:pointer;font-family:var(--font-body);text-decoration:none;transition:color .15s ease}
+.notif-dd-foot a:hover{color:var(--text)}
 .tb-divider{width:1px;height:24px;background:var(--gray-400)}
 /* Avatar: CDS square gray per Figma */
 .tb-avatar{width:40px;aspect-ratio:1;background:var(--gray-200);color:var(--text);border-radius:12px;display:inline-flex;align-items:center;justify-content:center;line-height:40px;font-size:14px;font-weight:400;cursor:pointer;flex-shrink:0;font-family:var(--font-body)}
@@ -213,7 +222,7 @@ html,body{height:100%;background:var(--white);color:var(--black);font-family:'Su
 .main{flex:1;overflow-y:auto;background:var(--white);display:flex;flex-direction:column}
 
 /* ── Page header ── */
-.ph{padding:20px 12px 12px;display:flex;align-items:flex-start;justify-content:space-between;gap:16px}
+.ph{padding:20px 12px 12px;display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:72px;box-sizing:border-box}
 .ph-l{display:flex;flex-direction:column;gap:2px}
 /* Page titles: CDS h4 — ABC Diatype Mono, 24px, 400, 115%, ls -0.48px */
 .ph-title{font-family:var(--font-heading);font-size:24px;font-weight:400;line-height:125%;letter-spacing:-0.96px;color:var(--text);text-transform:capitalize}
@@ -582,12 +591,13 @@ img.ico{display:block;flex:0 0 auto}
 .browse-all{display:inline-block;font-size:12.5px;font-weight:500;font-family:var(--font-body);color:var(--muted);text-decoration:none;border-bottom:1px solid transparent;padding-bottom:1px;transition:color .15s ease,border-color .15s ease}
 .browse-all:hover{color:var(--text);border-color:var(--gray-400)}
 /* Simple state: center the hero vertically/horizontally in the page */
-#edge-4{display:flex;align-items:center;justify-content:center;gap:0;min-height:calc(100vh - 300px)}
-#edge-4 > div{gap:58px!important;padding:0!important;overflow:visible!important}
-#edge-4 #edge-cube-4{width:276px!important;height:auto!important}
-#edge-4 h1{font-size:60px!important;letter-spacing:-1.6px!important;margin-bottom:16px!important;white-space:nowrap!important;line-height:110%!important}
-#edge-4 p{font-size:19px!important;max-width:480px!important;margin-bottom:28px!important}
-#edge-4 .btn-p{padding:16px 28px!important;font-size:17px!important}
+#edge-4{display:flex;position:relative;align-items:stretch;justify-content:center;gap:0;min-height:calc(100vh - 180px)}
+#edge-4 > div{flex-direction:column!important;align-items:center!important;justify-content:center!important;text-align:center!important;gap:28px!important;padding:0!important;overflow:visible!important}
+#edge-4 #edge-cube-4{width:206px!important;height:auto!important}
+#edge-4 > div > div:nth-child(2){max-width:none!important;display:flex!important;flex-direction:column!important;align-items:center!important;gap:14px!important}
+#edge-4 h1{font-size:44px!important;letter-spacing:-1.2px!important;margin:0!important;white-space:nowrap!important;line-height:110%!important}
+#edge-4 p{font-size:14px!important;max-width:430px!important;margin:0!important;text-align:center!important}
+#edge-4 > div > div:nth-child(2) > div{justify-content:center!important;margin-top:6px!important}
 /* Billing popup (no-payment-method scenario) */
 .bm-overlay{position:fixed;inset:0;z-index:300;background:rgba(0,0,0,.45);display:flex;align-items:center;justify-content:center;padding:24px}
 .bm-card{position:relative;width:600px;max-width:94vw;max-height:92vh;overflow-y:auto;background:var(--white);border:1px solid var(--border);border-radius:14px;box-shadow:0 18px 50px rgba(0,0,0,.4);padding:20px 22px}
@@ -732,7 +742,7 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
 #view-buckets.active > .ca,
 #view-managed-logs.active > .ca,
 #view-sshkeys.active > .ca,
-#instances-spicy,#clusters-spicy,#slurm-spicy,#disks-spicy,#apikey-empty{flex:1;display:flex;flex-direction:column;justify-content:flex-start}
+#instances-edge,#clusters-spicy,#slurm-spicy,#disks-redesign,#apikey-empty{flex:1;display:flex;flex-direction:column;justify-content:flex-start}
 /* top spacer (flexible) */
 #view-instance-templates.active > .ca::before,
 #view-instance-groups.active > .ca::before,
@@ -740,7 +750,7 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
 #view-buckets.active > .ca::before,
 #view-managed-logs.active > .ca::before,
 #view-sshkeys.active > .ca::before,
-#instances-spicy::before,#clusters-spicy::before,#slurm-spicy::before,#disks-spicy::before,#apikey-empty::before{content:'';flex:1 1 0;min-height:0}
+#instances-edge::before,#clusters-spicy::before,#slurm-spicy::before,#disks-redesign::before,#apikey-empty::before{content:'';flex:1 1 0;min-height:0}
 /* bottom spacer (flexible, but floored so the hover panel always fits) */
 #view-instance-templates.active > .ca::after,
 #view-instance-groups.active > .ca::after,
@@ -748,9 +758,33 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
 #view-buckets.active > .ca::after,
 #view-managed-logs.active > .ca::after,
 #view-sshkeys.active > .ca::after,
-#instances-spicy::after,#clusters-spicy::after,#slurm-spicy::after,#disks-spicy::after,#apikey-empty::after{content:'';flex:2.6 1 0;min-height:54px}
+#instances-edge::after,#clusters-spicy::after,#slurm-spicy::after,#disks-redesign::after,#apikey-empty::after{content:'';flex:2.6 1 0;min-height:54px}
 /* middle spacer (inserted in markup before each pop-section) */
-.es-gap{flex:1 1 0;min-height:0}
+.es-gap{flex:0 0 32px;min-height:32px}
+/* ===== Simple-state surfaces (Templates, Groups, Custom Images, Kubernetes, Slurm): centered hero only, no cards ===== */
+#view-instance-templates .ca,#view-instance-groups .ca,#view-custom-images .ca{display:flex!important;flex-direction:column!important;justify-content:center!important;align-items:center!important}
+#view-instance-templates .pop-section,#view-instance-groups .pop-section,#view-custom-images .pop-section,#clusters-spicy .pop-section,#slurm-spicy .pop-section,#view-instance-templates .es-gap,#view-instance-groups .es-gap,#view-custom-images .es-gap,#clusters-spicy .es-gap,#slurm-spicy .es-gap{display:none!important}
+#view-instance-templates .ca>div,#view-instance-groups .ca>div,#view-custom-images .ca>div,#cluster-spicy-hero,#slurm-spicy-hero{flex-direction:column!important;align-items:center!important;justify-content:center!important;text-align:center!important;gap:24px!important;max-width:none!important}
+#view-instance-templates .ca>div>div:last-child,#view-instance-groups .ca>div>div:last-child,#view-custom-images .ca>div>div:last-child,#cluster-spicy-hero>div:last-child,#slurm-spicy-hero>div:last-child{max-width:560px!important;text-align:center!important}
+#view-instance-templates .ca>div>div:last-child>div,#view-instance-groups .ca>div>div:last-child>div,#view-custom-images .ca>div>div:last-child>div,#cluster-spicy-hero>div:last-child>div,#slurm-spicy-hero>div:last-child>div{justify-content:center!important}
+/* Disks + Buckets: simple state (centered hero only, cards hidden) */
+#disks-redesign .pop-section,#disks-redesign .es-gap,#view-buckets .pop-section,#view-buckets .es-gap{display:none!important}
+#disks-redesign>div:first-child,#bucket-spicy-hero{flex-direction:column!important;align-items:center!important;justify-content:center!important;text-align:center!important;gap:24px!important;max-width:none!important}
+#disks-redesign>div:first-child>div:last-child,#bucket-spicy-hero>div:last-child{max-width:560px!important;text-align:center!important}
+#disks-redesign>div:first-child>div:last-child>div,#bucket-spicy-hero>div:last-child>div{justify-content:center!important}
+/* ── Phase 2 empty states (copy + CTAs; illustrations pending) ── */
+.p2-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:20px;min-height:calc(100vh - 180px);padding:24px;box-sizing:border-box}
+
+:root{--glyph-bg:#fff;--sweep-pale:#c8cdd3;--sweep-ink:#16181a}[data-theme="dark"]{--glyph-bg:#141414;--sweep-pale:#5a6068;--sweep-ink:#f2f2f4}
+/* ===== PHASE 2 EMPTY-STATE ILLUSTRATION ANIMATIONS =====
+   glyph sizing + all motion: mesh (dash march, node fill-in, center blink),
+   diamond L-R sweep, flower spin, audit burst, notifications checklist, registry discs */
+.p2-glyph{color:var(--text);flex-shrink:0;display:flex;align-items:center;justify-content:center;margin-bottom:4px}.p2-glyph svg{display:block;width:auto;overflow:visible;transform-box:fill-box;transform-origin:center center}@keyframes p2-spin{to{transform:rotate(360deg)}}@keyframes p2-dash{to{stroke-dashoffset:-8}}.p2-spin{animation:p2-spin 60s linear infinite}.p2-spin-rev{animation:p2-spin 72s linear infinite reverse}.p2-march .dm{animation:p2-dash 1.6s linear infinite}.p2-mesh .dm{animation:p2-dash 1.6s linear infinite}@keyframes p2-node-fill{0%,10%{fill:currentColor}16%,100%{fill:var(--glyph-bg,#fff)}}.p2-mesh .p2-node{animation:p2-node-fill 4.5s linear infinite}@keyframes p2-blink{0%,30%{fill:currentColor}48%,100%{fill:var(--glyph-bg,#fff)}}.p2-mesh .p2-center{animation:p2-blink 1.5s linear infinite}.p2-diamond .dm{animation:p2-dash 1.6s linear infinite}.p2-discs .dm{animation:p2-dash 1.6s linear infinite}@keyframes p2-disc-bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}.p2-discs .p2-disc{animation:p2-disc-bob 3.6s ease-in-out infinite}.p2-spin-rev .dm{animation:p2-dash 1.6s linear infinite}@keyframes p2-ray{0%,100%{opacity:.22}50%{opacity:1}}.p2-burst g.p2-spin{transform-box:fill-box;transform-origin:center center}.p2-burst g.p2-spin path{animation:p2-ray 2.8s ease-in-out infinite}@keyframes p2-ring-glow{0%,100%{opacity:.4}50%{opacity:1}}@keyframes p2-flow{to{stroke-dashoffset:-1}}@keyframes p2-flow-r{to{stroke-dashoffset:1}}.p2-glyph svg.p2-march{overflow:hidden}@keyframes p2-log-step{0%,58%{transform:translateY(0)}88%,100%{transform:translateY(32px)}}@keyframes p2-log-out{0%,58%{opacity:1}82%,100%{opacity:0}}@keyframes p2-log-in{0%,64%{opacity:0}88%,100%{opacity:1}}.p2-log-stack{animation:p2-log-step 2.2s ease-in-out infinite;animation-delay:-1.25s}.p2-log-out{animation:p2-log-out 2.2s linear infinite;animation-delay:-1.25s}.p2-log-in{opacity:0;animation:p2-log-in 2.2s linear infinite;animation-delay:-1.25s}
+.p2-title{font-size:44px;font-weight:400;font-family:var(--font-heading);color:var(--text);letter-spacing:-1.2px;line-height:110%;margin:0;white-space:nowrap}
+.p2-desc{font-size:14px;color:var(--muted);font-family:var(--font-body);line-height:160%;margin:0;max-width:520px}
+.p2-ctas{display:flex;align-items:center;gap:18px;margin-top:6px}
+.p2-docs{font-size:13px;color:var(--muted);text-decoration:underline;text-underline-offset:3px;font-family:var(--font-body);transition:color .15s ease}
+.p2-docs:hover{color:var(--text)}
 #instances-medium,#instances-mild{margin:auto 0}
 /* ── Instances "Redesign" tab ── */
 #inst-tabs,#disks-tabs{flex-shrink:0;display:flex;gap:4px;padding:2px;margin:0;align-self:center;background:var(--gray-50);border:1px solid var(--border);border-radius:9px;width:fit-content}
@@ -768,16 +802,6 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
 .cli-reveal code{display:block;font-family:var(--mono);font-size:10.5px;color:var(--text2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .cli-reveal .cli-note{font-size:10.5px;color:var(--muted);font-family:var(--font-body);margin-top:5px;line-height:140%}
 /* Review-notes overlay (maps each change to the UX feedback) */
-#rev-toggle,#disks-rev-toggle{display:none;flex-shrink:0;margin:0 auto 8px;font-size:11.5px;font-family:var(--font-body);color:var(--muted);background:transparent;border:1px solid var(--border);border-radius:7px;padding:4px 12px;cursor:pointer;transition:color .15s ease,border-color .15s ease}
-#rev-toggle:hover,#disks-rev-toggle:hover{color:var(--text);border-color:var(--gray-400)}
-#rev-toggle.on,#disks-rev-toggle.on{color:#111;background:#f59e0b;border-color:#f59e0b}
-.rev-note{display:none;align-items:center;justify-content:center;width:16px;height:16px;border-radius:50%;background:#f59e0b;color:#111;font-size:10px;font-weight:700;font-family:var(--font-body);vertical-align:middle;margin-left:6px;flex-shrink:0}
-#instances-redesign.show-notes .rev-note,#instances-edge.show-notes .rev-note,#disks-redesign.show-notes .rev-note{display:inline-flex}
-.rev-legend{display:none;margin:16px auto 0;max-width:780px;border:1px solid var(--border);border-radius:10px;background:var(--gray-50);padding:12px 18px;text-align:left}
-#instances-redesign.show-notes .rev-legend,#instances-edge.show-notes .rev-legend,#disks-redesign.show-notes .rev-legend{display:block}
-.rev-legend-row{display:flex;gap:10px;align-items:flex-start;font-size:11.5px;font-family:var(--font-body);color:var(--muted);line-height:148%;padding:4px 0}
-.rev-legend-row .n{flex-shrink:0;width:16px;height:16px;border-radius:50%;background:#f59e0b;color:#111;font-size:10px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;margin-top:1px}
-.rev-legend-row b{color:var(--text2);font-weight:600}
 /* The three spacers above stay equal at every height, so the layout is
    evenly distributed when there's room and compresses to fit (never scrolls)
    when the window is short. */
@@ -789,26 +813,26 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
 @media (max-height: 760px){
   #view-instances .ca,#view-kubernetes .ca,#view-slurm .ca,#view-disks .ca,#view-apikeys .ca,#view-instance-templates .ca,#view-instance-groups .ca,#view-custom-images .ca,#view-buckets .ca,#view-managed-logs .ca,#view-sshkeys .ca{padding-top:14px;padding-bottom:16px}
   #instances-spicy .pop-section,#clusters-spicy .pop-section,#slurm-spicy .pop-section,#disks-spicy .pop-section,#apikey-empty .pop-section,#view-instance-templates.active > .ca .pop-section,#view-instance-groups.active > .ca .pop-section,#view-custom-images.active > .ca .pop-section,#view-buckets.active > .ca .pop-section,#view-managed-logs.active > .ca .pop-section,#view-sshkeys.active > .ca .pop-section{margin-top:22px !important}
-  #instances-spicy h1,#clusters-spicy h1,#slurm-spicy h1,#disks-spicy h1,#apikey-empty h1,#view-instance-templates.active > .ca h1,#view-instance-groups.active > .ca h1,#view-custom-images.active > .ca h1,#view-buckets.active > .ca h1,#view-managed-logs.active > .ca h1,#view-sshkeys.active > .ca h1{font-size:40px !important}
-  #view-instance-templates.active > .ca::after,#view-instance-groups.active > .ca::after,#view-custom-images.active > .ca::after,#view-buckets.active > .ca::after,#view-managed-logs.active > .ca::after,#view-sshkeys.active > .ca::after,#instances-spicy::after,#clusters-spicy::after,#slurm-spicy::after,#disks-spicy::after,#apikey-empty::after{min-height:30px}
+  .view .ca h1{font-size:40px !important}
+  #view-instance-templates.active > .ca::after,#view-instance-groups.active > .ca::after,#view-custom-images.active > .ca::after,#view-buckets.active > .ca::after,#view-managed-logs.active > .ca::after,#view-sshkeys.active > .ca::after,#instances-edge::after,#clusters-spicy::after,#slurm-spicy::after,#disks-redesign::after,#apikey-empty::after{min-height:30px}
 }
 @media (max-height: 690px){
   #view-instances .ca,#view-kubernetes .ca,#view-slurm .ca,#view-disks .ca,#view-apikeys .ca,#view-instance-templates .ca,#view-instance-groups .ca,#view-custom-images .ca,#view-buckets .ca,#view-managed-logs .ca,#view-sshkeys .ca{padding-top:10px;padding-bottom:10px}
   #instances-spicy .pop-section,#clusters-spicy .pop-section,#slurm-spicy .pop-section,#disks-spicy .pop-section,#apikey-empty .pop-section,#view-instance-templates.active > .ca .pop-section,#view-instance-groups.active > .ca .pop-section,#view-custom-images.active > .ca .pop-section,#view-buckets.active > .ca .pop-section,#view-managed-logs.active > .ca .pop-section,#view-sshkeys.active > .ca .pop-section{margin-top:14px !important}
-  #instances-spicy h1,#clusters-spicy h1,#slurm-spicy h1,#disks-spicy h1,#apikey-empty h1,#view-instance-templates.active > .ca h1,#view-instance-groups.active > .ca h1,#view-custom-images.active > .ca h1,#view-buckets.active > .ca h1,#view-managed-logs.active > .ca h1,#view-sshkeys.active > .ca h1{font-size:33px !important}
-  #view-instance-templates.active > .ca::after,#view-instance-groups.active > .ca::after,#view-custom-images.active > .ca::after,#view-buckets.active > .ca::after,#view-managed-logs.active > .ca::after,#view-sshkeys.active > .ca::after,#instances-spicy::after,#clusters-spicy::after,#slurm-spicy::after,#disks-spicy::after,#apikey-empty::after{min-height:22px}
+  .view .ca h1{font-size:33px !important}
+  #view-instance-templates.active > .ca::after,#view-instance-groups.active > .ca::after,#view-custom-images.active > .ca::after,#view-buckets.active > .ca::after,#view-managed-logs.active > .ca::after,#view-sshkeys.active > .ca::after,#instances-edge::after,#clusters-spicy::after,#slurm-spicy::after,#disks-redesign::after,#apikey-empty::after{min-height:22px}
 }
 @media (max-height: 620px){
   #view-instances .ca,#view-kubernetes .ca,#view-slurm .ca,#view-disks .ca,#view-apikeys .ca,#view-instance-templates .ca,#view-instance-groups .ca,#view-custom-images .ca,#view-buckets .ca,#view-managed-logs .ca,#view-sshkeys .ca{padding-top:9px;padding-bottom:10px}
   #instances-spicy .pop-section,#clusters-spicy .pop-section,#slurm-spicy .pop-section,#disks-spicy .pop-section,#apikey-empty .pop-section,#view-instance-templates.active > .ca .pop-section,#view-instance-groups.active > .ca .pop-section,#view-custom-images.active > .ca .pop-section,#view-buckets.active > .ca .pop-section,#view-managed-logs.active > .ca .pop-section,#view-sshkeys.active > .ca .pop-section{margin-top:14px !important}
-  #instances-spicy h1,#clusters-spicy h1,#slurm-spicy h1,#disks-spicy h1,#apikey-empty h1,#view-instance-templates.active > .ca h1,#view-instance-groups.active > .ca h1,#view-custom-images.active > .ca h1,#view-buckets.active > .ca h1,#view-managed-logs.active > .ca h1,#view-sshkeys.active > .ca h1{font-size:33px !important}
-  #view-instance-templates.active > .ca::after,#view-instance-groups.active > .ca::after,#view-custom-images.active > .ca::after,#view-buckets.active > .ca::after,#view-managed-logs.active > .ca::after,#view-sshkeys.active > .ca::after,#instances-spicy::after,#clusters-spicy::after,#slurm-spicy::after,#disks-spicy::after,#apikey-empty::after{min-height:20px}
+  .view .ca h1{font-size:33px !important}
+  #view-instance-templates.active > .ca::after,#view-instance-groups.active > .ca::after,#view-custom-images.active > .ca::after,#view-buckets.active > .ca::after,#view-managed-logs.active > .ca::after,#view-sshkeys.active > .ca::after,#instances-edge::after,#clusters-spicy::after,#slurm-spicy::after,#disks-redesign::after,#apikey-empty::after{min-height:20px}
 }
 @media (max-height: 580px){
   #view-instances .ca,#view-kubernetes .ca,#view-slurm .ca,#view-disks .ca,#view-apikeys .ca,#view-instance-templates .ca,#view-instance-groups .ca,#view-custom-images .ca,#view-buckets .ca,#view-managed-logs .ca,#view-sshkeys .ca{padding-top:6px;padding-bottom:8px}
   #instances-spicy .pop-section,#clusters-spicy .pop-section,#slurm-spicy .pop-section,#disks-spicy .pop-section,#apikey-empty .pop-section,#view-instance-templates.active > .ca .pop-section,#view-instance-groups.active > .ca .pop-section,#view-custom-images.active > .ca .pop-section,#view-buckets.active > .ca .pop-section,#view-managed-logs.active > .ca .pop-section,#view-sshkeys.active > .ca .pop-section{margin-top:10px !important;zoom:.9}
-  #instances-spicy h1,#clusters-spicy h1,#slurm-spicy h1,#disks-spicy h1,#apikey-empty h1,#view-instance-templates.active > .ca h1,#view-instance-groups.active > .ca h1,#view-custom-images.active > .ca h1,#view-buckets.active > .ca h1,#view-managed-logs.active > .ca h1,#view-sshkeys.active > .ca h1{font-size:29px !important}
-  #view-instance-templates.active > .ca::after,#view-instance-groups.active > .ca::after,#view-custom-images.active > .ca::after,#view-buckets.active > .ca::after,#view-managed-logs.active > .ca::after,#view-sshkeys.active > .ca::after,#instances-spicy::after,#clusters-spicy::after,#slurm-spicy::after,#disks-spicy::after,#apikey-empty::after{min-height:10px}
+  .view .ca h1{font-size:29px !important}
+  #view-instance-templates.active > .ca::after,#view-instance-groups.active > .ca::after,#view-custom-images.active > .ca::after,#view-buckets.active > .ca::after,#view-managed-logs.active > .ca::after,#view-sshkeys.active > .ca::after,#instances-edge::after,#clusters-spicy::after,#slurm-spicy::after,#disks-redesign::after,#apikey-empty::after{min-height:10px}
 }
 .pop-tag-title{font-size:13px;font-weight:600;font-family:var(--font-body);color:var(--text)}
 .pop-tag-sub{font-size:12px;font-family:var(--font-body);color:var(--muted)}
@@ -907,8 +931,18 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
   </div>
   <div class="tb-right">
     <!-- Notifications (Carbon: Notification) -->
-    <div class="tb-icon" id="tb-notif">
+    <div class="tb-icon" id="tb-notif" onclick="toggleNotifDropdown(event)" style="position:relative">
       <svg class="ico" width="20" height="20" viewBox="0 0 32 32" fill="currentColor"><path d="M28.7071,19.293,26,16.5859V13a10.0136,10.0136,0,0,0-9-9.9492V1H15V3.0508A10.0136,10.0136,0,0,0,6,13v3.5859L3.2929,19.293A1,1,0,0,0,3,20v3a1,1,0,0,0,1,1h7v.7768a5.152,5.152,0,0,0,4.5,5.1987A5.0057,5.0057,0,0,0,21,25V24h7a1,1,0,0,0,1-1V20A1,1,0,0,0,28.7071,19.293ZM19,25a3,3,0,0,1-6,0V24h6Zm8-3H5V20.4141L7.707,17.707A1,1,0,0,0,8,17V13a8,8,0,0,1,16,0v4a1,1,0,0,0,.293.707L27,20.4141Z"></path></svg>
+    </div>
+    <!-- Notification Center dropdown (empty state) -->
+    <div id="notif-dropdown" class="notif-dd" style="display:none">
+      <div class="notif-dd-hd">Notifications</div>
+      <div class="notif-dd-empty">
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="var(--gray-500)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+        <div class="notif-dd-title">You're all caught up</div>
+        <div class="notif-dd-desc">Alerts about your instances, clusters, billing, and capacity will show up here.</div>
+      </div>
+      <div class="notif-dd-foot"><a onclick="toggleNotifDropdown();navigate('notifications')">View all notifications →</a></div>
     </div>
     <!-- Help (Carbon: Help) -->
     <div class="tb-icon">
@@ -933,6 +967,200 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
 
 <!-- ═══ MAIN ═══ -->
 <div class="main">
+<!-- ═══ PHASE 2 EMPTY STATES (copy + CTAs approved; illustrations pending) ═══ -->
+<!-- VPC Networks -->
+<!-- Container Registry -->
+<div class="view" id="view-registry">
+  <div class="ph"><div class="ph-l"><div class="ph-title-sans">Container Registry</div></div><div class="ph-r"><button class="btn btn-p"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.99967 3.33337V12.6667M3.33301 8.00004H12.6663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Create Repository</button></div></div>
+  <div class="divider"></div>
+  <div class="ca"><div class="p2-empty">
+    <div class="p2-glyph"><svg class="p2-discs" height="136" viewBox="0 0 151 114.892" fill="none" xmlns="http://www.w3.org/2000/svg"><ellipse class="p2-disc" style="animation-delay:0s" cx="75.5" cy="83.1677" rx="75" ry="31.2239" fill="var(--glyph-bg,#fff)" stroke="currentColor" stroke-miterlimit="10"/><ellipse class="p2-disc" style="animation-delay:0.3s" cx="75.5" cy="66.0198" rx="75" ry="31.2239" fill="var(--glyph-bg,#fff)" stroke="currentColor" stroke-miterlimit="10"/><ellipse class="p2-disc" style="animation-delay:0.6s" cx="75.5" cy="48.8718" rx="75" ry="31.2239" fill="var(--glyph-bg,#fff)" stroke="currentColor" stroke-miterlimit="10"/><g class="p2-disc" style="animation-delay:0.9s"><ellipse cx="75.5" cy="31.7239" rx="75" ry="31.2239" fill="var(--glyph-bg,#fff)" stroke="currentColor" stroke-miterlimit="10"/><ellipse class="dm" cx="75.5" cy="31.7239" rx="48.8758" ry="20.3479" stroke="currentColor" stroke-miterlimit="10" stroke-dasharray="2 2"/></g></svg></div>
+    <h1 class="p2-title">No repositories yet</h1>
+    <p class="p2-desc">Store and manage container images close to your compute. Create a repository to push your first image.</p>
+    <div class="p2-ctas"><button class="btn btn-p"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.99967 3.33337V12.6667M3.33301 8.00004H12.6663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Create Repository</button><a class="p2-docs" href="https://docs.crusoecloud.com/containers/registry" target="_blank">View docs →</a></div>
+  </div></div>
+</div>
+<div class="view" id="view-vpc">
+  <div class="ph"><div class="ph-l"><div class="ph-title-sans">VPC Networks</div></div><div class="ph-r"><button class="btn btn-p"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.99967 3.33337V12.6667M3.33301 8.00004H12.6663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Create Network</button></div></div>
+  <div class="divider"></div>
+  <div class="ca"><div class="p2-empty">
+    <div class="p2-glyph"><svg class="p2-mesh" height="160" viewBox="0 0 151 135.806" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Group 1597884915">
+<path id="Vector 13" d="M4.31178 26.2077L3.99086 26.5911L146.634 109.396L146.954 109.012L147.275 108.629L4.63269 25.8242L4.31178 26.2077Z" fill="currentColor"/>
+<path id="Vector 14" d="M146.954 26.2077L147.275 26.5911L4.63206 109.396L4.31114 109.012L3.99023 108.629L146.633 25.8242L146.954 26.2077Z" fill="currentColor"/>
+<path id="Vector 15" d="M75.7889 5.27115L75.7889 67.1711" stroke="currentColor" stroke-miterlimit="10"/>
+<path id="Vector 17" d="M75.7889 130.535L75.7889 68.6352" stroke="currentColor" stroke-miterlimit="10"/>
+<path class="p2-center" id="Vector" d="M75.6327 70.9933C77.5226 70.9933 79.0547 69.4613 79.0547 67.5714C79.0547 65.6815 77.5226 64.1495 75.6327 64.1495C73.7429 64.1495 72.2108 65.6815 72.2108 67.5714C72.2108 69.4613 73.7429 70.9933 75.6327 70.9933Z" fill="currentColor" stroke="currentColor" stroke-miterlimit="10"/>
+<path class="dm" id="Vector 16" d="M4.72479 24.8213L75.5959 4.21816" stroke="currentColor" stroke-miterlimit="10" stroke-dasharray="2 2"/>
+<path class="dm" id="Vector 18" d="M4.72479 110.985L75.5959 131.588" stroke="currentColor" stroke-miterlimit="10" stroke-dasharray="2 2"/>
+<path class="p2-node" style="animation-delay:3.75s" id="Vector_2" d="M3.92192 21.7268C5.8118 21.7268 7.34384 23.2588 7.34384 25.1487C7.34384 27.0386 5.8118 28.5706 3.92192 28.5706C2.03205 28.5706 0.5 27.0386 0.5 25.1487C0.5 23.2588 2.03205 21.7268 3.92192 21.7268Z" fill="var(--glyph-bg,#fff)" stroke="currentColor" stroke-miterlimit="10"/>
+<path class="p2-node" style="animation-delay:3.0s" id="Vector_3" d="M3.92192 114.08C5.8118 114.08 7.34384 112.547 7.34384 110.658C7.34384 108.768 5.8118 107.236 3.92192 107.236C2.03205 107.236 0.5 108.768 0.5 110.658C0.5 112.547 2.03205 114.08 3.92192 114.08Z" fill="var(--glyph-bg,#fff)" stroke="currentColor" stroke-miterlimit="10"/>
+<path class="dm" id="Vector 16_2" d="M146.275 24.8213L75.4041 4.21816" stroke="currentColor" stroke-miterlimit="10" stroke-dasharray="2 2"/>
+<path class="dm" id="Vector 19" d="M146.275 110.985L75.4041 131.588" stroke="currentColor" stroke-miterlimit="10" stroke-dasharray="2 2"/>
+<path class="p2-node" style="animation-delay:0.75s" id="Vector_4" d="M147.078 21.7268C145.188 21.7268 143.656 23.2588 143.656 25.1487C143.656 27.0386 145.188 28.5706 147.078 28.5706C148.968 28.5706 150.5 27.0386 150.5 25.1487C150.5 23.2588 148.968 21.7268 147.078 21.7268Z" fill="var(--glyph-bg,#fff)" stroke="currentColor" stroke-miterlimit="10"/>
+<path class="p2-node" style="animation-delay:1.5s" id="Vector_5" d="M147.078 114.08C145.188 114.08 143.656 112.547 143.656 110.658C143.656 108.768 145.188 107.236 147.078 107.236C148.968 107.236 150.5 108.768 150.5 110.658C150.5 112.547 148.968 114.08 147.078 114.08Z" fill="var(--glyph-bg,#fff)" stroke="currentColor" stroke-miterlimit="10"/>
+<path class="p2-node" style="animation-delay:0s" id="Vector_6" d="M75.6329 0.5C73.743 0.5 72.211 2.03205 72.211 3.92192C72.211 5.81179 73.743 7.34384 75.6329 7.34384C77.5228 7.34384 79.0548 5.81179 79.0548 3.92192C79.0548 2.03205 77.5228 0.5 75.6329 0.5Z" fill="var(--glyph-bg,#fff)" stroke="currentColor" stroke-miterlimit="10"/>
+<path class="p2-node" style="animation-delay:2.25s" id="Vector_7" d="M75.6329 135.306C73.743 135.306 72.211 133.774 72.211 131.884C72.211 129.995 73.743 128.462 75.6329 128.462C77.5228 128.462 79.0548 129.995 79.0548 131.884C79.0548 133.774 77.5228 135.306 75.6329 135.306Z" fill="var(--glyph-bg,#fff)" stroke="currentColor" stroke-miterlimit="10"/>
+</g>
+</svg></div>
+    <h1 class="p2-title">No networks yet</h1>
+    <p class="p2-desc">A VPC network gives your instances a private, isolated space to communicate. Create one to define your address range and connect resources.</p>
+    <div class="p2-ctas"><button class="btn btn-p"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.99967 3.33337V12.6667M3.33301 8.00004H12.6663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Create Network</button><a class="p2-docs" href="https://docs.crusoecloud.com/networking/vpc-networks" target="_blank">View docs →</a></div>
+  </div></div>
+</div>
+<!-- VPC Subnets -->
+<div class="view" id="view-subnets">
+  <div class="ph"><div class="ph-l"><div class="ph-title-sans">VPC Subnets</div></div><div class="ph-r"><button class="btn btn-p"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.99967 3.33337V12.6667M3.33301 8.00004H12.6663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Create Subnet</button></div></div>
+  <div class="divider"></div>
+  <div class="ca"><div class="p2-empty">
+    <div class="p2-glyph"><svg class="p2-mesh" height="160" viewBox="0 0 151 135.806" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Group 1597884915">
+<path id="Vector 13" d="M4.31178 26.2077L3.99086 26.5911L146.634 109.396L146.954 109.012L147.275 108.629L4.63269 25.8242L4.31178 26.2077Z" fill="currentColor"/>
+<path id="Vector 14" d="M146.954 26.2077L147.275 26.5911L4.63206 109.396L4.31114 109.012L3.99023 108.629L146.633 25.8242L146.954 26.2077Z" fill="currentColor"/>
+<path id="Vector 15" d="M75.7889 5.27115L75.7889 67.1711" stroke="currentColor" stroke-miterlimit="10"/>
+<path id="Vector 17" d="M75.7889 130.535L75.7889 68.6352" stroke="currentColor" stroke-miterlimit="10"/>
+<path class="p2-center" id="Vector" d="M75.6327 70.9933C77.5226 70.9933 79.0547 69.4613 79.0547 67.5714C79.0547 65.6815 77.5226 64.1495 75.6327 64.1495C73.7429 64.1495 72.2108 65.6815 72.2108 67.5714C72.2108 69.4613 73.7429 70.9933 75.6327 70.9933Z" fill="currentColor" stroke="currentColor" stroke-miterlimit="10"/>
+<path class="dm" id="Vector 16" d="M4.72479 24.8213L75.5959 4.21816" stroke="currentColor" stroke-miterlimit="10" stroke-dasharray="2 2"/>
+<path class="dm" id="Vector 18" d="M4.72479 110.985L75.5959 131.588" stroke="currentColor" stroke-miterlimit="10" stroke-dasharray="2 2"/>
+<path class="p2-node" style="animation-delay:3.75s" id="Vector_2" d="M3.92192 21.7268C5.8118 21.7268 7.34384 23.2588 7.34384 25.1487C7.34384 27.0386 5.8118 28.5706 3.92192 28.5706C2.03205 28.5706 0.5 27.0386 0.5 25.1487C0.5 23.2588 2.03205 21.7268 3.92192 21.7268Z" fill="var(--glyph-bg,#fff)" stroke="currentColor" stroke-miterlimit="10"/>
+<path class="p2-node" style="animation-delay:3.0s" id="Vector_3" d="M3.92192 114.08C5.8118 114.08 7.34384 112.547 7.34384 110.658C7.34384 108.768 5.8118 107.236 3.92192 107.236C2.03205 107.236 0.5 108.768 0.5 110.658C0.5 112.547 2.03205 114.08 3.92192 114.08Z" fill="var(--glyph-bg,#fff)" stroke="currentColor" stroke-miterlimit="10"/>
+<path class="dm" id="Vector 16_2" d="M146.275 24.8213L75.4041 4.21816" stroke="currentColor" stroke-miterlimit="10" stroke-dasharray="2 2"/>
+<path class="dm" id="Vector 19" d="M146.275 110.985L75.4041 131.588" stroke="currentColor" stroke-miterlimit="10" stroke-dasharray="2 2"/>
+<path class="p2-node" style="animation-delay:0.75s" id="Vector_4" d="M147.078 21.7268C145.188 21.7268 143.656 23.2588 143.656 25.1487C143.656 27.0386 145.188 28.5706 147.078 28.5706C148.968 28.5706 150.5 27.0386 150.5 25.1487C150.5 23.2588 148.968 21.7268 147.078 21.7268Z" fill="var(--glyph-bg,#fff)" stroke="currentColor" stroke-miterlimit="10"/>
+<path class="p2-node" style="animation-delay:1.5s" id="Vector_5" d="M147.078 114.08C145.188 114.08 143.656 112.547 143.656 110.658C143.656 108.768 145.188 107.236 147.078 107.236C148.968 107.236 150.5 108.768 150.5 110.658C150.5 112.547 148.968 114.08 147.078 114.08Z" fill="var(--glyph-bg,#fff)" stroke="currentColor" stroke-miterlimit="10"/>
+<path class="p2-node" style="animation-delay:0s" id="Vector_6" d="M75.6329 0.5C73.743 0.5 72.211 2.03205 72.211 3.92192C72.211 5.81179 73.743 7.34384 75.6329 7.34384C77.5228 7.34384 79.0548 5.81179 79.0548 3.92192C79.0548 2.03205 77.5228 0.5 75.6329 0.5Z" fill="var(--glyph-bg,#fff)" stroke="currentColor" stroke-miterlimit="10"/>
+<path class="p2-node" style="animation-delay:2.25s" id="Vector_7" d="M75.6329 135.306C73.743 135.306 72.211 133.774 72.211 131.884C72.211 129.995 73.743 128.462 75.6329 128.462C77.5228 128.462 79.0548 129.995 79.0548 131.884C79.0548 133.774 77.5228 135.306 75.6329 135.306Z" fill="var(--glyph-bg,#fff)" stroke="currentColor" stroke-miterlimit="10"/>
+</g>
+</svg></div>
+    <h1 class="p2-title">No subnets yet</h1>
+    <p class="p2-desc">Subnets split a VPC network into smaller address ranges so you can organize and isolate resources. Create one to start placing instances.</p>
+    <div class="p2-ctas"><button class="btn btn-p"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.99967 3.33337V12.6667M3.33301 8.00004H12.6663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Create Subnet</button><a class="p2-docs" href="https://docs.crusoecloud.com/networking/subnets" target="_blank">View docs →</a></div>
+  </div></div>
+</div>
+<!-- Load Balancers -->
+<div class="view" id="view-load-balancers">
+  <div class="ph"><div class="ph-l"><div class="ph-title-sans">Load Balancers</div></div><div class="ph-r"><button class="btn btn-p"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.99967 3.33337V12.6667M3.33301 8.00004H12.6663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Create Load Balancer</button></div></div>
+  <div class="divider"></div>
+  <div class="ca"><div class="p2-empty">
+    <div class="p2-glyph"><svg class="p2-mesh" height="160" viewBox="0 0 151 135.806" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Group 1597884915">
+<path id="Vector 13" d="M4.31178 26.2077L3.99086 26.5911L146.634 109.396L146.954 109.012L147.275 108.629L4.63269 25.8242L4.31178 26.2077Z" fill="currentColor"/>
+<path id="Vector 14" d="M146.954 26.2077L147.275 26.5911L4.63206 109.396L4.31114 109.012L3.99023 108.629L146.633 25.8242L146.954 26.2077Z" fill="currentColor"/>
+<path id="Vector 15" d="M75.7889 5.27115L75.7889 67.1711" stroke="currentColor" stroke-miterlimit="10"/>
+<path id="Vector 17" d="M75.7889 130.535L75.7889 68.6352" stroke="currentColor" stroke-miterlimit="10"/>
+<path class="p2-center" id="Vector" d="M75.6327 70.9933C77.5226 70.9933 79.0547 69.4613 79.0547 67.5714C79.0547 65.6815 77.5226 64.1495 75.6327 64.1495C73.7429 64.1495 72.2108 65.6815 72.2108 67.5714C72.2108 69.4613 73.7429 70.9933 75.6327 70.9933Z" fill="currentColor" stroke="currentColor" stroke-miterlimit="10"/>
+<path class="dm" id="Vector 16" d="M4.72479 24.8213L75.5959 4.21816" stroke="currentColor" stroke-miterlimit="10" stroke-dasharray="2 2"/>
+<path class="dm" id="Vector 18" d="M4.72479 110.985L75.5959 131.588" stroke="currentColor" stroke-miterlimit="10" stroke-dasharray="2 2"/>
+<path class="p2-node" style="animation-delay:3.75s" id="Vector_2" d="M3.92192 21.7268C5.8118 21.7268 7.34384 23.2588 7.34384 25.1487C7.34384 27.0386 5.8118 28.5706 3.92192 28.5706C2.03205 28.5706 0.5 27.0386 0.5 25.1487C0.5 23.2588 2.03205 21.7268 3.92192 21.7268Z" fill="var(--glyph-bg,#fff)" stroke="currentColor" stroke-miterlimit="10"/>
+<path class="p2-node" style="animation-delay:3.0s" id="Vector_3" d="M3.92192 114.08C5.8118 114.08 7.34384 112.547 7.34384 110.658C7.34384 108.768 5.8118 107.236 3.92192 107.236C2.03205 107.236 0.5 108.768 0.5 110.658C0.5 112.547 2.03205 114.08 3.92192 114.08Z" fill="var(--glyph-bg,#fff)" stroke="currentColor" stroke-miterlimit="10"/>
+<path class="dm" id="Vector 16_2" d="M146.275 24.8213L75.4041 4.21816" stroke="currentColor" stroke-miterlimit="10" stroke-dasharray="2 2"/>
+<path class="dm" id="Vector 19" d="M146.275 110.985L75.4041 131.588" stroke="currentColor" stroke-miterlimit="10" stroke-dasharray="2 2"/>
+<path class="p2-node" style="animation-delay:0.75s" id="Vector_4" d="M147.078 21.7268C145.188 21.7268 143.656 23.2588 143.656 25.1487C143.656 27.0386 145.188 28.5706 147.078 28.5706C148.968 28.5706 150.5 27.0386 150.5 25.1487C150.5 23.2588 148.968 21.7268 147.078 21.7268Z" fill="var(--glyph-bg,#fff)" stroke="currentColor" stroke-miterlimit="10"/>
+<path class="p2-node" style="animation-delay:1.5s" id="Vector_5" d="M147.078 114.08C145.188 114.08 143.656 112.547 143.656 110.658C143.656 108.768 145.188 107.236 147.078 107.236C148.968 107.236 150.5 108.768 150.5 110.658C150.5 112.547 148.968 114.08 147.078 114.08Z" fill="var(--glyph-bg,#fff)" stroke="currentColor" stroke-miterlimit="10"/>
+<path class="p2-node" style="animation-delay:0s" id="Vector_6" d="M75.6329 0.5C73.743 0.5 72.211 2.03205 72.211 3.92192C72.211 5.81179 73.743 7.34384 75.6329 7.34384C77.5228 7.34384 79.0548 5.81179 79.0548 3.92192C79.0548 2.03205 77.5228 0.5 75.6329 0.5Z" fill="var(--glyph-bg,#fff)" stroke="currentColor" stroke-miterlimit="10"/>
+<path class="p2-node" style="animation-delay:2.25s" id="Vector_7" d="M75.6329 135.306C73.743 135.306 72.211 133.774 72.211 131.884C72.211 129.995 73.743 128.462 75.6329 128.462C77.5228 128.462 79.0548 129.995 79.0548 131.884C79.0548 133.774 77.5228 135.306 75.6329 135.306Z" fill="var(--glyph-bg,#fff)" stroke="currentColor" stroke-miterlimit="10"/>
+</g>
+</svg></div>
+    <h1 class="p2-title">No load balancers yet</h1>
+    <p class="p2-desc">Distribute traffic across instances for higher availability and throughput. Create a load balancer to route requests to your backends.</p>
+    <div class="p2-ctas"><button class="btn btn-p"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.99967 3.33337V12.6667M3.33301 8.00004H12.6663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Create Load Balancer</button><a class="p2-docs" href="https://docs.crusoecloud.com/networking/load-balancers" target="_blank">View docs →</a></div>
+  </div></div>
+</div>
+<!-- IAM / User Access -->
+<div class="view" id="view-user-access">
+  <div class="ph"><div class="ph-l"><div class="ph-title-sans">User Access</div></div><div class="ph-r"><button class="btn btn-p"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.99967 3.33337V12.6667M3.33301 8.00004H12.6663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Invite User</button></div></div>
+  <div class="divider"></div>
+  <div class="ca"><div class="p2-empty">
+    <div class="p2-glyph"><svg class="p2-diamond" height="186" viewBox="0 0 161 160.75" fill="none" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="p2dg-ua" gradientUnits="userSpaceOnUse" x1="-161" y1="0" x2="0" y2="0"><stop offset="0" stop-color="var(--sweep-pale,#c8cdd3)"/><stop offset="0.35" stop-color="var(--sweep-ink,#16181a)"/><stop offset="0.65" stop-color="var(--sweep-ink,#16181a)"/><stop offset="1" stop-color="var(--sweep-pale,#c8cdd3)"/><animateTransform attributeName="gradientTransform" type="translate" from="0 0" to="322 0" dur="3.4s" repeatCount="indefinite"/></linearGradient></defs><g>
+<path class="dm" d="M80.5 105.298C124.683 105.298 160.5 93.943 160.5 79.9364C160.5 65.9298 124.683 54.5751 80.5 54.5751C36.3172 54.5751 0.5 65.9298 0.5 79.9364C0.5 93.943 36.3172 105.298 80.5 105.298Z" stroke="currentColor" stroke-miterlimit="10" stroke-dasharray="2 2"/>
+<path class="p2-ring" d="M80.3588 119.067C116.799 119.067 146.339 101.597 146.339 80.046C146.339 58.4953 116.799 41.0251 80.3588 41.0251C43.919 41.0251 14.3788 58.4953 14.3788 80.046C14.3788 101.597 43.919 119.067 80.3588 119.067Z" stroke="url(#p2dg-ua)" stroke-width="0.75" stroke-miterlimit="10"/>
+<path class="p2-ring" d="M80.202 132.836C108.89 132.836 132.146 109.25 132.146 80.1556C132.146 51.0609 108.89 27.475 80.202 27.475C51.5139 27.475 28.2576 51.0609 28.2576 80.1556C28.2576 109.25 51.5139 132.836 80.202 132.836Z" stroke="url(#p2dg-ua)" stroke-width="0.75" stroke-miterlimit="10"/>
+<path class="p2-ring" d="M80.0454 146.606C100.99 146.606 117.97 116.904 117.97 80.2653C117.97 43.6266 100.99 13.925 80.0454 13.925C59.1003 13.925 42.121 43.6266 42.121 80.2653C42.121 116.904 59.1003 146.606 80.0454 146.606Z" stroke="url(#p2dg-ua)" stroke-width="0.75" stroke-miterlimit="10"/>
+<path class="p2-ring" d="M79.8888 160.375C93.0909 160.375 103.793 124.558 103.793 80.375C103.793 36.1922 93.0909 0.375 79.8888 0.375C66.6868 0.375 55.9844 36.1922 55.9844 80.375C55.9844 124.558 66.6868 160.375 79.8888 160.375Z" stroke="url(#p2dg-ua)" stroke-width="0.75" stroke-miterlimit="10"/>
+</g></svg></div>
+    <h1 class="p2-title">No users or roles yet</h1>
+    <p class="p2-desc">Invite teammates and assign roles to control who can access this project and what they can do.</p>
+    <div class="p2-ctas"><button class="btn btn-p"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.99967 3.33337V12.6667M3.33301 8.00004H12.6663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Invite User</button><a class="p2-docs" href="https://docs.crusoecloud.com/iam" target="_blank">View docs →</a></div>
+  </div></div>
+</div>
+<!-- MFA Devices -->
+<div class="view" id="view-mfa">
+  <div class="ph"><div class="ph-l"><div class="ph-title-sans">MFA Devices</div></div><div class="ph-r"><button class="btn btn-p"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.99967 3.33337V12.6667M3.33301 8.00004H12.6663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Register Device</button></div></div>
+  <div class="divider"></div>
+  <div class="ca"><div class="p2-empty">
+    <div class="p2-glyph"><svg class="p2-diamond" height="186" viewBox="0 0 161 160.75" fill="none" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="p2dg-mfa" gradientUnits="userSpaceOnUse" x1="-161" y1="0" x2="0" y2="0"><stop offset="0" stop-color="var(--sweep-pale,#c8cdd3)"/><stop offset="0.35" stop-color="var(--sweep-ink,#16181a)"/><stop offset="0.65" stop-color="var(--sweep-ink,#16181a)"/><stop offset="1" stop-color="var(--sweep-pale,#c8cdd3)"/><animateTransform attributeName="gradientTransform" type="translate" from="0 0" to="322 0" dur="3.4s" repeatCount="indefinite"/></linearGradient></defs><g>
+<path class="dm" d="M80.5 105.298C124.683 105.298 160.5 93.943 160.5 79.9364C160.5 65.9298 124.683 54.5751 80.5 54.5751C36.3172 54.5751 0.5 65.9298 0.5 79.9364C0.5 93.943 36.3172 105.298 80.5 105.298Z" stroke="currentColor" stroke-miterlimit="10" stroke-dasharray="2 2"/>
+<path class="p2-ring" d="M80.3588 119.067C116.799 119.067 146.339 101.597 146.339 80.046C146.339 58.4953 116.799 41.0251 80.3588 41.0251C43.919 41.0251 14.3788 58.4953 14.3788 80.046C14.3788 101.597 43.919 119.067 80.3588 119.067Z" stroke="url(#p2dg-mfa)" stroke-width="0.75" stroke-miterlimit="10"/>
+<path class="p2-ring" d="M80.202 132.836C108.89 132.836 132.146 109.25 132.146 80.1556C132.146 51.0609 108.89 27.475 80.202 27.475C51.5139 27.475 28.2576 51.0609 28.2576 80.1556C28.2576 109.25 51.5139 132.836 80.202 132.836Z" stroke="url(#p2dg-mfa)" stroke-width="0.75" stroke-miterlimit="10"/>
+<path class="p2-ring" d="M80.0454 146.606C100.99 146.606 117.97 116.904 117.97 80.2653C117.97 43.6266 100.99 13.925 80.0454 13.925C59.1003 13.925 42.121 43.6266 42.121 80.2653C42.121 116.904 59.1003 146.606 80.0454 146.606Z" stroke="url(#p2dg-mfa)" stroke-width="0.75" stroke-miterlimit="10"/>
+<path class="p2-ring" d="M79.8888 160.375C93.0909 160.375 103.793 124.558 103.793 80.375C103.793 36.1922 93.0909 0.375 79.8888 0.375C66.6868 0.375 55.9844 36.1922 55.9844 80.375C55.9844 124.558 66.6868 160.375 79.8888 160.375Z" stroke="url(#p2dg-mfa)" stroke-width="0.75" stroke-miterlimit="10"/>
+</g></svg></div>
+    <h1 class="p2-title">No MFA devices registered</h1>
+    <p class="p2-desc">Add a second factor to protect your account. Register an authenticator app or security key to require MFA at sign-in.</p>
+    <div class="p2-ctas"><button class="btn btn-p"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.99967 3.33337V12.6667M3.33301 8.00004H12.6663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Register Device</button><a class="p2-docs" href="https://docs.crusoecloud.com/identity-and-security/mfa" target="_blank">View docs →</a></div>
+  </div></div>
+</div>
+<!-- Reservations -->
+<div class="view" id="view-reservations">
+  <div class="ph"><div class="ph-l"><div class="ph-title-sans">Reservations</div></div><div class="ph-r"><button class="btn btn-p"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.99967 3.33337V12.6667M3.33301 8.00004H12.6663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Request Reservation</button></div></div>
+  <div class="divider"></div>
+  <div class="ca"><div class="p2-empty">
+    <div class="p2-glyph"><svg class="p2-spin-rev" height="186" viewBox="0 0 150.749 150.75" fill="none" xmlns="http://www.w3.org/2000/svg"><g>
+<path d="M77.6206 55.4722C92.8353 55.4722 105.169 43.1382 105.169 27.9236C105.169 12.7089 92.8353 0.375 77.6206 0.375C62.406 0.375 50.072 12.7089 50.072 27.9236C50.072 43.1382 62.406 55.4722 77.6206 55.4722Z" stroke="currentColor" stroke-width="0.75" stroke-miterlimit="10"/>
+<path class="dm" d="M110.51 70.972C125.724 70.972 138.058 58.6381 138.058 43.4234C138.058 28.2088 125.724 15.8748 110.51 15.8748C95.295 15.8748 82.961 28.2088 82.961 43.4234C82.961 58.6381 95.295 70.972 110.51 70.972Z" stroke="currentColor" stroke-miterlimit="10" stroke-dasharray="2 2"/>
+<path d="M122.826 105.17C138.041 105.17 150.374 92.8358 150.374 77.6211C150.374 62.4065 138.041 50.0726 122.826 50.0726C107.611 50.0726 95.2773 62.4065 95.2773 77.6211C95.2773 92.8358 107.611 105.17 122.826 105.17Z" stroke="currentColor" stroke-width="0.75" stroke-miterlimit="10"/>
+<path class="dm" d="M107.326 138.058C122.541 138.058 134.875 125.725 134.875 110.51C134.875 95.2952 122.541 82.9613 107.326 82.9613C92.1115 82.9613 79.7776 95.2952 79.7776 110.51C79.7776 125.725 92.1115 138.058 107.326 138.058Z" stroke="currentColor" stroke-miterlimit="10" stroke-dasharray="2 2"/>
+<path d="M73.1283 150.375C88.343 150.375 100.677 138.041 100.677 122.826C100.677 107.612 88.343 95.2778 73.1283 95.2778C57.9137 95.2778 45.5797 107.612 45.5797 122.826C45.5797 138.041 57.9137 150.375 73.1283 150.375Z" stroke="currentColor" stroke-width="0.75" stroke-miterlimit="10"/>
+<path class="dm" d="M40.2398 134.875C55.4545 134.875 67.7884 122.541 67.7884 107.327C67.7884 92.1119 55.4545 79.778 40.2398 79.778C25.0251 79.778 12.6912 92.1119 12.6912 107.327C12.6912 122.541 25.0251 134.875 40.2398 134.875Z" stroke="currentColor" stroke-miterlimit="10" stroke-dasharray="2 2"/>
+<path d="M27.9236 100.677C43.1382 100.677 55.4722 88.3435 55.4722 73.1289C55.4722 57.9142 43.1382 45.5803 27.9236 45.5803C12.7089 45.5803 0.375 57.9142 0.375 73.1289C0.375 88.3435 12.7089 100.677 27.9236 100.677Z" stroke="currentColor" stroke-width="0.75" stroke-miterlimit="10"/>
+<path class="dm" d="M43.4233 67.7887C58.6379 67.7887 70.9719 55.4548 70.9719 40.2401C70.9719 25.0255 58.6379 12.6915 43.4233 12.6915C28.2086 12.6915 15.8747 25.0255 15.8747 40.2401C15.8747 55.4548 28.2086 67.7887 43.4233 67.7887Z" stroke="currentColor" stroke-miterlimit="10" stroke-dasharray="2 2"/>
+</g></svg></div>
+    <h1 class="p2-title">No reservations yet</h1>
+    <p class="p2-desc">Reserve GPU capacity at a committed rate for predictable, long-running workloads — guaranteed and ready when you need it.</p>
+    <div class="p2-ctas"><button class="btn btn-p"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.99967 3.33337V12.6667M3.33301 8.00004H12.6663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Request Reservation</button><a class="p2-docs" href="https://docs.crusoecloud.com/compute/reservations" target="_blank">View docs →</a></div>
+  </div></div>
+</div>
+<!-- Audit Logs (auto-populated: no create action) -->
+<div class="view" id="view-audit-logs">
+  <div class="ph"><div class="ph-l"><div class="ph-title-sans">Audit Logs</div></div><div class="ph-r"></div></div>
+  <div class="divider"></div>
+  <div class="ca"><div class="p2-empty">
+    <div class="p2-glyph"><svg class="p2-burst" height="180" viewBox="0 0 150 150" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="Group 1597884340"><path pathLength="1" style="animation-delay:0.0s" id="Vector" d="M76.4663 37.8802V61.8142" stroke="currentColor" stroke-miterlimit="10"/><g class="p2-spin"><path pathLength="1" style="animation-delay:-0.093s" id="Vector_2" d="M76.4663 0V23.934" stroke="currentColor" stroke-miterlimit="10"/><path pathLength="1" style="animation-delay:-0.186s" id="Vector_3" d="M38.7687 9.31891L50.7357 30.0459" stroke="currentColor" stroke-miterlimit="10"/><path pathLength="1" style="animation-delay:-0.279s" id="Vector_4" d="M10.7755 36.231L31.5025 48.198" stroke="currentColor" stroke-miterlimit="10"/><path pathLength="1" style="animation-delay:-0.372s" id="Vector_5" d="M0 73.5338H23.934" stroke="currentColor" stroke-miterlimit="10"/><path pathLength="1" style="animation-delay:-0.465s" id="Vector_6" d="M9.31856 111.231L30.0455 99.264" stroke="currentColor" stroke-miterlimit="10"/><path pathLength="1" style="animation-delay:-0.558s" id="Vector_7" d="M36.2306 139.224L48.1976 118.497" stroke="currentColor" stroke-miterlimit="10"/><path pathLength="1" style="animation-delay:-0.651s" id="Vector_8" d="M73.5338 150V126.066" stroke="currentColor" stroke-miterlimit="10"/><path pathLength="1" style="animation-delay:-0.744s" id="Vector_9" d="M111.231 140.69L99.264 119.963" stroke="currentColor" stroke-miterlimit="10"/><path pathLength="1" style="animation-delay:-0.837s" id="Vector_10" d="M139.224 113.769L118.497 101.802" stroke="currentColor" stroke-miterlimit="10"/><path pathLength="1" style="animation-delay:-0.93s" id="Vector_11" d="M150 76.466H126.066" stroke="currentColor" stroke-miterlimit="10"/><path pathLength="1" style="animation-delay:-1.023s" id="Vector_12" d="M140.69 38.7694L119.963 50.7364" stroke="currentColor" stroke-miterlimit="10"/><path pathLength="1" style="animation-delay:-1.116s" id="Vector_13" d="M113.769 10.7759L101.802 31.5028" stroke="currentColor" stroke-miterlimit="10"/></g><path pathLength="1" style="animation-delay:-.7s" id="Vector_14" d="M63.3252 39.7859L71.5079 62.2721" stroke="currentColor" stroke-miterlimit="10"/><path pathLength="1" style="animation-delay:-.7s" id="Vector_15" d="M51.6247 46.0629L67.0096 64.3983" stroke="currentColor" stroke-miterlimit="10"/><path pathLength="1" style="animation-delay:-.7s" id="Vector_16" d="M42.7735 55.9589L63.5004 67.9259" stroke="currentColor" stroke-miterlimit="10"/><path pathLength="1" style="animation-delay:-.7s" id="Vector_17" d="M37.853 68.2925L61.4205 72.4434" stroke="currentColor" stroke-miterlimit="10"/><path pathLength="1" style="animation-delay:-.7s" id="Vector_18" d="M37.4307 81.5608L61.0074 77.4099" stroke="currentColor" stroke-miterlimit="10"/><path pathLength="1" style="animation-delay:-.7s" id="Vector_19" d="M41.5819 94.1784L62.3089 82.2114" stroke="currentColor" stroke-miterlimit="10"/><path pathLength="1" style="animation-delay:-.7s" id="Vector_20" d="M49.8012 104.606L65.186 86.2704" stroke="currentColor" stroke-miterlimit="10"/><path pathLength="1" style="animation-delay:-.7s" id="Vector_21" d="M61.0897 111.597L69.2724 89.1112" stroke="currentColor" stroke-miterlimit="10"/><path pathLength="1" style="animation-delay:-.7s" id="Vector_22" d="M74.0836 114.31V90.3756" stroke="currentColor" stroke-miterlimit="10"/><path pathLength="1" style="animation-delay:-.7s" id="Vector_23" d="M87.2228 112.413L79.0402 89.9268" stroke="currentColor" stroke-miterlimit="10"/><path pathLength="1" style="animation-delay:-.7s" id="Vector_24" d="M98.9242 106.136L83.5394 87.8007" stroke="currentColor" stroke-miterlimit="10"/><path pathLength="1" style="animation-delay:-.7s" id="Vector_25" d="M107.776 96.2402L87.0493 84.2732" stroke="currentColor" stroke-miterlimit="10"/><path pathLength="1" style="animation-delay:-.7s" id="Vector_26" d="M112.706 83.9066L89.129 79.7465" stroke="currentColor" stroke-miterlimit="10"/><path pathLength="1" style="animation-delay:-.7s" id="Vector_27" d="M113.118 70.638L89.541 74.7889" stroke="currentColor" stroke-miterlimit="10"/><path pathLength="1" style="animation-delay:-.7s" id="Vector_28" d="M108.968 58.0207L88.2408 69.9877" stroke="currentColor" stroke-miterlimit="10"/><path pathLength="1" style="animation-delay:-.7s" id="Vector_29" d="M100.749 47.5932L85.3637 65.9285" stroke="currentColor" stroke-miterlimit="10"/><path pathLength="1" style="animation-delay:-.7s" id="Vector_30" d="M89.459 40.5926L81.2764 63.0881" stroke="currentColor" stroke-miterlimit="10"/></g></svg></div>
+    <h1 class="p2-title">No audit logs yet</h1>
+    <p class="p2-desc">Audit logs record every create, update, and delete across your project — who did it and when. Entries appear here automatically as your team works.</p>
+    <div class="p2-ctas"><a class="p2-docs" href="https://docs.crusoecloud.com/security/audit-logs" target="_blank">View docs →</a></div>
+  </div></div>
+</div>
+<!-- Billing activity (auto-populated: no create action) -->
+<div class="view" id="view-billing">
+  <div class="ph"><div class="ph-l"><div class="ph-title-sans">Billing</div></div><div class="ph-r"></div></div>
+  <div class="divider"></div>
+  <div class="ca"><div class="p2-empty">
+    <div class="p2-glyph"><svg class="p2-spin-rev" height="186" viewBox="0 0 150.749 150.75" fill="none" xmlns="http://www.w3.org/2000/svg"><g>
+<path d="M77.6206 55.4722C92.8353 55.4722 105.169 43.1382 105.169 27.9236C105.169 12.7089 92.8353 0.375 77.6206 0.375C62.406 0.375 50.072 12.7089 50.072 27.9236C50.072 43.1382 62.406 55.4722 77.6206 55.4722Z" stroke="currentColor" stroke-width="0.75" stroke-miterlimit="10"/>
+<path class="dm" d="M110.51 70.972C125.724 70.972 138.058 58.6381 138.058 43.4234C138.058 28.2088 125.724 15.8748 110.51 15.8748C95.295 15.8748 82.961 28.2088 82.961 43.4234C82.961 58.6381 95.295 70.972 110.51 70.972Z" stroke="currentColor" stroke-miterlimit="10" stroke-dasharray="2 2"/>
+<path d="M122.826 105.17C138.041 105.17 150.374 92.8358 150.374 77.6211C150.374 62.4065 138.041 50.0726 122.826 50.0726C107.611 50.0726 95.2773 62.4065 95.2773 77.6211C95.2773 92.8358 107.611 105.17 122.826 105.17Z" stroke="currentColor" stroke-width="0.75" stroke-miterlimit="10"/>
+<path class="dm" d="M107.326 138.058C122.541 138.058 134.875 125.725 134.875 110.51C134.875 95.2952 122.541 82.9613 107.326 82.9613C92.1115 82.9613 79.7776 95.2952 79.7776 110.51C79.7776 125.725 92.1115 138.058 107.326 138.058Z" stroke="currentColor" stroke-miterlimit="10" stroke-dasharray="2 2"/>
+<path d="M73.1283 150.375C88.343 150.375 100.677 138.041 100.677 122.826C100.677 107.612 88.343 95.2778 73.1283 95.2778C57.9137 95.2778 45.5797 107.612 45.5797 122.826C45.5797 138.041 57.9137 150.375 73.1283 150.375Z" stroke="currentColor" stroke-width="0.75" stroke-miterlimit="10"/>
+<path class="dm" d="M40.2398 134.875C55.4545 134.875 67.7884 122.541 67.7884 107.327C67.7884 92.1119 55.4545 79.778 40.2398 79.778C25.0251 79.778 12.6912 92.1119 12.6912 107.327C12.6912 122.541 25.0251 134.875 40.2398 134.875Z" stroke="currentColor" stroke-miterlimit="10" stroke-dasharray="2 2"/>
+<path d="M27.9236 100.677C43.1382 100.677 55.4722 88.3435 55.4722 73.1289C55.4722 57.9142 43.1382 45.5803 27.9236 45.5803C12.7089 45.5803 0.375 57.9142 0.375 73.1289C0.375 88.3435 12.7089 100.677 27.9236 100.677Z" stroke="currentColor" stroke-width="0.75" stroke-miterlimit="10"/>
+<path class="dm" d="M43.4233 67.7887C58.6379 67.7887 70.9719 55.4548 70.9719 40.2401C70.9719 25.0255 58.6379 12.6915 43.4233 12.6915C28.2086 12.6915 15.8747 25.0255 15.8747 40.2401C15.8747 55.4548 28.2086 67.7887 43.4233 67.7887Z" stroke="currentColor" stroke-miterlimit="10" stroke-dasharray="2 2"/>
+</g></svg></div>
+    <h1 class="p2-title">No billing activity yet</h1>
+    <p class="p2-desc">Charges appear here as you use compute, storage, and networking. You won't be billed until you start running resources.</p>
+    <div class="p2-ctas"><a class="p2-docs" href="https://docs.crusoecloud.com/billing" target="_blank">View pricing →</a></div>
+  </div></div>
+</div>
+<!-- All Notifications (page; auto-populated) -->
+<div class="view" id="view-notifications">
+  <div class="ph"><div class="ph-l"><div class="ph-title-sans">All Notifications</div></div><div class="ph-r"></div></div>
+  <div class="divider"></div>
+  <div class="ca"><div class="p2-empty">
+    <div class="p2-glyph"><svg class="p2-march" height="160" viewBox="0 0 190 164" fill="none" xmlns="http://www.w3.org/2000/svg"><g class="p2-log-stack"><g class="p2-log-row p2-log-in"><circle cx="5" cy="-14" r="3" fill="var(--glyph-bg,#fff)" stroke="currentColor" stroke-miterlimit="10"/><line class="dm" x1="14" y1="-14" x2="187" y2="-14" stroke="currentColor" stroke-miterlimit="10" stroke-dasharray="2 2"/></g><g class="p2-log-row"><circle cx="5" cy="18" r="3" fill="var(--glyph-bg,#fff)" stroke="currentColor" stroke-miterlimit="10"/><line class="dm" x1="14" y1="18" x2="187" y2="18" stroke="currentColor" stroke-miterlimit="10" stroke-dasharray="2 2"/></g><g class="p2-log-row"><circle cx="5" cy="50" r="3" fill="var(--glyph-bg,#fff)" stroke="currentColor" stroke-miterlimit="10"/><line class="dm" x1="14" y1="50" x2="187" y2="50" stroke="currentColor" stroke-miterlimit="10" stroke-dasharray="2 2"/></g><g class="p2-log-row"><circle cx="5" cy="82" r="3" fill="var(--glyph-bg,#fff)" stroke="currentColor" stroke-miterlimit="10"/><line class="dm" x1="14" y1="82" x2="187" y2="82" stroke="currentColor" stroke-miterlimit="10" stroke-dasharray="2 2"/></g><g class="p2-log-row"><circle cx="5" cy="114" r="3" fill="var(--glyph-bg,#fff)" stroke="currentColor" stroke-miterlimit="10"/><line class="dm" x1="14" y1="114" x2="187" y2="114" stroke="currentColor" stroke-miterlimit="10" stroke-dasharray="2 2"/></g><g class="p2-log-row p2-log-out"><circle cx="5" cy="146" r="3" fill="var(--glyph-bg,#fff)" stroke="currentColor" stroke-miterlimit="10"/><line class="dm" x1="14" y1="146" x2="187" y2="146" stroke="currentColor" stroke-miterlimit="10" stroke-dasharray="2 2"/></g></g></svg></div>
+    <h1 class="p2-title">You're all caught up</h1>
+    <p class="p2-desc">Alerts about your instances, clusters, billing, and capacity will show up here.</p>
+  </div></div>
+</div>
 
 <!-- ─── VIEW: Instances ─── -->
 <div class="view active" id="view-instances">
@@ -940,17 +1168,20 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
     <div class="ph-l">
       <div class="ph-title-sans">Instances</div>
     </div>
-    <!-- Empty-state design tabs (Current vs Redesign vs Edge cases) -->
-    <div id="inst-tabs">
-      <button class="inst-tab active" data-tab="current" onclick="setInstancesTab('current')">Current</button>
-      <button class="inst-tab" data-tab="redesign" onclick="setInstancesTab('redesign')">Redesign</button>
-      <button class="inst-tab" data-tab="edge" onclick="setInstancesTab('edge')">Edge cases</button>
+    <!-- Scenario tabs (always shown) -->
+    <div id="inst-cap-toggle" style="display:flex;align-items:center;gap:10px">
+      <div class="state-toggle">
+        <button class="state-toggle-btn active" onclick="toggleEdgeState(0)">On demand</button>
+        <button class="state-toggle-btn" onclick="toggleEdgeState(1)">Reservation</button>
+        <button class="state-toggle-btn" onclick="toggleEdgeState(2)">Reservation + on-demand</button>
+        <button class="state-toggle-btn" onclick="toggleEdgeState(3)">No payment method</button>
+        <button class="state-toggle-btn" onclick="toggleEdgeState(4)">Simple state</button>
+      </div>
     </div>
-    <div class="ph-r"></div>
+    <div class="ph-r"><button class="btn btn-p" onclick="openCreateInstance('h100')"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.99967 3.33337V12.6667M3.33301 8.00004H12.6663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Create Instance</button></div>
   </div>
   <div class="divider"></div>
   <div class="ca">
-    <button id="rev-toggle" onclick="toggleReviewNotes(this)">Show review notes</button>
     <!-- ── MEDIUM (Informational) ── -->
 <div id="instances-medium" style="display:none">
   <!-- Empty state hero -->
@@ -1021,22 +1252,10 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
 
 <!-- ── EDGE CASES ── -->
 <div id="instances-edge" style="display:none">
-  <!-- Sub-toggle: capacity scenarios (driven by the reviewer's feedback) -->
-  <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap">
-    <span style="font-size:12px;font-weight:500;color:var(--muted);font-family:var(--font-body)">Capacity scenario:<span class="rev-note">1</span></span>
-    <div class="state-toggle" style="margin-left:0">
-      <button class="state-toggle-btn active" onclick="toggleEdgeState(0)">On demand</button>
-      <button class="state-toggle-btn" onclick="toggleEdgeState(1)">Reservation</button>
-      <button class="state-toggle-btn" onclick="toggleEdgeState(2)">Reservation + on-demand</button>
-      <button class="state-toggle-btn" onclick="toggleEdgeState(3)">No payment method</button>
-      <button class="state-toggle-btn" onclick="toggleEdgeState(4)">Simple state</button>
-    </div>
-  </div>
-
   <!-- Shared hero (hidden for state 3 "No access", which has its own) -->
   <div id="edge-shared-hero" style="display:flex;flex-direction:row;align-items:center;justify-content:flex-start;gap:48px;padding:24px 40px 20px 72px;min-height:200px;box-sizing:border-box;text-align:left;position:relative;overflow:hidden;background:var(--white)">
     <div style="display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:1;position:relative">
-      <svg id="edge-cube" width="204" height="158" viewBox="0 0 166.55 128.97" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:relative;z-index:1;overflow:hidden">
+      <svg id="edge-cube" width="206" height="160" viewBox="0 0 166.55 128.97" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:relative;z-index:1;overflow:hidden">
         <path d="M143.43 96.41H161.12C161.92 96.41 162.75 96.53 163.52 96.18C164.12 95.91 164.75 96.04 165.14 96.42C165.56 96.82 165.14 97.2 164.88 97.6C163.91 99.07 162.88 100.53 161.86 101.98C159.15 105.81 156.46 109.64 153.75 113.47C150.75 117.74 147.81 122.03 144.72 126.26C143.76 127.57 142.3 128.49 139.84 128.48C94.52 128.4 49.22 128.42 3.9 128.42C3.02 128.42 1.85 128.68 1.41 127.93C1.04 127.29 0.49 126.61 0.6 125.82C0.62 125.66 0.6 125.51 0.6 125.35V35.11C0.6 33.55 1.07 32.15 2.03 30.69C4.53 26.89 7.11 23.13 9.59 19.34C13.54 13.32 17.69 7.38 21.6 1.34C21.82 1.01 22.11 0.64 22.66 0.5C22.97 0.61 23.27 0.74 23.24 1.09C22.9 4.52 23.12 7.97 23.1 11.4C23.05 18.55 23.1 89.24 23.1 96.4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
         <path d="M23.05 1.24C38.06 16.83 121.42 106.9 136.61 122.41C138.09 123.92 140.21 126.05 142.39 127.37" stroke="currentColor" stroke-miterlimit="10" stroke-dasharray="3 3"/>
         <path d="M23.88 96.63C24.35 97.15 44.33 96.41 45.01 96.41H142.77" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
@@ -1063,13 +1282,13 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
 
   <!-- ══ STATE 0 · On demand (has quota, none used up — quota numbers hidden) ══ -->
   <div id="edge-0">
-    <div class="pop-section" style="margin-top:16px">
+    <div class="pop-section" style="margin-top:68px">
       <div class="pop-title">Launch from your available capacity</div>
       <div class="pop-grid">
         <div class="pop-card med-res-card" style="display:flex;flex-direction:column;gap:0">
           <div class="pop-card-top" style="margin-bottom:10px;align-items:center"><div class="pop-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--text2)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="6" width="12" height="12" rx="2"/><rect x="9.5" y="9.5" width="5" height="5" rx="1"/><path d="M9 2v2M15 2v2M9 20v2M15 20v2M2 9h2M2 15h2M20 9h2M20 15h2"/></svg></div><div class="pop-card-info"><div class="pop-card-name">H100 80GB SXM</div><div class="pop-card-avail">8 of 8 GPUs in quota</div></div></div>
           <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Training · Multi-node</span></div>
-          <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="openCreateInstance('h100')">Create instance</button><button class="btn btn-o btn-sm cli-icon" onclick="showCliPopover(this,'crusoe compute vms create --name my-vm --type h100-80gb-sxm-ib.8x --location us-southcentral1-a --image ubuntu22.04:latest --keyfile ~/.ssh/id_ed25519.pub')" aria-label="View code" title="View the command"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg> View code</button></div>
+          <div style="display:flex;gap:10px;align-items:center"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="openCreateInstance('h100')">Create instance</button><button class="btn btn-o btn-sm cli-icon" onclick="showCliPopover(this,'crusoe compute vms create --name my-vm --type h100-80gb-sxm-ib.8x --location us-southcentral1-a --image ubuntu22.04:latest --keyfile ~/.ssh/id_ed25519.pub')" aria-label="View code" title="View the command"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg> View code</button></div>
           <div class="med-res-expand"><div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">State-of-the-art training &amp; inference. 80 GB HBM3 with NVLink + InfiniBand for multi-node runs. Best for LLM training, RLHF, and fine-tuning.</div></div>
         </div>
         <div class="pop-card med-res-card" style="display:flex;flex-direction:column;gap:0">
@@ -1086,11 +1305,11 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
         </div>
       </div>
     </div>
-  </div>
+      </div>
 
   <!-- ══ STATE 1 · Reservation only ══ -->
   <div id="edge-1" style="display:none">
-    <div class="pop-section" style="margin-top:16px">
+    <div class="pop-section" style="margin-top:68px">
       <div class="pop-title">Launch from your reserved capacity</div>
       <div class="pop-grid">
         <div class="pop-card med-res-card" style="display:flex;flex-direction:column;gap:0">
@@ -1117,7 +1336,7 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
 
   <!-- ══ STATE 2 · Reservation + on-demand (enterprise mix) ══ -->
   <div id="edge-2" style="display:none">
-    <div class="pop-section" style="margin-top:16px">
+    <div class="pop-section" style="margin-top:68px">
       <div class="pop-title">Launch from your available capacity</div>
       <div class="pop-grid">
         <div class="pop-card med-res-card" style="display:flex;flex-direction:column;gap:0">
@@ -1146,7 +1365,7 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
   <div id="edge-3" style="display:none">
     <div style="display:flex;flex-direction:row;align-items:center;justify-content:flex-start;gap:48px;padding:24px 40px 20px 72px;min-height:200px;box-sizing:border-box;text-align:left;position:relative;overflow:hidden;background:var(--white)">
       <div style="display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:1;position:relative">
-        <svg id="edge-cube-3" width="204" height="158" viewBox="0 0 166.55 128.97" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:relative;z-index:1;overflow:hidden">
+        <svg id="edge-cube-3" width="206" height="160" viewBox="0 0 166.55 128.97" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:relative;z-index:1;overflow:hidden">
           <path d="M143.43 96.41H161.12C161.92 96.41 162.75 96.53 163.52 96.18C164.12 95.91 164.75 96.04 165.14 96.42C165.56 96.82 165.14 97.2 164.88 97.6C163.91 99.07 162.88 100.53 161.86 101.98C159.15 105.81 156.46 109.64 153.75 113.47C150.75 117.74 147.81 122.03 144.72 126.26C143.76 127.57 142.3 128.49 139.84 128.48C94.52 128.4 49.22 128.42 3.9 128.42C3.02 128.42 1.85 128.68 1.41 127.93C1.04 127.29 0.49 126.61 0.6 125.82C0.62 125.66 0.6 125.51 0.6 125.35V35.11C0.6 33.55 1.07 32.15 2.03 30.69C4.53 26.89 7.11 23.13 9.59 19.34C13.54 13.32 17.69 7.38 21.6 1.34C21.82 1.01 22.11 0.64 22.66 0.5C22.97 0.61 23.27 0.74 23.24 1.09C22.9 4.52 23.12 7.97 23.1 11.4C23.05 18.55 23.1 89.24 23.1 96.4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
           <path d="M23.05 1.24C38.06 16.83 121.42 106.9 136.61 122.41C138.09 123.92 140.21 126.05 142.39 127.37" stroke="currentColor" stroke-miterlimit="10" stroke-dasharray="3 3"/>
           <path d="M23.88 96.63C24.35 97.15 44.33 96.41 45.01 96.41H142.77" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
@@ -1200,7 +1419,7 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
   <div id="edge-4" style="display:none">
     <div style="display:flex;flex-direction:row;align-items:center;justify-content:flex-start;gap:48px;padding:24px 40px 20px 72px;min-height:200px;box-sizing:border-box;text-align:left;position:relative;overflow:hidden;background:var(--white)">
       <div style="display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:1;position:relative">
-        <svg id="edge-cube-4" width="204" height="158" viewBox="0 0 166.55 128.97" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:relative;z-index:1;overflow:hidden">
+        <svg id="edge-cube-4" width="206" height="160" viewBox="0 0 166.55 128.97" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:relative;z-index:1;overflow:hidden">
           <path d="M143.43 96.41H161.12C161.92 96.41 162.75 96.53 163.52 96.18C164.12 95.91 164.75 96.04 165.14 96.42C165.56 96.82 165.14 97.2 164.88 97.6C163.91 99.07 162.88 100.53 161.86 101.98C159.15 105.81 156.46 109.64 153.75 113.47C150.75 117.74 147.81 122.03 144.72 126.26C143.76 127.57 142.3 128.49 139.84 128.48C94.52 128.4 49.22 128.42 3.9 128.42C3.02 128.42 1.85 128.68 1.41 127.93C1.04 127.29 0.49 126.61 0.6 125.82C0.62 125.66 0.6 125.51 0.6 125.35V35.11C0.6 33.55 1.07 32.15 2.03 30.69C4.53 26.89 7.11 23.13 9.59 19.34C13.54 13.32 17.69 7.38 21.6 1.34C21.82 1.01 22.11 0.64 22.66 0.5C22.97 0.61 23.27 0.74 23.24 1.09C22.9 4.52 23.12 7.97 23.1 11.4C23.05 18.55 23.1 89.24 23.1 96.4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
           <path d="M23.05 1.24C38.06 16.83 121.42 106.9 136.61 122.41C138.09 123.92 140.21 126.05 142.39 127.37" stroke="currentColor" stroke-miterlimit="10" stroke-dasharray="3 3"/>
           <path d="M23.88 96.63C24.35 97.15 44.33 96.41 45.01 96.41H142.77" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
@@ -1223,7 +1442,7 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
           <a href="https://docs.crusoecloud.com/compute/virtual-machines/overview/" target="_blank" style="font-size:13px;color:var(--muted);text-decoration:underline;text-underline-offset:3px;font-family:var(--font-body);transition:color .15s ease" onmouseenter="this.style.color='var(--text)'" onmouseleave="this.style.color='var(--muted)'">View docs →</a>
         </div>
       </div>
-    </div>
+          </div>
   </div>
 
 <!-- Billing popup: 2-step "Finish account setup" — opens when a no-payment-method account clicks Create -->
@@ -1269,14 +1488,6 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
       </div>
     </div>
   </div>
-
-  <div class="rev-legend">
-          <div class="rev-legend-row"><span class="n">1</span><span><b>Lead with the GPU SKU</b> — name first, availability in green, the use case smaller underneath.</span></div>
-      <div class="rev-legend-row"><span class="n">2</span><span><b>Availability shown for every GPU you have quota for</b>; out-of-capacity SKUs are hidden. No "on demand" pill — reserved capacity gets the Reservation pill.</span></div>
-      <div class="rev-legend-row"><span class="n">3</span><span><b>Hover a card</b> to see what the GPU is best for.</span></div>
-      <div class="rev-legend-row"><span class="n">4</span><span><b>Create instance</b> opens the one-click create popup, pre-filled from the card (reservation or on-demand).</span></div>
-      <div class="rev-legend-row"><span class="n">5</span><span><b>View code</b> shows the exact <code>crusoe compute vms create</code> command.</span></div>
-    </div>
 </div><!-- /instances-edge -->
 
 <!-- ── MILD (Delightful) ── -->
@@ -1300,7 +1511,7 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
       </svg>
     </div>
     <!-- Headline -->
-    <h1 style="font-size:48px;font-weight:400;font-family:var(--font-heading);color:var(--text);letter-spacing:-1.4px;line-height:104%;margin:0 0 32px;position:relative;z-index:1">No Instances Yet</h1>
+    <h1 style="font-size:44px;font-weight:400;font-family:var(--font-heading);color:var(--text);letter-spacing:-1.4px;line-height:104%;margin:0 0 32px;position:relative;z-index:1">No Instances Yet</h1>
   </div>
   <!-- Compute ecard -->
   <div class="ecard">
@@ -1342,76 +1553,13 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
 </div><!-- /instances-mild -->
 
 <!-- ── SPICY (Motion-forward) ── -->
-<div id="instances-spicy">
-  <!-- Side-by-side hero: illustration left, text right -->
-  <div id="spicy-hero" style="display:flex;flex-direction:row;align-items:center;justify-content:flex-start;gap:48px;padding:24px 40px 20px 72px;min-height:200px;box-sizing:border-box;text-align:left;position:relative;overflow:hidden;background:var(--white)">
-    <!-- Illustration -->
-    <div id="spicy-cube-wrap" style="display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:1;position:relative;align-self:center">
-      <svg id="spicy-cube" width="204" height="158" viewBox="0 0 166.55 128.97" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:relative;z-index:1;overflow:hidden">
-        <path d="M143.43 96.41H161.12C161.92 96.41 162.75 96.53 163.52 96.18C164.12 95.91 164.75 96.04 165.14 96.42C165.56 96.82 165.14 97.2 164.88 97.6C163.91 99.07 162.88 100.53 161.86 101.98C159.15 105.81 156.46 109.64 153.75 113.47C150.75 117.74 147.81 122.03 144.72 126.26C143.76 127.57 142.3 128.49 139.84 128.48C94.52 128.4 49.22 128.42 3.9 128.42C3.02 128.42 1.85 128.68 1.41 127.93C1.04 127.29 0.49 126.61 0.6 125.82C0.62 125.66 0.6 125.51 0.6 125.35V35.11C0.6 33.55 1.07 32.15 2.03 30.69C4.53 26.89 7.11 23.13 9.59 19.34C13.54 13.32 17.69 7.38 21.6 1.34C21.82 1.01 22.11 0.64 22.66 0.5C22.97 0.61 23.27 0.74 23.24 1.09C22.9 4.52 23.12 7.97 23.1 11.4C23.05 18.55 23.1 89.24 23.1 96.4" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M23.05 1.24C38.06 16.83 121.42 106.9 136.61 122.41C138.09 123.92 140.21 126.05 142.39 127.37" stroke="black" stroke-miterlimit="10" stroke-dasharray="3 3"/>
-        <path d="M23.88 96.63C24.35 97.15 44.33 96.41 45.01 96.41H142.77" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M142.45 33.7C141.97 33.25 121.93 33.66 121.24 33.66C99.36 33.66 1.19 33.9 1.19 33.9" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M0.11 34.56C1.24 34.31 2.27 34.69 3.15 35.07C10.55 38.22 18.32 40.8 25.86 43.72C49.63 52.88 73.52 61.82 97.31 70.95C116.7 78.38 136.24 85.57 155.53 93.2C157.82 94.1 160.81 94.27 161.99 96.54" stroke="black" stroke-miterlimit="10" stroke-dasharray="3 3"/>
-        <path d="M143.28 33.57V127.37" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M1.55 128.11L25 95.59L83.7 65.46L84.54 65.03L165.97 1.13L144.1 33.5L83.93 66.34L1.55 128.11Z" stroke="black" stroke-linejoin="round" stroke-dasharray="3 3"/>
-        <path d="M12.58 81.75L153.13 49.83" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M165.45 1.63C166.19 2.1 166.05 2.76 166.05 3.39V94.43C166.05 94.95 166.07 95.47 165.45 95.83" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M22.35 0.58H165.77" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
-        <!-- Black dots at each end of the diagonal line -->
-        <circle cx="12.58" cy="81.75" r="2.8" fill="black"/>
-        <circle cx="153.13" cy="49.83" r="2.8" fill="black"/>
-      </svg>
-    </div>
-    <!-- Text block -->
-    <div style="position:relative;z-index:1;max-width:380px">
-      <h1 style="font-size:44px;font-weight:400;font-family:var(--font-heading);color:var(--text);letter-spacing:-1.2px;line-height:110%;margin:0 0 10px;white-space:nowrap"><span id="spicy-typed">No Instances Yet</span><span id="spicy-cursor" style="display:none;font-style:normal">|</span></h1>
-      <p style="font-size:14px;color:var(--muted);font-family:var(--font-body);line-height:160%;margin:0 0 16px">Spin up a GPU or CPU VM in under a minute. SSH in directly and start building.</p>
-      <a href="https://docs.crusoecloud.com/compute/virtual-machines/overview/" target="_blank" style="display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:500;font-family:var(--font-body);color:var(--muted);text-decoration:none;border:1px solid var(--border);border-radius:8px;padding:7px 13px;background:transparent;transition:color .15s ease,border-color .15s ease,background .15s ease" onmouseenter="this.style.color='var(--text)';this.style.borderColor='var(--gray-400)';this.style.background='var(--gray-50)'" onmouseleave="this.style.color='var(--muted)';this.style.borderColor='var(--border)';this.style.background='transparent'">View docs →</a>
-    </div>
-  </div>
-  <!-- Reservations -->
-  <div class="es-gap"></div>
-  <div class="pop-section spicy-reveal" style="margin-top:36px;padding-bottom:16px">
-    <div class="pop-title">Create from your reservations</div>
-    <div class="pop-grid">
-      <div class="pop-card med-res-card spicy-reveal" style="display:flex;flex-direction:column;gap:0;transition-delay:.08s">
-        <div class="pop-card-top" style="margin-bottom:10px">
-          <div class="pop-card-info"><div class="pop-card-name">H100 80GB SXM</div><div class="pop-card-price">6 of 32 GPUs in quota</div></div>
-          <span class="np-hover-hint">Details<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
-        </div>
-        <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Training · Multi-node</span></div>
-        <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createInstanceFromRes('h100',this)">Create instance</button><button class="btn btn-o btn-sm" onclick="copyResCli('h100')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
-        <div class="med-res-expand">State-of-the-art training &amp; inference. 80 GB HBM3 with NVLink + InfiniBand for multi-node runs. Best for LLM training, RLHF, and fine-tuning.</div>
-      </div>
-      <div class="pop-card med-res-card spicy-reveal" style="display:flex;flex-direction:column;gap:0;transition-delay:.14s">
-        <div class="pop-card-top" style="margin-bottom:10px">
-          <div class="pop-card-info"><div class="pop-card-name">H200 141GB</div><div class="pop-card-price">16 of 16 GPUs in quota</div></div>
-          <span class="np-hover-hint">Details<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
-        </div>
-        <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Inference · Large models</span></div>
-        <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createInstanceFromRes('h200',this)">Create instance</button><button class="btn btn-o btn-sm" onclick="copyResCli('h200')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
-        <div class="med-res-expand">Largest memory for massive models. 141 GB HBM3e — ideal for 70B+ parameter inference, long-context workloads, and MoE architectures.</div>
-      </div>
-      <div class="pop-card med-res-card spicy-reveal" style="display:flex;flex-direction:column;gap:0;transition-delay:.2s">
-        <div class="pop-card-top" style="margin-bottom:10px">
-          <div class="pop-card-info"><div class="pop-card-name">L40S 48GB</div><div class="pop-card-price">4 of 8 GPUs in quota</div></div>
-          <span class="np-hover-hint">Details<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
-        </div>
-        <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Inference · Fine-tuning</span></div>
-        <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="createInstanceFromRes('l40s',this)">Create instance</button><button class="btn btn-o btn-sm" onclick="copyResCli('l40s')" style="gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy CLI</button></div>
-        <div class="med-res-expand">Cost-efficient inference &amp; fine-tuning. 48 GB GDDR6, great for model serving, small-scale training, and multi-modal workloads.</div>
-      </div>
-    </div>
-  </div>
-</div><!-- /instances-spicy -->
 
 <!-- ── REDESIGN (empty-state concept addressing UX feedback) ── -->
 <div id="instances-redesign" style="display:none">
   <!-- Hero -->
   <div style="display:flex;flex-direction:row;align-items:center;justify-content:flex-start;gap:48px;padding:24px 40px 20px 72px;min-height:200px;box-sizing:border-box;text-align:left;position:relative;overflow:hidden;background:var(--white)">
     <div style="display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:1;position:relative">
-      <svg id="redesign-cube" width="204" height="158" viewBox="0 0 166.55 128.97" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:relative;z-index:1;overflow:hidden">
+      <svg id="redesign-cube" width="206" height="160" viewBox="0 0 166.55 128.97" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:relative;z-index:1;overflow:hidden">
         <path d="M143.43 96.41H161.12C161.92 96.41 162.75 96.53 163.52 96.18C164.12 95.91 164.75 96.04 165.14 96.42C165.56 96.82 165.14 97.2 164.88 97.6C163.91 99.07 162.88 100.53 161.86 101.98C159.15 105.81 156.46 109.64 153.75 113.47C150.75 117.74 147.81 122.03 144.72 126.26C143.76 127.57 142.3 128.49 139.84 128.48C94.52 128.4 49.22 128.42 3.9 128.42C3.02 128.42 1.85 128.68 1.41 127.93C1.04 127.29 0.49 126.61 0.6 125.82C0.62 125.66 0.6 125.51 0.6 125.35V35.11C0.6 33.55 1.07 32.15 2.03 30.69C4.53 26.89 7.11 23.13 9.59 19.34C13.54 13.32 17.69 7.38 21.6 1.34C21.82 1.01 22.11 0.64 22.66 0.5C22.97 0.61 23.27 0.74 23.24 1.09C22.9 4.52 23.12 7.97 23.1 11.4C23.05 18.55 23.1 89.24 23.1 96.4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
         <path d="M23.05 1.24C38.06 16.83 121.42 106.9 136.61 122.41C138.09 123.92 140.21 126.05 142.39 127.37" stroke="currentColor" stroke-miterlimit="10" stroke-dasharray="3 3"/>
         <path d="M23.88 96.63C24.35 97.15 44.33 96.41 45.01 96.41H142.77" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
@@ -1432,42 +1580,34 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
       <div style="display:flex;align-items:center;gap:18px">
         <button class="btn btn-p" onclick="openCreateInstance('h100')"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.99967 3.33337V12.6667M3.33301 8.00004H12.6663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Create Instance</button>
         <a href="https://docs.crusoecloud.com/compute/virtual-machines/overview/" target="_blank" style="font-size:13px;color:var(--muted);text-decoration:underline;text-underline-offset:3px;font-family:var(--font-body);transition:color .15s ease" onmouseenter="this.style.color='var(--text)'" onmouseleave="this.style.color='var(--muted)'">View docs →</a>
-        <span class="rev-note">1</span>
       </div>
     </div>
   </div>
   <div class="es-gap"></div>
   <!-- Capacity section: source-tagged, quota hidden until exhausted -->
   <div class="pop-section" style="margin-top:36px;padding-bottom:16px">
-    <div class="pop-title">Launch from your available capacity<span class="rev-note">2</span></div>
+    <div class="pop-title">Launch from your available capacity</div>
       <div class="pop-grid">
         <div class="pop-card med-res-card" style="display:flex;flex-direction:column;gap:0">
-          <div class="pop-card-top" style="margin-bottom:10px;align-items:center"><div class="pop-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--text2)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="6" width="12" height="12" rx="2"/><rect x="9.5" y="9.5" width="5" height="5" rx="1"/><path d="M9 2v2M15 2v2M9 20v2M15 20v2M2 9h2M2 15h2M20 9h2M20 15h2"/></svg></div><div class="pop-card-info"><div class="pop-card-name">H100 80GB SXM</div><div class="pop-card-avail">6 of 32 GPUs in quota</div></div><span class="src-pill src-reserved">Reservation</span></div>
+          <div class="pop-card-top" style="margin-bottom:10px;align-items:center"><div class="pop-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--text2)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="6" width="12" height="12" rx="2"/><rect x="9.5" y="9.5" width="5" height="5" rx="1"/><path d="M9 2v2M15 2v2M9 20v2M15 20v2M2 9h2M2 15h2M20 9h2M20 15h2"/></svg></div><div class="pop-card-info"><div class="pop-card-name">H100 80GB SXM</div><a href="#" onclick="event.preventDefault()" style="font-size:11.5px;font-weight:500;color:var(--muted);text-decoration:underline;text-underline-offset:2px;font-family:var(--font-body)">View reservations →</a></div><span class="src-pill src-reserved">Reservation</span></div>
           <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Training · Multi-node</span></div>
-          <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="openCreateInstance('h100')">Create instance</button><button class="btn btn-o btn-sm cli-icon" onclick="showCliPopover(this,'crusoe compute vms create --name my-vm --type h100-80gb-sxm-ib.8x --location us-southcentral1-a --image ubuntu22.04:latest --keyfile ~/.ssh/id_ed25519.pub')" aria-label="View code" title="View the command"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg> View code</button></div>
+          <div style="display:flex;gap:10px;align-items:center"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="openCreateInstance('h100')">Create instance</button><button class="btn btn-o btn-sm cli-icon" onclick="showCliPopover(this,'crusoe compute vms create --name my-vm --type h100-80gb-sxm-ib.8x --location us-southcentral1-a --image ubuntu22.04:latest --keyfile ~/.ssh/id_ed25519.pub')" aria-label="View code" title="View the command"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg> View code</button></div>
           <div class="med-res-expand"><div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">State-of-the-art training &amp; inference. 80 GB HBM3 with NVLink + InfiniBand for multi-node runs. Best for LLM training, RLHF, and fine-tuning.</div></div>
         </div>
         <div class="pop-card med-res-card" style="display:flex;flex-direction:column;gap:0">
-          <div class="pop-card-top" style="margin-bottom:10px;align-items:center"><div class="pop-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--text2)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="6" width="12" height="12" rx="2"/><rect x="9.5" y="9.5" width="5" height="5" rx="1"/><path d="M9 2v2M15 2v2M9 20v2M15 20v2M2 9h2M2 15h2M20 9h2M20 15h2"/></svg></div><div class="pop-card-info"><div class="pop-card-name">H200 141GB</div><div class="pop-card-avail">8 of 8 GPUs in quota</div></div></div>
+          <div class="pop-card-top" style="margin-bottom:10px;align-items:center"><div class="pop-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--text2)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="6" width="12" height="12" rx="2"/><rect x="9.5" y="9.5" width="5" height="5" rx="1"/><path d="M9 2v2M15 2v2M9 20v2M15 20v2M2 9h2M2 15h2M20 9h2M20 15h2"/></svg></div><div class="pop-card-info"><div class="pop-card-name">H200 141GB</div></div></div>
           <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Inference · Large models</span></div>
           <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="openCreateInstance('h200')">Create instance</button><button class="btn btn-o btn-sm cli-icon" onclick="showCliPopover(this,'crusoe compute vms create --name my-vm --type h200-141gb-sxm-ib.8x --location us-southcentral1-a --image ubuntu22.04:latest --keyfile ~/.ssh/id_ed25519.pub')" aria-label="View code" title="View the command"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg> View code</button></div>
           <div class="med-res-expand"><div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">Largest memory for massive models. 141 GB HBM3e — ideal for 70B+ parameter inference, long-context workloads, and MoE architectures.</div></div>
         </div>
         <div class="pop-card med-res-card" style="display:flex;flex-direction:column;gap:0">
-          <div class="pop-card-top" style="margin-bottom:10px;align-items:center"><div class="pop-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--text2)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="6" width="12" height="12" rx="2"/><rect x="9.5" y="9.5" width="5" height="5" rx="1"/><path d="M9 2v2M15 2v2M9 20v2M15 20v2M2 9h2M2 15h2M20 9h2M20 15h2"/></svg></div><div class="pop-card-info"><div class="pop-card-name">L40S 48GB</div><div class="pop-card-avail">16 of 16 GPUs in quota</div></div></div>
+          <div class="pop-card-top" style="margin-bottom:10px;align-items:center"><div class="pop-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--text2)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="6" width="12" height="12" rx="2"/><rect x="9.5" y="9.5" width="5" height="5" rx="1"/><path d="M9 2v2M15 2v2M9 20v2M15 20v2M2 9h2M2 15h2M20 9h2M20 15h2"/></svg></div><div class="pop-card-info"><div class="pop-card-name">L40S 48GB</div></div></div>
           <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Inference · Fine-tuning</span></div>
           <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center" onclick="openCreateInstance('l40s')">Create instance</button><button class="btn btn-o btn-sm cli-icon" onclick="showCliPopover(this,'crusoe compute vms create --name my-vm --type l40s-48gb.1x --location us-southcentral1-a --image ubuntu22.04:latest --keyfile ~/.ssh/id_ed25519.pub')" aria-label="View code" title="View the command"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg> View code</button></div>
           <div class="med-res-expand"><div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">Cost-efficient inference &amp; fine-tuning. 48 GB GDDR6, great for model serving, small-scale training, and multi-modal workloads.</div></div>
         </div>
       </div>
-    <div class="rev-legend">
-            <div class="rev-legend-row"><span class="n">1</span><span><b>Lead with the GPU SKU</b> — name first, availability in green, the use case smaller underneath.</span></div>
-      <div class="rev-legend-row"><span class="n">2</span><span><b>Availability shown for every GPU you have quota for</b>; out-of-capacity SKUs are hidden. No "on demand" pill — reserved capacity gets the Reservation pill.</span></div>
-      <div class="rev-legend-row"><span class="n">3</span><span><b>Hover a card</b> to see what the GPU is best for.</span></div>
-      <div class="rev-legend-row"><span class="n">4</span><span><b>Create instance</b> opens the one-click create popup, pre-filled from the card (reservation or on-demand).</span></div>
-      <div class="rev-legend-row"><span class="n">5</span><span><b>View code</b> shows the exact <code>crusoe compute vms create</code> command.</span></div>
-    </div>
-  </div>
+      </div>
 </div><!-- /instances-redesign -->
 
 <!-- ── FILLED STATE ── -->
@@ -1536,7 +1676,7 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
 <!-- ─── VIEW: Instance Templates ─── -->
 <div class="view" id="view-instance-templates">
   <div class="ph">
-    <div class="ph-l"><div class="ph-title">Instance Templates</div></div>
+    <div class="ph-l"><div class="ph-title-sans">Instance Templates</div></div>
     <div class="ph-r">
       <button class="btn btn-p"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.99967 3.33337V12.6667M3.33301 8.00004H12.6663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Create Template</button>
     </div>
@@ -1547,7 +1687,7 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
     <div style="display:flex;flex-direction:row;align-items:center;justify-content:flex-start;gap:48px;padding:24px 40px 20px 72px;min-height:200px;box-sizing:border-box;text-align:left;position:relative;overflow:hidden;background:var(--white)">
       <!-- Illustration — same cube SVG, different IDs -->
       <div style="display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:1;position:relative;align-self:center">
-        <svg id="tmpl-cube" width="204" height="158" viewBox="0 0 166.55 128.97" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:relative;z-index:1;overflow:hidden">
+        <svg id="tmpl-cube" width="206" height="160" viewBox="0 0 166.55 128.97" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:relative;z-index:1;overflow:hidden">
           <path d="M143.43 96.41H161.12C161.92 96.41 162.75 96.53 163.52 96.18C164.12 95.91 164.75 96.04 165.14 96.42C165.56 96.82 165.14 97.2 164.88 97.6C163.91 99.07 162.88 100.53 161.86 101.98C159.15 105.81 156.46 109.64 153.75 113.47C150.75 117.74 147.81 122.03 144.72 126.26C143.76 127.57 142.3 128.49 139.84 128.48C94.52 128.4 49.22 128.42 3.9 128.42C3.02 128.42 1.85 128.68 1.41 127.93C1.04 127.29 0.49 126.61 0.6 125.82C0.62 125.66 0.6 125.51 0.6 125.35V35.11C0.6 33.55 1.07 32.15 2.03 30.69C4.53 26.89 7.11 23.13 9.59 19.34C13.54 13.32 17.69 7.38 21.6 1.34C21.82 1.01 22.11 0.64 22.66 0.5C22.97 0.61 23.27 0.74 23.24 1.09C22.9 4.52 23.12 7.97 23.1 11.4C23.05 18.55 23.1 89.24 23.1 96.4" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
           <path d="M23.05 1.24C38.06 16.83 121.42 106.9 136.61 122.41C138.09 123.92 140.21 126.05 142.39 127.37" stroke="black" stroke-miterlimit="10" stroke-dasharray="3 3"/>
           <path d="M23.88 96.63C24.35 97.15 44.33 96.41 45.01 96.41H142.77" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
@@ -1566,7 +1706,10 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
       <div style="position:relative;z-index:1;max-width:520px">
         <h1 style="font-size:44px;font-weight:400;font-family:var(--font-heading);color:var(--text);letter-spacing:-1.2px;line-height:110%;margin:0 0 10px;white-space:nowrap">No Templates Yet</h1>
         <p style="font-size:14px;color:var(--muted);font-family:var(--font-body);line-height:160%;margin:0 0 16px">Save a full VM configuration — instance type, image, disks, SSH keys, and network — then launch identical VMs in one command.</p>
-        <a href="https://docs.crusoecloud.com/compute/templates/" target="_blank" style="display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:500;font-family:var(--font-body);color:var(--muted);text-decoration:none;border:1px solid var(--border);border-radius:8px;padding:7px 13px;background:transparent;transition:color .15s ease,border-color .15s ease,background .15s ease" onmouseenter="this.style.color='var(--text)';this.style.borderColor='var(--gray-400)';this.style.background='var(--gray-50)'" onmouseleave="this.style.color='var(--muted)';this.style.borderColor='var(--border)';this.style.background='transparent'">View docs →</a>
+        <div style="display:flex;align-items:center;gap:16px">
+          <button class="btn btn-p"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.99967 3.33337V12.6667M3.33301 8.00004H12.6663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Create Template</button>
+          <a href="https://docs.crusoecloud.com/compute/templates/" target="_blank" style="font-size:13px;color:var(--muted);text-decoration:underline;text-underline-offset:3px;font-family:var(--font-body);transition:color .15s ease" onmouseenter="this.style.color='var(--text)'" onmouseleave="this.style.color='var(--muted)'">View docs →</a>
+        </div>
       </div>
     </div>
     <!-- Popular templates -->
@@ -1606,7 +1749,7 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
 <!-- ─── VIEW: Instance Groups ─── -->
 <div class="view" id="view-instance-groups">
   <div class="ph">
-    <div class="ph-l"><div class="ph-title">Instance Groups</div></div>
+    <div class="ph-l"><div class="ph-title-sans">Instance Groups</div></div>
     <div class="ph-r">
       <button class="btn btn-p"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.99967 3.33337V12.6667M3.33301 8.00004H12.6663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Create Group</button>
     </div>
@@ -1615,7 +1758,7 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
   <div class="ca">
     <div style="display:flex;flex-direction:row;align-items:center;justify-content:flex-start;gap:48px;padding:24px 40px 20px 72px;min-height:200px;box-sizing:border-box;text-align:left;position:relative;overflow:hidden;background:var(--white)">
       <div style="display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:1;position:relative;align-self:center">
-        <svg id="groups-cube" width="204" height="158" viewBox="0 0 166.55 128.97" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:relative;z-index:1;overflow:hidden">
+        <svg id="groups-cube" width="206" height="160" viewBox="0 0 166.55 128.97" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:relative;z-index:1;overflow:hidden">
           <path d="M143.43 96.41H161.12C161.92 96.41 162.75 96.53 163.52 96.18C164.12 95.91 164.75 96.04 165.14 96.42C165.56 96.82 165.14 97.2 164.88 97.6C163.91 99.07 162.88 100.53 161.86 101.98C159.15 105.81 156.46 109.64 153.75 113.47C150.75 117.74 147.81 122.03 144.72 126.26C143.76 127.57 142.3 128.49 139.84 128.48C94.52 128.4 49.22 128.42 3.9 128.42C3.02 128.42 1.85 128.68 1.41 127.93C1.04 127.29 0.49 126.61 0.6 125.82C0.62 125.66 0.6 125.51 0.6 125.35V35.11C0.6 33.55 1.07 32.15 2.03 30.69C4.53 26.89 7.11 23.13 9.59 19.34C13.54 13.32 17.69 7.38 21.6 1.34C21.82 1.01 22.11 0.64 22.66 0.5C22.97 0.61 23.27 0.74 23.24 1.09C22.9 4.52 23.12 7.97 23.1 11.4C23.05 18.55 23.1 89.24 23.1 96.4" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
           <path d="M23.05 1.24C38.06 16.83 121.42 106.9 136.61 122.41C138.09 123.92 140.21 126.05 142.39 127.37" stroke="black" stroke-miterlimit="10" stroke-dasharray="3 3"/>
           <path d="M23.88 96.63C24.35 97.15 44.33 96.41 45.01 96.41H142.77" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
@@ -1633,7 +1776,10 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
       <div style="position:relative;z-index:1;max-width:380px">
         <h1 style="font-size:44px;font-weight:400;font-family:var(--font-heading);color:var(--text);letter-spacing:-1.2px;line-height:110%;margin:0 0 10px;white-space:nowrap">No Groups Yet</h1>
         <p style="font-size:14px;color:var(--muted);font-family:var(--font-body);line-height:160%;margin:0 0 16px">Start, stop, and scale related instances together and apply one template across the whole set — ideal for fleets of identical nodes.</p>
-        <a href="https://docs.crusoecloud.com/compute/instance-groups" target="_blank" style="display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:500;font-family:var(--font-body);color:var(--muted);text-decoration:none;border:1px solid var(--border);border-radius:8px;padding:7px 13px;background:transparent;transition:color .15s ease,border-color .15s ease,background .15s ease" onmouseenter="this.style.color='var(--text)';this.style.borderColor='var(--gray-400)';this.style.background='var(--gray-50)'" onmouseleave="this.style.color='var(--muted)';this.style.borderColor='var(--border)';this.style.background='transparent'">View docs →</a>
+        <div style="display:flex;align-items:center;gap:16px">
+          <button class="btn btn-p"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.99967 3.33337V12.6667M3.33301 8.00004H12.6663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Create Group</button>
+          <a href="https://docs.crusoecloud.com/compute/instance-groups" target="_blank" style="font-size:13px;color:var(--muted);text-decoration:underline;text-underline-offset:3px;font-family:var(--font-body);transition:color .15s ease" onmouseenter="this.style.color='var(--text)'" onmouseleave="this.style.color='var(--muted)'">View docs →</a>
+        </div>
       </div>
     </div>
     <div class="es-gap"></div>
@@ -1661,7 +1807,7 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
           </div>
           <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Step 2 · Deploy</span></div>
           
-        <div style="display:flex;gap:10px"><a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/compute/instance-groups" target="_blank" style="flex:1;justify-content:center;text-decoration:none">View docs →</a></div>
+        <div style="display:flex;gap:10px"><a class="btn btn-p btn-sm" href="https://docs.crusoecloud.com/compute/instance-groups" target="_blank" style="flex:1;justify-content:center;text-decoration:none">View docs →</a></div>
         <div class="med-res-expand"><div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">Attach existing instances or launch new ones directly into the group for unified lifecycle management.</div></div>
         </div>
       </div>
@@ -1672,7 +1818,7 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
 <!-- ─── VIEW: Custom Images ─── -->
 <div class="view" id="view-custom-images">
   <div class="ph">
-    <div class="ph-l"><div class="ph-title">Custom Images</div></div>
+    <div class="ph-l"><div class="ph-title-sans">Custom Images</div></div>
     <div class="ph-r">
       <button class="btn btn-p"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.99967 3.33337V12.6667M3.33301 8.00004H12.6663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Create Image</button>
     </div>
@@ -1681,7 +1827,7 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
   <div class="ca">
     <div style="display:flex;flex-direction:row;align-items:center;justify-content:flex-start;gap:48px;padding:24px 40px 20px 72px;min-height:200px;box-sizing:border-box;text-align:left;position:relative;overflow:hidden;background:var(--white)">
       <div style="display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:1;position:relative;align-self:center">
-        <svg id="images-cube" width="204" height="158" viewBox="0 0 166.55 128.97" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:relative;z-index:1;overflow:hidden">
+        <svg id="images-cube" width="206" height="160" viewBox="0 0 166.55 128.97" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:relative;z-index:1;overflow:hidden">
           <path d="M143.43 96.41H161.12C161.92 96.41 162.75 96.53 163.52 96.18C164.12 95.91 164.75 96.04 165.14 96.42C165.56 96.82 165.14 97.2 164.88 97.6C163.91 99.07 162.88 100.53 161.86 101.98C159.15 105.81 156.46 109.64 153.75 113.47C150.75 117.74 147.81 122.03 144.72 126.26C143.76 127.57 142.3 128.49 139.84 128.48C94.52 128.4 49.22 128.42 3.9 128.42C3.02 128.42 1.85 128.68 1.41 127.93C1.04 127.29 0.49 126.61 0.6 125.82C0.62 125.66 0.6 125.51 0.6 125.35V35.11C0.6 33.55 1.07 32.15 2.03 30.69C4.53 26.89 7.11 23.13 9.59 19.34C13.54 13.32 17.69 7.38 21.6 1.34C21.82 1.01 22.11 0.64 22.66 0.5C22.97 0.61 23.27 0.74 23.24 1.09C22.9 4.52 23.12 7.97 23.1 11.4C23.05 18.55 23.1 89.24 23.1 96.4" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
           <path d="M23.05 1.24C38.06 16.83 121.42 106.9 136.61 122.41C138.09 123.92 140.21 126.05 142.39 127.37" stroke="black" stroke-miterlimit="10" stroke-dasharray="3 3"/>
           <path d="M23.88 96.63C24.35 97.15 44.33 96.41 45.01 96.41H142.77" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
@@ -1699,7 +1845,10 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
       <div style="position:relative;z-index:1;max-width:380px">
         <h1 style="font-size:44px;font-weight:400;font-family:var(--font-heading);color:var(--text);letter-spacing:-1.2px;line-height:110%;margin:0 0 10px;white-space:nowrap">No Custom Images Yet</h1>
         <p style="font-size:14px;color:var(--muted);font-family:var(--font-body);line-height:160%;margin:0 0 16px">Capture the boot disk of a stopped VM as a reusable base image — project- and region-specific, for launching identical instances.</p>
-        <a href="https://docs.crusoecloud.com/compute/images/overview/" target="_blank" style="display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:500;font-family:var(--font-body);color:var(--muted);text-decoration:none;border:1px solid var(--border);border-radius:8px;padding:7px 13px;background:transparent;transition:color .15s ease,border-color .15s ease,background .15s ease" onmouseenter="this.style.color='var(--text)';this.style.borderColor='var(--gray-400)';this.style.background='var(--gray-50)'" onmouseleave="this.style.color='var(--muted)';this.style.borderColor='var(--border)';this.style.background='transparent'">View docs →</a>
+        <div style="display:flex;align-items:center;gap:16px">
+          <button class="btn btn-p"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.99967 3.33337V12.6667M3.33301 8.00004H12.6663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Create Image</button>
+          <a href="https://docs.crusoecloud.com/compute/images/overview/" target="_blank" style="font-size:13px;color:var(--muted);text-decoration:underline;text-underline-offset:3px;font-family:var(--font-body);transition:color .15s ease" onmouseenter="this.style.color='var(--text)'" onmouseleave="this.style.color='var(--muted)'">View docs →</a>
+        </div>
       </div>
     </div>
     <div class="es-gap"></div>
@@ -1727,7 +1876,7 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
           </div>
           <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Step 2 · Capture</span></div>
           
-        <div style="display:flex;gap:10px"><a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/compute/images/overview/" target="_blank" style="flex:1;justify-content:center;text-decoration:none">View docs →</a></div>
+        <div style="display:flex;gap:10px"><a class="btn btn-p btn-sm" href="https://docs.crusoecloud.com/compute/images/overview/" target="_blank" style="flex:1;justify-content:center;text-decoration:none">View docs →</a></div>
         <div class="med-res-expand"><div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">Shut down your VM, then create a custom image from its boot disk. Images are scoped to this project and region.</div></div>
         </div>
       </div>
@@ -1822,7 +1971,7 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
       </svg>
     </div>
     <!-- Headline -->
-    <h1 style="font-size:48px;font-weight:400;font-family:var(--font-heading);color:var(--text);letter-spacing:-1.4px;line-height:104%;margin:0 0 32px;position:relative;z-index:1">No Clusters Yet</h1>
+    <h1 style="font-size:44px;font-weight:400;font-family:var(--font-heading);color:var(--text);letter-spacing:-1.4px;line-height:104%;margin:0 0 32px;position:relative;z-index:1">No Clusters Yet</h1>
   </div>
   <!-- Orchestration ecard -->
   <div class="ecard">
@@ -1879,7 +2028,6 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
   <div id="cluster-spicy-hero" style="display:flex;flex-direction:row;align-items:center;justify-content:flex-start;gap:48px;padding:24px 40px 20px 72px;min-height:200px;box-sizing:border-box;text-align:left;position:relative;overflow:hidden;background:var(--white)">
     <!-- Illustration -->
     <div id="cluster-illus-wrap" style="display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:1;position:relative;height:158px;overflow:visible">
-      <svg id="cluster-node-ripples" width="480" height="480" viewBox="0 0 153.881 152.019" fill="none" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);pointer-events:none;z-index:2;overflow:visible"></svg>
       <svg id="cluster-orch-svg" width="200" height="200" viewBox="0 0 153.881 152.019" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:relative;z-index:1">
         <path id="co-sq-tr" d="M147.57 5.34863H39.6802V112.759H147.57V5.34863Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" style="opacity:0"/>
         <path id="co-sq-mid" d="M130.63 22.2891H22.7402V129.699H130.63V22.2891Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" style="opacity:0"/>
@@ -2299,7 +2447,7 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
 <div class="view" id="view-slurm">
   <div class="ph">
     <div class="ph-l">
-      <div class="ph-title">Slurm Clusters</div>
+      <div class="ph-title-sans">Slurm Clusters</div>
     </div>
     <div class="ph-r"><button class="btn btn-p" onclick="createClusterFromTemplate('slurm','gpu-hpc',this)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.99967 3.33337V12.6667M3.33301 8.00004H12.6663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Create Cluster</button></div>
   </div>
@@ -2358,7 +2506,7 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
         <path d="M86.8652 66.1665L66.2163 86.0952" stroke="black"/>
       </svg>
     </div>
-    <h1 style="font-size:48px;font-weight:400;font-family:var(--font-heading);color:var(--text);letter-spacing:-1.4px;line-height:104%;margin:0 0 32px;position:relative;z-index:1">No Clusters Yet</h1>
+    <h1 style="font-size:44px;font-weight:400;font-family:var(--font-heading);color:var(--text);letter-spacing:-1.4px;line-height:104%;margin:0 0 32px;position:relative;z-index:1">No Clusters Yet</h1>
   </div>
   <div class="ecard">
     <div class="etxt">
@@ -2397,7 +2545,6 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
   <div id="slurm-spicy-hero" style="display:flex;flex-direction:row;align-items:center;justify-content:flex-start;gap:48px;padding:24px 40px 20px 72px;min-height:200px;box-sizing:border-box;text-align:left;position:relative;overflow:hidden;background:var(--white)">
     <!-- Illustration -->
     <div id="slurm-illus-wrap" style="display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:1;position:relative;height:158px;overflow:visible">
-      <svg id="slurm-node-ripples" width="480" height="480" viewBox="0 0 153.881 152.019" fill="none" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);pointer-events:none;z-index:2;overflow:visible"></svg>
       <svg id="slurm-orch-svg" width="200" height="200" viewBox="0 0 153.881 152.019" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:relative;z-index:1">
         <path id="sl-sq-tr"  d="M147.57 5.34863H39.6802V112.759H147.57V5.34863Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
         <path id="sl-sq-mid" d="M130.63 22.2891H22.7402V129.699H130.63V22.2891Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
@@ -2490,20 +2637,16 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
 <div class="view" id="view-disks">
   <div class="ph">
     <div class="ph-l">
-      <div class="ph-title">Disks</div>
+      <div class="ph-title-sans">Disks</div>
     </div>
-    <!-- Empty-state design tabs (Current vs Redesign) -->
-    <div id="disks-tabs">
-      <button class="inst-tab active" data-tab="current" onclick="setDisksTab('current')">Current</button>
-      <button class="inst-tab" data-tab="redesign" onclick="setDisksTab('redesign')">Redesign</button>
-    </div>
+    <!-- (Redesign tab removed — redesign is the only Disks view) -->
+    <div id="disks-tabs" style="display:none"></div>
     <div class="ph-r">
       <button class="btn btn-p"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.99967 3.33337V12.6667M3.33301 8.00004H12.6663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Create Disk</button>
     </div>
   </div>
   <div class="divider"></div>
   <div class="ca">
-    <button id="disks-rev-toggle" onclick="toggleDisksNotes(this)" style="display:none">Show review notes</button>
     <!-- Empty state -->
     <div id="disks-empty" style="display:none">
       <div class="ecard">
@@ -2550,65 +2693,13 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
     </div><!-- /disks-empty -->
 
     <!-- Spicy state -->
-    <div id="disks-spicy">
-      <!-- Side-by-side hero: animation left, text right -->
-      <div id="disk-spicy-hero" style="display:flex;flex-direction:row;align-items:center;justify-content:flex-start;gap:48px;padding:24px 40px 20px 72px;min-height:200px;box-sizing:border-box;text-align:left;position:relative;overflow:hidden;background:var(--white)">
-        <!-- Illustration -->
-        <div id="disk-illus-wrap" style="display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:1;position:relative">
-          <svg id="disk-spicy-svg" width="165" height="165" viewBox="0 0 150.588 150.588" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:relative;z-index:1;overflow:visible">
-            <path id="disk-e0" d="M75.2938 150.088C116.601 150.088 150.088 116.601 150.088 75.2938C150.088 33.9863 116.601 0.5 75.2938 0.5C33.9863 0.5 0.5 33.9863 0.5 75.2938C0.5 116.601 33.9863 150.088 75.2938 150.088Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
-            <path id="disk-e1" transform="translate(0,16.149)" d="M75.2938 117.79C116.601 117.79 150.088 91.5341 150.088 59.1452C150.088 26.7564 116.601 0.5 75.2938 0.5C33.9863 0.5 0.5 26.7564 0.5 59.1452C0.5 91.5341 33.9863 117.79 75.2938 117.79Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
-            <path id="disk-e2" transform="translate(0,32.307)" d="M75.2938 85.4742C116.601 85.4742 150.088 66.4521 150.088 42.9871C150.088 19.5221 116.601 0.5 75.2938 0.5C33.9863 0.5 0.5 19.5221 0.5 42.9871C0.5 66.4521 33.9863 85.4742 75.2938 85.4742Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
-            <path id="disk-e3" transform="translate(0,48.455)" d="M75.2938 53.1771C116.601 53.1771 150.088 41.3849 150.088 26.8385C150.088 12.2922 116.601 0.5 75.2938 0.5C33.9863 0.5 0.5 12.2922 0.5 26.8385C0.5 41.3849 33.9863 53.1771 75.2938 53.1771Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
-            <path id="disk-e4" transform="translate(0,64.604)" d="M75.2938 20.88C116.601 20.88 150.088 16.3178 150.088 10.69C150.088 5.06222 116.601 0.5 75.2938 0.5C33.9863 0.5 0.5 5.06222 0.5 10.69C0.5 16.3178 33.9863 20.88 75.2938 20.88Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </div>
-        <!-- Text block -->
-        <div style="position:relative;z-index:1;max-width:380px">
-          <h1 style="font-size:44px;font-weight:400;font-family:var(--font-heading);color:var(--text);letter-spacing:-1.2px;line-height:110%;margin:0 0 10px;white-space:nowrap"><span id="disk-typed">No Disks Yet</span><span id="disk-cursor" style="display:none;font-style:normal">|</span></h1>
-          <p style="font-size:14px;color:var(--muted);font-family:var(--font-body);line-height:160%;margin:0 0 16px">Crusoe Cloud offers three types of disks: Ephemeral Disks, Persistent Disks and Shared Disks.</p>
-          <div style="display:flex;align-items:center;gap:18px"><button class="btn btn-p"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.99967 3.33337V12.6667M3.33301 8.00004H12.6663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Create Disk</button><a href="https://docs.crusoecloud.com/storage/disks/" target="_blank" style="font-size:13px;color:var(--muted);text-decoration:underline;text-underline-offset:3px;font-family:var(--font-body);transition:color .15s ease" onmouseenter="this.style.color='var(--text)'" onmouseleave="this.style.color='var(--muted)'">View docs →</a></div>
-        </div>
-      </div>
-      <!-- Disk type cards -->
-      <div class="es-gap"></div>
-      <div class="pop-section disk-spicy-reveal" style="margin-top:36px;padding-bottom:16px">
-        <div class="pop-title">Choose your disk type</div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;overflow:visible;align-items:start">
-          <div class="pop-card med-res-card disk-spicy-reveal" style="transition-delay:.08s">
-
-            <div class="pop-card-top" style="margin-bottom:10px">
-              <div class="pop-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="13" fill="#111"/><text x="14" y="18.5" text-anchor="middle" fill="white" font-size="13" font-weight="700" font-family="sans-serif">1</text></svg></div>
-              <div class="pop-card-info"><div class="pop-card-name">Persistent disk</div><div class="pop-card-price">1 GiB – 10 TiB · $0.08/GiB/mo</div></div>
-          <span class="np-hover-hint">Details<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
-            </div>
-            <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Single VM · Block storage</span></div>
-            
-        <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create persistent disk</button></div>
-        <div class="med-res-expand"><div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">Attach to one VM in read-write mode, or multiple VMs read-only. Up to 16 per instance. Attach and detach while running or stopped — unmount before detaching.</div></div>
-          </div>
-          <div class="pop-card med-res-card disk-spicy-reveal" style="transition-delay:.14s">
-
-            <div class="pop-card-top" style="margin-bottom:10px">
-              <div class="pop-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="13" fill="#111"/><text x="14" y="18.5" text-anchor="middle" fill="white" font-size="13" font-weight="700" font-family="sans-serif">2</text></svg></div>
-              <div class="pop-card-info"><div class="pop-card-name">Shared disk</div><div class="pop-card-price">1 TiB – 1000 TiB · $0.07/GiB/mo</div></div>
-          <span class="np-hover-hint">Details<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
-            </div>
-            <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Multi-VM · NFS</span></div>
-            
-        <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create shared disk</button></div>
-        <div class="med-res-expand"><div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">Concurrent NFS access from many VMs at once. Up to 8 per instance, in 1 TiB increments. Max 36-character name. Data preserved until explicitly deleted.</div></div>
-          </div>
-        </div>
-      </div>
-    </div><!-- /disks-spicy -->
 
     <!-- Redesign state (feedback-driven copy changes) -->
     <div id="disks-redesign" style="display:none">
       <!-- Side-by-side hero: animation left, text right -->
       <div style="display:flex;flex-direction:row;align-items:center;justify-content:flex-start;gap:48px;padding:24px 40px 20px 72px;min-height:200px;box-sizing:border-box;text-align:left;position:relative;overflow:hidden;background:var(--white)">
         <div style="display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:1;position:relative">
-          <svg id="disk-rdz-svg" width="165" height="165" viewBox="0 0 150.588 150.588" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:relative;z-index:1;overflow:visible">
+          <svg id="disk-rdz-svg" width="160" height="160" viewBox="0 0 150.588 150.588" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:relative;z-index:1;overflow:visible">
             <path d="M75.2938 150.088C116.601 150.088 150.088 116.601 150.088 75.2938C150.088 33.9863 116.601 0.5 75.2938 0.5C33.9863 0.5 0.5 33.9863 0.5 75.2938C0.5 116.601 33.9863 150.088 75.2938 150.088Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
             <path transform="translate(0,16.149)" d="M75.2938 117.79C116.601 117.79 150.088 91.5341 150.088 59.1452C150.088 26.7564 116.601 0.5 75.2938 0.5C33.9863 0.5 0.5 26.7564 0.5 59.1452C0.5 91.5341 33.9863 117.79 75.2938 117.79Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
             <path transform="translate(0,32.307)" d="M75.2938 85.4742C116.601 85.4742 150.088 66.4521 150.088 42.9871C150.088 19.5221 116.601 0.5 75.2938 0.5C33.9863 0.5 0.5 19.5221 0.5 42.9871C0.5 66.4521 33.9863 85.4742 75.2938 85.4742Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
@@ -2618,40 +2709,33 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
         </div>
         <div style="position:relative;z-index:1;max-width:560px">
           <h1 style="font-size:44px;font-weight:400;font-family:var(--font-heading);color:var(--text);letter-spacing:-1.2px;line-height:110%;margin:0 0 10px;white-space:nowrap">No Disks Yet</h1>
-          <p style="font-size:14px;color:var(--muted);font-family:var(--font-body);line-height:160%;margin:0 0 16px">Add storage that lives independently of your instances. Choose a <b style="color:var(--text2);font-weight:600">Persistent Disk</b> for fast single-VM block storage, or a <b style="color:var(--text2);font-weight:600">Shared Disk</b> for concurrent NFS access across many VMs.<span class="rev-note">1</span></p>
-          <div style="display:flex;align-items:center;gap:18px"><button class="btn btn-p"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.99967 3.33337V12.6667M3.33301 8.00004H12.6663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Create Disk</button><a href="https://docs.crusoecloud.com/storage/disks/overview" target="_blank" style="font-size:13px;color:var(--muted);text-decoration:underline;text-underline-offset:3px;font-family:var(--font-body);transition:color .15s ease" onmouseenter="this.style.color='var(--text)'" onmouseleave="this.style.color='var(--muted)'">View docs →</a><span class="rev-note">2</span></div>
+          <p style="font-size:14px;color:var(--muted);font-family:var(--font-body);line-height:160%;margin:0 0 16px">Add storage that lives independently of your instances. Choose a <b style="color:var(--text2);font-weight:600">Persistent Disk</b> for fast single-VM block storage, or a <b style="color:var(--text2);font-weight:600">Shared Disk</b> for concurrent NFS access across many VMs.</p>
+          <div style="display:flex;align-items:center;gap:18px"><button class="btn btn-p"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.99967 3.33337V12.6667M3.33301 8.00004H12.6663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Create Disk</button><a href="https://docs.crusoecloud.com/storage/disks/overview" target="_blank" style="font-size:13px;color:var(--muted);text-decoration:underline;text-underline-offset:3px;font-family:var(--font-body);transition:color .15s ease" onmouseenter="this.style.color='var(--text)'" onmouseleave="this.style.color='var(--muted)'">View docs →</a></div>
         </div>
       </div>
       <!-- Disk type cards -->
       <div class="es-gap"></div>
       <div class="pop-section" style="margin-top:36px;padding-bottom:16px">
         <div class="pop-title">Choose your disk type</div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:stretch;max-width:760px;margin:0 auto">
-          <div class="pop-card med-res-card" style="display:flex;flex-direction:column;gap:0;min-width:0">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start">
+          <div class="pop-card med-res-card" style="display:flex;flex-direction:column;gap:0">
             <div class="pop-card-top" style="margin-bottom:10px;align-items:center">
               <div class="pop-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="13" fill="#111"/><text x="14" y="18.5" text-anchor="middle" fill="white" font-size="13" font-weight="700" font-family="sans-serif">1</text></svg></div>
               <div class="pop-card-info"><div class="pop-card-name">Persistent Disks</div><div class="pop-card-price">1 GiB – 10 TiB · $0.08/GiB/mo</div></div>
             </div>
             <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Single VM · Block storage</span></div>
-            <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create Persistent Disks<span class="rev-note">4</span></button></div><div class="med-res-expand"><div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">Attach to one VM in read-write mode. Up to 16 per instance including OS Disk. Attach and detach while running or stopped — unmount before detaching.<span class="rev-note">3</span></div></div>
+            <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create Persistent Disks</button></div><div class="med-res-expand"><div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">Attach to one VM in read-write mode. Up to 16 per instance including OS Disk. Attach and detach while running or stopped — unmount before detaching.</div></div>
           </div>
-          <div class="pop-card med-res-card" style="display:flex;flex-direction:column;gap:0;min-width:0">
+          <div class="pop-card med-res-card" style="display:flex;flex-direction:column;gap:0">
             <div class="pop-card-top" style="margin-bottom:10px;align-items:center">
               <div class="pop-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="13" fill="#111"/><text x="14" y="18.5" text-anchor="middle" fill="white" font-size="13" font-weight="700" font-family="sans-serif">2</text></svg></div>
               <div class="pop-card-info"><div class="pop-card-name">Shared Disks</div><div class="pop-card-price">1 TiB – 1000 TiB · $0.07/GiB/mo</div></div>
             </div>
             <div class="pop-card-tags" style="margin-bottom:10px"><span class="pop-tag-sub">Multi-VM · NFS</span></div>
-            <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create Shared Disks</button></div><div class="med-res-expand"><div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">Concurrent NFS access from many VMs at once. Up to 8 per instance, in 1 TiB increments. Max 36-character name.<span class="rev-note">5</span></div></div>
+            <div style="display:flex;gap:10px"><button class="btn btn-p btn-sm" style="flex:1;justify-content:center">Create Shared Disks</button></div><div class="med-res-expand"><div style="font-size:12px;color:var(--text2);font-family:var(--font-body);line-height:148%;margin-bottom:10px">Concurrent NFS access from many VMs at once. Up to 8 per instance, in 1 TiB increments. Max 36-character name.</div></div>
           </div>
         </div>
-        <div class="rev-legend">
-          <div class="rev-legend-row"><span class="n">1</span><span><b>Rewrote the intro to be accurate and useful</b> — "two types of disks" was wrong (ephemeral disks also exist, they just ship with the instance). Instead of counting types, the line now frames what these disks are for and helps the user pick between Persistent (single-VM block) and Shared (multi-VM NFS).</span></div>
-          <div class="rev-legend-row"><span class="n">2</span><span><b>Docs link points straight to the overview</b> — <code>/storage/disks/overview</code> instead of <code>/storage/disks/</code>, saving the extra click to the landing page.</span></div>
-          <div class="rev-legend-row"><span class="n">3</span><span><b>Persistent disk copy corrected</b> — the UI doesn't allow multi-attach read-only (per the docs limitations), so "or multiple VMs read-only" is removed and "including OS Disk" is added to the 16-per-instance limit.</span></div>
-          <div class="rev-legend-row"><span class="n">4</span><span><b>Disk-type names capitalized</b> — "Persistent Disks" / "Shared Disks" in titles and actions for consistent product naming.</span></div>
-          <div class="rev-legend-row"><span class="n">5</span><span><b>Trimmed the redundant line</b> — "Data preserved until explicitly deleted" is obvious and was dropped from the Shared disk description (kept off Persistent too, for parity).</span></div>
-        </div>
-      </div>
+              </div>
     </div><!-- /disks-redesign -->
 
     <!-- Filled state (disks exist but keep empty state UI) -->
@@ -2697,7 +2781,7 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
 <!-- ─── VIEW: Buckets ─── -->
 <div class="view" id="view-buckets">
   <div class="ph">
-    <div class="ph-l"><div class="ph-title">Buckets</div></div>
+    <div class="ph-l"><div class="ph-title-sans">Buckets</div></div>
     <div class="ph-r">
       <a href="https://docs.crusoecloud.com/storage/object-storage/managing-buckets/" target="_blank" style="display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:500;font-family:var(--font-body);color:var(--muted);text-decoration:none;border:1px solid var(--border);border-radius:8px;padding:7px 13px;background:transparent;transition:color .15s ease,border-color .15s ease,background .15s ease" onmouseenter="this.style.color='var(--text)';this.style.borderColor='var(--gray-400)';this.style.background='var(--gray-50)'" onmouseleave="this.style.color='var(--muted)';this.style.borderColor='var(--border)';this.style.background='transparent'">View docs →</a>
       <button class="btn btn-p"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.99967 3.33337V12.6667M3.33301 8.00004H12.6663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Create Bucket</button>
@@ -2709,7 +2793,7 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
     <div id="bucket-spicy-hero" style="display:flex;flex-direction:row;align-items:center;justify-content:flex-start;gap:48px;padding:24px 40px 20px 72px;min-height:200px;box-sizing:border-box;text-align:left;position:relative;overflow:hidden;background:var(--white)">
       <!-- Illustration -->
       <div id="bucket-illus-wrap" style="display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:1;position:relative">
-        <svg id="bucket-spicy-svg" width="165" height="165" viewBox="0 0 150.588 150.588" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:relative;z-index:1;overflow:visible">
+        <svg id="bucket-spicy-svg" width="160" height="160" viewBox="0 0 150.588 150.588" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:relative;z-index:1;overflow:visible">
           <path id="bucket-e0" d="M75.2938 150.088C116.601 150.088 150.088 116.601 150.088 75.2938C150.088 33.9863 116.601 0.5 75.2938 0.5C33.9863 0.5 0.5 33.9863 0.5 75.2938C0.5 116.601 33.9863 150.088 75.2938 150.088Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
           <path id="bucket-e1" transform="translate(0,16.149)" d="M75.2938 117.79C116.601 117.79 150.088 91.5341 150.088 59.1452C150.088 26.7564 116.601 0.5 75.2938 0.5C33.9863 0.5 0.5 26.7564 0.5 59.1452C0.5 91.5341 33.9863 117.79 75.2938 117.79Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
           <path id="bucket-e2" transform="translate(0,32.307)" d="M75.2938 85.4742C116.601 85.4742 150.088 66.4521 150.088 42.9871C150.088 19.5221 116.601 0.5 75.2938 0.5C33.9863 0.5 0.5 19.5221 0.5 42.9871C0.5 66.4521 33.9863 85.4742 75.2938 85.4742Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
@@ -3100,7 +3184,7 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
 <div class="view" id="view-apikeys">
   <div class="ph">
     <div class="ph-l">
-      <div class="ph-title">Cloud API Keys</div>
+      <div class="ph-title-sans">Cloud API Keys</div>
     </div>
     <div class="ph-r"><button class="btn btn-p" onclick="openApiKeyCreate()"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.99967 3.33337V12.6667M3.33301 8.00004H12.6663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Create Cloud API Key</button></div>
   </div>
@@ -3112,23 +3196,26 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
     <div id="apikey-spicy-hero" style="display:flex;flex-direction:row;align-items:center;justify-content:flex-start;gap:48px;padding:24px 40px 20px 72px;min-height:200px;box-sizing:border-box;text-align:left;position:relative;overflow:hidden;background:var(--white)">
       <!-- Animated illustration -->
       <div id="apikey-illus-wrap" style="display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:1;position:relative">
-        <svg id="apikey-spicy-svg" width="165" height="165" viewBox="-2 -2 155 155" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:relative;z-index:1">
-          <g id="apikey-outer-ring" class="keys-outer-spin">
+        <svg id="apikey-spicy-svg" width="160" height="160" viewBox="-2 -2 155 155" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:relative;z-index:1">
+          <!-- One rigid rotation: outer circle, inner dashed circle, and both cross lines spin together -->
+          <g id="apikey-ring" class="keys-outer-spin">
             <circle cx="75.5" cy="75.5" r="75" stroke="black" stroke-miterlimit="10"/>
+            <circle cx="75.5" cy="75.5" r="49.333" stroke="black" stroke-miterlimit="10" stroke-dasharray="3 3"/>
             <line x1="75.5" y1="0.5" x2="75.5" y2="150.5" stroke="black" stroke-miterlimit="10" stroke-dasharray="3 3"/>
             <line x1="0.5" y1="75.5" x2="150.5" y2="75.5" stroke="black" stroke-miterlimit="10" stroke-dasharray="3 3"/>
           </g>
-          <g id="apikey-inner-ring" class="keys-inner-spin">
-            <circle cx="75.5" cy="75.5" r="49.333" stroke="black" stroke-miterlimit="10" stroke-dasharray="3 3"/>
-            <rect x="54.85" y="54.85" width="41.3" height="41.3" stroke="black" stroke-miterlimit="10" transform="rotate(45 75.5 75.5)"/>
-          </g>
+          <!-- Static diamond in the middle — stays still -->
+          <rect x="54.85" y="54.85" width="41.3" height="41.3" stroke="black" stroke-miterlimit="10" transform="rotate(45 75.5 75.5)"/>
         </svg>
       </div>
       <!-- Text block -->
       <div style="position:relative;z-index:1;max-width:380px">
         <h1 style="font-size:44px;font-weight:400;font-family:var(--font-heading);color:var(--text);letter-spacing:-1.2px;line-height:110%;margin:0 0 10px;white-space:nowrap">No API Keys Yet</h1>
         <p style="font-size:14px;color:var(--muted);font-family:var(--font-body);line-height:160%;margin:0 0 16px">Required for programmatic access to the Crusoe Cloud API. The secret key is shown once — save it before leaving the page.</p>
-        <a href="https://docs.crusoecloud.com/identity-and-security/managing-api-keys/" target="_blank" style="display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:500;font-family:var(--font-body);color:var(--muted);text-decoration:none;border:1px solid var(--border);border-radius:8px;padding:7px 13px;background:transparent;transition:color .15s ease,border-color .15s ease,background .15s ease" onmouseenter="this.style.color='var(--text)';this.style.borderColor='var(--gray-400)';this.style.background='var(--gray-50)'" onmouseleave="this.style.color='var(--muted)';this.style.borderColor='var(--border)';this.style.background='transparent'">View docs →</a>
+        <div style="display:flex;align-items:center;gap:12px">
+          <button class="btn btn-p" onclick="openApiKeyCreate()"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.99967 3.33337V12.6667M3.33301 8.00004H12.6663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Create API Key</button>
+          <a href="https://docs.crusoecloud.com/identity-and-security/managing-api-keys/" target="_blank" style="display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:500;font-family:var(--font-body);color:var(--muted);text-decoration:none;border:1px solid var(--border);border-radius:8px;padding:7px 13px;background:transparent;transition:color .15s ease,border-color .15s ease,background .15s ease" onmouseenter="this.style.color='var(--text)';this.style.borderColor='var(--gray-400)';this.style.background='var(--gray-50)'" onmouseleave="this.style.color='var(--muted)';this.style.borderColor='var(--border)';this.style.background='transparent'">View docs →</a>
+        </div>
       </div>
     </div>
     <!-- 3 step cards -->
@@ -3299,7 +3386,7 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
 <!-- ─── VIEW: Managed Logs ─── -->
 <div class="view" id="view-managed-logs">
   <div class="ph">
-    <div class="ph-l"><div class="ph-title">Managed Logs</div></div>
+    <div class="ph-l"><div class="ph-title-sans">Managed Logs</div></div>
     <div class="ph-r">
       <a class="btn btn-o btn-sm" href="https://docs.crusoecloud.com/command-center/logs/" target="_blank" style="text-decoration:none">View docs →</a>
     </div>
@@ -3310,7 +3397,7 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
     <div style="display:flex;flex-direction:row;align-items:center;justify-content:flex-start;gap:48px;padding:24px 40px 20px 72px;min-height:200px;box-sizing:border-box;background:var(--white);overflow:hidden">
       <!-- Illustration -->
       <div style="display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:1">
-        <svg id="logs-wave-svg" width="204" height="174" viewBox="0 0 176.387 150" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:block;overflow:hidden">
+        <svg id="logs-wave-svg" width="188" height="160" viewBox="0 0 176.387 150" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:block;overflow:hidden">
           <path id="logs-box"    d="M171.539 0.755H0.906V149.245H171.539V0.755Z" stroke="black" stroke-miterlimit="10"/>
           <path id="logs-diamond" d="M171.07 75.29L86.56 132.28L1.36 74.69L85.87 17.7L171.07 75.29Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
           <path id="logs-wave-a" d="M128.658 106.742C125.561 102.739 124.142 97.9207 122.45 93.2534C120.154 86.9399 118.13 80.5206 115.411 74.3883C114.475 72.2888 113.312 70.1591 111.348 68.6487C109.234 67.0325 108.101 67.0023 106.032 68.7091C103.449 70.8539 102.029 73.92 100.715 76.956C97.7696 83.7227 95.5342 90.8217 91.9243 97.2863C91.0331 98.8722 90.006 100.322 88.6769 101.531C87.242 102.83 85.5201 102.89 84.0701 101.531C82.7258 100.262 81.6383 98.8118 80.7623 97.0899C77.1524 89.9456 75.3247 82.1821 72.9685 74.5997C70.6877 67.2893 68.981 59.7674 65.5825 52.8497C64.9783 51.6111 64.3742 50.3273 63.4679 49.3304C60.6585 46.2642 59.1481 46.5965 56.7919 49.3002C54.3903 52.0491 53.0913 55.4174 51.6866 58.7554C48.9075 65.3106 46.8835 72.1831 43.8324 78.6175C42.8809 80.6263 41.8538 82.6201 40.3585 84.2966C37.9267 87.0154 35.5402 87.3779 32.7157 84.0701C30.4954 81.4571 29.0152 78.4362 27.6407 75.3096C24.6652 68.5581 22.7167 61.3382 18.9105 54.9492C18.0344 53.4689 17.0678 52.1247 15.8443 50.9767C14.4245 49.6476 12.9443 49.708 11.4641 50.9616C8.65472 53.333 7.38596 56.7314 5.95106 59.9638C4.42554 63.3924 3.5646 67.0929 2.1599 70.5669C1.46511 72.3039 1.02709 74.0711 0.770315 75.8534" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
@@ -3324,7 +3411,10 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
       <div style="max-width:380px">
         <h1 style="font-size:44px;font-weight:400;font-family:var(--font-heading);color:var(--text);letter-spacing:-1.2px;line-height:110%;margin:0 0 10px;white-space:nowrap">No Log Data Yet</h1>
         <p style="font-size:14px;color:var(--muted);font-family:var(--font-body);line-height:160%;margin:0 0 16px">Centralized log collection and monitoring for your Crusoe Cloud resources. Install Observability agent to start streaming.</p>
-        <a href="https://docs.crusoecloud.com/command-center/logs/" target="_blank" style="display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:500;font-family:var(--font-body);color:var(--muted);text-decoration:none;border:1px solid var(--border);border-radius:8px;padding:7px 13px;background:transparent;transition:color .15s ease,border-color .15s ease,background .15s ease" onmouseenter="this.style.color='var(--text)';this.style.borderColor='var(--gray-400)';this.style.background='var(--gray-50)'" onmouseleave="this.style.color='var(--muted)';this.style.borderColor='var(--border)';this.style.background='transparent'">View docs →</a>
+        <div style="display:flex;align-items:center;gap:12px">
+          <a class="btn btn-p" href="https://docs.crusoecloud.com/command-center/logs/" target="_blank" style="text-decoration:none"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.99967 3.33337V12.6667M3.33301 8.00004H12.6663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Install agent</a>
+          <a href="https://docs.crusoecloud.com/command-center/logs/" target="_blank" style="display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:500;font-family:var(--font-body);color:var(--muted);text-decoration:none;border:1px solid var(--border);border-radius:8px;padding:7px 13px;background:transparent;transition:color .15s ease,border-color .15s ease,background .15s ease" onmouseenter="this.style.color='var(--text)';this.style.borderColor='var(--gray-400)';this.style.background='var(--gray-50)'" onmouseleave="this.style.color='var(--muted)';this.style.borderColor='var(--border)';this.style.background='transparent'">View docs →</a>
+        </div>
       </div>
     </div>
 
@@ -3374,7 +3464,7 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
 <!-- ─── VIEW: Infrastructure Overview ─── -->
 <div class="view" id="view-infra">
   <div class="ph">
-    <div class="ph-l"><div class="ph-title">Infrastructure Overview</div></div>
+    <div class="ph-l"><div class="ph-title-sans">Infrastructure Overview</div></div>
   </div>
   <div class="divider"></div>
   <div class="ca">
@@ -3616,7 +3706,7 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
 <!--
 <div class="view" id="view-k8s-list">
   <div class="ph">
-    <div class="ph-l"><div class="ph-title">Kubernetes Clusters</div></div>
+    <div class="ph-l"><div class="ph-title-sans">Kubernetes Clusters</div></div>
     <div class="ph-r"><button class="btn btn-p"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.99967 3.33337V12.6667M3.33301 8.00004H12.6663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Create Cluster</button></div>
   </div>
   <div class="divider"></div>
@@ -3670,7 +3760,7 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
 <div class="view" id="view-sshkeys">
   <div class="ph">
     <div class="ph-l">
-      <div class="ph-title">SSH Keys</div>
+      <div class="ph-title-sans">SSH Keys</div>
     </div>
     <div class="ph-r"><button class="btn btn-p"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.99967 3.33337V12.6667M3.33301 8.00004H12.6663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Add SSH Key</button></div>
   </div>
@@ -3680,7 +3770,7 @@ select.bm-input{appearance:none;-webkit-appearance:none;background-image:url("da
     <div id="sshkey-spicy-hero" style="display:flex;flex-direction:row;align-items:center;justify-content:flex-start;gap:48px;padding:24px 40px 20px 72px;min-height:200px;box-sizing:border-box;text-align:left;position:relative;overflow:hidden;background:var(--white)">
       <!-- Animated illustration -->
       <div id="sshkey-illus-wrap" style="display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:1;position:relative">
-        <svg id="sshkey-spicy-svg" width="165" height="165" viewBox="-2 -2 155 155" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:relative;z-index:1">
+        <svg id="sshkey-spicy-svg" width="160" height="160" viewBox="-2 -2 155 155" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:relative;z-index:1">
           <g id="sshkey-outer-ring" class="keys-outer-spin">
             <circle cx="75.5" cy="75.5" r="75" stroke="black" stroke-miterlimit="10"/>
             <line x1="75.5" y1="0.5" x2="75.5" y2="150.5" stroke="black" stroke-miterlimit="10" stroke-dasharray="3 3"/>
@@ -3850,24 +3940,28 @@ function mainNav(activeGrp, activeItem) {
   ];
 }
 function settingsNav(activeKey) {
+  const A = id => id === activeKey;
   return {
     type:'settings', topbar:null, back:'Back to Project',
     sections:[
       {label:'Org Management', items:[
         {id:'usage',icon:'usage',label:'Usage',hasChev:true},
-        {id:'billing',icon:'billing',label:'Billing',hasChev:true},
+        {id:'billing',icon:'billing',label:'Billing',hasChev:true,active:A('billing')},
+        {id:'reservations',icon:'billing',label:'Reservations',active:A('reservations')},
+        {id:'user-access',icon:'security',label:'User Access',active:A('user-access')},
+        {id:'audit-logs',icon:'logs',label:'Audit Logs',active:A('audit-logs')},
         {id:'projects',icon:'projects',label:'Projects'},
-        {id:'notifications',icon:'logs',label:'All Notifications'}
+        {id:'notifications',icon:'logs',label:'All Notifications',active:A('notifications')}
       ]},
       {label:'Personal Settings', items:[
         {id:'security',icon:'security',label:'Security',hasChev:true,open:true,subItems:[
-          {id:'cloud-api-keys',label:'Cloud API Keys',active:activeKey==='cloud-api-keys'},
-          {id:'ssh-keys',label:'SSH Keys',active:activeKey==='ssh-keys'},
+          {id:'cloud-api-keys',label:'Cloud API Keys',active:A('cloud-api-keys')},
+          {id:'ssh-keys',label:'SSH Keys',active:A('ssh-keys')},
           {id:'obj-storage-keys',label:'Object Storage Keys'},
           {id:'container-reg-keys',label:'Container Registry ...'},
           {id:'mon-keys',label:'Monitoring Keys'},
           {id:'inf-api-keys',label:'Inference API Keys'},
-          {id:'mfa',label:'MFA'}
+          {id:'mfa',label:'MFA',active:A('mfa')}
         ]},
         {id:'settings-personal',icon:'gear',label:'Settings',hasChev:true}
       ]}
@@ -3889,6 +3983,18 @@ const SIDEBARS = {
   buckets:     {type:'main', topbar:{org:'ManagedOrchestration',proj:'abhatti'}, nav:mainNav('storage','buckets')},
   apikeys:     settingsNav('cloud-api-keys'),
   sshkeys:     settingsNav('ssh-keys'),
+  // Phase 2 — Networking (main nav)
+  registry:          {type:'main', topbar:{org:'ManagedOrchestration',proj:'abhatti'}, nav:mainNav(null,'registry')},
+  vpc:              {type:'main', topbar:{org:'ManagedOrchestration',proj:'abhatti'}, nav:mainNav('networking','vpc')},
+  subnets:          {type:'main', topbar:{org:'ManagedOrchestration',proj:'abhatti'}, nav:mainNav('networking','subnets')},
+  'load-balancers': {type:'main', topbar:{org:'ManagedOrchestration',proj:'abhatti'}, nav:mainNav('networking','load-balancers')},
+  // Phase 2 — Settings surfaces
+  billing:       settingsNav('billing'),
+  reservations:  settingsNav('reservations'),
+  'user-access': settingsNav('user-access'),
+  'audit-logs':  settingsNav('audit-logs'),
+  mfa:           settingsNav('mfa'),
+  notifications: settingsNav('notifications'),
   infra: {
     type:'cc', topbar:{org:'ManagedOrchestration',proj:'abhatti'}, notif:true,
     nav:[
@@ -3908,9 +4014,11 @@ const ROUTES = {
   kubernetes:'kubernetes', slurm:'slurm',
   'k8s-list':'kubernetes', 'k8s-detail':'k8s-detail', 'vm-detail':'vm-detail', 'create-instance':'create-instance',
   disks:'disks', buckets:'buckets',
-  vpc:null, subnets:null, firewall:null, infiniband:null, 'load-balancers':null,
+  vpc:'vpc', subnets:'subnets', firewall:null, infiniband:null, 'load-balancers':'load-balancers',
   'cloud-api-keys':'apikeys', 'ssh-keys':'sshkeys',
   'infra-overview':'infra', 'managed-logs':'managed-logs',
+  // Phase 2 empty states
+  registry:'registry', 'audit-logs':'audit-logs', 'user-access':'user-access', mfa:'mfa', reservations:'reservations', billing:'billing', notifications:'notifications',
 };
 
 let currentView = 'instances';
@@ -4058,6 +4166,10 @@ function showView(viewId, sbKey) {
   buildSidebar(sbKey || viewId);
   currentView = viewId;
   document.querySelector('.main').scrollTop = 0;
+  // restart the left-to-right sweep so it plays immediately on page open
+  if (viewId === 'user-access' || viewId === 'mfa') {
+    if (v) v.querySelectorAll('animateTransform').forEach(a => { try { a.beginElement(); } catch(e) {} });
+  }
   // trigger spicy animations on navigation
   if (viewId === 'instances') {
     // If instances already exist (e.g., navigating back from a VM detail), show the list — never the empty state.
@@ -4068,11 +4180,10 @@ function showView(viewId, sbKey) {
       const rtg = document.getElementById('rev-toggle'); if (rtg) rtg.style.display = 'none';
       const filled = document.getElementById('instances-filled'); if (filled) filled.style.display = '';
     } else {
-      // Restore the last-used sub-tab (Current / Redesign / Edge cases) and edge scenario
-      const savedTab = (function(){ try { return localStorage.getItem('lastInstTab'); } catch(e){ return null; } })() || 'current';
+      // Default to the redesign empty state (hero + capacity cards with the View-reservations link)
       const savedEdge = (function(){ try { return parseInt(localStorage.getItem('lastEdgeState') || '0', 10); } catch(e){ return 0; } })();
-      if (typeof setInstancesTab === 'function') setInstancesTab(savedTab);
-      if (savedTab === 'edge' && typeof toggleEdgeState === 'function') toggleEdgeState(isNaN(savedEdge) ? 0 : savedEdge);
+      if (typeof setInstancesTab === 'function') setInstancesTab('redesign');
+      if (typeof toggleEdgeState === 'function') toggleEdgeState(isNaN(savedEdge) ? 0 : savedEdge);
       setTimeout(initSpicyMagic, 60);
     }
   } else if (viewId === 'instance-templates') {
@@ -4088,7 +4199,7 @@ function showView(viewId, sbKey) {
     window._slurmWavesStarted = false; window._slurmRipplesStarted = false;
     setTimeout(initSlurmSpicyMagic, 60);
   } else if (viewId === 'disks') {
-    const savedDisksTab = (function(){ try { return localStorage.getItem('lastDisksTab'); } catch(e){ return null; } })() || 'current';
+    const savedDisksTab = 'redesign';
     if (typeof setDisksTab === 'function') setDisksTab(savedDisksTab);
     setTimeout(initDiskSpicyMagic, 60);
   } else if (viewId === 'buckets') {
@@ -4278,7 +4389,7 @@ function toggleEdgeState(n) {
     const el = document.getElementById('edge-' + i);
     if (el) el.style.display = i === n ? '' : 'none';
   });
-  const btns = document.querySelectorAll('#instances-edge .state-toggle-btn');
+  const btns = document.querySelectorAll('#inst-cap-toggle .state-toggle-btn');
   btns.forEach((b, i) => b.classList.toggle('active', i === n));
   // Hide shared hero for state 3 "No payment method" and state 4 "Create flow" (each has its own layout)
   const sharedHero = document.getElementById('edge-shared-hero');
@@ -4634,6 +4745,7 @@ function createInstanceFromRes(gpuType, btn) {
 
 // ── Instances empty-state design tabs (Current vs Redesign) ──
 function setInstancesTab(tab) {
+  if (tab === 'current') tab = 'redesign';
   try { localStorage.setItem('lastInstTab', tab); } catch (e) {}
   const spicy = document.getElementById('instances-spicy');
   const redesign = document.getElementById('instances-redesign');
@@ -4644,6 +4756,9 @@ function setInstancesTab(tab) {
   // Empty-state tabs never show the filled list view (usage belongs to the list only)
   ['instances-filled','instances-medium','instances-mild'].forEach(id => { const el = document.getElementById(id); if (el) el.style.display = 'none'; });
   document.querySelectorAll('#inst-tabs .inst-tab').forEach(b => b.classList.toggle('active', b.dataset.tab === tab));
+  // Capacity-scenario sub-toggle lives in the header — only shown on the Edge cases tab
+  const capToggle = document.getElementById('inst-cap-toggle');
+  if (capToggle) capToggle.style.display = tab === 'edge' ? 'flex' : 'none';
   const revToggle = document.getElementById('rev-toggle');
   if (revToggle) {
     // Review notes are available on both the Redesign and Edge cases tabs
@@ -4664,6 +4779,7 @@ function setInstancesTab(tab) {
 }
 
 function setDisksTab(tab) {
+  if (tab === 'current') tab = 'redesign';
   try { localStorage.setItem('lastDisksTab', tab); } catch (e) {}
   const cur = document.getElementById('disks-spicy');
   const rdz = document.getElementById('disks-redesign');
@@ -5636,9 +5752,40 @@ function toggleDarkMode() {
   });
 })();
 
+// ── Notification Center dropdown ──
+function toggleNotifDropdown(e) {
+  if (e) e.stopPropagation();
+  const dd = document.getElementById('notif-dropdown');
+  if (!dd) return;
+  const show = dd.style.display !== 'block';
+  if (show) {
+    const b = document.getElementById('tb-notif').getBoundingClientRect();
+    dd.style.top = (b.bottom + 8) + 'px';
+    dd.style.right = Math.max(12, window.innerWidth - b.right) + 'px';
+    dd.style.display = 'block';
+  } else {
+    dd.style.display = 'none';
+  }
+}
+document.addEventListener('click', function(e) {
+  const dd = document.getElementById('notif-dropdown');
+  const bell = document.getElementById('tb-notif');
+  if (dd && dd.style.display === 'block' && !dd.contains(e.target) && bell && !bell.contains(e.target)) dd.style.display = 'none';
+});
+
 // ── Init ──
 // Restore last visited page on reload; default to instances
 (function() {
+  // Deep-link: #ondemand (or #instances-ondemand) opens Instances → Edge cases → On demand
+  const hash = (location.hash || '').replace(/^#/, '').toLowerCase();
+  if (hash === 'ondemand' || hash === 'instances-ondemand') {
+    navigate('instances');
+    setTimeout(function() {
+      if (typeof setInstancesTab === 'function') setInstancesTab('edge');
+      if (typeof toggleEdgeState === 'function') toggleEdgeState(0);
+    }, 0);
+    return;
+  }
   const saved = localStorage.getItem('lastNav');
   const valid = saved && ROUTES[saved] !== null && (ROUTES[saved] !== undefined || Object.values(ROUTES).filter(Boolean).includes(saved));
   navigate(valid ? saved : 'instances');

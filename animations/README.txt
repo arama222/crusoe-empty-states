@@ -1,25 +1,20 @@
-Crusoe Empty State — Illustration Assets
-========================================
+Standalone illustration SVGs
+============================
 
-These are standalone SVG files for the empty-state illustrations.
-Open any .svg in a web browser to see it (animated ones will play automatically).
-They scale cleanly and have transparent backgrounds; stroke color is #111.
+p2-*.svg  — Phase 2 empty-state illustrations WITH their animations embedded
+            (CSS keyframes + one SMIL gradient inside each file). Open in any
+            browser to see the motion. Light-mode colors baked in.
 
-Files
------
-instances-cube.svg   ANIMATED — marching dashed lines (used on Instances,
-                     Instance Templates, Instance Groups, Custom Images)
-api-keys.svg         ANIMATED — two counter-rotating rings (Cloud API Keys, SSH Keys)
-disks.svg            ANIMATED — oscillating concentric rings (Disks, Buckets)
-orchestration.svg    ANIMATED — nested squares draw in sequentially + node ripples (Kubernetes, Slurm)
-managed-logs.svg     ANIMATED — two dots travel along the waveform (matches prototype) (Managed Logs, Infra Overview)
+            p2-networking-mesh.svg          VPC Networks / Subnets / Load Balancers
+            p2-security-diamond.svg         User Access / MFA (left-to-right sweep)
+            p2-billing-flower.svg           Billing / Reservations
+            p2-audit-starburst.svg          Audit Logs
+            p2-notifications-checklist.svg  All Notifications
+            p2-registry-discs.svg           Container Registry
 
-Notes
------
-- Animation is pure CSS embedded inside each SVG (no JS) — works in any modern
-  browser and in tools that render SVG CSS (e.g. web embeds).
-- Figma/Illustrator import the SHAPES but will NOT play the CSS animation —
-  they'll show the first static frame. For motion in a deck or doc, embed the
-  SVG in a web view or record a short screen capture of the live prototype:
-  https://arama222.github.io/crusoe-empty-states/handoff.html
-- Recolor: change the stroke="#111" values (and fill on the dots) to retheme.
+Others    — legacy static exports of the Phase 1 illustrations (no animation):
+            instances-cube.svg, disks.svg, api-keys.svg, managed-logs.svg,
+            orchestration.svg
+
+The authoritative animated versions live in handoff.html (search for
+"PHASE 2 EMPTY-STATE ILLUSTRATION ANIMATIONS") and animations.html (gallery).
